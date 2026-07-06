@@ -1,0 +1,104 @@
+import { mkdir, writeFile } from "node:fs/promises";
+import path from "node:path";
+import type { Business } from "../content/business-schema.js";
+
+export type PreparedImage = {
+  heroSrc: string;
+  status: "downloaded" | "placeholder" | "mock";
+};
+
+function isGooglePlacePhoto(url: string): boolean {
+  return url.startsWith("https://places.googleapis.com/v1/") && url.includes("/media");
+}
+
+function withGoogleKey(url: string, apiKey: string): string {
+  const parsed = new URL(url);
+  parsed.searchParams.set("key", apiKey);
+  return parsed.toString();
+}
+
+function contentTypeToExtension(contentType: string | null): string {
+  if (!contentType) return "jpg";
+  if (contentType.includes("png")) return "png";
+  if (contentType.includes("webp")) return "webp";
+  return "jpg";
+}
+
+function hashText(value: string): number {
+  let hash = 0;
+  for (const char of value) {
+    hash = (hash * 31 + char.charCodeAt(0)) >>> 0;
+  }
+  return hash;
+}
+
+function placeholderSvg(business: Business): string {
+  const seed = hashText(business.name);
+  const hue = seed % 360;
+  const accentHue = (hue + 44) % 360;
+  const lineTilt = 25 + (seed % 30);
+  const name = business.name.replace(/[<&>"]/g, "");
+  const category = business.category.replace(/[<&>"]/g, "");
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1050" viewBox="0 0 1600 1050" role="img" aria-label="${name}">
+  <defs>
+    <linearGradient id="paint" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="hsl(${hue} 28% 10%)"/>
+      <stop offset="0.58" stop-color="hsl(${hue} 22% 22%)"/>
+      <stop offset="1" stop-color="hsl(${accentHue} 70% 44%)"/>
+    </linearGradient>
+    <pattern id="tread" width="120" height="120" patternUnits="userSpaceOnUse" patternTransform="rotate(${lineTilt})">
+      <rect width="120" height="120" fill="none"/>
+      <rect x="0" y="0" width="26" height="120" fill="rgba(255,255,255,0.10)"/>
+      <rect x="58" y="0" width="18" height="120" fill="rgba(255,255,255,0.06)"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="1050" fill="url(#paint)"/>
+  <rect width="1600" height="1050" fill="url(#tread)" opacity="0.65"/>
+  <circle cx="${1120 + (seed % 180)}" cy="${650 + (seed % 140)}" r="220" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="34"/>
+  <circle cx="${1120 + (seed % 180)}" cy="${650 + (seed % 140)}" r="92" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="26"/>
+  <path d="M160 ${610 + (seed % 80)}h680l88-160h245l92 160h135" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="110" y="180" fill="#fff7e8" font-family="Arial, sans-serif" font-size="72" font-weight="700">${name}</text>
+  <text x="114" y="260" fill="#ffd27a" font-family="Arial, sans-serif" font-size="38" font-weight="700">${category}</text>
+</svg>`;
+}
+
+export async function prepareHeroImage(business: Business, siteDir: string, requireRealImage: boolean): Promise<PreparedImage> {
+  const photo = business.photos.find((item) => item.usage_status === "allowed");
+  const assetsDir = path.join(siteDir, "assets");
+  await mkdir(assetsDir, { recursive: true });
+
+  if (!photo || photo.url.startsWith("mock://")) {
+    await writeFile(path.join(assetsDir, "hero.svg"), placeholderSvg(business), "utf8");
+    return { heroSrc: "./assets/hero.svg", status: photo?.url.startsWith("mock://") ? "mock" : "placeholder" };
+  }
+
+  if (isGooglePlacePhoto(photo.url)) {
+    const apiKey = process.env.GOOGLE_PLACES_API_KEY;
+    if (apiKey) {
+      const response = await fetch(withGoogleKey(photo.url, apiKey), { redirect: "follow" });
+      if (response.ok) {
+        const contentType = response.headers.get("content-type");
+        const extension = contentTypeToExtension(contentType);
+        const bytes = new Uint8Array(await response.arrayBuffer());
+        await writeFile(path.join(assetsDir, `hero.${extension}`), bytes);
+        return { heroSrc: `./assets/hero.${extension}`, status: "downloaded" };
+      }
+      console.warn(`${business.slug}: photo download failed with ${response.status}; using generated placeholder.`);
+      if (requireRealImage) {
+        throw new Error(`${business.slug}: Google Places photo download failed with ${response.status}.`);
+      }
+    } else {
+      console.warn(`${business.slug}: GOOGLE_PLACES_API_KEY is not set; using generated placeholder.`);
+      if (requireRealImage) {
+        throw new Error(`${business.slug}: GOOGLE_PLACES_API_KEY is required to download real images.`);
+      }
+    }
+  }
+
+  if (requireRealImage) {
+    throw new Error(`${business.slug}: no downloadable real image was available.`);
+  }
+
+  await writeFile(path.join(assetsDir, "hero.svg"), placeholderSvg(business), "utf8");
+  return { heroSrc: "./assets/hero.svg", status: "placeholder" };
+}

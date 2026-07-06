@@ -1,0 +1,39 @@
+{
+  "name": "ia-landing-generator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate:data": "tsx src/validators/validate-dataset.ts data/tandil-businesses.json --strict-final",
+    "validate:intake": "tsx src/validators/validate-dataset.ts data/intake/tandil-candidates.json --allow-incomplete",
+    "validate:mock": "tsx src/validators/validate-dataset.ts data/fixtures/mock-businesses.json --allow-mock",
+    "search": "tsx src/research/search-businesses.ts",
+    "search:tandil": "tsx src/research/search-businesses.ts --city Tandil --country Argentina --out data/intake/tandil-candidates.json --limit 30",
+    "shortlist": "tsx src/research/shortlist-businesses.ts",
+    "shortlist:tandil": "tsx src/research/shortlist-businesses.ts --input data/intake/tandil-candidates.json --out data/intake/tandil-shortlist.json --limit 10",
+    "promote": "tsx src/research/promote-shortlist.ts",
+    "promote:tandil": "tsx src/research/promote-shortlist.ts --input data/intake/tandil-shortlist.json --out data/tandil-businesses.json",
+    "agent:briefs": "tsx scripts/create-agent-briefs.ts",
+    "agent:briefs:tandil": "tsx scripts/create-agent-briefs.ts --input data/tandil-businesses.json --specs data/site-specs/tandil-site-specs.json --out data/agent-briefs/tandil --city Tandil --segment \"servicios vehiculares\"",
+    "validate:specs": "tsx src/site-specs/validate-site-specs.ts",
+    "validate:specs:tandil": "tsx src/site-specs/validate-site-specs.ts --businesses data/tandil-businesses.json --specs data/site-specs/tandil-site-specs.json",
+    "compose:local": "tsx src/site-specs/compose-site-specs.ts --provider local --input data/tandil-businesses.json --out data/site-specs/tandil-site-specs.json",
+    "compose:ai": "tsx src/site-specs/compose-site-specs.ts --provider openai --input data/tandil-businesses.json --out data/site-specs/tandil-site-specs.json",
+    "generate": "tsx src/generator/generate-sites.ts data/tandil-businesses.json --specs data/site-specs/tandil-site-specs.json --require-real-images",
+    "generate:preview": "tsx src/generator/generate-sites.ts data/tandil-businesses.json --specs data/site-specs/tandil-site-specs.json",
+    "generate:mock": "tsx src/generator/generate-sites.ts data/fixtures/mock-businesses.json --out generated/mock --allow-mock",
+    "qa": "tsx src/validators/validate-generated-sites.ts generated",
+    "qa:mock": "tsx src/validators/validate-generated-sites.ts generated/mock --allow-mock",
+    "import:businesses": "tsx scripts/import-businesses.ts",
+    "deploy:plan": "tsx src/deploy/plan-vercel-deploys.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3"
+  }
+}

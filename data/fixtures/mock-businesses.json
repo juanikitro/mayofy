@@ -1,0 +1,197 @@
+[
+  {
+    "id": "mock-lavadero-centro",
+    "name": "Lavadero Centro Demo",
+    "slug": "lavadero-centro-demo",
+    "category": "lavadero",
+    "is_vehicle_related": true,
+    "address": "Direccion ficticia 123, Tandil",
+    "neighborhood_or_area": "Centro",
+    "phone": "+54 249 000-0000",
+    "opening_hours": {
+      "raw": "Lunes a viernes de 9 a 18",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.8,
+      "reviews_count": 37,
+      "source_url": "mock://rating/lavadero-centro-demo"
+    },
+    "reviews": [
+      {
+        "text": "Atencion clara y buen resultado en el lavado.",
+        "author": "Cliente demo 1",
+        "rating": 5,
+        "source_url": "mock://reviews/lavadero-centro-demo/1"
+      },
+      {
+        "text": "El auto quedo prolijo y cumplieron el horario.",
+        "author": "Cliente demo 2",
+        "rating": 5,
+        "source_url": "mock://reviews/lavadero-centro-demo/2"
+      },
+      {
+        "text": "Buena relacion entre precio y servicio.",
+        "author": "Cliente demo 3",
+        "rating": 4,
+        "source_url": "mock://reviews/lavadero-centro-demo/3"
+      }
+    ],
+    "main_product_or_service": "Lavado exterior e interior",
+    "photos": [
+      {
+        "url": "mock://photos/lavadero-centro-demo/fachada.jpg",
+        "type": "facade",
+        "source_url": "mock://photos/lavadero-centro-demo",
+        "usage_status": "allowed",
+        "captured_at": "2026-07-05"
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": ["mock://search/lavadero-centro-demo"],
+      "evidence": ["Fixture sin dominio propio para validar el flujo."],
+      "notes": "Dato mock. No usar para deploy final."
+    },
+    "data_quality_score": 0.91,
+    "missing_data_reason": null,
+    "approved_for_generation": true,
+    "is_mock": true,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Fixture local",
+          "url": "mock://business/lavadero-centro-demo",
+          "captured_at": "2026-07-05",
+          "notes": "Registro inventado para pruebas tecnicas."
+        }
+      ],
+      "field_evidence": [
+        { "field": "name", "source_url": "mock://business/lavadero-centro-demo", "notes": "Mock" },
+        { "field": "address", "source_url": "mock://business/lavadero-centro-demo", "notes": "Mock" },
+        { "field": "phone", "source_url": "mock://business/lavadero-centro-demo", "notes": "Mock" },
+        { "field": "opening_hours", "source_url": "mock://business/lavadero-centro-demo", "notes": "Mock" },
+        { "field": "category", "source_url": "mock://business/lavadero-centro-demo", "notes": "Mock" },
+        { "field": "main_product_or_service", "source_url": "mock://business/lavadero-centro-demo", "notes": "Mock" },
+        { "field": "rating", "source_url": "mock://rating/lavadero-centro-demo", "notes": "Mock" },
+        { "field": "reviews", "source_url": "mock://reviews/lavadero-centro-demo", "notes": "Mock" },
+        { "field": "photos", "source_url": "mock://photos/lavadero-centro-demo", "notes": "Mock" },
+        { "field": "website_check", "source_url": "mock://search/lavadero-centro-demo", "notes": "Mock" }
+      ]
+    },
+    "brand": {
+      "palette": {
+        "source": "photo",
+        "captured_from": "mock://photos/lavadero-centro-demo/fachada.jpg",
+        "dominant": "#102336",
+        "accent": "#f5b841",
+        "supporting": ["#f8fafc", "#4b657a"]
+      },
+      "typography": {
+        "primary": "Archivo Narrow",
+        "secondary": "Merriweather Sans"
+      }
+    },
+    "site_plan": {
+      "archetype": "automotive-premium-dark",
+      "position": 1
+    }
+  },
+  {
+    "id": "mock-gomeria-barrio",
+    "name": "Gomeria Barrio Demo",
+    "slug": "gomeria-barrio-demo",
+    "category": "gomeria",
+    "is_vehicle_related": true,
+    "address": "Avenida ficticia 456, Tandil",
+    "neighborhood_or_area": "Villa Italia",
+    "phone": null,
+    "opening_hours": {
+      "raw": "Sabados de 9 a 13",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.6,
+      "reviews_count": 22,
+      "source_url": "mock://rating/gomeria-barrio-demo"
+    },
+    "reviews": [
+      {
+        "text": "Me resolvieron una cubierta en el dia.",
+        "author": "Cliente demo 1",
+        "rating": 5,
+        "source_url": "mock://reviews/gomeria-barrio-demo/1"
+      },
+      {
+        "text": "Atencion directa y sin vueltas.",
+        "author": "Cliente demo 2",
+        "rating": 4,
+        "source_url": "mock://reviews/gomeria-barrio-demo/2"
+      },
+      {
+        "text": "Buen trato y explicaron bien el trabajo.",
+        "author": "Cliente demo 3",
+        "rating": 5,
+        "source_url": "mock://reviews/gomeria-barrio-demo/3"
+      }
+    ],
+    "main_product_or_service": "Reparacion y cambio de cubiertas",
+    "photos": [
+      {
+        "url": "mock://photos/gomeria-barrio-demo/fachada.jpg",
+        "type": "facade",
+        "source_url": "mock://photos/gomeria-barrio-demo",
+        "usage_status": "allowed",
+        "captured_at": "2026-07-05"
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": ["mock://search/gomeria-barrio-demo"],
+      "evidence": ["Fixture sin dominio propio para validar el flujo."],
+      "notes": "Dato mock. No usar para deploy final."
+    },
+    "data_quality_score": 0.89,
+    "missing_data_reason": "Telefono no disponible en el fixture.",
+    "approved_for_generation": true,
+    "is_mock": true,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Fixture local",
+          "url": "mock://business/gomeria-barrio-demo",
+          "captured_at": "2026-07-05",
+          "notes": "Registro inventado para pruebas tecnicas."
+        }
+      ],
+      "field_evidence": [
+        { "field": "name", "source_url": "mock://business/gomeria-barrio-demo", "notes": "Mock" },
+        { "field": "address", "source_url": "mock://business/gomeria-barrio-demo", "notes": "Mock" },
+        { "field": "opening_hours", "source_url": "mock://business/gomeria-barrio-demo", "notes": "Mock" },
+        { "field": "category", "source_url": "mock://business/gomeria-barrio-demo", "notes": "Mock" },
+        { "field": "main_product_or_service", "source_url": "mock://business/gomeria-barrio-demo", "notes": "Mock" },
+        { "field": "rating", "source_url": "mock://rating/gomeria-barrio-demo", "notes": "Mock" },
+        { "field": "reviews", "source_url": "mock://reviews/gomeria-barrio-demo", "notes": "Mock" },
+        { "field": "photos", "source_url": "mock://photos/gomeria-barrio-demo", "notes": "Mock" },
+        { "field": "website_check", "source_url": "mock://search/gomeria-barrio-demo", "notes": "Mock" }
+      ]
+    },
+    "brand": {
+      "palette": {
+        "source": "facade",
+        "captured_from": "mock://photos/gomeria-barrio-demo/fachada.jpg",
+        "dominant": "#2d2a26",
+        "accent": "#d94f30",
+        "supporting": ["#f4efe6", "#6b6258"]
+      },
+      "typography": {
+        "primary": "IBM Plex Sans Condensed",
+        "secondary": "Source Serif 4"
+      }
+    },
+    "site_plan": {
+      "archetype": "industrial-garage",
+      "position": 2
+    }
+  }
+]

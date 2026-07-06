@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ia-landing-generator.local/schemas/business-dataset.schema.json",
+  "title": "Local web generator business dataset",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "name",
+      "slug",
+      "category",
+      "is_vehicle_related",
+      "address",
+      "neighborhood_or_area",
+      "phone",
+      "opening_hours",
+      "rating",
+      "reviews",
+      "main_product_or_service",
+      "photos",
+      "has_own_website",
+      "website_check",
+      "data_quality_score",
+      "missing_data_reason",
+      "verification"
+    ],
+    "properties": {
+      "id": { "type": "string", "minLength": 1 },
+      "name": { "type": "string", "minLength": 1 },
+      "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+      "category": { "type": "string", "minLength": 1 },
+      "is_vehicle_related": { "type": "boolean" },
+      "address": { "type": "string", "minLength": 1 },
+      "neighborhood_or_area": { "type": ["string", "null"] },
+      "phone": { "type": ["string", "null"] },
+      "opening_hours": {
+        "type": "object",
+        "required": ["raw", "structured"],
+        "properties": {
+          "raw": { "type": ["string", "null"] },
+          "structured": { "type": "object" }
+        }
+      },
+      "rating": {
+        "type": "object",
+        "required": ["value", "reviews_count", "source_url"],
+        "properties": {
+          "value": { "type": "number", "minimum": 0, "maximum": 5 },
+          "reviews_count": { "type": "integer", "minimum": 0 },
+          "source_url": { "type": "string", "minLength": 1 }
+        }
+      },
+      "reviews": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["text", "author", "rating", "source_url"],
+          "properties": {
+            "text": { "type": "string", "minLength": 1 },
+            "author": { "type": ["string", "null"] },
+            "rating": { "type": "number", "minimum": 0, "maximum": 5 },
+            "source_url": { "type": "string", "minLength": 1 }
+          }
+        }
+      },
+      "photos": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["url", "type", "source_url", "usage_status"],
+          "properties": {
+            "url": { "type": "string", "minLength": 1 },
+            "type": { "enum": ["facade", "interior", "logo", "product", "other"] },
+            "source_url": { "type": "string", "minLength": 1 },
+            "usage_status": { "enum": ["allowed", "unknown", "needs_permission"] },
+            "captured_at": { "type": "string" }
+          }
+        }
+      },
+      "has_own_website": { "type": "boolean" },
+      "website_check": {
+        "type": "object",
+        "required": ["checked_sources", "evidence", "notes"],
+        "properties": {
+          "checked_sources": { "type": "array", "items": { "type": "string" } },
+          "evidence": { "type": "array", "items": { "type": "string" } },
+          "notes": { "type": "string" }
+        }
+      },
+      "data_quality_score": { "type": "number", "minimum": 0, "maximum": 1 },
+      "missing_data_reason": { "type": ["string", "null"] }
+    }
+  }
+}
