@@ -320,10 +320,10 @@ function creativeFromProfile(profile: ReturnType<typeof buildBusinessProfile>, b
         type: "material-story",
         eyebrow: "Direccion visual",
         title: "El sitio se apoya en imagen real y escenas seguras de contexto.",
-        body: "Cuando los datos o fotos son pobres, la IA puede completar atmosfera, textura y proceso sin atribuir esos recursos al negocio.",
+        body: "Cuando los datos o fotos son pobres, la composicion puede sumar atmosfera, textura y proceso sin atribuir esos recursos al negocio.",
         items: [
           { label: "Foto real", value: "Usar como prueba", note: "Priorizar la mejor imagen publica disponible." },
-          { label: "IA segura", value: "Poblar contexto", note: "Herramientas, material, mostrador o proceso sin marcas falsas." },
+          { label: "Apoyo visual", value: "Poblar contexto", note: "Herramientas, material, mostrador o proceso sin marcas falsas." },
           { label: "Cliente", value: "Siguiente paso claro", note: publicText(profile.cta) },
         ],
       },

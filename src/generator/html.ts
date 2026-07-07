@@ -410,7 +410,7 @@ function renderDocument(ctx: PageContext, content: string): string {
   return `<!doctype html>
 <html lang="es-AR" data-business-id="${escapeHtml(ctx.business.id)}" data-archetype="${ctx.archetype.id}" data-creative-layout="${escapeHtml(
     ctx.creative.layout,
-  )}">
+  )}"${ctx.pageSpec.conversion_template ? ` data-conversion-template="${escapeHtml(ctx.pageSpec.conversion_template)}"` : ""}>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
