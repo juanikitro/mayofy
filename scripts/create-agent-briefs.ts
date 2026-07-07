@@ -1,4 +1,4 @@
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { approvedBusinesses, loadBusinesses } from "../src/content/load-businesses.js";
 import { summarizeOpeningHours } from "../src/content/hours.js";
@@ -11,6 +11,8 @@ type Args = {
   outDir: string;
   city: string;
   segment: string;
+  remakeFrom: string | null;
+  screenshotsDir: string | null;
 };
 
 function parseArgs(argv: string[]): Args {
@@ -25,6 +27,8 @@ function parseArgs(argv: string[]): Args {
     outDir: valueAfter("--out", "data/agent-briefs/tandil"),
     city: valueAfter("--city", "Tandil"),
     segment: valueAfter("--segment", "servicios vehiculares"),
+    remakeFrom: valueAfter("--remake-from", "") || null,
+    screenshotsDir: valueAfter("--screenshots", "") || null,
   };
 }
 
@@ -51,13 +55,54 @@ async function loadCurrentSpecs(filePath: string): Promise<Map<string, unknown>>
   }
 }
 
+async function fileExists(filePath: string): Promise<boolean> {
+  try {
+    return (await stat(filePath)).isFile();
+  } catch {
+    return false;
+  }
+}
+
+async function optionalExcerpt(filePath: string, maxLength = 2800): Promise<string | null> {
+  if (!(await fileExists(filePath))) {
+    return null;
+  }
+
+  const raw = await readFile(filePath, "utf8");
+  return raw.length > maxLength ? `${raw.slice(0, maxLength)}\n...[truncated]` : raw;
+}
+
+async function loadRemakeContext(args: Args, slug: string): Promise<{
+  htmlPath: string | null;
+  cssPath: string | null;
+  htmlExcerpt: string | null;
+  cssExcerpt: string | null;
+  desktopScreenshot: string | null;
+  mobileScreenshot: string | null;
+}> {
+  const htmlPath = args.remakeFrom ? path.join(args.remakeFrom, slug, "index.html") : null;
+  const cssPath = args.remakeFrom ? path.join(args.remakeFrom, slug, "styles.css") : null;
+  const desktopScreenshot = args.screenshotsDir ? path.join(args.screenshotsDir, `${slug}-desktop.png`) : null;
+  const mobileScreenshot = args.screenshotsDir ? path.join(args.screenshotsDir, `${slug}-mobile.png`) : null;
+
+  return {
+    htmlPath: htmlPath && (await fileExists(htmlPath)) ? htmlPath : null,
+    cssPath: cssPath && (await fileExists(cssPath)) ? cssPath : null,
+    htmlExcerpt: htmlPath ? await optionalExcerpt(htmlPath) : null,
+    cssExcerpt: cssPath ? await optionalExcerpt(cssPath, 1800) : null,
+    desktopScreenshot: desktopScreenshot && (await fileExists(desktopScreenshot)) ? desktopScreenshot : null,
+    mobileScreenshot: mobileScreenshot && (await fileExists(mobileScreenshot)) ? mobileScreenshot : null,
+  };
+}
+
 function renderBrief(params: {
   business: Awaited<ReturnType<typeof loadBusinesses>>[number];
   index: number;
   currentSpec: unknown;
   args: Args;
+  remakeContext: Awaited<ReturnType<typeof loadRemakeContext>>;
 }): string {
-  const { business, index, currentSpec, args } = params;
+  const { business, index, currentSpec, args, remakeContext } = params;
   const profile = buildBusinessProfile(business);
   const sourceUrls = [
     business.rating.source_url,
@@ -76,6 +121,39 @@ function renderBrief(params: {
       ? "Use automotive conversion cues: premium/detailing or urban/custom art direction, strong hero, trust numbers, services, editable packages, before/after, reviews, booking CTA, practical contact and location."
       : `Use cues from the ${args.segment} domain and the local retail/service context in ${args.city}.`;
   const runSlug = `${slugPart(args.city)}-${slugPart(args.segment)}`;
+  const remakeBlock =
+    remakeContext.htmlPath || remakeContext.cssPath || remakeContext.desktopScreenshot || remakeContext.mobileScreenshot
+      ? `
+## Remake Context
+
+This brief is allowed to replace an existing weak landing. Do not preserve the current structure just because it exists.
+
+- current HTML: ${remakeContext.htmlPath ?? "not found"}
+- current CSS: ${remakeContext.cssPath ?? "not found"}
+- desktop screenshot: ${remakeContext.desktopScreenshot ?? "not found"}
+- mobile screenshot: ${remakeContext.mobileScreenshot ?? "not found"}
+
+Before writing the replacement, critique the existing page against these remake targets:
+
+1. Does the first viewport feel like a real local business or a generated template?
+2. Is the main photo/visual large enough to carry the page?
+3. Does the copy speak to a customer action instead of explaining the generator?
+4. Are weak photos compensated with safe AI-generated generic imagery or texture?
+5. Does mobile have rhythm, not only stacked cards?
+
+Current HTML excerpt:
+
+\`\`\`html
+${remakeContext.htmlExcerpt ?? "No HTML excerpt available."}
+\`\`\`
+
+Current CSS excerpt:
+
+\`\`\`css
+${remakeContext.cssExcerpt ?? "No CSS excerpt available."}
+\`\`\`
+`
+      : "";
 
   return `# Site Brief ${index + 1}: ${business.name}
 
@@ -88,7 +166,8 @@ Write or refine one \`SiteSpec\` for this business and create its real frontend 
 - Use only verified data below.
 - Do not invent services, years, awards, guarantees, prices, certifications, owners, staff, or claims.
 - Visible copy must be Spanish argentino, natural, local, commercial, and strong enough to sell the next action.
-- If useful commercial facts are missing, use clearly editable demo placeholders instead of weak filler. Examples: "[X] vehiculos atendidos", "[Precio editable]", "Opiniones reales proximamente". Never present placeholders as verified facts.
+- If useful commercial facts are missing, use safe AI-assisted filler: generic rubro imagery, process visuals, texture, section names, microcopy, and "a confirmar" offers. Never present them as verified facts.
+- Internal placeholders may exist in specs, but the customer-facing HTML must not show raw brackets, "placeholder", "demo", "editable", "template", "landing", or "creado con IA".
 - Avoid generic filler like "soluciones integrales", "calidad garantizada", "experiencia unica", "creado con IA".
 - Keep the business name isolated to this one site.
 - Make the page feel designed for "${args.segment}" in ${args.city}, not like a SaaS template.
@@ -143,13 +222,15 @@ ${business.photos
 ### Sources
 
 ${[...new Set(sourceUrls)].map((url) => `- ${url}`).join("\n")}
+${remakeBlock}
 
 ## Recommended Design Direction
 
 - ${domainDirection}
 - Quality matters more than cheap or fast generation.
-- Build a real landing structure: strong hero, trust bar, services, why choose, editable packages, before/after or gallery placeholders, process, reviews/contact, final CTA.
-- Make sparse data look intentional: use editable placeholders with labels, visual empty states, and future-review slots. Do not leave thin generic copy.
+- Choose one proven conversion template: \`hero-proof-offer\`, \`editorial-local-story\`, \`visual-menu\`, \`service-diagnostic\`, \`catalog-counter\`, or \`urgent-call-first\`.
+- Build a real landing structure: strong hero, trust bar, services, why choose, offer/options, before/after or gallery, process, reviews/contact, final CTA.
+- Make sparse data look intentional: use AI-generated generic imagery and crafted microcopy where the source data is thin. Do not leave empty generic cards.
 - Automotive references to emulate structurally: strong claim + numbers + services + CTA to booking; urban/aggressive wrapping/custom style; detailing service taxonomy; emotional hero; packages; before/after; reviews.
 - You may use plain HTML/CSS or a framework/library if it materially improves the final UI. You have broad discretion to use frontend/UI, animation, and icon libraries such as Aceternity UI (https://ui.aceternity.com/components), shadcn/ui (https://ui.shadcn.com/docs/components), Magic UI (https://magicui.design/), Framer Motion, GSAP, Motion One, lucide-react, React Icons, or similar component/motion kits when they raise product quality.
 - If using a framework, build/export it yourself and point \`agent_frontend.output_dir\` at the static output.
@@ -157,6 +238,7 @@ ${[...new Set(sourceUrls)].map((url) => `- ${url}`).join("\n")}
 - Prefer concrete microcopy based on the signals above.
 - Vary \`visual_mood\` and \`composition\` across the 10 sites.
 - Avoid repeating the same hero rhythm, proof order, and CTA wording from nearby briefs.
+- If the page would otherwise look templated, use a high-conversion template deliberately: first viewport promise + proof + CTA, visible image, objection handling, offer/options, process, final CTA. Make it polished rather than novel.
 
 ## Current Spec, If Any
 ${fencedJson(currentSpec ?? null)}
@@ -181,6 +263,18 @@ Return one object with:
 - \`contact_heading\`
 - \`image_prompt\`
 - \`design_notes\`
+- \`conversion_template\`: one of \`hero-proof-offer\`, \`editorial-local-story\`, \`visual-menu\`, \`service-diagnostic\`, \`catalog-counter\`, \`urgent-call-first\`
+- \`design_brief\`: required for future/remake quality:
+  - \`market_position\`: what this page sells and for whom
+  - \`visual_thesis\`: concrete art direction tied to the business/rubro
+  - \`copy_voice\`: how the copy should sound and what it must avoid
+  - \`layout_signature\`: what makes this page structurally specific
+  - \`asset_plan\`: how real photos and safe AI generic imagery are used
+  - \`ai_fill_plan.copy\`: how AI enriches thin data without false claims
+  - \`ai_fill_plan.imagery\`: what non-specific images/textures can be generated
+  - \`ai_fill_plan.boundaries\`: explicit limits: no fake prices, stock, brands, years, awards, guarantees, services or reviews
+  - \`anti_patterns\`: visible failure modes to avoid
+  - \`rewrite_targets\`: what to improve if remaking an existing page
 - \`commercial\`: recommended for sellable landings:
   - \`tone\`: \`premium-detailing\`, \`urban-custom\`, \`practical-workshop\`, \`fast-local\`, \`parts-counter\`, or \`bodyshop-craft\`
   - \`customer_type\`
@@ -188,8 +282,8 @@ Return one object with:
   - \`trust_bar\`: 3 to 5 cards with \`label\`, \`title\`, \`body\`, optional \`meta\`, optional \`is_demo\`
   - \`service_cards\`: 3 to 6 benefit-led service cards
   - \`why_choose\`: 3 to 5 reasons tied to the business/rubro
-  - \`packages\`: 2 to 4 demo/editable commercial packages; no fake prices
-  - \`gallery\`: 2 to 4 before/after or real-photo placeholders
+  - \`packages\`: 2 to 4 offer/options; no fake prices
+  - \`gallery\`: 2 to 4 before/after, real-photo or AI-safe generic visual blocks
   - \`process\`: 3 to 5 steps from inquiry to visit/booking
   - \`final_cta\`: \`title\`, \`body\`, \`primary_label\`, \`secondary_label\`
   - \`editable_note\`: short warning for placeholders
@@ -219,7 +313,7 @@ Creative block \`type\` values:
 - \`material-story\`
 - \`metric-grid\`
 
-The \`agent_frontend\` artifact is the main place where the page stops being a template. The \`creative\` object remains useful as planning metadata and fallback input, but the final UI must be authored.
+The \`agent_frontend\` artifact is the main place where the page stops being a template. The \`design_brief\` and \`creative\` objects remain useful as planning metadata and fallback input, but the final UI must be authored.
 `;
 }
 
@@ -243,6 +337,14 @@ npm run generate
 npm run qa
 \`\`\`
 
+Remake flow for an existing weak batch:
+
+\`\`\`powershell
+npm run agent:briefs -- --input <businesses.json> --specs <site-specs.json> --out <briefs-dir> --city "${args.city}" --segment "${args.segment}" --remake-from <generated-run-dir> --screenshots <screenshots-dir>
+\`\`\`
+
+Each remake brief includes current HTML/CSS excerpts and screenshot paths when available. Replace the frontend instead of preserving a weak structure.
+
 Businesses:
 
 ${businesses.map((business, index) => `${index + 1}. [${business.name}](./${business.slug}.md)`).join("\n")}
@@ -258,9 +360,10 @@ async function main(): Promise<void> {
   await mkdir(args.outDir, { recursive: true });
 
   for (const [index, business] of businesses.entries()) {
+    const remakeContext = await loadRemakeContext(args, business.slug);
     await writeFile(
       path.join(args.outDir, `${business.slug}.md`),
-      renderBrief({ business, index, currentSpec: currentSpecs.get(business.id), args }),
+      renderBrief({ business, index, currentSpec: currentSpecs.get(business.id), args, remakeContext }),
       "utf8",
     );
   }

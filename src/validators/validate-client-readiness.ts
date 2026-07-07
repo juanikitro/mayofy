@@ -19,6 +19,26 @@ type SiteRecord = {
   directory: string;
 };
 
+type SiteJson = {
+  site_spec?: {
+    conversion_template?: string | null;
+    design_brief?: {
+      market_position?: string;
+      visual_thesis?: string;
+      copy_voice?: string;
+      layout_signature?: string;
+      asset_plan?: string;
+      ai_fill_plan?: {
+        copy?: string[];
+        imagery?: string[];
+        boundaries?: string[];
+      };
+      anti_patterns?: string[];
+      rewrite_targets?: string[];
+    } | null;
+  } | null;
+};
+
 type Manifest = {
   sites: SiteRecord[];
 };
@@ -149,12 +169,60 @@ async function auditSite(outDir: string, site: SiteRecord): Promise<{ classes: S
   const siteDir = path.join(outDir, site.directory);
   const html = await readFile(path.join(siteDir, "index.html"), "utf8");
   const css = await readFile(path.join(siteDir, "styles.css"), "utf8");
+  let siteJson: SiteJson | null = null;
+  try {
+    siteJson = JSON.parse(await readFile(path.join(siteDir, "site.json"), "utf8")) as SiteJson;
+  } catch {
+    siteJson = null;
+  }
   const visibleText = stripTags(html);
   const normalizedText = normalize(visibleText);
   const classes = extractClasses(html);
+  const spec = siteJson?.site_spec ?? null;
 
   if (!site.frontend_mode || site.frontend_mode === "renderer-fallback") {
     issues.push(issue("blocker", "renderer_fallback", site.slug, "usa renderer fallback; no es entregable cliente."));
+  }
+
+  if (!spec?.conversion_template) {
+    issues.push(issue("blocker", "missing_conversion_template", site.slug, "no tiene conversion_template; falta una estructura comercial elegida."));
+  }
+
+  if (!spec?.design_brief) {
+    issues.push(issue("blocker", "missing_design_brief", site.slug, "no tiene design_brief; falta tesis visual, plan de IA segura y objetivos de remake."));
+  } else {
+    const brief = spec.design_brief;
+    const aiCopy = brief.ai_fill_plan?.copy ?? [];
+    const aiImagery = brief.ai_fill_plan?.imagery ?? [];
+    const aiBoundaries = brief.ai_fill_plan?.boundaries ?? [];
+    const briefText = [
+      brief.market_position ?? "",
+      brief.visual_thesis ?? "",
+      brief.copy_voice ?? "",
+      brief.layout_signature ?? "",
+      brief.asset_plan ?? "",
+      ...aiCopy,
+      ...aiImagery,
+      ...aiBoundaries,
+      ...(brief.anti_patterns ?? []),
+      ...(brief.rewrite_targets ?? []),
+    ].join(" ");
+
+    if ((brief.visual_thesis ?? "").length < 80) {
+      issues.push(issue("blocker", "thin_visual_thesis", site.slug, "design_brief.visual_thesis es demasiado fina para guiar una UI real."));
+    }
+    if ((brief.layout_signature ?? "").length < 80) {
+      issues.push(issue("blocker", "thin_layout_signature", site.slug, "design_brief.layout_signature no describe una estructura de conversion concreta."));
+    }
+    if (!/IA|imagen|foto|escena|textura|visual/iu.test(brief.asset_plan ?? "") || aiImagery.length < 2) {
+      issues.push(issue("blocker", "weak_ai_imagery_plan", site.slug, "falta plan claro para poblar visualmente con imagenes genericas seguras cuando los assets reales son pobres."));
+    }
+    if (aiCopy.length < 2 || !/microcopy|copy|CTA|secci[oó]n|paquete|rese[ñn]a/iu.test(briefText)) {
+      issues.push(issue("blocker", "weak_ai_copy_plan", site.slug, "falta plan claro para enriquecer copy sin depender de datos pobres."));
+    }
+    if (!aiBoundaries.some((entry) => /precio|stock|marca|a[nñ]o|premio|garant|servicio|rese[ñn]a/iu.test(entry))) {
+      issues.push(issue("blocker", "missing_ai_boundaries", site.slug, "el plan de IA no bloquea explicitamente datos comerciales falsos."));
+    }
   }
 
   if (countWords(visibleText) < 420) {
