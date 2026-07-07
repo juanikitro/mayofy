@@ -2,6 +2,7 @@ import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { approvedBusinesses, loadBusinesses } from "../content/load-businesses.js";
 import type { Business } from "../content/business-schema.js";
+import { flagValue, resolveGeneratedDir } from "../generated-output.js";
 
 type Args = {
   generatedDir: string;
@@ -95,32 +96,21 @@ type ExecutiveSummary = {
 
 type RawRecord = Record<string, unknown>;
 
-function valueAfter(argv: string[], flag: string, fallback: string | null = null): string | null {
-  const index = argv.indexOf(flag);
-  if (index < 0) {
-    return fallback;
-  }
-  const value = argv[index + 1];
-  if (!value) {
-    throw new Error(`${flag} requires a value.`);
-  }
-  return value;
-}
-
 function parseArgs(argv: string[]): Args {
-  const generatedDir = argv[2] && !argv[2].startsWith("--") ? argv[2] : "generated";
-  const outPath = valueAfter(argv, "--out", "output/final-study.md") ?? "output/final-study.md";
-  const jsonPath = valueAfter(argv, "--json", outPath.replace(/\.md$/iu, ".json")) ?? outPath.replace(/\.md$/iu, ".json");
+  const businessesPath = flagValue(argv, "--businesses", "data/tandil-businesses.json") ?? "data/tandil-businesses.json";
+  const generatedDir = resolveGeneratedDir(argv, { positionalIndex: 2, datasetPath: businessesPath, outFlag: null });
+  const outPath = flagValue(argv, "--out", path.join(generatedDir, "final-study.md")) ?? path.join(generatedDir, "final-study.md");
+  const jsonPath = flagValue(argv, "--json", outPath.replace(/\.md$/iu, ".json")) ?? outPath.replace(/\.md$/iu, ".json");
 
   return {
     generatedDir,
-    businessesPath: valueAfter(argv, "--businesses", "data/tandil-businesses.json") ?? "data/tandil-businesses.json",
-    specsPath: valueAfter(argv, "--specs"),
-    briefsDir: valueAfter(argv, "--briefs"),
+    businessesPath,
+    specsPath: flagValue(argv, "--specs"),
+    briefsDir: flagValue(argv, "--briefs"),
     outPath,
     jsonPath,
-    price: valueAfter(argv, "--price", "[PRECIO]") ?? "[PRECIO]",
-    baseUrl: valueAfter(argv, "--base-url"),
+    price: flagValue(argv, "--price", "[PRECIO]") ?? "[PRECIO]",
+    baseUrl: flagValue(argv, "--base-url"),
   };
 }
 

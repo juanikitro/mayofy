@@ -156,7 +156,9 @@ Generar final:
 npm run generate
 ```
 
-Cada negocio aprobado crea una carpeta `generated/<slug>/` con `index.html`, `styles.css` y `site.json`.
+Cada corrida crea una carpeta de sesion dentro de `generated/`. Por defecto el nombre sale del dataset (`data/tandil-businesses.json` -> `generated/tandil`; `data/chivilcoy-ropa-businesses.json` -> `generated/chivilcoy-ropa`). Tambien se puede fijar con `--session <slug>`.
+
+Dentro de `generated/<sesion>/` queda una carpeta por negocio (`<slug>/`) con `index.html`, `styles.css` y `site.json`, mas `manifest.json` e `index.html` de indice de la tanda.
 
 `npm run generate` exige `GOOGLE_PLACES_API_KEY`, fotos reales y `agent_frontend`. Si queres revisar UI sin fotos reales o sin frontend final, usar:
 
@@ -182,7 +184,7 @@ npm run qa:client
 - accesibilidad basica floja
 - demasiada similitud visual/estructural entre landings consecutivas
 
-El comando escribe `output/client-readiness-report.md`. Aunque pase, la revision visual con screenshots sigue siendo responsabilidad del agente antes de deploy.
+El comando escribe `generated/<sesion>/client-readiness-report.md` salvo que se pase `--report`. Aunque pase, la revision visual con screenshots sigue siendo responsabilidad del agente antes de deploy.
 
 ## Fase 7: estudio final
 
@@ -194,10 +196,10 @@ npm run study:final -- --price "[PRECIO]"
 
 El comando escribe:
 
-- `output/final-study.md`
-- `output/final-study.json`
+- `generated/<sesion>/final-study.md`
+- `generated/<sesion>/final-study.json`
 
-El estudio final cruza `generated/manifest.json`, `data/tandil-businesses.json`, `data/site-specs/tandil-site-specs.json` y `data/agent-briefs/tandil/`. Para cada negocio entrega:
+El estudio final cruza `generated/<sesion>/manifest.json`, el dataset de negocios, los site specs y los briefs de la corrida. Para cada negocio entrega:
 
 - link/path de la landing
 - medio de contacto favorito: Instagram, WhatsApp, WhatsApp probable o telefono
@@ -217,12 +219,12 @@ No buscar redes nuevas ni inventar canales. Si no hay Instagram/WhatsApp verific
 npm run deploy:plan
 ```
 
-El comando escribe `generated/deploy-plan.json`. No publica nada. El deploy real debe ejecutarse explicitamente.
+El comando escribe `generated/<sesion>/deploy-plan.json`. No publica nada. El deploy real debe ejecutarse explicitamente.
 
 ## Repetir con otra ciudad
 
 1. Crear `data/<ciudad>-businesses.json`.
 2. Cargar negocios con la misma estructura.
 3. Ejecutar `tsx src/validators/validate-dataset.ts data/<ciudad>-businesses.json --strict-final`.
-4. Ejecutar `tsx src/generator/generate-sites.ts data/<ciudad>-businesses.json --out generated/<ciudad>`.
-5. Ejecutar `tsx src/validators/validate-generated-sites.ts generated/<ciudad>`.
+4. Ejecutar `tsx src/generator/generate-sites.ts data/<ciudad>-businesses.json --session <ciudad>`.
+5. Ejecutar `tsx src/validators/validate-generated-sites.ts --session <ciudad>`.

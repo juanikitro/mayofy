@@ -118,9 +118,11 @@ npm run study:final -- --price "[PRECIO]"
 El comando escribe:
 
 ```text
-output/final-study.md
-output/final-study.json
+generated/<sesion>/final-study.md
+generated/<sesion>/final-study.json
 ```
+
+La carpeta `generated/<sesion>/` es el paquete de salida de la corrida: contiene una carpeta por landing, `manifest.json`, `index.html`, los reportes de QA que no tengan override y el estudio final Markdown.
 
 El estudio final debe incluir, por cada negocio:
 

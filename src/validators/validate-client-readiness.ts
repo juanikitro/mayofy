@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { flagValue, resolveGeneratedDir } from "../generated-output.js";
 
 type Severity = "blocker" | "warning";
 
@@ -68,18 +69,14 @@ const requiredSignals = [
 ];
 
 function parseArgs(argv: string[]): Args {
-  const valueAfter = (flag: string, fallback: string): string => {
-    const index = argv.indexOf(flag);
-    return index >= 0 ? argv[index + 1] : fallback;
-  };
-
-  const minScoreRaw = valueAfter("--min-score", "85");
+  const outDir = resolveGeneratedDir(argv, { positionalIndex: 2, fallbackSession: "tandil" });
+  const minScoreRaw = flagValue(argv, "--min-score", "85") ?? "85";
   const minScore = Number.parseInt(minScoreRaw, 10);
-  const slug = valueAfter("--slug", valueAfter("--only", ""));
+  const slug = flagValue(argv, "--slug", flagValue(argv, "--only", "") ?? "") ?? "";
 
   return {
-    outDir: argv[2] ?? "generated",
-    reportPath: valueAfter("--report", "output/client-readiness-report.md"),
+    outDir,
+    reportPath: flagValue(argv, "--report", path.join(outDir, "client-readiness-report.md")) ?? path.join(outDir, "client-readiness-report.md"),
     minScore: Number.isFinite(minScore) ? minScore : 85,
     slug: slug ? slug.trim() : null,
   };

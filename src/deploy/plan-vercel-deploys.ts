@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { resolveGeneratedDir } from "../generated-output.js";
 
 type SiteRecord = {
   slug: string;
@@ -12,7 +13,7 @@ type Manifest = {
 };
 
 async function main(): Promise<void> {
-  const outDir = process.argv[2] ?? "generated";
+  const outDir = resolveGeneratedDir(process.argv, { positionalIndex: 2, fallbackSession: "tandil" });
   const manifest = JSON.parse(await readFile(path.join(outDir, "manifest.json"), "utf8")) as Manifest;
 
   const deploys = manifest.sites.map((site) => ({

@@ -57,7 +57,7 @@ npm run study:final -- --price "[PRECIO]"
 
 `npm run qa` valida integridad tecnica. `npm run qa:client` es el gate de entrega: falla si la tanda todavia parece demo interna, template repetido, copy con placeholders visibles o landing no vendible.
 
-`npm run study:final -- --price "[PRECIO]"` escribe `output/final-study.md` y `output/final-study.json` con las landings, el contacto recomendado, lead score, mini auditoria comercial, paquete de mensajes/follow-ups/objeciones y propuesta lista para enviar por negocio. El precio no se inventa: pasalo por `--price` o quedara como placeholder.
+`npm run study:final -- --price "[PRECIO]"` escribe `generated/<sesion>/final-study.md` y `generated/<sesion>/final-study.json` junto a las landings, con el contacto recomendado, lead score, mini auditoria comercial, paquete de mensajes/follow-ups/objeciones y propuesta lista para enviar por negocio. El precio no se inventa: pasalo por `--price` o quedara como placeholder.
 
 ## Busqueda automatica de candidatos
 
@@ -92,10 +92,10 @@ npm run qa
 6. Codex/Claude agrega `agent_frontend` en `data/site-specs/tandil-site-specs.json`.
 7. Validar specs con `npm run validate:specs:tandil`.
 8. Validar que no haya datos inventados ni negocios con sitio propio.
-9. Generar un sitio separado por negocio en `generated/<slug>/`.
+9. Generar una carpeta de sesion en `generated/<sesion>/`; adentro queda una carpeta por negocio (`generated/<sesion>/<slug>/`) con todo su codigo.
 10. Ejecutar QA de contenido, datos y frontends authored.
 11. Ejecutar `npm run qa:client` y revisar screenshots desktop/mobile.
-12. Generar el estudio final con `npm run study:final -- --price "[PRECIO]"`.
+12. Generar el estudio final con `npm run study:final -- --price "[PRECIO]"`; el Markdown queda en `generated/<sesion>/final-study.md`.
 13. Crear plan de deploy para 10 URLs separadas.
 
 Ver detalles en `docs/PIPELINE.md`, `docs/DATA_RULES.md`, `docs/CLIENT_READINESS_QA.md` y `docs/DEPLOYMENT.md`.

@@ -11,7 +11,7 @@ El repositorio prepara deploys separados, pero no publica automaticamente.
 
 ## Vercel
 
-`generated/deploy-plan.json` contiene una entrada por sitio:
+`generated/<sesion>/deploy-plan.json` contiene una entrada por sitio:
 
 - negocio
 - slug

@@ -3,6 +3,7 @@ import path from "node:path";
 import { resolveArchetype } from "../archetypes/index.js";
 import { approvedBusinesses, loadBusinesses } from "../content/load-businesses.js";
 import { resolveDesign } from "../design/palette.js";
+import { flagValue, positionalValue, resolveGeneratedDir } from "../generated-output.js";
 import { loadSiteSpecs } from "../site-specs/load-site-specs.js";
 import { copyAgentFrontend } from "./agent-frontend.js";
 import { renderBusinessPage } from "./html.js";
@@ -38,14 +39,12 @@ type ManifestSite = {
 };
 
 function parseArgs(argv: string[]): Args {
-  const datasetPath = argv[2] ?? "data/tandil-businesses.json";
-  const outFlag = argv.indexOf("--out");
-  const specsFlag = argv.indexOf("--specs");
+  const datasetPath = positionalValue(argv, 2) ?? "data/tandil-businesses.json";
   return {
     datasetPath,
-    outDir: outFlag >= 0 ? argv[outFlag + 1] : "generated",
+    outDir: resolveGeneratedDir(argv, { datasetPath }),
     allowMock: argv.includes("--allow-mock"),
-    specsPath: specsFlag >= 0 ? argv[specsFlag + 1] : null,
+    specsPath: flagValue(argv, "--specs"),
     requireRealImages: argv.includes("--require-real-images"),
     requireAgentFrontends: argv.includes("--require-agent-frontends"),
   };

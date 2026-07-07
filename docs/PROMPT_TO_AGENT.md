@@ -101,16 +101,19 @@ npm run validate:specs -- --businesses data/chivilcoy-ropa-businesses.json --spe
 Generar preview:
 
 ```powershell
-tsx src/generator/generate-sites.ts data/chivilcoy-ropa-businesses.json --specs data/site-specs/chivilcoy-ropa-site-specs.json --out generated/chivilcoy-ropa
-tsx src/validators/validate-generated-sites.ts generated/chivilcoy-ropa
+tsx src/generator/generate-sites.ts data/chivilcoy-ropa-businesses.json --specs data/site-specs/chivilcoy-ropa-site-specs.json --session chivilcoy-ropa
+tsx src/validators/validate-generated-sites.ts --session chivilcoy-ropa
 ```
 
 Generar final con fotos reales:
 
 ```powershell
-tsx src/generator/generate-sites.ts data/chivilcoy-ropa-businesses.json --specs data/site-specs/chivilcoy-ropa-site-specs.json --out generated/chivilcoy-ropa --require-real-images
-tsx src/validators/validate-generated-sites.ts generated/chivilcoy-ropa
+tsx src/generator/generate-sites.ts data/chivilcoy-ropa-businesses.json --specs data/site-specs/chivilcoy-ropa-site-specs.json --session chivilcoy-ropa --require-real-images
+tsx src/validators/validate-generated-sites.ts --session chivilcoy-ropa
+tsx src/delivery/create-final-study.ts --session chivilcoy-ropa --businesses data/chivilcoy-ropa-businesses.json --specs data/site-specs/chivilcoy-ropa-site-specs.json --briefs data/agent-briefs/chivilcoy-ropa --price "[PRECIO]"
 ```
+
+La salida final de la sesion queda concentrada en `generated/chivilcoy-ropa/`: una carpeta por landing, `manifest.json`, `index.html` y `final-study.md`.
 
 ## Responsabilidad del agente
 
