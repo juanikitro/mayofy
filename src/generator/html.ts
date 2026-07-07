@@ -183,12 +183,12 @@ function commercialFallback(profile: BusinessProfile): CommercialSpec {
     process: profile.process,
     final_cta: profile.finalCta,
     editable_note:
-      "Los items marcados como demo son placeholders comerciales editables: reemplazar por datos reales antes de publicar o dejarlos explicitamente como a confirmar.",
+      "Las opciones marcadas como a confirmar ordenan la consulta sin publicar precios, stock o alcances no verificados.",
   };
 }
 
 function renderDemoFlag(isDemo?: boolean): string {
-  return isDemo ? `<span class="demo-flag">Editable</span>` : "";
+  return isDemo ? `<span class="demo-flag">A confirmar</span>` : "";
 }
 
 function renderCommercialCard(card: CommercialCard, className = "commercial-card"): string {
@@ -251,9 +251,9 @@ function renderCommercialSections(ctx: PageContext): string {
 
     <section id="combos" class="commercial-section commercial-packages">
       <div class="commercial-heading">
-        <p class="section-label">Combos demo</p>
-        <h2>Paquetes editables para vender mejor sin inventar precios</h2>
-        <p>${escapeHtml(c.editable_note ?? "Los precios y alcances marcados como editables deben confirmarse antes de publicar.")}</p>
+        <p class="section-label">Opciones de consulta</p>
+        <h2>Tres formas de pedir presupuesto sin publicar precios no confirmados</h2>
+        <p>${escapeHtml(c.editable_note ?? "Los precios, stock y alcances se confirman antes de publicar una oferta final.")}</p>
       </div>
       <div class="package-grid">
         ${c.packages.map((item) => renderCommercialPackage(item)).join("\n")}
@@ -263,7 +263,7 @@ function renderCommercialSections(ctx: PageContext): string {
     <section class="commercial-section commercial-gallery">
       <div class="commercial-heading">
         <p class="section-label">Antes / despues</p>
-        <h2>Espacios visuales listos para fotos reales</h2>
+        <h2>Prueba visual para que el resultado se entienda rapido</h2>
       </div>
       <div class="gallery-grid">
         ${c.gallery.map((item) => renderCommercialCard(item, "gallery-card")).join("\n")}

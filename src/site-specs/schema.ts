@@ -45,6 +45,15 @@ export const creativeBlockTypeSchema = z.enum([
   "metric-grid",
 ]);
 
+export const conversionTemplateSchema = z.enum([
+  "hero-proof-offer",
+  "editorial-local-story",
+  "visual-menu",
+  "service-diagnostic",
+  "catalog-counter",
+  "urgent-call-first",
+]);
+
 export const agentFrontendModeSchema = z.enum(["static-files", "framework-build"]);
 
 export const agentFrontendSchema = z.object({
@@ -134,6 +143,21 @@ export const creativeSpecSchema = z.object({
   sections: z.array(creativeBlockSchema).min(3).max(5),
 });
 
+export const designBriefSchema = z.object({
+  market_position: z.string().min(1),
+  visual_thesis: z.string().min(1),
+  copy_voice: z.string().min(1),
+  layout_signature: z.string().min(1),
+  asset_plan: z.string().min(1),
+  ai_fill_plan: z.object({
+    copy: z.array(z.string().min(1)).min(2).max(5),
+    imagery: z.array(z.string().min(1)).min(2).max(5),
+    boundaries: z.array(z.string().min(1)).min(2).max(6),
+  }),
+  anti_patterns: z.array(z.string().min(1)).min(3).max(8),
+  rewrite_targets: z.array(z.string().min(1)).min(3).max(8),
+});
+
 export const siteSpecSchema = z.object({
   business_id: z.string().min(1),
   slug: z.string().min(1),
@@ -151,6 +175,8 @@ export const siteSpecSchema = z.object({
   contact_heading: z.string().min(1),
   image_prompt: z.string().min(1),
   design_notes: z.string().min(1),
+  conversion_template: conversionTemplateSchema.optional(),
+  design_brief: designBriefSchema.optional(),
   commercial: commercialSpecSchema.optional(),
   creative: creativeSpecSchema.optional(),
   agent_frontend: agentFrontendSchema.optional(),
@@ -165,3 +191,5 @@ export type CreativeSpec = z.infer<typeof creativeSpecSchema>;
 export type CreativeBlockType = z.infer<typeof creativeBlockTypeSchema>;
 export type AgentFrontendSpec = z.infer<typeof agentFrontendSchema>;
 export type CommercialSpec = z.infer<typeof commercialSpecSchema>;
+export type ConversionTemplate = z.infer<typeof conversionTemplateSchema>;
+export type DesignBrief = z.infer<typeof designBriefSchema>;
