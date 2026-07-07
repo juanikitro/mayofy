@@ -13,6 +13,7 @@ El repositorio empieza sin datos reales finales. `data/tandil-businesses.json` e
 - Vercel preparado como opcion de deploy por carpeta generada, sin ejecutar deploys automaticamente.
 
 La prioridad es calidad visual, no velocidad ni costo. El agente tiene libertad para usar frameworks, librerias, composiciones propias y CSS dedicado, siempre que el resultado final exporte archivos estaticos y respete los datos verificados.
+Cada landing debe nacer de un `conversion_template` y un `design_brief`: que vende, tesis visual, voz de copy, firma de layout, plan de assets, plan de IA segura, anti-patrones y objetivos de remake. Si los datos o fotos son pobres, la IA puede poblar copy, secciones e imagenes genericas del rubro sin inventar datos comerciales.
 
 ## Comandos
 
@@ -57,6 +58,14 @@ npm run study:final -- --price "[PRECIO]"
 
 `npm run qa` valida integridad tecnica. `npm run qa:client` es el gate de entrega: falla si la tanda todavia parece demo interna, template repetido, copy con placeholders visibles o landing no vendible.
 
+Para rehacer una tanda floja:
+
+```bash
+npm run agent:briefs -- --input data/<run>-businesses.json --specs data/site-specs/<run>-site-specs.json --out data/agent-briefs/<run> --city "<Ciudad>" --segment "<Rubro>" --remake-from generated/<run> --screenshots output/screenshots/<run>
+```
+
+El brief de remake incluye contexto de la version anterior y obliga a reemplazar la estructura si no llega a barra de producto real.
+
 `npm run study:final -- --price "[PRECIO]"` escribe `generated/<sesion>/final-study.md` y `generated/<sesion>/final-study.json` junto a las landings, con el contacto recomendado, lead score, mini auditoria comercial, paquete de mensajes/follow-ups/objeciones y propuesta lista para enviar por negocio. El precio no se inventa: pasalo por `--price` o quedara como placeholder.
 
 ## Busqueda automatica de candidatos
@@ -88,7 +97,7 @@ npm run qa
 2. Generar shortlist con `npm run shortlist:tandil`.
 3. Promover 10 negocios con `npm run promote:tandil`.
 4. Preparar briefs con `npm run agent:briefs:tandil`.
-5. Codex/Claude diseña y escribe un frontend real por negocio.
+5. Codex/Claude elige `conversion_template`, completa `design_brief` y diseña un frontend real por negocio.
 6. Codex/Claude agrega `agent_frontend` en `data/site-specs/tandil-site-specs.json`.
 7. Validar specs con `npm run validate:specs:tandil`.
 8. Validar que no haya datos inventados ni negocios con sitio propio.
