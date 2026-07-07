@@ -1,0 +1,346 @@
+{
+  "generated_at": "2026-07-07T22:14:12.423Z",
+  "executive_summary": {
+    "total_landings": 3,
+    "suggested_price": "[PRECIO]",
+    "top_3_to_contact_first": [
+      {
+        "slug": "autocentro-cardetail",
+        "business_name": "Autocentro CarDetail",
+        "priority": 10,
+        "reason": "Rating fuerte: 5.0 sobre 5."
+      },
+      {
+        "slug": "taller-sr-chapa-y-pintura",
+        "business_name": "Taller SR. Chapa y pintura",
+        "priority": 10,
+        "reason": "Rating fuerte: 4.8 sobre 5."
+      },
+      {
+        "slug": "lubricentro-power-ful-ii",
+        "business_name": "Lubricentro Power Ful II",
+        "priority": 10,
+        "reason": "Rating fuerte: 4.8 sobre 5."
+      }
+    ],
+    "strongest_contact_channels": [
+      {
+        "slug": "lubricentro-power-ful-ii",
+        "business_name": "Lubricentro Power Ful II",
+        "contact": "Telefono: 0351 351-7691",
+        "confidence": "high"
+      },
+      {
+        "slug": "autocentro-cardetail",
+        "business_name": "Autocentro CarDetail",
+        "contact": "WhatsApp probable: 0351 15-265-8259",
+        "confidence": "medium"
+      },
+      {
+        "slug": "taller-sr-chapa-y-pintura",
+        "business_name": "Taller SR. Chapa y pintura",
+        "contact": "WhatsApp probable: 0351 549-1346",
+        "confidence": "medium"
+      }
+    ],
+    "best_commercial_opportunities": [
+      {
+        "slug": "autocentro-cardetail",
+        "business_name": "Autocentro CarDetail",
+        "opportunity": "high",
+        "reason": "Rating fuerte: 5.0 sobre 5."
+      },
+      {
+        "slug": "taller-sr-chapa-y-pintura",
+        "business_name": "Taller SR. Chapa y pintura",
+        "opportunity": "high",
+        "reason": "Rating fuerte: 4.8 sobre 5."
+      },
+      {
+        "slug": "lubricentro-power-ful-ii",
+        "business_name": "Lubricentro Power Ful II",
+        "opportunity": "high",
+        "reason": "Rating fuerte: 4.8 sobre 5."
+      }
+    ],
+    "needs_contact_validation": [
+      {
+        "slug": "autocentro-cardetail",
+        "business_name": "Autocentro CarDetail",
+        "contact": "WhatsApp probable: 0351 15-265-8259",
+        "risk": "WhatsApp no verificado; conviene validar canal antes de escribir como si fuera oficial."
+      },
+      {
+        "slug": "taller-sr-chapa-y-pintura",
+        "business_name": "Taller SR. Chapa y pintura",
+        "contact": "WhatsApp probable: 0351 549-1346",
+        "risk": "WhatsApp no verificado; conviene validar canal antes de escribir como si fuera oficial."
+      }
+    ],
+    "contact_breakdown": {
+      "instagram": 0,
+      "whatsapp": 0,
+      "whatsapp_probable": 2,
+      "phone": 1,
+      "missing": 0
+    }
+  },
+  "entries": [
+    {
+      "slug": "autocentro-cardetail",
+      "business_name": "Autocentro CarDetail",
+      "landing_url": "generated/cordoba-conversion/autocentro-cardetail/index.html",
+      "landing_path": "generated/cordoba-conversion/autocentro-cardetail/index.html",
+      "service": "car detailing",
+      "rating": "5.0 (92)",
+      "preferred_contact": {
+        "medium": "whatsapp_probable",
+        "label": "WhatsApp probable",
+        "value": "0351 15-265-8259",
+        "confidence": "medium",
+        "reason": "El material disponible menciona WhatsApp, pero no hay link verificado; se usa el telefono publicado."
+      },
+      "lead_score": {
+        "priority": 10,
+        "contact_probability": "medium",
+        "opportunity": "high",
+        "reasons": [
+          "No tiene sitio propio registrado en los datos disponibles.",
+          "Rating fuerte: 5.0 sobre 5.",
+          "Volumen util de reseñas: 92.",
+          "Rubro visual: una landing con fotos y CTA puede mostrar valor rapido."
+        ],
+        "risks": [
+          "WhatsApp no verificado; conviene validar canal antes de escribir como si fuera oficial."
+        ]
+      },
+      "commercial_audit": {
+        "problem_solved": "Convierte una consulta visual de cuidado del auto en una pagina con fotos, reseñas y CTA claro para coordinar.",
+        "public_signals_used": [
+          "Rating 5.0 con 92 reseñas.",
+          "Direccion publicada: Puvr Olimpia 1851, X5000 Córdoba, Argentina.",
+          "Telefono publicado: 0351 15-265-8259.",
+          "Horario publicado disponible para orientar la consulta.",
+          "Reseña usada como señal: \"Facu y Mauri dejaron mi auto impecable! Lo hicieron en menos tiempo del que me dijeron.  Siempre atentos y profesionales...\"",
+          "Reseña usada como señal: \"Excelente atención,  muy bien el trabajo , muy conforme, gracias!!\""
+        ],
+        "owner_data_to_request": [
+          "Confirmar si el telefono publicado tambien recibe WhatsApp.",
+          "WhatsApp confirmado y nombre de quien responde consultas.",
+          "Logo o marca actual si existe.",
+          "Fotos propias autorizadas para publicar.",
+          "Lista real de servicios y limites de lo que no quieren prometer.",
+          "Horario final, zona de atencion y direccion revisada.",
+          "Dominio deseado o nombre corto para publicar.",
+          "Fotos antes/despues o trabajos terminados para reemplazar imagenes genericas."
+        ],
+        "suggested_improvements": [
+          "Boton de WhatsApp real con mensaje prearmado.",
+          "Dominio propio o URL corta para compartir.",
+          "SEO local basico: rubro, ciudad, direccion y datos estructurados.",
+          "Medicion basica de consultas con Analytics o eventos de click.",
+          "Galeria real con fotos del local, trabajos o productos.",
+          "Revision final de copy con el dueño para confirmar servicios y tono."
+        ],
+        "offer_angle": "La muestra ya ordena la informacion publica; la venta es dejarla lista para publicar con datos propios, canal confirmado y medicion de consultas por Autocentro CarDetail."
+      },
+      "outreach": {
+        "whatsapp_short": "Hola, como va? Soy Juan. Prepare una muestra de landing para Autocentro CarDetail con la informacion publica disponible: rubro, reseñas, direccion, horario y contacto. No es una plantilla generica; esta pensada para que alguien consulte mas rapido. Si te sirve, por [PRECIO] la dejo lista para publicar con boton de WhatsApp real con mensaje prearmado, dominio propio o URL corta para compartir, SEO local basico: rubro, ciudad, direccion y datos estructurados. Te paso el link? generated/cordoba-conversion/autocentro-cardetail/index.html",
+        "formal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Autocentro CarDetail: generated/cordoba-conversion/autocentro-cardetail/index.html\n\nLa pense para que una persona vea rapido el rubro (car detailing), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe lo mando por este medio porque es el canal mas practico para verlo rapido desde el telefono.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?",
+        "follow_up_24h": "Hola, te escribo de nuevo por la muestra de Autocentro CarDetail. La idea no es venderte algo abstracto: ya hay una landing armada para revisar. Si queres, te mando el link y me decis si tiene sentido ajustarla con fotos y WhatsApp real.",
+        "follow_up_48h": "Cierro por aca para no insistir. Si en algun momento quieren una pagina simple para convertir consultas de car detailing, ya deje una base hecha y se puede publicar rapido por [PRECIO].",
+        "direct_close": "Si te gusta la muestra, el siguiente paso es simple: me confirmas WhatsApp, fotos, servicios reales y dominio/nombre. Con eso la dejo lista para publicar por [PRECIO].",
+        "objection_replies": [
+          {
+            "objection": "Ya tengo Instagram",
+            "reply": "Perfecto. La landing no reemplaza Instagram: sirve para mandar a una persona interesada a un lugar con servicios, reseñas, ubicacion y boton de consulta sin que tenga que revisar publicaciones."
+          },
+          {
+            "objection": "No necesito web",
+            "reply": "Puede ser. La idea no es una web grande, sino una pagina corta para convertir mejor a quien ya te busca o te pide informacion por mensaje."
+          },
+          {
+            "objection": "Cuanto sale",
+            "reply": "La version lista para publicar queda en [PRECIO]. Incluye ajustes de texto, fotos, boton de contacto, dominio/hosting basico si hace falta y revision final con ustedes."
+          },
+          {
+            "objection": "Lo veo despues",
+            "reply": "Dale. Te dejo el link para que lo veas cuando puedas; si te cierra, lo ajustamos con tus fotos y datos reales antes de publicarlo."
+          }
+        ]
+      },
+      "proposal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Autocentro CarDetail: generated/cordoba-conversion/autocentro-cardetail/index.html\n\nLa pense para que una persona vea rapido el rubro (car detailing), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe lo mando por este medio porque es el canal mas practico para verlo rapido desde el telefono.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?"
+    },
+    {
+      "slug": "taller-sr-chapa-y-pintura",
+      "business_name": "Taller SR. Chapa y pintura",
+      "landing_url": "generated/cordoba-conversion/taller-sr-chapa-y-pintura/index.html",
+      "landing_path": "generated/cordoba-conversion/taller-sr-chapa-y-pintura/index.html",
+      "service": "chapa pintura autos",
+      "rating": "4.8 (188)",
+      "preferred_contact": {
+        "medium": "whatsapp_probable",
+        "label": "WhatsApp probable",
+        "value": "0351 549-1346",
+        "confidence": "medium",
+        "reason": "El numero publicado parece celular argentino, pero no hay link de WhatsApp verificado."
+      },
+      "lead_score": {
+        "priority": 10,
+        "contact_probability": "medium",
+        "opportunity": "high",
+        "reasons": [
+          "No tiene sitio propio registrado en los datos disponibles.",
+          "Rating fuerte: 4.8 sobre 5.",
+          "Volumen alto de reseñas: 188.",
+          "Rubro visual: una landing con fotos y CTA puede mostrar valor rapido."
+        ],
+        "risks": [
+          "WhatsApp no verificado; conviene validar canal antes de escribir como si fuera oficial."
+        ]
+      },
+      "commercial_audit": {
+        "problem_solved": "Transforma un daño visible del auto en una consulta ordenada con fotos, revision y contacto.",
+        "public_signals_used": [
+          "Rating 4.8 con 188 reseñas.",
+          "Direccion publicada: Juan de Santiso y Moscoso 760, X5000 Córdoba, Argentina.",
+          "Telefono publicado: 0351 549-1346.",
+          "Horario publicado disponible para orientar la consulta.",
+          "Reseña usada como señal: \"I found this place through Google reviews and, as someone from India who doesn’t speak great Spanish, I was struggling t...\"",
+          "Reseña usada como señal: \"Más que conforme con la excelente calidad del trabajo y tiempo de entrega. Me dejaron como nuevo el parachoques y hasta ...\""
+        ],
+        "owner_data_to_request": [
+          "Confirmar si el telefono publicado tambien recibe WhatsApp.",
+          "WhatsApp confirmado y nombre de quien responde consultas.",
+          "Logo o marca actual si existe.",
+          "Fotos propias autorizadas para publicar.",
+          "Lista real de servicios y limites de lo que no quieren prometer.",
+          "Horario final, zona de atencion y direccion revisada.",
+          "Dominio deseado o nombre corto para publicar.",
+          "Fotos antes/despues o trabajos terminados para reemplazar imagenes genericas."
+        ],
+        "suggested_improvements": [
+          "Boton de WhatsApp real con mensaje prearmado.",
+          "Dominio propio o URL corta para compartir.",
+          "SEO local basico: rubro, ciudad, direccion y datos estructurados.",
+          "Medicion basica de consultas con Analytics o eventos de click.",
+          "Galeria real con fotos del local, trabajos o productos.",
+          "Revision final de copy con el dueño para confirmar servicios y tono.",
+          "CTA para enviar foto del golpe antes de coordinar revision."
+        ],
+        "offer_angle": "La muestra ya ordena la informacion publica; la venta es dejarla lista para publicar con datos propios, canal confirmado y medicion de consultas por Taller SR. Chapa y pintura."
+      },
+      "outreach": {
+        "whatsapp_short": "Hola, como va? Soy Juan. Prepare una muestra de landing para Taller SR. Chapa y pintura con la informacion publica disponible: rubro, reseñas, direccion, horario y contacto. No es una plantilla generica; esta pensada para que alguien consulte mas rapido. Si te sirve, por [PRECIO] la dejo lista para publicar con boton de WhatsApp real con mensaje prearmado, dominio propio o URL corta para compartir, SEO local basico: rubro, ciudad, direccion y datos estructurados. Te paso el link? generated/cordoba-conversion/taller-sr-chapa-y-pintura/index.html",
+        "formal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Taller SR. Chapa y pintura: generated/cordoba-conversion/taller-sr-chapa-y-pintura/index.html\n\nLa pense para que una persona vea rapido el rubro (chapa pintura autos), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe lo mando por este medio porque es el canal mas practico para verlo rapido desde el telefono.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?",
+        "follow_up_24h": "Hola, te escribo de nuevo por la muestra de Taller SR. Chapa y pintura. La idea no es venderte algo abstracto: ya hay una landing armada para revisar. Si queres, te mando el link y me decis si tiene sentido ajustarla con fotos y WhatsApp real.",
+        "follow_up_48h": "Cierro por aca para no insistir. Si en algun momento quieren una pagina simple para convertir consultas de chapa pintura autos, ya deje una base hecha y se puede publicar rapido por [PRECIO].",
+        "direct_close": "Si te gusta la muestra, el siguiente paso es simple: me confirmas WhatsApp, fotos, servicios reales y dominio/nombre. Con eso la dejo lista para publicar por [PRECIO].",
+        "objection_replies": [
+          {
+            "objection": "Ya tengo Instagram",
+            "reply": "Perfecto. La landing no reemplaza Instagram: sirve para mandar a una persona interesada a un lugar con servicios, reseñas, ubicacion y boton de consulta sin que tenga que revisar publicaciones."
+          },
+          {
+            "objection": "No necesito web",
+            "reply": "Puede ser. La idea no es una web grande, sino una pagina corta para convertir mejor a quien ya te busca o te pide informacion por mensaje."
+          },
+          {
+            "objection": "Cuanto sale",
+            "reply": "La version lista para publicar queda en [PRECIO]. Incluye ajustes de texto, fotos, boton de contacto, dominio/hosting basico si hace falta y revision final con ustedes."
+          },
+          {
+            "objection": "Lo veo despues",
+            "reply": "Dale. Te dejo el link para que lo veas cuando puedas; si te cierra, lo ajustamos con tus fotos y datos reales antes de publicarlo."
+          }
+        ]
+      },
+      "proposal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Taller SR. Chapa y pintura: generated/cordoba-conversion/taller-sr-chapa-y-pintura/index.html\n\nLa pense para que una persona vea rapido el rubro (chapa pintura autos), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe lo mando por este medio porque es el canal mas practico para verlo rapido desde el telefono.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?"
+    },
+    {
+      "slug": "lubricentro-power-ful-ii",
+      "business_name": "Lubricentro Power Ful II",
+      "landing_url": "generated/cordoba-conversion/lubricentro-power-ful-ii/index.html",
+      "landing_path": "generated/cordoba-conversion/lubricentro-power-ful-ii/index.html",
+      "service": "lubricentro",
+      "rating": "4.8 (119)",
+      "preferred_contact": {
+        "medium": "phone",
+        "label": "Telefono",
+        "value": "0351 351-7691",
+        "confidence": "high",
+        "reason": "No hay red social ni WhatsApp verificado; el telefono publicado es el contacto mas seguro."
+      },
+      "lead_score": {
+        "priority": 10,
+        "contact_probability": "high",
+        "opportunity": "high",
+        "reasons": [
+          "No tiene sitio propio registrado en los datos disponibles.",
+          "Rating fuerte: 4.8 sobre 5.",
+          "Volumen alto de reseñas: 119.",
+          "Contacto directo confiable: Telefono."
+        ],
+        "risks": [
+          "Sin Instagram ni WhatsApp verificado; el primer contacto puede sentirse mas frio."
+        ]
+      },
+      "commercial_audit": {
+        "problem_solved": "Hace mas concreta la primera consulta: sintoma, horario, direccion, reseñas y forma de coordinar revision.",
+        "public_signals_used": [
+          "Rating 4.8 con 119 reseñas.",
+          "Direccion publicada: Manuel Cardeñosa 3875, X5009EXU Córdoba, Argentina.",
+          "Telefono publicado: 0351 351-7691.",
+          "Horario publicado disponible para orientar la consulta.",
+          "Reseña usada como señal: \"Excelente atención. Muy amables y muy buenos precios.  100% recomendables.!\"",
+          "Reseña usada como señal: \"Excelente atención de Seba, lo recomiendo\""
+        ],
+        "owner_data_to_request": [
+          "Confirmar si el telefono publicado tambien recibe WhatsApp.",
+          "WhatsApp confirmado y nombre de quien responde consultas.",
+          "Logo o marca actual si existe.",
+          "Fotos propias autorizadas para publicar.",
+          "Lista real de servicios y limites de lo que no quieren prometer.",
+          "Horario final, zona de atencion y direccion revisada.",
+          "Dominio deseado o nombre corto para publicar.",
+          "Tipos de trabajo que quieren captar y casos que prefieren derivar."
+        ],
+        "suggested_improvements": [
+          "Boton de WhatsApp real con mensaje prearmado.",
+          "Dominio propio o URL corta para compartir.",
+          "SEO local basico: rubro, ciudad, direccion y datos estructurados.",
+          "Medicion basica de consultas con Analytics o eventos de click.",
+          "Galeria real con fotos del local, trabajos o productos.",
+          "Revision final de copy con el dueño para confirmar servicios y tono."
+        ],
+        "offer_angle": "La muestra ya ordena la informacion publica; la venta es dejarla lista para publicar con datos propios, canal confirmado y medicion de consultas por Lubricentro Power Ful II."
+      },
+      "outreach": {
+        "whatsapp_short": "Hola, como va? Soy Juan. Prepare una muestra de landing para Lubricentro Power Ful II con la informacion publica disponible: rubro, reseñas, direccion, horario y contacto. No es una plantilla generica; esta pensada para que alguien consulte mas rapido. Si te sirve, por [PRECIO] la dejo lista para publicar con boton de WhatsApp real con mensaje prearmado, dominio propio o URL corta para compartir, SEO local basico: rubro, ciudad, direccion y datos estructurados. Te paso el link? generated/cordoba-conversion/lubricentro-power-ful-ii/index.html",
+        "formal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Lubricentro Power Ful II: generated/cordoba-conversion/lubricentro-power-ful-ii/index.html\n\nLa pense para que una persona vea rapido el rubro (lubricentro), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?",
+        "follow_up_24h": "Hola, te escribo de nuevo por la muestra de Lubricentro Power Ful II. La idea no es venderte algo abstracto: ya hay una landing armada para revisar. Si queres, te mando el link y me decis si tiene sentido ajustarla con fotos y WhatsApp real.",
+        "follow_up_48h": "Cierro por aca para no insistir. Si en algun momento quieren una pagina simple para convertir consultas de lubricentro, ya deje una base hecha y se puede publicar rapido por [PRECIO].",
+        "direct_close": "Si te gusta la muestra, el siguiente paso es simple: me confirmas WhatsApp, fotos, servicios reales y dominio/nombre. Con eso la dejo lista para publicar por [PRECIO].",
+        "objection_replies": [
+          {
+            "objection": "Ya tengo Instagram",
+            "reply": "Perfecto. La landing no reemplaza Instagram: sirve para mandar a una persona interesada a un lugar con servicios, reseñas, ubicacion y boton de consulta sin que tenga que revisar publicaciones."
+          },
+          {
+            "objection": "No necesito web",
+            "reply": "Puede ser. La idea no es una web grande, sino una pagina corta para convertir mejor a quien ya te busca o te pide informacion por mensaje."
+          },
+          {
+            "objection": "Cuanto sale",
+            "reply": "La version lista para publicar queda en [PRECIO]. Incluye ajustes de texto, fotos, boton de contacto, dominio/hosting basico si hace falta y revision final con ustedes."
+          },
+          {
+            "objection": "Lo veo despues",
+            "reply": "Dale. Te dejo el link para que lo veas cuando puedas; si te cierra, lo ajustamos con tus fotos y datos reales antes de publicarlo."
+          }
+        ]
+      },
+      "proposal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Lubricentro Power Ful II: generated/cordoba-conversion/lubricentro-power-ful-ii/index.html\n\nLa pense para que una persona vea rapido el rubro (lubricentro), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?"
+    }
+  ]
+}
