@@ -2,16 +2,18 @@
 
 ## Goal
 
-Write or refine one `SiteSpec` for this business. Use the agent session context and judgement. Do not call the OpenAI API from repo scripts.
+Write or refine one `SiteSpec` for this business and create its real frontend artifact. Use the agent session context, judgement, and frontend skill. Do not call the OpenAI API from repo scripts.
 
 ## Hard Rules
 
 - Use only verified data below.
 - Do not invent services, years, awards, guarantees, prices, certifications, owners, staff, or claims.
-- Visible copy must be Spanish argentino, natural, local, commercial, and not exaggerated.
+- Visible copy must be Spanish argentino, natural, local, commercial, and strong enough to sell the next action.
+- If useful commercial facts are missing, use clearly editable demo placeholders instead of weak filler. Examples: "[X] vehiculos atendidos", "[Precio editable]", "Opiniones reales proximamente". Never present placeholders as verified facts.
 - Avoid generic filler like "soluciones integrales", "calidad garantizada", "experiencia unica", "creado con IA".
 - Keep the business name isolated to this one site.
 - Make the page feel designed for "servicios vehiculares" in Tandil, not like a SaaS template.
+- Final generation expects an `agent_frontend`. The renderer fallback is only for rough preview.
 
 ## Business Snapshot
 
@@ -27,6 +29,176 @@ Write or refine one `SiteSpec` for this business. Use the agent session context 
 - hours summary: Lunes a Sabado; Domingo cerrado
 - rating: 4.9 / 5 (13 reseñas)
 - service baseline: car detailing
+
+## Suggested Commercial Profile
+
+```json
+{
+  "tone": "premium-detailing",
+  "customer_type": "Personas que cuidan el auto, quieren recuperar brillo, proteger terminaciones o reservar un lavado detallado.",
+  "hero_claim": "Que el auto vuelva a sentirse cuidado, limpio y listo para mirar de cerca.",
+  "services": [
+    "Detailing",
+    "Interior",
+    "Exterior",
+    "Proteccion o consulta"
+  ],
+  "trust_bar": [
+    {
+      "label": "Prueba social",
+      "title": "4.9 / 5",
+      "body": "13 resenas registradas en las fuentes disponibles.",
+      "meta": "Dato verificado",
+      "is_demo": false
+    },
+    {
+      "label": "Rubro",
+      "title": "Detailing y estetica vehicular",
+      "body": "La pagina debe vender el servicio principal sin sumar prestaciones no confirmadas.",
+      "meta": "Base verificada"
+    },
+    {
+      "label": "Agenda",
+      "title": "Lunes a Sabado; Domingo cerrado",
+      "body": "Horario publicado para orientar la primera consulta.",
+      "meta": "Dato verificado",
+      "is_demo": false
+    },
+    {
+      "label": "Contacto",
+      "title": "Telefono directo",
+      "body": "CTA preparado para llamar desde el celular sin buscar el dato en otro lado.",
+      "meta": "0249 420-6233"
+    },
+    {
+      "label": "Confianza",
+      "title": "Mas de [X] vehiculos",
+      "body": "Placeholder editable para volumen real, anos o trabajos terminados si el negocio lo confirma.",
+      "meta": "Demo editable",
+      "is_demo": true
+    }
+  ],
+  "service_cards": [
+    {
+      "label": "Interior",
+      "title": "Habitaculo con sensacion de estreno",
+      "body": "Copy pensado para vender limpieza profunda, orden visual y confort sin inventar tratamientos no verificados."
+    },
+    {
+      "label": "Exterior",
+      "title": "Brillo y terminacion visible",
+      "body": "Bloque preparado para lavado detallado, descontaminado o correccion si el negocio lo confirma."
+    },
+    {
+      "label": "Proteccion",
+      "title": "Cuidado despues del lavado",
+      "body": "Espacio editable para ceramicos, selladores o mantenimiento cuando existan datos reales.",
+      "is_demo": true
+    }
+  ],
+  "why_choose": [
+    {
+      "title": "Resultado fotografiable",
+      "body": "La estructura empuja a mostrar antes/despues, detalles y terminaciones reales."
+    },
+    {
+      "title": "Reserva simple",
+      "body": "El CTA lleva a consultar turno, tipo de vehiculo y necesidad concreta."
+    },
+    {
+      "title": "Prueba social visible",
+      "body": "Rating, resenas y comentarios quedan arriba, no escondidos al final."
+    }
+  ],
+  "packages": [
+    {
+      "name": "Lavado detallado",
+      "price_label": "Precio a confirmar",
+      "body": "Para exterior e interior con foco en presentacion general.",
+      "items": [
+        "Exterior",
+        "Interior",
+        "Terminacion visual"
+      ],
+      "is_demo": true
+    },
+    {
+      "name": "Interior profundo",
+      "price_label": "[Desde editable]",
+      "body": "Paquete editable para butacas, alfombras, plasticos y olor.",
+      "items": [
+        "Aspirado detallado",
+        "Superficies interiores",
+        "Fotos del estado inicial"
+      ],
+      "is_demo": true
+    },
+    {
+      "name": "Proteccion premium",
+      "price_label": "[Presupuesto editable]",
+      "body": "Lugar para ceramico, sellador o proteccion si el negocio lo ofrece.",
+      "items": [
+        "Evaluacion previa",
+        "Producto a confirmar",
+        "Mantenimiento recomendado"
+      ],
+      "is_demo": true
+    }
+  ],
+  "gallery": [
+    {
+      "label": "Antes",
+      "title": "Foto real del ingreso",
+      "body": "Espacio para mostrar el estado inicial del vehiculo, pieza o consulta.",
+      "meta": "Placeholder visual",
+      "is_demo": true
+    },
+    {
+      "label": "Despues",
+      "title": "Resultado o entrega",
+      "body": "Lugar reservado para una foto propia del negocio, sin usar stock generico.",
+      "meta": "Editable",
+      "is_demo": true
+    },
+    {
+      "label": "Detailing",
+      "title": "Detalle del trabajo",
+      "body": "Plano corto de materiales, herramientas, terminaciones o mostrador segun el rubro.",
+      "meta": "Foto a reemplazar",
+      "is_demo": true
+    }
+  ],
+  "process": [
+    {
+      "step": "01",
+      "title": "Contar el estado del auto",
+      "body": "El cliente consulta por interior, exterior o detalle puntual."
+    },
+    {
+      "step": "02",
+      "title": "Elegir nivel de trabajo",
+      "body": "La pagina propone paquetes editables y deja claro que el precio se confirma."
+    },
+    {
+      "step": "03",
+      "title": "Reservar turno",
+      "body": "CTA directo a telefono o WhatsApp cuando esta disponible."
+    },
+    {
+      "step": "04",
+      "title": "Registrar resultado",
+      "body": "Bloque de galeria listo para cargar fotos reales del trabajo terminado."
+    }
+  ],
+  "final_cta": {
+    "title": "Luxe Detailing: el proximo paso es simple",
+    "body": "Llama, confirma disponibilidad y lleva el auto con el dato clave ya resuelto: detailing y estetica vehicular, direccion y horario.",
+    "primary_label": "Reservar turno",
+    "secondary_label": "Ver ubicacion"
+  }
+}
+```
+
 
 ## Useful Real Signals
 
@@ -51,7 +223,14 @@ Write or refine one `SiteSpec` for this business. Use the agent session context 
 
 ## Recommended Design Direction
 
-- Use automotive/local-service cues: route, workshop, tires, urgency, practical contact, opening hours, location.
+- Use automotive conversion cues: premium/detailing or urban/custom art direction, strong hero, trust numbers, services, editable packages, before/after, reviews, booking CTA, practical contact and location.
+- Quality matters more than cheap or fast generation.
+- Build a real landing structure: strong hero, trust bar, services, why choose, editable packages, before/after or gallery placeholders, process, reviews/contact, final CTA.
+- Make sparse data look intentional: use editable placeholders with labels, visual empty states, and future-review slots. Do not leave thin generic copy.
+- Automotive references to emulate structurally: strong claim + numbers + services + CTA to booking; urban/aggressive wrapping/custom style; detailing service taxonomy; emotional hero; packages; before/after; reviews.
+- You may use plain HTML/CSS or a framework/library if it materially improves the final UI. You have broad discretion to use frontend/UI, animation, and icon libraries such as Aceternity UI (https://ui.aceternity.com/components), shadcn/ui (https://ui.shadcn.com/docs/components), Magic UI (https://magicui.design/), Framer Motion, GSAP, Motion One, lucide-react, React Icons, or similar component/motion kits when they raise product quality.
+- If using a framework, build/export it yourself and point `agent_frontend.output_dir` at the static output.
+- Avoid making ten pages share the same hero rhythm, card system, font pairing, spacing scale, or composition.
 - Prefer concrete microcopy based on the signals above.
 - Vary `visual_mood` and `composition` across the 10 sites.
 - Avoid repeating the same hero rhythm, proof order, and CTA wording from nearby briefs.
@@ -90,6 +269,165 @@ Write or refine one `SiteSpec` for this business. Use the agent session context 
   "contact_heading": "Coordinar el cuidado del auto",
   "image_prompt": "Escena editorial realista para detailing vehicular en Tandil, auto limpio, reflejos cuidados, luz natural, sin texto ni logos inventados.",
   "design_notes": "Landing tipo estudio: oscura, precisa, con foco en brillo, terminación y decisión rápida.",
+  "commercial": {
+    "tone": "premium-detailing",
+    "customer_type": "Personas que cuidan el auto, quieren recuperar brillo, proteger terminaciones o reservar un lavado detallado.",
+    "hero_claim": "Que el auto vuelva a sentirse cuidado, limpio y listo para mirar de cerca.",
+    "trust_bar": [
+      {
+        "label": "Prueba social",
+        "title": "4.9 / 5",
+        "body": "13 resenas registradas en las fuentes disponibles.",
+        "meta": "Dato verificado",
+        "is_demo": false
+      },
+      {
+        "label": "Rubro",
+        "title": "Detailing y estetica vehicular",
+        "body": "La pagina debe vender el servicio principal sin sumar prestaciones no confirmadas.",
+        "meta": "Base verificada"
+      },
+      {
+        "label": "Agenda",
+        "title": "Lunes a Sabado; Domingo cerrado",
+        "body": "Horario publicado para orientar la primera consulta.",
+        "meta": "Dato verificado",
+        "is_demo": false
+      },
+      {
+        "label": "Contacto",
+        "title": "Telefono directo",
+        "body": "CTA preparado para llamar desde el celular sin buscar el dato en otro lado.",
+        "meta": "0249 420-6233"
+      },
+      {
+        "label": "Confianza",
+        "title": "Mas de [X] vehiculos",
+        "body": "Placeholder editable para volumen real, anos o trabajos terminados si el negocio lo confirma.",
+        "meta": "Demo editable",
+        "is_demo": true
+      }
+    ],
+    "service_cards": [
+      {
+        "label": "Interior",
+        "title": "Habitaculo con sensacion de estreno",
+        "body": "Copy pensado para vender limpieza profunda, orden visual y confort sin inventar tratamientos no verificados."
+      },
+      {
+        "label": "Exterior",
+        "title": "Brillo y terminacion visible",
+        "body": "Bloque preparado para lavado detallado, descontaminado o correccion si el negocio lo confirma."
+      },
+      {
+        "label": "Proteccion",
+        "title": "Cuidado despues del lavado",
+        "body": "Espacio editable para ceramicos, selladores o mantenimiento cuando existan datos reales.",
+        "is_demo": true
+      }
+    ],
+    "why_choose": [
+      {
+        "title": "Resultado fotografiable",
+        "body": "La estructura empuja a mostrar antes/despues, detalles y terminaciones reales."
+      },
+      {
+        "title": "Reserva simple",
+        "body": "El CTA lleva a consultar turno, tipo de vehiculo y necesidad concreta."
+      },
+      {
+        "title": "Prueba social visible",
+        "body": "Rating, resenas y comentarios quedan arriba, no escondidos al final."
+      }
+    ],
+    "packages": [
+      {
+        "name": "Lavado detallado",
+        "price_label": "Precio a confirmar",
+        "body": "Para exterior e interior con foco en presentacion general.",
+        "items": [
+          "Exterior",
+          "Interior",
+          "Terminacion visual"
+        ],
+        "is_demo": true
+      },
+      {
+        "name": "Interior profundo",
+        "price_label": "[Desde editable]",
+        "body": "Paquete editable para butacas, alfombras, plasticos y olor.",
+        "items": [
+          "Aspirado detallado",
+          "Superficies interiores",
+          "Fotos del estado inicial"
+        ],
+        "is_demo": true
+      },
+      {
+        "name": "Proteccion premium",
+        "price_label": "[Presupuesto editable]",
+        "body": "Lugar para ceramico, sellador o proteccion si el negocio lo ofrece.",
+        "items": [
+          "Evaluacion previa",
+          "Producto a confirmar",
+          "Mantenimiento recomendado"
+        ],
+        "is_demo": true
+      }
+    ],
+    "gallery": [
+      {
+        "label": "Antes",
+        "title": "Foto real del ingreso",
+        "body": "Espacio para mostrar el estado inicial del vehiculo, pieza o consulta.",
+        "meta": "Placeholder visual",
+        "is_demo": true
+      },
+      {
+        "label": "Despues",
+        "title": "Resultado o entrega",
+        "body": "Lugar reservado para una foto propia del negocio, sin usar stock generico.",
+        "meta": "Editable",
+        "is_demo": true
+      },
+      {
+        "label": "Detailing",
+        "title": "Detalle del trabajo",
+        "body": "Plano corto de materiales, herramientas, terminaciones o mostrador segun el rubro.",
+        "meta": "Foto a reemplazar",
+        "is_demo": true
+      }
+    ],
+    "process": [
+      {
+        "step": "01",
+        "title": "Contar el estado del auto",
+        "body": "El cliente consulta por interior, exterior o detalle puntual."
+      },
+      {
+        "step": "02",
+        "title": "Elegir nivel de trabajo",
+        "body": "La pagina propone paquetes editables y deja claro que el precio se confirma."
+      },
+      {
+        "step": "03",
+        "title": "Reservar turno",
+        "body": "CTA directo a telefono o WhatsApp cuando esta disponible."
+      },
+      {
+        "step": "04",
+        "title": "Registrar resultado",
+        "body": "Bloque de galeria listo para cargar fotos reales del trabajo terminado."
+      }
+    ],
+    "final_cta": {
+      "title": "Luxe Detailing: el proximo paso es simple",
+      "body": "Llama, confirma disponibilidad y lleva el auto con el dato clave ya resuelto: detailing y estetica vehicular, direccion y horario.",
+      "primary_label": "Reservar turno",
+      "secondary_label": "Ver ubicacion"
+    },
+    "editable_note": "Los items marcados como demo son placeholders comerciales editables: reemplazar por datos reales antes de publicar o dejarlos explicitamente como a confirmar."
+  },
   "creative": {
     "concept": "Estudio de detalle: menos urgencia, más terminación visible y confianza por reseñas concretas.",
     "audience": "Dueños de autos que quieren coordinar cuidado exterior o interior sin perder tiempo preguntando datos básicos.",
@@ -173,6 +511,15 @@ Write or refine one `SiteSpec` for this business. Use the agent session context 
         ]
       }
     ]
+  },
+  "agent_frontend": {
+    "mode": "static-files",
+    "source_dir": "data/frontends/tandil-servicios-vehiculares/luxe-detailing",
+    "libraries": [
+      "HTML",
+      "CSS"
+    ],
+    "notes": "Landing estatica autoria de agente, con direccion visual propia y foto local del build final."
   }
 }
 ```
@@ -198,6 +545,25 @@ Return one object with:
 - `contact_heading`
 - `image_prompt`
 - `design_notes`
+- `commercial`: recommended for sellable landings:
+  - `tone`: `premium-detailing`, `urban-custom`, `practical-workshop`, `fast-local`, `parts-counter`, or `bodyshop-craft`
+  - `customer_type`
+  - `hero_claim`
+  - `trust_bar`: 3 to 5 cards with `label`, `title`, `body`, optional `meta`, optional `is_demo`
+  - `service_cards`: 3 to 6 benefit-led service cards
+  - `why_choose`: 3 to 5 reasons tied to the business/rubro
+  - `packages`: 2 to 4 demo/editable commercial packages; no fake prices
+  - `gallery`: 2 to 4 before/after or real-photo placeholders
+  - `process`: 3 to 5 steps from inquiry to visit/booking
+  - `final_cta`: `title`, `body`, `primary_label`, `secondary_label`
+  - `editable_note`: short warning for placeholders
+- `agent_frontend`: required for final quality generation:
+  - `mode`: `static-files` or `framework-build`
+  - `source_dir`: source folder kept inside this repo, for example `data/frontends/tandil-servicios-vehiculares/luxe-detailing`
+  - `output_dir`: required only for `framework-build`; points to the static build output copied by the generator
+  - `build_command`: optional note, not executed by the generator
+  - `libraries`: optional list of real libraries used
+  - `notes`: short explanation of the visual direction and why it fits this business
 - `creative`: object used by the renderer to make the page feel custom:
   - `concept`: commercial idea for this specific business
   - `audience`: who is likely to search/contact
@@ -217,4 +583,4 @@ Creative block `type` values:
 - `material-story`
 - `metric-grid`
 
-The `creative` object is the main place where the page stops being a template. Use it to define a sellable landing from the verified signals.
+The `agent_frontend` artifact is the main place where the page stops being a template. The `creative` object remains useful as planning metadata and fallback input, but the final UI must be authored.

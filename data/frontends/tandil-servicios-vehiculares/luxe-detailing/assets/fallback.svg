@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100" role="img" aria-label="Luxe Detailing">
+  <rect width="1600" height="1100" fill="#070b10"/>
+  <path d="M-120 890 C 260 680, 440 720, 760 520 S 1250 300, 1720 420" fill="none" stroke="#d7a94b" stroke-width="64" opacity=".72"/>
+  <path d="M-80 1010 C 310 790, 520 820, 820 640 S 1210 440, 1680 570" fill="none" stroke="#8fd8c5" stroke-width="28" opacity=".78"/>
+  <circle cx="1160" cy="770" r="190" fill="none" stroke="#fff8ea" stroke-width="36" opacity=".22"/>
+  <circle cx="1160" cy="770" r="84" fill="none" stroke="#fff8ea" stroke-width="22" opacity=".18"/>
+  <rect x="96" y="118" width="1080" height="18" fill="#d7a94b"/>
+  <text x="96" y="260" fill="#fff8ea" font-family="Verdana, sans-serif" font-size="84" font-weight="800">Luxe Detailing</text>
+  <text x="100" y="345" fill="#bac6c6" font-family="Georgia, serif" font-size="42">Detailing y estética vehicular · Tandil</text>
+</svg>

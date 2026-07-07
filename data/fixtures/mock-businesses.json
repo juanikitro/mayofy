@@ -193,5 +193,103 @@
       "archetype": "industrial-garage",
       "position": 2
     }
+  },
+  {
+    "id": "mock-wrap-estudio",
+    "name": "Wrap Estudio Demo",
+    "slug": "wrap-estudio-demo",
+    "category": "wrapping y estetica vehicular",
+    "is_vehicle_related": true,
+    "address": "Galpon demo 789, Tandil",
+    "neighborhood_or_area": "Parque Industrial",
+    "phone": null,
+    "opening_hours": {
+      "raw": "Horario a confirmar",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.7,
+      "reviews_count": 18,
+      "source_url": "mock://rating/wrap-estudio-demo"
+    },
+    "reviews": [
+      {
+        "text": "Me orientaron bien antes de decidir el cambio visual del auto.",
+        "author": "Cliente demo 1",
+        "rating": 5,
+        "source_url": "mock://reviews/wrap-estudio-demo/1"
+      },
+      {
+        "text": "Buen trato y explicaron que datos tenia que mandar para cotizar.",
+        "author": "Cliente demo 2",
+        "rating": 5,
+        "source_url": "mock://reviews/wrap-estudio-demo/2"
+      },
+      {
+        "text": "La consulta fue clara y dejaron todo sujeto a revision del vehiculo.",
+        "author": "Cliente demo 3",
+        "rating": 4,
+        "source_url": "mock://reviews/wrap-estudio-demo/3"
+      }
+    ],
+    "main_product_or_service": "Ploteo, polarizado y detailing demo",
+    "photos": [
+      {
+        "url": "mock://photos/wrap-estudio-demo/interior.jpg",
+        "type": "interior",
+        "source_url": "mock://photos/wrap-estudio-demo",
+        "usage_status": "allowed",
+        "captured_at": "2026-07-07"
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": ["mock://search/wrap-estudio-demo"],
+      "evidence": ["Fixture con datos escasos para probar placeholders comerciales editables."],
+      "notes": "Dato mock. No usar para deploy final."
+    },
+    "data_quality_score": 0.88,
+    "missing_data_reason": "Telefono y horarios reales no disponibles en el fixture.",
+    "approved_for_generation": true,
+    "is_mock": true,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Fixture local",
+          "url": "mock://business/wrap-estudio-demo",
+          "captured_at": "2026-07-07",
+          "notes": "Registro inventado para pruebas tecnicas de copy comercial."
+        }
+      ],
+      "field_evidence": [
+        { "field": "name", "source_url": "mock://business/wrap-estudio-demo", "notes": "Mock" },
+        { "field": "address", "source_url": "mock://business/wrap-estudio-demo", "notes": "Mock" },
+        { "field": "opening_hours", "source_url": "mock://business/wrap-estudio-demo", "notes": "Mock" },
+        { "field": "category", "source_url": "mock://business/wrap-estudio-demo", "notes": "Mock" },
+        { "field": "main_product_or_service", "source_url": "mock://business/wrap-estudio-demo", "notes": "Mock" },
+        { "field": "rating", "source_url": "mock://rating/wrap-estudio-demo", "notes": "Mock" },
+        { "field": "reviews", "source_url": "mock://reviews/wrap-estudio-demo", "notes": "Mock" },
+        { "field": "photos", "source_url": "mock://photos/wrap-estudio-demo", "notes": "Mock" },
+        { "field": "website_check", "source_url": "mock://search/wrap-estudio-demo", "notes": "Mock" }
+      ]
+    },
+    "brand": {
+      "palette": {
+        "source": "manual",
+        "captured_from": "mock://photos/wrap-estudio-demo/interior.jpg",
+        "dominant": "#0d1018",
+        "accent": "#72ff7d",
+        "supporting": ["#f5f7f2", "#3e4654"]
+      },
+      "typography": {
+        "primary": "Barlow Condensed",
+        "secondary": "Inter"
+      }
+    },
+    "site_plan": {
+      "archetype": "bold-hero-photo",
+      "position": 3,
+      "rationale": "Caso mock de customizacion urbana con datos escasos y placeholders editables."
+    }
   }
 ]

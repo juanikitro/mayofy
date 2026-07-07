@@ -4,6 +4,8 @@
 
 No inventar informacion. Si un dato no se puede verificar, usar `null`, explicar el motivo en `missing_data_reason` y no aprobar el negocio para generacion final.
 
+En copy comercial si puede haber placeholders de ejemplo, pero deben verse como placeholders editables y no como hechos. Correcto: `[X] vehiculos atendidos`, `[Precio editable]`, `Opiniones reales proximamente`, `Marca a confirmar`. Incorrecto: publicar "1500 vehiculos atendidos", "10 anos de experiencia", marcas, garantias, stock o precios sin evidencia.
+
 ## Evidencia por dato
 
 Cada negocio debe incluir `verification.field_evidence` para los campos principales:
@@ -46,3 +48,5 @@ Las resenas obtenidas por Places API deben conservar texto y atribucion. Antes d
 ## Mocks
 
 Los mocks deben llevar `is_mock: true` y fuentes `mock://`. Los comandos finales los rechazan.
+
+Los mocks pueden incluir datos comerciales de ejemplo para probar estructura visual, siempre marcados como mock o editable. No deben copiarse a datasets finales sin reemplazar esos campos por evidencia real.

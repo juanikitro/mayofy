@@ -73,7 +73,7 @@ function renderBrief(params: {
   const domainDirection = normalizedSegment.includes("ropa") || normalizedSegment.includes("indumentaria") || normalizedSegment.includes("moda")
     ? "Use apparel/local-retail cues: vidriera, temporada, seleccion de prendas, cercania, ubicacion, formas de contacto. Do not invent brands, prices, stock, sizes or promos."
     : normalizedSegment.includes("vehicul")
-      ? "Use automotive/local-service cues: route, workshop, tires, urgency, practical contact, opening hours, location."
+      ? "Use automotive conversion cues: premium/detailing or urban/custom art direction, strong hero, trust numbers, services, editable packages, before/after, reviews, booking CTA, practical contact and location."
       : `Use cues from the ${args.segment} domain and the local retail/service context in ${args.city}.`;
   const runSlug = `${slugPart(args.city)}-${slugPart(args.segment)}`;
 
@@ -87,7 +87,8 @@ Write or refine one \`SiteSpec\` for this business and create its real frontend 
 
 - Use only verified data below.
 - Do not invent services, years, awards, guarantees, prices, certifications, owners, staff, or claims.
-- Visible copy must be Spanish argentino, natural, local, commercial, and not exaggerated.
+- Visible copy must be Spanish argentino, natural, local, commercial, and strong enough to sell the next action.
+- If useful commercial facts are missing, use clearly editable demo placeholders instead of weak filler. Examples: "[X] vehiculos atendidos", "[Precio editable]", "Opiniones reales proximamente". Never present placeholders as verified facts.
 - Avoid generic filler like "soluciones integrales", "calidad garantizada", "experiencia unica", "creado con IA".
 - Keep the business name isolated to this one site.
 - Make the page feel designed for "${args.segment}" in ${args.city}, not like a SaaS template.
@@ -107,6 +108,21 @@ Write or refine one \`SiteSpec\` for this business and create its real frontend 
 - hours summary: ${summarizeOpeningHours(business.opening_hours.raw)}
 - rating: ${business.rating.value} / 5 (${business.rating.reviews_count} reseñas)
 - service baseline: ${business.main_product_or_service}
+
+## Suggested Commercial Profile
+${fencedJson({
+    tone: profile.tone,
+    customer_type: profile.customerType,
+    hero_claim: profile.heroClaim,
+    services: profile.services,
+    trust_bar: profile.trustBar,
+    service_cards: profile.serviceCards,
+    why_choose: profile.whyChoose,
+    packages: profile.packages,
+    gallery: profile.gallery,
+    process: profile.process,
+    final_cta: profile.finalCta,
+  })}
 
 ## Useful Real Signals
 
@@ -132,7 +148,10 @@ ${[...new Set(sourceUrls)].map((url) => `- ${url}`).join("\n")}
 
 - ${domainDirection}
 - Quality matters more than cheap or fast generation.
-- You may use plain HTML/CSS or a framework/library if it materially improves the final UI.
+- Build a real landing structure: strong hero, trust bar, services, why choose, editable packages, before/after or gallery placeholders, process, reviews/contact, final CTA.
+- Make sparse data look intentional: use editable placeholders with labels, visual empty states, and future-review slots. Do not leave thin generic copy.
+- Automotive references to emulate structurally: strong claim + numbers + services + CTA to booking; urban/aggressive wrapping/custom style; detailing service taxonomy; emotional hero; packages; before/after; reviews.
+- You may use plain HTML/CSS or a framework/library if it materially improves the final UI. You have broad discretion to use frontend/UI, animation, and icon libraries such as Aceternity UI (https://ui.aceternity.com/components), shadcn/ui (https://ui.shadcn.com/docs/components), Magic UI (https://magicui.design/), Framer Motion, GSAP, Motion One, lucide-react, React Icons, or similar component/motion kits when they raise product quality.
 - If using a framework, build/export it yourself and point \`agent_frontend.output_dir\` at the static output.
 - Avoid making ten pages share the same hero rhythm, card system, font pairing, spacing scale, or composition.
 - Prefer concrete microcopy based on the signals above.
@@ -162,6 +181,18 @@ Return one object with:
 - \`contact_heading\`
 - \`image_prompt\`
 - \`design_notes\`
+- \`commercial\`: recommended for sellable landings:
+  - \`tone\`: \`premium-detailing\`, \`urban-custom\`, \`practical-workshop\`, \`fast-local\`, \`parts-counter\`, or \`bodyshop-craft\`
+  - \`customer_type\`
+  - \`hero_claim\`
+  - \`trust_bar\`: 3 to 5 cards with \`label\`, \`title\`, \`body\`, optional \`meta\`, optional \`is_demo\`
+  - \`service_cards\`: 3 to 6 benefit-led service cards
+  - \`why_choose\`: 3 to 5 reasons tied to the business/rubro
+  - \`packages\`: 2 to 4 demo/editable commercial packages; no fake prices
+  - \`gallery\`: 2 to 4 before/after or real-photo placeholders
+  - \`process\`: 3 to 5 steps from inquiry to visit/booking
+  - \`final_cta\`: \`title\`, \`body\`, \`primary_label\`, \`secondary_label\`
+  - \`editable_note\`: short warning for placeholders
 - \`agent_frontend\`: required for final quality generation:
   - \`mode\`: \`static-files\` or \`framework-build\`
   - \`source_dir\`: source folder kept inside this repo, for example \`data/frontends/${runSlug}/${business.slug}\`
@@ -204,10 +235,11 @@ Use these briefs from a Codex/Claude session to rewrite the configured site spec
 Recommended flow:
 
 \`\`\`powershell
-npm run agent:briefs
+npm run agent:briefs:tandil
 # Agent edits data/site-specs/tandil-site-specs.json
-npm run validate:specs
+npm run validate:specs:tandil
 npm run generate:preview
+npm run generate
 npm run qa
 \`\`\`
 

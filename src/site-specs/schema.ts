@@ -56,6 +56,58 @@ export const agentFrontendSchema = z.object({
   notes: z.string().min(1),
 });
 
+export const commercialToneSchema = z.enum([
+  "premium-detailing",
+  "urban-custom",
+  "practical-workshop",
+  "fast-local",
+  "parts-counter",
+  "bodyshop-craft",
+]);
+
+const commercialCardSchema = z.object({
+  label: z.string().min(1).optional(),
+  title: z.string().min(1),
+  body: z.string().min(1),
+  meta: z.string().min(1).optional(),
+  is_demo: z.boolean().optional(),
+});
+
+const commercialPackageSchema = z.object({
+  name: z.string().min(1),
+  price_label: z.string().min(1),
+  body: z.string().min(1),
+  items: z.array(z.string().min(1)).min(2).max(5),
+  is_demo: z.boolean().optional(),
+});
+
+const commercialProcessStepSchema = z.object({
+  step: z.string().min(1),
+  title: z.string().min(1),
+  body: z.string().min(1),
+});
+
+const commercialFinalCtaSchema = z.object({
+  title: z.string().min(1),
+  body: z.string().min(1),
+  primary_label: z.string().min(1),
+  secondary_label: z.string().min(1),
+});
+
+export const commercialSpecSchema = z.object({
+  tone: commercialToneSchema,
+  customer_type: z.string().min(1),
+  hero_claim: z.string().min(1),
+  trust_bar: z.array(commercialCardSchema).min(3).max(5),
+  service_cards: z.array(commercialCardSchema).min(3).max(6),
+  why_choose: z.array(commercialCardSchema).min(3).max(5),
+  packages: z.array(commercialPackageSchema).min(2).max(4),
+  gallery: z.array(commercialCardSchema).min(2).max(4),
+  process: z.array(commercialProcessStepSchema).min(3).max(5),
+  final_cta: commercialFinalCtaSchema,
+  editable_note: z.string().min(1).optional(),
+});
+
 const creativeCardSchema = z.object({
   label: z.string().min(1),
   value: z.string().min(1),
@@ -99,6 +151,7 @@ export const siteSpecSchema = z.object({
   contact_heading: z.string().min(1),
   image_prompt: z.string().min(1),
   design_notes: z.string().min(1),
+  commercial: commercialSpecSchema.optional(),
   creative: creativeSpecSchema.optional(),
   agent_frontend: agentFrontendSchema.optional(),
 });
@@ -111,3 +164,4 @@ export type Composition = z.infer<typeof compositionSchema>;
 export type CreativeSpec = z.infer<typeof creativeSpecSchema>;
 export type CreativeBlockType = z.infer<typeof creativeBlockTypeSchema>;
 export type AgentFrontendSpec = z.infer<typeof agentFrontendSchema>;
+export type CommercialSpec = z.infer<typeof commercialSpecSchema>;

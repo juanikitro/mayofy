@@ -3,11 +3,11 @@
     "business_id": "google-ChIJJYacq7vhkJURcwnaYFx1g20",
     "slug": "luxe-detailing",
     "visual_mood": "precision-service",
-    "composition": "split-command",
-    "headline": "Luxe Detailing",
-    "subheadline": "Detailing en Tandil para quien quiere ver el auto prolijo antes de moverse: contacto directo, reseñas claras y ubicación a mano.",
-    "primary_cta": "Consultar detailing",
-    "secondary_cta": "Ver ubicación",
+    "composition": "photo-board",
+    "headline": "Volvé a mirar tu auto de cerca.",
+    "subheadline": "Detailing vehicular en Tandil con teléfono directo, ubicación visible y reseñas que destacan prolijidad, buena atención y responsabilidad.",
+    "primary_cta": "Consultar turno",
+    "secondary_cta": "Ver servicios",
     "service_tags": [
       "Detailing",
       "Cuidado exterior",
@@ -16,71 +16,72 @@
     ],
     "proof_points": [
       "4.9 sobre 5 con 13 reseñas",
-      "Lunes a sábado con horario registrado",
       "Los Aromos 678, Tandil",
-      "Reseñas que hablan de trabajo prolijo y buena atención"
+      "Lunes a sábado; domingo cerrado",
+      "Comentarios sobre trabajo prolijo y buena atención"
     ],
-    "resource_title": "Una consulta simple para dejar el auto presentable",
+    "resource_title": "Una consulta mejor armada antes de llevar el auto",
     "resource_items": [
-      "Teléfono visible para coordinar turno.",
-      "Foto real del lugar como contexto visual.",
-      "Reseñas breves para evaluar trato y terminación."
+      "Teléfono directo para coordinar turno.",
+      "Dirección visible para llegar sin fricción.",
+      "Reseñas breves que hablan de trato y terminación.",
+      "Servicios presentados por intención de consulta, no por promesas infladas."
     ],
-    "review_heading": "Señales de terminación",
-    "contact_heading": "Coordinar el cuidado del auto",
-    "image_prompt": "Escena editorial realista para detailing vehicular en Tandil, auto limpio, reflejos cuidados, luz natural, sin texto ni logos inventados.",
-    "design_notes": "Landing tipo estudio: oscura, precisa, con foco en brillo, terminación y decisión rápida.",
+    "review_heading": "Reseñas que sostienen la decisión",
+    "contact_heading": "Coordinar con Luxe Detailing",
+    "image_prompt": "Escena editorial realista de detailing vehicular en Tandil, auto limpio, reflejos cuidados, luz natural, sin texto ni logos inventados.",
+    "design_notes": "Golden sample de estudio oscuro y fotográfico: hero fuerte, prueba social arriba, servicios por intención de consulta y CTA telefónico.",
     "creative": {
-      "concept": "Estudio de detalle: menos urgencia, más terminación visible y confianza por reseñas concretas.",
-      "audience": "Dueños de autos que quieren coordinar cuidado exterior o interior sin perder tiempo preguntando datos básicos.",
-      "visual_direction": "Oscuro pulido, foto protagonista, placas inclinadas de precisión y microcopy corto.",
+      "concept": "Estudio de detalle: una primera impresión oscura, fotográfica y apoyada en reseñas concretas.",
+      "audience": "Dueños de autos en Tandil que quieren consultar detailing o cuidado exterior/interior sin buscar teléfono, ubicación y horario por separado.",
+      "visual_direction": "Hero fotográfico full-bleed, tablero de datos, placas oscuras con acento dorado y verde agua, secciones amplias y CTA telefónico persistente.",
       "layout": "studio-detail",
       "texture": "polished-glass",
-      "hero_angle": "La página vende una primera impresión: ver el trabajo, leer dos señales de confianza y tocar para consultar.",
+      "hero_angle": "Volver a mirar el auto de cerca con una consulta simple y señales de confianza arriba.",
       "hero_cards": [
         {
           "label": "Valoración",
           "value": "4.9",
-          "note": "13 reseñas públicas"
+          "note": "13 reseñas"
         },
         {
-          "label": "Señal real",
+          "label": "Señal",
           "value": "Trabajo prolijo",
-          "note": "Mencionado en reseñas"
+          "note": "Mencionado por clientes"
         },
         {
-          "label": "Acción",
-          "value": "Turno por teléfono",
-          "note": "0249 420-6233"
+          "label": "Contacto",
+          "value": "0249 420-6233",
+          "note": "Teléfono directo"
         }
       ],
       "sections": [
         {
           "type": "service-board",
-          "eyebrow": "Detalle",
-          "title": "No hace falta prometer lujo: alcanza con mostrar prolijidad.",
-          "body": "La landing ordena lo que una persona necesita antes de consultar: rubro, ubicación, teléfono, horarios y reseñas sobre el trabajo.",
+          "eyebrow": "Servicios",
+          "title": "Una consulta mejor armada para un auto limpio y presentable.",
+          "body": "La estructura vende detailing, cuidado exterior, interior y coordinación por teléfono con el alcance final definido al consultar.",
           "items": [
             {
-              "label": "Servicio",
-              "value": "Detailing"
+              "label": "Exterior",
+              "value": "Terminación visible"
             },
             {
-              "label": "Cuidado",
-              "value": "Exterior e interior"
+              "label": "Interior",
+              "value": "Habitáculo más cuidado"
             },
             {
               "label": "Consulta",
-              "value": "Por turno"
+              "value": "Turno telefónico"
             }
           ],
-          "callout": "Ideal para captar consultas de gente que ya sabe que quiere mejorar la presentación del auto."
+          "callout": "La propuesta se mantiene concreta para no sumar servicios no confirmados."
         },
         {
           "type": "quote-strip",
-          "eyebrow": "Prueba social",
+          "eyebrow": "Confianza",
           "title": "“Trabajo prolijo y bien ejecutado.”",
-          "body": "La reseña destacada no exagera: funciona porque habla de ejecución, no de slogans.",
+          "body": "La reseña principal funciona porque habla de ejecución y recomendación directa.",
           "items": [
             {
               "label": "Soledad Larsen",
@@ -93,10 +94,34 @@
           ]
         },
         {
+          "type": "process",
+          "eyebrow": "Proceso",
+          "title": "Del interés al turno en cuatro pasos.",
+          "body": "Contar la necesidad, confirmar disponibilidad, acercarse a Los Aromos 678 y revisar la terminación.",
+          "items": [
+            {
+              "label": "01",
+              "value": "Contar estado"
+            },
+            {
+              "label": "02",
+              "value": "Confirmar horario"
+            },
+            {
+              "label": "03",
+              "value": "Coordinar visita"
+            },
+            {
+              "label": "04",
+              "value": "Revisar entrega"
+            }
+          ]
+        },
+        {
           "type": "quick-actions",
-          "eyebrow": "Consulta",
-          "title": "Del interés al llamado en un solo bloque.",
-          "body": "El CTA aparece con el dato clave: teléfono, ubicación y horario resumido.",
+          "eyebrow": "Contacto",
+          "title": "Llamar con los datos clave resueltos.",
+          "body": "Teléfono, dirección, horario y valoración quedan visibles para cerrar la consulta sin pasos intermedios.",
           "items": [
             {
               "label": "Teléfono",
@@ -113,6 +138,157 @@
           ]
         }
       ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/tandil-servicios-vehiculares/luxe-detailing",
+      "libraries": [
+        "HTML",
+        "CSS"
+      ],
+      "notes": "Golden sample estático: estudio oscuro de detailing con hero fotográfico, tablero de confianza, servicios por intención de consulta y CTA telefónico."
+    },
+    "commercial": {
+      "tone": "premium-detailing",
+      "customer_type": "Personas que cuidan el auto y quieren consultar detailing, interior, exterior o una terminación visible antes de coordinar turno.",
+      "hero_claim": "Volvé a mirar tu auto de cerca.",
+      "trust_bar": [
+        {
+          "label": "Valoración",
+          "title": "4.9 / 5",
+          "body": "13 reseñas registradas para Luxe Detailing.",
+          "meta": "Dato verificado"
+        },
+        {
+          "label": "Ubicación",
+          "title": "Los Aromos 678",
+          "body": "Dirección publicada en Tandil para orientar la primera visita.",
+          "meta": "Tandil"
+        },
+        {
+          "label": "Horario",
+          "title": "Lunes a sábado",
+          "body": "Domingo cerrado según el horario disponible.",
+          "meta": "Dato verificado"
+        },
+        {
+          "label": "Señal de confianza",
+          "title": "Trabajo prolijo",
+          "body": "Las reseñas mencionan ejecución cuidada, buena atención, amabilidad y responsabilidad.",
+          "meta": "Reseñas"
+        }
+      ],
+      "service_cards": [
+        {
+          "label": "Exterior",
+          "title": "Terminación visible",
+          "body": "Consulta orientada a mejorar la presentación del auto y coordinar un lavado detallado o trabajo exterior."
+        },
+        {
+          "label": "Interior",
+          "title": "Habitáculo más cuidado",
+          "body": "Entrada clara para preguntar por interior, contar el estado del vehículo y acordar disponibilidad."
+        },
+        {
+          "label": "Detalle puntual",
+          "title": "Un motivo claro para llamar",
+          "body": "Para consultas sobre una zona específica del auto, con alcance y turno definidos por teléfono."
+        }
+      ],
+      "why_choose": [
+        {
+          "title": "Prueba social concreta",
+          "body": "La confianza se apoya en 4.9, 13 reseñas y comentarios sobre prolijidad y atención."
+        },
+        {
+          "title": "Consulta directa",
+          "body": "El teléfono aparece como acción principal para pasar del interés al turno."
+        },
+        {
+          "title": "Copy sin promesas infladas",
+          "body": "La propuesta vende detailing y coordinación sin sumar prestaciones, precios ni garantías no confirmadas."
+        }
+      ],
+      "packages": [
+        {
+          "name": "Lavado detallado",
+          "price_label": "Alcance a coordinar",
+          "body": "Para presentación general, exterior e interior, con definición final según el estado del auto.",
+          "items": [
+            "Presentación general",
+            "Consulta por estado",
+            "Turno telefónico"
+          ]
+        },
+        {
+          "name": "Interior",
+          "price_label": "Disponibilidad a confirmar",
+          "body": "Pedido pensado para describir el habitáculo, nivel de uso y urgencia antes de llevarlo.",
+          "items": [
+            "Habitáculo",
+            "Necesidad concreta",
+            "Coordinación por teléfono"
+          ]
+        },
+        {
+          "name": "Exterior",
+          "price_label": "Turno por teléfono",
+          "body": "Consulta para brillo, limpieza y terminación visible sin sumar productos ni tratamientos no confirmados.",
+          "items": [
+            "Exterior",
+            "Terminación visible",
+            "Horario a coordinar"
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "label": "Antes",
+          "title": "Estado inicial",
+          "body": "El punto de partida se conversa al consultar: exterior, interior o una zona puntual.",
+          "meta": "Proceso"
+        },
+        {
+          "label": "Durante",
+          "title": "Trabajo de detalle",
+          "body": "La decisión se apoya en reseñas fuertes sobre prolijidad y trato.",
+          "meta": "Detailing"
+        },
+        {
+          "label": "Después",
+          "title": "Entrega revisada",
+          "body": "La expectativa se concentra en limpieza, terminación visible y coordinación directa.",
+          "meta": "Resultado"
+        }
+      ],
+      "process": [
+        {
+          "step": "01",
+          "title": "Contar qué querés mejorar",
+          "body": "Exterior, interior o detalle puntual."
+        },
+        {
+          "step": "02",
+          "title": "Confirmar disponibilidad",
+          "body": "El horario publicado orienta la consulta de lunes a sábado."
+        },
+        {
+          "step": "03",
+          "title": "Acercarse a Los Aromos 678",
+          "body": "La dirección queda visible para reducir fricción."
+        },
+        {
+          "step": "04",
+          "title": "Revisar la terminación",
+          "body": "El foco comercial queda en un auto más limpio, prolijo y presentable."
+        }
+      ],
+      "final_cta": {
+        "title": "Luxe Detailing en Tandil",
+        "body": "Llamá al 0249 420-6233 para consultar turno, comentar el estado del auto y coordinar una visita a Los Aromos 678.",
+        "primary_label": "Llamar a Luxe Detailing",
+        "secondary_label": "Ver servicios"
+      }
     }
   },
   {
@@ -229,6 +405,174 @@
           ]
         }
       ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/tandil-servicios-vehiculares/boxes-centro-de-autolavado",
+      "libraries": [
+        "HTML",
+        "CSS"
+      ],
+      "notes": "Landing estatica autoria de agente, con direccion visual propia y foto local del build final."
+    },
+    "commercial": {
+      "tone": "premium-detailing",
+      "customer_type": "Conductores que quieren resolver lavado, interior o exterior sin comparar mil mensajes.",
+      "hero_claim": "Salir con el auto limpio, prolijo y sin vueltas.",
+      "trust_bar": [
+        {
+          "label": "Prueba social",
+          "title": "4.4 / 5",
+          "body": "353 resenas registradas en las fuentes disponibles.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Rubro",
+          "title": "Lavadero de autos",
+          "body": "La pagina debe vender el servicio principal sin sumar prestaciones no confirmadas.",
+          "meta": "Base verificada"
+        },
+        {
+          "label": "Agenda",
+          "title": "Lunes: 9:00 a. m. – 8:00 p. m.",
+          "body": "Horario publicado para orientar la primera consulta.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Contacto",
+          "title": "Telefono directo",
+          "body": "CTA preparado para llamar desde el celular sin buscar el dato en otro lado.",
+          "meta": "0297 15-539-0936"
+        },
+        {
+          "label": "Confianza",
+          "title": "Mas de [X] vehiculos",
+          "body": "Placeholder editable para volumen real, anos o trabajos terminados si el negocio lo confirma.",
+          "meta": "Demo editable",
+          "is_demo": true
+        }
+      ],
+      "service_cards": [
+        {
+          "label": "Exterior",
+          "title": "Carroceria presentable",
+          "body": "Servicio explicado desde el beneficio: llegar con el auto limpio y una terminacion cuidada."
+        },
+        {
+          "label": "Interior",
+          "title": "Cabina lista para usar",
+          "body": "Bloque para aspirado, superficies y detalles internos solo si el negocio los confirma.",
+          "is_demo": true
+        },
+        {
+          "label": "Turno",
+          "title": "Pasar o coordinar",
+          "body": "La landing reduce friccion: horario, direccion, telefono y CTA visibles."
+        }
+      ],
+      "why_choose": [
+        {
+          "title": "Rapidez para decidir",
+          "body": "El usuario ve servicio, horario, resenas y contacto en el primer scroll."
+        },
+        {
+          "title": "Servicios empaquetados",
+          "body": "Combos demo ayudan a vender sin inventar precios; se editan antes de publicar."
+        },
+        {
+          "title": "Fotos con contexto",
+          "body": "Galeria pensada para autos reales del lavadero, no imagen generica vacia."
+        }
+      ],
+      "packages": [
+        {
+          "name": "Lavado exterior",
+          "price_label": "Precio a confirmar",
+          "body": "Para resolver presentacion diaria del auto.",
+          "items": [
+            "Exterior",
+            "Secado",
+            "Terminacion visual"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Completo interior/exterior",
+          "price_label": "[Desde editable]",
+          "body": "Combo demo para vender una visita mas completa.",
+          "items": [
+            "Exterior",
+            "Interior",
+            "Consulta por demora"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Detalle puntual",
+          "price_label": "[Editable]",
+          "body": "Espacio para agregar motor, tapizados o tratamiento si se verifica.",
+          "items": [
+            "Necesidad puntual",
+            "Foto previa",
+            "Turno a confirmar"
+          ],
+          "is_demo": true
+        }
+      ],
+      "gallery": [
+        {
+          "label": "Antes",
+          "title": "Foto real del ingreso",
+          "body": "Espacio para mostrar el estado inicial del vehiculo, pieza o consulta.",
+          "meta": "Placeholder visual",
+          "is_demo": true
+        },
+        {
+          "label": "Despues",
+          "title": "Resultado o entrega",
+          "body": "Lugar reservado para una foto propia del negocio, sin usar stock generico.",
+          "meta": "Editable",
+          "is_demo": true
+        },
+        {
+          "label": "Lavado",
+          "title": "Detalle del trabajo",
+          "body": "Plano corto de materiales, herramientas, terminaciones o mostrador segun el rubro.",
+          "meta": "Foto a reemplazar",
+          "is_demo": true
+        }
+      ],
+      "process": [
+        {
+          "step": "01",
+          "title": "Elegir tipo de lavado",
+          "body": "Exterior, interior o completo segun necesidad."
+        },
+        {
+          "step": "02",
+          "title": "Confirmar horario",
+          "body": "La pagina muestra disponibilidad publicada y contacto."
+        },
+        {
+          "step": "03",
+          "title": "Dejar o esperar",
+          "body": "Texto editable segun modalidad real del negocio."
+        },
+        {
+          "step": "04",
+          "title": "Retirar limpio",
+          "body": "La galeria puede mostrar resultados reales del local."
+        }
+      ],
+      "final_cta": {
+        "title": "Boxes Centro de Autolavado: el proximo paso es simple",
+        "body": "Llama, confirma disponibilidad y lleva el auto con el dato clave ya resuelto: lavadero de autos, direccion y horario.",
+        "primary_label": "Consultar lavado",
+        "secondary_label": "Ver ubicacion"
+      },
+      "editable_note": "Los items marcados como demo son placeholders comerciales editables: reemplazar por datos reales antes de publicar o dejarlos explicitamente como a confirmar."
     }
   },
   {
@@ -345,6 +689,174 @@
           ]
         }
       ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/tandil-servicios-vehiculares/lubricentro-y-gomeria-boxes",
+      "libraries": [
+        "HTML",
+        "CSS"
+      ],
+      "notes": "Landing estatica autoria de agente, con direccion visual propia y foto local del build final."
+    },
+    "commercial": {
+      "tone": "practical-workshop",
+      "customer_type": "Conductores que necesitan mantenimiento simple, filtros o cambio de aceite con datos claros.",
+      "hero_claim": "Mantenimiento del auto sin vueltas: dato, consulta y turno.",
+      "trust_bar": [
+        {
+          "label": "Prueba social",
+          "title": "4.7 / 5",
+          "body": "44 resenas registradas en las fuentes disponibles.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Rubro",
+          "title": "Lubricentro",
+          "body": "La pagina debe vender el servicio principal sin sumar prestaciones no confirmadas.",
+          "meta": "Base verificada"
+        },
+        {
+          "label": "Agenda",
+          "title": "Lunes a Sabado; Domingo cerrado",
+          "body": "Horario publicado para orientar la primera consulta.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Contacto",
+          "title": "Telefono directo",
+          "body": "CTA preparado para llamar desde el celular sin buscar el dato en otro lado.",
+          "meta": "0249 443-7843"
+        },
+        {
+          "label": "Confianza",
+          "title": "Mas de [X] vehiculos",
+          "body": "Placeholder editable para volumen real, anos o trabajos terminados si el negocio lo confirma.",
+          "meta": "Demo editable",
+          "is_demo": true
+        }
+      ],
+      "service_cards": [
+        {
+          "label": "Aceite",
+          "title": "Cambio con datos del vehiculo",
+          "body": "Pide modelo, kilometraje y uso del auto antes de prometer producto o precio."
+        },
+        {
+          "label": "Filtros",
+          "title": "Chequeo de consumibles",
+          "body": "Bloque editable para filtros y repuestos de mantenimiento cuando haya disponibilidad real.",
+          "is_demo": true
+        },
+        {
+          "label": "Agenda",
+          "title": "Consulta de paso",
+          "body": "CTA directo para confirmar horario y evitar ir sin datos."
+        }
+      ],
+      "why_choose": [
+        {
+          "title": "Menos friccion",
+          "body": "La pagina dice que informacion llevar para que la consulta sea util."
+        },
+        {
+          "title": "Sin inventar marcas",
+          "body": "Marcas, stock y precios quedan fuera hasta que el negocio los confirme."
+        },
+        {
+          "title": "Mantenimiento ordenado",
+          "body": "Servicios, proceso y contacto aparecen en un flujo logico."
+        }
+      ],
+      "packages": [
+        {
+          "name": "Cambio de aceite",
+          "price_label": "Precio a confirmar",
+          "body": "Paquete demo para publicar cuando se definan productos y mano de obra.",
+          "items": [
+            "Aceite a confirmar",
+            "Filtro si corresponde",
+            "Datos del vehiculo"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Chequeo rapido",
+          "price_label": "[Editable]",
+          "body": "Bloque para mantenimiento preventivo si el negocio lo ofrece.",
+          "items": [
+            "Kilometraje",
+            "Uso del auto",
+            "Consulta de consumibles"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Kit mantenimiento",
+          "price_label": "[Presupuesto editable]",
+          "body": "Espacio para combos reales de filtros o lubricantes.",
+          "items": [
+            "Stock a confirmar",
+            "Marca no inventada",
+            "Turno sujeto a agenda"
+          ],
+          "is_demo": true
+        }
+      ],
+      "gallery": [
+        {
+          "label": "Antes",
+          "title": "Foto real del ingreso",
+          "body": "Espacio para mostrar el estado inicial del vehiculo, pieza o consulta.",
+          "meta": "Placeholder visual",
+          "is_demo": true
+        },
+        {
+          "label": "Despues",
+          "title": "Resultado o entrega",
+          "body": "Lugar reservado para una foto propia del negocio, sin usar stock generico.",
+          "meta": "Editable",
+          "is_demo": true
+        },
+        {
+          "label": "Lubricentro",
+          "title": "Detalle del trabajo",
+          "body": "Plano corto de materiales, herramientas, terminaciones o mostrador segun el rubro.",
+          "meta": "Foto a reemplazar",
+          "is_demo": true
+        }
+      ],
+      "process": [
+        {
+          "step": "01",
+          "title": "Enviar datos del auto",
+          "body": "Modelo, motor si se conoce y kilometraje."
+        },
+        {
+          "step": "02",
+          "title": "Confirmar producto",
+          "body": "El negocio valida lubricante, filtro y disponibilidad real."
+        },
+        {
+          "step": "03",
+          "title": "Coordinar visita",
+          "body": "Horario, direccion y telefono quedan visibles."
+        },
+        {
+          "step": "04",
+          "title": "Registrar proximo cambio",
+          "body": "Campo editable para recomendaciones reales del local."
+        }
+      ],
+      "final_cta": {
+        "title": "Lubricentro y Gomeria BOXES: el proximo paso es simple",
+        "body": "Llama, confirma disponibilidad y lleva el auto con el dato clave ya resuelto: lubricentro, direccion y horario.",
+        "primary_label": "Consultar mantenimiento",
+        "secondary_label": "Ver ubicacion"
+      },
+      "editable_note": "Los items marcados como demo son placeholders comerciales editables: reemplazar por datos reales antes de publicar o dejarlos explicitamente como a confirmar."
     }
   },
   {
@@ -461,6 +973,173 @@
           ]
         }
       ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/tandil-servicios-vehiculares/gomeria-el-viejo-matias-auxilio-24-hs",
+      "libraries": [
+        "HTML",
+        "CSS"
+      ],
+      "notes": "Landing estatica autoria de agente, con direccion visual propia y foto local del build final."
+    },
+    "commercial": {
+      "tone": "fast-local",
+      "customer_type": "Conductores que necesitan resolver una cubierta rapido.",
+      "hero_claim": "Cuando una cubierta te frena, el CTA tiene que estar primero.",
+      "trust_bar": [
+        {
+          "label": "Prueba social",
+          "title": "4.7 / 5",
+          "body": "328 resenas registradas en las fuentes disponibles.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Rubro",
+          "title": "Gomeria",
+          "body": "La pagina debe vender el servicio principal sin sumar prestaciones no confirmadas.",
+          "meta": "Base verificada"
+        },
+        {
+          "label": "Agenda",
+          "title": "Lunes a Sabado; Domingo cerrado",
+          "body": "Horario publicado para orientar la primera consulta.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Contacto",
+          "title": "Telefono directo",
+          "body": "CTA preparado para llamar desde el celular sin buscar el dato en otro lado.",
+          "meta": "0249 424-3685"
+        },
+        {
+          "label": "Confianza",
+          "title": "Mas de [X] vehiculos",
+          "body": "Placeholder editable para volumen real, anos o trabajos terminados si el negocio lo confirma.",
+          "meta": "Demo editable",
+          "is_demo": true
+        }
+      ],
+      "service_cards": [
+        {
+          "label": "Pinchadura",
+          "title": "Resolver sin perder tiempo",
+          "body": "La landing prioriza telefono, ubicacion y el dato de disponibilidad."
+        },
+        {
+          "label": "Cubiertas",
+          "title": "Consulta por medida",
+          "body": "El copy pide medida y modelo antes de hablar de stock, marca o precio."
+        },
+        {
+          "label": "Auxilio",
+          "title": "Llamar primero",
+          "body": "CTA de urgencia arriba y bloque de horario visible."
+        }
+      ],
+      "why_choose": [
+        {
+          "title": "Consulta concreta",
+          "body": "Pedir medida, estado y urgencia evita mensajes que no se pueden responder."
+        },
+        {
+          "title": "Confianza local",
+          "body": "Rating, resenas y direccion aparecen como prueba rapida."
+        },
+        {
+          "title": "Sin stock inventado",
+          "body": "Marcas, medidas disponibles y precios quedan a confirmar."
+        }
+      ],
+      "packages": [
+        {
+          "name": "Pinchadura",
+          "price_label": "Precio a confirmar",
+          "body": "Consulta demo para evaluar reparacion o reemplazo.",
+          "items": [
+            "Estado de la cubierta",
+            "Medida",
+            "Disponibilidad"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Cambio de cubierta",
+          "price_label": "[Presupuesto editable]",
+          "body": "Bloque editable para venta o montaje si el local lo confirma.",
+          "items": [
+            "Medida a consultar",
+            "Stock a confirmar",
+            "Trabajo en local"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Auxilio",
+          "price_label": "[Editable]",
+          "body": "Campo para condiciones reales de auxilio.",
+          "items": [
+            "Ubicacion del vehiculo",
+            "Telefono visible",
+            "Disponibilidad real"
+          ],
+          "is_demo": true
+        }
+      ],
+      "gallery": [
+        {
+          "label": "Antes",
+          "title": "Foto real del ingreso",
+          "body": "Espacio para mostrar el estado inicial del vehiculo, pieza o consulta.",
+          "meta": "Placeholder visual",
+          "is_demo": true
+        },
+        {
+          "label": "Despues",
+          "title": "Resultado o entrega",
+          "body": "Lugar reservado para una foto propia del negocio, sin usar stock generico.",
+          "meta": "Editable",
+          "is_demo": true
+        },
+        {
+          "label": "Gomeria",
+          "title": "Detalle del trabajo",
+          "body": "Plano corto de materiales, herramientas, terminaciones o mostrador segun el rubro.",
+          "meta": "Foto a reemplazar",
+          "is_demo": true
+        }
+      ],
+      "process": [
+        {
+          "step": "01",
+          "title": "Contar el problema",
+          "body": "Pinchadura, cubierta baja, cambio o consulta por medida."
+        },
+        {
+          "step": "02",
+          "title": "Mandar dato clave",
+          "body": "Medida, foto o ubicacion si aplica."
+        },
+        {
+          "step": "03",
+          "title": "Confirmar disponibilidad",
+          "body": "El negocio valida horario, stock o auxilio real."
+        },
+        {
+          "step": "04",
+          "title": "Resolver en local",
+          "body": "Direccion y contacto quedan listos para ir."
+        }
+      ],
+      "final_cta": {
+        "title": "Gomería El Viejo Matias - Auxilio 24 hs: el proximo paso es simple",
+        "body": "Llama, confirma disponibilidad y lleva el auto con el dato clave ya resuelto: gomeria, direccion y horario.",
+        "primary_label": "Consultar auxilio",
+        "secondary_label": "Ver ubicacion"
+      },
+      "editable_note": "Los items marcados como demo son placeholders comerciales editables: reemplazar por datos reales antes de publicar o dejarlos explicitamente como a confirmar."
     }
   },
   {
@@ -577,6 +1256,174 @@
           ]
         }
       ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/tandil-servicios-vehiculares/taller-franco-chapa-y-pintura",
+      "libraries": [
+        "HTML",
+        "CSS"
+      ],
+      "notes": "Landing estatica autoria de agente, con direccion visual propia y foto local del build final."
+    },
+    "commercial": {
+      "tone": "premium-detailing",
+      "customer_type": "Personas que cuidan el auto, quieren recuperar brillo, proteger terminaciones o reservar un lavado detallado.",
+      "hero_claim": "Que el auto vuelva a sentirse cuidado, limpio y listo para mirar de cerca.",
+      "trust_bar": [
+        {
+          "label": "Prueba social",
+          "title": "4.7 / 5",
+          "body": "67 resenas registradas en las fuentes disponibles.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Rubro",
+          "title": "Detailing y estetica vehicular",
+          "body": "La pagina debe vender el servicio principal sin sumar prestaciones no confirmadas.",
+          "meta": "Base verificada"
+        },
+        {
+          "label": "Agenda",
+          "title": "Lunes a Viernes; Sabado, Domingo cerrado",
+          "body": "Horario publicado para orientar la primera consulta.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Contacto",
+          "title": "Telefono directo",
+          "body": "CTA preparado para llamar desde el celular sin buscar el dato en otro lado.",
+          "meta": "0249 454-4214"
+        },
+        {
+          "label": "Confianza",
+          "title": "Mas de [X] vehiculos",
+          "body": "Placeholder editable para volumen real, anos o trabajos terminados si el negocio lo confirma.",
+          "meta": "Demo editable",
+          "is_demo": true
+        }
+      ],
+      "service_cards": [
+        {
+          "label": "Interior",
+          "title": "Habitaculo con sensacion de estreno",
+          "body": "Copy pensado para vender limpieza profunda, orden visual y confort sin inventar tratamientos no verificados."
+        },
+        {
+          "label": "Exterior",
+          "title": "Brillo y terminacion visible",
+          "body": "Bloque preparado para lavado detallado, descontaminado o correccion si el negocio lo confirma."
+        },
+        {
+          "label": "Proteccion",
+          "title": "Cuidado despues del lavado",
+          "body": "Espacio editable para ceramicos, selladores o mantenimiento cuando existan datos reales.",
+          "is_demo": true
+        }
+      ],
+      "why_choose": [
+        {
+          "title": "Resultado fotografiable",
+          "body": "La estructura empuja a mostrar antes/despues, detalles y terminaciones reales."
+        },
+        {
+          "title": "Reserva simple",
+          "body": "El CTA lleva a consultar turno, tipo de vehiculo y necesidad concreta."
+        },
+        {
+          "title": "Prueba social visible",
+          "body": "Rating, resenas y comentarios quedan arriba, no escondidos al final."
+        }
+      ],
+      "packages": [
+        {
+          "name": "Lavado detallado",
+          "price_label": "Precio a confirmar",
+          "body": "Para exterior e interior con foco en presentacion general.",
+          "items": [
+            "Exterior",
+            "Interior",
+            "Terminacion visual"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Interior profundo",
+          "price_label": "[Desde editable]",
+          "body": "Paquete editable para butacas, alfombras, plasticos y olor.",
+          "items": [
+            "Aspirado detallado",
+            "Superficies interiores",
+            "Fotos del estado inicial"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Proteccion premium",
+          "price_label": "[Presupuesto editable]",
+          "body": "Lugar para ceramico, sellador o proteccion si el negocio lo ofrece.",
+          "items": [
+            "Evaluacion previa",
+            "Producto a confirmar",
+            "Mantenimiento recomendado"
+          ],
+          "is_demo": true
+        }
+      ],
+      "gallery": [
+        {
+          "label": "Antes",
+          "title": "Foto real del ingreso",
+          "body": "Espacio para mostrar el estado inicial del vehiculo, pieza o consulta.",
+          "meta": "Placeholder visual",
+          "is_demo": true
+        },
+        {
+          "label": "Despues",
+          "title": "Resultado o entrega",
+          "body": "Lugar reservado para una foto propia del negocio, sin usar stock generico.",
+          "meta": "Editable",
+          "is_demo": true
+        },
+        {
+          "label": "Detailing",
+          "title": "Detalle del trabajo",
+          "body": "Plano corto de materiales, herramientas, terminaciones o mostrador segun el rubro.",
+          "meta": "Foto a reemplazar",
+          "is_demo": true
+        }
+      ],
+      "process": [
+        {
+          "step": "01",
+          "title": "Contar el estado del auto",
+          "body": "El cliente consulta por interior, exterior o detalle puntual."
+        },
+        {
+          "step": "02",
+          "title": "Elegir nivel de trabajo",
+          "body": "La pagina propone paquetes editables y deja claro que el precio se confirma."
+        },
+        {
+          "step": "03",
+          "title": "Reservar turno",
+          "body": "CTA directo a telefono o WhatsApp cuando esta disponible."
+        },
+        {
+          "step": "04",
+          "title": "Registrar resultado",
+          "body": "Bloque de galeria listo para cargar fotos reales del trabajo terminado."
+        }
+      ],
+      "final_cta": {
+        "title": "Taller Franco Chapa y Pintura: el proximo paso es simple",
+        "body": "Llama, confirma disponibilidad y lleva el auto con el dato clave ya resuelto: detailing y estetica vehicular, direccion y horario.",
+        "primary_label": "Reservar turno",
+        "secondary_label": "Ver ubicacion"
+      },
+      "editable_note": "Los items marcados como demo son placeholders comerciales editables: reemplazar por datos reales antes de publicar o dejarlos explicitamente como a confirmar."
     }
   },
   {
@@ -701,6 +1548,174 @@
           ]
         }
       ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/tandil-servicios-vehiculares/iturralde-repuestos",
+      "libraries": [
+        "HTML",
+        "CSS"
+      ],
+      "notes": "Landing estatica autoria de agente, con direccion visual propia y foto local del build final."
+    },
+    "commercial": {
+      "tone": "parts-counter",
+      "customer_type": "Clientes que buscan disponibilidad de una pieza, accesorio o dato de mostrador.",
+      "hero_claim": "Consulta de repuesto con el dato del auto listo desde el primer mensaje.",
+      "trust_bar": [
+        {
+          "label": "Prueba social",
+          "title": "4.6 / 5",
+          "body": "295 resenas registradas en las fuentes disponibles.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Rubro",
+          "title": "Repuestos para autos",
+          "body": "La pagina debe vender el servicio principal sin sumar prestaciones no confirmadas.",
+          "meta": "Base verificada"
+        },
+        {
+          "label": "Agenda",
+          "title": "Lunes a Sabado; Domingo cerrado",
+          "body": "Horario publicado para orientar la primera consulta.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Contacto",
+          "title": "Telefono directo",
+          "body": "CTA preparado para llamar desde el celular sin buscar el dato en otro lado.",
+          "meta": "0249 401-7903"
+        },
+        {
+          "label": "Confianza",
+          "title": "Mas de [X] vehiculos",
+          "body": "Placeholder editable para volumen real, anos o trabajos terminados si el negocio lo confirma.",
+          "meta": "Demo editable",
+          "is_demo": true
+        }
+      ],
+      "service_cards": [
+        {
+          "label": "Consulta",
+          "title": "Pedir pieza con datos",
+          "body": "Modelo, ano, motor o foto de la pieza antes de hablar de stock."
+        },
+        {
+          "label": "Mostrador",
+          "title": "Direccion y horario",
+          "body": "La pagina facilita llegar o llamar sin inventar catalogo."
+        },
+        {
+          "label": "Disponibilidad",
+          "title": "Stock a confirmar",
+          "body": "El bloque comercial explica que marcas, precios y unidades se validan en el contacto.",
+          "is_demo": true
+        }
+      ],
+      "why_choose": [
+        {
+          "title": "Menos ida y vuelta",
+          "body": "El usuario sabe que datos mandar para que la consulta sea util."
+        },
+        {
+          "title": "Mostrador claro",
+          "body": "Direccion, horario y telefono dominan la landing."
+        },
+        {
+          "title": "Sin catalogo falso",
+          "body": "No se listan marcas, stock ni promociones si no estan verificadas."
+        }
+      ],
+      "packages": [
+        {
+          "name": "Consulta por pieza",
+          "price_label": "Precio a confirmar",
+          "body": "Para pedir disponibilidad con datos del vehiculo.",
+          "items": [
+            "Modelo",
+            "Ano o motor",
+            "Foto o codigo si existe"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Accesorio puntual",
+          "price_label": "[Editable]",
+          "body": "Bloque para accesorios reales si el comercio los confirma.",
+          "items": [
+            "Tipo de accesorio",
+            "Compatibilidad",
+            "Stock a validar"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Retiro en local",
+          "price_label": "A coordinar",
+          "body": "CTA para confirmar horario y direccion antes de pasar.",
+          "items": [
+            "Horario",
+            "Direccion",
+            "Telefono"
+          ],
+          "is_demo": true
+        }
+      ],
+      "gallery": [
+        {
+          "label": "Antes",
+          "title": "Foto real del ingreso",
+          "body": "Espacio para mostrar el estado inicial del vehiculo, pieza o consulta.",
+          "meta": "Placeholder visual",
+          "is_demo": true
+        },
+        {
+          "label": "Despues",
+          "title": "Resultado o entrega",
+          "body": "Lugar reservado para una foto propia del negocio, sin usar stock generico.",
+          "meta": "Editable",
+          "is_demo": true
+        },
+        {
+          "label": "Repuestos",
+          "title": "Detalle del trabajo",
+          "body": "Plano corto de materiales, herramientas, terminaciones o mostrador segun el rubro.",
+          "meta": "Foto a reemplazar",
+          "is_demo": true
+        }
+      ],
+      "process": [
+        {
+          "step": "01",
+          "title": "Mandar dato del vehiculo",
+          "body": "Modelo, ano, motor o foto de la pieza."
+        },
+        {
+          "step": "02",
+          "title": "Validar compatibilidad",
+          "body": "El local confirma si corresponde consultar stock."
+        },
+        {
+          "step": "03",
+          "title": "Confirmar precio y retiro",
+          "body": "Precio, marca y disponibilidad no se inventan en la landing."
+        },
+        {
+          "step": "04",
+          "title": "Pasar por mostrador",
+          "body": "Direccion y horario quedan visibles."
+        }
+      ],
+      "final_cta": {
+        "title": "Iturralde - Repuestos: el proximo paso es simple",
+        "body": "Llama, confirma disponibilidad y lleva el auto con el dato clave ya resuelto: repuestos para autos, direccion y horario.",
+        "primary_label": "Consultar repuesto",
+        "secondary_label": "Ver ubicacion"
+      },
+      "editable_note": "Los items marcados como demo son placeholders comerciales editables: reemplazar por datos reales antes de publicar o dejarlos explicitamente como a confirmar."
     }
   },
   {
@@ -817,6 +1832,174 @@
           ]
         }
       ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/tandil-servicios-vehiculares/walter-gomez-servicio-multimarca",
+      "libraries": [
+        "HTML",
+        "CSS"
+      ],
+      "notes": "Landing estatica autoria de agente, con direccion visual propia y foto local del build final."
+    },
+    "commercial": {
+      "tone": "practical-workshop",
+      "customer_type": "Conductores que necesitan diagnostico, mantenimiento o una primera consulta confiable.",
+      "hero_claim": "Primero entender que le pasa al auto. Despues, coordinar bien el turno.",
+      "trust_bar": [
+        {
+          "label": "Prueba social",
+          "title": "4.7 / 5",
+          "body": "75 resenas registradas en las fuentes disponibles.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Rubro",
+          "title": "Taller mecanico",
+          "body": "La pagina debe vender el servicio principal sin sumar prestaciones no confirmadas.",
+          "meta": "Base verificada"
+        },
+        {
+          "label": "Agenda",
+          "title": "Lunes a Domingo: 8:30 a. m. – 6:00 p. m.",
+          "body": "Horario publicado para orientar la primera consulta.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Contacto",
+          "title": "Telefono directo",
+          "body": "CTA preparado para llamar desde el celular sin buscar el dato en otro lado.",
+          "meta": "0249 442-2400"
+        },
+        {
+          "label": "Confianza",
+          "title": "Mas de [X] vehiculos",
+          "body": "Placeholder editable para volumen real, anos o trabajos terminados si el negocio lo confirma.",
+          "meta": "Demo editable",
+          "is_demo": true
+        }
+      ],
+      "service_cards": [
+        {
+          "label": "Diagnostico",
+          "title": "Consulta con sintomas",
+          "body": "La landing pide ruido, falla, kilometraje y contexto antes de prometer una solucion."
+        },
+        {
+          "label": "Service",
+          "title": "Mantenimiento ordenado",
+          "body": "Bloque para service o revision si el taller lo confirma.",
+          "is_demo": true
+        },
+        {
+          "label": "Turno",
+          "title": "Llamar con datos",
+          "body": "CTA enfocado en coordinar horario, necesidad y disponibilidad."
+        }
+      ],
+      "why_choose": [
+        {
+          "title": "Consulta mas clara",
+          "body": "El visitante sabe que informacion dar antes de llevar el auto."
+        },
+        {
+          "title": "Confianza visible",
+          "body": "Resenas, rating y direccion aparecen como respaldo local."
+        },
+        {
+          "title": "Sin diagnostico inventado",
+          "body": "La landing no promete fallas resueltas ni marcas atendidas si no existen datos."
+        }
+      ],
+      "packages": [
+        {
+          "name": "Diagnostico inicial",
+          "price_label": "A confirmar",
+          "body": "Para evaluar sintomas y definir siguiente paso.",
+          "items": [
+            "Sintoma",
+            "Kilometraje",
+            "Turno"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Service preventivo",
+          "price_label": "[Editable]",
+          "body": "Espacio para servicios confirmados por el taller.",
+          "items": [
+            "Aceite/filtros si aplica",
+            "Revision",
+            "Datos del vehiculo"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Reparacion puntual",
+          "price_label": "[Presupuesto editable]",
+          "body": "Bloque para trabajos reales luego de diagnostico.",
+          "items": [
+            "Falla reportada",
+            "Revision presencial",
+            "Piezas a confirmar"
+          ],
+          "is_demo": true
+        }
+      ],
+      "gallery": [
+        {
+          "label": "Antes",
+          "title": "Foto real del ingreso",
+          "body": "Espacio para mostrar el estado inicial del vehiculo, pieza o consulta.",
+          "meta": "Placeholder visual",
+          "is_demo": true
+        },
+        {
+          "label": "Despues",
+          "title": "Resultado o entrega",
+          "body": "Lugar reservado para una foto propia del negocio, sin usar stock generico.",
+          "meta": "Editable",
+          "is_demo": true
+        },
+        {
+          "label": "Taller mecanico",
+          "title": "Detalle del trabajo",
+          "body": "Plano corto de materiales, herramientas, terminaciones o mostrador segun el rubro.",
+          "meta": "Foto a reemplazar",
+          "is_demo": true
+        }
+      ],
+      "process": [
+        {
+          "step": "01",
+          "title": "Contar sintomas",
+          "body": "Ruido, falla, testigo, perdida o mantenimiento pendiente."
+        },
+        {
+          "step": "02",
+          "title": "Enviar datos",
+          "body": "Modelo, kilometraje y urgencia ayudan a ordenar la consulta."
+        },
+        {
+          "step": "03",
+          "title": "Coordinar turno",
+          "body": "Contacto y horario quedan visibles para avanzar."
+        },
+        {
+          "step": "04",
+          "title": "Definir trabajo",
+          "body": "Repuestos, precio y plazo se confirman despues del diagnostico real."
+        }
+      ],
+      "final_cta": {
+        "title": "Walter Gomez Servicio Multimarca: el proximo paso es simple",
+        "body": "Llama, confirma disponibilidad y lleva el auto con el dato clave ya resuelto: taller mecanico, direccion y horario.",
+        "primary_label": "Consultar turno",
+        "secondary_label": "Ver ubicacion"
+      },
+      "editable_note": "Los items marcados como demo son placeholders comerciales editables: reemplazar por datos reales antes de publicar o dejarlos explicitamente como a confirmar."
     }
   },
   {
@@ -933,6 +2116,173 @@
           ]
         }
       ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/tandil-servicios-vehiculares/gomeria-y-auxilio-24-horas-landeyro",
+      "libraries": [
+        "HTML",
+        "CSS"
+      ],
+      "notes": "Landing estatica autoria de agente, con direccion visual propia y foto local del build final."
+    },
+    "commercial": {
+      "tone": "fast-local",
+      "customer_type": "Conductores que necesitan resolver una cubierta rapido.",
+      "hero_claim": "Cuando una cubierta te frena, el CTA tiene que estar primero.",
+      "trust_bar": [
+        {
+          "label": "Prueba social",
+          "title": "4.8 / 5",
+          "body": "176 resenas registradas en las fuentes disponibles.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Rubro",
+          "title": "Gomeria",
+          "body": "La pagina debe vender el servicio principal sin sumar prestaciones no confirmadas.",
+          "meta": "Base verificada"
+        },
+        {
+          "label": "Agenda",
+          "title": "Lunes: Abierto 24 horas",
+          "body": "Horario publicado para orientar la primera consulta.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Contacto",
+          "title": "Telefono directo",
+          "body": "CTA preparado para llamar desde el celular sin buscar el dato en otro lado.",
+          "meta": "0249 463-9850"
+        },
+        {
+          "label": "Confianza",
+          "title": "Mas de [X] vehiculos",
+          "body": "Placeholder editable para volumen real, anos o trabajos terminados si el negocio lo confirma.",
+          "meta": "Demo editable",
+          "is_demo": true
+        }
+      ],
+      "service_cards": [
+        {
+          "label": "Pinchadura",
+          "title": "Resolver sin perder tiempo",
+          "body": "La landing prioriza telefono, ubicacion y el dato de disponibilidad."
+        },
+        {
+          "label": "Cubiertas",
+          "title": "Consulta por medida",
+          "body": "El copy pide medida y modelo antes de hablar de stock, marca o precio."
+        },
+        {
+          "label": "Auxilio",
+          "title": "Llamar primero",
+          "body": "CTA de urgencia arriba y bloque de horario visible."
+        }
+      ],
+      "why_choose": [
+        {
+          "title": "Consulta concreta",
+          "body": "Pedir medida, estado y urgencia evita mensajes que no se pueden responder."
+        },
+        {
+          "title": "Confianza local",
+          "body": "Rating, resenas y direccion aparecen como prueba rapida."
+        },
+        {
+          "title": "Sin stock inventado",
+          "body": "Marcas, medidas disponibles y precios quedan a confirmar."
+        }
+      ],
+      "packages": [
+        {
+          "name": "Pinchadura",
+          "price_label": "Precio a confirmar",
+          "body": "Consulta demo para evaluar reparacion o reemplazo.",
+          "items": [
+            "Estado de la cubierta",
+            "Medida",
+            "Disponibilidad"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Cambio de cubierta",
+          "price_label": "[Presupuesto editable]",
+          "body": "Bloque editable para venta o montaje si el local lo confirma.",
+          "items": [
+            "Medida a consultar",
+            "Stock a confirmar",
+            "Trabajo en local"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Auxilio",
+          "price_label": "[Editable]",
+          "body": "Campo para condiciones reales de auxilio.",
+          "items": [
+            "Ubicacion del vehiculo",
+            "Telefono visible",
+            "Disponibilidad real"
+          ],
+          "is_demo": true
+        }
+      ],
+      "gallery": [
+        {
+          "label": "Antes",
+          "title": "Foto real del ingreso",
+          "body": "Espacio para mostrar el estado inicial del vehiculo, pieza o consulta.",
+          "meta": "Placeholder visual",
+          "is_demo": true
+        },
+        {
+          "label": "Despues",
+          "title": "Resultado o entrega",
+          "body": "Lugar reservado para una foto propia del negocio, sin usar stock generico.",
+          "meta": "Editable",
+          "is_demo": true
+        },
+        {
+          "label": "Gomeria",
+          "title": "Detalle del trabajo",
+          "body": "Plano corto de materiales, herramientas, terminaciones o mostrador segun el rubro.",
+          "meta": "Foto a reemplazar",
+          "is_demo": true
+        }
+      ],
+      "process": [
+        {
+          "step": "01",
+          "title": "Contar el problema",
+          "body": "Pinchadura, cubierta baja, cambio o consulta por medida."
+        },
+        {
+          "step": "02",
+          "title": "Mandar dato clave",
+          "body": "Medida, foto o ubicacion si aplica."
+        },
+        {
+          "step": "03",
+          "title": "Confirmar disponibilidad",
+          "body": "El negocio valida horario, stock o auxilio real."
+        },
+        {
+          "step": "04",
+          "title": "Resolver en local",
+          "body": "Direccion y contacto quedan listos para ir."
+        }
+      ],
+      "final_cta": {
+        "title": "Gomería y auxilio 24 horas Landeyro: el proximo paso es simple",
+        "body": "Llama, confirma disponibilidad y lleva el auto con el dato clave ya resuelto: gomeria, direccion y horario.",
+        "primary_label": "Consultar auxilio",
+        "secondary_label": "Ver ubicacion"
+      },
+      "editable_note": "Los items marcados como demo son placeholders comerciales editables: reemplazar por datos reales antes de publicar o dejarlos explicitamente como a confirmar."
     }
   },
   {
@@ -1049,6 +2399,173 @@
           "callout": "Diseñada para vender consulta, no para inventar catálogo."
         }
       ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/tandil-servicios-vehiculares/taller-di-sipio-chapa-y-pintura",
+      "libraries": [
+        "HTML",
+        "CSS"
+      ],
+      "notes": "Landing estatica autoria de agente, con direccion visual propia y foto local del build final."
+    },
+    "commercial": {
+      "tone": "bodyshop-craft",
+      "customer_type": "Dueños de autos que necesitan evaluar un golpe, pintura o terminacion antes de dejar el vehiculo.",
+      "hero_claim": "El golpe se consulta con fotos, alcance claro y criterio de terminacion.",
+      "trust_bar": [
+        {
+          "label": "Prueba social",
+          "title": "4.9 / 5",
+          "body": "35 resenas registradas en las fuentes disponibles.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Rubro",
+          "title": "Chapa y pintura",
+          "body": "La pagina debe vender el servicio principal sin sumar prestaciones no confirmadas.",
+          "meta": "Base verificada"
+        },
+        {
+          "label": "Agenda",
+          "title": "Lunes a Sabado; Domingo cerrado",
+          "body": "Horario publicado para orientar la primera consulta.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Contacto",
+          "title": "Telefono directo",
+          "body": "CTA preparado para llamar desde el celular sin buscar el dato en otro lado.",
+          "meta": "0249 460-4088"
+        },
+        {
+          "label": "Confianza",
+          "title": "Mas de [X] vehiculos",
+          "body": "Placeholder editable para volumen real, anos o trabajos terminados si el negocio lo confirma.",
+          "meta": "Demo editable",
+          "is_demo": true
+        }
+      ],
+      "service_cards": [
+        {
+          "label": "Chapa",
+          "title": "Evaluacion del dano",
+          "body": "Pide fotos y zona afectada antes de prometer plazos o presupuestos."
+        },
+        {
+          "label": "Pintura",
+          "title": "Terminacion visible",
+          "body": "La landing deja lugar para mostrar trabajos reales de color, brillo y ajuste."
+        },
+        {
+          "label": "Consulta",
+          "title": "Primer diagnostico",
+          "body": "CTA para enviar imagenes y coordinar una visita al taller."
+        }
+      ],
+      "why_choose": [
+        {
+          "title": "Oficio, no plantilla",
+          "body": "Visual editorial de taller, superficies, marcas de trabajo y proceso."
+        },
+        {
+          "title": "Antes/despues necesario",
+          "body": "La pagina obliga a mostrar evidencia visual cuando el negocio la tenga."
+        },
+        {
+          "title": "Sin plazos inventados",
+          "body": "Tiempo, garantia y presupuesto quedan a confirmar con el caso real."
+        }
+      ],
+      "packages": [
+        {
+          "name": "Evaluacion con fotos",
+          "price_label": "Sin precio publicado",
+          "body": "Para entender dano, zona y necesidad antes de presupuestar.",
+          "items": [
+            "Fotos del golpe",
+            "Zona afectada",
+            "Direccion del taller"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Reparacion puntual",
+          "price_label": "[Presupuesto editable]",
+          "body": "Bloque demo para trabajos chicos cuando el taller lo confirme.",
+          "items": [
+            "Alcance a definir",
+            "Materiales a confirmar",
+            "Turno"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Pintura / terminacion",
+          "price_label": "[A cotizar]",
+          "body": "Espacio para trabajos de pintura verificados por el negocio.",
+          "items": [
+            "Color",
+            "Paneles afectados",
+            "Revision presencial"
+          ],
+          "is_demo": true
+        }
+      ],
+      "gallery": [
+        {
+          "label": "Antes",
+          "title": "Foto real del ingreso",
+          "body": "Espacio para mostrar el estado inicial del vehiculo, pieza o consulta.",
+          "meta": "Placeholder visual",
+          "is_demo": true
+        },
+        {
+          "label": "Despues",
+          "title": "Resultado o entrega",
+          "body": "Lugar reservado para una foto propia del negocio, sin usar stock generico.",
+          "meta": "Editable",
+          "is_demo": true
+        },
+        {
+          "label": "Chapa y pintura",
+          "title": "Detalle del trabajo",
+          "body": "Plano corto de materiales, herramientas, terminaciones o mostrador segun el rubro.",
+          "meta": "Foto a reemplazar",
+          "is_demo": true
+        }
+      ],
+      "process": [
+        {
+          "step": "01",
+          "title": "Enviar fotos",
+          "body": "Golpe, lateral afectado, detalle de pintura o pieza."
+        },
+        {
+          "step": "02",
+          "title": "Separar alcance",
+          "body": "Se define si requiere visita, repuesto o presupuesto formal."
+        },
+        {
+          "step": "03",
+          "title": "Coordinar taller",
+          "body": "Contacto, horario y direccion se muestran sin friccion."
+        },
+        {
+          "step": "04",
+          "title": "Cargar antes/despues",
+          "body": "La galeria queda lista para trabajos reales terminados."
+        }
+      ],
+      "final_cta": {
+        "title": "\"Taller Di Sipio\" Chapa Y Pintura: el proximo paso es simple",
+        "body": "Llama, confirma disponibilidad y lleva el auto con el dato clave ya resuelto: chapa y pintura, direccion y horario.",
+        "primary_label": "Consultar reparacion",
+        "secondary_label": "Ver ubicacion"
+      },
+      "editable_note": "Los items marcados como demo son placeholders comerciales editables: reemplazar por datos reales antes de publicar o dejarlos explicitamente como a confirmar."
     }
   },
   {
@@ -1165,6 +2682,174 @@
           ]
         }
       ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/tandil-servicios-vehiculares/mecanica-maz",
+      "libraries": [
+        "HTML",
+        "CSS"
+      ],
+      "notes": "Landing estatica autoria de agente, con direccion visual propia y foto local del build final."
+    },
+    "commercial": {
+      "tone": "practical-workshop",
+      "customer_type": "Conductores que necesitan diagnostico, mantenimiento o una primera consulta confiable.",
+      "hero_claim": "Primero entender que le pasa al auto. Despues, coordinar bien el turno.",
+      "trust_bar": [
+        {
+          "label": "Prueba social",
+          "title": "4.9 / 5",
+          "body": "31 resenas registradas en las fuentes disponibles.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Rubro",
+          "title": "Taller mecanico",
+          "body": "La pagina debe vender el servicio principal sin sumar prestaciones no confirmadas.",
+          "meta": "Base verificada"
+        },
+        {
+          "label": "Agenda",
+          "title": "Lunes a Sabado; Domingo cerrado",
+          "body": "Horario publicado para orientar la primera consulta.",
+          "meta": "Dato verificado",
+          "is_demo": false
+        },
+        {
+          "label": "Contacto",
+          "title": "Telefono directo",
+          "body": "CTA preparado para llamar desde el celular sin buscar el dato en otro lado.",
+          "meta": "0249 464-3419"
+        },
+        {
+          "label": "Confianza",
+          "title": "Mas de [X] vehiculos",
+          "body": "Placeholder editable para volumen real, anos o trabajos terminados si el negocio lo confirma.",
+          "meta": "Demo editable",
+          "is_demo": true
+        }
+      ],
+      "service_cards": [
+        {
+          "label": "Diagnostico",
+          "title": "Consulta con sintomas",
+          "body": "La landing pide ruido, falla, kilometraje y contexto antes de prometer una solucion."
+        },
+        {
+          "label": "Service",
+          "title": "Mantenimiento ordenado",
+          "body": "Bloque para service o revision si el taller lo confirma.",
+          "is_demo": true
+        },
+        {
+          "label": "Turno",
+          "title": "Llamar con datos",
+          "body": "CTA enfocado en coordinar horario, necesidad y disponibilidad."
+        }
+      ],
+      "why_choose": [
+        {
+          "title": "Consulta mas clara",
+          "body": "El visitante sabe que informacion dar antes de llevar el auto."
+        },
+        {
+          "title": "Confianza visible",
+          "body": "Resenas, rating y direccion aparecen como respaldo local."
+        },
+        {
+          "title": "Sin diagnostico inventado",
+          "body": "La landing no promete fallas resueltas ni marcas atendidas si no existen datos."
+        }
+      ],
+      "packages": [
+        {
+          "name": "Diagnostico inicial",
+          "price_label": "A confirmar",
+          "body": "Para evaluar sintomas y definir siguiente paso.",
+          "items": [
+            "Sintoma",
+            "Kilometraje",
+            "Turno"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Service preventivo",
+          "price_label": "[Editable]",
+          "body": "Espacio para servicios confirmados por el taller.",
+          "items": [
+            "Aceite/filtros si aplica",
+            "Revision",
+            "Datos del vehiculo"
+          ],
+          "is_demo": true
+        },
+        {
+          "name": "Reparacion puntual",
+          "price_label": "[Presupuesto editable]",
+          "body": "Bloque para trabajos reales luego de diagnostico.",
+          "items": [
+            "Falla reportada",
+            "Revision presencial",
+            "Piezas a confirmar"
+          ],
+          "is_demo": true
+        }
+      ],
+      "gallery": [
+        {
+          "label": "Antes",
+          "title": "Foto real del ingreso",
+          "body": "Espacio para mostrar el estado inicial del vehiculo, pieza o consulta.",
+          "meta": "Placeholder visual",
+          "is_demo": true
+        },
+        {
+          "label": "Despues",
+          "title": "Resultado o entrega",
+          "body": "Lugar reservado para una foto propia del negocio, sin usar stock generico.",
+          "meta": "Editable",
+          "is_demo": true
+        },
+        {
+          "label": "Taller mecanico",
+          "title": "Detalle del trabajo",
+          "body": "Plano corto de materiales, herramientas, terminaciones o mostrador segun el rubro.",
+          "meta": "Foto a reemplazar",
+          "is_demo": true
+        }
+      ],
+      "process": [
+        {
+          "step": "01",
+          "title": "Contar sintomas",
+          "body": "Ruido, falla, testigo, perdida o mantenimiento pendiente."
+        },
+        {
+          "step": "02",
+          "title": "Enviar datos",
+          "body": "Modelo, kilometraje y urgencia ayudan a ordenar la consulta."
+        },
+        {
+          "step": "03",
+          "title": "Coordinar turno",
+          "body": "Contacto y horario quedan visibles para avanzar."
+        },
+        {
+          "step": "04",
+          "title": "Definir trabajo",
+          "body": "Repuestos, precio y plazo se confirman despues del diagnostico real."
+        }
+      ],
+      "final_cta": {
+        "title": "Mecanica Maz: el proximo paso es simple",
+        "body": "Llama, confirma disponibilidad y lleva el auto con el dato clave ya resuelto: taller mecanico, direccion y horario.",
+        "primary_label": "Consultar turno",
+        "secondary_label": "Ver ubicacion"
+      },
+      "editable_note": "Los items marcados como demo son placeholders comerciales editables: reemplazar por datos reales antes de publicar o dejarlos explicitamente como a confirmar."
     }
   }
 ]

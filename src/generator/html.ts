@@ -3,7 +3,7 @@ import type { Business } from "../content/business-schema.js";
 import { parseOpeningHours, summarizeOpeningHours } from "../content/hours.js";
 import { buildBusinessProfile } from "../content/local-copy.js";
 import type { ResolvedDesign } from "../design/palette.js";
-import type { CreativeSpec, SiteSpec } from "../site-specs/schema.js";
+import type { CommercialSpec, CreativeSpec, SiteSpec } from "../site-specs/schema.js";
 
 const footerText = "Creado por JuaniKitro";
 
@@ -15,6 +15,7 @@ type PageContext = {
   business: Business;
   profile: BusinessProfile;
   pageSpec: SiteSpec;
+  commercial: CommercialSpec;
   creative: CreativeSpec;
   heroSrc: string;
   area: string;
@@ -27,6 +28,9 @@ type NavLink = {
   href: string;
   label: string;
 };
+
+type CommercialCard = CommercialSpec["service_cards"][number];
+type CommercialPackage = CommercialSpec["packages"][number];
 
 export function escapeHtml(value: string): string {
   return value
@@ -164,6 +168,141 @@ function creativeFallback(profile: BusinessProfile, business: Business, pageSpec
       },
     ],
   };
+}
+
+function commercialFallback(profile: BusinessProfile): CommercialSpec {
+  return {
+    tone: profile.tone,
+    customer_type: profile.customerType,
+    hero_claim: profile.heroClaim,
+    trust_bar: profile.trustBar,
+    service_cards: profile.serviceCards,
+    why_choose: profile.whyChoose,
+    packages: profile.packages,
+    gallery: profile.gallery,
+    process: profile.process,
+    final_cta: profile.finalCta,
+    editable_note:
+      "Los items marcados como demo son placeholders comerciales editables: reemplazar por datos reales antes de publicar o dejarlos explicitamente como a confirmar.",
+  };
+}
+
+function renderDemoFlag(isDemo?: boolean): string {
+  return isDemo ? `<span class="demo-flag">Editable</span>` : "";
+}
+
+function renderCommercialCard(card: CommercialCard, className = "commercial-card"): string {
+  return `<article class="${className}${card.is_demo ? " is-demo" : ""}">
+    <div>
+      ${card.label ? `<span>${escapeHtml(card.label)}</span>` : ""}
+      ${renderDemoFlag(card.is_demo)}
+    </div>
+    <h3>${escapeHtml(card.title)}</h3>
+    <p>${escapeHtml(card.body)}</p>
+    ${card.meta ? `<strong>${escapeHtml(card.meta)}</strong>` : ""}
+  </article>`;
+}
+
+function renderCommercialPackage(item: CommercialPackage): string {
+  return `<article class="commercial-package${item.is_demo ? " is-demo" : ""}">
+    <div class="package-top">
+      <span>${renderDemoFlag(item.is_demo) || "Servicio"}</span>
+      <strong>${escapeHtml(item.price_label)}</strong>
+    </div>
+    <h3>${escapeHtml(item.name)}</h3>
+    <p>${escapeHtml(item.body)}</p>
+    <ul>
+      ${item.items.map((entry) => `<li>${escapeHtml(entry)}</li>`).join("\n")}
+    </ul>
+  </article>`;
+}
+
+function renderCommercialTrust(ctx: PageContext): string {
+  return `<section class="commercial-trust" aria-label="Datos de confianza">
+    ${ctx.commercial.trust_bar.map((item) => renderCommercialCard(item, "trust-card")).join("\n")}
+  </section>`;
+}
+
+function renderCommercialSections(ctx: PageContext): string {
+  const c = ctx.commercial;
+  return `
+    ${renderCommercialTrust(ctx)}
+
+    <section id="servicios" class="commercial-section commercial-services commercial-tone-${escapeHtml(c.tone)}">
+      <div class="commercial-heading">
+        <p class="section-label">Servicios</p>
+        <h2>${escapeHtml(c.hero_claim)}</h2>
+        <p>${escapeHtml(c.customer_type)}</p>
+      </div>
+      <div class="commercial-grid">
+        ${c.service_cards.map((item) => renderCommercialCard(item)).join("\n")}
+      </div>
+    </section>
+
+    <section class="commercial-section commercial-why">
+      <div class="commercial-heading">
+        <p class="section-label">Por que elegir</p>
+        <h2>Argumentos concretos para reservar o consultar</h2>
+      </div>
+      <div class="commercial-grid compact">
+        ${c.why_choose.map((item) => renderCommercialCard(item)).join("\n")}
+      </div>
+    </section>
+
+    <section id="combos" class="commercial-section commercial-packages">
+      <div class="commercial-heading">
+        <p class="section-label">Combos demo</p>
+        <h2>Paquetes editables para vender mejor sin inventar precios</h2>
+        <p>${escapeHtml(c.editable_note ?? "Los precios y alcances marcados como editables deben confirmarse antes de publicar.")}</p>
+      </div>
+      <div class="package-grid">
+        ${c.packages.map((item) => renderCommercialPackage(item)).join("\n")}
+      </div>
+    </section>
+
+    <section class="commercial-section commercial-gallery">
+      <div class="commercial-heading">
+        <p class="section-label">Antes / despues</p>
+        <h2>Espacios visuales listos para fotos reales</h2>
+      </div>
+      <div class="gallery-grid">
+        ${c.gallery.map((item) => renderCommercialCard(item, "gallery-card")).join("\n")}
+      </div>
+    </section>
+
+    <section class="commercial-section commercial-process">
+      <div class="commercial-heading">
+        <p class="section-label">Proceso</p>
+        <h2>Como pasa de consulta a turno</h2>
+      </div>
+      <div class="process-rail">
+        ${c.process
+          .map(
+            (item) => `<article>
+              <span>${escapeHtml(item.step)}</span>
+              <h3>${escapeHtml(item.title)}</h3>
+              <p>${escapeHtml(item.body)}</p>
+            </article>`,
+          )
+          .join("\n")}
+      </div>
+    </section>
+
+    <section class="commercial-final-cta">
+      <div>
+        <p class="section-label">Reservar</p>
+        <h2>${escapeHtml(c.final_cta.title)}</h2>
+        <p>${escapeHtml(c.final_cta.body)}</p>
+      </div>
+      <div class="cta-row">
+        ${
+          ctx.business.phone
+            ? `<a class="button primary" href="tel:${escapeHtml(phoneHref(ctx.business.phone))}">${escapeHtml(c.final_cta.primary_label)}</a>`
+            : `<a class="button primary" href="#ubicacion">${escapeHtml(c.final_cta.primary_label)}</a>`
+        }
+        <a class="button secondary" href="#ubicacion">${escapeHtml(c.final_cta.secondary_label)}</a>
+      </div>
+    </section>`;
 }
 
 function renderHours(raw: string | null): string {
@@ -327,6 +466,7 @@ function renderStudioDetail(ctx: PageContext): string {
 
       ${process ? `<section class="studio-process">${renderCreativeBlock(process)}</section>` : ""}
       ${remaining.length > 0 ? `<section class="studio-extra">${remaining.map((block) => renderCreativeBlock(block)).join("\n")}</section>` : ""}
+      ${renderCommercialSections(ctx)}
       ${renderReviewsSection(ctx, "studio-reviews", "Referencias de terminacion")}
       ${renderContactSection(ctx, "location studio-contact")}
     `,
@@ -376,6 +516,7 @@ function renderWashFlow(ctx: PageContext): string {
 
       ${service ? `<section class="wash-service">${renderCreativeBlock(service)}</section>` : ""}
       ${remaining.length > 0 ? `<section class="wash-extra">${remaining.map((block) => renderCreativeBlock(block)).join("\n")}</section>` : ""}
+      ${renderCommercialSections(ctx)}
       <section class="wash-lower">
         ${renderHoursSection(ctx, "hours-block wash-hours", "Horario para pasar o consultar")}
         ${renderReviewsSection(ctx, "review-list wash-reviews", "Lo que dicen del paso por el lavadero")}
@@ -424,6 +565,7 @@ function renderOilBay(ctx: PageContext): string {
 
       ${metric ? `<section class="oil-metric-strip">${renderCreativeBlock(metric)}</section>` : ""}
       ${remaining.length > 0 ? `<section class="oil-extra">${remaining.map((block) => renderCreativeBlock(block)).join("\n")}</section>` : ""}
+      ${renderCommercialSections(ctx)}
       <section class="oil-bottom">
         ${renderHoursSection(ctx, "hours-block oil-hours", "Ventana para coordinar mantenimiento")}
         ${renderContactSection(ctx, "location oil-contact", `Datos publicos para consultar mantenimiento en ${ctx.area} sin perder el telefono ni la direccion.`)}
@@ -476,6 +618,7 @@ function renderRoadsideRescue(ctx: PageContext): string {
 
       ${quote ? `<section class="rescue-quote">${renderCreativeBlock(quote)}</section>` : ""}
       ${remaining.length > 0 ? `<section class="rescue-extra">${remaining.map((block) => renderCreativeBlock(block)).join("\n")}</section>` : ""}
+      ${renderCommercialSections(ctx)}
       <section class="rescue-strip">
         ${renderFactTiles(ctx, "facts rescue-facts")}
         ${renderProofPoints(ctx, "rescue-proof")}
@@ -525,6 +668,7 @@ function renderBodyshopCraft(ctx: PageContext): string {
 
       ${quote ? `<section class="bodyshop-quote">${renderCreativeBlock(quote)}</section>` : ""}
       ${remaining.length > 0 ? `<section class="bodyshop-extra">${remaining.map((block) => renderCreativeBlock(block)).join("\n")}</section>` : ""}
+      ${renderCommercialSections(ctx)}
       <section class="bodyshop-lower">
         ${renderReviewsSection(ctx, "review-list bodyshop-reviews", "Lo que importa antes de dejar el auto")}
         ${renderHoursSection(ctx, "hours-block bodyshop-hours", "Horario de consulta")}
@@ -576,6 +720,7 @@ function renderPartsCounter(ctx: PageContext): string {
       </section>
 
       ${remaining.length > 0 ? `<section class="parts-extra">${remaining.map((block) => renderCreativeBlock(block)).join("\n")}</section>` : ""}
+      ${renderCommercialSections(ctx)}
       <section class="parts-bottom">
         ${renderContactSection(ctx, "location parts-contact", `Para consultar repuestos en ${ctx.area}, conviene llamar con el dato del vehiculo y confirmar disponibilidad.`)}
         ${renderHoursSection(ctx, "hours-block parts-hours", "Horario de mostrador")}
@@ -624,6 +769,7 @@ function renderMechanicLedger(ctx: PageContext): string {
       </section>
 
       ${remaining.length > 0 ? `<section class="ledger-extra">${remaining.map((block) => renderCreativeBlock(block)).join("\n")}</section>` : ""}
+      ${renderCommercialSections(ctx)}
       ${renderReviewsSection(ctx, "review-list ledger-reviews", "Notas de clientes")}
       <section class="ledger-bottom">
         ${renderHoursSection(ctx, "hours-block ledger-hours", "Horario para consultar turno")}
@@ -671,15 +817,18 @@ export function renderBusinessPage(business: Business, archetype: Archetype, des
     contact_heading: "Llegar o llamar sin vueltas",
     image_prompt: "",
     design_notes: "",
+    commercial: commercialFallback(profile),
   };
   const area = business.neighborhood_or_area ? `${business.neighborhood_or_area}, Tandil` : "Tandil";
   const hours = summarizeOpeningHours(business.opening_hours.raw);
   const rating = `${business.rating.value.toFixed(1)} sobre 5 · ${business.rating.reviews_count} reseñas`;
+  const commercial = pageSpec.commercial ?? commercialFallback(profile);
   const creative = pageSpec.creative ?? creativeFallback(profile, business, pageSpec, hours);
   const bodyClass = [
     `layout-${archetype.layout}`,
     `mood-${pageSpec.visual_mood}`,
     `composition-${pageSpec.composition}`,
+    `commercial-${commercial.tone}`,
     "has-creative",
     `creative-${creative.layout}`,
     `texture-${creative.texture}`,
@@ -691,6 +840,7 @@ export function renderBusinessPage(business: Business, archetype: Archetype, des
     business,
     profile,
     pageSpec,
+    commercial,
     creative,
     heroSrc,
     area,

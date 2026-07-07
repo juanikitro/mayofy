@@ -9,7 +9,7 @@ Genera 10 landings para negocios reales de venta de ropa en Chivilcoy, Argentina
 Hace desde la busqueda hasta los sitios generados.
 Usa datos verificados, evita cadenas/franquicias y negocios con web propia.
 No uses OpenAI API; usa esta sesion de agente para la composicion.
-Prioriza calidad visual sobre velocidad/costo. Podes usar framework o librerias si mejora la UI final.
+Prioriza calidad visual sobre velocidad/costo. Podes usar framework o librerias de frontend, animaciones e iconos con bastante libertad si mejora la UI final, incluyendo Aceternity UI (https://ui.aceternity.com/components), shadcn/ui (https://ui.shadcn.com/docs/components), Magic UI (https://magicui.design/), Framer Motion, GSAP, Motion One, lucide-react o React Icons.
 ```
 
 ## Flujo que debe ejecutar el agente
@@ -57,7 +57,7 @@ El agente debe leer `data/agent-briefs/chivilcoy-ropa/`, disenar cada landing y 
 data/frontends/chivilcoy-ropa/<slug>/
 ```
 
-Puede escribir HTML/CSS directo o usar framework/librerias. Si usa framework, debe ejecutar el build/export y dejar un output estatico.
+Puede escribir HTML/CSS directo o usar framework/librerias. Tiene permiso amplio para incorporar librerias de UI/frontend, animacion e iconos cuando eleven el producto final, incluyendo Aceternity UI (https://ui.aceternity.com/components), shadcn/ui (https://ui.shadcn.com/docs/components), Magic UI (https://magicui.design/), Framer Motion, GSAP, Motion One, lucide-react o React Icons. Si usa framework, debe ejecutar el build/export y dejar un output estatico.
 
 Luego debe reescribir:
 
@@ -86,7 +86,7 @@ O, si usa framework:
     "source_dir": "data/frontends/chivilcoy-ropa/nombre-del-negocio",
     "output_dir": "data/frontends/chivilcoy-ropa/nombre-del-negocio/dist",
     "build_command": "npm run build",
-    "libraries": ["vite", "gsap"],
+    "libraries": ["vite", "shadcn/ui", "magicui", "framer-motion", "lucide-react"],
     "notes": "Landing con layout editorial y motion suave para vidriera."
   }
 }
@@ -118,7 +118,7 @@ tsx src/validators/validate-generated-sites.ts generated/chivilcoy-ropa
 - Revisar el shortlist report antes de promover si el rubro trae falsos positivos.
 - Editar los `site-specs` usando criterio visual y copy natural.
 - Crear frontends authored por negocio; el renderer interno solo sirve como fallback de preview.
-- Usar framework o librerias cuando aporten calidad real.
+- Usar framework o librerias cuando aporten calidad real; puede apoyarse con bastante libertad en librerias de UI, animaciones e iconos como Aceternity UI, shadcn/ui, Magic UI, Framer Motion, GSAP, Motion One, lucide-react o React Icons si eso mejora la landing final.
 - Ejecutar build/export si se usa framework y apuntar `agent_frontend.output_dir` al resultado.
 - No inventar marcas, stock, precios, descuentos, talles ni envios.
 - Reportar si el rubro o ciudad no tiene datos suficientes.

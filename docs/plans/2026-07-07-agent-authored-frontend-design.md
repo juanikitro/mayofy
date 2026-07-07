@@ -2,7 +2,7 @@
 
 ## Decision
 
-The final pipeline should prefer quality over speed or cheap generation. The agent is no longer limited to filling a `SiteSpec` for a fixed renderer. For each business, the agent may author the real frontend directly with HTML/CSS or use a framework/library when that materially improves the UI.
+The final pipeline should prefer quality over speed or cheap generation. The agent is no longer limited to filling a `SiteSpec` for a fixed renderer. For each business, the agent may author the real frontend directly with HTML/CSS or use a framework/library when that materially improves the UI, including Aceternity UI (https://ui.aceternity.com/components), shadcn/ui (https://ui.shadcn.com/docs/components), Magic UI (https://magicui.design/), animation libraries, icon libraries, or similar frontend libraries.
 
 ## Architecture
 
@@ -18,7 +18,7 @@ The final pipeline should prefer quality over speed or cheap generation. The age
 - Data validation remains strict: no invented services, claims, prices, brands, awards, guarantees, or stock.
 - Frontend source/output paths must stay inside the repo.
 - Generated sites still need an image, the required footer, isolated business data, and valid metadata.
-- Frameworks and libraries are allowed only when they improve the final landing, not as default ceremony.
+- Frameworks and UI, animation, and icon libraries are allowed with broad discretion when they improve the final landing, not as default ceremony. Suitable examples include Aceternity UI, shadcn/ui, Magic UI, Framer Motion, GSAP, Motion One, lucide-react, React Icons, or component/motion kits adapted to the business.
 
 ## Expected workflow
 

@@ -25,6 +25,10 @@ const weakCopyPatterns = [
   /experiencia unica/iu,
   /servicio de excelencia/iu,
   /mejor opcion/iu,
+  /profesionales altamente capacitados/iu,
+  /atencion personalizada de calidad/iu,
+  /tu mejor aliado/iu,
+  /compromiso con la excelencia/iu,
 ];
 
 function isInsideRoot(root: string, target: string): boolean {
@@ -61,6 +65,24 @@ function parseArgs(argv: string[]): Args {
 }
 
 function visibleSpecText(spec: SiteSpec): string {
+  const commercial = spec.commercial
+    ? [
+        spec.commercial.customer_type,
+        spec.commercial.hero_claim,
+        spec.commercial.editable_note ?? "",
+        ...spec.commercial.trust_bar.flatMap((item) => [item.label ?? "", item.title, item.body, item.meta ?? ""]),
+        ...spec.commercial.service_cards.flatMap((item) => [item.label ?? "", item.title, item.body, item.meta ?? ""]),
+        ...spec.commercial.why_choose.flatMap((item) => [item.label ?? "", item.title, item.body, item.meta ?? ""]),
+        ...spec.commercial.packages.flatMap((item) => [item.name, item.price_label, item.body, ...item.items]),
+        ...spec.commercial.gallery.flatMap((item) => [item.label ?? "", item.title, item.body, item.meta ?? ""]),
+        ...spec.commercial.process.flatMap((item) => [item.step, item.title, item.body]),
+        spec.commercial.final_cta.title,
+        spec.commercial.final_cta.body,
+        spec.commercial.final_cta.primary_label,
+        spec.commercial.final_cta.secondary_label,
+      ]
+    : [];
+
   const creative = spec.creative
     ? [
         spec.creative.concept,
@@ -89,6 +111,7 @@ function visibleSpecText(spec: SiteSpec): string {
     ...spec.resource_items,
     spec.review_heading,
     spec.contact_heading,
+    ...commercial,
     ...creative,
   ].join("\n");
 }

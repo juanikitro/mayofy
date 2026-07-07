@@ -9,10 +9,11 @@ Use these briefs from a Codex/Claude session to rewrite the configured site spec
 Recommended flow:
 
 ```powershell
-npm run agent:briefs
+npm run agent:briefs:tandil
 # Agent edits data/site-specs/tandil-site-specs.json
-npm run validate:specs
+npm run validate:specs:tandil
 npm run generate:preview
+npm run generate
 npm run qa
 ```
 
