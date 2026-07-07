@@ -23,6 +23,8 @@
     "generate:preview": "tsx src/generator/generate-sites.ts data/tandil-businesses.json --specs data/site-specs/tandil-site-specs.json",
     "generate:mock": "tsx src/generator/generate-sites.ts data/fixtures/mock-businesses.json --out generated/mock --allow-mock",
     "qa": "tsx src/validators/validate-generated-sites.ts generated --require-agent-frontends",
+    "qa:client": "tsx src/validators/validate-client-readiness.ts generated --report output/client-readiness-report.md --min-score 85",
+    "study:final": "tsx src/delivery/create-final-study.ts generated --businesses data/tandil-businesses.json --specs data/site-specs/tandil-site-specs.json --briefs data/agent-briefs/tandil --out output/final-study.md",
     "qa:mock": "tsx src/validators/validate-generated-sites.ts generated/mock --allow-mock",
     "import:businesses": "tsx scripts/import-businesses.ts",
     "deploy:plan": "tsx src/deploy/plan-vercel-deploys.ts",

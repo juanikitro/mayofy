@@ -49,9 +49,15 @@ npm run validate:specs:tandil
 npm run generate:preview
 npm run generate
 npm run qa
+npm run qa:client
+npm run study:final -- --price "[PRECIO]"
 ```
 
 `compose:ai` queda como opcion secundaria para quien quiera usar billing de OpenAI API. `npm run generate` exige fotos reales descargadas desde Google Places y frontends escritos por agente. Para revisar datos/UI sin bloquear por fotos o frontends finales, usar `npm run generate:preview`.
+
+`npm run qa` valida integridad tecnica. `npm run qa:client` es el gate de entrega: falla si la tanda todavia parece demo interna, template repetido, copy con placeholders visibles o landing no vendible.
+
+`npm run study:final -- --price "[PRECIO]"` escribe `output/final-study.md` y `output/final-study.json` con las landings, el contacto recomendado, lead score, mini auditoria comercial, paquete de mensajes/follow-ups/objeciones y propuesta lista para enviar por negocio. El precio no se inventa: pasalo por `--price` o quedara como placeholder.
 
 ## Busqueda automatica de candidatos
 
@@ -88,6 +94,8 @@ npm run qa
 8. Validar que no haya datos inventados ni negocios con sitio propio.
 9. Generar un sitio separado por negocio en `generated/<slug>/`.
 10. Ejecutar QA de contenido, datos y frontends authored.
-11. Crear plan de deploy para 10 URLs separadas.
+11. Ejecutar `npm run qa:client` y revisar screenshots desktop/mobile.
+12. Generar el estudio final con `npm run study:final -- --price "[PRECIO]"`.
+13. Crear plan de deploy para 10 URLs separadas.
 
-Ver detalles en `docs/PIPELINE.md`, `docs/DATA_RULES.md` y `docs/DEPLOYMENT.md`.
+Ver detalles en `docs/PIPELINE.md`, `docs/DATA_RULES.md`, `docs/CLIENT_READINESS_QA.md` y `docs/DEPLOYMENT.md`.

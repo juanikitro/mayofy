@@ -1,0 +1,975 @@
+{
+  "generated_at": "2026-07-07T21:51:58.125Z",
+  "executive_summary": {
+    "total_landings": 10,
+    "suggested_price": "[PRECIO]",
+    "top_3_to_contact_first": [
+      {
+        "slug": "gomeria-y-auxilio-24-horas-landeyro",
+        "business_name": "Gomería y auxilio 24 horas Landeyro",
+        "priority": 10,
+        "reason": "Rating fuerte: 4.8 sobre 5."
+      },
+      {
+        "slug": "iturralde-repuestos",
+        "business_name": "Iturralde - Repuestos",
+        "priority": 10,
+        "reason": "Buen rating publico: 4.6 sobre 5."
+      },
+      {
+        "slug": "gomeria-el-viejo-matias-auxilio-24-hs",
+        "business_name": "Gomería El Viejo Matias - Auxilio 24 hs",
+        "priority": 10,
+        "reason": "Buen rating publico: 4.7 sobre 5."
+      }
+    ],
+    "strongest_contact_channels": [
+      {
+        "slug": "gomeria-y-auxilio-24-horas-landeyro",
+        "business_name": "Gomería y auxilio 24 horas Landeyro",
+        "contact": "Telefono: 0249 463-9850",
+        "confidence": "high"
+      },
+      {
+        "slug": "iturralde-repuestos",
+        "business_name": "Iturralde - Repuestos",
+        "contact": "Telefono: 0249 401-7903",
+        "confidence": "high"
+      },
+      {
+        "slug": "gomeria-el-viejo-matias-auxilio-24-hs",
+        "business_name": "Gomería El Viejo Matias - Auxilio 24 hs",
+        "contact": "Telefono: 0249 424-3685",
+        "confidence": "high"
+      },
+      {
+        "slug": "taller-di-sipio-chapa-y-pintura",
+        "business_name": "\"Taller Di Sipio\" Chapa Y Pintura",
+        "contact": "Telefono: 0249 460-4088",
+        "confidence": "high"
+      },
+      {
+        "slug": "mecanica-maz",
+        "business_name": "Mecanica Maz",
+        "contact": "Telefono: 0249 464-3419",
+        "confidence": "high"
+      }
+    ],
+    "best_commercial_opportunities": [
+      {
+        "slug": "gomeria-y-auxilio-24-horas-landeyro",
+        "business_name": "Gomería y auxilio 24 horas Landeyro",
+        "opportunity": "high",
+        "reason": "Rating fuerte: 4.8 sobre 5."
+      },
+      {
+        "slug": "iturralde-repuestos",
+        "business_name": "Iturralde - Repuestos",
+        "opportunity": "high",
+        "reason": "Buen rating publico: 4.6 sobre 5."
+      },
+      {
+        "slug": "gomeria-el-viejo-matias-auxilio-24-hs",
+        "business_name": "Gomería El Viejo Matias - Auxilio 24 hs",
+        "opportunity": "high",
+        "reason": "Buen rating publico: 4.7 sobre 5."
+      },
+      {
+        "slug": "taller-di-sipio-chapa-y-pintura",
+        "business_name": "\"Taller Di Sipio\" Chapa Y Pintura",
+        "opportunity": "high",
+        "reason": "Rating fuerte: 4.9 sobre 5."
+      },
+      {
+        "slug": "mecanica-maz",
+        "business_name": "Mecanica Maz",
+        "opportunity": "high",
+        "reason": "Rating fuerte: 4.9 sobre 5."
+      }
+    ],
+    "needs_contact_validation": [
+      {
+        "slug": "luxe-detailing",
+        "business_name": "Luxe Detailing",
+        "contact": "WhatsApp probable: 0249 420-6233",
+        "risk": "Pocas reseñas para sostener prueba social: 13."
+      },
+      {
+        "slug": "boxes-centro-de-autolavado",
+        "business_name": "Boxes Centro de Autolavado",
+        "contact": "WhatsApp probable: 0297 15-539-0936",
+        "risk": "WhatsApp no verificado; conviene validar canal antes de escribir como si fuera oficial."
+      },
+      {
+        "slug": "taller-franco-chapa-y-pintura",
+        "business_name": "Taller Franco Chapa y Pintura",
+        "contact": "WhatsApp probable: 0249 454-4214",
+        "risk": "WhatsApp no verificado; conviene validar canal antes de escribir como si fuera oficial."
+      }
+    ],
+    "contact_breakdown": {
+      "instagram": 0,
+      "whatsapp": 0,
+      "whatsapp_probable": 3,
+      "phone": 7,
+      "missing": 0
+    }
+  },
+  "entries": [
+    {
+      "slug": "luxe-detailing",
+      "business_name": "Luxe Detailing",
+      "landing_url": "generated/luxe-detailing/index.html",
+      "landing_path": "generated/luxe-detailing/index.html",
+      "service": "car detailing",
+      "rating": "4.9 (13)",
+      "preferred_contact": {
+        "medium": "whatsapp_probable",
+        "label": "WhatsApp probable",
+        "value": "0249 420-6233",
+        "confidence": "medium",
+        "reason": "El material disponible menciona WhatsApp, pero no hay link verificado; se usa el telefono publicado."
+      },
+      "lead_score": {
+        "priority": 9,
+        "contact_probability": "medium",
+        "opportunity": "high",
+        "reasons": [
+          "No tiene sitio propio registrado en los datos disponibles.",
+          "Rating fuerte: 4.9 sobre 5.",
+          "Rubro visual: una landing con fotos y CTA puede mostrar valor rapido."
+        ],
+        "risks": [
+          "Pocas reseñas para sostener prueba social: 13.",
+          "WhatsApp no verificado; conviene validar canal antes de escribir como si fuera oficial."
+        ]
+      },
+      "commercial_audit": {
+        "problem_solved": "Convierte una consulta visual de cuidado del auto en una pagina con fotos, reseñas y CTA claro para coordinar.",
+        "public_signals_used": [
+          "Rating 4.9 con 13 reseñas.",
+          "Direccion publicada: Los Aromos 678, B7000 Tandil, Provincia de Buenos Aires, Argentina.",
+          "Telefono publicado: 0249 420-6233.",
+          "Horario publicado disponible para orientar la consulta.",
+          "Reseña usada como señal: \"Excelente, trabajo prolijo y bien ejecutado. Totalmente recomendado\"",
+          "Reseña usada como señal: \"Exelente servicio y muy buena atención!\""
+        ],
+        "owner_data_to_request": [
+          "Confirmar si el telefono publicado tambien recibe WhatsApp.",
+          "WhatsApp confirmado y nombre de quien responde consultas.",
+          "Logo o marca actual si existe.",
+          "Fotos propias autorizadas para publicar.",
+          "Lista real de servicios y limites de lo que no quieren prometer.",
+          "Horario final, zona de atencion y direccion revisada.",
+          "Dominio deseado o nombre corto para publicar.",
+          "Fotos antes/despues o trabajos terminados para reemplazar imagenes genericas."
+        ],
+        "suggested_improvements": [
+          "Boton de WhatsApp real con mensaje prearmado.",
+          "Dominio propio o URL corta para compartir.",
+          "SEO local basico: rubro, ciudad, direccion y datos estructurados.",
+          "Medicion basica de consultas con Analytics o eventos de click.",
+          "Galeria real con fotos del local, trabajos o productos.",
+          "Revision final de copy con el dueño para confirmar servicios y tono."
+        ],
+        "offer_angle": "La muestra ya ordena la informacion publica; la venta es dejarla lista para publicar con datos propios, canal confirmado y medicion de consultas por Luxe Detailing."
+      },
+      "outreach": {
+        "whatsapp_short": "Hola, como va? Soy Juan. Prepare una muestra de landing para Luxe Detailing con la informacion publica disponible: rubro, reseñas, direccion, horario y contacto. No es una plantilla generica; esta pensada para que alguien consulte mas rapido. Si te sirve, por [PRECIO] la dejo lista para publicar con boton de WhatsApp real con mensaje prearmado, dominio propio o URL corta para compartir, SEO local basico: rubro, ciudad, direccion y datos estructurados. Te paso el link? generated/luxe-detailing/index.html",
+        "formal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Luxe Detailing: generated/luxe-detailing/index.html\n\nLa pense para que una persona vea rapido el rubro (car detailing), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe lo mando por este medio porque es el canal mas practico para verlo rapido desde el telefono.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?",
+        "follow_up_24h": "Hola, te escribo de nuevo por la muestra de Luxe Detailing. La idea no es venderte algo abstracto: ya hay una landing armada para revisar. Si queres, te mando el link y me decis si tiene sentido ajustarla con fotos y WhatsApp real.",
+        "follow_up_48h": "Cierro por aca para no insistir. Si en algun momento quieren una pagina simple para convertir consultas de car detailing, ya deje una base hecha y se puede publicar rapido por [PRECIO].",
+        "direct_close": "Si te gusta la muestra, el siguiente paso es simple: me confirmas WhatsApp, fotos, servicios reales y dominio/nombre. Con eso la dejo lista para publicar por [PRECIO].",
+        "objection_replies": [
+          {
+            "objection": "Ya tengo Instagram",
+            "reply": "Perfecto. La landing no reemplaza Instagram: sirve para mandar a una persona interesada a un lugar con servicios, reseñas, ubicacion y boton de consulta sin que tenga que revisar publicaciones."
+          },
+          {
+            "objection": "No necesito web",
+            "reply": "Puede ser. La idea no es una web grande, sino una pagina corta para convertir mejor a quien ya te busca o te pide informacion por mensaje."
+          },
+          {
+            "objection": "Cuanto sale",
+            "reply": "La version lista para publicar queda en [PRECIO]. Incluye ajustes de texto, fotos, boton de contacto, dominio/hosting basico si hace falta y revision final con ustedes."
+          },
+          {
+            "objection": "Lo veo despues",
+            "reply": "Dale. Te dejo el link para que lo veas cuando puedas; si te cierra, lo ajustamos con tus fotos y datos reales antes de publicarlo."
+          }
+        ]
+      },
+      "proposal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Luxe Detailing: generated/luxe-detailing/index.html\n\nLa pense para que una persona vea rapido el rubro (car detailing), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe lo mando por este medio porque es el canal mas practico para verlo rapido desde el telefono.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?"
+    },
+    {
+      "slug": "boxes-centro-de-autolavado",
+      "business_name": "Boxes Centro de Autolavado",
+      "landing_url": "generated/boxes-centro-de-autolavado/index.html",
+      "landing_path": "generated/boxes-centro-de-autolavado/index.html",
+      "service": "lavadero de autos",
+      "rating": "4.4 (353)",
+      "preferred_contact": {
+        "medium": "whatsapp_probable",
+        "label": "WhatsApp probable",
+        "value": "0297 15-539-0936",
+        "confidence": "medium",
+        "reason": "El numero publicado parece celular argentino, pero no hay link de WhatsApp verificado."
+      },
+      "lead_score": {
+        "priority": 9,
+        "contact_probability": "medium",
+        "opportunity": "high",
+        "reasons": [
+          "No tiene sitio propio registrado en los datos disponibles.",
+          "Volumen alto de reseñas: 353.",
+          "Rubro visual: una landing con fotos y CTA puede mostrar valor rapido."
+        ],
+        "risks": [
+          "WhatsApp no verificado; conviene validar canal antes de escribir como si fuera oficial."
+        ]
+      },
+      "commercial_audit": {
+        "problem_solved": "Reduce friccion para quien quiere lavar el auto: horario, ubicacion, reseñas y llamado quedan en un solo lugar.",
+        "public_signals_used": [
+          "Rating 4.4 con 353 reseñas.",
+          "Direccion publicada: Av. Buzón 632, B7000 Tandil, Provincia de Buenos Aires, Argentina.",
+          "Telefono publicado: 0297 15-539-0936.",
+          "Horario publicado disponible para orientar la consulta.",
+          "Reseña usada como señal: \"Affordable and quick way to keep your car clean\"",
+          "Reseña usada como señal: \"Muy buena atención de las chicas. Llevando tus propios productos de limpieza es una excelente opción 3000 la ficha al 6/...\""
+        ],
+        "owner_data_to_request": [
+          "Confirmar si el telefono publicado tambien recibe WhatsApp.",
+          "WhatsApp confirmado y nombre de quien responde consultas.",
+          "Logo o marca actual si existe.",
+          "Fotos propias autorizadas para publicar.",
+          "Lista real de servicios y limites de lo que no quieren prometer.",
+          "Horario final, zona de atencion y direccion revisada.",
+          "Dominio deseado o nombre corto para publicar.",
+          "Fotos antes/despues o trabajos terminados para reemplazar imagenes genericas."
+        ],
+        "suggested_improvements": [
+          "Boton de WhatsApp real con mensaje prearmado.",
+          "Dominio propio o URL corta para compartir.",
+          "SEO local basico: rubro, ciudad, direccion y datos estructurados.",
+          "Medicion basica de consultas con Analytics o eventos de click.",
+          "Galeria real con fotos del local, trabajos o productos.",
+          "Revision final de copy con el dueño para confirmar servicios y tono."
+        ],
+        "offer_angle": "La muestra ya ordena la informacion publica; la venta es dejarla lista para publicar con datos propios, canal confirmado y medicion de consultas por Boxes Centro de Autolavado."
+      },
+      "outreach": {
+        "whatsapp_short": "Hola, como va? Soy Juan. Prepare una muestra de landing para Boxes Centro de Autolavado con la informacion publica disponible: rubro, reseñas, direccion, horario y contacto. No es una plantilla generica; esta pensada para que alguien consulte mas rapido. Si te sirve, por [PRECIO] la dejo lista para publicar con boton de WhatsApp real con mensaje prearmado, dominio propio o URL corta para compartir, SEO local basico: rubro, ciudad, direccion y datos estructurados. Te paso el link? generated/boxes-centro-de-autolavado/index.html",
+        "formal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Boxes Centro de Autolavado: generated/boxes-centro-de-autolavado/index.html\n\nLa pense para que una persona vea rapido el rubro (lavadero de autos), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe lo mando por este medio porque es el canal mas practico para verlo rapido desde el telefono.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?",
+        "follow_up_24h": "Hola, te escribo de nuevo por la muestra de Boxes Centro de Autolavado. La idea no es venderte algo abstracto: ya hay una landing armada para revisar. Si queres, te mando el link y me decis si tiene sentido ajustarla con fotos y WhatsApp real.",
+        "follow_up_48h": "Cierro por aca para no insistir. Si en algun momento quieren una pagina simple para convertir consultas de lavadero de autos, ya deje una base hecha y se puede publicar rapido por [PRECIO].",
+        "direct_close": "Si te gusta la muestra, el siguiente paso es simple: me confirmas WhatsApp, fotos, servicios reales y dominio/nombre. Con eso la dejo lista para publicar por [PRECIO].",
+        "objection_replies": [
+          {
+            "objection": "Ya tengo Instagram",
+            "reply": "Perfecto. La landing no reemplaza Instagram: sirve para mandar a una persona interesada a un lugar con servicios, reseñas, ubicacion y boton de consulta sin que tenga que revisar publicaciones."
+          },
+          {
+            "objection": "No necesito web",
+            "reply": "Puede ser. La idea no es una web grande, sino una pagina corta para convertir mejor a quien ya te busca o te pide informacion por mensaje."
+          },
+          {
+            "objection": "Cuanto sale",
+            "reply": "La version lista para publicar queda en [PRECIO]. Incluye ajustes de texto, fotos, boton de contacto, dominio/hosting basico si hace falta y revision final con ustedes."
+          },
+          {
+            "objection": "Lo veo despues",
+            "reply": "Dale. Te dejo el link para que lo veas cuando puedas; si te cierra, lo ajustamos con tus fotos y datos reales antes de publicarlo."
+          }
+        ]
+      },
+      "proposal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Boxes Centro de Autolavado: generated/boxes-centro-de-autolavado/index.html\n\nLa pense para que una persona vea rapido el rubro (lavadero de autos), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe lo mando por este medio porque es el canal mas practico para verlo rapido desde el telefono.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?"
+    },
+    {
+      "slug": "lubricentro-y-gomeria-boxes",
+      "business_name": "Lubricentro y Gomeria BOXES",
+      "landing_url": "generated/lubricentro-y-gomeria-boxes/index.html",
+      "landing_path": "generated/lubricentro-y-gomeria-boxes/index.html",
+      "service": "lubricentro",
+      "rating": "4.7 (44)",
+      "preferred_contact": {
+        "medium": "phone",
+        "label": "Telefono",
+        "value": "0249 443-7843",
+        "confidence": "high",
+        "reason": "No hay red social ni WhatsApp verificado; el telefono publicado es el contacto mas seguro."
+      },
+      "lead_score": {
+        "priority": 9,
+        "contact_probability": "medium",
+        "opportunity": "high",
+        "reasons": [
+          "No tiene sitio propio registrado en los datos disponibles.",
+          "Buen rating publico: 4.7 sobre 5.",
+          "Volumen util de reseñas: 44.",
+          "Contacto directo confiable: Telefono."
+        ],
+        "risks": [
+          "Sin Instagram ni WhatsApp verificado; el primer contacto puede sentirse mas frio."
+        ]
+      },
+      "commercial_audit": {
+        "problem_solved": "Hace mas concreta la primera consulta: sintoma, horario, direccion, reseñas y forma de coordinar revision.",
+        "public_signals_used": [
+          "Rating 4.7 con 44 reseñas.",
+          "Direccion publicada: Ameghino 898, B7000 Tandil, Provincia de Buenos Aires, Argentina.",
+          "Telefono publicado: 0249 443-7843.",
+          "Horario publicado disponible para orientar la consulta.",
+          "Reseña usada como señal: \"Espetacular la atención recomendable cien por ciento.\"",
+          "Reseña usada como señal: \"Excelente atención siempre con toda la onda!\""
+        ],
+        "owner_data_to_request": [
+          "Confirmar si el telefono publicado tambien recibe WhatsApp.",
+          "WhatsApp confirmado y nombre de quien responde consultas.",
+          "Logo o marca actual si existe.",
+          "Fotos propias autorizadas para publicar.",
+          "Lista real de servicios y limites de lo que no quieren prometer.",
+          "Horario final, zona de atencion y direccion revisada.",
+          "Dominio deseado o nombre corto para publicar.",
+          "Tipos de trabajo que quieren captar y casos que prefieren derivar."
+        ],
+        "suggested_improvements": [
+          "Boton de WhatsApp real con mensaje prearmado.",
+          "Dominio propio o URL corta para compartir.",
+          "SEO local basico: rubro, ciudad, direccion y datos estructurados.",
+          "Medicion basica de consultas con Analytics o eventos de click.",
+          "Galeria real con fotos del local, trabajos o productos.",
+          "Revision final de copy con el dueño para confirmar servicios y tono."
+        ],
+        "offer_angle": "La muestra ya ordena la informacion publica; la venta es dejarla lista para publicar con datos propios, canal confirmado y medicion de consultas por Lubricentro y Gomeria BOXES."
+      },
+      "outreach": {
+        "whatsapp_short": "Hola, como va? Soy Juan. Prepare una muestra de landing para Lubricentro y Gomeria BOXES con la informacion publica disponible: rubro, reseñas, direccion, horario y contacto. No es una plantilla generica; esta pensada para que alguien consulte mas rapido. Si te sirve, por [PRECIO] la dejo lista para publicar con boton de WhatsApp real con mensaje prearmado, dominio propio o URL corta para compartir, SEO local basico: rubro, ciudad, direccion y datos estructurados. Te paso el link? generated/lubricentro-y-gomeria-boxes/index.html",
+        "formal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Lubricentro y Gomeria BOXES: generated/lubricentro-y-gomeria-boxes/index.html\n\nLa pense para que una persona vea rapido el rubro (lubricentro), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?",
+        "follow_up_24h": "Hola, te escribo de nuevo por la muestra de Lubricentro y Gomeria BOXES. La idea no es venderte algo abstracto: ya hay una landing armada para revisar. Si queres, te mando el link y me decis si tiene sentido ajustarla con fotos y WhatsApp real.",
+        "follow_up_48h": "Cierro por aca para no insistir. Si en algun momento quieren una pagina simple para convertir consultas de lubricentro, ya deje una base hecha y se puede publicar rapido por [PRECIO].",
+        "direct_close": "Si te gusta la muestra, el siguiente paso es simple: me confirmas WhatsApp, fotos, servicios reales y dominio/nombre. Con eso la dejo lista para publicar por [PRECIO].",
+        "objection_replies": [
+          {
+            "objection": "Ya tengo Instagram",
+            "reply": "Perfecto. La landing no reemplaza Instagram: sirve para mandar a una persona interesada a un lugar con servicios, reseñas, ubicacion y boton de consulta sin que tenga que revisar publicaciones."
+          },
+          {
+            "objection": "No necesito web",
+            "reply": "Puede ser. La idea no es una web grande, sino una pagina corta para convertir mejor a quien ya te busca o te pide informacion por mensaje."
+          },
+          {
+            "objection": "Cuanto sale",
+            "reply": "La version lista para publicar queda en [PRECIO]. Incluye ajustes de texto, fotos, boton de contacto, dominio/hosting basico si hace falta y revision final con ustedes."
+          },
+          {
+            "objection": "Lo veo despues",
+            "reply": "Dale. Te dejo el link para que lo veas cuando puedas; si te cierra, lo ajustamos con tus fotos y datos reales antes de publicarlo."
+          }
+        ]
+      },
+      "proposal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Lubricentro y Gomeria BOXES: generated/lubricentro-y-gomeria-boxes/index.html\n\nLa pense para que una persona vea rapido el rubro (lubricentro), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?"
+    },
+    {
+      "slug": "gomeria-y-auxilio-24-horas-landeyro",
+      "business_name": "Gomería y auxilio 24 horas Landeyro",
+      "landing_url": "generated/gomeria-y-auxilio-24-horas-landeyro/index.html",
+      "landing_path": "generated/gomeria-y-auxilio-24-horas-landeyro/index.html",
+      "service": "gomeria",
+      "rating": "4.8 (176)",
+      "preferred_contact": {
+        "medium": "phone",
+        "label": "Telefono",
+        "value": "0249 463-9850",
+        "confidence": "high",
+        "reason": "No hay red social ni WhatsApp verificado; el telefono publicado es el contacto mas seguro."
+      },
+      "lead_score": {
+        "priority": 10,
+        "contact_probability": "high",
+        "opportunity": "high",
+        "reasons": [
+          "No tiene sitio propio registrado en los datos disponibles.",
+          "Rating fuerte: 4.8 sobre 5.",
+          "Volumen alto de reseñas: 176.",
+          "Rubro visual: una landing con fotos y CTA puede mostrar valor rapido.",
+          "Contacto directo confiable: Telefono."
+        ],
+        "risks": [
+          "Sin Instagram ni WhatsApp verificado; el primer contacto puede sentirse mas frio."
+        ]
+      },
+      "commercial_audit": {
+        "problem_solved": "Ayuda a quien tiene un problema de cubierta o auxilio a encontrar telefono, direccion y proximo paso sin vueltas.",
+        "public_signals_used": [
+          "Rating 4.8 con 176 reseñas.",
+          "Direccion publicada: J. M. Dhers 25, B7000 Tandil, Provincia de Buenos Aires, Argentina.",
+          "Telefono publicado: 0249 463-9850.",
+          "Horario publicado disponible para orientar la consulta.",
+          "Reseña usada como señal: \"Me atendieron muy rápido y bien. Está las 24 hs abierta. No la conocía, me la recomendaron.\nTuve que dejar el neumático ...\"",
+          "Reseña usada como señal: \"Exelente atención de parte de Darío me solución el problema de la pinchadura de la moto rápido y con eficiencia es muy p...\""
+        ],
+        "owner_data_to_request": [
+          "Confirmar si el telefono publicado tambien recibe WhatsApp.",
+          "WhatsApp confirmado y nombre de quien responde consultas.",
+          "Logo o marca actual si existe.",
+          "Fotos propias autorizadas para publicar.",
+          "Lista real de servicios y limites de lo que no quieren prometer.",
+          "Horario final, zona de atencion y direccion revisada.",
+          "Dominio deseado o nombre corto para publicar.",
+          "Tipos de trabajo que quieren captar y casos que prefieren derivar."
+        ],
+        "suggested_improvements": [
+          "Boton de WhatsApp real con mensaje prearmado.",
+          "Dominio propio o URL corta para compartir.",
+          "SEO local basico: rubro, ciudad, direccion y datos estructurados.",
+          "Medicion basica de consultas con Analytics o eventos de click.",
+          "Galeria real con fotos del local, trabajos o productos.",
+          "Revision final de copy con el dueño para confirmar servicios y tono.",
+          "CTA de urgencia con ubicacion y medida de cubierta."
+        ],
+        "offer_angle": "La muestra ya ordena la informacion publica; la venta es dejarla lista para publicar con datos propios, canal confirmado y medicion de consultas por Gomería y auxilio 24 horas Landeyro."
+      },
+      "outreach": {
+        "whatsapp_short": "Hola, como va? Soy Juan. Prepare una muestra de landing para Gomería y auxilio 24 horas Landeyro con la informacion publica disponible: rubro, reseñas, direccion, horario y contacto. No es una plantilla generica; esta pensada para que alguien consulte mas rapido. Si te sirve, por [PRECIO] la dejo lista para publicar con boton de WhatsApp real con mensaje prearmado, dominio propio o URL corta para compartir, SEO local basico: rubro, ciudad, direccion y datos estructurados. Te paso el link? generated/gomeria-y-auxilio-24-horas-landeyro/index.html",
+        "formal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Gomería y auxilio 24 horas Landeyro: generated/gomeria-y-auxilio-24-horas-landeyro/index.html\n\nLa pense para que una persona vea rapido el rubro (gomeria), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?",
+        "follow_up_24h": "Hola, te escribo de nuevo por la muestra de Gomería y auxilio 24 horas Landeyro. La idea no es venderte algo abstracto: ya hay una landing armada para revisar. Si queres, te mando el link y me decis si tiene sentido ajustarla con fotos y WhatsApp real.",
+        "follow_up_48h": "Cierro por aca para no insistir. Si en algun momento quieren una pagina simple para convertir consultas de gomeria, ya deje una base hecha y se puede publicar rapido por [PRECIO].",
+        "direct_close": "Si te gusta la muestra, el siguiente paso es simple: me confirmas WhatsApp, fotos, servicios reales y dominio/nombre. Con eso la dejo lista para publicar por [PRECIO].",
+        "objection_replies": [
+          {
+            "objection": "Ya tengo Instagram",
+            "reply": "Perfecto. La landing no reemplaza Instagram: sirve para mandar a una persona interesada a un lugar con servicios, reseñas, ubicacion y boton de consulta sin que tenga que revisar publicaciones."
+          },
+          {
+            "objection": "No necesito web",
+            "reply": "Puede ser. La idea no es una web grande, sino una pagina corta para convertir mejor a quien ya te busca o te pide informacion por mensaje."
+          },
+          {
+            "objection": "Cuanto sale",
+            "reply": "La version lista para publicar queda en [PRECIO]. Incluye ajustes de texto, fotos, boton de contacto, dominio/hosting basico si hace falta y revision final con ustedes."
+          },
+          {
+            "objection": "Lo veo despues",
+            "reply": "Dale. Te dejo el link para que lo veas cuando puedas; si te cierra, lo ajustamos con tus fotos y datos reales antes de publicarlo."
+          }
+        ]
+      },
+      "proposal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Gomería y auxilio 24 horas Landeyro: generated/gomeria-y-auxilio-24-horas-landeyro/index.html\n\nLa pense para que una persona vea rapido el rubro (gomeria), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?"
+    },
+    {
+      "slug": "taller-franco-chapa-y-pintura",
+      "business_name": "Taller Franco Chapa y Pintura",
+      "landing_url": "generated/taller-franco-chapa-y-pintura/index.html",
+      "landing_path": "generated/taller-franco-chapa-y-pintura/index.html",
+      "service": "chapa y pintura autos",
+      "rating": "4.7 (67)",
+      "preferred_contact": {
+        "medium": "whatsapp_probable",
+        "label": "WhatsApp probable",
+        "value": "0249 454-4214",
+        "confidence": "medium",
+        "reason": "El material disponible menciona WhatsApp, pero no hay link verificado; se usa el telefono publicado."
+      },
+      "lead_score": {
+        "priority": 9,
+        "contact_probability": "medium",
+        "opportunity": "high",
+        "reasons": [
+          "No tiene sitio propio registrado en los datos disponibles.",
+          "Buen rating publico: 4.7 sobre 5.",
+          "Volumen util de reseñas: 67.",
+          "Rubro visual: una landing con fotos y CTA puede mostrar valor rapido."
+        ],
+        "risks": [
+          "WhatsApp no verificado; conviene validar canal antes de escribir como si fuera oficial."
+        ]
+      },
+      "commercial_audit": {
+        "problem_solved": "Transforma un daño visible del auto en una consulta ordenada con fotos, revision y contacto.",
+        "public_signals_used": [
+          "Rating 4.7 con 67 reseñas.",
+          "Direccion publicada: Saavedra 458, B7000 Tandil, Provincia de Buenos Aires, Argentina.",
+          "Telefono publicado: 0249 454-4214.",
+          "Horario publicado disponible para orientar la consulta.",
+          "Reseña usada como señal: \"Excelente atención de todo el equipo, ademas de arreglarle ese golpe, pedi un pulido y quedo espectacular. Recomendables...\"",
+          "Reseña usada como señal: \"Excelentes. Atención muy buena,eficiencia y el auto quedo impecable.\""
+        ],
+        "owner_data_to_request": [
+          "Confirmar si el telefono publicado tambien recibe WhatsApp.",
+          "WhatsApp confirmado y nombre de quien responde consultas.",
+          "Logo o marca actual si existe.",
+          "Fotos propias autorizadas para publicar.",
+          "Lista real de servicios y limites de lo que no quieren prometer.",
+          "Horario final, zona de atencion y direccion revisada.",
+          "Dominio deseado o nombre corto para publicar.",
+          "Fotos antes/despues o trabajos terminados para reemplazar imagenes genericas."
+        ],
+        "suggested_improvements": [
+          "Boton de WhatsApp real con mensaje prearmado.",
+          "Dominio propio o URL corta para compartir.",
+          "SEO local basico: rubro, ciudad, direccion y datos estructurados.",
+          "Medicion basica de consultas con Analytics o eventos de click.",
+          "Galeria real con fotos del local, trabajos o productos.",
+          "Revision final de copy con el dueño para confirmar servicios y tono.",
+          "CTA para enviar foto del golpe antes de coordinar revision."
+        ],
+        "offer_angle": "La muestra ya ordena la informacion publica; la venta es dejarla lista para publicar con datos propios, canal confirmado y medicion de consultas por Taller Franco Chapa y Pintura."
+      },
+      "outreach": {
+        "whatsapp_short": "Hola, como va? Soy Juan. Prepare una muestra de landing para Taller Franco Chapa y Pintura con la informacion publica disponible: rubro, reseñas, direccion, horario y contacto. No es una plantilla generica; esta pensada para que alguien consulte mas rapido. Si te sirve, por [PRECIO] la dejo lista para publicar con boton de WhatsApp real con mensaje prearmado, dominio propio o URL corta para compartir, SEO local basico: rubro, ciudad, direccion y datos estructurados. Te paso el link? generated/taller-franco-chapa-y-pintura/index.html",
+        "formal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Taller Franco Chapa y Pintura: generated/taller-franco-chapa-y-pintura/index.html\n\nLa pense para que una persona vea rapido el rubro (chapa y pintura autos), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe lo mando por este medio porque es el canal mas practico para verlo rapido desde el telefono.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?",
+        "follow_up_24h": "Hola, te escribo de nuevo por la muestra de Taller Franco Chapa y Pintura. La idea no es venderte algo abstracto: ya hay una landing armada para revisar. Si queres, te mando el link y me decis si tiene sentido ajustarla con fotos y WhatsApp real.",
+        "follow_up_48h": "Cierro por aca para no insistir. Si en algun momento quieren una pagina simple para convertir consultas de chapa y pintura autos, ya deje una base hecha y se puede publicar rapido por [PRECIO].",
+        "direct_close": "Si te gusta la muestra, el siguiente paso es simple: me confirmas WhatsApp, fotos, servicios reales y dominio/nombre. Con eso la dejo lista para publicar por [PRECIO].",
+        "objection_replies": [
+          {
+            "objection": "Ya tengo Instagram",
+            "reply": "Perfecto. La landing no reemplaza Instagram: sirve para mandar a una persona interesada a un lugar con servicios, reseñas, ubicacion y boton de consulta sin que tenga que revisar publicaciones."
+          },
+          {
+            "objection": "No necesito web",
+            "reply": "Puede ser. La idea no es una web grande, sino una pagina corta para convertir mejor a quien ya te busca o te pide informacion por mensaje."
+          },
+          {
+            "objection": "Cuanto sale",
+            "reply": "La version lista para publicar queda en [PRECIO]. Incluye ajustes de texto, fotos, boton de contacto, dominio/hosting basico si hace falta y revision final con ustedes."
+          },
+          {
+            "objection": "Lo veo despues",
+            "reply": "Dale. Te dejo el link para que lo veas cuando puedas; si te cierra, lo ajustamos con tus fotos y datos reales antes de publicarlo."
+          }
+        ]
+      },
+      "proposal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Taller Franco Chapa y Pintura: generated/taller-franco-chapa-y-pintura/index.html\n\nLa pense para que una persona vea rapido el rubro (chapa y pintura autos), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe lo mando por este medio porque es el canal mas practico para verlo rapido desde el telefono.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?"
+    },
+    {
+      "slug": "iturralde-repuestos",
+      "business_name": "Iturralde - Repuestos",
+      "landing_url": "generated/iturralde-repuestos/index.html",
+      "landing_path": "generated/iturralde-repuestos/index.html",
+      "service": "repuestos autos",
+      "rating": "4.6 (295)",
+      "preferred_contact": {
+        "medium": "phone",
+        "label": "Telefono",
+        "value": "0249 401-7903",
+        "confidence": "high",
+        "reason": "No hay red social ni WhatsApp verificado; el telefono publicado es el contacto mas seguro."
+      },
+      "lead_score": {
+        "priority": 10,
+        "contact_probability": "high",
+        "opportunity": "high",
+        "reasons": [
+          "No tiene sitio propio registrado en los datos disponibles.",
+          "Buen rating publico: 4.6 sobre 5.",
+          "Volumen alto de reseñas: 295.",
+          "Contacto directo confiable: Telefono."
+        ],
+        "risks": [
+          "Sin Instagram ni WhatsApp verificado; el primer contacto puede sentirse mas frio."
+        ]
+      },
+      "commercial_audit": {
+        "problem_solved": "Reune señales publicas y contacto en una experiencia clara para pedir informacion o coordinar.",
+        "public_signals_used": [
+          "Rating 4.6 con 295 reseñas.",
+          "Direccion publicada: 9 de Julio 1556, B7000 Tandil, Provincia de Buenos Aires, Argentina.",
+          "Telefono publicado: 0249 401-7903.",
+          "Horario publicado disponible para orientar la consulta.",
+          "Reseña usada como señal: \"Recibí una excelente atención del empleado que me toco\"",
+          "Reseña usada como señal: \"Buena atención y precio!\""
+        ],
+        "owner_data_to_request": [
+          "Confirmar si el telefono publicado tambien recibe WhatsApp.",
+          "WhatsApp confirmado y nombre de quien responde consultas.",
+          "Logo o marca actual si existe.",
+          "Fotos propias autorizadas para publicar.",
+          "Lista real de servicios y limites de lo que no quieren prometer.",
+          "Horario final, zona de atencion y direccion revisada.",
+          "Dominio deseado o nombre corto para publicar."
+        ],
+        "suggested_improvements": [
+          "Boton de WhatsApp real con mensaje prearmado.",
+          "Dominio propio o URL corta para compartir.",
+          "SEO local basico: rubro, ciudad, direccion y datos estructurados.",
+          "Medicion basica de consultas con Analytics o eventos de click.",
+          "Galeria real con fotos del local, trabajos o productos.",
+          "Revision final de copy con el dueño para confirmar servicios y tono."
+        ],
+        "offer_angle": "La muestra ya ordena la informacion publica; la venta es dejarla lista para publicar con datos propios, canal confirmado y medicion de consultas por Iturralde - Repuestos."
+      },
+      "outreach": {
+        "whatsapp_short": "Hola, como va? Soy Juan. Prepare una muestra de landing para Iturralde - Repuestos con la informacion publica disponible: rubro, reseñas, direccion, horario y contacto. No es una plantilla generica; esta pensada para que alguien consulte mas rapido. Si te sirve, por [PRECIO] la dejo lista para publicar con boton de WhatsApp real con mensaje prearmado, dominio propio o URL corta para compartir, SEO local basico: rubro, ciudad, direccion y datos estructurados. Te paso el link? generated/iturralde-repuestos/index.html",
+        "formal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Iturralde - Repuestos: generated/iturralde-repuestos/index.html\n\nLa pense para que una persona vea rapido el rubro (repuestos autos), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?",
+        "follow_up_24h": "Hola, te escribo de nuevo por la muestra de Iturralde - Repuestos. La idea no es venderte algo abstracto: ya hay una landing armada para revisar. Si queres, te mando el link y me decis si tiene sentido ajustarla con fotos y WhatsApp real.",
+        "follow_up_48h": "Cierro por aca para no insistir. Si en algun momento quieren una pagina simple para convertir consultas de repuestos autos, ya deje una base hecha y se puede publicar rapido por [PRECIO].",
+        "direct_close": "Si te gusta la muestra, el siguiente paso es simple: me confirmas WhatsApp, fotos, servicios reales y dominio/nombre. Con eso la dejo lista para publicar por [PRECIO].",
+        "objection_replies": [
+          {
+            "objection": "Ya tengo Instagram",
+            "reply": "Perfecto. La landing no reemplaza Instagram: sirve para mandar a una persona interesada a un lugar con servicios, reseñas, ubicacion y boton de consulta sin que tenga que revisar publicaciones."
+          },
+          {
+            "objection": "No necesito web",
+            "reply": "Puede ser. La idea no es una web grande, sino una pagina corta para convertir mejor a quien ya te busca o te pide informacion por mensaje."
+          },
+          {
+            "objection": "Cuanto sale",
+            "reply": "La version lista para publicar queda en [PRECIO]. Incluye ajustes de texto, fotos, boton de contacto, dominio/hosting basico si hace falta y revision final con ustedes."
+          },
+          {
+            "objection": "Lo veo despues",
+            "reply": "Dale. Te dejo el link para que lo veas cuando puedas; si te cierra, lo ajustamos con tus fotos y datos reales antes de publicarlo."
+          }
+        ]
+      },
+      "proposal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Iturralde - Repuestos: generated/iturralde-repuestos/index.html\n\nLa pense para que una persona vea rapido el rubro (repuestos autos), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?"
+    },
+    {
+      "slug": "walter-gomez-servicio-multimarca",
+      "business_name": "Walter Gomez Servicio Multimarca",
+      "landing_url": "generated/walter-gomez-servicio-multimarca/index.html",
+      "landing_path": "generated/walter-gomez-servicio-multimarca/index.html",
+      "service": "taller mecanico",
+      "rating": "4.7 (75)",
+      "preferred_contact": {
+        "medium": "phone",
+        "label": "Telefono",
+        "value": "0249 442-2400",
+        "confidence": "high",
+        "reason": "No hay red social ni WhatsApp verificado; el telefono publicado es el contacto mas seguro."
+      },
+      "lead_score": {
+        "priority": 9,
+        "contact_probability": "high",
+        "opportunity": "high",
+        "reasons": [
+          "No tiene sitio propio registrado en los datos disponibles.",
+          "Buen rating publico: 4.7 sobre 5.",
+          "Volumen util de reseñas: 75.",
+          "Contacto directo confiable: Telefono."
+        ],
+        "risks": [
+          "Sin Instagram ni WhatsApp verificado; el primer contacto puede sentirse mas frio."
+        ]
+      },
+      "commercial_audit": {
+        "problem_solved": "Hace mas concreta la primera consulta: sintoma, horario, direccion, reseñas y forma de coordinar revision.",
+        "public_signals_used": [
+          "Rating 4.7 con 75 reseñas.",
+          "Direccion publicada: Av. Marconi 1678, B7000 Tandil, Provincia de Buenos Aires, Argentina.",
+          "Telefono publicado: 0249 442-2400.",
+          "Horario publicado disponible para orientar la consulta.",
+          "Reseña usada como señal: \"Fui por recomendación. Se aflojó el cubre cárter del auto justo antes de pegar la vuelta a bs as. Lo llamé y le expliqué...\"",
+          "Reseña usada como señal: \"La verdad que se nota la honestidad de Walter. Excelente atención con respecto al problema del auto! Súper recomendable ...\""
+        ],
+        "owner_data_to_request": [
+          "Confirmar si el telefono publicado tambien recibe WhatsApp.",
+          "WhatsApp confirmado y nombre de quien responde consultas.",
+          "Logo o marca actual si existe.",
+          "Fotos propias autorizadas para publicar.",
+          "Lista real de servicios y limites de lo que no quieren prometer.",
+          "Horario final, zona de atencion y direccion revisada.",
+          "Dominio deseado o nombre corto para publicar.",
+          "Tipos de trabajo que quieren captar y casos que prefieren derivar."
+        ],
+        "suggested_improvements": [
+          "Boton de WhatsApp real con mensaje prearmado.",
+          "Dominio propio o URL corta para compartir.",
+          "SEO local basico: rubro, ciudad, direccion y datos estructurados.",
+          "Medicion basica de consultas con Analytics o eventos de click.",
+          "Galeria real con fotos del local, trabajos o productos.",
+          "Revision final de copy con el dueño para confirmar servicios y tono."
+        ],
+        "offer_angle": "La muestra ya ordena la informacion publica; la venta es dejarla lista para publicar con datos propios, canal confirmado y medicion de consultas por Walter Gomez Servicio Multimarca."
+      },
+      "outreach": {
+        "whatsapp_short": "Hola, como va? Soy Juan. Prepare una muestra de landing para Walter Gomez Servicio Multimarca con la informacion publica disponible: rubro, reseñas, direccion, horario y contacto. No es una plantilla generica; esta pensada para que alguien consulte mas rapido. Si te sirve, por [PRECIO] la dejo lista para publicar con boton de WhatsApp real con mensaje prearmado, dominio propio o URL corta para compartir, SEO local basico: rubro, ciudad, direccion y datos estructurados. Te paso el link? generated/walter-gomez-servicio-multimarca/index.html",
+        "formal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Walter Gomez Servicio Multimarca: generated/walter-gomez-servicio-multimarca/index.html\n\nLa pense para que una persona vea rapido el rubro (taller mecanico), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?",
+        "follow_up_24h": "Hola, te escribo de nuevo por la muestra de Walter Gomez Servicio Multimarca. La idea no es venderte algo abstracto: ya hay una landing armada para revisar. Si queres, te mando el link y me decis si tiene sentido ajustarla con fotos y WhatsApp real.",
+        "follow_up_48h": "Cierro por aca para no insistir. Si en algun momento quieren una pagina simple para convertir consultas de taller mecanico, ya deje una base hecha y se puede publicar rapido por [PRECIO].",
+        "direct_close": "Si te gusta la muestra, el siguiente paso es simple: me confirmas WhatsApp, fotos, servicios reales y dominio/nombre. Con eso la dejo lista para publicar por [PRECIO].",
+        "objection_replies": [
+          {
+            "objection": "Ya tengo Instagram",
+            "reply": "Perfecto. La landing no reemplaza Instagram: sirve para mandar a una persona interesada a un lugar con servicios, reseñas, ubicacion y boton de consulta sin que tenga que revisar publicaciones."
+          },
+          {
+            "objection": "No necesito web",
+            "reply": "Puede ser. La idea no es una web grande, sino una pagina corta para convertir mejor a quien ya te busca o te pide informacion por mensaje."
+          },
+          {
+            "objection": "Cuanto sale",
+            "reply": "La version lista para publicar queda en [PRECIO]. Incluye ajustes de texto, fotos, boton de contacto, dominio/hosting basico si hace falta y revision final con ustedes."
+          },
+          {
+            "objection": "Lo veo despues",
+            "reply": "Dale. Te dejo el link para que lo veas cuando puedas; si te cierra, lo ajustamos con tus fotos y datos reales antes de publicarlo."
+          }
+        ]
+      },
+      "proposal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Walter Gomez Servicio Multimarca: generated/walter-gomez-servicio-multimarca/index.html\n\nLa pense para que una persona vea rapido el rubro (taller mecanico), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?"
+    },
+    {
+      "slug": "gomeria-el-viejo-matias-auxilio-24-hs",
+      "business_name": "Gomería El Viejo Matias - Auxilio 24 hs",
+      "landing_url": "generated/gomeria-el-viejo-matias-auxilio-24-hs/index.html",
+      "landing_path": "generated/gomeria-el-viejo-matias-auxilio-24-hs/index.html",
+      "service": "gomeria",
+      "rating": "4.7 (328)",
+      "preferred_contact": {
+        "medium": "phone",
+        "label": "Telefono",
+        "value": "0249 424-3685",
+        "confidence": "high",
+        "reason": "No hay red social ni WhatsApp verificado; el telefono publicado es el contacto mas seguro."
+      },
+      "lead_score": {
+        "priority": 10,
+        "contact_probability": "high",
+        "opportunity": "high",
+        "reasons": [
+          "No tiene sitio propio registrado en los datos disponibles.",
+          "Buen rating publico: 4.7 sobre 5.",
+          "Volumen alto de reseñas: 328.",
+          "Rubro visual: una landing con fotos y CTA puede mostrar valor rapido.",
+          "Contacto directo confiable: Telefono."
+        ],
+        "risks": [
+          "Sin Instagram ni WhatsApp verificado; el primer contacto puede sentirse mas frio."
+        ]
+      },
+      "commercial_audit": {
+        "problem_solved": "Ayuda a quien tiene un problema de cubierta o auxilio a encontrar telefono, direccion y proximo paso sin vueltas.",
+        "public_signals_used": [
+          "Rating 4.7 con 328 reseñas.",
+          "Direccion publicada: Av. Rivadavia 799, B7000 Tandil, Provincia de Buenos Aires, Argentina.",
+          "Telefono publicado: 0249 424-3685.",
+          "Horario publicado disponible para orientar la consulta.",
+          "Reseña usada como señal: \"Cool\"",
+          "Reseña usada como señal: \"Muy buena atención, y honestos, además, si le gustan los animales, son buena gente, lastima que no me acuerdo el nombre ...\""
+        ],
+        "owner_data_to_request": [
+          "Confirmar si el telefono publicado tambien recibe WhatsApp.",
+          "WhatsApp confirmado y nombre de quien responde consultas.",
+          "Logo o marca actual si existe.",
+          "Fotos propias autorizadas para publicar.",
+          "Lista real de servicios y limites de lo que no quieren prometer.",
+          "Horario final, zona de atencion y direccion revisada.",
+          "Dominio deseado o nombre corto para publicar.",
+          "Tipos de trabajo que quieren captar y casos que prefieren derivar."
+        ],
+        "suggested_improvements": [
+          "Boton de WhatsApp real con mensaje prearmado.",
+          "Dominio propio o URL corta para compartir.",
+          "SEO local basico: rubro, ciudad, direccion y datos estructurados.",
+          "Medicion basica de consultas con Analytics o eventos de click.",
+          "Galeria real con fotos del local, trabajos o productos.",
+          "Revision final de copy con el dueño para confirmar servicios y tono.",
+          "CTA de urgencia con ubicacion y medida de cubierta."
+        ],
+        "offer_angle": "La muestra ya ordena la informacion publica; la venta es dejarla lista para publicar con datos propios, canal confirmado y medicion de consultas por Gomería El Viejo Matias - Auxilio 24 hs."
+      },
+      "outreach": {
+        "whatsapp_short": "Hola, como va? Soy Juan. Prepare una muestra de landing para Gomería El Viejo Matias - Auxilio 24 hs con la informacion publica disponible: rubro, reseñas, direccion, horario y contacto. No es una plantilla generica; esta pensada para que alguien consulte mas rapido. Si te sirve, por [PRECIO] la dejo lista para publicar con boton de WhatsApp real con mensaje prearmado, dominio propio o URL corta para compartir, SEO local basico: rubro, ciudad, direccion y datos estructurados. Te paso el link? generated/gomeria-el-viejo-matias-auxilio-24-hs/index.html",
+        "formal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Gomería El Viejo Matias - Auxilio 24 hs: generated/gomeria-el-viejo-matias-auxilio-24-hs/index.html\n\nLa pense para que una persona vea rapido el rubro (gomeria), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?",
+        "follow_up_24h": "Hola, te escribo de nuevo por la muestra de Gomería El Viejo Matias - Auxilio 24 hs. La idea no es venderte algo abstracto: ya hay una landing armada para revisar. Si queres, te mando el link y me decis si tiene sentido ajustarla con fotos y WhatsApp real.",
+        "follow_up_48h": "Cierro por aca para no insistir. Si en algun momento quieren una pagina simple para convertir consultas de gomeria, ya deje una base hecha y se puede publicar rapido por [PRECIO].",
+        "direct_close": "Si te gusta la muestra, el siguiente paso es simple: me confirmas WhatsApp, fotos, servicios reales y dominio/nombre. Con eso la dejo lista para publicar por [PRECIO].",
+        "objection_replies": [
+          {
+            "objection": "Ya tengo Instagram",
+            "reply": "Perfecto. La landing no reemplaza Instagram: sirve para mandar a una persona interesada a un lugar con servicios, reseñas, ubicacion y boton de consulta sin que tenga que revisar publicaciones."
+          },
+          {
+            "objection": "No necesito web",
+            "reply": "Puede ser. La idea no es una web grande, sino una pagina corta para convertir mejor a quien ya te busca o te pide informacion por mensaje."
+          },
+          {
+            "objection": "Cuanto sale",
+            "reply": "La version lista para publicar queda en [PRECIO]. Incluye ajustes de texto, fotos, boton de contacto, dominio/hosting basico si hace falta y revision final con ustedes."
+          },
+          {
+            "objection": "Lo veo despues",
+            "reply": "Dale. Te dejo el link para que lo veas cuando puedas; si te cierra, lo ajustamos con tus fotos y datos reales antes de publicarlo."
+          }
+        ]
+      },
+      "proposal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Gomería El Viejo Matias - Auxilio 24 hs: generated/gomeria-el-viejo-matias-auxilio-24-hs/index.html\n\nLa pense para que una persona vea rapido el rubro (gomeria), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?"
+    },
+    {
+      "slug": "taller-di-sipio-chapa-y-pintura",
+      "business_name": "\"Taller Di Sipio\" Chapa Y Pintura",
+      "landing_url": "generated/taller-di-sipio-chapa-y-pintura/index.html",
+      "landing_path": "generated/taller-di-sipio-chapa-y-pintura/index.html",
+      "service": "chapa y pintura autos",
+      "rating": "4.9 (35)",
+      "preferred_contact": {
+        "medium": "phone",
+        "label": "Telefono",
+        "value": "0249 460-4088",
+        "confidence": "high",
+        "reason": "No hay red social ni WhatsApp verificado; el telefono publicado es el contacto mas seguro."
+      },
+      "lead_score": {
+        "priority": 10,
+        "contact_probability": "medium",
+        "opportunity": "high",
+        "reasons": [
+          "No tiene sitio propio registrado en los datos disponibles.",
+          "Rating fuerte: 4.9 sobre 5.",
+          "Volumen util de reseñas: 35.",
+          "Rubro visual: una landing con fotos y CTA puede mostrar valor rapido.",
+          "Contacto directo confiable: Telefono."
+        ],
+        "risks": [
+          "Sin Instagram ni WhatsApp verificado; el primer contacto puede sentirse mas frio."
+        ]
+      },
+      "commercial_audit": {
+        "problem_solved": "Transforma un daño visible del auto en una consulta ordenada con fotos, revision y contacto.",
+        "public_signals_used": [
+          "Rating 4.9 con 35 reseñas.",
+          "Direccion publicada: C. Almafuerte 943, B7000 Tandil, Provincia de Buenos Aires, Argentina.",
+          "Telefono publicado: 0249 460-4088.",
+          "Horario publicado disponible para orientar la consulta.",
+          "Reseña usada como señal: \"Hola! Increíble su trabajo, súper recomendable y la rapidez en la que se entregó el trabajo a requerir. Doy 5 estrellas ...\"",
+          "Reseña usada como señal: \"Excelente Atencion de parte de Gaston y los chicos.\nMe prometieron que iba a llevar una semana el arreglo y tardaron jus...\""
+        ],
+        "owner_data_to_request": [
+          "Confirmar si el telefono publicado tambien recibe WhatsApp.",
+          "WhatsApp confirmado y nombre de quien responde consultas.",
+          "Logo o marca actual si existe.",
+          "Fotos propias autorizadas para publicar.",
+          "Lista real de servicios y limites de lo que no quieren prometer.",
+          "Horario final, zona de atencion y direccion revisada.",
+          "Dominio deseado o nombre corto para publicar.",
+          "Fotos antes/despues o trabajos terminados para reemplazar imagenes genericas."
+        ],
+        "suggested_improvements": [
+          "Boton de WhatsApp real con mensaje prearmado.",
+          "Dominio propio o URL corta para compartir.",
+          "SEO local basico: rubro, ciudad, direccion y datos estructurados.",
+          "Medicion basica de consultas con Analytics o eventos de click.",
+          "Galeria real con fotos del local, trabajos o productos.",
+          "Revision final de copy con el dueño para confirmar servicios y tono.",
+          "CTA para enviar foto del golpe antes de coordinar revision."
+        ],
+        "offer_angle": "La muestra ya ordena la informacion publica; la venta es dejarla lista para publicar con datos propios, canal confirmado y medicion de consultas por \"Taller Di Sipio\" Chapa Y Pintura."
+      },
+      "outreach": {
+        "whatsapp_short": "Hola, como va? Soy Juan. Prepare una muestra de landing para \"Taller Di Sipio\" Chapa Y Pintura con la informacion publica disponible: rubro, reseñas, direccion, horario y contacto. No es una plantilla generica; esta pensada para que alguien consulte mas rapido. Si te sirve, por [PRECIO] la dejo lista para publicar con boton de WhatsApp real con mensaje prearmado, dominio propio o URL corta para compartir, SEO local basico: rubro, ciudad, direccion y datos estructurados. Te paso el link? generated/taller-di-sipio-chapa-y-pintura/index.html",
+        "formal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para \"Taller Di Sipio\" Chapa Y Pintura: generated/taller-di-sipio-chapa-y-pintura/index.html\n\nLa pense para que una persona vea rapido el rubro (chapa y pintura autos), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?",
+        "follow_up_24h": "Hola, te escribo de nuevo por la muestra de \"Taller Di Sipio\" Chapa Y Pintura. La idea no es venderte algo abstracto: ya hay una landing armada para revisar. Si queres, te mando el link y me decis si tiene sentido ajustarla con fotos y WhatsApp real.",
+        "follow_up_48h": "Cierro por aca para no insistir. Si en algun momento quieren una pagina simple para convertir consultas de chapa y pintura autos, ya deje una base hecha y se puede publicar rapido por [PRECIO].",
+        "direct_close": "Si te gusta la muestra, el siguiente paso es simple: me confirmas WhatsApp, fotos, servicios reales y dominio/nombre. Con eso la dejo lista para publicar por [PRECIO].",
+        "objection_replies": [
+          {
+            "objection": "Ya tengo Instagram",
+            "reply": "Perfecto. La landing no reemplaza Instagram: sirve para mandar a una persona interesada a un lugar con servicios, reseñas, ubicacion y boton de consulta sin que tenga que revisar publicaciones."
+          },
+          {
+            "objection": "No necesito web",
+            "reply": "Puede ser. La idea no es una web grande, sino una pagina corta para convertir mejor a quien ya te busca o te pide informacion por mensaje."
+          },
+          {
+            "objection": "Cuanto sale",
+            "reply": "La version lista para publicar queda en [PRECIO]. Incluye ajustes de texto, fotos, boton de contacto, dominio/hosting basico si hace falta y revision final con ustedes."
+          },
+          {
+            "objection": "Lo veo despues",
+            "reply": "Dale. Te dejo el link para que lo veas cuando puedas; si te cierra, lo ajustamos con tus fotos y datos reales antes de publicarlo."
+          }
+        ]
+      },
+      "proposal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para \"Taller Di Sipio\" Chapa Y Pintura: generated/taller-di-sipio-chapa-y-pintura/index.html\n\nLa pense para que una persona vea rapido el rubro (chapa y pintura autos), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?"
+    },
+    {
+      "slug": "mecanica-maz",
+      "business_name": "Mecanica Maz",
+      "landing_url": "generated/mecanica-maz/index.html",
+      "landing_path": "generated/mecanica-maz/index.html",
+      "service": "taller mecanico",
+      "rating": "4.9 (31)",
+      "preferred_contact": {
+        "medium": "phone",
+        "label": "Telefono",
+        "value": "0249 464-3419",
+        "confidence": "high",
+        "reason": "No hay red social ni WhatsApp verificado; el telefono publicado es el contacto mas seguro."
+      },
+      "lead_score": {
+        "priority": 10,
+        "contact_probability": "medium",
+        "opportunity": "high",
+        "reasons": [
+          "No tiene sitio propio registrado en los datos disponibles.",
+          "Rating fuerte: 4.9 sobre 5.",
+          "Volumen util de reseñas: 31.",
+          "Contacto directo confiable: Telefono."
+        ],
+        "risks": [
+          "Sin Instagram ni WhatsApp verificado; el primer contacto puede sentirse mas frio."
+        ]
+      },
+      "commercial_audit": {
+        "problem_solved": "Hace mas concreta la primera consulta: sintoma, horario, direccion, reseñas y forma de coordinar revision.",
+        "public_signals_used": [
+          "Rating 4.9 con 31 reseñas.",
+          "Direccion publicada: Laprida 961, B7000 Tandil, Provincia de Buenos Aires, Argentina.",
+          "Telefono publicado: 0249 464-3419.",
+          "Horario publicado disponible para orientar la consulta.",
+          "Reseña usada como señal: \"La verdad Excelente servicio. Estaba de viaje y un sábado por la tarde tuve un problema mecánico, me remolcaron el auto ...\"",
+          "Reseña usada como señal: \"Marcelo,un genio,me arreglaron el auto después de un problema que tuve en pleno viaje hacia Villa Gesell,me demostró ser...\""
+        ],
+        "owner_data_to_request": [
+          "Confirmar si el telefono publicado tambien recibe WhatsApp.",
+          "WhatsApp confirmado y nombre de quien responde consultas.",
+          "Logo o marca actual si existe.",
+          "Fotos propias autorizadas para publicar.",
+          "Lista real de servicios y limites de lo que no quieren prometer.",
+          "Horario final, zona de atencion y direccion revisada.",
+          "Dominio deseado o nombre corto para publicar.",
+          "Tipos de trabajo que quieren captar y casos que prefieren derivar."
+        ],
+        "suggested_improvements": [
+          "Boton de WhatsApp real con mensaje prearmado.",
+          "Dominio propio o URL corta para compartir.",
+          "SEO local basico: rubro, ciudad, direccion y datos estructurados.",
+          "Medicion basica de consultas con Analytics o eventos de click.",
+          "Galeria real con fotos del local, trabajos o productos.",
+          "Revision final de copy con el dueño para confirmar servicios y tono."
+        ],
+        "offer_angle": "La muestra ya ordena la informacion publica; la venta es dejarla lista para publicar con datos propios, canal confirmado y medicion de consultas por Mecanica Maz."
+      },
+      "outreach": {
+        "whatsapp_short": "Hola, como va? Soy Juan. Prepare una muestra de landing para Mecanica Maz con la informacion publica disponible: rubro, reseñas, direccion, horario y contacto. No es una plantilla generica; esta pensada para que alguien consulte mas rapido. Si te sirve, por [PRECIO] la dejo lista para publicar con boton de WhatsApp real con mensaje prearmado, dominio propio o URL corta para compartir, SEO local basico: rubro, ciudad, direccion y datos estructurados. Te paso el link? generated/mecanica-maz/index.html",
+        "formal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Mecanica Maz: generated/mecanica-maz/index.html\n\nLa pense para que una persona vea rapido el rubro (taller mecanico), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?",
+        "follow_up_24h": "Hola, te escribo de nuevo por la muestra de Mecanica Maz. La idea no es venderte algo abstracto: ya hay una landing armada para revisar. Si queres, te mando el link y me decis si tiene sentido ajustarla con fotos y WhatsApp real.",
+        "follow_up_48h": "Cierro por aca para no insistir. Si en algun momento quieren una pagina simple para convertir consultas de taller mecanico, ya deje una base hecha y se puede publicar rapido por [PRECIO].",
+        "direct_close": "Si te gusta la muestra, el siguiente paso es simple: me confirmas WhatsApp, fotos, servicios reales y dominio/nombre. Con eso la dejo lista para publicar por [PRECIO].",
+        "objection_replies": [
+          {
+            "objection": "Ya tengo Instagram",
+            "reply": "Perfecto. La landing no reemplaza Instagram: sirve para mandar a una persona interesada a un lugar con servicios, reseñas, ubicacion y boton de consulta sin que tenga que revisar publicaciones."
+          },
+          {
+            "objection": "No necesito web",
+            "reply": "Puede ser. La idea no es una web grande, sino una pagina corta para convertir mejor a quien ya te busca o te pide informacion por mensaje."
+          },
+          {
+            "objection": "Cuanto sale",
+            "reply": "La version lista para publicar queda en [PRECIO]. Incluye ajustes de texto, fotos, boton de contacto, dominio/hosting basico si hace falta y revision final con ustedes."
+          },
+          {
+            "objection": "Lo veo despues",
+            "reply": "Dale. Te dejo el link para que lo veas cuando puedas; si te cierra, lo ajustamos con tus fotos y datos reales antes de publicarlo."
+          }
+        ]
+      },
+      "proposal_message": "Hola, como va? Soy Juan. Prepare una muestra de landing para Mecanica Maz: generated/mecanica-maz/index.html\n\nLa pense para que una persona vea rapido el rubro (taller mecanico), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.\n\nTe escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.\n\nSi les interesa, por [PRECIO] puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?"
+    }
+  ]
+}
