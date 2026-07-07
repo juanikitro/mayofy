@@ -80,8 +80,10 @@ npm run agent:briefs
 Luego Codex/Claude debe:
 
 - disenar una landing real por negocio
-- trabajar desde una estructura comercial completa: hero fuerte, trust bar, servicios, razones para elegir, paquetes editables, antes/despues o galeria, proceso, resenas/contacto y CTA final
-- usar datos reales cuando existan y placeholders claramente editables cuando falten datos comerciales importantes
+- elegir un `conversion_template` de alta conversion: promesa + prueba + CTA, historia local editorial, menu visual, diagnostico de servicio, mostrador/catalogo o llamada urgente
+- escribir un `design_brief` con tesis visual, voz de copy, firma de layout, plan de assets, plan de IA segura, anti-patrones y objetivos de remake
+- trabajar desde una estructura comercial completa: hero fuerte, trust bar, servicios, razones para elegir, opciones de consulta, antes/despues o galeria, proceso, resenas/contacto y CTA final
+- usar datos reales cuando existan y completar la pagina con copy, secciones e imagenes genericas seguras generadas por IA cuando los datos/fotos sean pobres
 - crear HTML/CSS propio o un framework/libreria de UI, animaciones o iconos exportado a estatico
 - guardar el resultado dentro de `data/frontends/<run>/<slug>/`
 - agregar `agent_frontend` en `data/site-specs/tandil-site-specs.json`
@@ -92,9 +94,19 @@ Validar:
 npm run validate:specs
 ```
 
-`npm run compose:local` queda como fallback mecanico, pero tambien genera un bloque `commercial` con servicios, paquetes demo editables, galeria, proceso y CTA final. `npm run compose:ai` queda como opcion secundaria con billing de OpenAI API; no usa tokens de Codex Desktop.
+`npm run compose:local` queda como fallback mecanico, pero tambien genera `conversion_template`, `design_brief`, `commercial` y `creative`. `npm run compose:ai` queda como opcion secundaria con billing de OpenAI API; no usa tokens de Codex Desktop.
 
 El generador usa `data/site-specs/tandil-site-specs.json` para validar datos, ubicar el frontend de agente y copiar el artefacto final. El renderer interno solo queda como fallback de preview.
+
+### Rehacer una tanda floja
+
+Si una tanda ya existe pero parece template, generar briefs de remake con el output y screenshots actuales:
+
+```bash
+npm run agent:briefs -- --input data/<run>-businesses.json --specs data/site-specs/<run>-site-specs.json --out data/agent-briefs/<run> --city "<Ciudad>" --segment "<Rubro>" --remake-from generated/<run> --screenshots output/screenshots/<run>
+```
+
+Cada brief incluye excerpts de HTML/CSS y rutas de screenshots si existen. El agente debe criticar la pagina actual, elegir un `conversion_template`, completar `design_brief`, y reemplazar el frontend cuando la estructura anterior sea debil.
 
 Variables opcionales:
 
@@ -179,6 +191,8 @@ npm run qa:client
 
 - copy interno visible (`landing`, `template`, `editable`, `demo`, `la pagina`, `sin inventar`)
 - placeholders demasiado crudos
+- falta de `conversion_template` o `design_brief`
+- falta de plan de IA para poblar copy e imagenes genericas seguras cuando los datos/fotos son pobres
 - falta de estructura comercial
 - CTAs debiles
 - accesibilidad basica floja
