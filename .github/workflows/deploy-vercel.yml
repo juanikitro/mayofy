@@ -1,6 +1,12 @@
 name: Deploy generated landings to Vercel
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "data/*-businesses.json"
+      - "data/site-specs/*.json"
+      - "data/frontends/**"
   workflow_dispatch:
     inputs:
       run:
@@ -15,15 +21,39 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: deploy-vercel-${{ inputs.run }}
-  cancel-in-progress: false
-
 jobs:
-  deploy:
+  detect:
     runs-on: ubuntu-latest
+    outputs:
+      runs: ${{ steps.detect.outputs.runs }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect deployable runs
+        id: detect
+        run: |
+          node scripts/detect-deploy-runs.mjs \
+            --event-name "${{ github.event_name }}" \
+            --manual-run "${{ github.event.inputs.run }}" \
+            --before "${{ github.event.before }}" \
+            --after "${{ github.sha }}"
+
+  deploy:
+    needs: detect
+    if: ${{ needs.detect.outputs.runs != '[]' }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        run: ${{ fromJSON(needs.detect.outputs.runs) }}
+    concurrency:
+      group: deploy-vercel-${{ matrix.run }}
+      cancel-in-progress: false
     env:
-      RUN_NAME: ${{ inputs.run }}
+      RUN_NAME: ${{ matrix.run }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -66,6 +96,6 @@ jobs:
       - name: Deploy sites to Vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_SCOPE: ${{ inputs.vercel_scope || secrets.VERCEL_SCOPE }}
+          VERCEL_SCOPE: ${{ github.event.inputs.vercel_scope || secrets.VERCEL_SCOPE }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
         run: node scripts/deploy-generated.mjs --session "$RUN_NAME"

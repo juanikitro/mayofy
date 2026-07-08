@@ -118,11 +118,11 @@ async function writeSummary(runName, results) {
   const lines = [
     `# Vercel deployments for \`${runName}\``,
     "",
-    "| Business | Slug | Project | Status | URL |",
-    "| --- | --- | --- | --- | --- |",
+    "| Business | Slug | Service | Rating | Project | Status | URL |",
+    "| --- | --- | --- | --- | --- | --- | --- |",
     ...results.map((result) => {
       const url = result.url ? `[${markdownCell(result.url)}](${result.url})` : "";
-      return `| ${markdownCell(result.business)} | \`${markdownCell(result.slug)}\` | \`${markdownCell(result.project)}\` | ${markdownCell(result.status)} | ${url} |`;
+      return `| ${markdownCell(result.business)} | \`${markdownCell(result.slug)}\` | ${markdownCell(result.service)} | ${markdownCell(result.rating)} | \`${markdownCell(result.project)}\` | ${markdownCell(result.status)} | ${url} |`;
     }),
     "",
   ];
@@ -207,10 +207,26 @@ async function main() {
 
     try {
       const url = await deploySite({ token, scope, siteDir, projectName });
-      results.push({ business: site.name, slug: site.slug, project: projectName, status: "deployed", url });
+      results.push({
+        business: site.name,
+        slug: site.slug,
+        service: site.service ?? "",
+        rating: site.rating ?? "",
+        project: projectName,
+        status: "deployed",
+        url,
+      });
       console.log(`Deployed ${site.slug}: ${url}`);
     } catch (error) {
-      results.push({ business: site.name, slug: site.slug, project: projectName, status: "failed", url: "" });
+      results.push({
+        business: site.name,
+        slug: site.slug,
+        service: site.service ?? "",
+        rating: site.rating ?? "",
+        project: projectName,
+        status: "failed",
+        url: "",
+      });
       await writeSummary(runName, results);
       throw error;
     }
