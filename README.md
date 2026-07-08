@@ -13,6 +13,8 @@ El repositorio empieza sin datos reales finales. `data/tandil-businesses.json` e
 - Vercel preparado como opcion de deploy por carpeta generada, sin ejecutar deploys automaticamente.
 
 La prioridad es calidad visual, no velocidad ni costo. El agente tiene libertad para usar frameworks, librerias, composiciones propias y CSS dedicado, siempre que el resultado final exporte archivos estaticos y respete los datos verificados.
+
+Division de roles (preferencia explicita): **Claude Code disena** las landings (skill `frontend-design`; ver `CLAUDE.md`) y **Codex las programa** a partir del brief de diseno (ver `AGENTS.md`). La barra de calidad son los golden samples de `docs/DESIGN_STANDARDS.md`.
 Cada landing debe nacer de un `conversion_template` y un `design_brief`: que vende, tesis visual, voz de copy, firma de layout, plan de assets, plan de IA segura, anti-patrones y objetivos de remake. Si los datos o fotos son pobres, la IA puede poblar copy, secciones e imagenes genericas del rubro sin inventar datos comerciales.
 
 ## Comandos
@@ -97,9 +99,9 @@ npm run qa
 2. Generar shortlist con `npm run shortlist:tandil`.
 3. Promover 10 negocios con `npm run promote:tandil`.
 4. Preparar briefs con `npm run agent:briefs:tandil`.
-5. Codex/Claude elige `conversion_template`, completa `design_brief` y diseña un frontend real por negocio.
-6. Codex/Claude agrega `agent_frontend` en `data/site-specs/tandil-site-specs.json`.
-7. Validar specs con `npm run validate:specs:tandil`.
+5. Etapa `design-director` (Claude): elige `conversion_template`, completa `design_brief` con `designed_by: "claude-code"` y define la dirección visual de cada landing; Codex implementa el frontend a partir de ese brief.
+6. El agente agrega `agent_frontend` en `data/site-specs/tandil-site-specs.json`.
+7. Validar specs con `npm run validate:specs:tandil` y el gate de diseño con `npm run qa:design`.
 8. Validar que no haya datos inventados ni negocios con sitio propio.
 9. Generar una carpeta de sesion en `generated/<sesion>/`; adentro queda una carpeta por negocio (`generated/<sesion>/<slug>/`) con todo su codigo.
 10. Ejecutar QA de contenido, datos y frontends authored.
@@ -107,4 +109,4 @@ npm run qa
 12. Generar el estudio final con `npm run study:final -- --price "[PRECIO]"`; el Markdown queda en `generated/<sesion>/final-study.md`.
 13. Crear plan de deploy para 10 URLs separadas.
 
-Ver detalles en `docs/PIPELINE.md`, `docs/DATA_RULES.md`, `docs/CLIENT_READINESS_QA.md` y `docs/DEPLOYMENT.md`.
+Ver detalles en `docs/PIPELINE.md`, `docs/DATA_RULES.md`, `docs/DESIGN_STANDARDS.md`, `docs/CLIENT_READINESS_QA.md` y `docs/DEPLOYMENT.md`.

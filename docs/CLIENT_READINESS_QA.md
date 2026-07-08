@@ -82,26 +82,13 @@ Esto escribe `generated/<sesion>/final-study.md` y `generated/<sesion>/final-stu
 
 ## Golden sample
 
-El mejor flujo es aprobar primero una landing como golden sample.
+Los golden samples vigentes son las 3 landings de `amba-alta-conversion` (Cerrajeria La Madrilena, Guapisimas Depilacion y Calderas YA), disenadas con Claude Code. Ver `docs/DESIGN_STANDARDS.md`: ahi estan las rutas, los principios que definen la barra y el procedimiento para aprobar un sample nuevo.
 
-Procedimiento recomendado:
-
-1. Elegir un negocio visualmente fuerte, por ejemplo detailing, wrapping, chapa/pintura o un comercio con buenas fotos.
-2. Crear una landing completa solo para ese negocio.
-3. Validarla con:
-
-```powershell
-npm run generate
-npm run qa
-npm run qa:client
-```
-
-4. Revisarla visualmente en desktop y mobile.
-5. Cuando el usuario la apruebe, guardar screenshots en:
+Screenshots de referencia:
 
 ```text
-output/screenshots/golden-samples/<run>/<slug>-desktop.png
-output/screenshots/golden-samples/<run>/<slug>-mobile.png
+output/screenshots/golden-samples/amba-alta-conversion/<slug>-desktop.png
+output/screenshots/golden-samples/amba-alta-conversion/<slug>-mobile.png
 ```
 
-6. Usarla como estandar de calidad para densidad comercial, naturalidad de copy, ritmo mobile, nivel visual y pulido. No copiarla literalmente.
+Usarlas como estandar de densidad comercial, naturalidad de copy, ritmo mobile, nivel visual y pulido. No copiarlas literalmente: la barra son los principios y el nivel de ejecucion, no el layout puntual.

@@ -4,7 +4,9 @@ import { resolveArchetype } from "../archetypes/index.js";
 import { approvedBusinesses, loadBusinesses } from "../content/load-businesses.js";
 import { resolveDesign } from "../design/palette.js";
 import { flagValue, positionalValue, resolveGeneratedDir } from "../generated-output.js";
+import { designBriefIssues } from "../site-specs/design-brief-rules.js";
 import { loadSiteSpecs } from "../site-specs/load-site-specs.js";
+import type { SiteSpec } from "../site-specs/schema.js";
 import { copyAgentFrontend } from "./agent-frontend.js";
 import { renderBusinessPage } from "./html.js";
 import { prepareHeroImage } from "./image-assets.js";
@@ -17,6 +19,7 @@ type Args = {
   specsPath: string | null;
   requireRealImages: boolean;
   requireAgentFrontends: boolean;
+  requireDesignBrief: boolean;
 };
 
 type ManifestSite = {
@@ -47,6 +50,7 @@ function parseArgs(argv: string[]): Args {
     specsPath: flagValue(argv, "--specs"),
     requireRealImages: argv.includes("--require-real-images"),
     requireAgentFrontends: argv.includes("--require-agent-frontends"),
+    requireDesignBrief: argv.includes("--require-design-brief"),
   };
 }
 
@@ -220,6 +224,35 @@ function renderIndexPage(sites: ManifestSite[]): string {
 </html>`;
 }
 
+function designGateFailureDetails(spec: SiteSpec | undefined): string[] {
+  if (!spec) {
+    return ["missing site spec"];
+  }
+
+  const details: string[] = [];
+
+  if (!spec.conversion_template) {
+    details.push("missing conversion_template");
+  }
+
+  if (!spec.design_brief) {
+    details.push("missing design_brief");
+    return details;
+  }
+
+  if (spec.design_brief.designed_by !== "claude-code") {
+    details.push('design_brief.designed_by must be "claude-code" from Claude/design-director');
+  }
+
+  for (const issue of designBriefIssues(spec)) {
+    const prefix = `${spec.slug}: `;
+    const message = issue.message.startsWith(prefix) ? issue.message.slice(prefix.length) : issue.message;
+    details.push(`${issue.code}: ${message}`);
+  }
+
+  return details;
+}
+
 async function main(): Promise<void> {
   const args = parseArgs(process.argv);
   const businesses = approvedBusinesses(await loadBusinesses(args.datasetPath));
@@ -235,6 +268,15 @@ async function main(): Promise<void> {
   const manifest: ManifestSite[] = [];
 
   for (const [index, business] of businesses.entries()) {
+    const spec = specs.get(business.id);
+
+    if (args.requireDesignBrief) {
+      const designGateFailures = designGateFailureDetails(spec);
+      if (designGateFailures.length > 0) {
+        throw new Error(`${business.slug}: design gate failed; ${designGateFailures.join("; ")}`);
+      }
+    }
+
     const allowedPhoto = business.photos.some((photo) => photo.usage_status === "allowed");
     if (!allowedPhoto) {
       throw new Error(`${business.slug}: no allowed photo available for generation.`);
@@ -244,7 +286,6 @@ async function main(): Promise<void> {
     const design = resolveDesign(business, archetype);
     const siteDir = path.join(args.outDir, business.slug);
     await mkdir(siteDir, { recursive: true });
-    const spec = specs.get(business.id);
     if (args.requireAgentFrontends && !spec?.agent_frontend) {
       throw new Error(`${business.slug}: final generation requires agent_frontend. Create an authored frontend or framework export first.`);
     }

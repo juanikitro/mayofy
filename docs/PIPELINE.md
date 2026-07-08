@@ -77,7 +77,7 @@ Componer direccion visual y preparar el trabajo del agente:
 npm run agent:briefs
 ```
 
-Luego Codex/Claude debe:
+Luego los agentes (Claude disena, Codex implementa) deben:
 
 - disenar una landing real por negocio
 - elegir un `conversion_template` de alta conversion: promesa + prueba + CTA, historia local editorial, menu visual, diagnostico de servicio, mostrador/catalogo o llamada urgente

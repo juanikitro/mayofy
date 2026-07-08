@@ -1,0 +1,1246 @@
+[
+  {
+    "id": "google-ChIJC-1DPgK1vJURcDgwEJvn5u4",
+    "name": "Calefon ORBIS Botonera Servicio Tecnico Oficial",
+    "slug": "calefon-orbis-botonera-servicio-tecnico-oficial",
+    "category": "Building Materials Store",
+    "is_vehicle_related": false,
+    "address": "Soldado de la Independencia 507 C1426BTC, C1426 C1426BTC, Cdad. Autónoma de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 6522-8024",
+    "opening_hours": {
+      "raw": "Monday: Open 24 hours | Tuesday: Open 24 hours | Wednesday: Open 24 hours | Thursday: Open 24 hours | Friday: Open 24 hours | Saturday: Open 24 hours | Sunday: Open 24 hours",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.5,
+      "reviews_count": 64,
+      "source_url": "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Nicolás fue muy profesional, empático y contenedor en un momento difícil para mí. Se tomó el tiempo de escucharme, explicarme todo con paciencia y realmente tuvo un trato humano que valoro muchísimo. Gracias por la atención y la calidez.",
+        "author": "Roxie Rubi",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/116063250276919764898/reviews"
+      },
+      {
+        "text": "Cuesta encontrar lugares donde te den garantía y seguridad sobre el trabajo. Aquí me sentí muy bien asesorado. El calefón quedó perfecto.",
+        "author": "Diana Biotti",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/106162606453356119655/reviews"
+      },
+      {
+        "text": "Desde que me atendieron el teléfono hasta que se retiró el técnico, el trato fue excelente. Cumplieron con todo lo pactado.",
+        "author": "Kaseal",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/111852634214444900321/reviews"
+      }
+    ],
+    "main_product_or_service": "service de calefones",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJC-1DPgK1vJURcDgwEJvn5u4/photos/AaVGc3n6WhbWLAAJsv55PyKgsINXrC1LV_QQZmDavn28-X5VWZmbf_zVlgQk9QmMVYjcQ-G_lRqTbbf3UNvlsaGkK66F65T-aKtGDBZwvl1UMe7DIqGfL4SrRiYNbuhUVN8-w8u-vlEHmcxSO5T0u-VxN6426NvyQClDl3X3U73Q831RNjscwl1n9e_dbegZCt4Ea8M0vg5yrkkpIV9SuaGJORHx3JrIfS8yieaULb9dTqOOAfJpYm_AKU-B2sPm8frrHyLYSplG0MajQ47ZScx7oj2QU4Y4MPQniSORyLsaNcuP0PbMOGKeyMIt4yMEgjKjs-_oy7tRxp7Pbpv_PRyIgYmCPrZooCoJaSkCME2dI-C-NOd2XOpxAINtL5dKnKY8bAyfnsSj-9rzmf1HttfesIQ1KUZE2aH-mkMKSjyYdUPdFA/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJC-1DPgK1vJURcDgwEJvn5u4/photos/AaVGc3nZmfVtXJ3ktRG_rNW8cB6KDiR5Lvk8lOFh4_HQth6Q0tq2ikJSmtI50XHtUpraZU2-oJh111wFos-AUdVrh8z7F6IEiF_dci1OSkf52yJtmT6k9JoyP7eEyHvwdJqWXAgxfYyjK5vE_S0iKHZhre1UYdbEaBtJITzsG0y5s5n8MoN4yZZiEGs3F5hce3icd95a4tXBvZHsxOVsELOeH51G4FaGxTLeaC5Iwp39OIImm80E1KAy3p-cmi6f5birHUAXXk6wO_5owWmnwlhcjjbtiISdCvTkgEMb4HyOK_vw-fLWjPl-_h-c8InDUNxEesDhQif_KQ0Mn9iAQp97tiAmNq8PYVnn-ZHgDy4BiqR1C685n6LQFCsLQu6vag4_yqXSThx4aMJ_n22s1TUTEpJuyV8gLptMpN_X0BciSjYzUPyuFfl_lLHMQLXzV5BF/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJC-1DPgK1vJURcDgwEJvn5u4/photos/AaVGc3leuXxEFiXbeKHp9-L9ylerUNwsNSUNan7QouAKM4SwmwnffQBxGK2QkUi7Te8AgFjcRjFkYX6-yEsGAmwVlKmJTxTYuMFcidSeXz_4DUqrq1aSjle2x5bc28rfPjze-JGOJ2McrfoQE7tAicVJKBfJVtPdx8clA6CDtTzUmwWDyUlKCHJ8GJcDyP5cIouaNm-OeQGlEj2dZkLPVitBLj5S1QhMGP9bkMAMA1Do6fkxDscaIMQTzBAnN96lX1Xm3cAa3sSvCJyxpfPOdZ2L1S4Z3QL-FAD9uWRcAvy_Ej9t4RE-aQhFGdLAVtTTCjzlCPhMyR3xKqYDW9i5vjRqskdHWSIN0ANA0uVgTOH1XcaZWFPCIp1K6j05DA3E9zWMIL1xzSU_rG41aCE2BafZDf-Tkbxwl2vYu3zIae5FBR0Saw/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:57:21.918Z",
+          "notes": "Resultado automatico para \"service de calefones\" en CABA. Segmento: gas y calefaccion."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=17214701278847842416&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJYyz_71nLvJURX59Q9aaAFaU",
+    "name": "gasista matriculado",
+    "slug": "gasista-matriculado",
+    "category": "Services",
+    "is_vehicle_related": false,
+    "address": "Gascón 1701, C1414 Cdad. Autónoma de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 3477-2401",
+    "opening_hours": {
+      "raw": "Monday: Open 24 hours | Tuesday: Open 24 hours | Wednesday: Open 24 hours | Thursday: Open 24 hours | Friday: Open 24 hours | Saturday: Open 24 hours | Sunday: Open 24 hours",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.7,
+      "reviews_count": 333,
+      "source_url": "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Excelente profesional. Dejo mi experiencia por si le sirve a alguien mas. Lo llamé por un tema con el aire y con la llave del gas, y uno esta acostumbrado a que te encuentran un problema siempre, vino Nico, midió todo e hizo las pruebas correspondientes  y me dijo \"aca no tenes ningun problema si te cobrara algo te estaria mentiendo\". De esos profesionales que ya no hay. Muy buena predisposición a ayudarme con mis dudas, ya que no tengo ni idea de aires ni gas, muy prolijo para trabajar y sobre todo muy sincero. 1000% recomendado. Llámenlo con confianza.",
+        "author": "Sergio De Luca",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/106567702644454855691/reviews"
+      },
+      {
+        "text": "Un excelente trabajo y servicio, Nicolás con muy buen trato, calidad humana, sumado a una cotización de la instalación de la cocina muy razonable. 100% recomendable!",
+        "author": "Fabian Szulanski",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/102371650360766133753/reviews"
+      },
+      {
+        "text": "Encontré a Nicolás por la referencias positivas en maps.\nMuy buen trabajo de parte de él y su equipo!\nHice un trabajo de gasista en una estufa y uno de plomería en un bidet.\nSúper prolijos, amables y cumplidores con la fecha y horario coordinado.\nHicieron el trabajo tal cual se los pedí.\nEstoy contento y cuando necesite los volveré a llamar!\nMuchas gracias!",
+        "author": "Martín Vázquez",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/116839905692366019437/reviews"
+      }
+    ],
+    "main_product_or_service": "gasista matriculado",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJYyz_71nLvJURX59Q9aaAFaU/photos/AaVGc3k-t6q3ZK938y84VYXi0ypV-6aApu0wDaiP4awQTMvA46IRBCNCXwJvNfRoHOAVJoH5_-qhgB36RlVFzCMzYAGWWv9zBqsg8wHhInGGuEPBbRtndy_E-pOYdNlCJL8ld6Ex-dBSWo720JIRZmX_1Ivhef5H-zzBKs2cHyauwK0NLCj9Y6KgwAwLJWh6fXzz_GIM70LrGxJUdi7cZksxArNgAy2UL2czYPbeFrTgyuGyBsGPB2DAvS11ifXtgkKPm-Kxie7sXMlQ0iSbregX7ZdGElECEJc_5pyixt2DoZ5FQOgUzHUxxmEf0gaDB3GVZyB1GEdIsWauWCE1MkParqB8AM6kUzxe0AJwF20H-9anP7F3GwyBbtoS8pEYgS6g_4_MuYsOPcOjR5p2XrleW1dXLRQGGNhmN3HieBeM1eCIoLyxxrxo_ZxYn20cHV88/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJYyz_71nLvJURX59Q9aaAFaU/photos/AaVGc3nO5Ky2T2F8id6qLl8Vqbm10crExsmtAwYbxNsDufqlvWjlEVpyWipa0MPMJbSB8dt9jav9LnAen2hapKxK8HiKdRxRD6bntVICw01MKSwuRudp_Buo9qPB642HtsbVrlnvy0cztqjps5zzEzpXQMg1QyFybEQtO6-t9m4TNLoTlmDd4F9VBXUe9hAGV7F_L54tewGSx93wsqsIxaeiB_JjzjMHwzN1r4k1Dl0ziFu9FVhgkKJuC5JqGyMNRWYxGu23yAtlrBGt1kMtDj7oIBqY0GR6ZXxl7hii0CMD0cUx373Q_8FSPwyYA93-TUXRBWq1dpO4ZEmDRy00Fm5LORD7U13K2i5ERM2Qlli4FkjjIEdYF14lQQV5IvB5_H5Ws7qEqfF2PD6P_HGHxzOtN0tih6NQWBljxqz4VRfAuLsf-YddphQa3dow9YQXB3KP/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJYyz_71nLvJURX59Q9aaAFaU/photos/AaVGc3lkpGcEIxhQaWQD3ajJG47fSzb9cRdEU8HqSKmAthpq5ftFNLYwg4-6DACIJKH81WrFp9EbbwfEGF6NA5DTz1lLJkBtFzucOPmCHVIBbtSRMjBGazIDaBOyE6X9dokY1dT29whirhUnm60Tu6EXLNjdWHC0t4JXUO8pXiiHto-H3plh2yFH7pFSJzvG54MbzApoN_teeq8_Umi6g_dwOv_gZLpyP1DEmoHzGiWI7Z2HdiypP8Km_nuepsSkJGMcbc6IoPSTNKFtVJLA0aiNF_wIPENIYZQXipvvwVN6bLOWMmSRgv0n1ikUoX1hVeJ4X1FnFLFl14iU1xAwxPSbkLzfv__qYIebx3gar6nbennYJudgnN2IJXMS2HialwkkrNuN9QHmm51w0FQtBVTK7Qq5Rs995tHZRZmcXhxNNXZAnqdC5RxpyXZ3yHpyAFi5/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:57:21.919Z",
+          "notes": "Resultado automatico para \"gasista matriculado\" en CABA. Segmento: gas y calefaccion."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=11895555445337661279&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJ03sUl4uhvJURSTqoLihfDxg",
+    "name": "CALDERAS YA !!! SERVICE 24 Hs.",
+    "slug": "calderas-ya-service-24-hs",
+    "category": "General Contractor",
+    "is_vehicle_related": false,
+    "address": "Blvd. de Todos los Santos 100, B1623 Benavidez, Provincia de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 3356-8147",
+    "opening_hours": {
+      "raw": "Monday: 1:00 AM – 11:30 PM | Tuesday: 1:00 AM – 11:30 PM | Wednesday: 1:00 AM – 11:30 PM | Thursday: 1:00 AM – 11:30 PM | Friday: 1:00 AM – 11:30 PM | Saturday: 1:00 AM – 11:30 PM | Sunday: 1:00 AM – 11:30 PM",
+      "structured": {}
+    },
+    "rating": {
+      "value": 5,
+      "reviews_count": 43,
+      "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "​⭐⭐⭐⭐⭐ ¡Mariano es un gran  profesional!\n​Tuve un problema con mi caldera un viernes a la noche y, sinceramente, pensé que tendría que pasar el fin de semana sin agua caliente ni calefacción. Después de contactar a varios servicios que no respondieron, encontré a Mariano. Su atención desde el primer momento fue impecable. No solo me respondió al instante, sino que, en lugar de venir de madrugada, me guió por teléfono. Con una paciencia infinita y grab claridad, me explicó paso a paso qué hacer, pidiéndome videos para diagnosticar la falla. En menos de 20 minutos, y sin tener que venir, logré que la caldera volviera a funcionar. Es un verdadero crack: honesto, rápido y, lo más importante, se nota que ama lo que hace y no busca cobrar de más. Sinceramente, la mejor experiencia de servicio que he tenido en años. ¡Súper recomendado!!",
+        "author": "Martín Gauna",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/113025305862833047467/reviews"
+      },
+      {
+        "text": "Mariano no podía venir y sin conocerme, se tomó la molestia de explicarme todo por teléfono para que pudiera resolver un tema con el termotanque. Un genio total. No me cobró un peso y tuvo la mejor predisposición para ayudarme a solventar. Millones de gracias",
+        "author": "Marcos Cobos",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/114807050451863519428/reviews"
+      },
+      {
+        "text": "Excelencia. Practico, eficiente, amable.\nNo solo nos explicó todo con mucha paciencia sino que nos resolvió el problema por teléfono, guiándonos de que hacer para solucionarlo más rápido.\nDespués de muchas malas experiencias con gente irresponsable que te dice un horario y no viene, o viene y te cobra cualquier cosa abusándose del desconocimiento, quedamos muy satisfechos con la experiencia.\nGracias Mariano! Ojalá tengas muchísimo trabajo, te lo mereces.",
+        "author": "NUTRILAKE Nutricion",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/105298218552663489120/reviews"
+      }
+    ],
+    "main_product_or_service": "service de calderas",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJ03sUl4uhvJURSTqoLihfDxg/photos/AaVGc3msysZckVYWS4NL1vdrchphhjxwJDyJVcD9ul5B_40zAtGgOD6147dWrWYxiNCUkc78tWXjFPPMw3kogDlh8pomVq2EpVEL5MfMZACa-yjJioWRqIx-2eQWW2RN0xEH7eqBLgaxfJZAO971wuYUkzDwVDqJwFIFKjnDlCFMBS6h3MOvgEZyHnj6mhfvouJYBlzM6zyYmbGeyljvKPxwefmBnRExsIzfkXJRXW_zkLvF3JOX0ceSpYpgV7d7Ibn9HQThncW0aUb7KW1qGfCUjh8ch3-zGMHlxLE4wEtmDXoavTK_7e9E7IrlgFy2h63pTFoy8Ycp61f7XAQ092DUk2HtJ_QyxcIFl31dZeEai9RVfmj67N_GMfoXvtTlaRnJEqAANNWpqCnEbT7yhAQLZTRdHxqb0GcPDikveuf1cArjIQ/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJ03sUl4uhvJURSTqoLihfDxg/photos/AaVGc3mzcheGPAMY_KOJGhcFV9EuMDcN7Oom497-BlR3aXMNBsw1V7cln0yfS2n7rMBu-PHnT8ow2KFuT1AwIRTGlX9YVajrdEd5qLuy_LxFgJ4f800jjHruqMMf3I0v2wOh327XpIhlIySVCozUsuEJmpobGUZukKOlc5junGjVg5kNdS385QX_E5_tEJiZVTFzlKb-GYZQ9Qy-FKhbxAseWV_heTNGqtmA6CIRESSqPNXcNht0JIWhQ4uFdh54v94SCMKgyUtcyDExJCd_mB7p7cFl994mjHMcgZT-BqAXPRQ2JC9yy9H3NnPErK6CyOIokI4r2HHGt7KxkVQR5S_Pta2awkxQzFJeLl4_ukyCauXRnLV_46SnSiV8jjGz2DVg9y6XG7OxFgbhuJzB-blovrall97jOvHBt0s2WB_BU_kFYTBg/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJ03sUl4uhvJURSTqoLihfDxg/photos/AaVGc3nmuSLCX4_ZB5vHBtKsW04AfH8cU9aOjUlSrZ2IJtxwxky3NnQItFP3gcW_7lCtBGdTaaCRAlDk9VWkl3KqBS9CFAssHxCvu84AsH-kbEswJTfWrzxkag1Gws-Ac3W7EqX3-Z8-nevANRb-OgI2awctArlOsxxehAmhdkFabt1WgzYziCupWFZ5FP0B5JD49pNSJN9GHNkaIZJCkAnYmddx-VjWKSORlMDT4Es8PPj7nhnux_YosW_bWXsQXpz1GuJprqIHctuW7fMVAKdkUMHTPqhQfrH7UVS4QIsM1xelPJ3JRxYn5WW6ljseHzgUKUhXLBM73P0RQS0edNZjQn4QgwZhkz2991pfcyWoldE38XF7O8cTNRhIm5jxOeDSvX2nVMLSORFVOPQmRJ7u7oi4uKg3N-9hqHnyY-uoQxcvOsu3yLqwOIs_pZPuua5o/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:57:21.919Z",
+          "notes": "Resultado automatico para \"service de calderas\" en CABA. Segmento: gas y calefaccion."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJmaNUFXjBvJURNyRUmZusIhk",
+    "name": "Termotanques carlos ,reparacion integral",
+    "slug": "termotanques-carlos-reparacion-integral",
+    "category": "Services",
+    "is_vehicle_related": false,
+    "address": "Juan B. Justo 1377, B1722 Merlo, Provincia de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 3463-5065",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 6:00 PM | Tuesday: 9:00 AM – 6:00 PM | Wednesday: 9:00 AM – 6:00 PM | Thursday: 9:00 AM – 6:00 PM | Friday: 9:00 AM – 6:00 PM | Saturday: 9:00 AM – 1:00 PM | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 5,
+      "reviews_count": 33,
+      "source_url": "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Excelente atención. Vino en el día. Arreglo todos los desperfectos con el precio convenido.",
+        "author": "silvia fátima Hidalgo",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/106173328515028105626/reviews"
+      },
+      {
+        "text": "No duden en llamar a Carlos, lo llame un martes y vino al día siguiente con su ayudante,  en menos de 2hs resolvió la falla de mi termo eléctrico, lo dejo funcionando excelente profesional muy respetuoso en todos los sentidos.",
+        "author": "Natalia Francia",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/109212273710828532796/reviews"
+      },
+      {
+        "text": "Me arreglo el termotanque arreglando las cagadas que dejó un gasista de tiktok. Muy recomendable!!!",
+        "author": "Damian Martucci",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/110473222028970418553/reviews"
+      }
+    ],
+    "main_product_or_service": "reparacion de termotanques",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJmaNUFXjBvJURNyRUmZusIhk/photos/AaVGc3mXVMG9SN_4K1de5nLHi88NeiZI_3WNY0hCzOVp1N6FuLhKDpnHpJMUsJKHUQFJvmIbv8BdDjsS6kaxp_86ANuxxFq3L_2wgEvAsQyFbChARvxETG1WAIJPJCN_AXdVgQviQ69hfNUlP5hvU2-PM1p9eQ5N1wffAYw4ScCu-IWgSaJ-886I_RbVBSvdncCV4GAgr9I1txpMBUUNuXEJQPBoq1jO_YrLO0D3kls6hX3rKsbmwcV5mk1qCMh2nM5Sqpr4Oya9O-nQkJd-RZ-uLI2NMM68Zkzk4ABN2kJTrwsnEcijS68Yb0AUZcUEHmQr14aOHFQLAZ15QJt2TIYpehoiHvcJo1XU6QOQuKV1jGF7e2GHKLWp2J5NCTagleAvaGFJhhWIKj45ff5TMIPRvvUc79a0V0sj8HlkAMd3FfWVMMg/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJmaNUFXjBvJURNyRUmZusIhk/photos/AaVGc3ktZLxzoIZyzjqOhY0ySbSPLCftrQSQKisEOAX-67V1nCIfkq5s3R4Uu2hDckn69lw-ymbntTy94bmzfRKbhpBh09MgYaaOhSxxH_v_vKBYxk7Em_axUICwOErpZe3CQ1QfvRCU818VmTImzrjEAWxHRHLWWDcs_c0glezqFszjCUR458iJB4ALarfQ1j5NwOFF4mgF4eiv469sG1NtQ7LH0l_QMh_Rqj-CyuTTPMNretGacTqLbZ4GS8dGnOe3eUEZQraxpAZ-m0Fi3YEpqFsUHby8tWKWVurEU4VFIx93ixrMd30zTEN2Mjxh8y0ixsQttoW_0pyt3-1Gfw3t03S5mU194XseJcbmxezm07L4LETOUTbLeIVN0A4gynTH_0rmuLqfyMpE1FUIKvYtZzoeEyvpTtYyQbfuchufE_BIzA/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJmaNUFXjBvJURNyRUmZusIhk/photos/AaVGc3lsLED2V7zdHtSwh8ZN5ct5XD-6X4BWND0VG0rSrYwT6aV-c5oMFDIfB7WoRxpvcgnwrOCR9lMW2C4H1a_oQNJyVebzc41orSpDv4rfNUqPEvtpd_heQf0VBaK6bClYBw6hIN1vV5ysKdmCX4c4cIRgwBFZzWbeXlTOzSQfd_-j0T_hWZBCsqgnD8P1Oj0zPN5P7EtQWDGg7hJhNdgzfYS1_rkN_B8IeuMWZ2Ez2UNjAcPGFi17xWzUoMVQjcS-y_0RPV1cf7kpieaXQIgV_3QyH0Z3XT37ziUe1D0ybnmqweCnqrxa84Uc5SMurbGzNLofx-JUUjavmbj07DVh_7zx7dcd8SecZeQnEvY8Gb6tNg3fIgw7blmi9t-aO8-lHhvTpH0tgEInchjwh1ouA9xK3VAx5-ncAUPDcUvrFI0ASQ/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:57:21.919Z",
+          "notes": "Resultado automatico para \"reparacion de termotanques\" en CABA. Segmento: gas y calefaccion."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=1811199784448697399&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJB4wVAOy3vJUR7kASCFBbiL4",
+    "name": "Plomeria Calefones Estufas Christian Garraza Servicios",
+    "slug": "plomeria-calefones-estufas-christian-garraza-servicios",
+    "category": "Services",
+    "is_vehicle_related": false,
+    "address": "Pje. Islandia 5487, C1431 Cdad. Autónoma de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 5425-2325",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 7:00 PM | Tuesday: 9:00 AM – 7:00 PM | Wednesday: 9:00 AM – 7:00 PM | Thursday: 9:00 AM – 7:00 PM | Friday: 9:00 AM – 7:00 PM | Saturday: 9:00 AM – 1:30 PM | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.6,
+      "reviews_count": 59,
+      "source_url": "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Excelente profesional. Lo llamé por una emergencia, me explicó todo con claridad, vino a solucionarlo como coordinamos, me dejó tranquila por el trabajo y es muy amable. Lo súper recomiendo. Gracias Christian!",
+        "author": "Laura Benitez",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/109213716772329538565/reviews"
+      },
+      {
+        "text": "Muy conforme con el servicio ofrecido por Christian. Instaló una cocina y también nos recomendó marcas antes de comprar. Fue puntual, prolijo y amable. Muchas gracias.",
+        "author": "Leticia A",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/106317504798316158319/reviews"
+      },
+      {
+        "text": "Christian trabajo en mi domicilio en dos oportunidades. La primera vez para realizar la puesta a punto de un Calefon y posteriormente para detectar una pérdida de gas en un artefacto de cocina. Quiero destacar la responsabilidad con que realiza su trabajo, la educación con la que se maneja sin dejar de lado que además es un gasista matriculado. Lo recomiendo con creces!!! Es merecedor sin lugar a dudas de las 5 estrellas con las que lo califique. No duden en llamarlo.",
+        "author": "Debora Fernanda Prado",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/106596920065317792798/reviews"
+      }
+    ],
+    "main_product_or_service": "service de calefones",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJB4wVAOy3vJUR7kASCFBbiL4/photos/AaVGc3lC0t-lQfAHjUNCPIYr2WdNC2GJmdJb3KF1n_M-5n8yf6j3miOJ9IyK6d8AIXcRCcaEiBQsw4b0WSmsXcZm39hrvGMY-jyr8qkYjxgKd2-_zqsywW03CkGxgWh_t6dCqF7XiA7Q-3tR4lSrfCYJHLXMj_4GLMjNXa97IRJOfPGW8bkMGrkfVXHaBZM6Wu3CzYS4TMeoaqLSPxGUSmcUPnF1c8Rp7gwq7kZhyardx76sAl-WWDDx4A5fzuP2gcf9DOVhFRr3TXmGgDOBRkDA8Hk-8y19C8QRR3Aeb3RPY9Hu_W1-cEbmkyZiO-R4yNqIR7fejDTjopz3T6UwksGf6wINsaPWe1iNB2BOF2QxXIK0TFK6naLhmXgIVsar7GzP81DoFKmiHbQUyimEqBYu2qr7cDT9puOO_nQ02W1X_Nrb3d4I/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJB4wVAOy3vJUR7kASCFBbiL4/photos/AaVGc3n-Ylgc1pHjIn9zJCsulNqaFOETEKVMqmQJ0etmg7T-q7SaL5yfjhmNM79ZIgHJqXYduUJTLDCBidj-3sG4JipkabtM4IJcdhIxHxWZ4Vy3PDl9fspKkiZ818a-8mV6g2GKyi7fXLstgXzYxHLIs36Bkf05PoCbC08MYiRaMdFf_j5wPkP_DOzJzsWWTdvzT3IYzJT6iO3tBxS3LOIeyoupFaPguqP_qxejZMyuh_CIGCIO4VeHd2XyYdcO1iq_A8weV2ooguVmZK6d8JkqX3QTfKMPt7CZW7kC8kvM9_i_X1y5ctrZpjxfToDnXYhq2UhLRG58oypeZNQ_XWMYVQTpuaay0j6J6tZjawYwSx_yqde5zP7sgkgwEl2GxOkJ58UsTa_aXRQxsz0MRcdi6FxBOUmalPIAgjmwVj8BoZRxKg/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJB4wVAOy3vJUR7kASCFBbiL4/photos/AaVGc3lddqWAGJ6DRnlxL-LaTHkMykNJjqyEfdhPGpqLe8z_o2xWcoZRLQE2_CYhYK9tWqPBysTmyIorPoH5Xd_MYeXssn0vdwQ6cM-QWOskoAUfto18N4MXvjPOFIw8tMOmFNnSRXh6YBbI5DZrCgJ8thUlg7QM2mySeWTCsXUqnqw16PfdSuThCVxCREjXPbfEqEqDb-fR7i4kjZgLfAOwyegebcnTixGMp0qSM1e7yOP4QM7ksn0-1pD0DZiArnm92aWOs0bpL9zEQQtavflMe8sevS3wh9aXi-p2yG8c8FV9MZ1yIW9ftxn49X3hLD5WXUJ1sRiccaWw9BRvgk_1zSAduzzmVlMRgpmzJM6etj2M8dxxnCatVbIqBpkZnb8E14DW5SVWYFZnIy3kFiJv-EVHH1ycMbu0BIy3EhmrnI5Lqg/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:57:21.919Z",
+          "notes": "Resultado automatico para \"service de calefones\" en CABA. Segmento: gas y calefaccion."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=13729323863329882350&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJH2-iRya3vJURF9cIl_PHnro",
+    "name": "Javier Plomero Gasista Matriculado",
+    "slug": "javier-plomero-gasista-matriculado",
+    "category": "Services",
+    "is_vehicle_related": false,
+    "address": "Ceretti 3051, C1431 Cdad. Autónoma de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 15-5317-5500",
+    "opening_hours": {
+      "raw": "Monday: 8:30 AM – 7:30 PM | Tuesday: 8:30 AM – 7:30 PM | Wednesday: 8:30 AM – 7:30 PM | Thursday: 8:30 AM – 7:30 PM | Friday: 8:30 AM – 7:30 PM | Saturday: 8:30 AM – 1:00 PM | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.8,
+      "reviews_count": 585,
+      "source_url": "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "A Javier lo recomiendo sin lugar a dudas. Es un excelente profesional con conocimiento, amable, puntual y rapidez . Solucionó varios inconvenientes incluído una perdida de gas de nuestra cocina. Además nos aportó unos consejos para su mantenimiento que lo tendremos en cuenta.",
+        "author": "Luis Lerch",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/100347561815045430253/reviews"
+      },
+      {
+        "text": "Lo llamamos para quitar una cocina muy vieja y colocar una nueva. Súper recomendable! Muy profesional, tiene su matrícula al día y la muestra (otros no lo hacen). Es muy claro al explicar todo. Ordenado, prolijo, precios accesibles y también muy buena onda.  Qué más se puede pedir? No duden en llamarlo.\nLo conocimos gracias a las referencias que dejan sus clientes, así que no olviden escribir la suya!",
+        "author": "Analia Compa",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/113715191285227991127/reviews"
+      },
+      {
+        "text": "Muy recomendable. Es muy profesional, instaló en nuestra casa la cocina y el termotanque, al que hace poco le realizó un trabajo de mantenimiento. Nos brindó asesoramiento en plomeria.\nNo dudaría en volver a llamarlo ante cualquier problema de plomeria o como gasista.",
+        "author": "Araceli",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/117306677906878552098/reviews"
+      }
+    ],
+    "main_product_or_service": "gasista matriculado",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJH2-iRya3vJURF9cIl_PHnro/photos/AaVGc3leQ0ayZtBQeEXH7ecx-1iT35KDZ4ybNFCyAQOTLQ06ZLy2SH4CDNo68YX7bykwTaWAAZoodbjGHyvYEwv-1h7ezLZqCDjEEbUpSLhimq9gEG5r_Gv9meqfa7jp8RqQIS5knx_nfQAvKFxFTGCxX8EjwyaQ_Bu3ajmeiLJj_JtosJ4rOGmeDIfflhiocVTssDfD-g56BjDcICuJnOjgjz7R_sMOHgLlRNsHEBVyckonAk2uvWGCfPso3Vt51sJpQNgiGBquVkXVgxKnQn9m7Ixj33E0ZWngNmQNfFNeNi2_VFJ98IUZ5VaBbFFMc8F5kZTsn2SUXwK2zqLLN5MxAaDdZ2yRcpK4nOXX9LSDLuSipBonvbcMkSaz3sT8rNobAhjlLbroCLBcZSenziiAm8ZTOckM22TG6SyLDWQ9DXE/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJH2-iRya3vJURF9cIl_PHnro/photos/AaVGc3n1nwjp3E2uGdiP75DppHw17-9uyqbRF2lte9ap_GAou0t4lYo9cbCBF8Ww7pTW3iS4TzHqugu60QJaJGO--lEI6rSce5j0VoFhWrv-32DPXtWB_BE3Er7G8F_71oFMlMu3JN-VdwYFp9-CdZEIz8cak1bpyvk1M3x7XHWsM0ovmGDKa1pCa5ohxy3EjebrIarBsBIKMmOs03c6n5zVc2v6OfmraRsEtuk6nFajosMp-nItqHIHi7CW-KW44oVqF35DGjK7BlRE4T0ViUkKMmaOYohcK8uci4ioABA1koMbOIi_8lTUkLIZ6S_iVJ8ENzpk2uQf6DSbpAMlEX9N94i6wbIf_7LiwgvrfWxf3jt_GUTIiEZyuhUbux-uRI8wytzD8LVnspxsISYW2-PD4-Oedh9y4qicbE5JIT_TN26KOs4/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJH2-iRya3vJURF9cIl_PHnro/photos/AaVGc3n16RhVvvYCZZX5CPJI97rK8HrSj4r61h2GIfJGAmlpPmR_kLGLhPKKiD3PokTXYbbS6RqwL6XRZK4qBH0BaY_MT_UhF933TtiqnEv5ajVKSsIA0esG2qIb0hEcA7O9RmGtC1lc4I1Dn7Hnssl6Z-Utr0cZ7inEZ82mGhhY2dcsJGmnZ7eXJVhbfc_ToPdVhSl7LZLQGFPTZzW_kXf9hIEJA4qt6tAbjjQP14VFiqXncUk9ShaggZO1mmcLMI7srNJlmgsw7vCtP7yI48JoWyLQTkBTiww21Bwb-7vubj9yTuKlcOOn7Dm3uoY9P856eQR50XHd7feGqzdYX8vItMtk_z2-vTf4_CloeDW7fZTX4I6QlobgFwyshy40K8YBQsis3istJ1bq1LEimbXZq1OnFALKo53sBxiFZh3xKvATIA/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:57:21.919Z",
+          "notes": "Resultado automatico para \"gasista matriculado\" en CABA. Segmento: gas y calefaccion."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=13447405386399799063&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJY0444HPNvJUR_q7MrizFAz0",
+    "name": "CALEFON ORBIS SERVICE OFICIAL",
+    "slug": "calefon-orbis-service-oficial",
+    "category": "Services",
+    "is_vehicle_related": false,
+    "address": "Carlos Gardel 920, B1824CTN Buenos Aires, Provincia de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 6522-8024",
+    "opening_hours": {
+      "raw": "Monday: Open 24 hours | Tuesday: Open 24 hours | Wednesday: Open 24 hours | Thursday: Open 24 hours | Friday: Open 24 hours | Saturday: Open 24 hours | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.3,
+      "reviews_count": 39,
+      "source_url": "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Muy buen servicio confiable y justo con los precios muy recomendable tengo un calefón orbis y lo reparo enseguida",
+        "author": "Oscar Garcia",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/117665202421879287736/reviews"
+      },
+      {
+        "text": "Enorme agradecimeinto por el servicio y la velocidad en el arreglo y reemplazo de la cámara de agua del calefón! es muy complicado encontrar buenas experiencias en un contexto donde la mayoría de los gasistas te escupen la respuesta de \"va a ser mas barato si comprás un calefon nuevo\", cuando primero no es cierto, y segundo nunca contemplan que cambiar todo el calefon también tiene el costo del trabajo de instalación, por arriba del costo del aparato nuevo",
+        "author": "Santiago Pereyra",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/107144425492952743911/reviews"
+      },
+      {
+        "text": "Excelente profesional y muy buena atencion! lo recomiendo .",
+        "author": "Ezequiel Gerardo Grosso",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/102148185943780018700/reviews"
+      }
+    ],
+    "main_product_or_service": "service de calefones",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJY0444HPNvJUR_q7MrizFAz0/photos/AaVGc3kBswl4UkmQIJeCnDcTaJ8XCjyys07uwysgGUaj0jLBao0B5HM1iJcZIy3bpvq5zoVqTznnX52qF77JwtS2syLSbIomVq4FDLIuOXtfguiFsw_EvRf6OlZdC1StJOUJN0D5MuC-4AUNF6lxSGJlFClSAbfaF4xnxuWdmyioT8eyDP-F5cWqfputWI_PI_ksT8ofkyR7sWH7T1H1w5QeHnApzcnxu3ZvxTjkAuxQfXin6Qd_YYJ4QGsVaInecv_KGNjjThiEdXjXUiJVzKTHot-y-yvkAptVoAgsu2TIMl_tXv-rgVdXLT83rrJ_Hk61TiLYDsqQsvWZAj9FEVf0bvt8eazyCHLeIn1jLRCB8t_Vwk3ITHOMYnwfvAvBRRwqLoDes-oMbikQXJUGUDFZ_YKgVEm9eR9wj8MMnjC88zKB4judjHGFCTuGUVDruKac/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJY0444HPNvJUR_q7MrizFAz0/photos/AaVGc3nuHXxAdavr_MtGJczm2BfM_OzSpDghBA1W4Ol_usVpi5Sc-8cscQMYr9OOZZKJEdRMQ-qd8XfhBXWMgEoLYP7odI-_3lQ5YXIfgB941Ps9dzxfqwH5R1fOR43SPNv4NuKPtDnRvkyT6HxKXzrzQ0qlTM603nlON8j_ha11B15TgjAcG6KH6itRQLaml43nbvsjriCVG8tq6YC3CoWVuXMCtyk4XnhR55UVjaFghMgkelOuekNWEB5fbKIFQUID8OjQjApO7EPBlxAj2I9mclKUihkT_DEwyDRpf2qqsBbEODXHwMTTGRULVlIwfaRruuF9rllwB1DPy9qRE-RfP4WIsAmAE3nbsYRcx1fXlTkNLXtU0qHZjHwjimX1DTvkUe8Hy9D3h6TYMiPZ8OUVGtTm6SFnPO01bbL3D9jWA8ZNKRvIs1fAniKyUF6ZnM0O/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJY0444HPNvJUR_q7MrizFAz0/photos/AaVGc3kz_VsCgCXCFCe76o4iaGm_858FFJDmu1LkxMOON_1O7wuL0xu8xks3qjRdPxNhHDbIqfp5YhY8RHbeJmquF-tJAQFudw1UuLjTjcNVuutwmkhnufwHM6dso0D3Hwx37fbzh3CWgTv_lsqJSGjGn08cJFRtqZNudNY3796eu152AHf_PN7axzD4pZZRMrypuRsVXbhxDIu3ku8XpU3Liwz5qG0P-HZeYrzojivXpsguPqhicvjJ4WvoPILYpq_PQo6Nx2jM05dq54jlxcjrVSY_5ah3-1leN1wvFG0N86SmzolVXmzeYvpGRCvBe6ftNquxlOFWLMcogePXL35rolaCEWwysh-OB3WGJFtMIGCjjHARFSoCfsOW-FcqvIAdMQVApHNYk02yC6-EYl6dW4t6F5IfPklKal-fC6srqMYJeSIYOZ_m3kTMC_98w7oQ/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:57:21.919Z",
+          "notes": "Resultado automatico para \"service de calefones\" en CABA. Segmento: gas y calefaccion."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=4396574456945618686&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJMXIlYFPNvJURdUVyuwqT0WQ",
+    "name": "Gasista Matriculado profesional - Francisco Pralong. (Instalación y service de artefactos a gas)",
+    "slug": "gasista-matriculado-profesional-francisco-pralong-instalacion-y-service-de-artefactos-a-gas",
+    "category": "Services",
+    "is_vehicle_related": false,
+    "address": "Catamarca 734, C1231 Cdad. Autónoma de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 3833-0386",
+    "opening_hours": {
+      "raw": "Monday: 9:30 AM – 6:00 PM | Tuesday: 9:30 AM – 6:00 PM | Wednesday: 9:30 AM – 6:00 PM | Thursday: 9:30 AM – 6:00 PM | Friday: 9:30 AM – 6:00 PM | Saturday: 10:30 AM – 1:00 PM | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.8,
+      "reviews_count": 79,
+      "source_url": "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Muy recomendable. Primera vez lo llamé para instalar un termotanque porque otro profesional me dijo que habia que reemplazarlo. Él lo revisó, lo evaluó, y no era necesario reemplazarlo!!!  Reparó mi termotanque y no tuve que reemplazarlo, esto fué 2 años atrás y sigue ok. Devolví el termotanque nuevo y compré cocina nueva, que instaló perfectamente.\nTambién me reparó la estufa a gas tiro balanceado, reemplazando los caños de salida, desde una ventana complicada para acceder, y nuevamente recuperó el artefacto, dándole otra oportunidad y ahorrandome gastos innecesarios.\nLo recomiendo 100%.",
+        "author": "Debora GRIFFIN",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/117424365663412788346/reviews"
+      },
+      {
+        "text": "Un gran profesional, responsabilidad y puntualidad. Si llegaste hasta acá buscando un gasista no dudes, llamalo.",
+        "author": "Joel Peñafiel",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/101599622194018578447/reviews"
+      },
+      {
+        "text": "Recibi una excelente atención por parte de Francisco, reparo mi calefón y trabajo de forma prolija. Fue muy puntual con el horario acordado, recomiendo 100%.",
+        "author": "Guido Guzmán Yunes",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/115735082512680515621/reviews"
+      }
+    ],
+    "main_product_or_service": "gasista matriculado",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJMXIlYFPNvJURdUVyuwqT0WQ/photos/AaVGc3n7oGTYy9LRjfyt6-fWjJKLqfQU2m2AC0yy8WjJnHT3sI10wN7MsoQo75rMaBFuClVhaYTQkhFc0guAqlVnYSKUx4u3-eGHVSOrszFJ51XrJmS5TVf_1SuRXktFADBf0YvXwMEohgj7VrOGyKGK4AMCqyBzzZf24caUAaGVmGfIwEHtHq1nlo9PI1R7CkBQC7JDyvRbonpCTekV4lTVAOZVVeyCAA6-HRzpV2jWs_E65-IcenPI7QduarJs5hu-OcsUvq1X0ieHzMOGLV8BLUyEB37jHTPwM_nG9J4B-SNJU97T2mZhTrFU4FM9kMMzEf_FE7MbQFbIvSeP7uMEw_x07wg_ihtUGuEsPlKW2KNVQ00De5WOk-Yv1pL9_LWGrThH1zqbC6raoTsotzuTexX8ldehjKZLQB3uN8HzeJnN2kQr/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJMXIlYFPNvJURdUVyuwqT0WQ/photos/AaVGc3ndLzB2qtGOFK18axYT00oivvHM1DxsxJbFIc3raF3Oi3x_OLC2kPwMUreNOdqVOPEae0niuSYqp_hM2slq8mXty6dGv_Io4ucvgLL5zISFLIJJMd8ipg8KLZt0X8iX9Q4SBTrdCbTW3QRcOjbXV5f8zChqBSyOi3_tqtGjT7JUGYvqrox2-eK8SiW1IQ2ruG2qGx_NYNqx_kstCjCGavfM1rMsfcE0B6e-FkwtcXdj1iA279Z7fFL1PC3ggCic2LuxKcTjHkcIXhrlrsWU1VrswsrlwSK1dOXCkT1nkY27OBgJo9nfLiZre96-w9NdsrfP8IPXR6Y7whhi4XnShnEws9tT2ZHh3tjPhJ-el4ZmvtwzFPYvro09aYeqVUNgA_ih8sgxd0scy2WB31Rcno_Hfq-8gRcsX-0axFxG659E3g/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJMXIlYFPNvJURdUVyuwqT0WQ/photos/AaVGc3lK0noPV3eFDubGV7bdMWtXFMI2xmNhz287ZKjuDGy2bPQ7DakNQP9vmB-7En0FqDyfk_eC1nOc6etOubU0O38uPYUaum444LTm-RMabeOEz0oThA0ILbq1udmyQ1jZILY8gAhS4s1CP7BcgEKzovElS2NHcXSkg6AgJb9OTEKME5FO3w30M_adP11KFKwMyicXch89Sz7dVxD3sT3qiFGDYjTeiODLfArhfNcm_V-YJuGcaNwSeoMUmnm_kZl1d32Dt8DGPuCuqu58OwuY0Bj7hZTUXVcoN6nbZG2uQ71ms55HDQbdwrhd82pZz-t63SnbNzqTG0JxyojeSQrep3D5a7w0xtnhh6o0O-d4pwwI63CH6npbXsyn6IBfmiPst0UD4-983MgZ9OWxxXXQIuIslkX2jeJ0qOdBn3VnAFw/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:57:21.919Z",
+          "notes": "Resultado automatico para \"gasista matriculado\" en CABA. Segmento: gas y calefaccion."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=7264749348229105013&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJ--NsBQC1vJURTYJHu-iQpBQ",
+    "name": "Gasista matriculado - reparaciones -;repuestos",
+    "slug": "gasista-matriculado-reparaciones-repuestos",
+    "category": "General Contractor",
+    "is_vehicle_related": false,
+    "address": "Amenábar 39, C1426AIA Cdad. Autónoma de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 5389-1798",
+    "opening_hours": {
+      "raw": "Monday: Open 24 hours | Tuesday: Open 24 hours | Wednesday: Open 24 hours | Thursday: Open 24 hours | Friday: Open 24 hours | Saturday: Open 24 hours | Sunday: Open 24 hours",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.9,
+      "reviews_count": 15,
+      "source_url": "https://maps.google.com/?cid=1487473106187944525&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Quiero recomendar a Nahuel y su equipo , les pedí que no me hagan mucha suciedad ! Y me sorprendieron como dejaron todo pulcro y con mucho profesionalismo",
+        "author": "Pitufa3 Uwu",
+        "rating": 4,
+        "source_url": "https://www.google.com/maps/contrib/104971143452980423757/reviews"
+      },
+      {
+        "text": "El mejor gasista de todos! Muy buen precio,profesional , confiable y puntual.\nAdemas es copado!  Me ayudo a certificar el gas, reparo calefon y estufas .",
+        "author": "Lucas Maeder",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/110843253785752465312/reviews"
+      },
+      {
+        "text": "Me hizo una instalación de termotanque, me conectó la cocina y me colocó estufas en los dormitorios y living. Todo con sus correspondientes ventilaciones. Dejó todo muy limpio y ordenando. Excelente persona, muy respetuoso y educado RECOMENDABLE 10/10",
+        "author": "Francisco Orellano",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/107767488447067582114/reviews"
+      }
+    ],
+    "main_product_or_service": "gasista matriculado",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJ--NsBQC1vJURTYJHu-iQpBQ/photos/AaVGc3nIRuFtlFY86OkryGMnQp977t40nvdWVO57DlqRRRtD_FdT50TqOhgOXstAUIEFU56tyI2EjiddNgNjErPqKLDCxK4vtAh7hwyZLGlTsr_iLmpZ1aVKmQmBFVROfF4CgrlPbpJIKQvv7msg5EczDk8G_NFU4460e9FTwF_nT5pd-Lt4lLLDWLk0sB_XsH6lMrFE3hqj_HmCG5dBM-iMLXEgVZfvbX9S_eTl8iIIWf_wEXxEuj9GsEm1hkI1GQvAonKaX-wMzr2XLtseC-qkR-ueU9j-qSSlYHf7t5UNGu3nTH5rJ7XLSRx3iE4yvQnjxxXBQoyqBz62PrsoO7PaHM5efLSUZttxZYzSMtWUXdUkNf1V5LQVEszd8wIxPrfc2qtPbKahGjehyxH3d4bCP5mUEoMujWd0u3kct9hI0sUy31ft4XcmVv5KDkUfk_vo/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1487473106187944525&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJ--NsBQC1vJURTYJHu-iQpBQ/photos/AaVGc3mGfks3iKYgsjsDPSl4w5wn4Wi2-3c9iWjF64XfeOO2FQCYlc8lDxhrBIiOng0PurjiQZ7LPOQjfK3Z2sRuB6lFZrtm0hC5F5t4PFqDRwwXeSwXah6REbyqtyGOk1XNNoS2RwneN45iR-gakAaUU4b19B93_NqfHNL4oo8z7YxNYZhGmaRUU5RtFk9TMvtirNGSWxBtyGWh0695TyUuabnhoAg_u9Ponz9R5J0L82jHnzKpVyGuxySVVqWpVXetqg_KJAbIHuVZkO8KFIIN6rrk1h4zxOQU0BYKT-hj0arLURMx7xh5x_pP8ip_VJWouKa4sSWRmLoiAveB9ZY2nlmZihZ-rhJYYfPNlzDaHZ2on6QscaT1NCKy_DfrUyoOP2pnX_R6iaDq2qExtmcBW_QvOV3Zc-l7ZX6vhvym8NMRNW-HuphFAubGdBQjBknE/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1487473106187944525&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=1487473106187944525&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=1487473106187944525&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:57:21.919Z",
+          "notes": "Resultado automatico para \"gasista matriculado\" en CABA. Segmento: gas y calefaccion."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=1487473106187944525&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=1487473106187944525&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=1487473106187944525&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=1487473106187944525&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=1487473106187944525&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=1487473106187944525&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=1487473106187944525&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=1487473106187944525&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=1487473106187944525&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=1487473106187944525&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  }
+]

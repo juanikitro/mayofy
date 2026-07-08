@@ -1,0 +1,558 @@
+[
+  {
+    "id": "google-ChIJx5KqX0a1vJURrtScvyKfWnk",
+    "name": "Cerrajeria Zeus' SOLO Emergencias 24 horas",
+    "slug": "cerrajeria-zeus-solo-emergencias-24-horas",
+    "category": "Locksmith",
+    "is_vehicle_related": false,
+    "address": "Armenia 2374, C1425 Cdad. Autónoma de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 2254-2033",
+    "opening_hours": {
+      "raw": "Monday: Open 24 hours | Tuesday: Open 24 hours | Wednesday: Open 24 hours | Thursday: Open 24 hours | Friday: Open 24 hours | Saturday: Open 24 hours | Sunday: Open 24 hours",
+      "structured": {}
+    },
+    "rating": {
+      "value": 5,
+      "reviews_count": 52,
+      "source_url": "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Buenísimo! Divino, rápido y eficiente, además de muy buena onda y con la mejor actitud. Y buenos precios!!\nMuchas gracias!!",
+        "author": "Paula M",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/113165521500066989742/reviews"
+      },
+      {
+        "text": "Excelente, responsable muy buena atención y precios accesibles lo recomiendo",
+        "author": "Tito Armando Marcano Cardona",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/102305847500029935470/reviews"
+      },
+      {
+        "text": "Muy atento , llego en 20 minutos y soluciono . Precio razonable . Lo recomiendo",
+        "author": "javier caffarena",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/101681769557112993455/reviews"
+      }
+    ],
+    "main_product_or_service": "cerrajeria 24 horas",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJx5KqX0a1vJURrtScvyKfWnk/photos/AaVGc3nRfyyebDTG6yT1jl-E0i_wzq2gfMgnOskJjygsNU5gs8DyLZukg2OsyQXTyA0oqKBGYc3C3GtZr_UYMpk8iXJjMqVCZ8CmH1do098sWlhU5uZLV7cOyRADJBzGL8OoZevWZckGF4efPw3IfL2RxbZPxuhua0h9r7ePHDpzezLg_7mwVA9ZeG5cccNnrzmIJK_LvmqPBPv768MIjQUWrqVJk69qiaJbgi1kwscv-TwAOsngQd7PFDQ6mCY5wVFIQVh4SsEqBQwNgGd43FVZl3wUgeFN7edIFwV1wsaQBDUyEea6AZoOiWI9V3jU6yP707rDgBKakcNNlfeNp3_O9idvLzRxx_LUpHG0vy0oInhvridEIdkpd9obnyfqON_SQgag0VbopO7wNtXK_Xm3yhPD-NtID1jKo898YqTwOaVAQ2u74EfKdg3UdjjH2g/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJx5KqX0a1vJURrtScvyKfWnk/photos/AaVGc3mVTlgin8NWEhxKQstMdxrz7kZiOh1hrJ4nf-7V-TJEsdbGqUC5aCnEu4Ktmip1zm2ikljXmD0TD6L1qm9OHkW2fq_Bi6fe_t3Zi60K-SO5HfLXabp4UK6qbOZbwL9Y9b6mRYbeCFWuHz4M-eLEaT9DpcBA1tpg2FeqBASQOUPF0TeB06_HaAXSYBSpfXr6K19IIHfNCsGE92ybRkptrm2d0Ijz_8sgoXMZWOM3tJwWX8sXrlrgjzO9HWCQY8wF8E1zLR-WLeXhchceHeCbbq3k3nIPn6bfLmwErq9h1ta1I0atVE-ZWm9u6lpYm69CRwr7CGeCZ3_oJWXGlDHz85PTY_4NA6cBQdS5hQrnus5Rxxmxfa2FH_Gw-c544yoD2PvztkyeJ1_zIXQ3oN9ux1ubXRyhSyI8jdllCli0neS1AJxMwwoDyWVQC6SXjXuX/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJx5KqX0a1vJURrtScvyKfWnk/photos/AaVGc3lPOhMbhZ_CZh0fWlVjWeHtvLWsVHqucCHwbq3Z01tJIw5nChaAulexJ-4qNrPAjh2aJL0ZY_3idzsAXuMVoG7azMeh0WPHz_rGU6aiNH3KJycrmt9FPnDCTlPdE2sZh1RA4gtWh0ChNmkamlbMWqNmzC_fv74-3vYel8nFrTMDfAL_0KeQu3ouCTWa7Gx5D_MdXwAnnTHDmOyHT8a8uojN18YujFME5zUazVpaxSPyMoUil65qdSxCrysZpntNaieeGD-wh8H0RTc-OHKEitg5q96OG4XsuQUlJjIHvyIVslTYCunve5EMlEqhmVpn9LBWqDweUkz293kli441IqTX7NYkqU6_ujPBUmENqYhJcadR4aoIb5k3zB1r24F0pCNRK5w_DYdNkTmuRrVo1LlqgT2bpRw-3DsAbrbBAMcvxTPkwzyjgVlkYh4bdXaW/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:57:46.494Z",
+          "notes": "Resultado automatico para \"cerrajeria 24 horas\" en CABA. Segmento: cerrajeria urgencias."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=8744476598085670062&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJsxJPtd21vJURiSZJeW24MKM",
+    "name": "Cerrajería Bianco - Urgencias 24hs",
+    "slug": "cerrajeria-bianco-urgencias-24hs",
+    "category": "Locksmith",
+    "is_vehicle_related": false,
+    "address": "Av. Raúl Scalabrini Ortiz 2083, C1425DBB Cdad. Autónoma de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 2376-7643",
+    "opening_hours": {
+      "raw": "Monday: Open 24 hours | Tuesday: Open 24 hours | Wednesday: Open 24 hours | Thursday: Open 24 hours | Friday: Open 24 hours | Saturday: Open 24 hours | Sunday: Open 24 hours",
+      "structured": {}
+    },
+    "rating": {
+      "value": 5,
+      "reviews_count": 26,
+      "source_url": "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Muy buena atención y buena onda del chico. Me salvó un domingo a la tarde que se me rompió la cerradura y no podía salir de departamento excelente el 20 minutos cambió y dejó todo impecable",
+        "author": "franco Paiva",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/116029052588785730654/reviews"
+      },
+      {
+        "text": "Excelente servicio! Llamamos ayer por una urgencia, no solo vino rápido si no que lo solucionó sin problemas. Cabe destacar que el precio es accesible. Recomiendo 100%",
+        "author": "Leonardo Díaz",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/107727154070163540072/reviews"
+      },
+      {
+        "text": "Excelente servicio, me resolvió el problema en 10 minutos. Lo recomiendo!!",
+        "author": "Macarena Kim",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/118025785127365905070/reviews"
+      }
+    ],
+    "main_product_or_service": "cerrajero urgencias",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJsxJPtd21vJURiSZJeW24MKM/photos/AaVGc3nGLmPZko2TJcqTwhKhfuRcFfMPhf8HNlAe64qAOQ4ot31C1PIM7plZp9EwtTjNZSrdJQmO8jMDLHvz-h5npRvD3dOTRUfdjQKw1_0S4mLoKwzijxJzBHtc0vCB5wOmcWC9TUKgEr5q_e8YYyW0OVdL_6YtTQWNcWBF642KAobBeb335jsmc-CmbTPbJ1RNIfr3W3DuB9YGk2zgcbvLQgynOcHVOcCE4QkBXJViutvD-AOkDTFPUr7rh1A1MEcs0xppWSx7uc3BUuDuCqv3s8u0Jkb0zCIw4CMyLSBoiVUFzbt7QLUDPamhexUuJWtQiXhWs1H5d6ZJUNPp-caRFIGuEPhyiQQYH-XLuCaPkzW6YDKtCIFKtraFS7_ht-4IwAtKNN1dai9M_9-nG1vEvFyArb5JkX-WREutwl7kY2hFPCvE5fnY1xUpcJ0yqaTk/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJsxJPtd21vJURiSZJeW24MKM/photos/AaVGc3lzczkbEqguLwk9zlpUkQkhXIKmeY3WweSD8Z52ew1KiN45YimphwcgnaCLSPG4n-aVA9hC4WnEygq1ZfGsncg7LxFnIR6a7pKLhOERuTTJwhduqqMwpcvxwgTaWMtr8jj7TAfF8GZ-Ec0pD4XBU_6Z0vQ2fPo2q6OxeyyADsoAmESpOJtDjQ8xtqinJgIy5NUvR_mHQerJYNwNpx-2kz0lmNWB8RegxafmN81ovyWARI7v9_1zDOhhsGf8NKUz9Zppw9d20N1KxZaGXZC7SK7bSwdkuZpqQ1Hjc0VwVBAtWRC7jDu0VV1YeqTawQixE5z3zqTIWD5pwErB07jHttojbZC7cbtfn2tiWxf8xgZiehrOSZSXdy79hBm8vKBUmgtFd8_2b_pMcYcWbHYQ08yBAT5ChdY3mbbuRal6by4vnIIAGdF6XaKrInYGvM1n/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJsxJPtd21vJURiSZJeW24MKM/photos/AaVGc3kAziOicIjDPPx2GDCCj1S6G26dJmfLw12X1cATf7T1oxuQPFLU-d6ZJRVAsyyyDOKfg8zLaCrPS9YQelrabKsYBmp811wsM9ANx-r1jdqJw1NvX2oN1Xr6YvbNlKwFzWhSnxui_rGpn_x1c9OhvQZsnLDH5IIue93VTtra2-PO_D3ffUBpZ2xppBFGNdjmRmw4xUE8eLCWr0sAO0IZU90wHWCYqPiPjuoNT-4pcKe5Q_zvy3QnBUE6K41DVT80BigwcTMZUdbsOVluKTZV-JlFyMz7Sq4eHrjwzYCyPZdC6BVbD2q7HzVE8rXTwWz-QKkmVtvKmc7CawnDyX6q0vYQlJ0bTh5PiL2pADXvgZ5GrtVDGbeTp6Ne4SbGu7p02sxnp0qnzp0V4x7gyuZdIgRBROq7djjtXTPRyJDFwlcQY328uRIhnkQBReIMwO1z/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:57:46.495Z",
+          "notes": "Resultado automatico para \"cerrajero urgencias\" en CABA. Segmento: cerrajeria urgencias."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=11759101407390148233&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJzZkh1FDLvJURuhG8Q3bE5uc",
+    "name": "Cerrajería La Madrileña",
+    "slug": "cerrajeria-la-madrilena",
+    "category": "Locksmith",
+    "is_vehicle_related": false,
+    "address": "Tacuarí 790, C1071 Cdad. Autónoma de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 5908-8773",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 12:30 PM, 3:00 – 7:00 PM | Tuesday: 9:00 AM – 12:30 PM, 3:00 – 7:00 PM | Wednesday: 9:00 AM – 12:30 PM, 3:00 – 7:00 PM | Thursday: 9:00 AM – 12:30 PM, 3:00 – 7:00 PM | Friday: 9:00 AM – 12:30 PM, 3:00 – 7:00 PM | Saturday: 9:00 AM – 1:00 PM | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.9,
+      "reviews_count": 586,
+      "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Excelente atención. Necesitaba un repuesto a última hora y los chicos fueron los únicos que estaban abiertos en la zona.\n100% recomendable",
+        "author": "David Delmonte",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/105003140830919958821/reviews"
+      },
+      {
+        "text": "Excelente servicio super rapido y Nahuel un genio! Muy copado y atento ante todas mis dudas! Genios",
+        "author": "Jazmin Fernandez",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/111318439547141745867/reviews"
+      },
+      {
+        "text": "Muy buena atención y super atentos, Nahuel es muy honesto y simpático y resolutivo.",
+        "author": "Sebastian Dana",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/106127322431907690289/reviews"
+      }
+    ],
+    "main_product_or_service": "cerrajeria",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJzZkh1FDLvJURuhG8Q3bE5uc/photos/AaVGc3lxW99dOvWa9MacTfVjP21Slauy1MnTWYyCqSxxW5nr9G1JFNyWirmsmzVW6ZH_zdMerpjpUS2pl5_iIBui8HwSp5DjbblDatwU9kqDboU83-sJ4MrAjyt4-0UXHrgQHnqj4bySZbUt3i95a0h-D_fXMsduTf-Y1YBCPcZBrTegUXy79SYYvBkoZJnUq00O1gr4HP90ZMMIi4-b9odushXoiEsDhX5M7qVai9yrNpz3NVuMfOvnNfi5trDH9QvOEorRHLgkIr-OFs9HQVfKvlYxw_s9TQKYZnIh0gOYjW_NjWZ5A3g3MfI9E2qKWsU0vS9qGhkt2Lta-UqUgODfos8K-wlb4fvylkWATLmC6LrJc6176m4CGWvA-yvQDYwOG5y0fleDZ9pjM0wdP5_n7oaR5LW_LWeu3d77VeQDH3UK1hKW/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJzZkh1FDLvJURuhG8Q3bE5uc/photos/AaVGc3lL8XLoI87xXJciXjWvRMizmWwfqvNLoMaDbX0RYpR9b4LvUVyr4YKMWR7xgLkw625cMCt3JD2kKYd4zlooeAKZ-6pca3Dc71db9mU9x_r0hGO2y9Pz1HQvmApvJZX1iGR0KPyXQ_uADbQBAKc_lNVsRNdTqxQkvPPLaXkM-Rk2HCBH10tSW7Icb8Au3rIr5chBl4-TZjEH1MWg0u3i3wIo_YWlF5ck3RQCoXjfExq21o6PAhjQj83Gk6fcX4FKvhVxmpVY2ufqBdpRdebFAOd_A0kAbLsX_GBJ6Tb7w1sjeoCDj9guQdZXqxnc1b5_N8uVBQugJX4dBQ8AQaErwodzJOl0zhR6Fe3bDx6O4LyBmhlbbGE0ig_sXOa9TOvEaI4gbPmWMH_-tOkkXkP5wBNDOW0h4J-vxsexm9F1e1ZxdcLh/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJzZkh1FDLvJURuhG8Q3bE5uc/photos/AaVGc3nFOQ4-xFBs7zy-3bloHKH0rK6-qOrG9j0XcBY_bMJy111A-vgTyd82uZhu45BAleklg9uvii8YrzizuOZIvcYKEo9o5qu6O53VmBYT9qJ92qNyOa1KQEF0N0uYUszzW9hO8eteqTT4B4KavgPfEk52PKlhmMmNMRcEkl71HSuQ9KI-ioIz7lRD-6XiAebI5FJCTqivgeLe_3XZm0MmcT-LmtkeU0nT3BAkInGbzjgwlosnIkQ3NBC3_VyPGEYFrwKKu-9GlR2FrjbTS5GEnFNqnZzyRgdCABM1zzEq2TLW9g2ZMZz1UXps_8f9WefuKhAARi6CSbA1x6YNohzaDuG6SfEN8WFAbAyqDm3CPunoWqrOHM2iIZG6GeoxSOUMs135jm0LOW_J8T4Nrqkf0cilXNLBi0_yvXXKgwfZCCxQQuw/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:57:46.495Z",
+          "notes": "Resultado automatico para \"cerrajeria\" en CABA. Segmento: cerrajeria urgencias."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJYST-sIPJvJURYICqktMLO4w",
+    "name": "Cerrajeria Matute URGENCIAS 24Hs",
+    "slug": "cerrajeria-matute-urgencias-24hs",
+    "category": "Locksmith",
+    "is_vehicle_related": false,
+    "address": "San Nicolás 2096, C1407 Cdad. Autónoma de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 15-6669-7065",
+    "opening_hours": {
+      "raw": "Monday: 9:30 AM – 1:00 PM, 4:00 – 8:00 PM | Tuesday: 9:30 AM – 1:00 PM, 4:00 – 8:00 PM | Wednesday: 9:30 AM – 1:00 PM, 4:00 – 8:00 PM | Thursday: 9:30 AM – 1:00 PM, 4:00 – 8:00 PM | Friday: 9:30 AM – 1:00 PM, 4:00 – 8:00 PM | Saturday: 9:00 AM – 1:00 PM | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.6,
+      "reviews_count": 52,
+      "source_url": "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Es una excelente cerrajería. Hacen copias de todas las llaves y a muy buen precio. Y lo más importante es que nunca tenes que volver para retocar ninguna llave.",
+        "author": "Pablo",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/117261242519329660986/reviews"
+      },
+      {
+        "text": "De chico me enseñaron que para un forro siempre hay otro más forro... Cuándo atiendas a la gente, las llaves en la mano, no se las tires de mala manera arriba del mostrador porque cuándo te paguen te van a volver a tirar billetito por billetito de peor manera 😉.",
+        "author": "Lucas Maximiliano Orellana",
+        "rating": 1,
+        "source_url": "https://www.google.com/maps/contrib/108996888108438323373/reviews"
+      },
+      {
+        "text": "Lo llamé un domingo a las 17hs y vino al toque antes de que los vecinos del edificio me puteen. Un crack. Además pasó alternativas de mejor calidad",
+        "author": "Joaquín Bravo",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/100635897514984159763/reviews"
+      }
+    ],
+    "main_product_or_service": "cerrajeria",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJYST-sIPJvJURYICqktMLO4w/photos/AaVGc3kylVY3ahbiZS7KUFsY6UAiqCthEWvDrI53hFUfa8qW9SFDmjNwClgaNe8FmZzLqebscJRQZNw_npKWn1ga7lNPe8AiI6VxkzLrX9XtFLFAIOR3TayIVujI3bEL6TX2TjgYLGEbjZXibcfe_QuUPnqUkY0LDeQ4cUqWHnUaeF47pFDSiJmLQcyvdHVkDADo_sc__JF6pE_YCceFmACr0QaGGk13_4rmqvnBjjA-DJGE4yN7-WfeRCNZmMIDsFdnXbtqoYzcTGCYufujSl9nmG-axYdnGoZkWVYAZhYSjOl1rJX-gY25AUMe1NMRRNX5tAG-mkpcaWwbqG6HWIkhgn4ZsqSRy7WoFXGFmE7h9xf20qEOJJ7CmHfRsPqQ8w_r22UfgJPGm7ht0dhwML1vs4SC3jNTmmGl0REUfHaIAHFDNbR8/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJYST-sIPJvJURYICqktMLO4w/photos/AaVGc3k7k7AGlqzP5wibmcsdTcD_c7GVvHQ4o2ucpBE0qRUmcThlmnFmfUc4DXv5UcBbN9WCpJSspEEsAg_K2rpAz-J9OAJO0OQSBNqQV2tH6yRzVMT5B5z_94Wb-0HO_841pvrDUNmSFjoQDGlr8hO1kosy8YCjAkYQTCls1k77hxFgB863vjqjqelf2PXXe1UKt8vQd9aA4TTyknN99hxXGZYKBNkfRhVh5u4iCnADrlthfk7Nd-SIV4fj40JjDy_dT-2jZDBLlObtlrDlNLrBG15Hd8LBTHX5NJ4WlPYNy9evUaWUV_Yy7X_NEeVyeT9kpM0VLsX7zYYDZjNs6v46PT8TGgyqWwbRJrO6lbRgcMficCTFP3Pf69cQ_WN610A823zs9gptcQxDGdCXJzXGAVH246-WW5CCW5GLgNZoSzxmMJ4/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJYST-sIPJvJURYICqktMLO4w/photos/AaVGc3lQbqEcpxn0uDoEIr8npIBHFOmBLvl7jqTcwfeBH6Yd2aCUQ977GDC8d3zwXbj-siz32n3HxyO1M1fN9iONHQqVzpmiY3py071KPVhDoOdvIlPtA6gVlonT4-2bkRyClxk90UoxIDZYKhCXeue6Avmq9smI-6mVOdELkUoCHEIHkCyAU7XxKsrnOAG1NVHLcLmWQBpA3bMOZdG9kSabnPSccYGMYSftP9XSjyW_DxYlPInK0zyYJ-IYl6WInE4SiTZo0Cf42tI6LXFdTWa8O69FV-Ijb9CFrLm5np4M3QdMLRa2TgYfRzhlXq7AZPlqkYBsTWHQSdCSySSD6L16jJKuI1pbA6uoKugO2L0sp6u7zFCHpsjCYOL1ZV2igdo6Tjzo6Gy7uxUuqZXWYkpFWe_dBZESXpbfmqkD3fdhIJvEVg/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:57:46.495Z",
+          "notes": "Resultado automatico para \"cerrajeria\" en CABA. Segmento: cerrajeria urgencias."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=10104683192262492256&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  }
+]

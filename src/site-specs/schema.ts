@@ -143,7 +143,13 @@ export const creativeSpecSchema = z.object({
   sections: z.array(creativeBlockSchema).min(3).max(5),
 });
 
+// `designed_by` marca la etapa del design-director (ver agents/design-director.md).
+// Debe ser "claude-code": el diseno de landings lo hace Claude, no Codex (ver CLAUDE.md / AGENTS.md).
+// Es opcional en el schema para no romper el parseo de corridas viejas; el gate `qa:design` lo exige.
+export const designedBySchema = z.enum(["claude-code"]);
+
 export const designBriefSchema = z.object({
+  designed_by: designedBySchema.optional(),
   market_position: z.string().min(1),
   visual_thesis: z.string().min(1),
   copy_voice: z.string().min(1),

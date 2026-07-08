@@ -1,8 +1,14 @@
 # Agent Workflow
 
-Este repositorio esta pensado para que una sesion de Codex o Claude haga el trabajo creativo usando sus propios tokens/contexto. Los comandos npm existen para preparar contexto, validar y copiar artefactos, no para reemplazar al agente.
+Este repositorio esta pensado para que sesiones de agente hagan el trabajo creativo usando sus propios tokens/contexto. Los comandos npm existen para preparar contexto, validar y copiar artefactos, no para reemplazar al agente.
 
 La prioridad actual es calidad visual, no costo ni velocidad. El camino final esperado es que el agente escriba el frontend real de cada landing. El renderer interno queda como fallback de preview.
+
+## Division de roles (preferencia explicita del usuario)
+
+- **Claude Code disena.** Direccion de arte, tipografias, paleta, estructura, motion y copy con datos verificados se definen en una sesion de Claude con la skill `frontend-design`. Ver `CLAUDE.md` en la raiz.
+- **Codex implementa.** El codigo (HTML/CSS/JS) lo escribe Codex a partir del brief de diseno de Claude, sin reinterpretar la direccion de arte. Ver `AGENTS.md` en la raiz.
+- **Claude revisa** el resultado contra `docs/DESIGN_STANDARDS.md` antes de generar y correr QA.
 
 ## Flujo principal
 
@@ -24,7 +30,7 @@ Luego el agente debe leer:
 - los briefs individuales relevantes
 - `data/site-specs/tandil-site-specs.json` si ya existe
 
-Y escribir:
+Y escribir (etapa `design-director`, ver `agents/design-director.md`): por cada landing, `conversion_template` y un `design_brief` completo con `designed_by: "claude-code"` en
 
 ```text
 data/site-specs/tandil-site-specs.json
@@ -43,11 +49,14 @@ Despues:
 
 ```powershell
 npm run validate:specs:tandil
+npm run qa:design
 npm run generate:preview
 npm run generate
 npm run qa
 npm run qa:client
 ```
+
+`npm run qa:design` es el gate de la etapa `design-director`: falla si algun spec no tiene `conversion_template`, `design_brief` completo o `designed_by: "claude-code"`. Para corridas nuevas, generar con `--require-design-brief` para que el propio `generate` rechace landings sin brief de diseno firmado.
 
 Para ciudades/rubros nuevos, usar paths parametrizados en vez de los archivos de Tandil. Ver `docs/PROMPT_TO_AGENT.md`.
 
@@ -156,15 +165,15 @@ No inventar handles, links de WhatsApp, precios ni canales. El precio de la ofer
 
 Un golden sample es una landing que el usuario acepta como barra visual y comercial para el resto. Sirve para evitar que el agente optimice contra validadores pero entregue paginas "correctas" y poco vendibles.
 
-Para crear uno:
+**Los golden samples vigentes son las 3 landings de `amba-alta-conversion`** (Cerrajeria La Madrilena, Guapisimas Depilacion y Calderas YA), disenadas con Claude Code. Son el unico estandar aprobado: los samples anteriores de Tandil y Cordoba fueron eliminados. Ver `docs/DESIGN_STANDARDS.md` para el detalle de cada una, los principios que definen la barra y el procedimiento para aprobar un sample nuevo.
 
-1. Elegir un negocio representativo, idealmente el rubro mas visual o exigente de la tanda.
-2. Autorizar una landing final para ese negocio en su carpeta normal de frontend, por ejemplo `data/frontends/tandil-servicios-vehiculares/luxe-detailing/`.
-3. Correr `npm run generate`, abrir desktop/mobile y ajustar hasta que el usuario diga explicitamente: "este es el golden sample".
-4. Guardar capturas en `output/screenshots/golden-samples/<run>/<slug>-desktop.png` y `<slug>-mobile.png`.
-5. En futuras tandas, usar ese sitio como referencia de densidad, pulido, ritmo mobile, calidad de copy y nivel de diferenciacion. No copiar su layout literalmente.
+Capturar evidencia de una tanda con:
 
-Si no hay golden sample aprobado, el agente debe usar `qa:client` y su propio juicio visual como barra minima, pero debe reportar que falta una referencia aprobada por el usuario.
+```powershell
+node scripts/capture-golden-screenshots.mjs --base-url http://localhost:4173 --out output/screenshots/golden-samples/<run> --slugs "slug-1|slug-2|slug-3"
+```
+
+En futuras tandas, usar los golden samples como referencia de densidad, pulido, ritmo mobile, calidad de copy y nivel de diferenciacion. No copiar sus layouts literalmente.
 
 ## Frontends de agente
 

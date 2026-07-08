@@ -1,0 +1,412 @@
+[
+  {
+    "id": "google-ChIJd8fnORHLvJUR77rwvecftEs",
+    "name": "Consultorio odontológicos",
+    "slug": "consultorio-odontologicos",
+    "category": "Dentist",
+    "is_vehicle_related": false,
+    "address": "Av. Caseros 2738, C1264AAU Cdad. Autónoma de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "4737-3652",
+    "opening_hours": {
+      "raw": "Monday: 11:30 AM – 8:00 PM | Tuesday: 11:30 AM – 8:00 PM | Wednesday: 11:30 AM – 8:00 PM | Thursday: 11:30 AM – 8:00 PM | Friday: 11:30 AM – 8:00 PM | Saturday: Closed | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.4,
+      "reviews_count": 23,
+      "source_url": "https://maps.google.com/?cid=5455020128837090031&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Gracias Dra.por su paciencia y comprensión.\nExcelente profesional,  pero sobre todo una excelente persona, hace 10 años me atiendo con ella, yo y toda mi familia! Recién llegados al país, con una mala praxis horrible, fue ella la única odontologa que pudo resolver mi caso. Con una paciencia infinita hizo que perdiera el miedo y la angustia.\nSiga así Dra. Segovia todo lo bueno vuelve!",
+        "author": "Valen M",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/104846631901563877059/reviews"
+      },
+      {
+        "text": "Me atiendo con la dra. hace mas de 10 años nunca tuve ningun problema, excelente atencion y muy buena persona que se preocupa realmente por sus pacientes.",
+        "author": "Ser Dre",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/101907094872095845319/reviews"
+      },
+      {
+        "text": "Edito mi reseña porque soy paciente de la Dra Segovia desde hace años. Vi que una persona escribió una reseña falsa sobre discriminación y además mandó a sus amigos a escribir reseñas similares. En todas las veces que visitamos su consultorio, tanto mi familia como Yo, jamás notamos qué se maltrate a ningún paciente ni mucho menos discriminación! Por el contrario siempre me llamó la atención la gran paciencia y cordialidad con que atiende a todo tipo de pacientes. Es obvio que esas reseñas son parte de una actitud maliciosa y coordinada de una sola persona.",
+        "author": "Carlos Gramajo",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/113774604041832616080/reviews"
+      }
+    ],
+    "main_product_or_service": "consultorio odontologico",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJd8fnORHLvJUR77rwvecftEs/photos/AaVGc3k4aes3ofEb-ZyJy0VK13AGbIirmLOa76CfxXgPGBag8Ny2v3GKvVUEx6arun18y5xZ9jHk53U4kVODTpBCwUPXL4_OMYAxcarIpyUn9KH1pVOVrerDp1eyRGUtet_6RW9Im1sIY-83cAuuIyoH824tGi9VP3_Z7IFoJKEo--1hMbdU26lzl0W5XvhOk62Uvh2S3OQvMYRX3YkPQEwCs2zkwdYVBJhFdWPEE6O3i-ZiCy-0Ast7U0ttnx3Amy4zhvXgS9qkOLMtSIH9WrXwbjPzaudncibc-6iIjm1n_PiGemerClIxtqq5FzWkyrw7AmtCFN79PKbnZ9B-1GcrgOnWkHjtKJe4EtewnqI33yWt-guivzrGvLeqRq8h2NJb2ZipLgf_QHV_y7SdLkBM5qkKQbTxhuKOoQdia4ZqBUbhIw/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=5455020128837090031&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJd8fnORHLvJUR77rwvecftEs/photos/AaVGc3mKeZB2Z384PG-Wq0XLdDjk68IXn2XUIMp_5ND23dVJ_WlraucUmBhB3ssAvami769BOO8pgnvhzx3S914FkX1jCl_D28WjRtnZ5m1Ezydde7By6z9UrHTdTrS7b-3pGbFi4Pqsg2O6-h_7DRZdIgFk67QpgedPTYeQc-9ZcVoxXdNvZQ59Z7y4HS1Bd8sE1MUoMWFKkl4STZx5vPnVnkE7v3Wlxh1yknAhOsqT5Wu7VwTupQDirIdK8VYo-rHIMGq2yDY8dN6JGxrBRFbvwEwvpRVHNnmYUK5X2I7trX45onx1awwGk8FT561HJ6u_elKnCkR_Dkbh0bze_vWYYnLbynDVj1xy_p-Lb5fjtzbindTsDmmTvoAwUJ2n1Sq_aP8MKgF_bSvQPWU58EAkJhPlMTD5iKQEEjJiXQ/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=5455020128837090031&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=5455020128837090031&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=5455020128837090031&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:58:16.879Z",
+          "notes": "Resultado automatico para \"consultorio odontologico\" en CABA. Segmento: salud y estetica."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=5455020128837090031&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=5455020128837090031&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=5455020128837090031&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=5455020128837090031&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=5455020128837090031&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=5455020128837090031&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=5455020128837090031&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=5455020128837090031&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=5455020128837090031&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=5455020128837090031&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJF4Xzz3nLvJURseOU1XuhKhU",
+    "name": "Dra Cintia Bello",
+    "slug": "dra-cintia-bello",
+    "category": "Medical Clinic",
+    "is_vehicle_related": false,
+    "address": "de BsAs, Viamonte 1653, C1053 Cdad. Autónoma de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 6142-9710",
+    "opening_hours": {
+      "raw": "Monday: 10:00 AM – 6:00 PM | Tuesday: 10:00 AM – 8:00 PM | Wednesday: 9:00 AM – 6:00 PM | Thursday: 10:00 AM – 8:00 PM | Friday: 9:00 AM – 6:00 PM | Saturday: Closed | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 5,
+      "reviews_count": 88,
+      "source_url": "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Excelente atención, la Dra Bello explica muy bien el procedimiento y que realiza, estoy yendo por depilacion laser y note los cambios desde la primera sesión. El lugar es cómodo, limpio y ordenado. La recepción es muy amable y siempre te recuerdan los turnos. Un detalle que me encanto es el canastito del baño con insumos para sus pacientes, un amor 🫶🏻",
+        "author": "lu huerga",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/113485294844176266558/reviews"
+      },
+      {
+        "text": "Excelente atención y experiencia! El lugar limpio, estético y bien cuidado. Súper educados, profesionales y cordiales. Ví resultados MUY notorios desde la primera sesión, eso nunca me había pasado. Agradezco al fin encontrado un lugar donde se haga bien el tratamiento! Gracias 🙌🏻",
+        "author": "Agustina Sol Narducci",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/109921346038644722759/reviews"
+      },
+      {
+        "text": "He asistido a varias sesiones y he de decir que me encuentro muy satisfecha.\nLos cambios realmente se notan desde la primera sesión.\nLa Dra. es profesional, agradable y paciente. Aclara todas las dudas que uno tenga, todas las veces que uno necesite. Aprecio mucho su disponibilidad al momento de explicar todo, aún cuando es algo que ya había respondido. Y, sobre todo, aprecio que da lugar a ir adaptando el proceso al cliente, a través de sus preguntas, observaciones y los comentarios de uno.\nEl consultorio es muy agradable, bien arreglado, nada de música alta o disruptiva.\nDestaco que la Dra. desinfecta la camilla y equipamiento inmediatamente después de que uno finaliza la sesión, así que puedo decir de primera mano que hay buen higiene.\nLa recomiendo encarecidamente.",
+        "author": "Zoé Gopar",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/115309615243813361923/reviews"
+      }
+    ],
+    "main_product_or_service": "depilacion definitiva",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJF4Xzz3nLvJURseOU1XuhKhU/photos/AaVGc3n4j7ML2dg7DNbB5siN5mip7hKTd5OOaXGfi_OOJSKDY80FopCM8eOYfZdK2R_rMJsnt9yZD_fuWt5dDb7cI4sj9WwgQdcoXB9Zrajk4M0ZVwRPtCOuF1i_asapqgTXfpYZ1UvyZfVVcKG4hCj_R9nu1pxxZZPkFzKusfpfFYWNJR_5cuPfjAYvkGLs-t8MFBS5rfZInW5E-eg9M-7hfphjV5QDG8XtPjyDnqJzAipTq3k4RqlGKMuvj3_75tFSqa33pjErAPjsUnHRhPQZu_ebc1kEzzKttw8sVOnyYmkSLxiucmNblXH6Cy1stH-b2lBq93oxkS_zVOcTM9yA2JHD6lrUJP30HX8r534mM_ClJVkn9gxydGHZymZioYlxHYRNTfFGZzoejgHMkjwKp5PeVCldHzg0XK8w-vooqKEq2gw/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJF4Xzz3nLvJURseOU1XuhKhU/photos/AaVGc3kpAqYl9xEcbPeQMS7rAAnVsFyeZ8HXqGAyKBzijazxTx--mBirKGeRw2NzRSSlZhDIF8jW2GjPCNIXsSbCb7dCaJrxy48SUJ7fWz6KVVfVQMak3oO0AaZ3TYVWcqNj7ZT5e8Y-CB685w9DVCGTIfPxNrQ8NP3PGQbaSxEhE75nZrtQs2uzWymB1-ZPGL_my_qPzm4J7rM9bwAJ07NAL9xbAqAV957d9xYAepyEnLKo0CLSAwWWKp7DSm2UmfzI3htv5PnPzyDzDWnMpdU9CULapy0ZaEfZSMAe_jkeYERrqLTiLFfLVTAx0fwBRrLDOr8j-S4OyE5VL6ZjjJeGFbpfPo1jg0y8NpiA3bvCWHE7P7lqKj-Q5mt7RVlQpLQ5xo5JGIMdy-70VqWbHL6Xsup0q4yCZ-ajpLwmcb5oQQhje3-ekR4YfSXBOI9--g/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJF4Xzz3nLvJURseOU1XuhKhU/photos/AaVGc3kXZyPIMKIwkSaeH5bho7P0tnWI2vsrbMpHF7ADZpNA08q4Rhg2R-zcelzaAlUtFrGSHu2B3PuypLXbaFXGD1nFJz4YK_Ojx9t4eXtcCpfH1WHJW294KHWEdJ47wEfTSx148nY0BKmNiHrmKH7gq4k_kz8EQwfiY0vgRsLewsRr3QPCmqNnvXrKAREOaiWepkyHGppmbra5ntk1cJwM_HVG9GHsY3TLaTVWJzQ-K2OdWji4LPKGkqAQZV_-E0ji4D66bCaLukLaQfEMFs0URe201b0miTGZNB3OYJ_ux8f6nlNVHag9NiYffO7uU78Xe-PUQPLF_lRUQiV3IzMhGszPcTu9znSk8uq7Fn2HhhZ5boKYR3l--H6qkISxCzBghJW4XeEycI4K37CfFqjRrvLPL02qoVxVUeupMHzzQ2kaeHiLrU2WWDIVcyEZlA/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:58:16.879Z",
+          "notes": "Resultado automatico para \"depilacion definitiva\" en CABA. Segmento: salud y estetica."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=1525208977054688177&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJfyiFOQDLvJUR7uLOvjE8YU4",
+    "name": "Depilación Definitiva (Guapísimas Depilación)",
+    "slug": "depilacion-definitiva-guapisimas-depilacion",
+    "category": "Medical Clinic",
+    "is_vehicle_related": false,
+    "address": "Charcas 3371, C1425 Cdad. Autónoma de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 2276-0979",
+    "opening_hours": {
+      "raw": "Monday: 8:00 AM – 8:30 PM | Tuesday: 8:00 AM – 8:30 PM | Wednesday: 8:00 AM – 8:30 PM | Thursday: 8:00 AM – 8:30 PM | Friday: 8:00 AM – 8:30 PM | Saturday: 8:00 AM – 8:30 PM | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 5,
+      "reviews_count": 85,
+      "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Hace un año que voy y lo súper recomiendo. Probé otras depis antes, pero acá los resultados se notan desde la primera sesión. El equipo es amoroso, atento y siempre tiene detalles lindos que hacen que la experiencia sea distinta. Me encanta venir, me siento cuidada y acompañada. Si estás buscando un lugar donde realmente veas cambios y te traten con calidez, este es el indicado. 💖✨",
+        "author": "Florencia Duarte",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/111105607344167145322/reviews"
+      },
+      {
+        "text": "Moni y su equipo son muy profesionales! Lo súper recomiendo, los resultados se ven en la primera sesión.",
+        "author": "Delfina Lopez Harburu",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/110759409537824710362/reviews"
+      },
+      {
+        "text": "Moni y su equipo son las mejores de Palermo! Super atentas con todo y amorosas. Excelentes resultados desde la primera sesión, Moni informa y orienta super bien",
+        "author": "Eugenia Chaine",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/115582037194076769205/reviews"
+      }
+    ],
+    "main_product_or_service": "depilacion definitiva",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJfyiFOQDLvJUR7uLOvjE8YU4/photos/AaVGc3nU0eeM2bql2p5uvqCYTCtXMLonv5yZxWk1CkQ-xuW7JBB-S_g7RfRnBAeWSXKHi468tHrIzrMIh_LQQTc2JFrcMokREdNnsLlaBG7Yqf8dff_g6LFuEIejGGLbMrkmxx0XDWjtSm-rMVLVp0Dthv-rdNhORH7eBn9WJMw8749sbosA9PiNNy75zyo9NWw_LOIs-cJ-l3WR77hn4m05PxozaMQbATwkA8MjCCTjEWriKLBJs4Tc9yEo4suTigLbcR9ft7bc3AXAGE9Ek71JYmOQ5fI72YqHsKF_siDD5n60h2H4qRLWbK1sm_4Ug77N4CO18n_7LO8fZ51tGQyKkL3hhacJ0QD0offR2qRX9IrfANHwA0zd9BouR-cR2de3S07P8zx8N1U4uE41aQ5uvlhyM9FyI1BjLUqyGHaXopE/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJfyiFOQDLvJUR7uLOvjE8YU4/photos/AaVGc3kaGaQFfLIMylUpy_lo0aZ_UB3qJkHRNt2uObqh-CvGwJAhKLjfl9hmkjSoSTGwPtk64x7lmcGQVl_93CVoicgG0uvgTNLdBa-uWlslO4vdq6nRf5dbzIFHtZC89g7vvuWlomvjyDl0bGc7C1uXr-NY1rjCMdx2Djh7Zh_hBMVn2ocB4XKx4NJTN0jtpdlp1UZaWxC4rN_3dCyeRgw15Zz85CBcpAs6lvfAVjt6kxJVxCriiV7Uah0TIrN0tCU6WO9whJEYlzoSrao8lSaQ0DcCCV6UNQlJRp9JA5LcTy57Q5r4AS4wIzcapGbFZmO1NYfDx654njpPdMkiozVUSqbmUjfLFgn8g6_5rEv2h5M9R8HXDvDq9IUfPrJVfF8xvLV3i-U4kqwFd5ifYLkKfGo4dkpnqriXJqqcMWcjVmLANUlsRQ7kOBtyTgzyqW9H/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJfyiFOQDLvJUR7uLOvjE8YU4/photos/AaVGc3mu3aTAsNgvqgKmHS8H8tQSdxpQnVFVd6w0WR48-qkx6eEEwpgQVUGMtX2657m8kMxwbYVtdCcJk_U_qMkQSVWqwmWLcxQjlRZkYq74hBECStYNPyv9dfmXLr3vycgHec70GwT4n70Ot9l0A2MviHLTihOdZrzytqhVbYbKbxiueIvBC8vVMr13zxZ2Ck2C33CH29xXcc_ia_JDmdVpt_2PPCuyR1tZ8rSEZCdiKO_rOPtQQnb1kvXRuoi0DJSFi4L9jgT3LTrw05DW06pCes3Gt1c4XOjJIcHbEciOl9eAw8AgE0ipHuojML9euSxfcf84bdLZHmNZ-zL0ARLebgvluDQiWAa2HJR1WVReacp7-IfTqRZgmZpBRfk3O9nXCYLmoi8q-rk-d8u6pNre9ktJP8yov1mmghYPMCM_FMyvg7SA/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:58:16.879Z",
+          "notes": "Resultado automatico para \"depilacion definitiva\" en CABA. Segmento: salud y estetica."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  }
+]

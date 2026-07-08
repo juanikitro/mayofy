@@ -1,5 +1,6 @@
 import { ZodError } from "zod";
 import { approvedBusinesses, loadBusinesses } from "../content/load-businesses.js";
+import { designBriefIssues } from "./design-brief-rules.js";
 import { loadSiteSpecs } from "./load-site-specs.js";
 import { siteSpecDatasetSchema, type SiteSpec } from "./schema.js";
 import { readFile, stat } from "node:fs/promises";
@@ -124,25 +125,6 @@ function visibleSpecText(spec: SiteSpec): string {
   ].join("\n");
 }
 
-function designBriefText(spec: SiteSpec): string {
-  if (!spec.design_brief) {
-    return "";
-  }
-
-  return [
-    spec.design_brief.market_position,
-    spec.design_brief.visual_thesis,
-    spec.design_brief.copy_voice,
-    spec.design_brief.layout_signature,
-    spec.design_brief.asset_plan,
-    ...spec.design_brief.ai_fill_plan.copy,
-    ...spec.design_brief.ai_fill_plan.imagery,
-    ...spec.design_brief.ai_fill_plan.boundaries,
-    ...spec.design_brief.anti_patterns,
-    ...spec.design_brief.rewrite_targets,
-  ].join("\n");
-}
-
 async function loadRawSpecs(filePath: string): Promise<SiteSpec[] | null> {
   const raw = await readFile(filePath, "utf8");
   return siteSpecDatasetSchema.parse(JSON.parse(raw));
@@ -211,31 +193,7 @@ async function main(): Promise<void> {
     if (!spec.design_brief) {
       issues.push({ code: "missing_design_brief", message: `${spec.slug}: missing design_brief; future/remake specs need a visual thesis, AI fill plan, anti-patterns and rewrite targets.` });
     } else {
-      const briefText = designBriefText(spec);
-      const hasAiCopyPlan = spec.design_brief.ai_fill_plan.copy.some((item) => /copy|microcopy|secci[oó]n|cta|paquete|rese[ñn]a/iu.test(item));
-      const hasAiImagePlan = spec.design_brief.ai_fill_plan.imagery.some((item) => /imagen|foto|escena|textura|visual|herramienta|producto/iu.test(item));
-      const hasNoFakeDataBoundary = spec.design_brief.ai_fill_plan.boundaries.some((item) =>
-        /no\s+inventar.*(precio|stock|marca|a[nñ]o|premio|garant|servicio|rese[ñn]a)/iu.test(item),
-      );
-
-      if (spec.design_brief.visual_thesis.length < 80) {
-        issues.push({ code: "thin_visual_thesis", message: `${spec.slug}: design_brief.visual_thesis is too thin to guide a real UI direction.` });
-      }
-      if (spec.design_brief.layout_signature.length < 80) {
-        issues.push({ code: "thin_layout_signature", message: `${spec.slug}: design_brief.layout_signature should describe the conversion template's actual structure.` });
-      }
-      if (!hasAiCopyPlan) {
-        issues.push({ code: "missing_ai_copy_plan", message: `${spec.slug}: design_brief.ai_fill_plan.copy must say how AI should enrich weak source data.` });
-      }
-      if (!hasAiImagePlan) {
-        issues.push({ code: "missing_ai_image_plan", message: `${spec.slug}: design_brief.ai_fill_plan.imagery must say how AI should safely add non-specific visuals.` });
-      }
-      if (!hasNoFakeDataBoundary) {
-        issues.push({ code: "missing_ai_boundary", message: `${spec.slug}: AI fill plan must explicitly block invented prices, stock, brands, years, awards, guarantees, services or reviews.` });
-      }
-      if (!/hero|foto|imagen|visual|cta|oferta|consulta|turno|presupuesto/iu.test(briefText)) {
-        issues.push({ code: "weak_design_brief", message: `${spec.slug}: design_brief lacks concrete conversion/UI vocabulary.` });
-      }
+      issues.push(...designBriefIssues(spec));
     }
 
     seenCompositions.set(spec.composition, (seenCompositions.get(spec.composition) ?? 0) + 1);

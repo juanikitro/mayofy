@@ -1,0 +1,419 @@
+[
+  {
+    "id": "google-ChIJzZkh1FDLvJURuhG8Q3bE5uc",
+    "name": "Cerrajería La Madrileña",
+    "slug": "cerrajeria-la-madrilena",
+    "category": "Locksmith",
+    "is_vehicle_related": false,
+    "address": "Tacuarí 790, C1071 Cdad. Autónoma de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 5908-8773",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 12:30 PM, 3:00 – 7:00 PM | Tuesday: 9:00 AM – 12:30 PM, 3:00 – 7:00 PM | Wednesday: 9:00 AM – 12:30 PM, 3:00 – 7:00 PM | Thursday: 9:00 AM – 12:30 PM, 3:00 – 7:00 PM | Friday: 9:00 AM – 12:30 PM, 3:00 – 7:00 PM | Saturday: 9:00 AM – 1:00 PM | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.9,
+      "reviews_count": 586,
+      "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Excelente atención. Necesitaba un repuesto a última hora y los chicos fueron los únicos que estaban abiertos en la zona.\n100% recomendable",
+        "author": "David Delmonte",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/105003140830919958821/reviews"
+      },
+      {
+        "text": "Excelente servicio super rapido y Nahuel un genio! Muy copado y atento ante todas mis dudas! Genios",
+        "author": "Jazmin Fernandez",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/111318439547141745867/reviews"
+      },
+      {
+        "text": "Muy buena atención y super atentos, Nahuel es muy honesto y simpático y resolutivo.",
+        "author": "Sebastian Dana",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/106127322431907690289/reviews"
+      }
+    ],
+    "main_product_or_service": "cerrajeria",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJzZkh1FDLvJURuhG8Q3bE5uc/photos/AaVGc3lxW99dOvWa9MacTfVjP21Slauy1MnTWYyCqSxxW5nr9G1JFNyWirmsmzVW6ZH_zdMerpjpUS2pl5_iIBui8HwSp5DjbblDatwU9kqDboU83-sJ4MrAjyt4-0UXHrgQHnqj4bySZbUt3i95a0h-D_fXMsduTf-Y1YBCPcZBrTegUXy79SYYvBkoZJnUq00O1gr4HP90ZMMIi4-b9odushXoiEsDhX5M7qVai9yrNpz3NVuMfOvnNfi5trDH9QvOEorRHLgkIr-OFs9HQVfKvlYxw_s9TQKYZnIh0gOYjW_NjWZ5A3g3MfI9E2qKWsU0vS9qGhkt2Lta-UqUgODfos8K-wlb4fvylkWATLmC6LrJc6176m4CGWvA-yvQDYwOG5y0fleDZ9pjM0wdP5_n7oaR5LW_LWeu3d77VeQDH3UK1hKW/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJzZkh1FDLvJURuhG8Q3bE5uc/photos/AaVGc3lL8XLoI87xXJciXjWvRMizmWwfqvNLoMaDbX0RYpR9b4LvUVyr4YKMWR7xgLkw625cMCt3JD2kKYd4zlooeAKZ-6pca3Dc71db9mU9x_r0hGO2y9Pz1HQvmApvJZX1iGR0KPyXQ_uADbQBAKc_lNVsRNdTqxQkvPPLaXkM-Rk2HCBH10tSW7Icb8Au3rIr5chBl4-TZjEH1MWg0u3i3wIo_YWlF5ck3RQCoXjfExq21o6PAhjQj83Gk6fcX4FKvhVxmpVY2ufqBdpRdebFAOd_A0kAbLsX_GBJ6Tb7w1sjeoCDj9guQdZXqxnc1b5_N8uVBQugJX4dBQ8AQaErwodzJOl0zhR6Fe3bDx6O4LyBmhlbbGE0ig_sXOa9TOvEaI4gbPmWMH_-tOkkXkP5wBNDOW0h4J-vxsexm9F1e1ZxdcLh/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJzZkh1FDLvJURuhG8Q3bE5uc/photos/AaVGc3nFOQ4-xFBs7zy-3bloHKH0rK6-qOrG9j0XcBY_bMJy111A-vgTyd82uZhu45BAleklg9uvii8YrzizuOZIvcYKEo9o5qu6O53VmBYT9qJ92qNyOa1KQEF0N0uYUszzW9hO8eteqTT4B4KavgPfEk52PKlhmMmNMRcEkl71HSuQ9KI-ioIz7lRD-6XiAebI5FJCTqivgeLe_3XZm0MmcT-LmtkeU0nT3BAkInGbzjgwlosnIkQ3NBC3_VyPGEYFrwKKu-9GlR2FrjbTS5GEnFNqnZzyRgdCABM1zzEq2TLW9g2ZMZz1UXps_8f9WefuKhAARi6CSbA1x6YNohzaDuG6SfEN8WFAbAyqDm3CPunoWqrOHM2iIZG6GeoxSOUMs135jm0LOW_J8T4Nrqkf0cilXNLBi0_yvXXKgwfZCCxQQuw/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:57:46.495Z",
+          "notes": "Resultado automatico para \"cerrajeria\" en CABA. Segmento: cerrajeria urgencias."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=16710259479626387898&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJfyiFOQDLvJUR7uLOvjE8YU4",
+    "name": "Depilación Definitiva (Guapísimas Depilación)",
+    "slug": "depilacion-definitiva-guapisimas-depilacion",
+    "category": "Medical Clinic",
+    "is_vehicle_related": false,
+    "address": "Charcas 3371, C1425 Cdad. Autónoma de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 2276-0979",
+    "opening_hours": {
+      "raw": "Monday: 8:00 AM – 8:30 PM | Tuesday: 8:00 AM – 8:30 PM | Wednesday: 8:00 AM – 8:30 PM | Thursday: 8:00 AM – 8:30 PM | Friday: 8:00 AM – 8:30 PM | Saturday: 8:00 AM – 8:30 PM | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 5,
+      "reviews_count": 85,
+      "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Hace un año que voy y lo súper recomiendo. Probé otras depis antes, pero acá los resultados se notan desde la primera sesión. El equipo es amoroso, atento y siempre tiene detalles lindos que hacen que la experiencia sea distinta. Me encanta venir, me siento cuidada y acompañada. Si estás buscando un lugar donde realmente veas cambios y te traten con calidez, este es el indicado. 💖✨",
+        "author": "Florencia Duarte",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/111105607344167145322/reviews"
+      },
+      {
+        "text": "Moni y su equipo son muy profesionales! Lo súper recomiendo, los resultados se ven en la primera sesión.",
+        "author": "Delfina Lopez Harburu",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/110759409537824710362/reviews"
+      },
+      {
+        "text": "Moni y su equipo son las mejores de Palermo! Super atentas con todo y amorosas. Excelentes resultados desde la primera sesión, Moni informa y orienta super bien",
+        "author": "Eugenia Chaine",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/115582037194076769205/reviews"
+      }
+    ],
+    "main_product_or_service": "depilacion definitiva",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJfyiFOQDLvJUR7uLOvjE8YU4/photos/AaVGc3nU0eeM2bql2p5uvqCYTCtXMLonv5yZxWk1CkQ-xuW7JBB-S_g7RfRnBAeWSXKHi468tHrIzrMIh_LQQTc2JFrcMokREdNnsLlaBG7Yqf8dff_g6LFuEIejGGLbMrkmxx0XDWjtSm-rMVLVp0Dthv-rdNhORH7eBn9WJMw8749sbosA9PiNNy75zyo9NWw_LOIs-cJ-l3WR77hn4m05PxozaMQbATwkA8MjCCTjEWriKLBJs4Tc9yEo4suTigLbcR9ft7bc3AXAGE9Ek71JYmOQ5fI72YqHsKF_siDD5n60h2H4qRLWbK1sm_4Ug77N4CO18n_7LO8fZ51tGQyKkL3hhacJ0QD0offR2qRX9IrfANHwA0zd9BouR-cR2de3S07P8zx8N1U4uE41aQ5uvlhyM9FyI1BjLUqyGHaXopE/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJfyiFOQDLvJUR7uLOvjE8YU4/photos/AaVGc3kaGaQFfLIMylUpy_lo0aZ_UB3qJkHRNt2uObqh-CvGwJAhKLjfl9hmkjSoSTGwPtk64x7lmcGQVl_93CVoicgG0uvgTNLdBa-uWlslO4vdq6nRf5dbzIFHtZC89g7vvuWlomvjyDl0bGc7C1uXr-NY1rjCMdx2Djh7Zh_hBMVn2ocB4XKx4NJTN0jtpdlp1UZaWxC4rN_3dCyeRgw15Zz85CBcpAs6lvfAVjt6kxJVxCriiV7Uah0TIrN0tCU6WO9whJEYlzoSrao8lSaQ0DcCCV6UNQlJRp9JA5LcTy57Q5r4AS4wIzcapGbFZmO1NYfDx654njpPdMkiozVUSqbmUjfLFgn8g6_5rEv2h5M9R8HXDvDq9IUfPrJVfF8xvLV3i-U4kqwFd5ifYLkKfGo4dkpnqriXJqqcMWcjVmLANUlsRQ7kOBtyTgzyqW9H/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJfyiFOQDLvJUR7uLOvjE8YU4/photos/AaVGc3mu3aTAsNgvqgKmHS8H8tQSdxpQnVFVd6w0WR48-qkx6eEEwpgQVUGMtX2657m8kMxwbYVtdCcJk_U_qMkQSVWqwmWLcxQjlRZkYq74hBECStYNPyv9dfmXLr3vycgHec70GwT4n70Ot9l0A2MviHLTihOdZrzytqhVbYbKbxiueIvBC8vVMr13zxZ2Ck2C33CH29xXcc_ia_JDmdVpt_2PPCuyR1tZ8rSEZCdiKO_rOPtQQnb1kvXRuoi0DJSFi4L9jgT3LTrw05DW06pCes3Gt1c4XOjJIcHbEciOl9eAw8AgE0ipHuojML9euSxfcf84bdLZHmNZ-zL0ARLebgvluDQiWAa2HJR1WVReacp7-IfTqRZgmZpBRfk3O9nXCYLmoi8q-rk-d8u6pNre9ktJP8yov1mmghYPMCM_FMyvg7SA/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:58:16.879Z",
+          "notes": "Resultado automatico para \"depilacion definitiva\" en CABA. Segmento: salud y estetica."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=5647861592051606254&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJ03sUl4uhvJURSTqoLihfDxg",
+    "name": "CALDERAS YA !!! SERVICE 24 Hs.",
+    "slug": "calderas-ya-service-24-hs",
+    "category": "General Contractor",
+    "is_vehicle_related": false,
+    "address": "Blvd. de Todos los Santos 100, B1623 Benavidez, Provincia de Buenos Aires, Argentina",
+    "neighborhood_or_area": null,
+    "phone": "011 3356-8147",
+    "opening_hours": {
+      "raw": "Monday: 1:00 AM – 11:30 PM | Tuesday: 1:00 AM – 11:30 PM | Wednesday: 1:00 AM – 11:30 PM | Thursday: 1:00 AM – 11:30 PM | Friday: 1:00 AM – 11:30 PM | Saturday: 1:00 AM – 11:30 PM | Sunday: 1:00 AM – 11:30 PM",
+      "structured": {}
+    },
+    "rating": {
+      "value": 5,
+      "reviews_count": 43,
+      "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "​⭐⭐⭐⭐⭐ ¡Mariano es un gran  profesional!\n​Tuve un problema con mi caldera un viernes a la noche y, sinceramente, pensé que tendría que pasar el fin de semana sin agua caliente ni calefacción. Después de contactar a varios servicios que no respondieron, encontré a Mariano. Su atención desde el primer momento fue impecable. No solo me respondió al instante, sino que, en lugar de venir de madrugada, me guió por teléfono. Con una paciencia infinita y grab claridad, me explicó paso a paso qué hacer, pidiéndome videos para diagnosticar la falla. En menos de 20 minutos, y sin tener que venir, logré que la caldera volviera a funcionar. Es un verdadero crack: honesto, rápido y, lo más importante, se nota que ama lo que hace y no busca cobrar de más. Sinceramente, la mejor experiencia de servicio que he tenido en años. ¡Súper recomendado!!",
+        "author": "Martín Gauna",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/113025305862833047467/reviews"
+      },
+      {
+        "text": "Mariano no podía venir y sin conocerme, se tomó la molestia de explicarme todo por teléfono para que pudiera resolver un tema con el termotanque. Un genio total. No me cobró un peso y tuvo la mejor predisposición para ayudarme a solventar. Millones de gracias",
+        "author": "Marcos Cobos",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/114807050451863519428/reviews"
+      },
+      {
+        "text": "Excelencia. Practico, eficiente, amable.\nNo solo nos explicó todo con mucha paciencia sino que nos resolvió el problema por teléfono, guiándonos de que hacer para solucionarlo más rápido.\nDespués de muchas malas experiencias con gente irresponsable que te dice un horario y no viene, o viene y te cobra cualquier cosa abusándose del desconocimiento, quedamos muy satisfechos con la experiencia.\nGracias Mariano! Ojalá tengas muchísimo trabajo, te lo mereces.",
+        "author": "NUTRILAKE Nutricion",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/105298218552663489120/reviews"
+      }
+    ],
+    "main_product_or_service": "service de calderas",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJ03sUl4uhvJURSTqoLihfDxg/photos/AaVGc3msysZckVYWS4NL1vdrchphhjxwJDyJVcD9ul5B_40zAtGgOD6147dWrWYxiNCUkc78tWXjFPPMw3kogDlh8pomVq2EpVEL5MfMZACa-yjJioWRqIx-2eQWW2RN0xEH7eqBLgaxfJZAO971wuYUkzDwVDqJwFIFKjnDlCFMBS6h3MOvgEZyHnj6mhfvouJYBlzM6zyYmbGeyljvKPxwefmBnRExsIzfkXJRXW_zkLvF3JOX0ceSpYpgV7d7Ibn9HQThncW0aUb7KW1qGfCUjh8ch3-zGMHlxLE4wEtmDXoavTK_7e9E7IrlgFy2h63pTFoy8Ycp61f7XAQ092DUk2HtJ_QyxcIFl31dZeEai9RVfmj67N_GMfoXvtTlaRnJEqAANNWpqCnEbT7yhAQLZTRdHxqb0GcPDikveuf1cArjIQ/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJ03sUl4uhvJURSTqoLihfDxg/photos/AaVGc3mzcheGPAMY_KOJGhcFV9EuMDcN7Oom497-BlR3aXMNBsw1V7cln0yfS2n7rMBu-PHnT8ow2KFuT1AwIRTGlX9YVajrdEd5qLuy_LxFgJ4f800jjHruqMMf3I0v2wOh327XpIhlIySVCozUsuEJmpobGUZukKOlc5junGjVg5kNdS385QX_E5_tEJiZVTFzlKb-GYZQ9Qy-FKhbxAseWV_heTNGqtmA6CIRESSqPNXcNht0JIWhQ4uFdh54v94SCMKgyUtcyDExJCd_mB7p7cFl994mjHMcgZT-BqAXPRQ2JC9yy9H3NnPErK6CyOIokI4r2HHGt7KxkVQR5S_Pta2awkxQzFJeLl4_ukyCauXRnLV_46SnSiV8jjGz2DVg9y6XG7OxFgbhuJzB-blovrall97jOvHBt0s2WB_BU_kFYTBg/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJ03sUl4uhvJURSTqoLihfDxg/photos/AaVGc3nmuSLCX4_ZB5vHBtKsW04AfH8cU9aOjUlSrZ2IJtxwxky3NnQItFP3gcW_7lCtBGdTaaCRAlDk9VWkl3KqBS9CFAssHxCvu84AsH-kbEswJTfWrzxkag1Gws-Ac3W7EqX3-Z8-nevANRb-OgI2awctArlOsxxehAmhdkFabt1WgzYziCupWFZ5FP0B5JD49pNSJN9GHNkaIZJCkAnYmddx-VjWKSORlMDT4Es8PPj7nhnux_YosW_bWXsQXpz1GuJprqIHctuW7fMVAKdkUMHTPqhQfrH7UVS4QIsM1xelPJ3JRxYn5WW6ljseHzgUKUhXLBM73P0RQS0edNZjQn4QgwZhkz2991pfcyWoldE38XF7O8cTNRhIm5jxOeDSvX2nVMLSORFVOPQmRJ7u7oi4uKg3N-9hqHnyY-uoQxcvOsu3yLqwOIs_pZPuua5o/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-07T21:57:21.919Z",
+          "notes": "Resultado automatico para \"service de calderas\" en CABA. Segmento: gas y calefaccion."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=1733709007747037769&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  }
+]

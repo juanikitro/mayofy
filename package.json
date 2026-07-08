@@ -22,6 +22,7 @@
     "generate": "tsx src/generator/generate-sites.ts data/tandil-businesses.json --specs data/site-specs/tandil-site-specs.json --require-real-images --require-agent-frontends",
     "generate:preview": "tsx src/generator/generate-sites.ts data/tandil-businesses.json --specs data/site-specs/tandil-site-specs.json",
     "generate:mock": "tsx src/generator/generate-sites.ts data/fixtures/mock-businesses.json --out generated/mock --allow-mock",
+    "qa:design": "tsx src/validators/validate-design-gate.ts --businesses data/tandil-businesses.json --specs data/site-specs/tandil-site-specs.json",
     "qa": "tsx src/validators/validate-generated-sites.ts --session tandil --require-agent-frontends",
     "qa:client": "tsx src/validators/validate-client-readiness.ts --session tandil --min-score 85",
     "study:final": "tsx src/delivery/create-final-study.ts --session tandil --businesses data/tandil-businesses.json --specs data/site-specs/tandil-site-specs.json --briefs data/agent-briefs/tandil",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.14.10",
+    "playwright": "^1.61.1",
     "tsx": "^4.16.2",
     "typescript": "^5.5.3"
   }

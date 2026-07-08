@@ -4,3 +4,5 @@ generated/
 .vercel/
 *.log
 coverage/
+.claude/
+.tmp-design-gate-check/
