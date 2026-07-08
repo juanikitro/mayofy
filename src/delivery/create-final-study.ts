@@ -97,7 +97,11 @@ type ExecutiveSummary = {
 type RawRecord = Record<string, unknown>;
 
 function parseArgs(argv: string[]): Args {
-  const businessesPath = flagValue(argv, "--businesses", "data/tandil-businesses.json") ?? "data/tandil-businesses.json";
+  const businessesPath = flagValue(argv, "--businesses");
+  if (!businessesPath) {
+    throw new Error("Usage: tsx src/delivery/create-final-study.ts --businesses <businesses.json> [--session <run>]");
+  }
+
   const generatedDir = resolveGeneratedDir(argv, { positionalIndex: 2, datasetPath: businessesPath, outFlag: null });
   const outPath = flagValue(argv, "--out", path.join(generatedDir, "final-study.md")) ?? path.join(generatedDir, "final-study.md");
   const jsonPath = flagValue(argv, "--json", outPath.replace(/\.md$/iu, ".json")) ?? outPath.replace(/\.md$/iu, ".json");

@@ -20,12 +20,21 @@ function parseArgs(argv: string[]): Args {
     const index = argv.indexOf(flag);
     return index >= 0 ? argv[index + 1] : fallback;
   };
+  const requiredValue = (flag: string): string => {
+    const value = valueAfter(flag, "");
+    if (!value || value.startsWith("--")) {
+      throw new Error(
+        `Usage: tsx scripts/create-agent-briefs.ts --input <businesses.json> --specs <site-specs.json> --out <briefs-dir> --city <city> --segment <segment> (missing ${flag})`,
+      );
+    }
+    return value;
+  };
 
   return {
-    input: valueAfter("--input", "data/tandil-businesses.json"),
-    specs: valueAfter("--specs", "data/site-specs/tandil-site-specs.json"),
-    outDir: valueAfter("--out", "data/agent-briefs/tandil"),
-    city: valueAfter("--city", "Tandil"),
+    input: requiredValue("--input"),
+    specs: requiredValue("--specs"),
+    outDir: requiredValue("--out"),
+    city: requiredValue("--city"),
     segment: valueAfter("--segment", "servicios vehiculares"),
     remakeFrom: valueAfter("--remake-from", "") || null,
     screenshotsDir: valueAfter("--screenshots", "") || null,
@@ -331,12 +340,12 @@ Use these briefs from a Codex/Claude session to rewrite the configured site spec
 Recommended flow:
 
 \`\`\`powershell
-npm run agent:briefs:tandil
-# Agent edits data/site-specs/tandil-site-specs.json
-npm run validate:specs:tandil
-npm run generate:preview
-npm run generate
-npm run qa
+npm run agent:briefs -- --input ${args.input} --specs ${args.specs} --out ${args.outDir} --city "${args.city}" --segment "${args.segment}"
+# Agent edits ${args.specs}
+npm run validate:specs -- --businesses ${args.input} --specs ${args.specs}
+npm run generate:preview -- ${args.input} --specs ${args.specs} --session ${slugPart(args.city)}-${slugPart(args.segment)}
+npm run generate -- ${args.input} --specs ${args.specs} --session ${slugPart(args.city)}-${slugPart(args.segment)}
+npm run qa -- --session ${slugPart(args.city)}-${slugPart(args.segment)}
 \`\`\`
 
 Remake flow for an existing weak batch:

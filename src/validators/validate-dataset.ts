@@ -40,7 +40,7 @@ function datasetPathFromArgs(argv: string[]): string {
     }
   }
 
-  return "data/tandil-businesses.json";
+  throw new Error("Usage: tsx src/validators/validate-dataset.ts <businesses.json>");
 }
 
 function parseArgs(argv: string[]): Args {

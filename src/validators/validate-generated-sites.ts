@@ -1,6 +1,6 @@
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
-import { resolveGeneratedDir } from "../generated-output.js";
+import { flagValue, positionalValue, resolveGeneratedDir } from "../generated-output.js";
 import { exitForIssues, printReport, type ValidationIssue } from "./report.js";
 
 type SiteRecord = {
@@ -56,7 +56,11 @@ async function readManifest(outDir: string): Promise<Manifest> {
 }
 
 function parseArgs(argv: string[]): Args {
-  const outDir = resolveGeneratedDir(argv, { positionalIndex: 2, fallbackSession: "tandil" });
+  if (!positionalValue(argv, 2) && !flagValue(argv, "--out") && !flagValue(argv, "--session") && !flagValue(argv, "--run")) {
+    throw new Error("Usage: tsx src/validators/validate-generated-sites.ts --session <run>");
+  }
+
+  const outDir = resolveGeneratedDir(argv, { positionalIndex: 2 });
   const expectedFlag = argv.indexOf("--expected-count");
   const expectedCount = expectedFlag >= 0 ? Number(argv[expectedFlag + 1]) : 10;
 

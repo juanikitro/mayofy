@@ -16,6 +16,13 @@ function parseArgs(argv: string[]): Args {
     const index = argv.indexOf(flag);
     return index >= 0 ? argv[index + 1] : fallback;
   };
+  const requiredValue = (flag: string): string => {
+    const value = valueAfter(flag, "");
+    if (!value || value.startsWith("--")) {
+      throw new Error(`Usage: tsx src/site-specs/compose-site-specs.ts --input <businesses.json> --out <site-specs.json> (missing ${flag})`);
+    }
+    return value;
+  };
 
   const provider = valueAfter("--provider", "local");
   if (provider !== "local" && provider !== "openai") {
@@ -23,8 +30,8 @@ function parseArgs(argv: string[]): Args {
   }
 
   return {
-    input: valueAfter("--input", "data/tandil-businesses.json"),
-    out: valueAfter("--out", "data/site-specs/tandil-site-specs.json"),
+    input: requiredValue("--input"),
+    out: requiredValue("--out"),
     provider,
   };
 }

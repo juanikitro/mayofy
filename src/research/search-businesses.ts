@@ -56,14 +56,21 @@ function parseArgs(argv: string[]): Args {
     const index = argv.indexOf(flag);
     return index >= 0 ? argv[index + 1] : fallback;
   };
+  const requiredValue = (flag: string): string => {
+    const value = valueAfter(flag, "");
+    if (!value || value.startsWith("--")) {
+      throw new Error(`Usage: tsx src/research/search-businesses.ts --city <city> --out <candidates.json> (missing ${flag})`);
+    }
+    return value;
+  };
 
   const segment = valueAfter("--segment", "servicios vehiculares");
   const queries = splitList(valueAfter("--queries", vehicleQueries.join("|")));
 
   return {
-    city: valueAfter("--city", "Tandil"),
+    city: requiredValue("--city"),
     country: valueAfter("--country", "Argentina"),
-    out: valueAfter("--out", "data/intake/tandil-candidates.json"),
+    out: requiredValue("--out"),
     limit: Number(valueAfter("--limit", "30")),
     perQueryLimit: Number(valueAfter("--per-query-limit", "12")),
     segment,

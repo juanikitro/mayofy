@@ -9,16 +9,21 @@ type Args = {
 function parseArgs(argv: string[]): Args {
   const inputFlag = argv.indexOf("--input");
   const outputFlag = argv.indexOf("--output");
+  const output = outputFlag >= 0 ? argv[outputFlag + 1] : null;
+  if (!output || output.startsWith("--")) {
+    throw new Error("Usage: npm run import:businesses -- --input <verified-export.json> --output <businesses.json>");
+  }
+
   return {
     input: inputFlag >= 0 ? argv[inputFlag + 1] : undefined,
-    output: outputFlag >= 0 ? argv[outputFlag + 1] : "data/tandil-businesses.json",
+    output,
   };
 }
 
 async function main(): Promise<void> {
   const args = parseArgs(process.argv);
   if (!args.input) {
-    throw new Error("Usage: npm run import:businesses -- --input <verified-export.json> [--output data/tandil-businesses.json]");
+    throw new Error("Usage: npm run import:businesses -- --input <verified-export.json> --output <businesses.json>");
   }
 
   const raw = await readFile(args.input, "utf8");

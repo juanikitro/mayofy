@@ -1,6 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { flagValue, resolveGeneratedDir } from "../generated-output.js";
+import { flagValue, positionalValue, resolveGeneratedDir } from "../generated-output.js";
 
 type Severity = "blocker" | "warning";
 
@@ -89,7 +89,11 @@ const requiredSignals = [
 ];
 
 function parseArgs(argv: string[]): Args {
-  const outDir = resolveGeneratedDir(argv, { positionalIndex: 2, fallbackSession: "tandil" });
+  if (!positionalValue(argv, 2) && !flagValue(argv, "--out") && !flagValue(argv, "--session") && !flagValue(argv, "--run")) {
+    throw new Error("Usage: tsx src/validators/validate-client-readiness.ts --session <run>");
+  }
+
+  const outDir = resolveGeneratedDir(argv, { positionalIndex: 2 });
   const minScoreRaw = flagValue(argv, "--min-score", "85") ?? "85";
   const minScore = Number.parseInt(minScoreRaw, 10);
   const slug = flagValue(argv, "--slug", flagValue(argv, "--only", "") ?? "") ?? "";

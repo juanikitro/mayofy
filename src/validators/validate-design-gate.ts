@@ -12,14 +12,18 @@ type Args = {
 };
 
 function parseArgs(argv: string[]): Args {
-  const valueAfter = (flag: string, fallback: string): string => {
+  const requiredValue = (flag: string): string => {
     const index = argv.indexOf(flag);
-    return index >= 0 ? argv[index + 1] : fallback;
+    const value = index >= 0 ? argv[index + 1] : null;
+    if (!value || value.startsWith("--")) {
+      throw new Error(`Usage: tsx src/validators/validate-design-gate.ts --businesses <businesses.json> --specs <site-specs.json> (missing ${flag})`);
+    }
+    return value;
   };
 
   return {
-    businessesPath: valueAfter("--businesses", "data/tandil-businesses.json"),
-    specsPath: valueAfter("--specs", "data/site-specs/tandil-site-specs.json"),
+    businessesPath: requiredValue("--businesses"),
+    specsPath: requiredValue("--specs"),
   };
 }
 

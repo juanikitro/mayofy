@@ -104,10 +104,17 @@ function parseArgs(argv: string[]): Args {
     const index = argv.indexOf(flag);
     return index >= 0 ? argv[index + 1] : fallback;
   };
+  const requiredValue = (flag: string): string => {
+    const value = valueAfter(flag, "");
+    if (!value || value.startsWith("--")) {
+      throw new Error(`Usage: tsx src/research/shortlist-businesses.ts --input <candidates.json> --out <shortlist.json> (missing ${flag})`);
+    }
+    return value;
+  };
 
   return {
-    input: valueAfter("--input", "data/intake/tandil-candidates.json"),
-    out: valueAfter("--out", "data/intake/tandil-shortlist.json"),
+    input: requiredValue("--input"),
+    out: requiredValue("--out"),
     limit: Number(valueAfter("--limit", "10")),
     terms: splitList(valueAfter("--terms", strongVehicleTerms.join("|"))),
     title: valueAfter("--title", "Shortlist"),
