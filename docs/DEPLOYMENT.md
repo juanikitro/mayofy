@@ -1,33 +1,30 @@
 # Deployment
 
-El repositorio prepara deploys separados, pero no publica automaticamente.
+El deploy a Vercel es automatico. No hay comando local que publique nada.
 
-## Precondiciones
+## Disparadores
 
-1. `npm run validate:data`
-2. `npm run generate`
-3. `npm run qa`
-4. `npm run deploy:plan`
+`.github/workflows/deploy-vercel.yml` corre:
 
-## Vercel
+- En cada push a `main` que modifique `data/*-businesses.json`, `data/site-specs/*.json` o `data/frontends/**`. `scripts/detect-deploy-runs.mjs` detecta que tanda(s) cambiaron a partir del diff.
+- Manualmente via `workflow_dispatch`, pasando el nombre de la tanda (`run`) y opcionalmente un `vercel_scope`.
 
-`generated/<sesion>/deploy-plan.json` contiene una entrada por sitio:
+## Que hace el workflow por cada tanda detectada
 
-- negocio
-- slug
-- nombre sugerido de proyecto
-- carpeta
-- comando sugerido
-- estado
+1. `npx tsx src/validators/validate-design-gate.ts` — exige `conversion_template` + `design_brief` firmado (`designed_by: "claude-code"`).
+2. `npx tsx src/generator/generate-sites.ts ... --require-real-images --require-agent-frontends` — genera `generated/<run>/`.
+3. `npx tsx src/validators/validate-generated-sites.ts --session <run> --require-agent-frontends` — QA tecnico.
+4. `npx tsx src/validators/validate-client-readiness.ts --session <run> --min-score 85` — gate de entrega a cliente.
+5. `node scripts/deploy-generated.mjs --session <run>` — publica cada sitio de `generated/<run>/manifest.json` como proyecto `local-<slug>` en Vercel y escribe un resumen (`GITHUB_STEP_SUMMARY` o consola).
 
-Ejecutar deploys reales es una accion externa y debe hacerse de forma explicita.
+Si cualquier paso falla, no se publica esa tanda.
+
+## Secrets requeridos
+
+- `VERCEL_TOKEN`
+- `VERCEL_ORG_ID` (opcional segun cuenta)
+- `VERCEL_SCOPE` (opcional, o se pasa por `workflow_dispatch`)
 
 ## URLs finales
 
-Cuando se publiquen los 10 sitios, registrar las URLs en un reporte de entrega con:
-
-1. URL.
-2. Negocio.
-3. Arquetipo.
-4. Fecha de deploy.
-5. Fuente del dataset usado.
+`scripts/deploy-generated.mjs` imprime/anota una tabla con negocio, slug, proyecto, estado y URL por sitio deployado. Esa tabla es el registro de entrega; no hace falta llevarlo a mano.
