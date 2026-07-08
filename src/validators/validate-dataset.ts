@@ -18,14 +18,43 @@ const requiredEvidenceFields = [
 type Args = {
   datasetPath: string;
   strictFinal: boolean;
+  expectedCount: number;
   allowMock: boolean;
   allowIncomplete: boolean;
 };
 
+function datasetPathFromArgs(argv: string[]): string {
+  for (let index = 2; index < argv.length; index += 1) {
+    const value = argv[index];
+    if (!value) {
+      continue;
+    }
+
+    if (value === "--count") {
+      index += 1;
+      continue;
+    }
+
+    if (!value.startsWith("--")) {
+      return value;
+    }
+  }
+
+  return "data/tandil-businesses.json";
+}
+
 function parseArgs(argv: string[]): Args {
+  const countFlag = argv.indexOf("--count");
+  const expectedCount = Number(countFlag >= 0 ? argv[countFlag + 1] : "10");
+
+  if (!Number.isInteger(expectedCount) || expectedCount <= 0) {
+    throw new Error("--count must be a positive integer.");
+  }
+
   return {
-    datasetPath: argv[2] ?? "data/tandil-businesses.json",
+    datasetPath: datasetPathFromArgs(argv),
     strictFinal: argv.includes("--strict-final"),
+    expectedCount,
     allowMock: argv.includes("--allow-mock"),
     allowIncomplete: argv.includes("--allow-incomplete"),
   };
@@ -104,12 +133,12 @@ function validateBusiness(business: Business, args: Args): ValidationIssue[] {
   return issues;
 }
 
-function validateDistribution(businesses: Business[], strictFinal: boolean): ValidationIssue[] {
+function validateDistribution(businesses: Business[], strictFinal: boolean, expectedCount: number): ValidationIssue[] {
   const approved = approvedBusinesses(businesses);
   const issues: ValidationIssue[] = [];
 
-  if (strictFinal && approved.length !== 10) {
-    issues.push({ code: "approved_count", message: `Expected exactly 10 approved businesses, found ${approved.length}.` });
+  if (strictFinal && approved.length !== expectedCount) {
+    issues.push({ code: "approved_count", message: `Expected exactly ${expectedCount} approved businesses, found ${approved.length}.` });
   }
 
   const archetypeCounts = new Map<string, number>();
@@ -169,7 +198,7 @@ async function main(): Promise<void> {
     issues.push(...validateBusiness(business, args));
   }
 
-  issues.push(...validateDistribution(businesses, args.strictFinal));
+  issues.push(...validateDistribution(businesses, args.strictFinal, args.expectedCount));
 
   printReport("Dataset validation", issues);
   exitForIssues(issues);

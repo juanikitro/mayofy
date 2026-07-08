@@ -1,5 +1,6 @@
 import type { Business } from "./business-schema.js";
 import { summarizeOpeningHours } from "./hours.js";
+import { businessAreaLabel, businessCityLabel } from "./location.js";
 
 export type CommercialTone =
   | "premium-detailing"
@@ -89,7 +90,7 @@ function context(business: Business): string {
 }
 
 function area(business: Business): string {
-  return business.neighborhood_or_area ? `${business.neighborhood_or_area}, Tandil` : "Tandil";
+  return businessAreaLabel(business);
 }
 
 function reviewSignal(business: Business): string {
@@ -932,7 +933,7 @@ export function buildBusinessProfile(business: Business): BusinessProfile {
     tone: "practical-workshop",
     customerType: "Clientes locales que necesitan entender el servicio, llamar y llegar sin friccion.",
     heroClaim: "Una landing clara para convertir una busqueda local en una consulta concreta.",
-    services: [business.main_product_or_service, "Atencion en local", "Consulta directa", "Ubicacion en Tandil"],
+    services: [business.main_product_or_service, "Atencion en local", "Consulta directa", `Ubicacion en ${businessCityLabel(business)}`],
     serviceCards: [
       {
         label: "Servicio",

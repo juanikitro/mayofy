@@ -98,12 +98,14 @@ async function loadRemakeContext(args: Args, slug: string): Promise<{
 function renderBrief(params: {
   business: Awaited<ReturnType<typeof loadBusinesses>>[number];
   index: number;
+  batchSize: number;
   currentSpec: unknown;
   args: Args;
   remakeContext: Awaited<ReturnType<typeof loadRemakeContext>>;
 }): string {
-  const { business, index, currentSpec, args, remakeContext } = params;
+  const { business, index, batchSize, currentSpec, args, remakeContext } = params;
   const profile = buildBusinessProfile(business);
+  const batchLabel = batchSize === 1 ? "the page" : `the ${batchSize} pages`;
   const sourceUrls = [
     business.rating.source_url,
     ...business.website_check.checked_sources,
@@ -234,9 +236,9 @@ ${remakeBlock}
 - Automotive references to emulate structurally: strong claim + numbers + services + CTA to booking; urban/aggressive wrapping/custom style; detailing service taxonomy; emotional hero; packages; before/after; reviews.
 - You may use plain HTML/CSS or a framework/library if it materially improves the final UI. You have broad discretion to use frontend/UI, animation, and icon libraries such as Aceternity UI (https://ui.aceternity.com/components), shadcn/ui (https://ui.shadcn.com/docs/components), Magic UI (https://magicui.design/), Framer Motion, GSAP, Motion One, lucide-react, React Icons, or similar component/motion kits when they raise product quality.
 - If using a framework, build/export it yourself and point \`agent_frontend.output_dir\` at the static output.
-- Avoid making ten pages share the same hero rhythm, card system, font pairing, spacing scale, or composition.
+- Avoid making ${batchLabel} share the same hero rhythm, card system, font pairing, spacing scale, or composition.
 - Prefer concrete microcopy based on the signals above.
-- Vary \`visual_mood\` and \`composition\` across the 10 sites.
+- Vary \`visual_mood\` and \`composition\` across this ${batchSize}-site batch.
 - Avoid repeating the same hero rhythm, proof order, and CTA wording from nearby briefs.
 - If the page would otherwise look templated, use a high-conversion template deliberately: first viewport promise + proof + CTA, visible image, objection handling, offer/options, process, final CTA. Make it polished rather than novel.
 
@@ -363,7 +365,7 @@ async function main(): Promise<void> {
     const remakeContext = await loadRemakeContext(args, business.slug);
     await writeFile(
       path.join(args.outDir, `${business.slug}.md`),
-      renderBrief({ business, index, currentSpec: currentSpecs.get(business.id), args, remakeContext }),
+      renderBrief({ business, index, batchSize: businesses.length, currentSpec: currentSpecs.get(business.id), args, remakeContext }),
       "utf8",
     );
   }

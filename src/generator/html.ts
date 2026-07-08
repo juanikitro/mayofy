@@ -1,6 +1,7 @@
 import type { Archetype } from "../archetypes/index.js";
 import type { Business } from "../content/business-schema.js";
 import { parseOpeningHours, summarizeOpeningHours } from "../content/hours.js";
+import { businessAreaLabel } from "../content/location.js";
 import { buildBusinessProfile } from "../content/local-copy.js";
 import type { ResolvedDesign } from "../design/palette.js";
 import type { CommercialSpec, CreativeSpec, SiteSpec } from "../site-specs/schema.js";
@@ -414,7 +415,7 @@ function renderDocument(ctx: PageContext, content: string): string {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>${escapeHtml(ctx.business.name)} | ${escapeHtml(ctx.profile.rubro)} en Tandil</title>
+    <title>${escapeHtml(ctx.business.name)} | ${escapeHtml(ctx.profile.rubro)} en ${escapeHtml(ctx.area)}</title>
     <meta name="description" content="${escapeHtml(
       `${ctx.business.name}: ${ctx.profile.rubro} en ${ctx.area}. Contacto, horarios, reseñas y ubicación.`,
     )}">
@@ -819,7 +820,7 @@ export function renderBusinessPage(business: Business, archetype: Archetype, des
     design_notes: "",
     commercial: commercialFallback(profile),
   };
-  const area = business.neighborhood_or_area ? `${business.neighborhood_or_area}, Tandil` : "Tandil";
+  const area = businessAreaLabel(business);
   const hours = summarizeOpeningHours(business.opening_hours.raw);
   const rating = `${business.rating.value.toFixed(1)} sobre 5 · ${business.rating.reviews_count} reseñas`;
   const commercial = pageSpec.commercial ?? commercialFallback(profile);

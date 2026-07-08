@@ -1,5 +1,6 @@
 import type { Business } from "../content/business-schema.js";
 import { summarizeOpeningHours } from "../content/hours.js";
+import { businessCityLabel } from "../content/location.js";
 import { buildBusinessProfile } from "../content/local-copy.js";
 import type { CommercialSpec, Composition, ConversionTemplate, CreativeSpec, DesignBrief, SiteSpec, VisualMood } from "./schema.js";
 
@@ -91,7 +92,7 @@ function reviewSignal(business: Business): string {
   return best ? `Reseñas que destacan: "${best.text.slice(0, 92)}${best.text.length > 92 ? "..." : ""}"` : "Reseñas disponibles para comparar experiencias reales.";
 }
 
-function imageSubject(rubro: string): string {
+function imageSubject(rubro: string, city: string): string {
   const normalized = rubro
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
@@ -101,21 +102,21 @@ function imageSubject(rubro: string): string {
     return "estudio urbano de wrapping, polarizado o proteccion vehicular, auto con terminacion brillante, herramientas limpias";
   }
   if (normalized.includes("lavadero") || normalized.includes("estetica")) {
-    return "lavadero o estudio de detailing en Tandil, auto limpio, agua, espuma y terminaciones cuidadas";
+    return `lavadero o estudio de detailing en ${city}, auto limpio, agua, espuma y terminaciones cuidadas`;
   }
   if (normalized.includes("lubricentro")) {
-    return "lubricentro en Tandil, area de mantenimiento, bidones de aceite, filtros y herramientas ordenadas";
+    return `lubricentro en ${city}, area de mantenimiento, bidones de aceite, filtros y herramientas ordenadas`;
   }
   if (normalized.includes("chapa")) {
-    return "taller de chapa y pintura en Tandil, carroceria en reparacion, herramientas y luz de trabajo";
+    return `taller de chapa y pintura en ${city}, carroceria en reparacion, herramientas y luz de trabajo`;
   }
   if (normalized.includes("repuesto")) {
-    return "local de repuestos para autos en Tandil, mostrador, estanterias y accesorios automotores";
+    return `local de repuestos para autos en ${city}, mostrador, estanterias y accesorios automotores`;
   }
   if (normalized.includes("gomeria")) {
-    return "gomeria en Tandil, fachada de local barrial, herramientas y cubiertas";
+    return `gomeria en ${city}, fachada de local barrial, herramientas y cubiertas`;
   }
-  return `${normalized} en Tandil, fachada de local barrial y herramientas de trabajo`;
+  return `${normalized} en ${city}, fachada de local barrial y herramientas de trabajo`;
 }
 
 function commercialFromProfile(profile: ReturnType<typeof buildBusinessProfile>): CommercialSpec {
@@ -348,6 +349,7 @@ export function composeLocalSiteSpec(business: Business, index: number): SiteSpe
   const mood = chooseMood(business, index);
   const composition = compositions[index % compositions.length];
   const service = profile.rubro.toLowerCase();
+  const city = businessCityLabel(business);
   const addressShort = business.address.split(",").slice(0, 2).join(",").trim();
 
   return {
@@ -356,7 +358,7 @@ export function composeLocalSiteSpec(business: Business, index: number): SiteSpe
     visual_mood: mood,
     composition,
     headline: business.name,
-    subheadline: publicText(`${profile.heroClaim} ${profile.rubro} en Tandil con contacto, horarios, ubicacion y referencias publicas arriba del pliegue.`),
+    subheadline: publicText(`${profile.heroClaim} ${profile.rubro} en ${city} con contacto, horarios, ubicacion y referencias publicas arriba del pliegue.`),
     primary_cta: publicText(profile.cta),
     secondary_cta: "Ver ubicacion",
     service_tags: profile.services.slice(0, 5).map(publicText),
@@ -370,7 +372,7 @@ export function composeLocalSiteSpec(business: Business, index: number): SiteSpe
     resource_items: profile.resourceItems.map(publicText),
     review_heading: `Lo que valoran quienes ya fueron`,
     contact_heading: `Llegar o llamar sin vueltas`,
-    image_prompt: `Escena editorial realista para ${imageSubject(profile.rubro)}, luz natural, usable como imagen generica de apoyo si las fotos reales son pobres, sin texto, sin logos, sin marcas ni datos inventados del negocio.`,
+    image_prompt: `Escena editorial realista para ${imageSubject(profile.rubro, city)}, luz natural, usable como imagen generica de apoyo si las fotos reales son pobres, sin texto, sin logos, sin marcas ni datos inventados del negocio.`,
     design_notes: `Mood ${mood}, composicion ${composition}, template de conversion ${conversionTemplateFor(profile)}, tono comercial ${profile.tone}. Evitar estetica SaaS generica; usar recursos visuales del rubro ${service}, direccion, prueba social, paquetes editables y CTA de turno.`,
     conversion_template: conversionTemplateFor(profile),
     design_brief: designBriefFromProfile(profile, business, hours),

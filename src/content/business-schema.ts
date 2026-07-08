@@ -42,6 +42,7 @@ const fieldEvidenceSchema = z.object({
   field: z.enum([
     "name",
     "address",
+    "city",
     "phone",
     "opening_hours",
     "rating",
@@ -70,6 +71,7 @@ export const businessSchema = z.object({
   category: z.string().min(1),
   is_vehicle_related: z.boolean(),
   address: z.string().min(1),
+  city: z.string().min(1).optional(),
   neighborhood_or_area: z.string().min(1).nullable(),
   phone: z.string().min(1).nullable(),
   opening_hours: z.object({

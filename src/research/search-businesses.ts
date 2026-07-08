@@ -116,6 +116,7 @@ function fieldEvidence(place: GooglePlaceDetails): Business["verification"]["fie
   const fields: Business["verification"]["field_evidence"] = [
     { field: "name", source_url: source, notes: "Google Places API displayName." },
     { field: "address", source_url: source, notes: "Google Places API formattedAddress." },
+    { field: "city", source_url: source, notes: "Derived from the requested city and Google Places formattedAddress context." },
     { field: "category", source_url: source, notes: "Google Places API primary type." },
     { field: "rating", source_url: source, notes: "Google Places API rating and userRatingCount." },
     { field: "website_check", source_url: source, notes: "Google Places API websiteUri checked." },
@@ -172,6 +173,7 @@ function toBusinessCandidate(place: GooglePlaceDetails, query: string, args: Arg
     category: category(place),
     is_vehicle_related: args.vehicleRelated,
     address: place.formattedAddress ?? `${args.city}, ${args.country}`,
+    city: args.city,
     neighborhood_or_area: null,
     phone: place.nationalPhoneNumber ?? place.internationalPhoneNumber ?? null,
     opening_hours: {
