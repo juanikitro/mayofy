@@ -3,7 +3,7 @@ import path from "node:path";
 import { resolveArchetype } from "../archetypes/index.js";
 import { approvedBusinesses, loadBusinesses } from "../content/load-businesses.js";
 import { resolveDesign } from "../design/palette.js";
-import { flagValue, positionalValue, resolveGeneratedDir } from "../generated-output.js";
+import { flagValue, resolveGeneratedDir } from "../generated-output.js";
 import { designBriefIssues } from "../site-specs/design-brief-rules.js";
 import { loadSiteSpecs } from "../site-specs/load-site-specs.js";
 import type { SiteSpec } from "../site-specs/schema.js";
@@ -42,16 +42,37 @@ type ManifestSite = {
 };
 
 function parseArgs(argv: string[]): Args {
-  const datasetPath = positionalValue(argv, 2) ?? "data/tandil-businesses.json";
+  const datasetPath = datasetPathFromArgs(argv);
+  const city = flagValue(argv, "--city");
   return {
     datasetPath,
-    outDir: resolveGeneratedDir(argv, { datasetPath }),
+    outDir: resolveGeneratedDir(argv, { datasetPath, city }),
     allowMock: argv.includes("--allow-mock"),
     specsPath: flagValue(argv, "--specs"),
     requireRealImages: argv.includes("--require-real-images"),
     requireAgentFrontends: argv.includes("--require-agent-frontends"),
     requireDesignBrief: argv.includes("--require-design-brief"),
   };
+}
+
+function datasetPathFromArgs(argv: string[]): string {
+  for (let index = 2; index < argv.length; index += 1) {
+    const value = argv[index];
+    if (!value) {
+      continue;
+    }
+
+    if (["--out", "--session", "--run", "--specs", "--city"].includes(value)) {
+      index += 1;
+      continue;
+    }
+
+    if (!value.startsWith("--")) {
+      return value;
+    }
+  }
+
+  throw new Error("Usage: tsx src/generator/generate-sites.ts <businesses.json> --specs <site-specs.json>");
 }
 
 function escapeHtml(value: string): string {

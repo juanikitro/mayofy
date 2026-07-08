@@ -24,6 +24,14 @@ export function sessionNameFromDataset(datasetPath: string, fallback = "session"
   return slugify(withoutSuffix) || fallback;
 }
 
+export function sessionNameFromCityAndDate(city: string, date: Date): string {
+  const citySlug = slugify(city);
+  if (!citySlug) {
+    throw new Error("City must contain at least one alphanumeric character.");
+  }
+  return `${citySlug}-${date.toISOString().slice(0, 10)}`;
+}
+
 export function generatedSessionDir(sessionName: string): string {
   const slug = slugify(sessionName);
   if (!slug) {
@@ -34,7 +42,7 @@ export function generatedSessionDir(sessionName: string): string {
 
 export function resolveGeneratedDir(
   argv: string[],
-  options: { positionalIndex?: number; datasetPath?: string; fallbackSession?: string; outFlag?: string | null } = {},
+  options: { positionalIndex?: number; datasetPath?: string; fallbackSession?: string; outFlag?: string | null; city?: string | null } = {},
 ): string {
   const outFlag = options.outFlag === undefined ? "--out" : options.outFlag;
   if (outFlag) {
@@ -49,10 +57,18 @@ export function resolveGeneratedDir(
     return positional;
   }
 
+  const explicitSession = flagValue(argv, "--session") ?? flagValue(argv, "--run");
+  if (explicitSession) {
+    return generatedSessionDir(explicitSession);
+  }
+
+  const city = options.city ?? flagValue(argv, "--city");
+  if (city) {
+    return generatedSessionDir(sessionNameFromCityAndDate(city, new Date()));
+  }
+
   const session =
-    flagValue(argv, "--session") ??
-    flagValue(argv, "--run") ??
-    (options.datasetPath ? sessionNameFromDataset(options.datasetPath, options.fallbackSession) : options.fallbackSession ?? "session");
+    options.datasetPath ? sessionNameFromDataset(options.datasetPath, options.fallbackSession) : options.fallbackSession ?? "session";
 
   return generatedSessionDir(session);
 }
