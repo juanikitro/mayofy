@@ -1,0 +1,71 @@
+name: Deploy generated landings to Vercel
+
+on:
+  workflow_dispatch:
+    inputs:
+      run:
+        description: "Run name, for example cordoba-conversion"
+        required: true
+        type: string
+      vercel_scope:
+        description: "Optional Vercel team/org scope slug"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-vercel-${{ inputs.run }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      RUN_NAME: ${{ inputs.run }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run design gate
+        run: |
+          npx tsx src/validators/validate-design-gate.ts \
+            --businesses "data/${RUN_NAME}-businesses.json" \
+            --specs "data/site-specs/${RUN_NAME}-site-specs.json"
+
+      - name: Generate sites
+        run: |
+          npx tsx src/generator/generate-sites.ts \
+            "data/${RUN_NAME}-businesses.json" \
+            --specs "data/site-specs/${RUN_NAME}-site-specs.json" \
+            --require-real-images \
+            --require-agent-frontends
+
+      - name: Validate generated sites
+        run: |
+          npx tsx src/validators/validate-generated-sites.ts \
+            --session "$RUN_NAME" \
+            --require-agent-frontends
+
+      - name: Validate client readiness
+        run: |
+          npx tsx src/validators/validate-client-readiness.ts \
+            --session "$RUN_NAME" \
+            --min-score 85
+
+      - name: Deploy sites to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_SCOPE: ${{ inputs.vercel_scope || secrets.VERCEL_SCOPE }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        run: node scripts/deploy-generated.mjs --session "$RUN_NAME"
