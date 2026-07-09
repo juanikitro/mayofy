@@ -74,6 +74,13 @@ h1, h2, h3 {
 
 a { color: var(--ice-bright); }
 
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 4px;
+}
+
 .tabular { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
 
 /* ==========================================================================

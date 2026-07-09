@@ -282,7 +282,7 @@ async function auditSite(outDir: string, site: SiteRecord): Promise<{ classes: S
     issues.push(issue("warning", "skip_link", site.slug, "no se encontro skip link."));
   }
 
-  if (!/@media\s*\(\s*max-width/iu.test(css)) {
+  if (!/@media\s*\([^)]*\b(?:max|min)-width/iu.test(css)) {
     issues.push(issue("blocker", "responsive_css", site.slug, "no se encontro media query responsive."));
   }
 
