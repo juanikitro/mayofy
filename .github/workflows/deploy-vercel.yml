@@ -85,9 +85,11 @@ jobs:
 
       - name: Validate generated sites
         run: |
+          EXPECTED_COUNT=$(node -e "process.stdout.write(String(require('./data/'+process.env.RUN_NAME+'-businesses.json').length))")
           npx tsx src/validators/validate-generated-sites.ts \
             --session "$RUN_NAME" \
-            --require-agent-frontends
+            --require-agent-frontends \
+            --expected-count "$EXPECTED_COUNT"
 
       - name: Validate client readiness
         run: |
