@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { access, appendFile } from "node:fs/promises";
+import { access, appendFile, readdir } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import process from "node:process";
@@ -76,6 +76,16 @@ function runNameFromPath(filePath) {
   return null;
 }
 
+function shouldDeployAllFromPath(filePath) {
+  const normalized = filePath.replaceAll("\\", "/");
+  return (
+    normalized === ".github/workflows/deploy-vercel.yml" ||
+    normalized === "package.json" ||
+    normalized === "package-lock.json" ||
+    /^scripts\/(?:detect-deploy-runs|generate-deploy-runs|build-vercel-catalog|deploy-generated)\.mjs$/u.test(normalized)
+  );
+}
+
 async function exists(filePath) {
   try {
     await access(filePath);
@@ -108,6 +118,15 @@ async function deployableRuns(candidates) {
   return runs;
 }
 
+async function allRunCandidates() {
+  const entries = await readdir("data", { withFileTypes: true });
+  return entries
+    .filter((entry) => entry.isFile())
+    .map((entry) => entry.name.match(/^(.+)-businesses\.json$/u)?.[1])
+    .filter(Boolean)
+    .sort();
+}
+
 async function setOutput(name, value) {
   if (process.env.GITHUB_OUTPUT) {
     await appendFile(process.env.GITHUB_OUTPUT, `${name}=${value}\n`, "utf8");
@@ -124,12 +143,16 @@ async function main() {
 
   let runs;
   if (eventName === "workflow_dispatch") {
-    runs = manualRun ? [manualRun] : [];
+    runs = manualRun ? [manualRun] : await deployableRuns(await allRunCandidates());
   } else {
     const files = changedFiles(before, after);
     console.log(`Changed files:\n${files.map((file) => `- ${file}`).join("\n") || "(none)"}`);
     const candidates = [...new Set(files.map(runNameFromPath).filter(Boolean))];
-    runs = await deployableRuns(candidates);
+    if (candidates.length > 0 || files.some(shouldDeployAllFromPath)) {
+      runs = await deployableRuns(await allRunCandidates());
+    } else {
+      runs = [];
+    }
   }
 
   runs = [...new Set(runs)].sort();

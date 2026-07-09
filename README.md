@@ -10,7 +10,7 @@ El repositorio empieza sin datos reales finales. `data/tandil-businesses.json` e
 - JSON como fuente inicial de datos.
 - Frontend escrito por agente por negocio: HTML/CSS propio o framework/librerias cuando aporten calidad.
 - Renderer estatico interno solo como fallback de preview.
-- Vercel preparado como opcion de deploy por carpeta generada, sin ejecutar deploys automaticamente.
+- Vercel despliega un unico proyecto con catalogo por sesion y URLs publicas por landing.
 
 La prioridad es calidad visual, no velocidad ni costo. El agente tiene libertad para usar frameworks, librerias, composiciones propias y CSS dedicado, siempre que el resultado final exporte archivos estaticos y respete los datos verificados.
 
@@ -35,7 +35,7 @@ npm run generate -- data/<run>-businesses.json --specs data/site-specs/<run>-sit
 npm run qa -- --session <run> --expected-count 10
 ```
 
-El deploy es automatico en push a `main` via `.github/workflows/deploy-vercel.yml` (ver `docs/DEPLOYMENT.md`); no hay comando local de deploy.
+El deploy es automatico en push a `main` via `.github/workflows/deploy-vercel.yml` (ver `docs/DEPLOYMENT.md`); no hay comando local de deploy. Vercel usa un solo proyecto (`ia-landing-generator`) y publica cada landing como `/<run>/<slug>/`.
 
 Para componer la direccion visual/copy con OpenAI:
 
@@ -111,6 +111,8 @@ npm run qa -- --session <run> --expected-count 10
 10. Ejecutar QA de contenido, datos y frontends authored.
 11. Ejecutar `npm run qa:client` y revisar screenshots desktop/mobile.
 12. Generar el estudio final con `npm run study:final -- --session <run> --businesses data/<run>-businesses.json --price "[PRECIO]"`; el Markdown queda en `generated/<sesion>/final-study.md`.
-13. Crear plan de deploy para 10 URLs separadas.
+13. El workflow de deploy publica un unico proyecto Vercel con catalogo interno y URLs separadas por landing.
+
+`generated/` es salida reproducible local/CI y no debe versionarse. Las fuentes versionadas son datasets, specs y `data/frontends/**`.
 
 Ver detalles en `docs/PIPELINE.md`, `docs/DATA_RULES.md`, `docs/DESIGN_STANDARDS.md`, `docs/CLIENT_READINESS_QA.md` y `docs/DEPLOYMENT.md`.

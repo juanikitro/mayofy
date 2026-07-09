@@ -5,61 +5,16 @@ import { spawn } from "node:child_process";
 import path from "node:path";
 import process from "node:process";
 
-function argValue(argv, flag) {
+function argValue(argv, flag, fallback = null) {
   const index = argv.indexOf(flag);
   if (index < 0) {
-    return null;
+    return fallback;
   }
   const value = argv[index + 1];
   if (!value || value.startsWith("--")) {
     throw new Error(`${flag} requires a value.`);
   }
   return value;
-}
-
-function requiredRunName(argv) {
-  const runName = argValue(argv, "--session") ?? argValue(argv, "--run") ?? argv[2];
-  if (!runName) {
-    throw new Error("Usage: node scripts/deploy-generated.mjs --session <run>");
-  }
-  if (!/^[a-z0-9][a-z0-9-]*$/u.test(runName)) {
-    throw new Error("Run name must be a slug containing only lowercase letters, numbers, and hyphens.");
-  }
-  return runName;
-}
-
-async function readManifest(outDir) {
-  const manifestPath = path.join(outDir, "manifest.json");
-  let raw;
-  try {
-    raw = await readFile(manifestPath, "utf8");
-  } catch (error) {
-    throw new Error(`Missing ${manifestPath}. Generation must complete successfully before deploy.`);
-  }
-
-  const manifest = JSON.parse(raw);
-  if (!Array.isArray(manifest.sites)) {
-    throw new Error(`${manifestPath} must contain a sites array.`);
-  }
-  return manifest;
-}
-
-function safeSiteDir(outDir, directory) {
-  if (!directory || typeof directory !== "string") {
-    throw new Error("Manifest site is missing directory.");
-  }
-
-  const resolvedOutDir = path.resolve(outDir);
-  const resolvedSiteDir = path.resolve(outDir, directory);
-  const relative = path.relative(resolvedOutDir, resolvedSiteDir);
-  if (relative.startsWith("..") || path.isAbsolute(relative)) {
-    throw new Error(`Refusing to deploy directory outside ${outDir}: ${directory}`);
-  }
-  return resolvedSiteDir;
-}
-
-function markdownCell(value) {
-  return String(value ?? "").replaceAll("|", "\\|").replaceAll("\n", " ");
 }
 
 function deploymentUrl(stdout) {
@@ -114,25 +69,14 @@ async function runVercel(args, options) {
   });
 }
 
-async function writeSummary(runName, results) {
-  const lines = [
-    `# Vercel deployments for \`${runName}\``,
-    "",
-    "| Business | Slug | Service | Rating | Project | Status | URL |",
-    "| --- | --- | --- | --- | --- | --- | --- |",
-    ...results.map((result) => {
-      const url = result.url ? `[${markdownCell(result.url)}](${result.url})` : "";
-      return `| ${markdownCell(result.business)} | \`${markdownCell(result.slug)}\` | ${markdownCell(result.service)} | ${markdownCell(result.rating)} | \`${markdownCell(result.project)}\` | ${markdownCell(result.status)} | ${url} |`;
-    }),
-    "",
-  ];
+async function packageProjectName() {
+  const raw = await readFile("package.json", "utf8");
+  const pkg = JSON.parse(raw);
+  return typeof pkg.name === "string" && pkg.name.trim() ? pkg.name.trim() : "ia-landing-generator";
+}
 
-  const body = `${lines.join("\n")}\n`;
-  if (process.env.GITHUB_STEP_SUMMARY) {
-    await appendFile(process.env.GITHUB_STEP_SUMMARY, body, "utf8");
-  } else {
-    console.log(body);
-  }
+function validProjectName(projectName) {
+  return /^[a-z0-9][a-z0-9-]*$/u.test(projectName);
 }
 
 async function projectExists({ token, scope, projectName }) {
@@ -162,28 +106,38 @@ async function ensureProject({ token, scope, projectName }) {
   }
 }
 
-async function linkProject({ token, scope, siteDir, projectName }) {
-  await runVercel(["link", "--cwd", siteDir, "--project", projectName, "--yes", ...vercelAuthArgs({ token, scope })]);
+async function linkProject({ token, scope, deployDir, projectName }) {
+  await runVercel(["link", "--cwd", deployDir, "--project", projectName, "--yes", ...vercelAuthArgs({ token, scope })]);
 }
 
-async function deployLinkedProject({ token, scope, siteDir }) {
-  const { stdout } = await runVercel(["deploy", "--cwd", siteDir, "--prod", "--yes", ...vercelAuthArgs({ token, scope })]);
+async function deployLinkedProject({ token, scope, deployDir }) {
+  const { stdout } = await runVercel(["deploy", "--cwd", deployDir, "--prod", "--yes", ...vercelAuthArgs({ token, scope })]);
   const url = deploymentUrl(stdout);
   if (!url) {
-    throw new Error(`Vercel did not print a deployment URL for ${siteDir}.`);
+    throw new Error(`Vercel did not print a deployment URL for ${deployDir}.`);
   }
   return url;
 }
 
-async function deploySite({ token, scope, siteDir, projectName }) {
-  await access(siteDir);
-  await ensureProject({ token, scope, projectName });
-  await linkProject({ token, scope, siteDir, projectName });
-  return deployLinkedProject({ token, scope, siteDir });
+async function writeSummary({ projectName, deployDir, url }) {
+  const body = [
+    `# Vercel deployment for \`${projectName}\``,
+    "",
+    `- URL: [${url}](${url})`,
+    `- Target: production`,
+    `- Output: \`${deployDir}\``,
+    `- Catalog: [${url.replace(/\/$/u, "")}/catalog/](${url.replace(/\/$/u, "")}/catalog/)`,
+    "",
+  ].join("\n");
+
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    await appendFile(process.env.GITHUB_STEP_SUMMARY, `${body}\n`, "utf8");
+  } else {
+    console.log(body);
+  }
 }
 
 async function main() {
-  const runName = requiredRunName(process.argv);
   const token = process.env.VERCEL_TOKEN?.trim();
   if (!token) {
     throw new Error(
@@ -191,48 +145,19 @@ async function main() {
     );
   }
 
-  const outDir = path.join("generated", runName);
-  const manifest = await readManifest(outDir);
+  const deployDir = path.resolve(argValue(process.argv, "--dir", path.join("dist", "vercel-catalog")));
+  const projectName = argValue(process.argv, "--project", process.env.VERCEL_PROJECT_NAME?.trim() || (await packageProjectName()));
   const scope = process.env.VERCEL_SCOPE?.trim() || null;
-  const results = [];
 
-  for (const site of manifest.sites) {
-    if (!site.slug || !site.name) {
-      throw new Error("Each manifest site must include slug and name.");
-    }
-
-    const projectName = `local-${site.slug}`;
-    const siteDir = safeSiteDir(outDir, site.directory);
-    console.log(`Deploying ${site.name} (${site.slug}) as ${projectName}...`);
-
-    try {
-      const url = await deploySite({ token, scope, siteDir, projectName });
-      results.push({
-        business: site.name,
-        slug: site.slug,
-        service: site.service ?? "",
-        rating: site.rating ?? "",
-        project: projectName,
-        status: "deployed",
-        url,
-      });
-      console.log(`Deployed ${site.slug}: ${url}`);
-    } catch (error) {
-      results.push({
-        business: site.name,
-        slug: site.slug,
-        service: site.service ?? "",
-        rating: site.rating ?? "",
-        project: projectName,
-        status: "failed",
-        url: "",
-      });
-      await writeSummary(runName, results);
-      throw error;
-    }
+  if (!validProjectName(projectName)) {
+    throw new Error(`Invalid Vercel project name: ${projectName}`);
   }
 
-  await writeSummary(runName, results);
+  await access(path.join(deployDir, "index.html"));
+  await ensureProject({ token, scope, projectName });
+  await linkProject({ token, scope, deployDir, projectName });
+  const url = await deployLinkedProject({ token, scope, deployDir });
+  await writeSummary({ projectName, deployDir, url });
 }
 
 main().catch((error) => {

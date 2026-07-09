@@ -138,7 +138,7 @@ generated/<sesion>/final-study.md
 generated/<sesion>/final-study.json
 ```
 
-La carpeta `generated/<sesion>/` es el paquete de salida de la corrida: contiene una carpeta por landing, `manifest.json`, `index.html`, los reportes de QA que no tengan override y el estudio final Markdown.
+La carpeta `generated/<sesion>/` es el paquete de salida de la corrida: contiene una carpeta por landing, `manifest.json`, `index.html`, los reportes de QA que no tengan override y el estudio final Markdown. Es salida reproducible local/CI y no se versiona; la fuente versionada vive en datasets, specs y `data/frontends/**`.
 
 El estudio final debe incluir, por cada negocio:
 

@@ -170,6 +170,8 @@ npm run generate -- data/<run>-businesses.json --specs data/site-specs/<run>-sit
 
 Cada corrida crea una carpeta de sesion dentro de `generated/`. El nombre puede salir del dataset explicito (`data/<run>-businesses.json` -> `generated/<run>`) o fijarse con `--session <slug>`. Si se pasa `--city "<Ciudad>"` al generar y no se pasa `--session`, `--run`, `--out` ni salida posicional, la carpeta se nombra automaticamente como `<ciudad>-<fecha>`; sin `--city`, sigue el comportamiento anterior.
 
+`generated/` es un artefacto reproducible local/CI y no se versiona. Para reconstruirlo se usan los datasets, specs y `data/frontends/**`.
+
 Dentro de `generated/<sesion>/` queda una carpeta por negocio (`<slug>/`) con `index.html`, `styles.css` y `site.json`, mas `manifest.json` e `index.html` de indice de la tanda.
 
 Para navegar todas las tandas generadas localmente, ejecutar `npm run browse` y abrir `http://localhost:4310`.
@@ -231,7 +233,13 @@ No buscar redes nuevas ni inventar canales. Si no hay Instagram/WhatsApp verific
 
 ## Fase 8: deploy
 
-El deploy es automatico: `.github/workflows/deploy-vercel.yml` corre en cada push a `main` que toque `data/*-businesses.json`, `data/site-specs/*.json` o `data/frontends/**`, valida (`qa:design`, `generate`, `qa`, `qa:client`) y publica con `scripts/deploy-generated.mjs`. Ver `docs/DEPLOYMENT.md`. No hay paso manual local para esto.
+El deploy es automatico: `.github/workflows/deploy-vercel.yml` corre en cada push a `main` que toque datos, specs, frontends o scripts de deploy, valida (`qa:design`, `generate`, `qa`, `qa:client`), arma `dist/vercel-catalog/` y publica un unico proyecto Vercel con `scripts/deploy-generated.mjs`. Ver `docs/DEPLOYMENT.md`. No hay paso manual local para produccion.
+
+Rutas publicadas:
+
+- `/` login hardcodeado del catalogo.
+- `/catalog/` catalogo por sesion.
+- `/<run>/<slug>/` landing publica para enviar al negocio.
 
 ## Repetir con otra ciudad
 

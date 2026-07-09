@@ -24,6 +24,8 @@
     "qa:mock": "tsx src/validators/validate-generated-sites.ts generated/mock --allow-mock",
     "import:businesses": "tsx scripts/import-businesses.ts",
     "browse": "node scripts/serve-generated.mjs",
+    "catalog:build": "node scripts/build-vercel-catalog.mjs",
+    "deploy:prepare": "node scripts/generate-deploy-runs.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
