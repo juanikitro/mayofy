@@ -1,0 +1,1192 @@
+[
+  {
+    "business_id": "google-ChIJaUSB-G17GpYRB7RJDo88-1M",
+    "slug": "sandrik-alquiler-ropa-nieve",
+    "visual_mood": "neighborhood-direct",
+    "composition": "photo-board",
+    "headline": "La ropa de nieve de Bariloche que te abriga toda la temporada",
+    "subheadline": "Sandrik alquila camperas, pantalones y equipo de nieve en Sargento Rolando 277, con todos los talles y 4.3 sobre 5 en 162 reseñas.",
+    "primary_cta": "Llamar al 0294 466-1332",
+    "secondary_cta": "Consultar talles y disponibilidad",
+    "service_tags": [
+      "Alquiler de ropa de nieve",
+      "Camperas y pantalones térmicos",
+      "Todos los talles",
+      "Equipo para esquí y caminatas",
+      "Atención familiar"
+    ],
+    "proof_points": [
+      "4.3 sobre 5 con 162 reseñas en Google",
+      "Todos los días de 9 a 13 y de 16 a 21",
+      "Sargento A. Rolando 277, San Carlos de Bariloche",
+      "\"Las camperas tienen muy lindo diseño, súper coloridas y muy abrigadas, telas de muy buena calidad, los equipos son nuevos\" — Hernán Dileo"
+    ],
+    "resource_title": "Antes de venir a equiparte",
+    "resource_items": [
+      "Horario partido todos los días: al mediodía cierra de 13 a 16.",
+      "Podés probarte todo con tranquilidad y elegir según la actividad: nieve, caminatas o paseo.",
+      "Reseñas públicas con nombre que describen la atención de la familia."
+    ],
+    "review_heading": "Lo que cuentan quienes se equiparon acá",
+    "contact_heading": "Llamá o pasá por Sargento Rolando 277",
+    "image_prompt": "Foto real del local de alquiler de ropa de nieve Sandrik en Bariloche, con perchas de camperas coloridas y equipo térmico ordenado por talles, luz cálida de interior.",
+    "design_notes": "Vidriera de ropa de nieve en colores: crema cálido, cobalto profundo y amarillo sol de las camperas reales. Unbounded para titulares redondeados + DM Sans de cuerpo. Grilla tipo perchero con chips de talle.",
+    "conversion_template": "visual-menu",
+    "design_brief": {
+      "designed_by": "claude-code",
+      "market_position": "Alquiler de ropa de nieve familiar en el centro de Bariloche que convierte al turista que llega sin abrigo técnico en una visita al local para equiparse antes de subir al cerro.",
+      "visual_thesis": "Vidriera de camperas en color: la pared de ropa de nieve real, colorida y ordenada por talle, se vuelve un menú visual alegre. Display Unbounded de peso alto y redondez amable, cuerpo DM Sans; paleta de crema cálido, cobalto profundo y amarillo sol tomado de las camperas, con gris hielo de apoyo.",
+      "copy_voice": "Español argentino cálido y familiar, de local de barrio que te atiende con paciencia, sin tono de catálogo.",
+      "layout_signature": "Template visual-menu: hero con titular grande a la izquierda, foto del local a la derecha y CTA de llamada arriba del fold; después perchero de categorías de ropa como chips de talle, banda de reseñas de familia, franja de horario partido y contacto con mapa al cierre.",
+      "asset_plan": "Foto real del local como imagen principal del hero y del cierre; chips de talle, siluetas de campera y copo de nieve resueltos con SVG/CSS inline; textura de puntada de tela en el fondo, sin assets externos salvo Google Fonts.",
+      "ai_fill_plan": {
+        "copy": [
+          "Microcopy de secciones y CTAs derivado de las reseñas verificadas sobre atención y talles",
+          "Encabezados de bloque como 'Perchero de talles' sin inventar prendas ni marcas"
+        ],
+        "imagery": [
+          "Chips de talle y siluetas de campera en SVG de línea",
+          "Textura de puntada y copos de nieve en CSS como fondo suave"
+        ],
+        "boundaries": [
+          "No inventar precios, stock, marcas, años, premios, garantías, servicios ni reseñas",
+          "No afirmar envíos ni entregas a domicilio: no hay evidencia para este local",
+          "El ángulo 'súper coloridas y abrigadas' solo se apoya en la reseña citada de Hernán Dileo"
+        ]
+      },
+      "anti_patterns": [
+        "Fuentes genéricas como Inter, Roboto o Arial",
+        "Gradiente violeta sobre blanco",
+        "Layout SaaS de tres cards iguales",
+        "Stock de ropa de esquí de catálogo en lugar de la foto real del local"
+      ],
+      "rewrite_targets": [
+        "Que el color de las camperas reales mande la paleta, no un azul invierno cualquiera",
+        "Subir el 4.3 con 162 reseñas y el horario todos los días al hero",
+        "Dejar el CTA de llamada como el elemento más caliente de la pantalla"
+      ]
+    },
+    "creative": {
+      "concept": "El local de barrio donde toda la familia se equipa de nieve antes de subir, con perchero real y atención paciente.",
+      "audience": "Turistas y familias que llegan a Bariloche sin ropa de nieve y quieren alquilar todo cerca del centro.",
+      "visual_direction": "Camperas coloridas sobre crema cálido, chips de talle, tipografía redonda de peso alto y copos de nieve de línea.",
+      "layout": "parts-counter",
+      "texture": "parts-shelf",
+      "hero_angle": "Ropa de nieve para toda la familia en el centro de Bariloche, con todos los talles y 4.3 sobre 5 en 162 reseñas.",
+      "hero_cards": [
+        { "label": "Reseñas", "value": "4.3★ en 162 opiniones", "note": "Perfil público de Google" },
+        { "label": "Horario", "value": "Todos los días 9 a 13 y 16 a 21" },
+        { "label": "Dónde", "value": "Sargento A. Rolando 277" }
+      ],
+      "sections": [
+        {
+          "type": "service-board",
+          "eyebrow": "Qué se alquila",
+          "title": "Perchero de talles para toda la familia",
+          "body": "Ropa de nieve para elegir según la actividad, con talles para grandes y chicos y equipos que entregan impecables.",
+          "items": [
+            { "label": "Camperas térmicas", "value": "Coloridas y abrigadas, para nieve y paseo" },
+            { "label": "Pantalones de nieve", "value": "Talles para adultos y chicos" },
+            { "label": "Accesorios", "value": "Consultá en el mostrador qué necesitás para el día" }
+          ]
+        },
+        {
+          "type": "quote-strip",
+          "eyebrow": "Atención de la familia",
+          "title": "Amables y con paciencia",
+          "body": "Las reseñas repiten lo mismo: te ayudan a elegir sin apuro y volvés cada temporada.",
+          "items": [
+            { "label": "Florencia Navarro", "value": "El dueño súper amable y considerado. Este año vuelvo a elegirlos." },
+            { "label": "Evelin Ulloa", "value": "La atención es un sueño: amables, pacientes y siempre dispuestos a ayudar." }
+          ]
+        },
+        {
+          "type": "quick-actions",
+          "eyebrow": "Contacto directo",
+          "title": "Llamá o pasá por el local",
+          "body": "Teléfono, mapa y horario partido bien claros para coordinar tu visita.",
+          "items": [
+            { "label": "Llamar", "value": "0294 466-1332" },
+            { "label": "Ir al local", "value": "Sargento A. Rolando 277, Bariloche" }
+          ]
+        }
+      ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/bariloche-ski/sandrik-alquiler-ropa-nieve",
+      "notes": "Vidriera de ropa de nieve en color: Unbounded + DM Sans, paleta cobalto y amarillo sol sobre crema, perchero de talles y foto real del local."
+    }
+  },
+  {
+    "business_id": "google-ChIJf4qhOgx7GpYREEzF6DsyzHk",
+    "slug": "srn-rental-alquiler-de-ropa-de-nieve-ski-snowboard",
+    "visual_mood": "precision-service",
+    "composition": "split-command",
+    "headline": "Equipo de ski y snowboard con 5 estrellas, llevado hasta tu hotel",
+    "subheadline": "SRN.Rental alquila ropa y equipos nuevos en Av. de los Pioneros 3757 y te acompaña en tu primera vez en la nieve, con 5.0 sobre 5 en 61 reseñas.",
+    "primary_cta": "Llamar al 0294 15-433-8535",
+    "secondary_cta": "Reservar y coordinar entrega",
+    "service_tags": [
+      "Alquiler de ski y snowboard",
+      "Ropa de nieve",
+      "Equipos nuevos",
+      "Acompañamiento a principiantes",
+      "Atención en español y portugués"
+    ],
+    "proof_points": [
+      "5.0 sobre 5 con 61 reseñas en Google",
+      "Todos los días de 9 a 13 y de 17 a 21",
+      "Av. de los Pioneros 3757, San Carlos de Bariloche",
+      "\"Gabriel nos acompañó personalmente en nuestro hotel para nuestra primera vez esquiando en Bariloche\" — María Caicedo"
+    ],
+    "resource_title": "Ideal si es tu primera vez",
+    "resource_items": [
+      "Equipos nuevos y ropa limpia, según las reseñas de quienes ya alquilaron.",
+      "Atención en español y portugués para turistas que recién llegan.",
+      "Coordinan la entrega y responden dudas antes de subir al cerro."
+    ],
+    "review_heading": "Lo que cuentan quienes esquiaron por primera vez",
+    "contact_heading": "Reservá por teléfono y coordiná la entrega",
+    "image_prompt": "Foto real del local de SRN.Rental en Bariloche con equipos de ski y snowboard nuevos y ropa de nieve ordenada, ambiente prolijo y luminoso.",
+    "design_notes": "Concierge alpino sereno: crema editorial, verde petróleo profundo y ámbar cálido en el CTA. Instrument Serif de titulares con Hanken Grotesk de cuerpo. Sello 5.0 como medalla.",
+    "conversion_template": "editorial-local-story",
+    "design_brief": {
+      "designed_by": "claude-code",
+      "market_position": "Alquiler premium de ski, snowboard y ropa de nieve que convierte al turista primerizo que compara locales en una reserva telefónica, apoyado en un 5.0 sobre 5 y en el acompañamiento personal hasta el hotel.",
+      "visual_thesis": "Concierge alpino sereno: la prolijidad del local real y la nieve limpia llevadas a una revista de montaña calma. Display serif Instrument Serif con cuerpo Hanken Grotesk; paleta de crema editorial, verde petróleo profundo y ámbar cálido reservado para el CTA, con un sello 5.0 tratado como medalla.",
+      "copy_voice": "Español argentino amable y tranquilizador, el mismo tono de las reseñas ('nos acompañaron', 'respondieron todas nuestras dudas'), pensado para quien nunca esquió.",
+      "layout_signature": "Template editorial-local-story: hero partido con titular serif a la izquierda, foto del equipo nuevo a la derecha y medalla 5.0 sobre el fold; después 'cómo es tu primer día' en tres pasos, banda de equipos y ropa, testimonios como cartas y cierre con horario, dirección y mapa.",
+      "asset_plan": "Foto real del local y del equipo nuevo como imagen del hero y del cierre; medalla 5.0, montañas de línea y separadores en SVG/CSS inline; textura de papel sutil en el fondo, sin assets externos salvo Google Fonts.",
+      "ai_fill_plan": {
+        "copy": [
+          "Microcopy de los tres pasos del primer día y CTAs de reserva",
+          "Encabezados editoriales de sección apoyados en reseñas, sin inventar servicios"
+        ],
+        "imagery": [
+          "Montañas y curvas de nivel en SVG de línea como separador",
+          "Medalla y estrellas del 5.0 en CSS como marca visual de confianza"
+        ],
+        "boundaries": [
+          "No inventar precios, stock, marcas, años, premios, garantías, servicios ni reseñas",
+          "No prometer traslado incluido: el acompañamiento al hotel solo se apoya en la reseña de María Caicedo",
+          "Sin claims de nivel de dificultad ni promesas de aprendizaje"
+        ]
+      },
+      "anti_patterns": [
+        "Fuentes genéricas como Inter, Roboto o Arial",
+        "Gradiente violeta sobre blanco",
+        "Layout SaaS de tres cards iguales",
+        "Stock de pistas de esquí de catálogo en lugar del local real"
+      ],
+      "rewrite_targets": [
+        "Poner el 5.0 sobre 5 como medalla de confianza arriba del fold",
+        "Contar el ángulo 'primera vez esquiando' con las reseñas reales, no con promesas",
+        "Reservar el ámbar solo para el CTA de llamada"
+      ]
+    },
+    "creative": {
+      "concept": "El alquiler que te saca el miedo a la primera vez: equipos nuevos, atención bilingüe y acompañamiento real.",
+      "audience": "Turistas primerizos, muchos brasileños, que comparan locales y reservan por teléfono antes de viajar.",
+      "visual_direction": "Crema editorial, verde petróleo y ámbar, serif calmo con medalla 5.0 y montañas de línea.",
+      "layout": "studio-detail",
+      "texture": "polished-glass",
+      "hero_angle": "Ski, snowboard y ropa con 5.0 sobre 5 y acompañamiento para tu primera vez en la nieve.",
+      "hero_cards": [
+        { "label": "Reseñas", "value": "5.0★ en 61 opiniones", "note": "Perfil público de Google" },
+        { "label": "Horario", "value": "Todos los días 9 a 13 y 17 a 21" },
+        { "label": "Dónde", "value": "Av. de los Pioneros 3757" }
+      ],
+      "sections": [
+        {
+          "type": "process",
+          "eyebrow": "Tu primer día",
+          "title": "De la reserva a la nieve, sin nervios",
+          "body": "El recorrido que describen las reseñas: consultás, coordinan la entrega y te explican todo antes de subir.",
+          "items": [
+            { "label": "01", "value": "Llamás y contás qué actividad vas a hacer" },
+            { "label": "02", "value": "Coordinan equipo y ropa según tu talle" },
+            { "label": "03", "value": "Retirás o coordinás la entrega y subís al cerro" }
+          ]
+        },
+        {
+          "type": "quote-strip",
+          "eyebrow": "Confianza de principiantes",
+          "title": "Te acompañan de verdad",
+          "body": "Las reseñas cuentan atención de cinco estrellas para quienes nunca pisaron la nieve.",
+          "items": [
+            { "label": "Mareña Solange Reddel", "value": "Excelente la atención, ni hablar de los equipos. De primera calidad." },
+            { "label": "Diego Antonio Barbosa", "value": "Roupas de esqui novas, limpas e de ótima qualidade. O atendimento foi excelente." }
+          ]
+        },
+        {
+          "type": "quick-actions",
+          "eyebrow": "Contacto directo",
+          "title": "Reservá por teléfono",
+          "body": "Teléfono, horario y mapa para coordinar equipo, ropa y entrega.",
+          "items": [
+            { "label": "Llamar", "value": "0294 15-433-8535" },
+            { "label": "Ir al local", "value": "Av. de los Pioneros 3757, Bariloche" }
+          ]
+        }
+      ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/bariloche-ski/srn-rental-alquiler-de-ropa-de-nieve-ski-snowboard",
+      "notes": "Concierge alpino sereno: Instrument Serif + Hanken Grotesk, crema y verde petróleo con ámbar en el CTA, medalla 5.0 y foto real del equipo nuevo."
+    }
+  },
+  {
+    "business_id": "google-ChIJH8JeX0NxGpYRd2b79AeyPpc",
+    "slug": "nestor-ski",
+    "visual_mood": "roadside-urgent",
+    "composition": "poster-bay",
+    "headline": "Alquilá y guardá tu equipo en la misma base del Cerro Catedral",
+    "subheadline": "Nestor Ski está frente a la plaza Catalina Reynal, en la base del cerro, con guardado de equipos, retiro y devolución fáciles y 4.8 sobre 5 en 50 reseñas.",
+    "primary_cta": "Llamar al 0294 460-9302",
+    "secondary_cta": "Consultar equipo en la base",
+    "service_tags": [
+      "Alquiler de ski y snowboard",
+      "Guardado de equipos en la base",
+      "Botas para adultos y chicos",
+      "Retiro y devolución simples",
+      "Atención en la base del cerro"
+    ],
+    "proof_points": [
+      "4.8 sobre 5 con 50 reseñas en Google",
+      "Todos los días de 9 a 17, en la base del cerro",
+      "Frente a plaza Catalina Reynal, base del Cerro Catedral",
+      "\"The best rental/gear service on base! Very at-home local feel. I used Nestor to keep my gear stored during my time in Bariloche\" — Rosemary Roberts"
+    ],
+    "resource_title": "Por qué conviene estar en la base",
+    "resource_items": [
+      "Guardás el equipo entre día y día sin cargarlo al alojamiento.",
+      "Retiro y devolución rápidos, a pasos de las pistas.",
+      "Botas para adultos y chicos, según las reseñas de quienes alquilaron."
+    ],
+    "review_heading": "Lo que cuentan quienes esquiaron en el cerro",
+    "contact_heading": "Llamá antes de subir al Catedral",
+    "image_prompt": "Foto real del puesto de Nestor Ski en la base del Cerro Catedral, con equipos de ski y snowboard y estantes de guardado, montaña nevada de fondo.",
+    "design_notes": "Refugio de base de cerro: grafito y madera con rojo señal en el CTA. Familjen Grotesk + Sofia Sans. Etiquetas de guardado tipo ticket de armario como motivo.",
+    "conversion_template": "hero-proof-offer",
+    "design_brief": {
+      "designed_by": "claude-code",
+      "market_position": "Alquiler y guardado de equipos en la misma base del Cerro Catedral que convierte al esquiador que ya está en el cerro en un cliente que retira, guarda y devuelve sin cargar el equipo al centro.",
+      "visual_thesis": "Refugio en la base del cerro: la atención al pie de la montaña y los estantes de guardado reales llevados a un póster de refugio de nieve. Display Familjen Grotesk con cuerpo Sofia Sans; paleta de grafito, madera cálida y nieve, con rojo señal reservado para el CTA y etiquetas de guardado tipo ticket de armario.",
+      "copy_voice": "Español argentino directo y práctico, de montaña, que resuelve la logística del día de esquí sin vueltas.",
+      "layout_signature": "Template hero-proof-offer: hero póster con titular sobre la base del cerro, foto del puesto y CTA de llamada arriba del fold; después tablero de servicios con guardado destacado, banda de reseña sobre el 'at-home local feel', tickets de armario y contacto con mapa a la base.",
+      "asset_plan": "Foto real del puesto en la base como imagen del hero; etiquetas de armario, curvas de montaña y flechas de pista en SVG/CSS inline; textura de madera y nieve en CSS, sin assets externos salvo Google Fonts.",
+      "ai_fill_plan": {
+        "copy": [
+          "Microcopy de logística (retiro, guardado, devolución) y CTAs derivado de reseñas",
+          "Encabezados de sección como 'Guardado en la base' sin inventar precios ni casilleros"
+        ],
+        "imagery": [
+          "Etiquetas de armario y tickets en SVG como motivo visual",
+          "Montaña y flechas de pista de línea en CSS como textura de fondo"
+        ],
+        "boundaries": [
+          "No inventar precios, stock, marcas, años, premios, garantías, servicios ni reseñas",
+          "No afirmar cantidad de casilleros ni medidas: el guardado solo se apoya en las reseñas citadas",
+          "No prometer clases ni instructores: no hay evidencia"
+        ]
+      },
+      "anti_patterns": [
+        "Fuentes genéricas como Inter, Roboto o Arial",
+        "Gradiente violeta sobre blanco",
+        "Layout SaaS de tres cards iguales",
+        "Foto de stock de una pista europea en lugar del puesto real en la base"
+      ],
+      "rewrite_targets": [
+        "Hacer del guardado en la base el diferencial central, no un servicio más",
+        "Subir el 4.8 con 50 reseñas y la ubicación en la base al hero",
+        "Reservar el rojo señal solo para el CTA de llamada"
+      ]
+    },
+    "creative": {
+      "concept": "El puesto al pie del cerro que te resuelve el equipo y el guardado el mismo día que esquiás.",
+      "audience": "Esquiadores y snowboarders que ya están en el Cerro Catedral y quieren alquilar y guardar sin volver al centro.",
+      "visual_direction": "Grafito y madera con rojo señal, etiquetas de armario y montaña de línea, tipografía condensada práctica.",
+      "layout": "roadside-rescue",
+      "texture": "road-markings",
+      "hero_angle": "Alquiler y guardado de equipos en la base del Cerro Catedral, con 4.8 sobre 5 en 50 reseñas.",
+      "hero_cards": [
+        { "label": "Reseñas", "value": "4.8★ en 50 opiniones", "note": "Perfil público de Google" },
+        { "label": "Horario", "value": "Todos los días 9 a 17" },
+        { "label": "Dónde", "value": "Base del Cerro Catedral" }
+      ],
+      "sections": [
+        {
+          "type": "service-board",
+          "eyebrow": "Servicios en la base",
+          "title": "Todo a pasos de las pistas",
+          "body": "Alquiler, guardado y devolución sin cargar el equipo al alojamiento, lo que más valoran las reseñas.",
+          "items": [
+            { "label": "Alquiler", "value": "Ski y snowboard para adultos y chicos" },
+            { "label": "Guardado", "value": "Dejá el equipo entre día y día en la base" },
+            { "label": "Botas", "value": "Consultá tallas al llamar" }
+          ]
+        },
+        {
+          "type": "quote-strip",
+          "eyebrow": "Trato local",
+          "title": "Se siente como en casa",
+          "body": "Quienes alquilaron destacan la cercanía del equipo y lo fácil de retirar y devolver.",
+          "items": [
+            { "label": "Brandon Danke", "value": "Rented après ski boots, one of the few that rents them, for adults and kids. Great service." },
+            { "label": "Letícia Dias", "value": "Alugamos equipamentos de ski. De 3 lugares que pesquisamos os preços, este estava melhor." }
+          ]
+        },
+        {
+          "type": "quick-actions",
+          "eyebrow": "Contacto directo",
+          "title": "Coordiná antes de subir",
+          "body": "Teléfono, horario y mapa a la base del cerro para dejar todo listo.",
+          "items": [
+            { "label": "Llamar", "value": "0294 460-9302" },
+            { "label": "Ir a la base", "value": "Frente a plaza Catalina Reynal, Cerro Catedral" }
+          ]
+        }
+      ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/bariloche-ski/nestor-ski",
+      "notes": "Refugio de base de cerro: Familjen Grotesk + Sofia Sans, grafito y madera con rojo señal en el CTA, etiquetas de guardado y foto real del puesto en la base."
+    }
+  },
+  {
+    "business_id": "google-ChIJLbC7y3V7GpYRqK2niuemXbQ",
+    "slug": "el-russo-rental",
+    "visual_mood": "neighborhood-direct",
+    "composition": "photo-board",
+    "headline": "Equipo de nieve completo, con María y Ernesto atendiendo cada detalle",
+    "subheadline": "El Russo Rental alquila ropa, calzado y guantes en Palacios 222, con muchos talles y estilos y 4.8 sobre 5 en 37 reseñas.",
+    "primary_cta": "Llamar al 0294 466-1318",
+    "secondary_cta": "Consultar talles y estilos",
+    "service_tags": [
+      "Alquiler de ropa de nieve",
+      "Calzado y guantes",
+      "Muchos talles y estilos",
+      "Equipo completo abrigado",
+      "Abierto de 9 a 21"
+    ],
+    "proof_points": [
+      "4.8 sobre 5 con 37 reseñas en Google",
+      "Todos los días de 9 a 21",
+      "Palacios 222, San Carlos de Bariloche",
+      "\"Várias opções de tamanhos, cores e estilos. Roupas bem conservadas e super quentes! Não passamos frio\" — Giovanna Fausto"
+    ],
+    "resource_title": "Qué te llevás del local",
+    "resource_items": [
+      "Equipo completo: ropa, calzado y guantes en una sola parada.",
+      "Muchos talles, colores y estilos para elegir con calma.",
+      "Atención de María y Ernesto, según las reseñas de quienes alquilaron."
+    ],
+    "review_heading": "Lo que cuentan quienes alquilaron acá",
+    "contact_heading": "Llamá o pasá por Palacios 222",
+    "image_prompt": "Foto real del local El Russo Rental en Bariloche con ropa de nieve colgada en variedad de colores y estilos, calzado y guantes a la vista, ambiente cálido.",
+    "design_notes": "Ropero cálido de nieve: crema tibio, ciruela profunda y coral en el CTA. Gabarito + Figtree. Parche bordado de nieve tipo souvenir como motivo.",
+    "conversion_template": "visual-menu",
+    "design_brief": {
+      "designed_by": "claude-code",
+      "market_position": "Alquiler de ropa de nieve completa en el centro de Bariloche que convierte al visitante que no quiere pasar frío en una visita al local para salir equipado de arriba a abajo en una sola parada.",
+      "visual_thesis": "Ropero cálido de nieve: la variedad de colores y estilos del local real llevada a un menú visual acogedor tipo souvenir de montaña. Display Gabarito con cuerpo Figtree; paleta de crema tibio, ciruela profunda y coral reservado para el CTA, con parches bordados de nieve como motivo.",
+      "copy_voice": "Español argentino cercano y cálido, con nombre propio de los dueños, que transmite trato de familia.",
+      "layout_signature": "Template visual-menu: hero con titular a la izquierda, foto del ropero real a la derecha y CTA de llamada arriba del fold; después menú de prendas por tipo, banda de reseña sobre 'no passamos frío', parches de estilo y contacto con mapa al cierre.",
+      "asset_plan": "Foto real del local con la ropa colgada como imagen del hero; parches bordados, perchas y copos de nieve en SVG/CSS inline; textura de lana en CSS como fondo, sin assets externos salvo Google Fonts.",
+      "ai_fill_plan": {
+        "copy": [
+          "Microcopy del menú de prendas y CTAs apoyado en reseñas sobre talles y abrigo",
+          "Encabezados de sección como 'Ropero completo' sin inventar prendas ni marcas"
+        ],
+        "imagery": [
+          "Parches bordados y perchas en SVG de línea como motivo",
+          "Textura de lana y copos en CSS como fondo cálido"
+        ],
+        "boundaries": [
+          "No inventar precios, stock, marcas, años, premios, garantías, servicios ni reseñas",
+          "No prometer descuentos por agencia: una reseña aclara que ese descuento no era real",
+          "No afirmar envíos a domicilio: no hay evidencia"
+        ]
+      },
+      "anti_patterns": [
+        "Fuentes genéricas como Inter, Roboto o Arial",
+        "Gradiente violeta sobre blanco",
+        "Layout SaaS de tres cards iguales",
+        "Stock de ropa de esquí de catálogo en lugar del ropero real"
+      ],
+      "rewrite_targets": [
+        "Que la variedad de colores y estilos real ordene el menú visual",
+        "Subir el 4.8 con 37 reseñas y el equipo completo al hero",
+        "Reservar el coral solo para el CTA de llamada"
+      ]
+    },
+    "creative": {
+      "concept": "El ropero de nieve donde salís equipado completo y con trato de familia.",
+      "audience": "Turistas y familias que quieren alquilar ropa, calzado y guantes en una sola parada del centro.",
+      "visual_direction": "Crema tibio, ciruela y coral, parches bordados de nieve y tipografía redonda amable.",
+      "layout": "parts-counter",
+      "texture": "parts-shelf",
+      "hero_angle": "Equipo de nieve completo con muchos talles y estilos, y 4.8 sobre 5 en 37 reseñas.",
+      "hero_cards": [
+        { "label": "Reseñas", "value": "4.8★ en 37 opiniones", "note": "Perfil público de Google" },
+        { "label": "Horario", "value": "Todos los días 9 a 21" },
+        { "label": "Dónde", "value": "Palacios 222, Bariloche" }
+      ],
+      "sections": [
+        {
+          "type": "service-board",
+          "eyebrow": "El ropero",
+          "title": "Todo lo que abriga, en una parada",
+          "body": "Ropa, calzado y guantes para no pasar frío en ninguna actividad, con talles y estilos para elegir.",
+          "items": [
+            { "label": "Ropa de nieve", "value": "Camperas y pantalones abrigados" },
+            { "label": "Calzado", "value": "Para la nieve y el paseo" },
+            { "label": "Guantes y accesorios", "value": "Para completar el equipo" }
+          ]
+        },
+        {
+          "type": "quote-strip",
+          "eyebrow": "Trato de familia",
+          "title": "María y Ernesto, atentos",
+          "body": "Las reseñas repiten la calidez de la atención y la calidad del equipo.",
+          "items": [
+            { "label": "Florencia Passarello", "value": "Todas las personas que me atendieron fueron amables y atentas. La ropa impecable!" },
+            { "label": "Romina", "value": "Buena onda y atención. Podés tener la ropa completa más el calzado y guantes." }
+          ]
+        },
+        {
+          "type": "quick-actions",
+          "eyebrow": "Contacto directo",
+          "title": "Llamá o pasá por el local",
+          "body": "Teléfono, horario amplio y mapa para coordinar tu equipo.",
+          "items": [
+            { "label": "Llamar", "value": "0294 466-1318" },
+            { "label": "Ir al local", "value": "Palacios 222, Bariloche" }
+          ]
+        }
+      ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/bariloche-ski/el-russo-rental",
+      "notes": "Ropero cálido de nieve: Gabarito + Figtree, crema y ciruela con coral en el CTA, parches bordados y foto real del local con ropa colgada."
+    }
+  },
+  {
+    "business_id": "google-ChIJYxh23nF7GpYR7AY6HnN37w0",
+    "slug": "tierra-de-mestizos-rental",
+    "visual_mood": "workshop-trust",
+    "composition": "service-ledger",
+    "headline": "El rental con más historia de reseñas para tu primera vez en la nieve",
+    "subheadline": "Tierra de Mestizos alquila equipos de nieve en Moreno 262, con gran variedad para elegir y 4.5 sobre 5 en 330 reseñas.",
+    "primary_cta": "Llamar al 0294 479-1637",
+    "secondary_cta": "Consultar disponibilidad",
+    "service_tags": [
+      "Alquiler de equipos de nieve",
+      "Gran variedad para elegir",
+      "Ideal para principiantes",
+      "Atención en el centro",
+      "Ski y snowboard"
+    ],
+    "proof_points": [
+      "4.5 sobre 5 con 330 reseñas en Google",
+      "Todos los días de 9 a 21 (confirmá el horario del día al llamar)",
+      "Francisco Pascasio Moreno 262, San Carlos de Bariloche",
+      "\"Great staff, very helpful and a lot of equipment to choose from! They turned out to be essential for us first timers in the snow\" — Bruno C"
+    ],
+    "resource_title": "Por qué llegan tantos primerizos",
+    "resource_items": [
+      "Mucha variedad de equipos para encontrar lo que te queda.",
+      "Atención pensada para quienes nunca pisaron la nieve.",
+      "330 reseñas públicas que puedes leer antes de decidir."
+    ],
+    "review_heading": "Lo que cuentan los que alquilaron por primera vez",
+    "contact_heading": "Llamá y coordiná tu equipo",
+    "image_prompt": "Foto real del local Tierra de Mestizos Rental en el centro de Bariloche con estantes llenos de equipos de nieve y mostrador de atención.",
+    "design_notes": "Almacén de montaña con volumen: pizarra profunda, azul glaciar y cian eléctrico en el CTA. Big Shoulders Display + Public Sans. Ledger de stock como motivo de confianza.",
+    "conversion_template": "catalog-counter",
+    "design_brief": {
+      "designed_by": "claude-code",
+      "market_position": "Alquiler de equipos de nieve con gran volumen de reseñas en el centro de Bariloche que convierte al primerizo indeciso en un cliente que confía por cantidad de opiniones y variedad de equipo.",
+      "visual_thesis": "Almacén de montaña con volumen: la variedad de equipos y el peso de 330 reseñas del local real llevados a un mostrador tipo catálogo con libro de stock. Display Big Shoulders Display con cuerpo Public Sans; paleta de pizarra profunda, azul glaciar y cian eléctrico reservado para el CTA, con un ledger de stock como motivo de confianza.",
+      "copy_voice": "Español argentino claro y confiable, que apoya la decisión en la variedad y en el volumen de reseñas, sin exagerar.",
+      "layout_signature": "Template catalog-counter: hero con titular fuerte y contador de 330 reseñas, foto del local y CTA de llamada arriba del fold; después catálogo de equipos por categoría, banda de reseña de primerizos, ledger de disponibilidad y contacto con mapa al centro.",
+      "asset_plan": "Foto real del local lleno de equipos como imagen del hero; ledger de stock, íconos de equipo y curvas de nivel en SVG/CSS inline; textura de papel cuadriculado en CSS, sin assets externos salvo Google Fonts.",
+      "ai_fill_plan": {
+        "copy": [
+          "Microcopy del catálogo de equipos y CTAs apoyado en reseñas de variedad",
+          "Encabezados de sección como 'Catálogo de equipos' sin inventar stock ni precios"
+        ],
+        "imagery": [
+          "Ledger de disponibilidad y íconos de equipo en SVG de línea",
+          "Textura de papel cuadriculado y curvas de nivel en CSS como fondo"
+        ],
+        "boundaries": [
+          "No inventar precios, stock, marcas, años, premios, garantías, servicios ni reseñas",
+          "No publicar un horario fijo contradictorio: una reseña discute el horario, por eso se pide confirmar al llamar",
+          "No prometer clases ni instructores: no hay evidencia"
+        ]
+      },
+      "anti_patterns": [
+        "Fuentes genéricas como Inter, Roboto o Arial",
+        "Gradiente violeta sobre blanco",
+        "Layout SaaS de tres cards iguales",
+        "Stock de equipos de catálogo en lugar del local real lleno de equipo"
+      ],
+      "rewrite_targets": [
+        "Convertir las 330 reseñas en el argumento visual central de confianza",
+        "Ordenar la variedad de equipo como un catálogo real, no como tres cards",
+        "Reservar el cian eléctrico solo para el CTA de llamada"
+      ]
+    },
+    "creative": {
+      "concept": "El almacén de equipos con tanto volumen de reseñas que el primerizo entra tranquilo.",
+      "audience": "Principiantes y familias que buscan variedad de equipo en el centro y se guían por la cantidad de reseñas.",
+      "visual_direction": "Pizarra profunda, azul glaciar y cian eléctrico, ledger de stock y tipografía display robusta.",
+      "layout": "mechanic-ledger",
+      "texture": "service-ledger",
+      "hero_angle": "Gran variedad de equipos de nieve con 4.5 sobre 5 en 330 reseñas.",
+      "hero_cards": [
+        { "label": "Reseñas", "value": "4.5★ en 330 opiniones", "note": "Perfil público de Google" },
+        { "label": "Horario", "value": "Todos los días 9 a 21" },
+        { "label": "Dónde", "value": "Moreno 262, centro" }
+      ],
+      "sections": [
+        {
+          "type": "metric-grid",
+          "eyebrow": "Por qué confían",
+          "title": "El peso de las reseñas",
+          "body": "La cantidad de opiniones y la variedad de equipo son el argumento que repiten los primerizos.",
+          "items": [
+            { "label": "330", "value": "Reseñas públicas en Google" },
+            { "label": "4.5★", "value": "Valoración promedio" },
+            { "label": "Centro", "value": "A pasos del microcentro de Bariloche" }
+          ]
+        },
+        {
+          "type": "quote-strip",
+          "eyebrow": "Primera vez",
+          "title": "Esenciales para arrancar",
+          "body": "Quienes nunca esquiaron destacan la ayuda para elegir el equipo correcto.",
+          "items": [
+            { "label": "Bruno C", "value": "A lot of equipment to choose from! Essential for us first timers in the snow." },
+            { "label": "Maria do Carmo Silva Folego", "value": "O atendimento do Luciano na loja foi perfeito. Ajudou nas escolhas." }
+          ]
+        },
+        {
+          "type": "quick-actions",
+          "eyebrow": "Contacto directo",
+          "title": "Coordiná tu equipo",
+          "body": "Teléfono, horario y mapa al centro para dejar tu equipo reservado.",
+          "items": [
+            { "label": "Llamar", "value": "0294 479-1637" },
+            { "label": "Ir al local", "value": "Moreno 262, Bariloche" }
+          ]
+        }
+      ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/bariloche-ski/tierra-de-mestizos-rental",
+      "notes": "Almacén de montaña con volumen: Big Shoulders Display + Public Sans, pizarra y azul glaciar con cian eléctrico en el CTA, ledger de stock y foto real del local lleno de equipo."
+    }
+  },
+  {
+    "business_id": "google-ChIJC6B38shxGpYRL1Pr4RpX5nk",
+    "slug": "epic-bariloche",
+    "visual_mood": "precision-service",
+    "composition": "split-command",
+    "headline": "Ski y snowboard a punto, a pasos de la base del Cerro Catedral",
+    "subheadline": "Epic Bariloche alquila y prepara equipos, encera tablas y guarda tu material para varios días, con 4.3 sobre 5 en 209 reseñas.",
+    "primary_cta": "Llamar al 03543 15-60-6807",
+    "secondary_cta": "Consultar equipo y encerado",
+    "service_tags": [
+      "Alquiler de ski y snowboard",
+      "Encerado y puesta a punto",
+      "Guardado para varios días",
+      "Cerca de la base del cerro",
+      "Atención en inglés y español"
+    ],
+    "proof_points": [
+      "4.3 sobre 5 con 209 reseñas en Google",
+      "Todos los días de 8:30 a 18:30",
+      "A pasos de la base del Cerro Catedral, San Carlos de Bariloche",
+      "\"Pablo took a great care of me selecting the perfect board and waxing it. Great customer service from all staff, fair prices\" — Ales Cevela"
+    ],
+    "resource_title": "Para quien ya sabe lo que busca",
+    "resource_items": [
+      "Puesta a punto y encerado de tablas, según las reseñas de quienes alquilaron.",
+      "Guardado del equipo arriba para alquileres de varios días.",
+      "Personal que atiende en inglés y da referencias de la montaña."
+    ],
+    "review_heading": "Lo que cuentan riders y esquiadores",
+    "contact_heading": "Llamá antes de tu jornada en el cerro",
+    "image_prompt": "Foto real del local Epic Bariloche con tablas de snowboard y skis en bancos de preparación, cerca de la base del Cerro Catedral.",
+    "design_notes": "Taller freeride de montaña: carbón profundo, nieve y naranja seguridad en el CTA. Bricolage Grotesque + Spline Sans, datos en Martian Mono. Curvas de nivel topográficas como motivo.",
+    "conversion_template": "service-diagnostic",
+    "design_brief": {
+      "designed_by": "claude-code",
+      "market_position": "Pro shop de ski y snowboard cerca de la base del Cerro Catedral que convierte al rider exigente en cliente que alquila, encera y guarda su equipo a pasos de las pistas.",
+      "visual_thesis": "Taller freeride de montaña: los bancos de preparación y el encerado del local real llevados a un mapa topográfico técnico. Display Bricolage Grotesque con cuerpo Spline Sans y datos en Martian Mono; paleta de carbón profundo, nieve y naranja seguridad reservado para el CTA, con curvas de nivel como motivo.",
+      "copy_voice": "Español argentino técnico y directo, de rider a rider, que habla de puesta a punto y logística sin marketing vacío.",
+      "layout_signature": "Template service-diagnostic: hero partido con titular técnico, foto del banco de preparación y CTA de llamada arriba del fold; después diagnóstico de servicios (alquiler, encerado, guardado), banda de reseña sobre 'the perfect board', panel de datos en mono y contacto con mapa a la base.",
+      "asset_plan": "Foto real del local con equipos en preparación como imagen del hero; curvas de nivel, íconos de tabla y ficha técnica en SVG/CSS inline; textura topográfica en CSS, sin assets externos salvo Google Fonts.",
+      "ai_fill_plan": {
+        "copy": [
+          "Microcopy técnico de servicios y CTAs apoyado en reseñas de encerado y guardado",
+          "Encabezados de sección como 'Puesta a punto' sin inventar precios ni marcas de tabla"
+        ],
+        "imagery": [
+          "Curvas de nivel y ficha técnica en SVG de línea",
+          "Textura topográfica y flechas de pendiente en CSS como fondo"
+        ],
+        "boundaries": [
+          "No inventar precios, stock, marcas, años, premios, garantías, servicios ni reseñas",
+          "No prometer clases de backcountry: las referencias solo se apoyan en la reseña citada",
+          "No afirmar medidas de guardado ni cantidad de casilleros"
+        ]
+      },
+      "anti_patterns": [
+        "Fuentes genéricas como Inter, Roboto o Arial",
+        "Gradiente violeta sobre blanco",
+        "Layout SaaS de tres cards iguales",
+        "Foto de stock de freeride en lugar del banco de preparación real"
+      ],
+      "rewrite_targets": [
+        "Poner el encerado y la puesta a punto como diferencial técnico, no como detalle",
+        "Subir el 4.3 con 209 reseñas y la cercanía a la base al hero",
+        "Reservar el naranja seguridad solo para el CTA de llamada"
+      ]
+    },
+    "creative": {
+      "concept": "El taller freeride donde tu tabla sale a punto y guardás el equipo entre jornadas.",
+      "audience": "Riders y esquiadores con experiencia que buscan equipo preparado cerca de la base del Catedral.",
+      "visual_direction": "Carbón profundo, nieve y naranja seguridad, curvas de nivel topográficas y datos en monoespaciada.",
+      "layout": "studio-detail",
+      "texture": "road-markings",
+      "hero_angle": "Alquiler, encerado y guardado de ski y snowboard con 4.3 sobre 5 en 209 reseñas.",
+      "hero_cards": [
+        { "label": "Reseñas", "value": "4.3★ en 209 opiniones", "note": "Perfil público de Google" },
+        { "label": "Horario", "value": "Todos los días 8:30 a 18:30" },
+        { "label": "Dónde", "value": "Cerca de la base del cerro" }
+      ],
+      "sections": [
+        {
+          "type": "service-board",
+          "eyebrow": "Puesta a punto",
+          "title": "Tu equipo listo para bajar",
+          "body": "Alquiler, encerado y guardado pensados para aprovechar cada jornada en el cerro.",
+          "items": [
+            { "label": "Alquiler", "value": "Tablas y skis para distintos niveles" },
+            { "label": "Encerado", "value": "Puesta a punto antes de salir" },
+            { "label": "Guardado", "value": "Dejá el equipo para alquileres de varios días" }
+          ]
+        },
+        {
+          "type": "quote-strip",
+          "eyebrow": "De rider a rider",
+          "title": "La tabla perfecta, encerada",
+          "body": "Las reseñas destacan la atención técnica y las referencias de montaña.",
+          "items": [
+            { "label": "Declan Walters", "value": "Great gear and service, and great backcountry recommendations. The absolute best option." },
+            { "label": "Vincent Tang", "value": "Dedicated storage area upstairs so you don't have to take all your gear on multi-day rentals." }
+          ]
+        },
+        {
+          "type": "quick-actions",
+          "eyebrow": "Contacto directo",
+          "title": "Coordiná tu jornada",
+          "body": "Teléfono, horario y mapa a la base para dejar tu equipo a punto.",
+          "items": [
+            { "label": "Llamar", "value": "03543 15-60-6807" },
+            { "label": "Ir al local", "value": "A pasos de la base del Cerro Catedral" }
+          ]
+        }
+      ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/bariloche-ski/epic-bariloche",
+      "notes": "Taller freeride de montaña: Bricolage Grotesque + Spline Sans + Martian Mono, carbón y nieve con naranja seguridad en el CTA, curvas de nivel y foto real del banco de preparación."
+    }
+  },
+  {
+    "business_id": "google-ChIJWULyUB97GpYRZ0GUFdvs8mM",
+    "slug": "aluguel-ropa-para-nieve",
+    "visual_mood": "neighborhood-direct",
+    "composition": "poster-bay",
+    "headline": "Ropa de nieve con atención paciente, en el centro de Bariloche",
+    "subheadline": "Aluguel Ropa para nieve alquila equipo abrigado en Libertad 290, con atención en español y portugués y 4.7 sobre 5 en 18 reseñas.",
+    "primary_cta": "Llamar al 0294 590-6607",
+    "secondary_cta": "Consultar y reservar equipo",
+    "service_tags": [
+      "Alquiler de ropa de nieve",
+      "Atención en español y portugués",
+      "Prueba con paciencia",
+      "Descuento en efectivo",
+      "En pleno centro"
+    ],
+    "proof_points": [
+      "4.7 sobre 5 con 18 reseñas en Google",
+      "Todos los días de 9 a 21",
+      "Libertad 290, local 9, San Carlos de Bariloche",
+      "\"The staff was friendly, helpful, and patient while we tried on various clothes. There was also a cash discount\" — Michael S"
+    ],
+    "resource_title": "Antes de venir al local",
+    "resource_items": [
+      "Atención en español y portugués para turistas que recién llegan.",
+      "Te dejan probarte con paciencia hasta encontrar el talle justo.",
+      "Descuento pagando en efectivo, según las reseñas de quienes alquilaron."
+    ],
+    "review_heading": "Lo que cuentan los viajeros",
+    "contact_heading": "Llamá o pasá por Libertad 290",
+    "image_prompt": "Foto real del local Aluguel Ropa para nieve en el centro de Bariloche con ropa de nieve ordenada por talle y mostrador de atención cálido.",
+    "design_notes": "Estación cálida bilingüe: verde bosque profundo y dorado cálido en el CTA. Syne + Manrope. Cartel bilingüe y flechas de dirección como motivo.",
+    "conversion_template": "hero-proof-offer",
+    "design_brief": {
+      "designed_by": "claude-code",
+      "market_position": "Alquiler de ropa de nieve en el centro de Bariloche con atención bilingüe que convierte al turista brasileño y argentino recién llegado en una visita al local para equiparse con paciencia y buen precio.",
+      "visual_thesis": "Estación cálida bilingüe: el trato paciente en español y portugués del local real llevado a un póster de bienvenida de viaje. Display Syne con cuerpo Manrope; paleta de verde bosque profundo, crema y dorado cálido reservado para el CTA, con cartelería bilingüe y flechas de dirección como motivo.",
+      "copy_voice": "Español argentino cálido y hospitalario, consciente del turista brasileño, sin caer en clichés ni banderas.",
+      "layout_signature": "Template hero-proof-offer: hero póster con titular de bienvenida, foto del local y CTA de llamada arriba del fold; después tablero de servicios con la atención bilingüe destacada, banda de reseña sobre la paciencia y el descuento en efectivo, y contacto con mapa al centro.",
+      "asset_plan": "Foto real del local como imagen del hero; cartel bilingüe, flechas y copos de nieve en SVG/CSS inline; textura de papel kraft cálido en CSS, sin assets externos salvo Google Fonts.",
+      "ai_fill_plan": {
+        "copy": [
+          "Microcopy bilingüe suave y CTAs apoyado en reseñas de atención paciente",
+          "Encabezados de sección como 'Bienvenida' sin inventar prendas ni marcas"
+        ],
+        "imagery": [
+          "Cartel de bienvenida bilingüe y flechas en SVG de línea",
+          "Textura de papel kraft y copos en CSS como fondo cálido"
+        ],
+        "boundaries": [
+          "No inventar precios, stock, marcas, años, premios, garantías, servicios ni reseñas",
+          "El descuento en efectivo solo se menciona como lo cuentan las reseñas, sin porcentaje inventado",
+          "No prometer envíos ni traslados: no hay evidencia"
+        ]
+      },
+      "anti_patterns": [
+        "Fuentes genéricas como Inter, Roboto o Arial",
+        "Gradiente violeta sobre blanco",
+        "Banderas o clichés turísticos como recurso visual",
+        "Stock de ropa de esquí de catálogo en lugar del local real"
+      ],
+      "rewrite_targets": [
+        "Hacer visible la atención bilingüe como diferencial, sin caer en clichés",
+        "Subir el 4.7 con 18 reseñas y el horario amplio al hero",
+        "Reservar el dorado cálido solo para el CTA de llamada"
+      ]
+    },
+    "creative": {
+      "concept": "La estación de ropa de nieve que recibe al viajero en su idioma y con paciencia.",
+      "audience": "Turistas brasileños y argentinos que llegan al centro sin abrigo técnico y comparan por atención y precio.",
+      "visual_direction": "Verde bosque y dorado cálido, cartel bilingüe y flechas de dirección, tipografía display con carácter.",
+      "layout": "roadside-rescue",
+      "texture": "primer-dust",
+      "hero_angle": "Ropa de nieve con atención en español y portugués y 4.7 sobre 5 en 18 reseñas.",
+      "hero_cards": [
+        { "label": "Reseñas", "value": "4.7★ en 18 opiniones", "note": "Perfil público de Google" },
+        { "label": "Horario", "value": "Todos los días 9 a 21" },
+        { "label": "Dónde", "value": "Libertad 290, local 9" }
+      ],
+      "sections": [
+        {
+          "type": "service-board",
+          "eyebrow": "Qué se alquila",
+          "title": "Abrigo para tus días de nieve",
+          "body": "Ropa de nieve para elegir con calma, con atención en dos idiomas y buena predisposición.",
+          "items": [
+            { "label": "Ropa de nieve", "value": "Camperas y pantalones abrigados" },
+            { "label": "Prueba sin apuro", "value": "Te ayudan hasta encontrar el talle" },
+            { "label": "Idiomas", "value": "Atención en español y portugués" }
+          ]
+        },
+        {
+          "type": "quote-strip",
+          "eyebrow": "Viajeros contentos",
+          "title": "Pacientes y atentos",
+          "body": "Las reseñas de turistas destacan la paciencia y la buena calidad de la ropa.",
+          "items": [
+            { "label": "Luis Fernando Chagas", "value": "Excellent service and clothing. Highly recommend. Walter helped us enormously." },
+            { "label": "Florencia Matko", "value": "Buenísima la atención y la ropa de excelente calidad!" }
+          ]
+        },
+        {
+          "type": "quick-actions",
+          "eyebrow": "Contacto directo",
+          "title": "Llamá o pasá por el local",
+          "body": "Teléfono, horario amplio y mapa al centro para coordinar tu equipo.",
+          "items": [
+            { "label": "Llamar", "value": "0294 590-6607" },
+            { "label": "Ir al local", "value": "Libertad 290, local 9, Bariloche" }
+          ]
+        }
+      ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/bariloche-ski/aluguel-ropa-para-nieve",
+      "notes": "Estación cálida bilingüe: Syne + Manrope, verde bosque con dorado en el CTA, cartel bilingüe y foto real del local."
+    }
+  },
+  {
+    "business_id": "google-ChIJW3ukkESHGpYRuNvepYeDAmo",
+    "slug": "alquiler-ropa-para-nieve",
+    "visual_mood": "roadside-urgent",
+    "composition": "route-card",
+    "headline": "Ropa de nieve a cualquier hora, llevada hasta donde estés",
+    "subheadline": "Alquiler Ropa Para Nieve atiende las 24 horas en Dina Huapi y te acerca la indumentaria a tu alojamiento, con 4.9 sobre 5 en 17 reseñas.",
+    "primary_cta": "Llamar al 0294 453-0283",
+    "secondary_cta": "Reservar entrega a domicilio",
+    "service_tags": [
+      "Alquiler de ropa de nieve",
+      "Abierto las 24 horas",
+      "Entrega en tu alojamiento",
+      "Se adaptan a tus horarios",
+      "En Dina Huapi"
+    ],
+    "proof_points": [
+      "4.9 sobre 5 con 17 reseñas en Google",
+      "Abierto las 24 horas, todos los días",
+      "Las Américas 359, Dina Huapi, Río Negro",
+      "\"Nos trajo la ropa a la casa a las 00:00h. Tenía mucha variedad y a muy buen valor. Volveremos!!!\" — Nahue Dobos"
+    ],
+    "resource_title": "Por qué elegirlos cuando el resto cerró",
+    "resource_items": [
+      "Atención las 24 horas para resolver el equipo a último momento.",
+      "Te acercan la ropa a tu alojamiento y se adaptan a tus horarios.",
+      "Entrega y devolución flexibles, según las reseñas de quienes alquilaron."
+    ],
+    "review_heading": "Lo que cuentan quienes alquilaron a deshora",
+    "contact_heading": "Llamá a cualquier hora y coordiná la entrega",
+    "image_prompt": "Foto real del local Alquiler Ropa Para Nieve en Dina Huapi con ropa de nieve ordenada, ambiente nocturno cálido.",
+    "design_notes": "Servicio nocturno de nieve: azul noche profundo, hielo lunar y amarillo lámpara en el CTA. Zilla Slab + Mulish. Ruta de entrega y luna como motivo.",
+    "conversion_template": "urgent-call-first",
+    "design_brief": {
+      "designed_by": "claude-code",
+      "market_position": "Alquiler de ropa de nieve 24 horas con entrega en el alojamiento que convierte al turista que necesita equipo a deshora en una llamada inmediata, apoyado en un 4.9 sobre 5 y en la flexibilidad real de horarios.",
+      "visual_thesis": "Servicio nocturno de nieve: la entrega a medianoche y la flexibilidad del negocio real llevadas a un tablero de despacho bajo la luna. Display Zilla Slab con cuerpo Mulish; paleta de azul noche profundo, hielo lunar y amarillo lámpara reservado para el CTA, con ruta de entrega y luna como motivo.",
+      "copy_voice": "Español argentino resolutivo y tranquilizador, de alguien que atiende cuando el resto cerró, sin dramatismo.",
+      "layout_signature": "Template urgent-call-first: hero nocturno con titular y CTA de llamada dominante arriba del fold, teléfono tratado como elemento gráfico; después tablero de cómo funciona la entrega, banda de reseña de la entrega a las 00:00 y contacto con mapa a Dina Huapi.",
+      "asset_plan": "Foto real del local como imagen del hero; luna, ruta de entrega y copos en SVG/CSS inline; textura de cielo nocturno en CSS, sin assets externos salvo Google Fonts.",
+      "ai_fill_plan": {
+        "copy": [
+          "Microcopy de disponibilidad 24hs y CTAs apoyado en reseñas de entrega flexible",
+          "Encabezados de sección como 'Cómo llega tu equipo' sin inventar zonas ni precios"
+        ],
+        "imagery": [
+          "Luna, faros y ruta de entrega en SVG de línea",
+          "Textura de cielo nocturno y copos en CSS como fondo"
+        ],
+        "boundaries": [
+          "No inventar precios, stock, marcas, años, premios, garantías, servicios ni reseñas",
+          "No prometer cobertura de zonas específicas: la entrega solo se apoya en las reseñas citadas",
+          "El horario 24hs se muestra tal como figura en el perfil público"
+        ]
+      },
+      "anti_patterns": [
+        "Fuentes genéricas como Inter, Roboto o Arial",
+        "Gradiente violeta sobre blanco",
+        "Layout SaaS de tres cards iguales",
+        "Estética de urgencia médica o alarma en lugar de servicio nocturno amable"
+      ],
+      "rewrite_targets": [
+        "Hacer del 24hs y la entrega a domicilio el eje visual, no un dato al pie",
+        "Tratar el teléfono como elemento gráfico central del hero",
+        "Reservar el amarillo lámpara solo para el CTA de llamada"
+      ]
+    },
+    "creative": {
+      "concept": "El alquiler que aparece cuando el resto cerró y te lleva la ropa hasta la puerta.",
+      "audience": "Turistas en Dina Huapi y Bariloche que necesitan equipo a deshora o prefieren recibirlo en el alojamiento.",
+      "visual_direction": "Azul noche, hielo lunar y amarillo lámpara, ruta de entrega y luna de línea, serif slab con carácter.",
+      "layout": "roadside-rescue",
+      "texture": "road-markings",
+      "hero_angle": "Ropa de nieve las 24 horas con entrega a domicilio y 4.9 sobre 5 en 17 reseñas.",
+      "hero_cards": [
+        { "label": "Reseñas", "value": "4.9★ en 17 opiniones", "note": "Perfil público de Google" },
+        { "label": "Horario", "value": "Las 24 horas, todos los días" },
+        { "label": "Dónde", "value": "Las Américas 359, Dina Huapi" }
+      ],
+      "sections": [
+        {
+          "type": "process",
+          "eyebrow": "Cómo funciona",
+          "title": "Tu equipo, a la hora que sea",
+          "body": "El recorrido que cuentan las reseñas: llamás, coordinan y te acercan la ropa a tu alojamiento.",
+          "items": [
+            { "label": "01", "value": "Llamás a cualquier hora y contás qué necesitás" },
+            { "label": "02", "value": "Coordinan talles y horario que te queda cómodo" },
+            { "label": "03", "value": "Te acercan la ropa y coordinan la devolución" }
+          ]
+        },
+        {
+          "type": "quote-strip",
+          "eyebrow": "A deshora",
+          "title": "Aparecen cuando los necesitás",
+          "body": "Las reseñas cuentan entregas a medianoche y una atención que se adapta a tu viaje.",
+          "items": [
+            { "label": "Solange Fernandez", "value": "Nos trasladaron la indumentaria a nuestro punto más cómodo y se adecuaron a nuestros horarios." },
+            { "label": "Daniel Mamani", "value": "Excelente servicio, la ropa impecable. Carla y Seba bien predispuestos al entregar y devolver." }
+          ]
+        },
+        {
+          "type": "quick-actions",
+          "eyebrow": "Contacto directo",
+          "title": "Llamá y coordiná",
+          "body": "Teléfono disponible las 24 horas y mapa a Dina Huapi para coordinar la entrega.",
+          "items": [
+            { "label": "Llamar", "value": "0294 453-0283" },
+            { "label": "Ir al local", "value": "Las Américas 359, Dina Huapi" }
+          ]
+        }
+      ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/bariloche-ski/alquiler-ropa-para-nieve",
+      "notes": "Servicio nocturno de nieve: Zilla Slab + Mulish, azul noche con amarillo lámpara en el CTA, ruta de entrega y luna, foto real del local."
+    }
+  },
+  {
+    "business_id": "google-ChIJi7WvSQBxGpYRH3RIELkAnrw",
+    "slug": "bari-snow",
+    "visual_mood": "precision-service",
+    "composition": "service-ledger",
+    "headline": "Equipos de ski y snowboard ajustados a tu medida, en el centro",
+    "subheadline": "Bari Snow alquila tablas y skis en Francisco de Biedma 55, con el dueño haciendo cada ajuste y 4.6 sobre 5 en 78 reseñas.",
+    "primary_cta": "Llamar al 0294 421-2523",
+    "secondary_cta": "Consultar equipos",
+    "service_tags": [
+      "Alquiler de ski y snowboard",
+      "Ajustes hechos por el dueño",
+      "Tablas de snow",
+      "En el centro de Bariloche",
+      "Buen precio"
+    ],
+    "proof_points": [
+      "4.6 sobre 5 con 78 reseñas en Google",
+      "Todos los días de 9 a 20",
+      "Francisco de Biedma 55, San Carlos de Bariloche",
+      "\"Aluguei uma prancha de snow, o dono da loja fez todos os ajustes. Além de ter um excelente preço\" — Escame"
+    ],
+    "resource_title": "Antes de retirar tu equipo",
+    "resource_items": [
+      "El dueño hace los ajustes del equipo, según las reseñas de quienes alquilaron.",
+      "Tablas de snow y skis para distintos niveles.",
+      "Ubicación céntrica para pasar a retirar sin complicaciones."
+    ],
+    "review_heading": "Lo que cuentan quienes alquilaron su tabla",
+    "contact_heading": "Llamá o pasá por Francisco de Biedma 55",
+    "image_prompt": "Foto real del local Bari Snow en el centro de Bariloche con tablas de snowboard y skis, banco de ajustes y mostrador.",
+    "design_notes": "Banco de ajuste nítido: blanco nieve, grafito y azul eléctrico en el CTA. League Gothic + Rethink Sans. Regla de ajuste y marcas de banco como motivo.",
+    "conversion_template": "catalog-counter",
+    "design_brief": {
+      "designed_by": "claude-code",
+      "market_position": "Alquiler de ski y snowboard en el centro de Bariloche donde el dueño ajusta el equipo, que convierte al visitante que quiere algo bien puesto a punto en un cliente que pasa a retirar sin vueltas.",
+      "visual_thesis": "Banco de ajuste nítido: la preparación personal del dueño en el local real llevada a un mostrador limpio y técnico. Display League Gothic con cuerpo Rethink Sans; paleta de blanco nieve, grafito y azul eléctrico reservado para el CTA, con regla de ajuste y marcas de banco como motivo.",
+      "copy_voice": "Español argentino directo y confiable, que resalta el ajuste hecho a mano sin exagerar.",
+      "layout_signature": "Template catalog-counter: hero con titular fuerte, foto del banco de ajuste y CTA de llamada arriba del fold; después catálogo de equipos por tipo, banda de reseña sobre el ajuste del dueño, ficha de retiro y contacto con mapa al centro.",
+      "asset_plan": "Foto real del local con equipos y banco como imagen del hero; regla de ajuste, íconos de tabla y marcas de banco en SVG/CSS inline; textura de banco de trabajo en CSS, sin assets externos salvo Google Fonts.",
+      "ai_fill_plan": {
+        "copy": [
+          "Microcopy del catálogo de equipos y CTAs apoyado en reseñas sobre ajustes",
+          "Encabezados de sección como 'Puesta a punto' sin inventar precios ni marcas"
+        ],
+        "imagery": [
+          "Regla de ajuste e íconos de tabla en SVG de línea",
+          "Textura de banco de trabajo y marcas en CSS como fondo"
+        ],
+        "boundaries": [
+          "No inventar precios, stock, marcas, años, premios, garantías, servicios ni reseñas",
+          "El 'excelente precio' solo se menciona como lo cuenta la reseña, sin números inventados",
+          "No prometer clases ni encerado si no hay evidencia"
+        ]
+      },
+      "anti_patterns": [
+        "Fuentes genéricas como Inter, Roboto o Arial",
+        "Gradiente violeta sobre blanco",
+        "Layout SaaS de tres cards iguales",
+        "Stock de tablas de catálogo en lugar del banco de ajuste real"
+      ],
+      "rewrite_targets": [
+        "Hacer del ajuste hecho por el dueño el argumento central",
+        "Subir el 4.6 con 78 reseñas y la ubicación céntrica al hero",
+        "Reservar el azul eléctrico solo para el CTA de llamada"
+      ]
+    },
+    "creative": {
+      "concept": "El local céntrico donde el dueño ajusta tu tabla antes de que salgas a la nieve.",
+      "audience": "Esquiadores y snowboarders que quieren equipo bien puesto a punto y retirar en el centro.",
+      "visual_direction": "Blanco nieve, grafito y azul eléctrico, regla de ajuste y marcas de banco, display alto y condensado.",
+      "layout": "mechanic-ledger",
+      "texture": "service-ledger",
+      "hero_angle": "Ski y snowboard con ajustes del dueño y 4.6 sobre 5 en 78 reseñas.",
+      "hero_cards": [
+        { "label": "Reseñas", "value": "4.6★ en 78 opiniones", "note": "Perfil público de Google" },
+        { "label": "Horario", "value": "Todos los días 9 a 20" },
+        { "label": "Dónde", "value": "Francisco de Biedma 55" }
+      ],
+      "sections": [
+        {
+          "type": "service-board",
+          "eyebrow": "Qué se alquila",
+          "title": "Equipos listos para la nieve",
+          "body": "Tablas y skis para distintos niveles, con el ajuste que hace el dueño antes de entregar.",
+          "items": [
+            { "label": "Snowboard", "value": "Tablas para distintos niveles" },
+            { "label": "Ski", "value": "Equipos con ajuste incluido" },
+            { "label": "Ajuste", "value": "El dueño revisa cada equipo" }
+          ]
+        },
+        {
+          "type": "quote-strip",
+          "eyebrow": "Ajuste a mano",
+          "title": "El dueño lo pone a punto",
+          "body": "Las reseñas destacan el ajuste personal y el buen precio del equipo.",
+          "items": [
+            { "label": "Escame", "value": "Aluguei uma prancha de snow, o dono fez todos os ajustes. Excelente preço." },
+            { "label": "Guilherme Otávio", "value": "Top." }
+          ]
+        },
+        {
+          "type": "quick-actions",
+          "eyebrow": "Contacto directo",
+          "title": "Coordiná tu retiro",
+          "body": "Teléfono, horario y mapa al centro para dejar tu equipo reservado.",
+          "items": [
+            { "label": "Llamar", "value": "0294 421-2523" },
+            { "label": "Ir al local", "value": "Francisco de Biedma 55, Bariloche" }
+          ]
+        }
+      ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/bariloche-ski/bari-snow",
+      "notes": "Banco de ajuste nítido: League Gothic + Rethink Sans, blanco nieve y grafito con azul eléctrico en el CTA, regla de ajuste y foto real del banco."
+    }
+  },
+  {
+    "business_id": "google-ChIJ4fkyfGB6GpYRf63Rv3ucqYs",
+    "slug": "travesias-ropa-de-nieve",
+    "visual_mood": "fleet-utility",
+    "composition": "route-card",
+    "headline": "Ropa de nieve, traslados y excursiones para tu viaje al cerro",
+    "subheadline": "Travesías resuelve el equipo y el movimiento en Av. de los Pioneros 4567: alquiler de ropa, traslados y excursiones, con 4.7 sobre 5 en 15 reseñas.",
+    "primary_cta": "Llamar al 0294 441-4490",
+    "secondary_cta": "Consultar traslados y equipo",
+    "service_tags": [
+      "Alquiler de ropa de nieve",
+      "Traslados",
+      "Excursiones",
+      "Asesoramiento del viaje",
+      "Todo en una parada"
+    ],
+    "proof_points": [
+      "4.7 sobre 5 con 15 reseñas en Google",
+      "Lunes a sábado, mañana y tarde (consultá el horario del día)",
+      "Av. de los Pioneros 4567, San Carlos de Bariloche",
+      "\"Tienen de todo, no solo ropa. Traslados, excursiones, alquiler. Muy buenos asesores\" — Flavia Miori"
+    ],
+    "resource_title": "Todo el viaje, en un solo lugar",
+    "resource_items": [
+      "Ropa de nieve, traslados y excursiones coordinados desde el mismo local.",
+      "Asesoramiento para armar el viaje, según las reseñas de quienes fueron.",
+      "Atención con paciencia para familias que planifican su estadía."
+    ],
+    "review_heading": "Lo que cuentan quienes armaron su viaje acá",
+    "contact_heading": "Llamá y armá tu día en la nieve",
+    "image_prompt": "Foto real del local Travesías en Bariloche con ropa de nieve, mostrador de asesoramiento y material de excursiones y traslados.",
+    "design_notes": "Bitácora de expedición: verde bosque profundo, papel kraft y naranja sendero en el CTA. DM Serif Display + Work Sans. Mapa de ruta al Catedral y sellos de expedición como motivo.",
+    "conversion_template": "editorial-local-story",
+    "design_brief": {
+      "designed_by": "claude-code",
+      "market_position": "Local que combina alquiler de ropa de nieve, traslados y excursiones en Bariloche y convierte al viajero que quiere resolver todo junto en una consulta para armar su día en el cerro desde un solo lugar.",
+      "visual_thesis": "Bitácora de expedición: la variedad de servicios del negocio real (ropa, traslados, excursiones) llevada a un cuaderno de ruta hacia el Catedral. Display DM Serif Display con cuerpo Work Sans; paleta de verde bosque profundo, papel kraft y naranja sendero reservado para el CTA, con mapa de ruta y sellos de expedición como motivo.",
+      "copy_voice": "Español argentino cálido y organizador, de quien te ayuda a planificar el viaje sin marearte.",
+      "layout_signature": "Template editorial-local-story: hero con titular editorial, foto del local y CTA de llamada arriba del fold; después bitácora de servicios (ropa, traslados, excursiones), banda de reseña sobre 'tienen de todo', mapa de ruta al cerro y contacto con horario y mapa al cierre.",
+      "asset_plan": "Foto real del local como imagen del hero; mapa de ruta al Catedral, sellos de expedición y copos en SVG/CSS inline; textura de papel kraft en CSS, sin assets externos salvo Google Fonts.",
+      "ai_fill_plan": {
+        "copy": [
+          "Microcopy de la bitácora de servicios y CTAs apoyado en reseñas sobre variedad y asesoramiento",
+          "Encabezados de sección como 'Tu día en el cerro' sin inventar excursiones ni precios"
+        ],
+        "imagery": [
+          "Mapa de ruta al Catedral y sellos de expedición en SVG de línea",
+          "Textura de papel kraft y copos en CSS como fondo"
+        ],
+        "boundaries": [
+          "No inventar precios, stock, marcas, años, premios, garantías, servicios ni reseñas",
+          "No detallar destinos de excursión ni recorridos que no estén confirmados",
+          "Los traslados se mencionan como los cuentan las reseñas, sin horarios inventados"
+        ]
+      },
+      "anti_patterns": [
+        "Fuentes genéricas como Inter, Roboto o Arial",
+        "Gradiente violeta sobre blanco",
+        "Layout SaaS de tres cards iguales",
+        "Estética de agencia de turismo genérica en lugar de bitácora propia"
+      ],
+      "rewrite_targets": [
+        "Hacer del combo ropa + traslados + excursiones el eje, no solo el alquiler",
+        "Subir el 4.7 con 15 reseñas y el 'tienen de todo' al hero",
+        "Reservar el naranja sendero solo para el CTA de llamada"
+      ]
+    },
+    "creative": {
+      "concept": "La bitácora de viaje que resuelve ropa, traslados y excursiones en una sola parada.",
+      "audience": "Familias y viajeros que quieren organizar el equipo y el movimiento al cerro sin dar mil vueltas.",
+      "visual_direction": "Verde bosque, papel kraft y naranja sendero, mapa de ruta al Catedral y sellos de expedición, serif display editorial.",
+      "layout": "roadside-rescue",
+      "texture": "primer-dust",
+      "hero_angle": "Ropa de nieve, traslados y excursiones con 4.7 sobre 5 en 15 reseñas.",
+      "hero_cards": [
+        { "label": "Reseñas", "value": "4.7★ en 15 opiniones", "note": "Perfil público de Google" },
+        { "label": "Qué ofrecen", "value": "Ropa, traslados y excursiones" },
+        { "label": "Dónde", "value": "Av. de los Pioneros 4567" }
+      ],
+      "sections": [
+        {
+          "type": "service-board",
+          "eyebrow": "La bitácora",
+          "title": "Todo tu día en el cerro",
+          "body": "Ropa de nieve, traslados y excursiones coordinados desde el mismo mostrador, con asesoramiento incluido.",
+          "items": [
+            { "label": "Ropa de nieve", "value": "Alquiler de indumentaria abrigada" },
+            { "label": "Traslados", "value": "Coordinás tu movimiento al cerro" },
+            { "label": "Excursiones", "value": "Consultá las opciones disponibles" }
+          ]
+        },
+        {
+          "type": "quote-strip",
+          "eyebrow": "Buenos asesores",
+          "title": "Tienen de todo",
+          "body": "Las reseñas destacan que resuelven mucho más que la ropa, con buena predisposición.",
+          "items": [
+            { "label": "Rami Adaro", "value": "Tienen traslados además de la ropa y casas de alquiler turístico. Súper recomendable." },
+            { "label": "alfredo sosa", "value": "Excelente atención, lo más recomendable de Bariloche. Los chicos súper atentos." }
+          ]
+        },
+        {
+          "type": "quick-actions",
+          "eyebrow": "Contacto directo",
+          "title": "Armá tu día",
+          "body": "Teléfono, horario y mapa para coordinar ropa, traslados y excursiones.",
+          "items": [
+            { "label": "Llamar", "value": "0294 441-4490" },
+            { "label": "Ir al local", "value": "Av. de los Pioneros 4567, Bariloche" }
+          ]
+        }
+      ]
+    },
+    "agent_frontend": {
+      "mode": "static-files",
+      "source_dir": "data/frontends/bariloche-ski/travesias-ropa-de-nieve",
+      "notes": "Bitácora de expedición: DM Serif Display + Work Sans, verde bosque y papel kraft con naranja sendero en el CTA, mapa de ruta al Catedral y foto real del local."
+    }
+  }
+]

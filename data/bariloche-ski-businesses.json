@@ -1,0 +1,1662 @@
+[
+  {
+    "id": "google-ChIJaUSB-G17GpYRB7RJDo88-1M",
+    "name": "Sandrik - Alquiler ropa nieve",
+    "slug": "sandrik-alquiler-ropa-nieve",
+    "category": "Clothing Store",
+    "is_vehicle_related": false,
+    "address": "Sargento A. Rolando 277, San Martín 297, R8400 San Carlos de Bariloche, Río Negro, Argentina",
+    "city": "San Carlos de Bariloche",
+    "neighborhood_or_area": null,
+    "phone": "0294 466-1332",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 1:00 PM, 4:00 – 9:00 PM | Tuesday: 9:00 AM – 1:00 PM, 4:00 – 9:00 PM | Wednesday: 9:00 AM – 1:00 PM, 4:00 – 9:00 PM | Thursday: 9:00 AM – 1:00 PM, 4:00 – 9:00 PM | Friday: 9:00 AM – 1:00 PM, 4:00 – 9:00 PM | Saturday: 9:00 AM – 1:00 PM, 4:00 – 9:00 PM | Sunday: 9:00 AM – 1:00 PM, 4:00 – 9:00 PM",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.3,
+      "reviews_count": 162,
+      "source_url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "🧥🎿 💖  La atención es un sueño: amables, pacientes y siempre dispuestos a ayudar con cada detalle para que te vayas perfectamente equipado.\nEl local es amplio, cómodo y muy bien organizado. Podés probarte todo con tranquilidad y elegir la ropa ideal según la actividad que vayas a hacer: esquí, caminatas o simplemente disfrutar de los paisajes nevados.\n\nLa indumentaria es de excelente calidad, con materiales tecnológicos que realmente protegen del frío, el viento y la humedad.\nGracias a eso, pude disfrutar de mis días en la nieve sin pasar frío y con total comodidad.\nLos precios son muy buenos en relación a la calidad del servicio — se nota el cuidado y la experiencia del equipo y hay todos los talles.\n\nComo único detalle a mejorar: las botas podrían tener un mejor agarre, ya que varias personas del grupo notamos que se resbalaban un poco sobre la nieve. Nada grave, pero es algo que vale la pena revisar, porque todo lo demás fue impecable.\nAtención cálida, precios justos y ropa técnica de primer nivel. Un lugar para recomendar y volver cada temporada.",
+        "author": "Evelin Ulloa",
+        "rating": 4,
+        "source_url": "https://www.google.com/maps/contrib/101906573520610288236/reviews"
+      },
+      {
+        "text": "El dueño súper amable y considerado. La verdad nos atendieron de 10 y este año vuelvo a elegirlos. 10/10 en cuanto precio, calidad y limpieza de la ropa todo excelente.. 🫶🏻❤️✨",
+        "author": "Florencia Navarro",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/109660221841280260803/reviews"
+      },
+      {
+        "text": "La experiencia Sandrik es super recomedable!!! La amabilidad de la flia la buena predisposición  y paciencia con los cliente es en todo momento, las Camperas tienen muy lindo diseño super coloridas y muy abrigadas, telas de muy buena calidad , los equipos son nuevos entregan todo impecable y los Precios súper Económicos.",
+        "author": "Hernán Dileo",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/103755381013376851126/reviews"
+      }
+    ],
+    "main_product_or_service": "ski shop",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJaUSB-G17GpYRB7RJDo88-1M/photos/AaVGc3mrTouO1dTCIo1wqWBgHFlzkGfwMYVEpdKuBV1X_xSUZib2ratmKP1uhlrmSnso8XS9SAfWoHB8HF4g6B9B37rThJlsXAhkIwByMGDHbxQp7IfDAVsnwu9Shgb1z3769agL1A-QVgxQ1hnjgdvlTCd7OhN6BC0d9xgetDf1BkSe9mf9WnJpd4_dPiFlzOaTDw276u4FiHC6lHQMCEWNTkgMA8JNyeZJVQNnlGok1-U-fr4pE2QK4xvsQRetPVOpx_9PAQOg6tslgOrg-c5NWq6NuEs49ZjQ3JRIWQTu_X4EUrfVo3c1wuxQFyyTJwbZdzEEqMkrpPgVyzaZzqK88jhECR8PcGl3m3eP0S_h_BXXzYdrQB-UDBVKapVIz7YTAxneVYcpHJmAT4RCk3gijXkPSm4ZCrKo2QOjftdhYQ8/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJaUSB-G17GpYRB7RJDo88-1M/photos/AaVGc3ntgJN8vat-M0pkA2S4bQh3YTf-PLvJhdhb9EmzDkQlrFXm7d1N4sDp4K9ut4JzcwSqFlHtFUOuvGy6HhBFzWkOQjToCzTRmHUnLA6lftTa2WtMko6sHJ7VDvIrjrNKOAMNhUDEr9DHmUC9QMKwiD0VpquBS17KQT4BkS66KbMCZOsX8aQcefvaVcjLoJI8bpfkd6n3bUm2p4cAtAc6bekRNLy5GtpzYPVVHUtiGBySZp2rIxcBCEoE4YZBUhUIcZGhqKbovCow8OGoX456P7d2h6-6GEIRpVG4ISWJwrUo7lF6_WMP-e5R9RTbqMF9wBQBpvzyGNOo5RPoURZpZVFGSsiTjPrH-GZdT2ajFUDS2DWviZNRmRRR6gzYaGkKn-9YQazAG0g5xGhL1nEOAhAaGTT2m2f20m8pJHjxWxgLh6JD2CYAGG3UdqaYCiTb/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJaUSB-G17GpYRB7RJDo88-1M/photos/AaVGc3lR0vt8P4phDr-ynZcuVCV9_61osj5dYMnwxtgB601XQ7zTGk4dX7MQCyvkrGcth7_3x4Y6rVS8iDoaIcJZX_riWTELcdxTz_VfP1-YsRIurWweFNfE9p6hQQRBG4mGpFEm_Cp9U2-8AKxYOcXcM2aIv_7Hx0uBmzmuvjw51crwdxImO9TcPdHJM0JMLqGQDSvBT-F3MWdh6bmHglQv--MYBubPZNLfdZekCc2zebF7RnukGzbnm3_T7VBCcXWwT2P1BaeFRP10jNzys2Y1xYexVjR1ogiB8nr_-2IiysHDQlpif920hpXPWddYm6CTrRIYP4urxZwW156IWlvYjhTwPCWh9kBDc_ILTuk934AJSBRPOgZFIXOV4oz1y9hX20tnxxF0PUDmp16WdNQcUTVavhkSvXf5ZVeaAV4EhlgzFrfK/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": true,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-08T20:15:08.451Z",
+          "notes": "Resultado automatico para \"ski shop\" en San Carlos de Bariloche. Segmento: escuelas de ski y snowboard, alquiler de equipos y traslados al Cerro Catedral."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    },
+    "brand": {
+      "palette": {
+        "source": "photo",
+        "captured_from": "https://maps.google.com/?cid=6051497109420094471&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "dominant": "#101820",
+        "accent": "#d7a94b",
+        "supporting": [
+          "#f4f1ea",
+          "#52616f"
+        ]
+      },
+      "typography": {
+        "primary": "Archivo Narrow",
+        "secondary": "Merriweather Sans"
+      }
+    },
+    "site_plan": {
+      "archetype": "automotive-premium-dark",
+      "position": 1,
+      "rationale": "Automatic rotation to keep no more than two sites per archetype and avoid consecutive repeats."
+    }
+  },
+  {
+    "id": "google-ChIJf4qhOgx7GpYREEzF6DsyzHk",
+    "name": "SRN.Rental Alquiler de Ropa de nieve - Ski & snowboard",
+    "slug": "srn-rental-alquiler-de-ropa-de-nieve-ski-snowboard",
+    "category": "Services",
+    "is_vehicle_related": false,
+    "address": "Av. de los Pioneros 3757, R8400 San Carlos de Bariloche, Río Negro, Argentina",
+    "city": "San Carlos de Bariloche",
+    "neighborhood_or_area": null,
+    "phone": "0294 15-433-8535",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 1:00 PM, 5:00 – 9:00 PM | Tuesday: 9:00 AM – 1:00 PM, 5:00 – 9:00 PM | Wednesday: 9:00 AM – 1:00 PM, 5:00 – 9:00 PM | Thursday: 9:00 AM – 1:00 PM, 5:00 – 9:00 PM | Friday: 9:00 AM – 1:00 PM, 5:00 – 9:00 PM | Saturday: 9:00 AM – 1:00 PM, 5:00 – 9:00 PM | Sunday: 9:00 AM – 1:00 PM, 5:00 – 9:00 PM",
+      "structured": {}
+    },
+    "rating": {
+      "value": 5,
+      "reviews_count": 61,
+      "source_url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Excelente la atención , ni hablar de los equipos! De primera calidad, hasta hice estreno  😍\nMuy atentos en absolutamente todo!\nUna experiencia demasiado buena!\nLos súper recomiendo",
+        "author": "Mareña Solange Reddel",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/106164493606291201818/reviews"
+      },
+      {
+        "text": "Roupas de esqui novas, limpas e de ótima qualidade. O atendimento foi excelente, foram muito atenciosas e simpáticas. Com certeza voltaremos quando retornarmos a Bariloche!",
+        "author": "Diego Antonio Barbosa",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/109707587648827978138/reviews"
+      },
+      {
+        "text": "De principio a fin, tanto el dueño del sitio, como Gabriel la persona que nos acompañó personalmente en nuestro hotel fueron súper colaboradores y amigables para nuestra primera vez esquiando en Bariloche. Muy agradecidos con ellos respondieron todas nuestras dudas !!",
+        "author": "María Caicedo",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/100868450109653182870/reviews"
+      }
+    ],
+    "main_product_or_service": "alquiler de equipos de nieve",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJf4qhOgx7GpYREEzF6DsyzHk/photos/AaVGc3mepvv0Ofx8LIoXRavDEM8agZyDgLQ6_xM6gex7hl19sULMe_RXyVfunxw7oVFH7TdeIzuDXHXiwRQXvbEAjodGxD-8D-EFkWOW3WZOCOdKnloVitemNhfkLyGrDBpZo47jMnvCdymulJ7uWyWybKoOj8_oYKScVnv20CYS4ZxoPvOwvDr-qlABFTwxil0dn3vEP1gKPyTc-hBnJQzdN3Y2s_Y5X6rPQLZyfdybBlGE3YnCcwEBxFGhHTOBTx4Q5zbbgMHRllqhMxGAlnp1SfymvdIW-b0VIQvGi18wc_MopvdWTAhYx3roNVm4jzHYhydNjwRJsaRTIE2_DzEOdFCFEZybijAdNi2g5UIBW6tN10OCGmZ3idy1CXz0QW6gGQu_X3uouLI0hB6ZWg9ZUN31l61wEUABbKPCY7UIPu-YNYR5WfoUImXLvskoZ6nq/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJf4qhOgx7GpYREEzF6DsyzHk/photos/AaVGc3nK8zu_iPEAAiZhtcheCXOnDULeZfmre314JDaY_wmpki_Ny8Q4XvEHaCdUWzt_5ys76_LJImhhze9DtqQqf0LYY5i-T0XeNbepjLLt8RGAhQDgUvPFZR9_8worcSAESNMaMbgZt6o9u_HE6SA3ierW8DFFhW6WYt03aTNX_RwR9NPkPdRhIqfSIyRpEDCN2xdqZgtgIARYJbDBfBOzy9vaEZe2Uqic7Of_06jO36DNQZKKFax9rO7rkPL6FHHK_tmtNcYRfvMAeWWJCPjO6i_6B4kulTJ6armcfEJu1f5oJWMukXxfp1k-TT6ehI2gKMpN9P1rL0jrVP6V4K4gyeB5N1nUTQKWwKhhZmiZwmIImf8G6E9DPexYKQ_pzoO_T11RddFv69rZuj_I6ueuSxUW3CkQODEMLiPp7v3x4xa70A/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJf4qhOgx7GpYREEzF6DsyzHk/photos/AaVGc3nGgSHwBFM26ypijqcyAt1nWcC6XwK1XYbOXv0WC0zwOEb6PHbW2Nl0ZPh_Wgq27pkOQAPKN2VTIhrvpAUtrl0BFWXUW_cmgNSHIL_nvLMn9u4XvIIwEOzCdVsGcT26NgWeFRW2LTlelei9C2-kzLIMpYpLG9D0dhN0CloLnEx-oq3YGojrOmbY7d1DMpbnmIriC_1LoiAtavdW6s5A4Fj2fGGp3ENLn-MXTnxAd8h9iWbC1vFlII1WlfPDMwEJZQT6DlO8A8Fc9COoDbOExJw-T2P5QpyHOZZ-fCTuGBAsW02_O1ZMuWLF6185Ux_mPXDR2m6kns97HOz6CQPh4yWmwnd72XQ3cqoJhISlNVfMpzrsAeGvmtnP67UWHDMJBgSHoudZ4p5BDzf5M4BjCgXCNC6SE3t4NYJQYAR_opR2f_rHqzLpoUZKGiBzFQZi/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": true,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-08T20:15:08.451Z",
+          "notes": "Resultado automatico para \"alquiler de equipos de nieve\" en San Carlos de Bariloche. Segmento: escuelas de ski y snowboard, alquiler de equipos y traslados al Cerro Catedral."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    },
+    "brand": {
+      "palette": {
+        "source": "photo",
+        "captured_from": "https://maps.google.com/?cid=8776445006727957520&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "dominant": "#f7fbfa",
+        "accent": "#24746b",
+        "supporting": [
+          "#163b40",
+          "#d9ebe7"
+        ]
+      },
+      "typography": {
+        "primary": "Nunito Sans",
+        "secondary": "Literata"
+      }
+    },
+    "site_plan": {
+      "archetype": "local-clean-service",
+      "position": 2,
+      "rationale": "Automatic rotation to keep no more than two sites per archetype and avoid consecutive repeats."
+    }
+  },
+  {
+    "id": "google-ChIJH8JeX0NxGpYRd2b79AeyPpc",
+    "name": "Nestor Ski",
+    "slug": "nestor-ski",
+    "category": "Services",
+    "is_vehicle_related": false,
+    "address": "Frente a plaza Catalina Reynal, Base, Acceso A Cerro Catedral, R8400 San Carlos de Bariloche, Río Negro, Argentina",
+    "city": "San Carlos de Bariloche",
+    "neighborhood_or_area": null,
+    "phone": "0294 460-9302",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 5:00 PM | Tuesday: 9:00 AM – 5:00 PM | Wednesday: 9:00 AM – 5:00 PM | Thursday: 9:00 AM – 5:00 PM | Friday: 9:00 AM – 5:00 PM | Saturday: 9:00 AM – 5:00 PM | Sunday: 9:00 AM – 5:00 PM",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.8,
+      "reviews_count": 50,
+      "source_url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "The best rental/gear service on base! The staff are all so lovely and helpful, very at-home local feel.\nI used Nestor to keep my gear stored during my time in Bariloche and it was always very easy to pick up and drop off.\nShoutout to Patsy, Sandro, and Rodrigo!",
+        "author": "Rosemary Roberts",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/105385135414482089575/reviews"
+      },
+      {
+        "text": "Rented apre ski boots, one of the few that rents them, for adults and kids.\nGreat service and friendly staff!\nDefinitely recommend",
+        "author": "Brandon Danke",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/116450299237799731738/reviews"
+      },
+      {
+        "text": "24.08.23\n\nAlugamos equipamentos de ski, capacete ($17500pesos/pessoa) e armário ($3000). Aceitam pagamento com cartão de crédito. Para quem vai esquiar pela primeira vez, se preparem, porque o equipamento é pesado até levar no local para esquiar e nada confortável andar com as botas.\nDe 3 lugares que pesquisamos os preços, este estava melhor.",
+        "author": "Letícia Dias",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/114322623656807380774/reviews"
+      }
+    ],
+    "main_product_or_service": "alquiler de tablas de snowboard",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJH8JeX0NxGpYRd2b79AeyPpc/photos/AaVGc3mJsTVRVMthYj_Q0S8SgeSehMa1qGEOERESCyVOKEmF2YOKEw4Bnmq7V9_-iOhXgA3lI_zy5bhO2w9Oqh7rxsmPxro2uoSfbuA3PXZU_jY53W5FbTWp9fWlX5jZDPtJnUpxa3kL_4PRTjCDaG7lUiO60Zwpe10injMtHnAAObRpkM4hTVYs52blL5yh083wllMnK3kYxXJ4svGfzPOqdk2IO9B5H4uACcrmJa_ikLkfVEShfQ6b0JsLBGlPzKSzLXyHNoUH9FutFtJQDrki-oPtoyBuMklw0udXHf8YkCElOhz06cC9wEW1iJ0yCNVCjs86R49h9eSUHZqThO8ONvQFq9R8YqbOtagiJWpQoNbe1HjnQoJ5kRj0YGRUiDyoHFJIb-AAe4MFNGn3DmrHCgwBxeIeNr71XTopqCLhYYw/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJH8JeX0NxGpYRd2b79AeyPpc/photos/AaVGc3nj6-iA5gFH4vUVTJfkFknXU0VeESoGOkTTuNpXLDV5GCcrCzNe_xOx3rFwFotq7GXpLyoCSI-l-28EAIxdEkh7k-7M9YQ2KBle80k8CTZdqLh6uYZMhKemrl0GzLLkJALYstYnR3Agd1Js0VUSWAxpxTT00hecoGLBJIzCRvhXurtMaST1T5tdW8v-XoLUSfQna4wQ80uSguQtWAbYnfCEdAe7n14wR1Dzg9OdbE7iqpXWLP1_8Ubcz_bjSDLNnT3Ux0aCzWmq8IccTsO8CIed1xAbJLn_1D5t6zNnTqXl2wGhCIYwg1yUx7cv90h5NjU5U51Eu2lrDUtsjlrLRt9lob-CscNTxwP90I2Mum5xfw_tF_65qu2GXi-BvQ492ZYl7AyYroMxFBoWENfdl8ZcyRkONjX6xVTJhyaGBrGQWFCRJPHGXGLVY9ucaw/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJH8JeX0NxGpYRd2b79AeyPpc/photos/AaVGc3nHhyeS_1aPmUKp5Ifr3_a4I9ALOkbxcf_g524Xh9uqgJbfBhCjN-qSCykSxISI7vk38fMcawpVPIxf8QYcPcZl5dzoryIGGhu7pbeHdO2cc4RHGVxUoTO0HgNPHHpEX24M5BP3jgJ59WBXhViNVPH6H8s3u37_p2ywYsp6IRKTxgUzFR7TC4K_mo93e1BTxUI-6IdSbZkwMMoSUZP8cZfVlh5UOeStVHClLuki9pCcjujcSjvv5Il9P85KAxNgLp_rIhiy9RhLJ0vY4TVXH_pHqEK9HaOtx10F8pEipVsAnJHKQgU3OqV6B81JFbfl43GflWhyALhm8kgeXuGkUOpR5mmzs-djSGBT0HVFNhMifPHv_rYOEwFbMbyEeU7guoGGPgbU-P2Q80VT2cXl2kmvbnmfUpzWxUm6uY5iTVJo5A/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": true,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-08T20:15:08.451Z",
+          "notes": "Resultado automatico para \"alquiler de tablas de snowboard\" en San Carlos de Bariloche. Segmento: escuelas de ski y snowboard, alquiler de equipos y traslados al Cerro Catedral."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    },
+    "brand": {
+      "palette": {
+        "source": "photo",
+        "captured_from": "https://maps.google.com/?cid=10898343895527810679&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "dominant": "#2d2a26",
+        "accent": "#d94f30",
+        "supporting": [
+          "#f4efe6",
+          "#7a7168"
+        ]
+      },
+      "typography": {
+        "primary": "IBM Plex Sans Condensed",
+        "secondary": "Source Serif 4"
+      }
+    },
+    "site_plan": {
+      "archetype": "industrial-garage",
+      "position": 3,
+      "rationale": "Automatic rotation to keep no more than two sites per archetype and avoid consecutive repeats."
+    }
+  },
+  {
+    "id": "google-ChIJLbC7y3V7GpYRqK2niuemXbQ",
+    "name": "El Russo Rental",
+    "slug": "el-russo-rental",
+    "category": "Services",
+    "is_vehicle_related": false,
+    "address": "Palacios 222 Local 18/19/20/21, R8400 San Carlos de Bariloche, Río Negro, Argentina",
+    "city": "San Carlos de Bariloche",
+    "neighborhood_or_area": null,
+    "phone": "0294 466-1318",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 9:00 PM | Tuesday: 9:00 AM – 9:00 PM | Wednesday: 9:00 AM – 9:00 PM | Thursday: 9:00 AM – 9:00 PM | Friday: 9:00 AM – 9:00 PM | Saturday: 9:00 AM – 9:00 PM | Sunday: 9:00 AM – 9:00 PM",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.8,
+      "reviews_count": 37,
+      "source_url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Maria e Ernesto super fofos e atenciosos! Tem várias opções de tamanhos, cores e estilos de roupa. Roupas são bem conservadas e super quentes! Não passamos frio nem um dia e em nenhuma atividade.",
+        "author": "Giovanna Fausto",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/105560431651863364052/reviews"
+      },
+      {
+        "text": "Buena onda 😎 y atención\nRecomiendo alquilar 👍con ellos.\nPodés tener la ropa completa más el calzado y guantes.\nLos precios están bien.\nLo malo es que en la agencia de turismo te recomiendan el lugar diciendo que por ir de parte de ellos tendrás descuento pero no es real y no creo que necesite de estos malos entendidos ya que la calidad de la ropa y de la atencion es excelente!",
+        "author": "Romina",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/103952478657119187457/reviews"
+      },
+      {
+        "text": "Quiero felicitarlos por la atención! Todas las personas que me atendieron desde el momento que entré fueron amables y atentas. La ropa impecable!\nRecomiendo 100% este lugar y deseo que tengan muchos clientes! Se lo merecen..",
+        "author": "Florencia Passarello",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/107670197368556216298/reviews"
+      }
+    ],
+    "main_product_or_service": "alquiler de botas de ski",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJLbC7y3V7GpYRqK2niuemXbQ/photos/AaVGc3khJYDacH0HgQRqG6q2MJQvsvPD8s08qPWC5DOgmv1JL6l5emvH4h2pBfbwJb-G5na5VS_EWkYZjYS8qKToaxnlpbdIedOg7ioGk4zGZ-GEdq-JNyQ4cNB1vUY8c-gxjcFnjM7aGY5cdLGoeSOWLkCGbOhaZZ4Cm6iIC5qm-47Zz3uA_6y5R4ViGmEEYWA0jILxEm6l8mGf5gtO9lfrmht3CUuXq2R3V2gkkaAHnZzoIaglnA-DQajaJ8O274fuKtMU6B1BjyLFFpl2mbQCUmyReYPObouDo7y7nCxC4FnEQdjC2iu275qLZktueKRb6Tu95_pCswqdSnzw1AoEgRN2xKcmoSonIvtmUnR-_U06MBRqth8xuqFpiynQyXoXovF-bYWxMPzzTSdcEDeSd8gKec-4lxd33VeIXbpGyfDRFR-WOuN41ThiHaX3TQ/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJLbC7y3V7GpYRqK2niuemXbQ/photos/AaVGc3miRnTbRChcJpSVpw6zGPFFPi7aWFXkoP6BIFBjb_OytdYEx0D99GQvgMCbL4luk9cvZxx4KrxQVPmP_a72Z0nXSD7ZLpZChlTpCNez-M9Xvk15tyg11VzcBMsb-FJRY3bsu4O57DlVhOD7L3n_9pM3n3Jc0mZFdnAJ6V20se8HJ7JNQp4fRvxJ5Rt4pgxg8kUptOiKmkUVuw4l-dwKi4xGlIxJhm76nM5ZVaaJjM0MLv2hRVrdKFzZ0KVFFfI8UlX9r7Gji-SrZTa43VUaaxgwxH6PQWQMYfz7dlFn7ap7YCRMhUhXwBmQjdOSonhvCb8xXTgG5wIb0SAVYvCGKND44BKSSVhFGmWGjWohViRPCKHsU3n_xy-qa0m9IMtFAdIeRdiBCR2Fe_uxXsMFxEztgc7zdbnlCR9ujsLyvrBSi6B466G9d4I2CO5SxQ/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJLbC7y3V7GpYRqK2niuemXbQ/photos/AaVGc3n0pvrYMOqaFUQoCqMJ4BQhTsoWktKoWlvAGlewzw2NDBQi0oERMg9H217TBCZ0b60db6wunIcIWHNxsm28W95Z0vWVlagCg0zmqtLpzdsrpOBPIBono256xbXrvMV5b81Jub4WpHOXQQGXTOioTJq1Mr6carKPTy-ETDUjC9OIY1cexqA0ONzELUDMNDeSBYEZ9k0GAoSGpTbnFEZ50EFRu1GRpGhxb9yE0Jwivxr2nwwmswGecGgtqXc3EtpcFWj6IcXp-WtFChovHzoZQvMTUSJlUGEi9RmmBuZ_MAN2uiko4KXf-Pf_4k6xhhQFHMak-swKhGrEI2D6zCTN_oOU_vlVhaC_-lb_GYFJssVUrLjZUmzjIT7XOtgc7V-EXgxOm5cwcFb78tvib3MJuDxnLSqELgpXmjIuSX0tbV8wzDMAVWpbaN2CAf0oacEQ/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": true,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-08T20:15:08.451Z",
+          "notes": "Resultado automatico para \"alquiler de botas de ski\" en San Carlos de Bariloche. Segmento: escuelas de ski y snowboard, alquiler de equipos y traslados al Cerro Catedral."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    },
+    "brand": {
+      "palette": {
+        "source": "photo",
+        "captured_from": "https://maps.google.com/?cid=12996727613055020456&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "dominant": "#f8f7f3",
+        "accent": "#2f5d62",
+        "supporting": [
+          "#1d2528",
+          "#d7d2c8"
+        ]
+      },
+      "typography": {
+        "primary": "Aptos",
+        "secondary": "Georgia"
+      }
+    },
+    "site_plan": {
+      "archetype": "minimal-professional",
+      "position": 4,
+      "rationale": "Automatic rotation to keep no more than two sites per archetype and avoid consecutive repeats."
+    }
+  },
+  {
+    "id": "google-ChIJYxh23nF7GpYR7AY6HnN37w0",
+    "name": "Tierra de Mestizos Rental",
+    "slug": "tierra-de-mestizos-rental",
+    "category": "Services",
+    "is_vehicle_related": false,
+    "address": "Francisco Pascasio Moreno 262, R8400 San Carlos de Bariloche, Río Negro, Argentina",
+    "city": "San Carlos de Bariloche",
+    "neighborhood_or_area": null,
+    "phone": "0294 479-1637",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 9:00 PM | Tuesday: 9:00 AM – 9:00 PM | Wednesday: 9:00 AM – 9:00 PM | Thursday: 9:00 AM – 9:00 PM | Friday: 9:00 AM – 9:00 PM | Saturday: 9:00 AM – 9:00 PM | Sunday: 9:00 AM – 9:00 PM",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.5,
+      "reviews_count": 330,
+      "source_url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Great staff, very helpful and a lot of equipment to choose from! They turned out to be essential for us first timers in the snow!",
+        "author": "Bruno C",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/116071356728719177664/reviews"
+      },
+      {
+        "text": "Opening hours are not as  google said\n\nIts from 10 -14\nAnd from 16 - 21",
+        "author": "hadar karni",
+        "rating": 2,
+        "source_url": "https://www.google.com/maps/contrib/114180967119524613964/reviews"
+      },
+      {
+        "text": "O atendimento do Luciano na loja foi perfeito. Ajudou nas escolhas, dando opinião, sendo atencioso, paciente  e educado o tempo todo. Recomendo.",
+        "author": "Maria do Carmo Silva Folego",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/115597028449303446935/reviews"
+      }
+    ],
+    "main_product_or_service": "alquiler de equipos de nieve",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJYxh23nF7GpYR7AY6HnN37w0/photos/AaVGc3m-e4Xq2GoXe6mhu8qX9hxUHHGi_aURC4rD9U6vYrI1WtgOrhAr5DeYDW97mLPyDljV-PcIwwMLBPR1fQ0WlDugNNjaB_1-Ds2YPUEbqP3YSgPGP6-Qgt1cukMbbzTkrG0IfkHKcCcNT2quYl4S5-g48f2JD2GxklUTa6JteEkEE_KBW38_2u6yexBv41JYtPv29a4WyHmkSru-6LJ7Zg8KGXH5ZRFX841Z1lpEhRJXmgb0EjSjYST5PfPOIqawW4tr0Pjtq6ki8IyC9b5F30lD4LVhXJ5jqWCNR2NXJ8JvchlI54gRGie7KxEcscRdj90HX7Af83_lFE-CTfn37ibmOq86AJsmIg5y-2nrPCrOdqeyNqQe7uuUFI8GLmKGVV-oQKgGglaT1qKW0HmYkJKuwq3HM8L7SdVlYH2aF4KeQw/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJYxh23nF7GpYR7AY6HnN37w0/photos/AaVGc3kV5yYz6JGkx8dqOz4hdiPS5MZYmYJoY7iy7la3a217E_jI6NN9ntrbgerPaUMS5cpG1lk-pDItzyLDS6FZCAX2LnZrJtjFghrHcoXGxIONv1yBMfPHa215r1hz-Eq7nd1M2fQyljR-pibfD09GnPiQHIo0sXUO5qoEnioIVngWnqzaxTuTbldBkooXY7lVaz5a3bsZ2B5Pwy4j7gxYnuCgsevl_MyL2GvekxPvBNt_VF_kQSN55yCgwwvHufEOxSmDT2d5D9EDAYHdQRVimF97pVn8FfOJkajTolKhLpn_tuYDFFU6LqgNWU7RtWpoPGNOIHyd9kL1vHf82q5T2R8CM1Syvqdc9P-ZVjp1Hd5V9cQUjFD_6rkH3WghfzCWPoW5VyVOVK13EDLHcwi-nvuvEoxMuxdiHyFLRYKE5O5IKAQ/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJYxh23nF7GpYR7AY6HnN37w0/photos/AaVGc3mrL9s_lUtbrObrF0xtxRGdtq-hRwFRnPTndEeLmFg6w6SAdpUBeK8dr1YlZOsoDEeQpa5aupFXSgDpIqp4Fhp7Sypl-TCms9yOA1I_70Bua_Bzv9yUZDrwWc_Jni60iYH_TAcPQ9tSC0Svd2DpV52f-jd2uDR9yNijFWz4m11SBKancbIv0T1DjpnJuATpgIMho7GleXa-FK1J1M3GXeSL30M7NYu7pZbMSkMd6V63zY6uMBfm1yWC9erS8fE7ChDZ-ekCqlnUcWRryFOPjnnnNiMIbicM1mEHMcugkieJ5xNKI01zoW-mkz15QhQ2OhywUkWcNOh2eCYhdnMHtK6DoGKxg1exa7HJ-CzzW0YL5XqPa_9qPKwFrisQUgVLx-ZS9yAwSuuE_Om09v8DVWoN0-N_blgcWgDY6YO5WQdV6Q/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": true,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-08T20:15:08.452Z",
+          "notes": "Resultado automatico para \"alquiler de equipos de nieve\" en San Carlos de Bariloche. Segmento: escuelas de ski y snowboard, alquiler de equipos y traslados al Cerro Catedral."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    },
+    "brand": {
+      "palette": {
+        "source": "photo",
+        "captured_from": "https://maps.google.com/?cid=1004152578238973676&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "dominant": "#111111",
+        "accent": "#ffbf1f",
+        "supporting": [
+          "#f2f2f0",
+          "#7d7b76"
+        ]
+      },
+      "typography": {
+        "primary": "Oswald",
+        "secondary": "Atkinson Hyperlegible"
+      }
+    },
+    "site_plan": {
+      "archetype": "bold-hero-photo",
+      "position": 5,
+      "rationale": "Automatic rotation to keep no more than two sites per archetype and avoid consecutive repeats."
+    }
+  },
+  {
+    "id": "google-ChIJC6B38shxGpYRL1Pr4RpX5nk",
+    "name": "Epic Bariloche",
+    "slug": "epic-bariloche",
+    "category": "Services",
+    "is_vehicle_related": false,
+    "address": "R8400 San Carlos de Bariloche, Río Negro Province, Argentina",
+    "city": "San Carlos de Bariloche",
+    "neighborhood_or_area": null,
+    "phone": "03543 15-60-6807",
+    "opening_hours": {
+      "raw": "Monday: 8:30 AM – 6:30 PM | Tuesday: 8:30 AM – 6:30 PM | Wednesday: 8:30 AM – 6:30 PM | Thursday: 8:30 AM – 6:30 PM | Friday: 8:30 AM – 6:30 PM | Saturday: 8:30 AM – 6:30 PM | Sunday: 8:30 AM – 6:30 PM",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.3,
+      "reviews_count": 209,
+      "source_url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Convenient, walkable location close to the Cerro Catedral base. Pablo took a great care of me early July selecting the perfect board and waxing it. Great customer service from all staff, fair prices, would surely use them again.",
+        "author": "Ales Cevela",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/116541960422084983279/reviews"
+      },
+      {
+        "text": "Ricky and the guys at EPIC Bariloche was bloody amazing. Not only great gear and service but Ricky also helped immensely with great backcountry recommendations and was able to provide all the equipment necessary. If in Bariloche for snowboarding and skiing the guys at EPIC are the absolute best option.",
+        "author": "Declan Walters",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/111294275136244927668/reviews"
+      },
+      {
+        "text": "Great ski/snowboard rental shop very close to Cerro Catedral! The staff is very friendly and some can speak a little English too. They have a dedicated storage area upstairs so that you don’t have to take all your rented gear with you overnight on multi-day rentals.",
+        "author": "Vincent Tang",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/106225560111966575739/reviews"
+      }
+    ],
+    "main_product_or_service": "ski shop",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJC6B38shxGpYRL1Pr4RpX5nk/photos/AaVGc3mWnrLfQqSIfqKxnhUVb-QpCRlO6HCkPmgtnYo3dKzzLWz9Gj3EhnwY796wZZhQB2_mNtpSRRziwFCWXzPlWcT_tihCYad_sxmWVVJzrpEXBGWsV8x4qqAE5dO81umWLR-SjOUqPvsRcG8RmyLity1dbTpJMouTdIMksnk1ykughhy0K8lNqOUJT-rXfu01L3mJMiHKRZPLEi54q5n6GRVhwFFgSX2dYbeX4r3gZQStD-zgCcUg0lkMs0KirNQyxN4CWnGADatLWmr2x0fNvRq3V7qfMJJKKLZjPi6mYxmRBAW5Iibs0GKSQNC-xqYQiDAZlL15B5TVvmgDdQxZkHZcI2O8TTxdwvDIluJlf2pNAT4wVt9NKcTVjIK1VezytYRR98h4uBpnwzrGWMztRXx-3s2L0aEvqjYxUGeRGefJbP-4l1AO5Zs7vneQpnYD/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJC6B38shxGpYRL1Pr4RpX5nk/photos/AaVGc3molSukTF1UJtZ-WNgV3HUNIczImEqYQtgwNO1nkzCQryOtzoF93y1gUk-4AYJ7or5qqRCsXmoU0qrHd0OVgWqnU7VsgQk_FHUvcpzhmrKW4x7ykO3rQ-gadCFO7TQ4fau0i9kJhXug_73lVJ6gdWdw7p05nQyvIJpb3BfViE6FfY-39FmoO_gJrLqTL69vxng_jYOTF7kd1lfRZxJbDKgiDrPSE7SK3wqfRRmhpv1ekr7rFpIi1cvF5QPk0bB7r2ZwC89mwGbZ8nkftP1oyOz6is14zBbNa4bDuXnRw5_UluiHvH3fqLZvEM0_D_C2lLabd5e58T1KazStmVixOiVaAUKpLVRrvcXQZqjxqwPOTawyK6Hp6Rn2VTrYwlfwTnR8Ko39K0QtOSqj5A8H-qwCzsM2OfH9LuQ7vu9BrXs8T4hTEoELVOY9EfgdmvW8/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJC6B38shxGpYRL1Pr4RpX5nk/photos/AaVGc3mHrIrGrdYFSo48CsBqOADf6GjZ05XJAThnY2aF_egwderpnBOtQI-VIOgUhgStHafdIXPHJtgXC7UniTiE4Is9lF8Zr5eXUnN_suIs0Y3yT9AsNa9D7T1RtHS5BGkZj6_BakdmaUH041pz802RFmHJhJWm2Gu1CdW3n3QxudWhk2Q1IxPvfBFjJDPwxfctanio74AZd3MLIsdOhcQ4udAGGKBUAmXts2fmLUIrSCFjbWLiwv7IIbsFDqLQ0I0N6EPfQ5ngy1B2p54VI45m_ucpNAgayVst4EH9zQVklwNYN2XGbMDFxV0xcWj4E_2Lj4-IPsUypietW9HlIlMmr_wXpY0EstnaOz3vjSyEODMe_iiDqOp_m9aPzUv-RMW_Wl7MifrYOxKyoCTQZY7C9BOhyGR-JdsUS-Pm40IaylZfvMFr/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": true,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-08T20:15:08.451Z",
+          "notes": "Resultado automatico para \"ski shop\" en San Carlos de Bariloche. Segmento: escuelas de ski y snowboard, alquiler de equipos y traslados al Cerro Catedral."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    },
+    "brand": {
+      "palette": {
+        "source": "photo",
+        "captured_from": "https://maps.google.com/?cid=8783803896203793199&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "dominant": "#edf3f1",
+        "accent": "#285f4c",
+        "supporting": [
+          "#17211f",
+          "#ffffff"
+        ]
+      },
+      "typography": {
+        "primary": "Sora",
+        "secondary": "Fraunces"
+      }
+    },
+    "site_plan": {
+      "archetype": "cards-and-services",
+      "position": 6,
+      "rationale": "Automatic rotation to keep no more than two sites per archetype and avoid consecutive repeats."
+    }
+  },
+  {
+    "id": "google-ChIJWULyUB97GpYRZ0GUFdvs8mM",
+    "name": "Aluguel Ropa para nieve",
+    "slug": "aluguel-ropa-para-nieve",
+    "category": "Services",
+    "is_vehicle_related": false,
+    "address": "Libertad 290 Loc 9, R8400 San Carlos de Bariloche, Río Negro, Argentina",
+    "city": "San Carlos de Bariloche",
+    "neighborhood_or_area": null,
+    "phone": "0294 590-6607",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 9:00 PM | Tuesday: 9:00 AM – 9:00 PM | Wednesday: 9:00 AM – 9:00 PM | Thursday: 9:00 AM – 9:00 PM | Friday: 9:00 AM – 9:00 PM | Saturday: 9:00 AM – 9:00 PM | Sunday: 9:00 AM – 9:00 PM",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.7,
+      "reviews_count": 18,
+      "source_url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "We rented here because of the positive reviews, and we're glad we did. The staff was friendly, helpful, and patient while we tried on various clothes to find ones that fit perfectly. Everything was in good condition. There was also a cash discount which saved us some money.",
+        "author": "Michael S",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/111917757473866950162/reviews"
+      },
+      {
+        "text": "Excellent service and clothing. Highly recommend. Walter helped us enormously.",
+        "author": "Luis Fernando Chagas",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/109693858440435120071/reviews"
+      },
+      {
+        "text": "Buenisima la atencion y la ropa de excelente calidad!",
+        "author": "Florencia Matko",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/117548462466822629272/reviews"
+      }
+    ],
+    "main_product_or_service": "alquiler de equipos de nieve",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJWULyUB97GpYRZ0GUFdvs8mM/photos/AaVGc3mRjkRGICDCt6VhEqxd-USfzst9zRwq9v4QkI6nB4qMifxBr8dSEM_mVoZeTfp5B9yECM4788hA-HYe6PDMIIFsaniIXL97ANYywZE5vlrnCZierpxVD9MsuWi9hURj_N5vC9mudlQqyXzkZI16hlNHEYLyvFVPmA0CXkZLIlAAbPt4tRR7NKEpozuKVA0jfsi8oUJMEawjPi0qPAMjFk86AeGDT1ba5Vb7TrZsWZpPTf0lj73AeZVw94gijapQIF7Lu5yxXLI4PXqRjn9_X4v5eu5mCZNrKoRL2l70Rcde8GPoMNdaVXOERgDwCwPEG-8u8P-xAkDykJXLWzk_sF8-iUMM0yffcDK_QQB73UP3qo4CCr_NzYg-RZbgN3LhK6jIF-bUUuEVah8eOhz5vFQzu61b0Dasm3XsNtBOAwPmaslo_QZAOV6926amBTdW/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJWULyUB97GpYRZ0GUFdvs8mM/photos/AaVGc3nQSKKF-0N6JyaUkx1a4O7Jj7hnQlRU_u8xAwNrC81BlI9Q7B4AUKfOPfnsAAe_T8fIwzCWVGVuRPGpRhsLOvkerhU3pvTGhAeHxyjSHkapckGfegmQ6NbGEk6PL5ZAoNM_35LBFS6oXaCZJffg6D_YMT7VibJSy1awXxT9ZhzlCgMI7BNL8C6dHtWuziLPpAR1ExaLC2rS4LyNALrN_3K8ztvx5t65rcKdgFH_UWYDApgckLIUCfocR7XGJL4RhRTpd2Yg1DZtag_y8IHKAOXdKb1a6CXiROT9exZSPtKVynKtGclDtKSbCuRnNz0RYlCWMf-jKBMUMotHYBB7OyAOC1hBqHWq0c4mPJZsGw1c608NzZXbX7S2Wc4NPcXp9Y3NYHbBEGRcGYBO53e4N1ZHXeoKrUEONf766q-WM6xXO4U/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJWULyUB97GpYRZ0GUFdvs8mM/photos/AaVGc3lKtDxlfJo-IcZPm7bvIq429lupd1QidgtYM5Lfhl3-TvAbsXnelAKEdLJdqf6NukxSTFOHoveQmB0S7fpxLMA540UfOfRXn2VaxCeyy7E-7Mh-yp_zBuQmV0gFFwFCgEiJ0OKXqtFpnnt2Mx3VOhJws-BVbx6gOCDMwiAAhQtMd8FqKLR7I95SHh2QdWsRa8hA89Z12pEMUZkUAShakJHIccUxuX6ZVq00VE-EoWqCehtdgMdCZmIoF3PGTtatuyO0_OIptWRXekjziqC7zjW6b4TnnRsq0L0dimN4YA0BpOajDJAwEyLB5u6j0vTRJXnAiFp4pE0PG530ei3oAvvI2VbJP9gbmHtgSVnbYmQ5VhPidW_C_EKwWI0_c2IISWfKhoMQYZ5yWLiclgem9VnIkFLWDT-lIxdCXCZNw5k/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": true,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-08T20:15:08.452Z",
+          "notes": "Resultado automatico para \"alquiler de equipos de nieve\" en San Carlos de Bariloche. Segmento: escuelas de ski y snowboard, alquiler de equipos y traslados al Cerro Catedral."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    },
+    "brand": {
+      "palette": {
+        "source": "photo",
+        "captured_from": "https://maps.google.com/?cid=7202079179822874983&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "dominant": "#fff8ec",
+        "accent": "#8f3f2b",
+        "supporting": [
+          "#2b2420",
+          "#d9c7a7"
+        ]
+      },
+      "typography": {
+        "primary": "Libre Franklin",
+        "secondary": "Libre Baskerville"
+      }
+    },
+    "site_plan": {
+      "archetype": "classic-neighborhood-business",
+      "position": 7,
+      "rationale": "Automatic rotation to keep no more than two sites per archetype and avoid consecutive repeats."
+    }
+  },
+  {
+    "id": "google-ChIJW3ukkESHGpYRuNvepYeDAmo",
+    "name": "Alquiler Ropa Para Nieve",
+    "slug": "alquiler-ropa-para-nieve",
+    "category": "Clothing Store",
+    "is_vehicle_related": false,
+    "address": "Las Americas 359, R8402 Dina Huapi, Río Negro, Argentina",
+    "city": "San Carlos de Bariloche",
+    "neighborhood_or_area": null,
+    "phone": "0294 453-0283",
+    "opening_hours": {
+      "raw": "Monday: Open 24 hours | Tuesday: Open 24 hours | Wednesday: Open 24 hours | Thursday: Open 24 hours | Friday: Open 24 hours | Saturday: Open 24 hours | Sunday: Open 24 hours",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.9,
+      "reviews_count": 17,
+      "source_url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "La ropa es ideal para la ocasión. El servicio que ofrecen es excelente. Son muy cálidos tuvieron el gran gesto de alcanzarnos la indumentaria a nuestro punto mas cómodo, se adecuaron a nuestros horarios y nos trasladaron en un momento a donde estábamos alojados ya que llovía mucho. Cosas que no se ven habitualmente. Mas que agradecidos y super recomendable. Y precios accesibles. De seguro en la próxima ocasión vamos a acudir a ellos para esta necesidad. Variedad en talles y colores.",
+        "author": "Solange Fernandez",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/111226257022639244662/reviews"
+      },
+      {
+        "text": "Seba es un fenómeno.\nNos trajo la ropa a la casa a las 00:00h.\nTenía mucha variedad y a muy buen valor.\nVolveremos!!!",
+        "author": "Nahue Dobos",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/116531767982379949756/reviews"
+      },
+      {
+        "text": "Excelente servicio, la ropa impecable , Carla y sebas bien predispuestos a la hora tanto de entregar como para devolver la ropa. Lo recomiendo",
+        "author": "Daniel Mamani",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/118241552165226752466/reviews"
+      }
+    ],
+    "main_product_or_service": "alquiler de ropa de nieve",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJW3ukkESHGpYRuNvepYeDAmo/photos/AaVGc3kblULMO0bq57KUo9bvEebU3V2eBv8SxBpuqOKu-ix0B0w5xQeysRZzcy1KZsexiwKlFVa3F8eHhUz0kYi2SM79Qz7Zfs7qLUTjf1a__BUzvgtGstdBiehJHt_lfBzoj16dH_tYFd50BjO8GY4qDgPgoo4SU0Ec3hlwi9-k-gWIONzGyfK1_NakVmZFiGX7kLL2Nvy6rnvwSuZcvd24M1UykR8FpzzuJZBSw294VKDvTjLRmnoHX-iTx0agR5LaSoM2w22oNFpzXH1lnTgNQxcGegKPYHZO-NYiJC9ByS4uhTKjdyiVVdgRvTfnUXbvHdJ5GtOqPEcpxve_tTAbHp7_XK7iSEu94nKyVYMQW4JrJO6c01LHPB5EBlDSIBC7FfKJeOxLiy1ItReu751pndN9QahhJeNdNHcMNA33AAGo3Myx/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJW3ukkESHGpYRuNvepYeDAmo/photos/AaVGc3kE5FOMTqMesSa4Yx3wfo8JeFFS1fXb-GJtPljzEbtgQfWOmaBn5kf2s1UFJsR-ApT1iWidOLVeWTIoAJEgnaFvAyqdAIfWDJM9ovlg-yKI7TuuI_VlljpKE0yG8JVN_DuSffLfgOFmsmmv7YtDfZCfYeg8tZIFhTRkYz4i44SqpDX6Hv4q9COtPtzIigQF-50JffvP54AuWcJdMMOZ4s0oHAJekaWRyiFS9cYbaM2jhDT6OEFc45pk2JRUBjvejtjVAvkpw8euKtzHdnVWSOL5kGVNjG6XounIxPbhXjd-OB7e6acsDEYI2djLBlUjW7IJaKq95ODfPkrmJdRyshz1xxr5SPjK1HuZB5t3IA-BX2oSSO2PUtuILstGCi4q-ZUdwVE2LBZlGopTBPk6UOxU97pPc9m7MyjFWvtG13CSYw/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJW3ukkESHGpYRuNvepYeDAmo/photos/AaVGc3kyKD4NmdxE5uBUMZP2bCDqKf20p7w7YVNVX2ZlFsMbFqXpp455EP2eDrS-q30LewBy49o6BPKfo7odpuBQG-8sLbDU22vDv1R14kuYYSIMxkqzZCZU8aBBKrb_Et82ig9-pFNlil3Qt6ov0YkI7kevK5GLlFSp5jj9gz9GL_v1oJHm4gVqyGF-kqXY9F6dDuMc473A8iIACg94MJIMIf8vPw0jrvmYxU3tMHupi2Muw2Fm_VbRlpM5ApYipDermVNn6bbJSHJ03dJpx5VNAgxuv6nId8AUhA-EaaJuOusDWF8ClJtsOSp8VIyJOu0lV_hp_YPxY4RtawD-XxxpPBFkqNdcO1XsCrrK5Rjrbejq_ByeB35wEnebwt6Q6AfVpMJX7F6U8WuSPCLAZe2TH6LEBa2LIcFZRBVtXgP_-b9SGw/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": true,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-08T20:15:08.452Z",
+          "notes": "Resultado automatico para \"alquiler de ropa de nieve\" en San Carlos de Bariloche. Segmento: escuelas de ski y snowboard, alquiler de equipos y traslados al Cerro Catedral."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    },
+    "brand": {
+      "palette": {
+        "source": "photo",
+        "captured_from": "https://maps.google.com/?cid=7638812536600452024&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "dominant": "#0c1f24",
+        "accent": "#36c5a1",
+        "supporting": [
+          "#f5f8f6",
+          "#41585e"
+        ]
+      },
+      "typography": {
+        "primary": "Manrope",
+        "secondary": "Bitter"
+      }
+    },
+    "site_plan": {
+      "archetype": "modern-conversion-landing",
+      "position": 8,
+      "rationale": "Automatic rotation to keep no more than two sites per archetype and avoid consecutive repeats."
+    }
+  },
+  {
+    "id": "google-ChIJi7WvSQBxGpYRH3RIELkAnrw",
+    "name": "Bari Snow",
+    "slug": "bari-snow",
+    "category": "Store",
+    "is_vehicle_related": false,
+    "address": "Francisco de Biedma 55, R8400 San Carlos de Bariloche, Río Negro, Argentina",
+    "city": "San Carlos de Bariloche",
+    "neighborhood_or_area": null,
+    "phone": "0294 421-2523",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 8:00 PM | Tuesday: 9:00 AM – 8:00 PM | Wednesday: 9:00 AM – 8:00 PM | Thursday: 9:00 AM – 8:00 PM | Friday: 9:00 AM – 8:00 PM | Saturday: 9:00 AM – 8:00 PM | Sunday: 9:00 AM – 8:00 PM",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.6,
+      "reviews_count": 78,
+      "source_url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Top",
+        "author": "Guilherme Otávio",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/117359545908225760436/reviews"
+      },
+      {
+        "text": "**Review para Bari Snow - 1 estrela**\n\nTivemos uma experiência absolutamente terrível com a Bari Snow em Bariloche. Alugamos quatro equipamentos de ski com base na confiança nas indicações do dono da loja, já que era a nossa primeira vez. Logo no início, durante a aula com o instrutor, descobrimos que um dos equipamentos simplesmente não encaixava na bota correspondente. O instrutor, surpreso, nos alertou sobre a péssima qualidade dos equipamentos fornecidos.\n\nQuando retornamos à loja para resolver a situação, fomos completamente ignorados pelo proprietário, que se recusou a trocar o equipamento defeituoso ou oferecer qualquer solução. Para piorar, ele nos ameaçou quando mencionamos a possibilidade de reclamar e, de forma absurda, não devolveu o documento de identidade que havia sido deixado como garantia.\n\nMesmo tendo pago 100% do valor da locação antecipadamente, fomos obrigados a alugar outro equipamento em outra loja para continuar nossa experiência de esqui. A Bari Snow foi a pior escolha que poderíamos ter feito, e a falta de profissionalismo e respeito por parte do proprietário transformou o que deveria ser um momento divertido em um grande transtorno. Evitem essa loja a todo custo!",
+        "author": "Joao Vitor Coutinho",
+        "rating": 1,
+        "source_url": "https://www.google.com/maps/contrib/112841381749454203705/reviews"
+      },
+      {
+        "text": "Melhor loja para alugar equipamentos de ski .. aluguei uma prancha de snow, lucy dono da loja fez todos os ajustem. Além de ter um excelente preço",
+        "author": "Escame",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/100493554119607059074/reviews"
+      }
+    ],
+    "main_product_or_service": "ski shop",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJi7WvSQBxGpYRH3RIELkAnrw/photos/AaVGc3mWpFyHiO4lscNBST1LqoMA4lHBifpU-fbLkS4HrVN_RMf9WQsFR9jJGcgnig660B8cRdPqQ2hNw1D-reyRDSLxhNwlpNuEC9nDKmIvYLOrNSFpbmoH99F1IIfVIgG8XRUCqgguN1PhJgnTDTBt-uZL4dqHn7gc7YIX9vwbTFUH1ReA7yqh_-P75vdV7isIX0tagbaAl7TlBAp_3j_f7jgHg3UrP_QdsGaK4scr83AEmY78w5jYtOTv5ZA6J3cSbZaEdn3yjUUxMCn3zNgluZzhvKdmJDx1O7GkNRiLAvE3x7K2LJl-U-TEJ3uCtVKI0IzDtPZ2JDSXvz44XVS7CasRE251VwRx8hegNeHQJ-oid0y-LduJuCosPnEvpzilXhZvurpEGJs6KVNxFZAhLtlU3K4L1jCR6AkRyrWm4al4-A/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJi7WvSQBxGpYRH3RIELkAnrw/photos/AaVGc3mrPFdO9r57gqgkkAGf-3zKVxSiqwF2y0hw_GjY3hsFUJ-8gg90j2J43ZSlpu67QMuzMdq6Wbqk-YY-_hgB8beTtWJgMXvVNihWLS-9tTc4VwL436vd-uxGaGa8qPuhxDTj_JzLELSQz5V8GAawOVr4f885pizckheoBHw9zrLJoJ2q5wRINkAyUO1NwrHLaybkC3LHPixR51ldY7Ft8tcgiTImDLSSpLtGOcXj-O5UnbmKAAiXJeIRTVdjeoB5QP71B1oXH7mgcH1RRoGpJW0SYOzg2iTB1vgPbPFA6PoF3cL62EiMRLwAf8CeCQyRtdo8Z9634MxyZjsfNFo7_7kOpBMA1qeVLHhpH6fxiHgup2kPFk7magMpRWnmeciGwOSL_WSdMENla-tKchY36ICYkPLbr36UnIPsomoY6YvsuQ/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJi7WvSQBxGpYRH3RIELkAnrw/photos/AaVGc3lCkjcHGT4_q7zUZYTo5d2gWmH81VEeRecn6W3omjsA11UDOX8dsvTNlgZPu5FG7S0xGe66IJ8VvaNZecVfPQcgGR5-6cDPlW0_kO_3QEcHX4n_hqsTu3Gtv55QSNdNn93l5Do3o5l1_0LpquNDhDKzK_AN6-O7AoNy5NaXE-H1tKO5RiKMljCsLRRkV1I4xafN4c9Zs4NmzyKFWvmBrIBIFCmZxpHHCvh_W17ogq3agEvVBkaH_g-9C-9Vw1AByM31zZ0DwpQmkZUAmr1KNFta1iRjUiWp0FZRlZer4BOxPu6eacnGlUozu-1kXSVB8noN2EH_wIJzADGKkIG1uOnbFtKThNFHQkMTGGOL3wWvQbvSPGr1c1lU-XQuNUh690-0wAFe1WBHpEBKsBAZylYzoGFhIhwrRM7PwowCG4S4ZctK/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": true,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-08T20:15:08.452Z",
+          "notes": "Resultado automatico para \"ski shop\" en San Carlos de Bariloche. Segmento: escuelas de ski y snowboard, alquiler de equipos y traslados al Cerro Catedral."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    },
+    "brand": {
+      "palette": {
+        "source": "photo",
+        "captured_from": "https://maps.google.com/?cid=13591301520292869151&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "dominant": "#17202a",
+        "accent": "#e5a338",
+        "supporting": [
+          "#f6f3ea",
+          "#687584"
+        ]
+      },
+      "typography": {
+        "primary": "Archivo Narrow",
+        "secondary": "Merriweather Sans"
+      }
+    },
+    "site_plan": {
+      "archetype": "automotive-premium-dark",
+      "position": 9,
+      "rationale": "Automatic rotation to keep no more than two sites per archetype and avoid consecutive repeats."
+    }
+  },
+  {
+    "id": "google-ChIJ4fkyfGB6GpYRf63Rv3ucqYs",
+    "name": "Travesías Ropa De Nieve",
+    "slug": "travesias-ropa-de-nieve",
+    "category": "Clothing Store",
+    "is_vehicle_related": false,
+    "address": "Av. de los Pioneros 4567, R8400 San Carlos de Bariloche, Río Negro, Argentina",
+    "city": "San Carlos de Bariloche",
+    "neighborhood_or_area": null,
+    "phone": "0294 441-4490",
+    "opening_hours": {
+      "raw": "Monday: 9:30 AM – 1:30 PM, 4:30 – 7:30 PM | Tuesday: 8:30 AM – 1:30 PM, 4:30 – 8:00 PM | Wednesday: 9:30 AM – 1:30 PM, 4:30 – 7:30 PM | Thursday: 9:30 AM – 1:30 PM, 4:30 – 7:30 PM | Friday: 9:30 AM – 1:30 PM, 4:30 – 7:30 PM | Saturday: 9:30 AM – 1:30 PM, 4:30 – 7:30 PM | Sunday: 9:30 AM – 1:30 PM, 4:30 – 7:30 PM",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.7,
+      "reviews_count": 15,
+      "source_url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Excelente atención!!! Los chicos muy atentos y predispuestos. La ropa de excelente calidad. Son muy buena onda y muy buenos asesores. Aparte tienen de todo,no solo ropa. Traslados, excursiones, alquiler. .",
+        "author": "Flavia Miori",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/113280475218268949867/reviews"
+      },
+      {
+        "text": "Excelente atención, la mujer y el muchacho son divinos, el asesoramiento y la paciencia, tienen traslados además de la ropa y casas de alquiler turístico, la verdad que volvería a ir con la familia siempre, súper recomendable!!!",
+        "author": "Rami Adaro",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/103403672032325238813/reviews"
+      },
+      {
+        "text": "La verdad excelente atención, lo más recomendable de bariloche. Fui y volveré a ir siempre. Los chicos super atentos  a que todo este en orden.  El chico que se queja de los guantes no habrá roto el guante y no quiere pagarlo?? Mmmm... lo mejor de lo mejor en barilo!!!!!!",
+        "author": "alfredo sosa",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/117608810984444131811/reviews"
+      }
+    ],
+    "main_product_or_service": "alquiler de ropa de nieve",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJ4fkyfGB6GpYRf63Rv3ucqYs/photos/AaVGc3mjLpq9SWcY_r2sCJ3obxZ4GBmJJmLm1bObAS2aZG-lsD7YAs957Uuk3W4klQZkNSQ1egx3_hgRWgq1vdd1VzDnqTfEJon8GuCx_DjhnX464M9LWNHobrtQqAHLk_cfaYtBZv0vj9fjHLvtwYaxCb-pTZA-6Pk248muY_9INVKzkYccW_dZA7JCYQdVG4PutxFutdGuLaXepmNxsAAkpck4rrukwmyPCKFn28AquCKd7Sh9_K8s-m23M2xr5OYI_2LfJI6S_P70aL0ZSv-lZm3CyW3ZcjyPnm_IDYbY2_j-aRcdvD75Fvmtt1raCWTKjYXTDFLP0AsDj9ImayxbuutKlcPc31nYaymgOaTNPIE_hF2K7G5489X5YAE5sM2cz2DJTIr7U5RDRg3zQHPwthJhilan_TupNEnoDK3NtDekeXd4sRCRmtIsyJH-fw/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJ4fkyfGB6GpYRf63Rv3ucqYs/photos/AaVGc3ntcVJ_Z4sECsub6hCM9JY2RGqwAVMpEZ8Rs9wQvSXmkUb_cgYEIh72Bk9Z_tVJHolz0bH6-NXHR-yQM9slEKL-NNLiXtFjSlrz29I7vt-MYbgM5RK3Ygrb6GdwylDf4CJHwYXASP6o77tQDKh4L_eNAz71IIUxbOZ9Q0mgjREownKzJIAZT6otg-3rNrHuptuGC1w00RDShta6UVHQpWrSpMdZ_mbhzcZXus8_Y3yy5UDLmgTCYtBzNJZBwTzxVRN0OEgBO129Ra6ybFa5qZG96p8kiBu_IxO7fV5eIDVEOtLJT1k0D9NbFTW2hpIlJOaAcsIItPYbgO3bXG6nbp1lKCAVCFFok8ucjVSwF-kPKJ0Z2CVlmphLDk5ORvhFj6r8oHbGsqX0pRWmuTxf7puoABvIGZTILV955fsR1p2lbmNI/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJ4fkyfGB6GpYRf63Rv3ucqYs/photos/AaVGc3mkUvXQOK6YAo_l5RWKHQfTpxMiKAVxmE6IwjlKJs7qXYtSCIr8XfugUrr-o0pbt23BQQukujo8G7nMp15MnjIXn9w1_daV6CI8JpbC_O0dpqEsuTX1H7TPnJ-tHHUBv5d9NOWQqbLLmL_VX4SMk1rx4zU_KCGhghahUaSANF8y_uCLUGbbvDIDfmqL8DhPmxy9uJ659KVzepGi_PHtz1-qXZT4RGFdPH7U3lGub49HaOrk2ZEqQOfyn2vxdGk_Hq4MsRs3zE52nR4MF26XjovFq9NVBqWRNgFqZq6u1gWfmyJKrKvyTA7AKEdgOruSTUGouzXW7ufKuj7i9OWSoF-pYks6_NWzlgN499tiuqXUaudiS1VVJ3SRatmPnPdbrOQVbjSISlyPxv0PJGoFus4LOjYAKScCJWgwGY5r03o3Wc4/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by automatic promotion configuration."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": true,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-08T20:15:08.451Z",
+          "notes": "Resultado automatico para \"alquiler de ropa de nieve\" en San Carlos de Bariloche. Segmento: escuelas de ski y snowboard, alquiler de equipos y traslados al Cerro Catedral."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    },
+    "brand": {
+      "palette": {
+        "source": "photo",
+        "captured_from": "https://maps.google.com/?cid=10063746897649184127&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "dominant": "#fbfaf6",
+        "accent": "#426b55",
+        "supporting": [
+          "#202825",
+          "#dcd5c6"
+        ]
+      },
+      "typography": {
+        "primary": "Nunito Sans",
+        "secondary": "Literata"
+      }
+    },
+    "site_plan": {
+      "archetype": "local-clean-service",
+      "position": 10,
+      "rationale": "Automatic rotation to keep no more than two sites per archetype and avoid consecutive repeats."
+    }
+  }
+]
