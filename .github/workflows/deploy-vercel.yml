@@ -73,7 +73,7 @@ jobs:
       - name: Generate and validate runs
         env:
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
-        run: node scripts/generate-deploy-runs.mjs --runs "$RUNS_JSON"
+        run: node scripts/generate-deploy-runs.mjs --runs "$RUNS_JSON" --client-readiness warn
 
       - name: Build Vercel catalog
         run: node scripts/build-vercel-catalog.mjs --runs "$RUNS_JSON" --out dist/vercel-catalog

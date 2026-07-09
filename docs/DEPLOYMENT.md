@@ -36,11 +36,11 @@ En pushes normales, si detecta un cambio deployable, el workflow regenera todas 
    - `validate-design-gate`
    - `generate-sites` con fotos reales, frontends de agente y design brief requerido
    - `validate-generated-sites`
-   - `validate-client-readiness`
+   - `validate-client-readiness` en modo warning para que una tanda historica no bloquee el catalogo completo
 3. `scripts/build-vercel-catalog.mjs` arma `dist/vercel-catalog/` con el login, catalogo y landings publicas.
 4. `scripts/deploy-generated.mjs` vincula/despliega `dist/vercel-catalog/` al proyecto Vercel unico.
 
-Si cualquier paso falla, no se publica el catalogo.
+Si falla el gate tecnico, no se publica el catalogo. Si falla `qa:client`, el deploy continua y el log marca que esa landing no deberia venderse sin correccion.
 
 ## Secrets requeridos
 

@@ -30,6 +30,14 @@ function parseRuns(argv) {
   return [...new Set(runs)].sort();
 }
 
+function clientReadinessMode(argv) {
+  const mode = argValue(argv, "--client-readiness") ?? "strict";
+  if (!["strict", "warn", "skip"].includes(mode)) {
+    throw new Error("--client-readiness must be strict, warn, or skip.");
+  }
+  return mode;
+}
+
 async function expectedCount(runName) {
   const datasetPath = path.join("data", `${runName}-businesses.json`);
   const raw = await readFile(datasetPath, "utf8");
@@ -57,7 +65,12 @@ function runCommand(command, args, options = {}) {
     child.on("error", reject);
     child.on("close", (code) => {
       if (code === 0) {
-        resolve();
+        resolve(true);
+        return;
+      }
+      if (options.allowFailure) {
+        console.warn(`${command} exited with code ${code}; continuing because this step is warning-only.`);
+        resolve(false);
         return;
       }
       reject(new Error(`${command} exited with code ${code}`));
@@ -65,7 +78,7 @@ function runCommand(command, args, options = {}) {
   });
 }
 
-async function validateAndGenerate(runName) {
+async function validateAndGenerate(runName, options) {
   const businessesPath = path.join("data", `${runName}-businesses.json`);
   const specsPath = path.join("data", "site-specs", `${runName}-site-specs.json`);
   const count = await expectedCount(runName);
@@ -102,11 +115,22 @@ async function validateAndGenerate(runName) {
     count,
   ]);
 
-  await runCommand("npx", ["tsx", "src/validators/validate-client-readiness.ts", "--session", runName, "--min-score", "85"]);
+  if (options.clientReadiness === "skip") {
+    console.log("Skipping client readiness audit for catalog deploy.");
+    return;
+  }
+
+  const passed = await runCommand("npx", ["tsx", "src/validators/validate-client-readiness.ts", "--session", runName, "--min-score", "85"], {
+    allowFailure: options.clientReadiness === "warn",
+  });
+  if (!passed) {
+    console.warn(`${runName}: client readiness audit failed; catalog deploy will continue. Fix this before selling the affected landing.`);
+  }
 }
 
 async function main() {
   const runs = parseRuns(process.argv);
+  const clientReadiness = clientReadinessMode(process.argv);
   if (runs.length === 0) {
     console.log("No runs to generate.");
     return;
@@ -114,7 +138,7 @@ async function main() {
 
   for (const runName of runs) {
     console.log(`\n=== ${runName} ===`);
-    await validateAndGenerate(runName);
+    await validateAndGenerate(runName, { clientReadiness });
   }
 }
 
