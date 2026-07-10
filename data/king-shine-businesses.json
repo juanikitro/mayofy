@@ -1,0 +1,235 @@
+[
+  {
+    "id": "google-thekingshine-g11vkp5s3dl",
+    "name": "The King Shine — Estética Vehicular",
+    "slug": "the-king-shine",
+    "category": "Car detailing / Lavadero",
+    "is_vehicle_related": true,
+    "address": "Calle 11 entre 25 y 26, B6660 Veinticinco de Mayo, Provincia de Buenos Aires",
+    "city": "Veinticinco de Mayo",
+    "neighborhood_or_area": "Veinticinco de Mayo, Buenos Aires",
+    "phone": "2345 52-2167",
+    "opening_hours": {
+      "raw": "Monday: 8:00 AM – 7:00 PM | Tuesday: 8:00 AM – 7:00 PM | Wednesday: 8:00 AM – 7:00 PM | Thursday: 8:00 AM – 7:00 PM | Friday: 8:00 AM – 7:00 PM | Saturday: 8:00 AM – 4:00 PM | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 5,
+      "reviews_count": 2,
+      "source_url": "https://www.google.com/maps/place/The+KingShine/@-35.434211,-60.1737776,17z/data=!4m6!3m5!1s0x95be6128a9b72941:0x1f7d9b906c07dccb!8m2!3d-35.434211!4d-60.1737776!16s%2Fg%2F11vkp5s3dl"
+    },
+    "reviews": [
+      {
+        "text": "Muy buen servicio",
+        "author": "mauricio montesinos",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/place/The+KingShine/@-35.434211,-60.1737776,17z/data=!4m6!3m5!1s0x95be6128a9b72941:0x1f7d9b906c07dccb!8m2!3d-35.434211!4d-60.1737776!16s%2Fg%2F11vkp5s3dl"
+      },
+      {
+        "text": "Excelente servicio y calidad!",
+        "author": "Enzo Torres",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/place/The+KingShine/@-35.434211,-60.1737776,17z/data=!4m6!3m5!1s0x95be6128a9b72941:0x1f7d9b906c07dccb!8m2!3d-35.434211!4d-60.1737776!16s%2Fg%2F11vkp5s3dl"
+      }
+    ],
+    "main_product_or_service": "Lavado detallado y estética vehicular (tratamientos acrílicos y cerámicos, abrillantado, limpieza interior, recuperación de ópticas, despolarizado)",
+    "photos": [
+      {
+        "url": "https://cdzqcpwbsfyeeigecqwr.storage.supabase.co/storage/v1/s3/shineapp-media/media/business-profile/thekingshine_qgEscQ5.logo_page-0001.jpg",
+        "type": "logo",
+        "source_url": "https://shineapp-web.vercel.app/publica/the-king-shine",
+        "usage_status": "allowed",
+        "captured_at": "2026-07-10",
+        "permission_notes": "Logo oficial publicado por el negocio en su turnera pública de ShineApp. Descargado como asset local (assets/logo-king-shine.jpg)."
+      },
+      {
+        "url": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkFHZfJOml4Jo3qhnijnxD8tZ6OptOdQwiUBgjPaWqkyQsmPe2QwXZ6JJiCOdntRw6udJjDjErWiE9J4dxioXqPglsseODkErdgcZ448JxhIu4w0bUurgUF6lqSJYARue3oxH0ti2WwkGIN",
+        "type": "facade",
+        "source_url": "https://www.google.com/maps/place/The+KingShine/@-35.434211,-60.1737776,17z/data=!4m6!3m5!1s0x95be6128a9b72941:0x1f7d9b906c07dccb!8m2!3d-35.434211!4d-60.1737776!16s%2Fg%2F11vkp5s3dl",
+        "usage_status": "allowed",
+        "captured_at": "2026-07-10",
+        "permission_notes": "Fachada nocturna del local con mural de marca, publicada en la ficha de Google Maps del negocio. Asset local: assets/fachada-nocturna.jpg."
+      },
+      {
+        "url": "https://instagram.faep16-2.fna.fbcdn.net/v/t51.82787-15/671084931_18064187015702626_772886630673816991_n.jpg",
+        "type": "interior",
+        "source_url": "https://www.instagram.com/thekingshine_/",
+        "usage_status": "allowed",
+        "captured_at": "2026-07-10",
+        "permission_notes": "Mercedes GLC Coupé dentro del box con el mural de marca, publicada por el negocio en su Instagram oficial. Asset local: assets/hero-mercedes-glc.jpg."
+      },
+      {
+        "url": "https://instagram.faep16-2.fna.fbcdn.net/v/t51.71878-15/695910690_977799648129604_6963107689180124747_n.jpg",
+        "type": "product",
+        "source_url": "https://www.instagram.com/thekingshine_/",
+        "usage_status": "allowed",
+        "captured_at": "2026-07-10",
+        "permission_notes": "Aplicación de tratamiento cerámico frente a una GLC negra, del Instagram oficial. Asset local: assets/tratamiento-ceramico.jpg."
+      },
+      {
+        "url": "https://instagram.faep16-1.fna.fbcdn.net/v/t51.71878-15/691805814_2669362620112016_3903169225076817690_n.jpg",
+        "type": "product",
+        "source_url": "https://www.instagram.com/thekingshine_/",
+        "usage_status": "allowed",
+        "captured_at": "2026-07-10",
+        "permission_notes": "Pulidoras trabajando sobre capot blanco, del Instagram oficial. Asset local: assets/pulido-abrillantado.jpg."
+      },
+      {
+        "url": "https://instagram.faep16-2.fna.fbcdn.net/v/t51.71878-15/701737225_1465107678144580_3669598978757264616_n.jpg",
+        "type": "interior",
+        "source_url": "https://www.instagram.com/thekingshine_/",
+        "usage_status": "allowed",
+        "captured_at": "2026-07-10",
+        "permission_notes": "Interior de vehículo terminado, del Instagram oficial. Asset local: assets/limpieza-interior.jpg."
+      },
+      {
+        "url": "https://instagram.faep16-2.fna.fbcdn.net/v/t51.82787-15/655229689_18057715619702626_6578430026554286634_n.jpg",
+        "type": "interior",
+        "source_url": "https://www.instagram.com/thekingshine_/",
+        "usage_status": "allowed",
+        "captured_at": "2026-07-10",
+        "permission_notes": "Ford Ranger azul dentro del box bajo las tiras LED, del Instagram oficial. Asset local: assets/ranger-azul-box.jpg."
+      },
+      {
+        "url": "https://instagram.faep16-2.fna.fbcdn.net/v/t51.82787-15/656247393_18057715721702626_7166540976844763891_n.jpg",
+        "type": "facade",
+        "source_url": "https://www.instagram.com/thekingshine_/",
+        "usage_status": "allowed",
+        "captured_at": "2026-07-10",
+        "permission_notes": "Ford F-150 Raptor y RAM 1500 en la puerta del local, del Instagram oficial. Asset local: assets/camionetas-frente.jpg."
+      },
+      {
+        "url": "https://instagram.faep16-1.fna.fbcdn.net/v/t51.71878-15/658405492_1255369259539825_8821002923662681893_n.jpg",
+        "type": "facade",
+        "source_url": "https://www.instagram.com/thekingshine_/",
+        "usage_status": "allowed",
+        "captured_at": "2026-07-10",
+        "permission_notes": "VW Amarok blanca frente a la pared pintada con los servicios del local, del Instagram oficial. Asset local: assets/amarok-servicios.jpg."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://www.instagram.com/thekingshine_/",
+        "https://shineapp-web.vercel.app/publica/the-king-shine",
+        "https://www.google.com/maps/place/The+KingShine/@-35.434211,-60.1737776,17z/data=!4m6!3m5!1s0x95be6128a9b72941:0x1f7d9b906c07dccb!8m2!3d-35.434211!4d-60.1737776!16s%2Fg%2F11vkp5s3dl"
+      ],
+      "evidence": [
+        "La bio de Instagram enlaza solo a la turnera de ShineApp, a WhatsApp (wa.link/g7t6b9) y a Google Maps; no aparece ningún dominio institucional propio.",
+        "La ficha de Google Maps lista instagram.com como único sitio web del negocio."
+      ],
+      "notes": "El negocio opera con Instagram + turnera ShineApp pública; no tiene landing ni sitio institucional propio."
+    },
+    "data_quality_score": 0.95,
+    "missing_data_reason": null,
+    "approved_for_generation": true,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Instagram oficial @thekingshine_",
+          "url": "https://www.instagram.com/thekingshine_/",
+          "captured_at": "2026-07-10",
+          "notes": "Cuenta verificada, 263 publicaciones, 1.587 seguidores. Bio: Lavadero & Estética Vehicular, 25 de Mayo Bs As; servicios: Tratamiento Acrílico y Cerámico, Abrillantado, Limpieza Interior Completa Tapizado, Recuperación en Óptica, Pre Venta, Lavados. Slogan verificado en gráfica publicada: \"UN SERVICIO, MIL DETALLES.\""
+        },
+        {
+          "label": "Turnera pública ShineApp",
+          "url": "https://shineapp-web.vercel.app/publica/the-king-shine",
+          "captured_at": "2026-07-10",
+          "notes": "Turnera de reservas online con catálogo de servicios y precios por tipo de vehículo (API pública: https://shineapp-api.vercel.app/api/public/landing/the-king-shine/). Lavadero: Lavado de Motor $35.000 (1 h, sin notas publicadas); Lavado Detallado Premium $75.000 auto / $30.000 moto / $85.000 camioneta (2 h; notas publicadas: lavado detallado de carrocería exterior, limpieza detallada básica interior, encerado carnauba exterior, acondicionado completo de plásticos negros exteriores siliconfree con protección contra rayos UV); Lavado Tradicional Detallado $35.000 auto / $15.000 moto / $45.000 camioneta / $35.000 combi / $35.000 camión (1 h 30; notas publicadas: lavado detallado exterior con secado a cera, limpieza de interior básica detallada, acondicionamiento de cubiertas). Detailing: Despolarizado $50.000 (1 h, sin notas publicadas); Recuperación de Ópticas $65.000 (1 h; notas publicadas: eliminación de capa amarillenta, rejuvenecimiento de tonalidad transparente, durabilidad 12 meses). Teléfono de contacto declarado: 2345522167."
+        },
+        {
+          "label": "WhatsApp del negocio (link de bio)",
+          "url": "https://wa.link/g7t6b9",
+          "captured_at": "2026-07-10",
+          "notes": "Redirige a api.whatsapp.com/send?phone=542345522167 con texto precargado \"Hola! Necesito información sobre tus servicios!\"."
+        },
+        {
+          "label": "Ficha de Google Maps",
+          "url": "https://www.google.com/maps/place/The+KingShine/@-35.434211,-60.1737776,17z/data=!4m6!3m5!1s0x95be6128a9b72941:0x1f7d9b906c07dccb!8m2!3d-35.434211!4d-60.1737776!16s%2Fg%2F11vkp5s3dl",
+          "captured_at": "2026-07-10",
+          "notes": "The KingShine, 5,0 (2 reseñas), categoría Servicio de lavado de coches. Dirección Calle 11, C. 25 & 26, B6660 Veinticinco de Mayo. Horario: lun–vie 8:00–19:00, sáb 8:00–16:00, dom cerrado. Teléfono 02345 52-2167. Link corto de la bio: maps.app.goo.gl/LdEzGonvDWCqZKdp6. La turnera ShineApp declara 08:00–12:00 como franja simple; se toma el horario por día de Maps por ser más completo y estar publicado por el negocio."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://www.instagram.com/thekingshine_/",
+          "notes": "\"The King Shine — Estética Vehicular\" según logo, mural del local y bio de Instagram; en Maps figura como \"The KingShine\"."
+        },
+        {
+          "field": "address",
+          "source_url": "https://www.google.com/maps/place/The+KingShine/@-35.434211,-60.1737776,17z/data=!4m6!3m5!1s0x95be6128a9b72941:0x1f7d9b906c07dccb!8m2!3d-35.434211!4d-60.1737776!16s%2Fg%2F11vkp5s3dl",
+          "notes": "Coincide con la gráfica oficial de IG (\"CALLE 11 25 y 26\") y con la turnera (\"11/ 25 y 26\")."
+        },
+        {
+          "field": "city",
+          "source_url": "https://www.google.com/maps/place/The+KingShine/@-35.434211,-60.1737776,17z/data=!4m6!3m5!1s0x95be6128a9b72941:0x1f7d9b906c07dccb!8m2!3d-35.434211!4d-60.1737776!16s%2Fg%2F11vkp5s3dl"
+        },
+        {
+          "field": "phone",
+          "source_url": "https://wa.link/g7t6b9",
+          "notes": "Mismo número en Maps (02345 52-2167), turnera ShineApp (2345522167) y gráfica de IG (2345-522167). WhatsApp: wa.me/542345522167."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://www.google.com/maps/place/The+KingShine/@-35.434211,-60.1737776,17z/data=!4m6!3m5!1s0x95be6128a9b72941:0x1f7d9b906c07dccb!8m2!3d-35.434211!4d-60.1737776!16s%2Fg%2F11vkp5s3dl",
+          "notes": "Horario por día expandido en la ficha de Maps el 2026-07-10."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://www.google.com/maps/place/The+KingShine/@-35.434211,-60.1737776,17z/data=!4m6!3m5!1s0x95be6128a9b72941:0x1f7d9b906c07dccb!8m2!3d-35.434211!4d-60.1737776!16s%2Fg%2F11vkp5s3dl",
+          "notes": "5,0 con 2 reseñas al 2026-07-10."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://www.google.com/maps/place/The+KingShine/@-35.434211,-60.1737776,17z/data=!4m6!3m5!1s0x95be6128a9b72941:0x1f7d9b906c07dccb!8m2!3d-35.434211!4d-60.1737776!16s%2Fg%2F11vkp5s3dl",
+          "notes": "Textos literales en español capturados con la ficha en hl=es."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://www.instagram.com/thekingshine_/",
+          "notes": "Fotos publicadas por el propio negocio en su Instagram oficial y su ficha de Maps; descargadas como assets locales del frontend."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://www.instagram.com/thekingshine_/",
+          "notes": "Links de bio revisados el 2026-07-10: turnera ShineApp, WhatsApp y Maps; sin dominio propio."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://shineapp-web.vercel.app/publica/the-king-shine",
+          "notes": "Catálogo de la turnera (Lavadero y Detailing) + servicios listados en la bio de IG y en la pared pintada del local."
+        },
+        {
+          "field": "category",
+          "source_url": "https://www.google.com/maps/place/The+KingShine/@-35.434211,-60.1737776,17z/data=!4m6!3m5!1s0x95be6128a9b72941:0x1f7d9b906c07dccb!8m2!3d-35.434211!4d-60.1737776!16s%2Fg%2F11vkp5s3dl",
+          "notes": "\"Servicio de lavado de coches\" en Maps; \"Auto Detailing Service\" en Instagram."
+        },
+        {
+          "field": "neighborhood_or_area",
+          "source_url": "https://www.instagram.com/thekingshine_/",
+          "notes": "\"25 de Mayo Bs As\" en la bio."
+        }
+      ]
+    },
+    "brand": {
+      "palette": {
+        "source": "logo",
+        "captured_from": "https://cdzqcpwbsfyeeigecqwr.storage.supabase.co/storage/v1/s3/shineapp-media/media/business-profile/thekingshine_qgEscQ5.logo_page-0001.jpg",
+        "dominant": "#0b0b0d",
+        "accent": "#e01e26",
+        "supporting": ["#c7c9cd", "#f4f5f7", "#17171b"]
+      },
+      "typography": {
+        "primary": "Chakra Petch",
+        "secondary": "Saira"
+      }
+    },
+    "site_plan": {
+      "archetype": "automotive-premium-dark",
+      "position": 1,
+      "rationale": "El logo (negro, rojo y plata metálica) y las fotos nocturnas del box piden un dark premium automotor; la turnera con precios reales habilita un menú visual de servicios como motor de conversión."
+    }
+  }
+]
