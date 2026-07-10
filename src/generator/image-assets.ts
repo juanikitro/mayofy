@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { Business } from "../content/business-schema.js";
 
@@ -9,6 +9,23 @@ export type PreparedImage = {
 
 function isGooglePlacePhoto(url: string): boolean {
   return url.startsWith("https://places.googleapis.com/v1/") && url.includes("/media");
+}
+
+function hasUrlScheme(url: string): boolean {
+  return /^[a-z][a-z0-9+.-]*:\/\//iu.test(url);
+}
+
+function isInsideRoot(root: string, target: string): boolean {
+  const relative = path.relative(root, target);
+  return relative === "" || (!relative.startsWith("..") && !path.isAbsolute(relative));
+}
+
+function localPathToExtension(filePath: string): string {
+  const extension = path.extname(filePath).toLowerCase().replace(/^\./u, "");
+  if (["png", "webp", "jpg"].includes(extension)) {
+    return extension;
+  }
+  return "jpg";
 }
 
 function withGoogleKey(url: string, apiKey: string): string {
@@ -70,6 +87,30 @@ export async function prepareHeroImage(business: Business, siteDir: string, requ
   if (!photo || photo.url.startsWith("mock://")) {
     await writeFile(path.join(assetsDir, "hero.svg"), placeholderSvg(business), "utf8");
     return { heroSrc: "./assets/hero.svg", status: photo?.url.startsWith("mock://") ? "mock" : "placeholder" };
+  }
+
+  if (!hasUrlScheme(photo.url)) {
+    const repoRoot = path.resolve(process.cwd());
+    const localPhotoPath = path.resolve(repoRoot, photo.url);
+    if (!isInsideRoot(repoRoot, localPhotoPath)) {
+      throw new Error(`${business.slug}: local photo path escapes repository: ${photo.url}`);
+    }
+
+    try {
+      const localPhotoStat = await stat(localPhotoPath);
+      if (localPhotoStat.isFile()) {
+        const extension = localPathToExtension(localPhotoPath);
+        await copyFile(localPhotoPath, path.join(assetsDir, `hero.${extension}`));
+        return { heroSrc: `./assets/hero.${extension}`, status: "downloaded" };
+      }
+    } catch {
+      // Keep the existing placeholder behavior below when real images are not required.
+    }
+
+    console.warn(`${business.slug}: local photo file does not exist: ${photo.url}; using generated placeholder.`);
+    if (requireRealImage) {
+      throw new Error(`${business.slug}: local photo file does not exist: ${photo.url}.`);
+    }
   }
 
   if (isGooglePlacePhoto(photo.url)) {

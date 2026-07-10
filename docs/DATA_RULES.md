@@ -37,6 +37,8 @@ Por decision local del proyecto, las fotos encontradas por Google Places se carg
 
 El HTML final no apunta directo al endpoint de Google Places. Durante `npm run generate`, la foto se descarga como asset local si hay `GOOGLE_PLACES_API_KEY`; si no, se usa una imagen SVG local de fallback.
 
+Las fotos ya versionadas en el repo pueden referenciarse por ruta local relativa al repo y el generador las copia como asset del sitio.
+
 ## Resenas de Google Places
 
 Las resenas obtenidas por Places API deben conservar texto y atribucion. Antes de mostrarlas publicamente, verificar las politicas vigentes de Google Maps Platform para author attribution y orden de resenas.

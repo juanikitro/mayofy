@@ -35,76 +35,76 @@
     "main_product_or_service": "Lavado detallado y estética vehicular (tratamientos acrílicos y cerámicos, abrillantado, limpieza interior, recuperación de ópticas, despolarizado)",
     "photos": [
       {
-        "url": "https://cdzqcpwbsfyeeigecqwr.storage.supabase.co/storage/v1/s3/shineapp-media/media/business-profile/thekingshine_qgEscQ5.logo_page-0001.jpg",
-        "type": "logo",
-        "source_url": "https://shineapp-web.vercel.app/publica/the-king-shine",
+        "url": "data/frontends/king-shine/the-king-shine/assets/hero-mercedes-glc.jpg",
+        "type": "interior",
+        "source_url": "https://www.instagram.com/thekingshine_/",
         "usage_status": "allowed",
         "captured_at": "2026-07-10",
-        "permission_notes": "Logo oficial publicado por el negocio en su turnera pública de ShineApp. Descargado como asset local (assets/logo-king-shine.jpg)."
+        "permission_notes": "Mercedes GLC Coupé dentro del box con el mural de marca, publicada por el negocio en su Instagram oficial (origen: instagram.faep16-2.fna.fbcdn.net/v/t51.82787-15/671084931_18064187015702626_772886630673816991_n.jpg, CDN con token efímero). Descargada el 2026-07-10 y versionada como asset local del repo."
       },
       {
-        "url": "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkFHZfJOml4Jo3qhnijnxD8tZ6OptOdQwiUBgjPaWqkyQsmPe2QwXZ6JJiCOdntRw6udJjDjErWiE9J4dxioXqPglsseODkErdgcZ448JxhIu4w0bUurgUF6lqSJYARue3oxH0ti2WwkGIN",
+        "url": "data/frontends/king-shine/the-king-shine/assets/fachada-nocturna.jpg",
         "type": "facade",
         "source_url": "https://www.google.com/maps/place/The+KingShine/@-35.434211,-60.1737776,17z/data=!4m6!3m5!1s0x95be6128a9b72941:0x1f7d9b906c07dccb!8m2!3d-35.434211!4d-60.1737776!16s%2Fg%2F11vkp5s3dl",
         "usage_status": "allowed",
         "captured_at": "2026-07-10",
-        "permission_notes": "Fachada nocturna del local con mural de marca, publicada en la ficha de Google Maps del negocio. Asset local: assets/fachada-nocturna.jpg."
+        "permission_notes": "Fachada nocturna del local con mural de marca, publicada en la ficha de Google Maps del negocio (origen: lh3.googleusercontent.com/gps-cs-s/AHRPTWkFHZfJOml4Jo3qhnijnxD8tZ6OptOdQwiUBgjPaWqkyQsmPe2QwXZ6JJiCOdntRw6udJjDjErWiE9J4dxioXqPglsseODkErdgcZ448JxhIu4w0bUurgUF6lqSJYARue3oxH0ti2WwkGIN). Descargada el 2026-07-10 y versionada como asset local del repo."
       },
       {
-        "url": "https://instagram.faep16-2.fna.fbcdn.net/v/t51.82787-15/671084931_18064187015702626_772886630673816991_n.jpg",
-        "type": "interior",
-        "source_url": "https://www.instagram.com/thekingshine_/",
-        "usage_status": "allowed",
-        "captured_at": "2026-07-10",
-        "permission_notes": "Mercedes GLC Coupé dentro del box con el mural de marca, publicada por el negocio en su Instagram oficial. Asset local: assets/hero-mercedes-glc.jpg."
-      },
-      {
-        "url": "https://instagram.faep16-2.fna.fbcdn.net/v/t51.71878-15/695910690_977799648129604_6963107689180124747_n.jpg",
+        "url": "data/frontends/king-shine/the-king-shine/assets/tratamiento-ceramico.jpg",
         "type": "product",
         "source_url": "https://www.instagram.com/thekingshine_/",
         "usage_status": "allowed",
         "captured_at": "2026-07-10",
-        "permission_notes": "Aplicación de tratamiento cerámico frente a una GLC negra, del Instagram oficial. Asset local: assets/tratamiento-ceramico.jpg."
+        "permission_notes": "Aplicación de tratamiento cerámico frente a una GLC negra, del Instagram oficial (origen: instagram.faep16-2.fna.fbcdn.net/v/t51.71878-15/695910690_977799648129604_6963107689180124747_n.jpg). Descargada el 2026-07-10 y versionada como asset local del repo."
       },
       {
-        "url": "https://instagram.faep16-1.fna.fbcdn.net/v/t51.71878-15/691805814_2669362620112016_3903169225076817690_n.jpg",
+        "url": "data/frontends/king-shine/the-king-shine/assets/pulido-abrillantado.jpg",
         "type": "product",
         "source_url": "https://www.instagram.com/thekingshine_/",
         "usage_status": "allowed",
         "captured_at": "2026-07-10",
-        "permission_notes": "Pulidoras trabajando sobre capot blanco, del Instagram oficial. Asset local: assets/pulido-abrillantado.jpg."
+        "permission_notes": "Pulidoras trabajando sobre capot blanco, del Instagram oficial (origen: instagram.faep16-1.fna.fbcdn.net/v/t51.71878-15/691805814_2669362620112016_3903169225076817690_n.jpg). Descargada el 2026-07-10 y versionada como asset local del repo."
       },
       {
-        "url": "https://instagram.faep16-2.fna.fbcdn.net/v/t51.71878-15/701737225_1465107678144580_3669598978757264616_n.jpg",
+        "url": "data/frontends/king-shine/the-king-shine/assets/limpieza-interior.jpg",
         "type": "interior",
         "source_url": "https://www.instagram.com/thekingshine_/",
         "usage_status": "allowed",
         "captured_at": "2026-07-10",
-        "permission_notes": "Interior de vehículo terminado, del Instagram oficial. Asset local: assets/limpieza-interior.jpg."
+        "permission_notes": "Interior de vehículo terminado, del Instagram oficial (origen: instagram.faep16-2.fna.fbcdn.net/v/t51.71878-15/701737225_1465107678144580_3669598978757264616_n.jpg). Descargada el 2026-07-10 y versionada como asset local del repo."
       },
       {
-        "url": "https://instagram.faep16-2.fna.fbcdn.net/v/t51.82787-15/655229689_18057715619702626_6578430026554286634_n.jpg",
+        "url": "data/frontends/king-shine/the-king-shine/assets/ranger-azul-box.jpg",
         "type": "interior",
         "source_url": "https://www.instagram.com/thekingshine_/",
         "usage_status": "allowed",
         "captured_at": "2026-07-10",
-        "permission_notes": "Ford Ranger azul dentro del box bajo las tiras LED, del Instagram oficial. Asset local: assets/ranger-azul-box.jpg."
+        "permission_notes": "Ford Ranger azul dentro del box bajo las tiras LED, del Instagram oficial (origen: instagram.faep16-2.fna.fbcdn.net/v/t51.82787-15/655229689_18057715619702626_6578430026554286634_n.jpg). Descargada el 2026-07-10 y versionada como asset local del repo."
       },
       {
-        "url": "https://instagram.faep16-2.fna.fbcdn.net/v/t51.82787-15/656247393_18057715721702626_7166540976844763891_n.jpg",
+        "url": "data/frontends/king-shine/the-king-shine/assets/camionetas-frente.jpg",
         "type": "facade",
         "source_url": "https://www.instagram.com/thekingshine_/",
         "usage_status": "allowed",
         "captured_at": "2026-07-10",
-        "permission_notes": "Ford F-150 Raptor y RAM 1500 en la puerta del local, del Instagram oficial. Asset local: assets/camionetas-frente.jpg."
+        "permission_notes": "Ford F-150 Raptor y RAM 1500 en la puerta del local, del Instagram oficial (origen: instagram.faep16-2.fna.fbcdn.net/v/t51.82787-15/656247393_18057715721702626_7166540976844763891_n.jpg). Descargada el 2026-07-10 y versionada como asset local del repo."
       },
       {
-        "url": "https://instagram.faep16-1.fna.fbcdn.net/v/t51.71878-15/658405492_1255369259539825_8821002923662681893_n.jpg",
+        "url": "data/frontends/king-shine/the-king-shine/assets/amarok-servicios.jpg",
         "type": "facade",
         "source_url": "https://www.instagram.com/thekingshine_/",
         "usage_status": "allowed",
         "captured_at": "2026-07-10",
-        "permission_notes": "VW Amarok blanca frente a la pared pintada con los servicios del local, del Instagram oficial. Asset local: assets/amarok-servicios.jpg."
+        "permission_notes": "VW Amarok blanca frente a la pared pintada con los servicios del local, del Instagram oficial (origen: instagram.faep16-1.fna.fbcdn.net/v/t51.71878-15/658405492_1255369259539825_8821002923662681893_n.jpg). Descargada el 2026-07-10 y versionada como asset local del repo."
+      },
+      {
+        "url": "data/frontends/king-shine/the-king-shine/assets/logo-king-shine.jpg",
+        "type": "logo",
+        "source_url": "https://shineapp-web.vercel.app/publica/the-king-shine",
+        "usage_status": "allowed",
+        "captured_at": "2026-07-10",
+        "permission_notes": "Logo oficial publicado por el negocio en su turnera pública de ShineApp (origen: bucket Supabase shineapp-media con URL firmada efímera). Descargado el 2026-07-10 y versionado como asset local del repo."
       }
     ],
     "has_own_website": false,
