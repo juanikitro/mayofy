@@ -64,7 +64,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # 22+ required by the impeccable detector (qa:impeccable advisory step).
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -74,6 +75,14 @@ jobs:
         env:
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
         run: node scripts/generate-deploy-runs.mjs --runs "$RUNS_JSON" --client-readiness warn
+
+      # Advisory anti-slop scan of the generated runs. Non-blocking on purpose:
+      # historical non-golden tandas still carry slop, so this reports findings
+      # as a warning rather than gating the deploy. Flip continue-on-error to
+      # false once historical debt is cleared to make it a hard gate.
+      - name: IMPECCABLE anti-slop scan (advisory)
+        continue-on-error: true
+        run: npm run qa:impeccable -- generated
 
       - name: Build Vercel catalog
         run: node scripts/build-vercel-catalog.mjs --runs "$RUNS_JSON" --out dist/vercel-catalog

@@ -236,7 +236,7 @@ No buscar redes nuevas ni inventar canales. Si no hay Instagram/WhatsApp verific
 
 ## Fase 8: deploy
 
-El deploy es automatico: `.github/workflows/deploy-vercel.yml` corre en cada push a `main` que toque datos, specs, frontends o scripts de deploy, valida (`qa:design`, `generate`, `qa`), registra `qa:client` como warning para tandas historicas, arma `dist/vercel-catalog/` y publica un unico proyecto Vercel con `scripts/deploy-generated.mjs`. Ver `docs/DEPLOYMENT.md`. No hay paso manual local para produccion.
+El deploy es automatico: `.github/workflows/deploy-vercel.yml` corre en cada push a `main` que toque datos, specs, frontends o scripts de deploy, valida (`qa:design`, `generate`, `qa`), registra `qa:client` y `qa:impeccable` como warning para tandas historicas (paso `continue-on-error`, no bloquea el deploy mientras haya slop historico sin saldar), arma `dist/vercel-catalog/` y publica un unico proyecto Vercel con `scripts/deploy-generated.mjs`. Ver `docs/DEPLOYMENT.md`. No hay paso manual local para produccion.
 
 Rutas publicadas:
 
