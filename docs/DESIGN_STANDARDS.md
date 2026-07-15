@@ -2,7 +2,9 @@
 
 Este documento define la barra de calidad visual y comercial de las landings. Reemplaza a todos los estándares anteriores: los golden samples de `tandil-servicios-vehiculares` (v1, v2 y v3) y `cordoba-conversion` quedaron eliminados y no deben usarse como referencia.
 
-Los únicos golden samples aprobados son las **3 landings de la corrida `amba-alta-conversion`** (julio 2026), diseñadas con Claude Code usando la skill `frontend-design`.
+Los únicos golden samples aprobados son las **3 landings de la corrida `amba-alta-conversion`** (julio 2026), diseñadas con Claude Code. El motor de diseño vigente para toda landing nueva es la skill **IMPECCABLE** (`frontend-design` queda como fallback compatible); ver `agents/design-director.md`.
+
+> Nota sobre los golden samples y IMPECCABLE: estas 3 landings usan decisiones de arte deliberadas (papel crema, Fraunces, dark-theme con acento ámbar) que el detector de IMPECCABLE marca como slop. Son output **aprobado**, así que están excepcionadas por archivo en `.impeccable/config.json` (glob `**/amba-alta-conversion/**`) y no se degradan. Las landings nuevas se scanean completas: IMPECCABLE empuja la barra por encima de estos samples, no por debajo.
 
 ## Los 3 golden samples
 
@@ -52,6 +54,7 @@ La etapa `design-director` (`agents/design-director.md`) produce, por landing, u
 
 - `npm run qa:design` falla si algún spec no tiene `conversion_template`, `design_brief` completo o el sello `designed_by: "claude-code"`.
 - `npm run generate ... --require-design-brief` no genera el sitio final sin ese brief.
+- `npm run qa:impeccable -- generated/<run>` corre el detector determinístico de IMPECCABLE sobre las landings generadas y falla ante slop. Capa adicional, no reemplaza `qa:design`/`qa`/`qa:client`. Configuración y excepciones en `.impeccable/config.json`.
 
 Es la forma dura del split Claude-diseña / Codex-programa: sin la etapa de diseño completada, la landing no llega a generación.
 
@@ -59,6 +62,6 @@ Es la forma dura del split Claude-diseña / Codex-programa: sin la etapa de dise
 
 1. Claude Code diseña la landing en la etapa `design-director` (ver división de roles en `CLAUDE.md` / `AGENTS.md` de la raíz) y corre `npm run qa:design`.
 2. Codex la implementa a partir del `design_brief`.
-3. Pasa `npm run qa` y `npm run qa:client`, más revisión visual desktop/mobile.
+3. Pasa `npm run qa`, `npm run qa:client` y `npm run qa:impeccable -- generated/<run>` (sin slop, salvo excepciones justificadas en `.impeccable/config.json`), más revisión visual desktop/mobile.
 4. El usuario la aprueba explícitamente como golden sample.
 5. Solo entonces se agregan sus capturas a `output/screenshots/golden-samples/` y se actualiza este documento. Este set solo se reemplaza con aprobación explícita del usuario.

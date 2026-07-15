@@ -4,7 +4,7 @@ Preferencias explícitas del usuario para este repositorio. Tienen prioridad sob
 
 ## División de roles: Claude diseña, Codex programa
 
-- **Diseño de landings: Claude Code, siempre.** El diseño se hace en la sesión de Claude con la skill `frontend-design` cargada. El usuario comparó resultados y prefiere el diseño de Claude. Claude NO delega el diseño a Codex ni a subagentes.
+- **Diseño de landings: Claude Code, siempre.** El diseño se hace en la sesión de Claude con la skill **IMPECCABLE** cargada como motor de diseño por defecto (`frontend-design` queda como fallback compatible). El usuario comparó resultados y prefiere el diseño de Claude. Claude NO delega el diseño a Codex ni a subagentes. Ver `agents/design-director.md` para el flujo IMPECCABLE (`shape`/`critique`, register `brand`) y la integración.
 - **Programación/implementación: Codex, siempre que esté disponible.** El usuario tiene más tokens en la suscripción de Codex. Una vez definido el diseño, Claude delega la escritura del código a Codex vía `/codex:rescue`.
 - **Revisión: Claude.** Claude revisa el código que devuelve Codex contra el brief de diseño y `docs/DESIGN_STANDARDS.md` antes de generar y correr QA.
 
@@ -25,6 +25,7 @@ La etapa de diseño está formalizada como el agente `design-director` (`agents/
 
 - `npm run qa:design` falla si algún spec no tiene `conversion_template`, `design_brief` completo o el sello `designed_by: "claude-code"`.
 - `npm run generate ... --require-design-brief` rechaza generar el sitio final sin ese brief firmado.
+- `npm run qa:impeccable` corre el detector determinístico de IMPECCABLE sobre las landings generadas y falla ante "AI slop" (side-tab, dark-glow, gradiente violeta, eyebrow chips, etc.). Es una capa **adicional** a `qa:design`/`qa`/`qa:client`. Los golden samples de `amba-alta-conversion` están excepcionados por archivo en `.impeccable/config.json`; toda landing nueva se scanea completa.
 
 Correr `qa:design` después de escribir los specs y antes de delegar el código a Codex. El sello `designed_by` es autodeclarado (no prueba técnicamente quién diseñó), pero hace del split un artefacto explícito y revisable en cada spec.
 

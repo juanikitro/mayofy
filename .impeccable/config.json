@@ -1,0 +1,23 @@
+{
+  "_comment": [
+    "Config del detector IMPECCABLE para este repo. Ver docs/DESIGN_STANDARDS.md (seccion QA) y CLAUDE.md.",
+    "detector.ignoreFiles: waiver EXPLICITO de los 3 golden samples aprobados de la corrida amba-alta-conversion.",
+    "  Son output aprobado por el usuario (docs/DESIGN_STANDARDS.md) y usan decisiones de arte deliberadas",
+    "  (papel crema, Fraunces, dark-theme con acento ambar) que el detector marca como slop. No se degradan:",
+    "  se excepcionan por archivo. Toda landing NUEVA se scanea completa y el gate qa:impeccable falla ante slop.",
+    "detector.designSystem.enabled=false: cada landing deriva su propio sistema visual del negocio real",
+    "  (DESIGN_STANDARDS punto 2), no hay un sistema global fijo que enforcar. Las 46 reglas anti-slop siguen activas.",
+    "updateCheck=false: evita polls de red en CI durante qa:impeccable."
+  ],
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [
+      "**/amba-alta-conversion/**"
+    ],
+    "ignoreValues": [],
+    "designSystem": {
+      "enabled": false
+    }
+  },
+  "updateCheck": false
+}

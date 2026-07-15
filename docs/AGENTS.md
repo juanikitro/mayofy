@@ -10,12 +10,12 @@ Division de roles creativos: el diseno de las landings lo hace Claude Code y la 
 2. `data-verifier`
 3. `brand-extractor`
 4. `site-planner`
-5. `design-director` — dueño de la dirección visual; produce `conversion_template` y `design_brief` (firmado `designed_by: "claude-code"`). Lo hace Claude, no Codex. Ver `agents/design-director.md`.
+5. `design-director` — dueño de la dirección visual; produce `conversion_template` y `design_brief` (firmado `designed_by: "claude-code"`) usando la skill **IMPECCABLE** (motor de diseño por defecto, `frontend-design` como fallback). Lo hace Claude, no Codex. Ver `agents/design-director.md`.
 6. `copywriter`
 7. `visual-qa`
 8. `deployer`
 
-La etapa `design-director` tiene su propio gate: `npm run qa:design` falla si algún spec no trae `conversion_template`, `design_brief` completo o `designed_by: "claude-code"`, y `npm run generate` con `--require-design-brief` rechaza generar sin ese brief.
+La etapa `design-director` tiene su propio gate: `npm run qa:design` falla si algún spec no trae `conversion_template`, `design_brief` completo o `designed_by: "claude-code"`, y `npm run generate` con `--require-design-brief` rechaza generar sin ese brief. `npm run qa:impeccable` suma el detector anti-slop de IMPECCABLE sobre las landings generadas (capa adicional, ver `docs/DESIGN_STANDARDS.md`).
 
 ## Contrato comun
 

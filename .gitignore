@@ -6,3 +6,11 @@ generated/
 coverage/
 .claude/
 .tmp-design-gate-check/
+
+# IMPECCABLE skill/harness dirs: materialized locally via `npm run impeccable:install`
+# (regenerable, provider-specific, not committed). Same convention as .claude/ above.
+.agents/
+.codex/
+# IMPECCABLE runtime dir: only the shared detector config is tracked; caches/sessions are not.
+.impeccable/*
+!.impeccable/config.json

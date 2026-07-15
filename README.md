@@ -14,7 +14,7 @@ El repositorio empieza sin datos reales finales. `data/tandil-businesses.json` e
 
 La prioridad es calidad visual, no velocidad ni costo. El agente tiene libertad para usar frameworks, librerias, composiciones propias y CSS dedicado, siempre que el resultado final exporte archivos estaticos y respete los datos verificados.
 
-Division de roles (preferencia explicita): **Claude Code disena** las landings (skill `frontend-design`; ver `CLAUDE.md`) y **Codex las programa** a partir del brief de diseno (ver `AGENTS.md`). La barra de calidad son los golden samples de `docs/DESIGN_STANDARDS.md`.
+Division de roles (preferencia explicita): **Claude Code disena** las landings con la skill **IMPECCABLE** como motor de diseño (`frontend-design` como fallback; ver `CLAUDE.md` y `agents/design-director.md`) y **Codex las programa** a partir del brief de diseno (ver `AGENTS.md`). La barra de calidad son los golden samples de `docs/DESIGN_STANDARDS.md`, reforzada por el detector `npm run qa:impeccable`.
 Cada landing debe nacer de un `conversion_template` y un `design_brief`: que vende, tesis visual, voz de copy, firma de layout, plan de assets, plan de IA segura, anti-patrones y objetivos de remake. Si los datos o fotos son pobres, la IA puede poblar copy, secciones e imagenes genericas del rubro sin inventar datos comerciales.
 
 ## Comandos
@@ -55,12 +55,13 @@ npm run generate:preview -- data/<run>-businesses.json --specs data/site-specs/<
 npm run generate -- data/<run>-businesses.json --specs data/site-specs/<run>-site-specs.json --session <run>
 npm run qa -- --session <run> --expected-count 10
 npm run qa:client -- --session <run>
+npm run qa:impeccable -- generated/<run>
 npm run study:final -- --session <run> --businesses data/<run>-businesses.json --specs data/site-specs/<run>-site-specs.json --briefs data/agent-briefs/<run> --price "[PRECIO]"
 ```
 
 `compose:ai` queda como opcion secundaria para quien quiera usar billing de OpenAI API. `npm run generate` exige fotos reales descargadas desde Google Places y frontends escritos por agente. Para revisar datos/UI sin bloquear por fotos o frontends finales, usar `npm run generate:preview`.
 
-`npm run qa` valida integridad tecnica. `npm run qa:client` es el gate de entrega: falla si la tanda todavia parece demo interna, template repetido, copy con placeholders visibles o landing no vendible.
+`npm run qa` valida integridad tecnica. `npm run qa:client` es el gate de entrega: falla si la tanda todavia parece demo interna, template repetido, copy con placeholders visibles o landing no vendible. `npm run qa:impeccable` corre el detector determinístico de IMPECCABLE (anti-slop: side-tab, dark-glow, gradiente violeta, eyebrow chips, bajo contraste, etc.) sobre las landings generadas y falla ante hallazgos; es una capa adicional a los gates anteriores. Excepciones (golden samples de `amba-alta-conversion`) y config en `.impeccable/config.json`. En un clon nuevo, materializar la skill con `npm run impeccable:install`.
 
 Para navegar todas las tandas generadas localmente, ejecutar `npm run browse` y abrir `http://localhost:4310`.
 
@@ -103,13 +104,13 @@ npm run qa -- --session <run> --expected-count 10
 2. Generar shortlist con `npm run shortlist -- --input data/intake/<run>-candidates.json --out data/intake/<run>-shortlist.json`.
 3. Promover 10 negocios con `npm run promote -- --input data/intake/<run>-shortlist.json --out data/<run>-businesses.json`.
 4. Preparar briefs con `npm run agent:briefs -- --input data/<run>-businesses.json --specs data/site-specs/<run>-site-specs.json --out data/agent-briefs/<run> --city "<Ciudad>" --segment "<Rubro>"`.
-5. Etapa `design-director` (Claude): elige `conversion_template`, completa `design_brief` con `designed_by: "claude-code"` y define la dirección visual de cada landing; Codex implementa el frontend a partir de ese brief.
+5. Etapa `design-director` (Claude, skill IMPECCABLE `shape`/`critique`, register `brand`): elige `conversion_template`, completa `design_brief` con `designed_by: "claude-code"` y define la dirección visual de cada landing; Codex implementa el frontend a partir de ese brief.
 6. El agente agrega `agent_frontend` en `data/site-specs/<run>-site-specs.json`.
 7. Validar specs con `npm run validate:specs -- --businesses data/<run>-businesses.json --specs data/site-specs/<run>-site-specs.json` y el gate de diseño con `npm run qa:design -- --businesses data/<run>-businesses.json --specs data/site-specs/<run>-site-specs.json`.
 8. Validar que no haya datos inventados ni negocios con sitio propio.
 9. Generar una carpeta de sesion en `generated/<sesion>/`; adentro queda una carpeta por negocio (`generated/<sesion>/<slug>/`) con todo su codigo.
 10. Ejecutar QA de contenido, datos y frontends authored.
-11. Ejecutar `npm run qa:client` y revisar screenshots desktop/mobile.
+11. Ejecutar `npm run qa:client`, `npm run qa:impeccable -- generated/<run>` (detector anti-slop) y revisar screenshots desktop/mobile.
 12. Generar el estudio final con `npm run study:final -- --session <run> --businesses data/<run>-businesses.json --price "[PRECIO]"`; el Markdown queda en `generated/<sesion>/final-study.md`.
 13. El workflow de deploy publica un unico proyecto Vercel con catalogo interno y URLs separadas por landing.
 

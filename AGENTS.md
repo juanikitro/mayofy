@@ -4,7 +4,7 @@ Reglas para sesiones de Codex en este repositorio. Complementan `~/.codex/AGENTS
 
 ## Rol de Codex: implementar, no diseñar
 
-En este repo el diseño de las landings lo hace Claude Code (preferencia explícita del usuario, ver `CLAUDE.md`). La dirección visual se decide en la etapa `design-director` (`agents/design-director.md`) y llega a Codex como un `design_brief` por landing. El trabajo de Codex es **ejecutarlo al pie de la letra**:
+En este repo el diseño de las landings lo hace Claude Code (preferencia explícita del usuario, ver `CLAUDE.md`) usando la skill **IMPECCABLE** como motor de diseño. La dirección visual se decide en la etapa `design-director` (`agents/design-director.md`) y llega a Codex como un `design_brief` por landing. Codex **no** corre los comandos de diseño de IMPECCABLE; su trabajo es **ejecutar el brief al pie de la letra**:
 
 - No reinterpretar ni "mejorar" la dirección de arte, el par tipográfico, la paleta ni la estructura de secciones definidas en el brief.
 - No cambiar el copy: los textos vienen escritos con datos verificados; cualquier hueco se devuelve como pregunta, no se rellena inventando.
@@ -32,4 +32,4 @@ El gate `npm run qa:design` y el flag `npm run generate ... --require-design-bri
 data/frontends/<run>/<slug>/index.html + styles.css (+ script.js)
 ```
 
-Después de implementar: `npm run validate:specs` (parametrizado a la corrida), `npm run generate`, `npm run qa -- --expected-count <N>` y `npm run qa:client`. Reportar qué se validó y qué no.
+Después de implementar: `npm run validate:specs` (parametrizado a la corrida), `npm run generate`, `npm run qa -- --expected-count <N>`, `npm run qa:client` y `npm run qa:impeccable -- generated/<run>` (detector anti-slop de IMPECCABLE; falla ante side-tab, dark-glow, gradiente violeta, etc.). Reportar qué se validó y qué no.

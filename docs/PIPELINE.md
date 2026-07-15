@@ -77,9 +77,9 @@ Componer direccion visual y preparar el trabajo del agente:
 npm run agent:briefs -- --input data/<run>-businesses.json --specs data/site-specs/<run>-site-specs.json --out data/agent-briefs/<run> --city "<Ciudad>" --segment "<Rubro>"
 ```
 
-Luego los agentes (Claude disena, Codex implementa) deben:
+Luego los agentes (Claude disena con la skill **IMPECCABLE** como motor de diseño, Codex implementa) deben:
 
-- disenar una landing real por negocio
+- disenar una landing real por negocio (etapa `design-director`, flujo IMPECCABLE `shape`/`critique`, register `brand`; ver `agents/design-director.md`)
 - elegir un `conversion_template` de alta conversion: promesa + prueba + CTA, historia local editorial, menu visual, diagnostico de servicio, mostrador/catalogo o llamada urgente
 - escribir un `design_brief` con tesis visual, voz de copy, firma de layout, plan de assets, plan de IA segura, anti-patrones y objetivos de remake
 - trabajar desde una estructura comercial completa: hero fuerte, trust bar, servicios, razones para elegir, opciones de consulta, antes/despues o galeria, proceso, resenas/contacto y CTA final
@@ -187,9 +187,12 @@ npm run generate:preview -- data/<run>-businesses.json --specs data/site-specs/<
 ```bash
 npm run qa -- --session <run> --expected-count <N>
 npm run qa:client -- --session <run>
+npm run qa:impeccable -- generated/<run>
 ```
 
 `npm run qa` controla cantidad de sitios, footer, texto prohibido, datos cruzados, frontends de agente y carpetas separadas.
+
+`npm run qa:impeccable` corre el detector determinístico de IMPECCABLE (46 reglas anti-slop y de calidad: side-tab, dark-glow, gradiente violeta, eyebrow chips, bajo contraste, etc.) sobre las landings generadas y falla si quedan hallazgos. Es una capa **adicional** a `qa`/`qa:client`, no un reemplazo. Sin argumento scanea `generated/`; se le puede pasar un `generated/<run>` o `data/frontends/<run>` puntual. Excepciones (los golden samples de `amba-alta-conversion`) y configuración en `.impeccable/config.json`. La skill se materializa en un clon nuevo con `npm run impeccable:install`.
 
 `npm run qa:client` es mas estricto y responde otra pregunta: si la landing esta para mostrarsela a un cliente potencial. Falla por senales como:
 

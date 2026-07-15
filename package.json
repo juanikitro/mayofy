@@ -26,13 +26,16 @@
     "browse": "node scripts/serve-generated.mjs",
     "catalog:build": "node scripts/build-vercel-catalog.mjs",
     "deploy:prepare": "node scripts/generate-deploy-runs.mjs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "qa:impeccable": "node scripts/qa-impeccable.mjs",
+    "impeccable:install": "impeccable install --providers=claude,codex --scope=project -y"
   },
   "dependencies": {
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",
+    "impeccable": "^3.2.1",
     "playwright": "^1.61.1",
     "tsx": "^4.16.2",
     "typescript": "^5.5.3"
