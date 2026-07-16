@@ -221,13 +221,14 @@ function toBusinessCandidate(place: GooglePlaceDetails, query: string, args: Arg
   };
 }
 
-function shouldKeep(place: GooglePlaceDetails, minRating: number, minReviews: number, excludeTerms: string[]): boolean {
+function shouldKeep(place: GooglePlaceDetails, minRating: number, minReviews: number, excludeTerms: string[], country: string): boolean {
   if (place.businessStatus && place.businessStatus !== "OPERATIONAL") return false;
   if (looksLikeChain(place, excludeTerms)) return false;
   if (place.websiteUri) return false;
   if ((place.rating ?? 0) < minRating) return false;
   if ((place.userRatingCount ?? 0) < minReviews) return false;
   if (!place.formattedAddress) return false;
+  if (!place.formattedAddress.toLocaleLowerCase().includes(country.toLocaleLowerCase())) return false;
   return true;
 }
 
@@ -280,7 +281,7 @@ async function main(): Promise<void> {
       if (acceptedForQuery >= args.perQueryLimit) break;
       if (!result.id || seen.has(result.id)) continue;
       const details = await placeDetails(result.id, apiKey);
-      if (shouldKeep(details, minRating, minReviews, args.excludeTerms)) {
+      if (shouldKeep(details, minRating, minReviews, args.excludeTerms, args.country)) {
         seen.set(result.id, { place: details, query });
         acceptedForQuery += 1;
       }

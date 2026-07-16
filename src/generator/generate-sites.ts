@@ -133,7 +133,7 @@ function renderIndexPage(sites: ManifestSite[]): string {
       header p {
         max-width: 520px;
         color: var(--muted);
-        font-size: 1.05rem;
+        font-size: 1.3rem;
         line-height: 1.55;
       }
       .count {
@@ -179,7 +179,7 @@ function renderIndexPage(sites: ManifestSite[]): string {
         border: 1px solid var(--line);
         padding: 6px 9px;
         color: var(--muted);
-        font-size: 0.84rem;
+        font-size: 1rem;
         font-weight: 700;
       }
       h2 {
@@ -200,6 +200,7 @@ function renderIndexPage(sites: ManifestSite[]): string {
         border-top: 1px solid var(--line);
         padding-top: 14px;
         font-weight: 800;
+        font-size: 1.3rem;
       }
       @media (max-width: 780px) {
         header,

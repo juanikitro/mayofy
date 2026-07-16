@@ -39,6 +39,10 @@ El HTML final no apunta directo al endpoint de Google Places. Durante `npm run g
 
 Las fotos ya versionadas en el repo pueden referenciarse por ruta local relativa al repo y el generador las copia como asset del sitio.
 
+## Imágenes editoriales para hero
+
+Una landing puede incluir un hero generado o licenciado como asset local cuando el brief lo indique. Ese asset es decorativo/editorial, no evidencia del negocio: no reemplaza fotos verificadas para datos, no puede presentar instalaciones, autos, personal ni resultados como reales, y debe llevar `alt` y caption que aclaren que es una imagen editorial conceptual si puede confundirse con una foto del local. La referencia visual sigue saliendo de las fotos permitidas del negocio.
+
 ## Resenas de Google Places
 
 Las resenas obtenidas por Places API deben conservar texto y atribucion. Antes de mostrarlas publicamente, verificar las politicas vigentes de Google Maps Platform para author attribution y orden de resenas.

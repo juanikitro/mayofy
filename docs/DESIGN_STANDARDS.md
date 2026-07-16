@@ -37,6 +37,7 @@ Estos principios salen de las 3 landings y son la definición operativa de "cali
 8. **Motion sobrio y progresivo.** Reveals escalonados en carga + IntersectionObserver en scroll con `script.js` vanilla mínimo; `prefers-reduced-motion` siempre respetado; sin JS pesado ni CDNs.
 9. **Accesibilidad y SEO base.** `alt` descriptivos reales, contraste AA, semántica correcta, `lang="es-AR"`, `<title>` y meta description con servicio + barrio.
 10. **Contrato QA del repo cumplido.** Footer con el texto exacto `Creado por Mayofy` enlazado a `https://www.instagram.com/mayofy.web/`, sin texto meta de IA ni palabras prohibidas, imágenes locales existentes, sin datos inventados (nada de precios, promos, años, zonas de cobertura ni claims médicos/técnicos sin evidencia).
+11. **Hero memorable, no ficha de Maps.** El hero debe partir de una imagen editorial local —generada para la landing o licenciada— cuando eso eleve claramente la dirección de arte. Las fotos verificadas del negocio se usan para extraer identidad y como contexto documental; no son la opción por defecto para el hero. Si la imagen editorial no corresponde al local real, su `alt` y caption deben decirlo con claridad y nunca debe respaldar servicios, instalaciones, resultados ni otros claims.
 
 ## Cómo usarlos
 

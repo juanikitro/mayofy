@@ -1,0 +1,872 @@
+[
+  {
+    "id": "google-ChIJx3dSsZjFYpYR9-uj3z7VQdw",
+    "name": "VAPOR CAR",
+    "slug": "vapor-car",
+    "category": "Car Wash",
+    "is_vehicle_related": true,
+    "address": "Av. Vicuña Mackenna 665, 8330435 Santiago, Región Metropolitana, Chile",
+    "city": "Santiago de Chile",
+    "neighborhood_or_area": null,
+    "phone": "9 5246 9350",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 8:30 PM | Tuesday: 9:00 AM – 8:30 PM | Wednesday: 9:00 AM – 8:30 PM | Thursday: 9:00 AM – 8:30 PM | Friday: 9:00 AM – 8:30 PM | Saturday: 9:00 AM – 8:30 PM | Sunday: 9:00 AM – 8:30 PM",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.7,
+      "reviews_count": 342,
+      "source_url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Super!!",
+        "author": "Roberth “VENDETTA [FEO]”",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/111575829085919734883/reviews"
+      },
+      {
+        "text": "Muy eficientes , lo he llevado dos veces , me salió 30 mil full completo y encerado …perfecto",
+        "author": "Luis M",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/109040011421107626021/reviews"
+      },
+      {
+        "text": "como el forro fui a lavar la moto un asco como la lavaro la moto super mal lavada no vuelvo mas",
+        "author": "nelson vasquez",
+        "rating": 1,
+        "source_url": "https://www.google.com/maps/contrib/108436157412003261297/reviews"
+      }
+    ],
+    "main_product_or_service": "lavadero de autos",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJx3dSsZjFYpYR9-uj3z7VQdw/photos/AWCwydh-mmzXqszRjDp4vD4iDnIZOPmGklCfKrcb0PbxppMWHkzaQb5e4IpN_6siyq5FR8v2FdhJEi5nahNpkioW20GIzv0lbtyRLkxZg3vSObRXTDib633EnVSQuaqnKD8tAJK3Q2CWHzVa0bUbPSKQ6eM764g6chw42Ij2I7U-IFnnB--P6sQTRNoPfsX9xz862dLky11WGaMcL7DQ0nCH1luViGlOKQDRKd0w34ezUzZ2Gydim9bxV4czFueEEmmUAgidO5f_p2px3Ox3cb-63GSIIGvLMj87OKCEO2fs8RRBs40qqwM9Yf2c_jKP5JmD0stg8rqJKoIYZjD7RL7YFBdkMrFyuM3gXaXPD5anHh3oVAqS0aIW4Sgd-6ZWd66sVuKUazmoFkoTvIFcopv_0PAf0qq0mHLNY89Q6Oy67Y8f7JwZ/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJx3dSsZjFYpYR9-uj3z7VQdw/photos/AWCwydjBS4B34p4NUaM9RVtfYQ-sdxW-AVi_z-CWta9nWkbu-Ud121DWOKkKTedEkA1uSBqx3WPxk1SHKcl6KDBzXD_PJW9rgmMClwHELn1n3TnNWXYkXtJl8tjpyLML4ueHj0pKJdVU2DqtRLkD1KtdsT3KUa38uwCpz2KeXrIWj3yL2ReXLbhyqffBBU9wQ3JXLYvPpvhJsYMnQywnfyPqZ8QsR8OIJqWcGEnlXM7GivkEkaoRP8c-V7B5fFaCKKcU7-nmFhN3XBQ2_ZuxLutW6JI74poq2Wd5W3Xel8ZSjJjmVDUruAVn2eG7tr7padPxQb4VI472QFJDEpzxo_LQNT2PPaW-EMlEF9zVm8CkSJ87HcmAISpFjHsgc3QKPpkWYBwxEnNwUOC9kcUt7ZduIJHDb25w01zvRnvWaFS7ZJbqCe4N8PWCGDKZLGlJ8-HQ/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJx3dSsZjFYpYR9-uj3z7VQdw/photos/AWCwydj4n6Ndmd9d8nbMgTWsBnID4Xn82nf07JrQ_Oh2ad3VRCk0nX6lkP7uB-xh2D5QwFFzo0NmvSKI3C-NHlu_7QvzFoj4EJL5hUgUCnHvav0BYsqX-44seJr3NdGGeACz7ld3eZXVrIFEQwNF10LeqkChOaQNXyy6qatMwMucRe8tIv2Zf9BOqG1BqzItiT-Nl1QUpsO812tH1ErMELvzkQRZmb9WSzY3Isq5VliUwqr3PT4OCKcXPa5PrwEONS8bHALngERYgTQdcX83t5QyeZM7QRKUlA0-kVc0fsEozTRQ9AEfXM2oOGtEs8zWxj4GAc0DolMzEGgAm3seviGh85PhROY10l3E4rUlv73RdT2y8UjUooOQjNXhJrHbqOm_t93mTFWQjYGiTqi2NKwPcdWELD74wTqLf7Yem4cVdYE/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-16T14:05:42.792Z",
+          "notes": "Resultado automatico para \"lavadero de autos\" en Santiago de Chile. Segmento: lavadero y detailing de autos."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=15871201027847089143&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJaWdb5QvFYpYRNC9yPxq32X4",
+    "name": "Infinity X Car Detail",
+    "slug": "infinity-x-car-detail",
+    "category": "Sporting Goods Store",
+    "is_vehicle_related": true,
+    "address": "Manuel Barrios 6050, 7560369 Las Condes, Región Metropolitana, Chile",
+    "city": "Santiago de Chile",
+    "neighborhood_or_area": null,
+    "phone": "9 4935 0078",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 6:30 PM | Tuesday: 9:00 AM – 6:30 PM | Wednesday: 9:00 AM – 6:30 PM | Thursday: 9:00 AM – 6:30 PM | Friday: 9:00 AM – 6:30 PM | Saturday: 9:00 AM – 1:00 PM | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 5,
+      "reviews_count": 17,
+      "source_url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "El mejor lugar donde llevar tus autos para servicio de detailing y estetica automotríz. La atención es persobalizada y te dejan en claro todo lo realizable en sus autos. Muy ordenado limpio y muy buenos profesionales. Los resultados están a la vista.",
+        "author": "Kevin Antoine Yuseff Bonnemaison",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/115347403194733454842/reviews"
+      },
+      {
+        "text": "Excelente atención por parte de Mauricio, trabajan impecable en el taller, he llevado un par de Autos y el resultado es espectacular",
+        "author": "Joaquin Saiz",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/100162463821096706368/reviews"
+      },
+      {
+        "text": "Excelente servicio,  responsables,atención cordial y precios justos",
+        "author": "Carolin Beltran (Soa Datos)",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/101137911389046799939/reviews"
+      }
+    ],
+    "main_product_or_service": "car detailing",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJaWdb5QvFYpYRNC9yPxq32X4/photos/AWCwydgfClFayRZtsRfdJ5edwDpIqCk0Lz9s4-nxc8J1kgtfulUnHEmsmE9rp0rwWfoxq2Ufo4wNLwtGwYFvRxOwUd0sh_7uBOmfu8jO2VauVGtXkfDJlJmTQbp1ea5IZZCIiUQIz2Gg0xsOdxZhpUiKyqAaH96b06VRl0vWEMWxmZkqZHoBWA0ue-RJqFDiqfrrMXSD2JdgIsy4E4TLstSypsKumYFKh6Ker5Tz1wz9BgPHIhGqtnIQwzsLhgEz8iZP2OS5Ffct-iPsRJ5PBULlBeUU_3WO5aqVzIkRU1O3VTugYPVjEtKTJT-eICqUoe2wVj35WR17THj73n_7umDkvt2eNryRUf1P0j6vyCR-UKsFbYnLiM1dRCgMZO6cH6fWj88ExC1zmJucCe9GLSjeHuhA2tX2IPFNTGkKYc--nhBK-A/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJaWdb5QvFYpYRNC9yPxq32X4/photos/AWCwydjiuLCpdytOLrrpUdxj8AOx5-cxdGSrQD75PvPCNXKGCkMFV2G7oA2_Q6UJJgFtu8-VjHe_P7O6EiUlplIMQE2Sf-LIynTvkq7_iHELGz0WjLy5p-HsgN9RIVblUZLT1QObknqqrJOn7gMRhE8sIRTY7Iwc0pNq1-t2HJGUldA_6vS-Qjc3VAEqLNHcaingsr3sQP0nqoX98bgn05wOUqkOUlQGIRH8PNiU1RCuGlw9wY94jJhkUFe_-qxSiO2R1UXBXb9dCNOoRIRNNJEj0hBKcL75aMIgtN-S-c1og3iQAU3Coh-qo-ApeoBtyAXkR_Q2q9xKwo0avd7ZzYHZ2jpk-zCU_ex7EuxpKo7PCmt0S7_9VumJrQKzeghuIhOi9zF1JHcMUiZxzwsTb7y6z-dERVgqqGkku3THq9qkQdTeZUhL/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJaWdb5QvFYpYRNC9yPxq32X4/photos/AWCwydjkHlPtv22kgcYHmeWwVqIm__PLbbEAv2MjxEjTuhyOcBqjBfPPxdMlOhgbi7vf93fIEtvh1zhfDPHv37FDRpEBiO89UV5FKWrD_rpiXb8UCepKyvRR9o_AGTdWo-DTqoJI9QMs0qIKK2Jfu9P4eT7T_Gj00BIveLLClGHaKFB9yb0yIsTNXRHSofPuzhBaQBGm0kJN6mv5CjBtR6nXlXWeGbVQd9RkL2P4YerP_WKVfPhg7YyjJRJzWpBGy3wAFEtbE3LPXoltpjZrkk4ndwWwouFnt9Ar6P1ock0R2vvOhgEmNDbDLPMsSAnLHCC7K0px-1a6s0_L9n_l8q-rq-FqXF-HmTOk4Fhy13kCjAXM1ghyFg1zsOJyKQj9gHwnefo8t7WfPSicLBrNUoC7rSa9HFTAdl2MSkXTbJV65Ns1Dz1Z/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-16T14:05:42.793Z",
+          "notes": "Resultado automatico para \"car detailing\" en Santiago de Chile. Segmento: lavadero y detailing de autos."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=9140538242086612788&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJEVMS57XFYpYR04yn8qQwZXw",
+    "name": "WashPro",
+    "slug": "washpro",
+    "category": "Car Wash",
+    "is_vehicle_related": true,
+    "address": "Buzo Sobenes 4341, 9160000 Estación Central, Región Metropolitana, Chile",
+    "city": "Santiago de Chile",
+    "neighborhood_or_area": null,
+    "phone": "9 8465 8025",
+    "opening_hours": {
+      "raw": "Monday: 9:30 AM – 6:00 PM | Tuesday: 9:30 AM – 6:00 PM | Wednesday: 9:30 AM – 6:00 PM | Thursday: 9:30 AM – 6:00 PM | Friday: 9:30 AM – 6:00 PM | Saturday: 9:30 AM – 6:00 PM | Sunday: 9:30 AM – 3:00 PM",
+      "structured": {}
+    },
+    "rating": {
+      "value": 5,
+      "reviews_count": 12,
+      "source_url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Excelente servicio 💯 recomendados",
+        "author": "Karol Cortes",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/107237058187086929993/reviews"
+      },
+      {
+        "text": "Excelente atención y muy buen servicio, un 10 de 10",
+        "author": "Rafael Flores",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/105455638138360741047/reviews"
+      },
+      {
+        "text": "Excelente servicio! Lo recomiendo al 100%",
+        "author": "Kenya Castillo",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/103186956700885503040/reviews"
+      }
+    ],
+    "main_product_or_service": "lavadero de autos",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJEVMS57XFYpYR04yn8qQwZXw/photos/AWCwydj0wrnIr4KvBnY2A5xsn5oc92Hlgd4H1z12dFR8HyLzNuM8X6MOXoIQjhlOIQx7264q0oPO6156qPIx4bePva98hdtD9xsv_tXPs1aJiXnU2TSJu8PX70eFsvFMKthj6ABhaf9KWgyo8fM8EIG-M47GXqXPjjZzcN9g11ok7hZccJzI2tCYUQF1-eNe3gozoGVVLpoD6kNyCIQX867yJ7CNIj5LKTHVGxDdoA_xXqsZmDehayI7PM3iNlSJtsBunt-A3JCd1BfjOqzpDjzpXiNN06pYCfSo9z7lKIgv0ItEbgRB871umQ2iFWbCLoFaQ-LLAj52Xsb-MpX4u1xGQLNZiOJH67xD_K8zcozoPwxd6FilP6UYzn5IZFCPk_kZ_1D_iXoSKN6FIT62F5HPK_SHj-WaDbP803Mn5SUVS80_ASLfYYewzUnPNjIMk02a/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJEVMS57XFYpYR04yn8qQwZXw/photos/AWCwydhqjzj3i9rJBLjRadr3pMRjVDbHmisHqCXfuE7-_7Hnk5F4TS_DBfZz4-_C7CJFB-xVK-i9CWTYsD2rf8B-xE751RcxRpR85dx9bQYShODbtPkDoVJwiO74Ruuumg-8D8Q1APHTAe786gk7lorkvVBbQ3QRQO0tAsC7rDZ9MmU0s0Rewfc0Zc7RUwy3TJoAHh0rBpbmQBRp0HFmJ4EvRrEmgWte-Z_IstPFoi4yyv1fE0TtLR9wuc10u8ECYR-Rg2t9rbyi3x52-P3zttP8OeCWyWqdu8rSCCjaxtxkM-YDmleFILIM6If7kZNt3VDuDqsrFR4pik4p9dFvYELxcWbma7Byq5JqS0X-rFh1wKb-BC51Nphw-eIoB8AG40YJR8_d20dZjJJl0sIE3CUjQGGMsz7NC4hfU9Bl-gltVV5pdosA_msN1dF-r8JbgBIH/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJEVMS57XFYpYR04yn8qQwZXw/photos/AWCwydgA-knY6_iRAHOR2YVyGO0fchET4yZCQ6nGGcg10H_15D96kQD60nIjcxMb7NY4IkiR1iSt0I3go1mVJ1RDUlcQpGf67ffwMmgLs8n0um0Gfjt2ch1lWp6xC2SKdPzV-Xx3VLsSjU-d9H7t5YSz_nlOhR7FTbfZ_Q4IGubHrMrfYqloNr2CM4fZOPKwxsJ9GFgLUtDgQE6oei2ZEPJ4kwYroRzwUpoN6FQNoI-OkcM_5AEyUP7yRGemC26IV6h3uZE66PJX8cge_3GVlYUOmoVX18x0AbCa-NEpzbrEx-ydx6I02RluiLaLLFSdWwDAzH3fYwGIE88DRIsH2vj06Vp8W-pvtLYUQtpA-ejjZO0Bqp9f8L57OJDZkJIC_Bu2lWQexUzgaC84CnczrXmdGVIJLqVnVNs2wp55HwjzAwv5BA7li0dW2Jt2D0qQBwWB/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-16T14:05:42.793Z",
+          "notes": "Resultado automatico para \"lavadero de autos\" en Santiago de Chile. Segmento: lavadero y detailing de autos."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=8963624118354676947&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJQ7Uje3LFYpYRHo1MUdeq4WU",
+    "name": "Lavado de autos El Cafetero 2",
+    "slug": "lavado-de-autos-el-cafetero-2",
+    "category": "Car Wash",
+    "is_vehicle_related": true,
+    "address": "San Isidro 827, 8330729 Santiago, Región Metropolitana, Chile",
+    "city": "Santiago de Chile",
+    "neighborhood_or_area": null,
+    "phone": "9 9065 4600",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 7:00 PM | Tuesday: 9:00 AM – 7:00 PM | Wednesday: 9:00 AM – 7:00 PM | Thursday: 9:00 AM – 7:00 PM | Friday: 9:00 AM – 7:00 PM | Saturday: 9:00 AM – 7:00 PM | Sunday: 10:00 AM – 3:00 PM",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.4,
+      "reviews_count": 117,
+      "source_url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Personal muy amable. Tiene un sector de espera muy cómodo y limpio",
+        "author": "Ricardo Sasmay",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/101929320413754300420/reviews"
+      },
+      {
+        "text": "Muy buen lugar, el auto quedó impeque y tiene sala de espera. Me salió 12.000, así que volveré.",
+        "author": "P",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/114367743198622212878/reviews"
+      },
+      {
+        "text": "Fui cliente por mucho tiempo, hubo cambio de administración y ahora es pésimo el servicio.",
+        "author": "Claudia Diaz",
+        "rating": 1,
+        "source_url": "https://www.google.com/maps/contrib/109836897080047858521/reviews"
+      }
+    ],
+    "main_product_or_service": "lavadero de autos",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJQ7Uje3LFYpYRHo1MUdeq4WU/photos/AWCwydhieyBnIeIdotJ8E84jMs1gDLZ1MBHysNiSmWmDmwTNHl41jfcfVrSAWQpM1T7wiTrOJvQIIDed8W2C9NBAcche3JIV9_eegvYShsHJHLR_tmqzuwl7xn-i8NWx6sr_cy6oZTxpRZpC7zWPLWyR7oBhoYpSL9xW3u1dDU5Jm4Vz7nqSwiYUUrjDwAOoJsGvXxzMt5XaG23Dawbp4osFPy8yy1WMnKKkm8OxCfNuqVUMmskYMnzF2RyMGonEMIYMBgFmH_p40NFKOKjzTS2SDJr3MNOuwxhr4yoGEIMIj_ZIbZUkBb1-lI1al3iEDlh3augzeZoUixQfu5fINT6JPKTetXe9p_hKd7Zmdk1KbqH6M3gIMH6jKni-Y5Eata-F6SWwT6g5y7nHOU75RxcFtV8EEI1GUQng4GvDhvAeXy1cgS_AFSWh__1JvJVYu7k7/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJQ7Uje3LFYpYRHo1MUdeq4WU/photos/AWCwydgy8sIAl3iE1Vpvxk6dNw7j6UhJaGClaQ9sTirN6pObB9RRna6dz13GgDjrzi31dJUaxMLjJNJABkLVrbVW9xBH4G973N0rQS1qF-LnfHEOHsCa7qrNvuBaa3dSVHmZHdKf6ysHsv_tW5Aap3nk2Q796xPj9sr7ZBY253KXPvLbT_oavjrKPA92uoX37bY1fiwcIKb6ib89iTAw4Fe3VJqyhR6ULU3udZVCjTC18rQkalWr1r0KUbc0cuxeB0yhkvchQDdKM6mVGwmJ_9lPYZALAtEksOXJrQU1d8viX9N6C7mEEt0IO2_MhXW2yXxksL0xK_wKBhC2vSxEd0_EbcBuKhok1PHsJ0JWzo4U4Cu8xLD5ap0nY1SHT3DtQBBnV4nYwtpmyzRjL4fE3h5GpRSIFcqcS5Sp63EwjGPPxR0/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJQ7Uje3LFYpYRHo1MUdeq4WU/photos/AWCwydjaOyR0YRQ6ZqeqG-MUykqSoxwy0EaFw9mL6JLT7_upLCKgl37OCMJTkOTfKWdvuA43Hrj-hG_UwpMY-PBBCYudr16vupRlO48MKV9r_tD7o5Fx6-V5bB_2zPCe9EDpf5JUNE4W3qDxO9kzMs_U0f1LJFUDNsYi4DeJvKfgk1y0FHCFO66bLmOod1YtQD9Q4iTToPJZiwlcx0_TshSHKnDozDH9LdxjFkGt5KdOp86Rv9t-rJX0lJTRCLDbwEgQHoBSBVM_ieZTcF_hGiqtT-s2svnlevg31BLaUs-vbDLlqOSU5XF0Bg3ncWKYadOFq0HYheikxv9T7g5t0RWrYsDtbc7dC9Lzwo5-_cW713T7qOZIuGniofyTmWRCcset3lZrt0Dy6KeNLTwlmYp6jJWquP_6T3DMJ_WT-VsfmWfMR-vC26y44WfRgFJjcA/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-16T14:05:42.793Z",
+          "notes": "Resultado automatico para \"lavadero de autos\" en Santiago de Chile. Segmento: lavadero y detailing de autos."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=7341336709349281054&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJEVOnPTnFYpYRJsLyMoeaWm8",
+    "name": "Lavado autos Burbucar4",
+    "slug": "lavado-autos-burbucar4",
+    "category": "Car Wash",
+    "is_vehicle_related": true,
+    "address": "San Ignacio de Loyola 1468, 8361505 Santiago, Región Metropolitana, Chile",
+    "city": "Santiago de Chile",
+    "neighborhood_or_area": null,
+    "phone": "9 9435 2760",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 7:00 PM | Tuesday: 9:00 AM – 7:00 PM | Wednesday: 9:00 AM – 7:00 PM | Thursday: 9:00 AM – 7:00 PM | Friday: 9:00 AM – 7:00 PM | Saturday: 9:00 AM – 7:00 PM | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.3,
+      "reviews_count": 58,
+      "source_url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Excelente atención mi auto quedó como nuevo y para esperar sala con aire acondicionado nada mejor muy recomendable Mario muy amable.",
+        "author": "Paty",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/100106657202230763083/reviews"
+      },
+      {
+        "text": "Buen servicio. El auto quedó impecable gracias a un hermano haitiano que lo dejó increíble. Tiempo promedio de espera 1 hora con 30 minutos. Precio razonable: 12000 pesos Lavado y aspirado por dentro y por fuera. Gracias",
+        "author": "Eduardo Anaya Sanroman",
+        "rating": 4,
+        "source_url": "https://www.google.com/maps/contrib/110831578683336861468/reviews"
+      },
+      {
+        "text": "Excelente atención. Tiene sector al aire libre para fumadores, y un buen salon para esperar. Bue a limpieza y aspirado. Y el gran Peter hace su trabajo de forma magistral",
+        "author": "Héctor Gómez",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/104414231219784245281/reviews"
+      }
+    ],
+    "main_product_or_service": "lavadero de autos",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJEVOnPTnFYpYRJsLyMoeaWm8/photos/AWCwydguEmy1gqyEPmOfHsklEAJuve1-WLrrCUkCgy26rVbIIpv0cp9KL_iwXaajnK_Z0oUF0buTXNHmXz5KsxgM7NtYVa0Fe9VdcVjTB4czr_87388vSZXL2gi_CIj3n_Ljpl9j2nQKa_zbI_EekHB709pb1aEEoL2aS8qb05bOyqatzz3uzWiKbECKncv5Rx6hOqznYvnavAWLdG4EbtucNtR2RHIuItWQAAsG5tnRl5aOfCtqJoVeKfS_-OZ7u16yj8uQQU_pf0tE0w-SJoNTORi9HsO2wTWYvUOEAsyKcKdouOBadzdxY7BghYfkcww2YHDSxNDAz5r7YshW3JRlefSBK99p6E7QB2_pHNM4lHKbYhCtrT-mxMBH_gikZJpIJ-2Wo_Dq-bdZMHV4QKX4XzOflvQnPIz_Lq8ja8cP6nY/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJEVOnPTnFYpYRJsLyMoeaWm8/photos/AWCwydjoNAmT47xzKPvS-RSOaKMlOnTgUSAI7TvtfDFKniOlN8S_2vWIrDGz0844p_YEoBhROzYdS6heHehqfBxFmd_HGQy9X49DXl9HkyDbREpEBqKvYnDMi4D9-1wNfuZ4Lga6mlTR4xqk2R8Wqo4c3vnbxL-R_CaA-YW_nA6Kg23Acx1ssDDaEfRT_I-P2Pwa7q04QttqPYghnGaM1Voly436DBf_ZvAkkjA3b_vcP-ERFL0kXp2DwyOarGO_9Lo4R8iyoTV4fZqPpJFqdiieDSxpuC0D1hNx6TXkw8vkZd4AOUy5t5jL7z_23JiE6SM3HKHPWh78oQ7wU2RjmrbgkjlNSAzicRmp26CAkFsbJfNaFRm6sWbDDhN84tuUmYImjtosE2CniLk2F12pYPWPwa5DtGGiiGykpOaFM4m3eml39A/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJEVOnPTnFYpYRJsLyMoeaWm8/photos/AWCwydhRsQL3Iynucdbe10epZntjIMkuxCTR8hTjSB92c_13DomwRkqgWoqPEUqjvzzNCqiTdAm-Nv8IZxK1mbK7WzsZ0xuWjyS3dGLX8GVSAbm6fBXK1bSC_VLRuGel5oSfUvC3kIQgtbUQ1xXVeaTGTLoNF5a8xQh9zwNgKr4Nq4HmNQj9bRsP76LmOQ7F4VzlPzcUiNRVDvVKGHW77pwcUZzJxLWaghtboA6Aq6pc_-VDTXbNhZAYiODIQ72ZDTurcHsuAHx-KoYWi-i6HyuDxrsYm7PJgQSCk8s5fwsfP5ByJ91O65fGaptHrNwDYjFLwoTC4OQInI-8yihvweYLWxM43jEhr5Bup_FaG7C_CM4uALM2BBvNB3sChQvQy0A0Daapn0VgMdTGGdQX_dFYaKlyt2PduIr8rK_HWRPlh53QgKxm/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-16T14:05:42.793Z",
+          "notes": "Resultado automatico para \"lavadero de autos\" en Santiago de Chile. Segmento: lavadero y detailing de autos."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=8023895591579992614&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "google-ChIJdaedjxbbYpYRTtaQ7NskRe8",
+    "name": "Easy Car Wash",
+    "slug": "easy-car-wash",
+    "category": "Car Wash",
+    "is_vehicle_related": true,
+    "address": "Pedro Mira 1091, 8900293 San Miguel, Región Metropolitana, Chile",
+    "city": "Santiago de Chile",
+    "neighborhood_or_area": null,
+    "phone": "9 9356 6044",
+    "opening_hours": {
+      "raw": "Monday: 9:00 AM – 5:30 PM | Tuesday: 9:00 AM – 5:30 PM | Wednesday: 9:00 AM – 5:30 PM | Thursday: 9:00 AM – 5:30 PM | Friday: 9:00 AM – 5:30 PM | Saturday: 9:00 AM – 3:00 PM | Sunday: Closed",
+      "structured": {}
+    },
+    "rating": {
+      "value": 4.8,
+      "reviews_count": 183,
+      "source_url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+    },
+    "reviews": [
+      {
+        "text": "Good place for your Car",
+        "author": "Guillermo Gibson",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/112847044828226525388/reviews"
+      },
+      {
+        "text": "My",
+        "author": "Gustavo Adolfo Calderón Abanto",
+        "rating": 2,
+        "source_url": "https://www.google.com/maps/contrib/107528269757588470296/reviews"
+      },
+      {
+        "text": "Excelente servicio, se demoran pero es porque son muy prolijos! Tienen una cómoda sala de espera con mesa, asientos, enchufe y café gratis.\nTe cobran adicional si el vehículo está demasiado sucio pero vale la pena.",
+        "author": "Jovy",
+        "rating": 5,
+        "source_url": "https://www.google.com/maps/contrib/114099331851756354864/reviews"
+      }
+    ],
+    "main_product_or_service": "lavadero de autos",
+    "photos": [
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJdaedjxbbYpYRTtaQ7NskRe8/photos/AWCwydjJahWxjuXvntsIKqaQ_m8c9TNkll7727khI4db7H6bPxPJNHLWxQ3oYfCOu7-JP796Ob2OiJdeN-Jyw4ynNyShtvI8JZ8-R4P2CUqxqFlHzFiQATna9JlRBdNVXBj6z2RSb9MMxSE1SmbbO-SAtVs3InFnL4zNB4bf7yXQsf-h9_yJFWBGzvY1tRQokXZ-0PhG1vTiCUp1i8BWuyra46UelMgWJMgRY0h2dmMml8OqeAgCRc0ALp7G-tm4fUaGVkIybFPKWlDN--_5uloicVijBwJIaKfB4Ic0dfG84mY9vyWCVNIH-3JnF_hkzuWrx2mK3tH2pbwnTqwXhZu8ckbne05DIcJXTPhN7smXJJ0QgWylquoiWDxGvbJKqRwrDk8vh2lssmGMa0C8Hx51PI-F7mCJ1PcqmQ4L8REy0ySV0g/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJdaedjxbbYpYRTtaQ7NskRe8/photos/AWCwydjFQ0u7GoW2UJCeKSu4TjM5_gsQHyzBXJJIyNnBvcO7CG5bHqUQcGHtNdQdlDtiPGVheq-L6pPjpoIU83c7yIEaqfswz-pweKjxKhnULdSSZWOgLo1O-XmJbvdYpnIexH_Elf1EBBiLdAAibTQkRx_xb1MerexoFZUfntvLVhn_IjbJLPok8M5r68nwABueTROrvPRZjHnFb-C4E-RKvjnmhr3T_kKJeAAlGXowE44Jlbx7dMU_SfY1cF9GySCRvzpf5DjaiE9yNMLKLC-TDIwqOHb3SHiDQbQmpJyHsFOB193miPRS3ft90oBkojDsOH2F7J6Pl-5slC08UfUT5wQmE5TREiEURMrlqKicqnxmQ__JqIRVqZEH4cKkNAVgQm2xCSNCVN8CO_v6zOtJysUen2gkAa546K0flSeWOvI/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      },
+      {
+        "url": "https://places.googleapis.com/v1/places/ChIJdaedjxbbYpYRTtaQ7NskRe8/photos/AWCwydi6SIedFjewhHLs5j094ieHAwtbQaryvEVLgcfFoNXxpY82_nWDLxdF0ay5BrUn4zNq9jY4rKE0V_O75UA8C6DyRf8jEdOaFo_emUaD8S83HoU6gtmAxojjT4dCP_Ca3ml7Fh441TPUaOuYqUwE7_--6SXFVTRt46VujbRPTSgWOB4BA-ym1N4snGRxsE9JGnCALlUDSp68fgtxtMm8er6FW0D0ChWI5m3ULgi8IuG0lhw3NwvsjVwLL7fhzvdtd8mhJZl3N76laqa1mFMGLLTxpIf0KoKqrV93L3x_ocQOJ1bYvOIE5wHRTzHtnxrQv6XwZLK3nhN7iFICod5tSrkeExpxiKSgkSnYrRJ1YtakFhqk3SGedjJc0nIUibLTsrqL689Fy0-OO1X8APqfjx0DMhlPHAHd7YHGjihM0GY/media?maxWidthPx=1600",
+        "type": "other",
+        "source_url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+        "usage_status": "allowed",
+        "permission_notes": "Marked allowed by local pipeline configuration. Source remains Google Places API photo metadata."
+      }
+    ],
+    "has_own_website": false,
+    "website_check": {
+      "checked_sources": [
+        "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+      ],
+      "evidence": [
+        "Google Places no devolvio websiteUri para este Place ID."
+      ],
+      "notes": "Candidato sin websiteUri en Google Places. Requiere verificacion secundaria antes de aprobacion final."
+    },
+    "data_quality_score": 1,
+    "missing_data_reason": null,
+    "approved_for_generation": false,
+    "is_mock": false,
+    "verification": {
+      "source_records": [
+        {
+          "label": "Google Places API",
+          "url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "captured_at": "2026-07-16T14:05:42.793Z",
+          "notes": "Resultado automatico para \"lavadero de autos\" en Santiago de Chile. Segmento: lavadero y detailing de autos."
+        }
+      ],
+      "field_evidence": [
+        {
+          "field": "name",
+          "source_url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API displayName."
+        },
+        {
+          "field": "address",
+          "source_url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API formattedAddress."
+        },
+        {
+          "field": "city",
+          "source_url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived from the requested city and Google Places formattedAddress context."
+        },
+        {
+          "field": "category",
+          "source_url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API primary type."
+        },
+        {
+          "field": "rating",
+          "source_url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API rating and userRatingCount."
+        },
+        {
+          "field": "website_check",
+          "source_url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API websiteUri checked."
+        },
+        {
+          "field": "phone",
+          "source_url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API phone field."
+        },
+        {
+          "field": "opening_hours",
+          "source_url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API regularOpeningHours."
+        },
+        {
+          "field": "reviews",
+          "source_url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API reviews. Preserve attribution before publishing."
+        },
+        {
+          "field": "photos",
+          "source_url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Google Places API photos metadata. Permission review required."
+        },
+        {
+          "field": "main_product_or_service",
+          "source_url": "https://maps.google.com/?cid=17241227275443164750&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+          "notes": "Derived conservatively from category/query, must be manually verified."
+        }
+      ]
+    }
+  }
+]

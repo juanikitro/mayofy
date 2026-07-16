@@ -9,6 +9,7 @@ type Args = {
   out: string;
   limit: number;
   terms: string[];
+  excludeTerms: string[];
   title: string;
 };
 
@@ -117,6 +118,7 @@ function parseArgs(argv: string[]): Args {
     out: requiredValue("--out"),
     limit: Number(valueAfter("--limit", "10")),
     terms: splitList(valueAfter("--terms", strongVehicleTerms.join("|"))),
+    excludeTerms: splitList(valueAfter("--exclude", "")),
     title: valueAfter("--title", "Shortlist"),
   };
 }
@@ -227,14 +229,16 @@ function scoreBusiness(business: Business, terms: string[]): ScoredBusiness {
   };
 }
 
-function isEligible(business: Business): boolean {
+function isEligible(business: Business, excludeTerms: string[]): boolean {
+  const haystack = `${business.name} ${business.address}`.toLowerCase();
   return (
     !business.has_own_website &&
     business.rating.value >= 4.3 &&
     business.rating.reviews_count >= 10 &&
     business.reviews.length >= 3 &&
     business.photos.length > 0 &&
-    business.address.length > 0
+    business.address.length > 0 &&
+    !excludeTerms.some((term) => haystack.includes(term.toLowerCase()))
   );
 }
 
@@ -309,7 +313,7 @@ function renderReport(scored: ScoredBusiness[], title: string): string {
 async function main(): Promise<void> {
   const args = parseArgs(process.argv);
   const candidates = await loadBusinesses(args.input);
-  const scored = dedupe(candidates.filter(isEligible).map((business) => scoreBusiness(business, args.terms))).sort((a, b) => {
+  const scored = dedupe(candidates.filter((business) => isEligible(business, args.excludeTerms)).map((business) => scoreBusiness(business, args.terms))).sort((a, b) => {
     if (b.score !== a.score) return b.score - a.score;
     if (b.business.rating.value !== a.business.rating.value) return b.business.rating.value - a.business.rating.value;
     return b.business.rating.reviews_count - a.business.rating.reviews_count;

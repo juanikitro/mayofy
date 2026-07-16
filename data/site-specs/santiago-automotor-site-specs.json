@@ -1,0 +1,110 @@
+[
+  {
+    "business_id": "google-ChIJaWdb5QvFYpYRNC9yPxq32X4",
+    "slug": "infinity-x-car-detail",
+    "visual_mood": "precision-service",
+    "composition": "split-command",
+    "headline": "Detailing que se nota al mirar de cerca",
+    "subheadline": "Infinity X Car Detail atiende en Las Condes, con 5.0 en 17 reseñas y una mirada de taller para cada auto.",
+    "primary_cta": "Reservar una consulta",
+    "secondary_cta": "Ver ubicación",
+    "service_tags": ["Car detailing", "Estética vehicular", "Consulta directa"],
+    "proof_points": ["5.0 en 17 reseñas", "Lunes a viernes, 9:00 a 18:30", "Sábado, 9:00 a 13:00", "Manuel Barrios 6050, Las Condes"],
+    "resource_title": "Datos para coordinar",
+    "resource_items": ["Llamá al +56 9 4935 0078.", "Domingo cerrado.", "Confirmá disponibilidad antes de ir."],
+    "review_heading": "Lo que dicen de cada entrega",
+    "contact_heading": "Hablemos de tu auto",
+    "image_prompt": "Hero editorial conceptual: coupé plateado en estudio negro y rojo, reflejos controlados y amplio negativo para el titular; no representa el local.",
+    "design_notes": "Performance studio: negro carbón, rojo señal y aluminio; Bebas Neue + DM Sans; hero editorial de corte diagonal y fotos verificadas como contexto.",
+    "conversion_template": "service-diagnostic",
+    "design_brief": {
+      "designed_by": "codex",
+      "market_position": "Detailing y estética vehicular en Las Condes para conductores que buscan conversar primero sobre el estado de su auto y coordinar una atención.",
+      "visual_thesis": "Performance studio de barrio: las paredes negras, pilares rojos y reflejos controlados de las fotos reales se convierten en un taller editorial de alto contraste. Bebas Neue para titulares mecánicos y DM Sans para lectura; carbón, aluminio y rojo señal, con el rojo reservado para la acción.",
+      "copy_voice": "Español de Chile, directo y sobrio: hablar de auto, detalle, coordinar y venir al taller; sin prometer resultados, productos ni tratamientos que la ficha no verifica.",
+      "layout_signature": "Service-diagnostic: una cabecera de dos velocidades con titular grande, teléfono y auto blanco en el hero; diagnóstico breve en una franja lateral, secuencia de fotos con cortes diagonales, reseñas en placas de taller y cierre de contacto como orden de ingreso.",
+      "asset_plan": "El hero usa un asset editorial local generado: coupé plateado, estudio negro y rojo, sin logos y señalado como conceptual. Las fotos verificadas quedan como contexto documental. Las líneas de carrocería, rejillas y diagonales se resuelven con CSS.",
+      "ai_fill_plan": {
+        "copy": ["Microcopy de coordinación y etiquetas de sección sin sumar prestaciones.", "CTAs y textos de proceso basados en la consulta, la ubicación y el horario verificados."],
+        "imagery": ["Hero editorial local, conceptual y no atribuible al local.", "Textura visual de rejilla y líneas de carrocería hecha en CSS sin representar productos ni resultados no documentados."],
+        "boundaries": ["No inventar precios, stock, marcas, años, premios, garantías, servicios ni reseñas.", "No afirmar tratamientos, correcciones, cerámicos ni plazos de entrega sin evidencia.", "Los autos de las fotos se muestran solo como contexto visual del taller."]
+      },
+      "anti_patterns": ["Tipografías genéricas", "gradiente oscuro brillante", "tabs laterales", "eyebrows o marcadores numerados", "tarjetas SaaS repetidas"],
+      "rewrite_targets": ["Mantener una composición de hero distinta a las otras dos páginas.", "Concentrar el rojo solo en acciones y señales de taller.", "Usar las reseñas textuales como prueba y no como promesa comercial."],
+      "impeccable_contract": {"contrast":"AA mínimo","forbidden":["side-tab","dark-glow","eyebrow","numbered-markers","fuentes genéricas"],"register_brand":"performance studio negro, rojo y aluminio"}
+    },
+    "agent_frontend": {"mode":"static-files","source_dir":"data/frontends/santiago-automotor/infinity-x-car-detail","notes":"Studio performance negro y rojo, con hero diagonal y comprobación visual desde las fotos del taller."}
+  },
+  {
+    "business_id": "google-ChIJx3dSsZjFYpYR9-uj3z7VQdw",
+    "slug": "vapor-car",
+    "visual_mood": "fleet-utility",
+    "composition": "service-ledger",
+    "headline": "Lavado de autos todos los días",
+    "subheadline": "VAPOR CAR abre de lunes a domingo, de 9:00 a 20:30, en Av. Vicuña Mackenna 665.",
+    "primary_cta": "Llamar para consultar",
+    "secondary_cta": "Cómo llegar",
+    "service_tags": ["Lavadero de autos", "Atención todos los días", "Consulta por teléfono"],
+    "proof_points": ["4.7 en 342 reseñas", "Lunes a domingo, 9:00 a 20:30", "Av. Vicuña Mackenna 665", "+56 9 5246 9350"],
+    "resource_title": "Antes de salir",
+    "resource_items": ["Revisá el horario publicado.", "Consultá por teléfono.", "Ubicación directa en el mapa."],
+    "review_heading": "342 reseñas públicas",
+    "contact_heading": "Tu consulta, directo al local",
+    "image_prompt": "Hero editorial conceptual: auto oscuro en box nocturno, vapor, agua y luz turquesa; no representa el local.",
+    "design_notes": "Nave de lavado: azul petróleo, acero, blanco de neón y verde de manguera; Oswald + Manrope; hero editorial, tablero de ruta vertical y reflejos de agua.",
+    "conversion_template": "hero-proof-offer",
+    "design_brief": {
+      "designed_by": "codex",
+      "market_position": "Lavadero de autos de Santiago para personas que necesitan ubicar un local abierto, ver el horario y llamar antes de acercarse.",
+      "visual_thesis": "Nave de lavado subterránea: el hormigón húmedo, las tuberías azules y el blanco duro de los tubos fluorescentes de las fotos se traducen a un sistema azul petróleo, acero pálido y verde de manguera. Oswald comprime la información operativa; Manrope mantiene la lectura clara.",
+      "copy_voice": "Español de Chile, breve y operativo: consulta, llama, ven, horario y ubicación. Sin tomar como propios los precios, tipos de lavado ni comentarios que no estén confirmados.",
+      "layout_signature": "Hero-proof-offer: panel de disponibilidad a la izquierda y foto vertical de la nave a la derecha; cinta de horario continuo, servicios expresados como preguntas de consulta, galería de boxes y una banda de reseñas antes de un bloque de llegada con mapa.",
+      "asset_plan": "El hero usa un asset editorial local generado: auto en box nocturno, vapor y agua, sin logos y señalado como conceptual. Las fotos verificadas de nave y autos quedan como contexto documental. El recorrido de mangueras, reflectores y líneas de estacionamiento se dibuja en CSS.",
+      "ai_fill_plan": {
+        "copy": ["Microcopy de disponibilidad y consulta telefónica sin inventar paquetes.", "Encabezados de proceso que ordenan horario, llamada y llegada al local."],
+        "imagery": ["Hero editorial local, conceptual y no atribuible al local.", "Patrón visual de líneas de box y reflejos de agua hechos en CSS sin representar maquinaria o servicios adicionales."],
+        "boundaries": ["No inventar precios, stock, marcas, años, premios, garantías, servicios ni reseñas.", "No repetir precios mencionados por una reseña como tarifa vigente.", "No prometer tiempos de lavado ni disponibilidad inmediata."]
+      },
+      "anti_patterns": ["Side-tab", "dark-glow", "eyebrows", "marcadores numerados", "tipografía de producto digital", "cards de oferta inventadas"],
+      "rewrite_targets": ["Mostrar el horario todos los días como información central.", "Diferenciar la composición de los otros dos negocios mediante un ledger vertical.", "Mantener el agua y el hormigón como textura de la foto, no como efecto brillante genérico."],
+      "impeccable_contract": {"contrast":"AA mínimo","forbidden":["side-tab","dark-glow","eyebrow","numbered-markers","fuentes genéricas"],"register_brand":"nave de lavado en azul petróleo y acero"}
+    },
+    "agent_frontend": {"mode":"static-files","source_dir":"data/frontends/santiago-automotor/vapor-car","notes":"Nave de lavado azul y acero, con panel operativo y reflejos de piso húmedo."}
+  },
+  {
+    "business_id": "google-ChIJQ7Uje3LFYpYRHo1MUdeq4WU",
+    "slug": "lavado-de-autos-el-cafetero-2",
+    "visual_mood": "neighborhood-direct",
+    "composition": "poster-bay",
+    "headline": "Tu auto, listo para seguir el día",
+    "subheadline": "Lavado de autos El Cafetero 2 está en San Isidro 827, con atención de lunes a sábado y horario de domingo.",
+    "primary_cta": "Consultar por teléfono",
+    "secondary_cta": "Ver el local",
+    "service_tags": ["Lavadero de autos", "Sala de espera", "Atención en Santiago"],
+    "proof_points": ["4.4 en 117 reseñas", "Lunes a sábado, 9:00 a 19:00", "Domingo, 10:00 a 15:00", "San Isidro 827"],
+    "resource_title": "Horarios y llegada",
+    "resource_items": ["Llamá al +56 9 9065 4600.", "El local está en San Isidro 827.", "Confirmá disponibilidad antes de ir."],
+    "review_heading": "Una espera cómoda, según sus reseñas",
+    "contact_heading": "Pasá por San Isidro",
+    "image_prompt": "Hero editorial conceptual: auto claro entrando a un lavadero urbano azul y amarillo, composición de afiche; no representa el local.",
+    "design_notes": "Cartel de barrio: azul eléctrico, amarillo vial, blanco y negro; Barlow Condensed + Lora; hero editorial como afiche y cintas de señalética.",
+    "conversion_template": "editorial-local-story",
+    "design_brief": {
+      "designed_by": "codex",
+      "market_position": "Lavadero de autos en Santiago centro para quienes quieren una alternativa de barrio con dirección, teléfono y horarios visibles antes de salir.",
+      "visual_thesis": "Cartel de barrio pintado a mano: la fachada azul, las letras amarillas, los murales y las banderas de las fotos dan un afiche urbano de alto día. Barlow Condensed crea titulares de marquesina y Lora aporta el contrapunto editorial; azul eléctrico, amarillo vial, blanco mate y negro.",
+      "copy_voice": "Español de Chile, cercano y concreto: pasar, llamar, auto, horario y local. La buena atención y la sala de espera aparecen únicamente como citas atribuidas de reseñas.",
+      "layout_signature": "Editorial-local-story: fachada completa como portada de afiche, bloque de contexto de San Isidro, secuencia de fotos en formato mural, tira de reseña atribuida y cierre de horarios con señalética de calle; el hero no usa split ni panel técnico.",
+      "asset_plan": "El hero usa un asset editorial local generado: auto claro y lavadero urbano azul/amarillo, sin logos y señalado como conceptual. La fachada y fotos verificadas aportan contexto documental. Cintas de tránsito, gotas y líneas de calle se hacen con CSS y SVG inline.",
+      "ai_fill_plan": {
+        "copy": ["Microcopy de llegada y consulta que no agrega modalidades de atención.", "Titulares de secciones que conectan horario, local y reseñas verificadas."],
+        "imagery": ["Hero editorial local, conceptual y no atribuible al local.", "Cintas de señalética, gotas y pintura mate en CSS sin crear una escena de servicio inexistente."],
+        "boundaries": ["No inventar precios, stock, marcas, años, premios, garantías, servicios ni reseñas.", "No afirmar que hay estacionamiento, café, tiempos de espera o servicios específicos.", "La sala de espera se atribuye a la reseña y no se presenta como promesa."]
+      },
+      "anti_patterns": ["Dark-glow", "side-tab", "eyebrow", "marcadores numerados", "tipografía genérica", "estética SaaS sin rasgos del local"],
+      "rewrite_targets": ["Dejar que la fachada y los murales determinen la paleta.", "No ocultar el horario de domingo.", "Distinguir la página mediante ritmo de afiche y foto mural."],
+      "impeccable_contract": {"contrast":"AA mínimo","forbidden":["side-tab","dark-glow","eyebrow","numbered-markers","fuentes genéricas"],"register_brand":"afiche de lavadero barrial azul y amarillo"}
+    },
+    "agent_frontend": {"mode":"static-files","source_dir":"data/frontends/santiago-automotor/lavado-de-autos-el-cafetero-2","notes":"Afiche de barrio azul y amarillo, con fachada real, mural de fotos y señalética de horario."}
+  }
+]
