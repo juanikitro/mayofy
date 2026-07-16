@@ -29,13 +29,14 @@ type Manifest = {
   sites: SiteRecord[];
 };
 
-type ContactMedium = "instagram" | "whatsapp" | "whatsapp_probable" | "phone" | "missing";
+type ContactMedium = "instagram" | "facebook" | "whatsapp" | "whatsapp_probable" | "phone" | "email" | "missing";
 type ContactConfidence = "high" | "medium" | "low";
 
 type ContactChoice = {
   medium: ContactMedium;
   label: string;
   value: string;
+  href: string;
   confidence: ContactConfidence;
   reason: string;
 };
@@ -62,11 +63,9 @@ type ObjectionReply = {
 };
 
 type OutreachPack = {
-  whatsapp_short: string;
-  formal_message: string;
+  initial_message: string;
   follow_up_24h: string;
-  follow_up_48h: string;
-  direct_close: string;
+  follow_up_28h: string;
   objection_replies: ObjectionReply[];
 };
 
@@ -78,10 +77,12 @@ type StudyEntry = {
   service: string;
   rating: string;
   preferred_contact: ContactChoice;
+  contacts: ContactChoice[];
   lead_score: LeadScore;
   commercial_audit: CommercialAudit;
   outreach: OutreachPack;
-  proposal_message: string;
+  outreach_detail: string;
+  public_info_source: string;
 };
 
 type ExecutiveSummary = {
@@ -194,23 +195,23 @@ async function readGeneratedHtml(generatedDir: string, site: SiteRecord): Promis
   return readFile(filePath, "utf8");
 }
 
-function extractInstagram(source: string): string | null {
-  const urlMatch = source.match(/https?:\/\/(?:www\.)?instagram\.com\/([a-z0-9._]+)/iu);
-  if (urlMatch?.[1]) {
-    return `https://instagram.com/${urlMatch[1].replace(/\/+$/u, "")}`;
-  }
-
-  const handleMatch = source.match(/instagram[^@\n\r]{0,80}@([a-z0-9._]+)/iu);
-  if (handleMatch?.[1]) {
-    return `@${handleMatch[1]}`;
-  }
-
-  return null;
+function uniqueValues(values: string[]): string[] {
+  return [...new Set(values.map((value) => value.trim()).filter(Boolean))];
 }
 
-function extractWhatsappUrl(source: string): string | null {
-  const match = source.match(/https?:\/\/(?:wa\.me|api\.whatsapp\.com|chat\.whatsapp\.com)\/[^\s"'<>)]*/iu);
-  return match?.[0] ?? null;
+function whatsappHref(value: string): string | null {
+  try {
+    const url = new URL(value);
+    const phone = url.searchParams.get("phone") ?? url.pathname.match(/\d+/gu)?.join("") ?? "";
+    return phone ? `https://wa.me/${phone}` : null;
+  } catch {
+    const phone = value.replace(/\D/gu, "");
+    return phone ? `https://wa.me/${phone}` : null;
+  }
+}
+
+function contactFrom(medium: ContactMedium, label: string, value: string, href: string, confidence: ContactConfidence, reason: string): ContactChoice {
+  return { medium, label, value, href, confidence, reason };
 }
 
 function hasWhatsappMention(source: string): boolean {
@@ -224,66 +225,64 @@ function looksLikeMobilePhone(phone: string | null): boolean {
   return /\b15[\s-]/u.test(phone) || /\+?54\s*9/u.test(phone);
 }
 
-function chooseContact(business: Business, source: string): ContactChoice {
-  const instagram = extractInstagram(source);
-  if (instagram) {
-    return {
-      medium: "instagram",
-      label: "Instagram",
-      value: instagram,
-      confidence: "high",
-      reason: "Aparece un perfil o link de Instagram en los datos/brief disponibles.",
-    };
-  }
-
-  const whatsappUrl = extractWhatsappUrl(source);
-  if (whatsappUrl) {
-    return {
-      medium: "whatsapp",
-      label: "WhatsApp",
-      value: whatsappUrl,
-      confidence: "high",
-      reason: "Aparece un link de WhatsApp en los datos/brief disponibles.",
-    };
-  }
-
-  if (business.phone && hasWhatsappMention(source)) {
-    return {
-      medium: "whatsapp_probable",
-      label: "WhatsApp probable",
-      value: business.phone,
-      confidence: "medium",
-      reason: "El material disponible menciona WhatsApp, pero no hay link verificado; se usa el telefono publicado.",
-    };
-  }
-
-  if (business.phone && looksLikeMobilePhone(business.phone)) {
-    return {
-      medium: "whatsapp_probable",
-      label: "WhatsApp probable",
-      value: business.phone,
-      confidence: "medium",
-      reason: "El numero publicado parece celular argentino, pero no hay link de WhatsApp verificado.",
-    };
-  }
-
-  if (business.phone) {
-    return {
-      medium: "phone",
-      label: "Telefono",
-      value: business.phone,
-      confidence: "high",
-      reason: "No hay red social ni WhatsApp verificado; el telefono publicado es el contacto mas seguro.",
-    };
-  }
-
-  return {
-    medium: "missing",
-    label: "Contacto faltante",
-    value: "Sin telefono o red social verificada",
-    confidence: "low",
-    reason: "El negocio no tiene un canal directo verificado en el dataset actual.",
+function collectContacts(business: Business, source: string): ContactChoice[] {
+  const contacts: ContactChoice[] = [];
+  const add = (contact: ContactChoice) => {
+    if (!contacts.some((item) => item.medium === contact.medium && item.href === contact.href)) {
+      contacts.push(contact);
+    }
   };
+
+  for (const url of uniqueValues([...source.matchAll(/https?:\/\/(?:www\.)?instagram\.com\/([a-z0-9._-]+)/giu)].map((match) => `https://instagram.com/${match[1]}`))) {
+    add(contactFrom("instagram", "Instagram", url, url, "high", "Perfil o link de Instagram encontrado en los datos disponibles."));
+  }
+  for (const handle of uniqueValues([...source.matchAll(/instagram[^@\n\r]{0,80}@([a-z0-9._]+)/giu)].map((match) => match[1]))) {
+    const href = `https://instagram.com/${handle}`;
+    add(contactFrom("instagram", "Instagram", `@${handle}`, href, "high", "Usuario de Instagram encontrado en los datos disponibles."));
+  }
+  for (const value of uniqueValues([...source.matchAll(/https?:\/\/(?:wa\.me|api\.whatsapp\.com|chat\.whatsapp\.com)\/[^\s"'<>)]*/giu)].map((match) => match[0]))) {
+    const href = whatsappHref(value);
+    if (href) {
+      add(contactFrom("whatsapp", "WhatsApp", href, href, "high", "Link de WhatsApp encontrado en los datos disponibles."));
+    }
+  }
+  for (const url of uniqueValues([...source.matchAll(/https?:\/\/(?:www\.)?(?:facebook\.com|fb\.com)\/[^\s"'<>)]*/giu)].map((match) => match[0]))) {
+    add(contactFrom("facebook", "Facebook", url, url, "high", "Perfil o link de Facebook encontrado en los datos disponibles."));
+  }
+  for (const email of uniqueValues([...source.matchAll(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/giu)].map((match) => match[0]))) {
+    add(contactFrom("email", "Email", email, `mailto:${email}`, "high", "Email encontrado en los datos disponibles."));
+  }
+  if (business.phone) {
+    add(contactFrom("phone", "Teléfono", business.phone, `tel:${business.phone.replace(/[^+\d]/gu, "")}`, "high", "Teléfono publicado en el dataset."));
+  }
+  for (const value of uniqueValues([...source.matchAll(/href=["']tel:([^"']+)["']/giu)].map((match) => decodeURIComponent(match[1])))) {
+    add(contactFrom("phone", "Teléfono", value, `tel:${value.replace(/[^+\d]/gu, "")}`, "high", "Teléfono enlazado en la landing generada."));
+  }
+  if (business.phone && hasWhatsappMention(source) && !contacts.some((contact) => contact.medium === "whatsapp")) {
+    const href = whatsappHref(business.phone);
+    if (href) {
+      add(contactFrom("whatsapp_probable", "WhatsApp probable", business.phone, href, "medium", "Se menciona WhatsApp sin un link verificado; se usa el teléfono publicado."));
+    }
+  }
+  if (business.phone && looksLikeMobilePhone(business.phone) && !contacts.some((contact) => contact.medium === "whatsapp" || contact.medium === "whatsapp_probable")) {
+    const href = whatsappHref(business.phone);
+    if (href) {
+      add(contactFrom("whatsapp_probable", "WhatsApp probable", business.phone, href, "medium", "El teléfono publicado parece celular, pero WhatsApp no está verificado."));
+    }
+  }
+
+  return contacts;
+}
+
+function chooseContact(contacts: ContactChoice[]): ContactChoice {
+  const preferred = ["instagram", "whatsapp", "whatsapp_probable", "phone", "facebook", "email"] as const;
+  for (const medium of preferred) {
+    const contact = contacts.find((item) => item.medium === medium);
+    if (contact) {
+      return contact;
+    }
+  }
+  return contactFrom("missing", "Contacto faltante", "Sin contacto directo verificado", "", "low", "El negocio no tiene un canal directo verificado en el dataset actual.");
 }
 
 function landingUrl(args: Args, site: SiteRecord): string {
@@ -505,48 +504,29 @@ function commercialAudit(business: Business, service: string, contact: ContactCh
   };
 }
 
-type BaseEntry = Omit<StudyEntry, "proposal_message" | "outreach">;
-
-function stripTrailingPeriod(value: string): string {
-  return value.trim().replace(/[.。]+$/u, "");
-}
-
-function lowerFirst(value: string): string {
-  return value.charAt(0).toLowerCase() + value.slice(1);
-}
-
-function sentenceFragment(value: string): string {
-  const stripped = stripTrailingPeriod(value);
-  return /^[A-Z]{2,}\b/u.test(stripped) ? stripped : lowerFirst(stripped);
-}
-
-function proposalMessage(entry: BaseEntry, price: string): string {
-  const contactSentence =
-    entry.preferred_contact.medium === "instagram"
-      ? "Te lo paso por aca porque parece ser el canal mas directo que tienen publicado."
-      : entry.preferred_contact.medium === "whatsapp" || entry.preferred_contact.medium === "whatsapp_probable"
-        ? "Te lo mando por este medio porque es el canal mas practico para verlo rapido desde el telefono."
-        : "Te escribo al contacto publicado porque no encontre un Instagram o WhatsApp verificado.";
-
-  return `Hola, como va? Soy Juan. Prepare una muestra de landing para ${entry.business_name}: ${entry.landing_url}
-
-La pense para que una persona vea rapido el rubro (${entry.service}), las resenas, direccion, horario y un llamado claro para consultar. No invente precios, servicios ni promociones: use la informacion publica disponible y deje la estructura lista para ajustar con fotos/textos propios del negocio.
-
-${contactSentence}
-
-Si les interesa, por ${price} puedo dejarla lista para publicar y mejorarla con dominio/hosting, boton de contacto, ajustes de copy, cambios de fotos, medicion basica de consultas y una revision final con ustedes. Queres que te mande el link para verla?`;
-}
+type BaseEntry = Omit<StudyEntry, "outreach">;
 
 function outreachPack(entry: BaseEntry, price: string): OutreachPack {
-  const coreValue = `prepare una muestra de landing para ${entry.business_name} con la informacion publica disponible: rubro, reseñas, direccion, horario y contacto`;
-  const improvements = entry.commercial_audit.suggested_improvements.slice(0, 3).map(sentenceFragment).join(", ");
-
   return {
-    whatsapp_short: `Hola, como va? Soy Juan. ${coreValue.charAt(0).toUpperCase() + coreValue.slice(1)}. No es una plantilla generica; esta pensada para que alguien consulte mas rapido. Si te sirve, por ${price} la dejo lista para publicar con ${improvements}. Te paso el link? ${entry.landing_url}`,
-    formal_message: proposalMessage(entry, price),
-    follow_up_24h: `Hola, te escribo de nuevo por la muestra de ${entry.business_name}. La idea no es venderte algo abstracto: ya hay una landing armada para revisar. Si queres, te mando el link y me decis si tiene sentido ajustarla con fotos y WhatsApp real.`,
-    follow_up_48h: `Cierro por aca para no insistir. Si en algun momento quieren una pagina simple para convertir consultas de ${entry.service}, ya deje una base hecha y se puede publicar rapido por ${price}.`,
-    direct_close: `Si te gusta la muestra, el siguiente paso es simple: me confirmas WhatsApp, fotos, servicios reales y dominio/nombre. Con eso la dejo lista para publicar por ${price}.`,
+    initial_message: `Hola, espero te encuentres muy bien! Soy Juani, programador de Mayofy.
+
+Estuve viendo ${entry.business_name} y me llamó la atención ${entry.outreach_detail}. Noté que hoy la información del negocio está principalmente en ${entry.public_info_source}, así que armé una demo de sitio web para mostrar cómo podrían reunir todo en un solo lugar y facilitar las consultas de nuevos clientes.
+
+La página incluye sus servicios, trabajos realizados, reseñas, ubicación, horarios y accesos directos a WhatsApp e Instagram.
+
+La preparé usando información pública como punto de partida. Es una propuesta inicial y se puede personalizar por completo: imágenes, textos, colores, secciones y diseño.
+
+Pueden verla acá:
+${entry.landing_url}
+
+La demo es sin compromiso. Si les interesa la idea, podemos coordinar una llamada breve para revisar qué cambiarían y contarles cómo sería adaptarla y dejarla publicada.
+
+Desde ya gracias por su tiempo y quedo a disposición por cualquier duda. Abrazo!`,
+    follow_up_24h: `Hola, espero que estés muy bien. Te escribo para retomar la demo que preparé para ${entry.business_name}. La armé a partir de la información pública que encontré, incluyendo ${entry.outreach_detail}. Si pudiste verla, me encantaría saber qué te pareció; si no, te dejo el link nuevamente:
+${entry.landing_url}`,
+    follow_up_28h: `Hola, ¿cómo estás? Paso una última vez por la demo de ${entry.business_name}. Entiendo que estos temas llevan tiempo, así que no hay ningún compromiso. Si la idea les interesa, podemos coordinar una llamada breve para revisar qué cambiarían y cómo adaptarla al negocio.
+
+${entry.landing_url}`,
     objection_replies: [
       {
         objection: "Ya tengo Instagram",
@@ -566,6 +546,28 @@ function outreachPack(entry: BaseEntry, price: string): OutreachPack {
       },
     ],
   };
+}
+
+function concreteOutreachDetail(business: Business, service: string): string {
+  const review = business.reviews.find((item) => item.text.trim());
+  if (review?.author) {
+    const excerpt = review.text.trim().replace(/\s+/gu, " ").slice(0, 140).replace(/[.。]+$/u, "");
+    return `la reseña de ${review.author}, que destaca “${excerpt}”`;
+  }
+  if (business.rating.reviews_count > 0) {
+    return `sus ${business.rating.reviews_count} reseñas con una calificación de ${business.rating.value.toFixed(1)} estrellas`;
+  }
+  return `la variedad de servicios que ofrecen en ${service}`;
+}
+
+function publicInfoSource(contacts: ContactChoice[]): string {
+  if (contacts.some((contact) => contact.medium === "instagram")) {
+    return "Instagram";
+  }
+  if (contacts.some((contact) => contact.medium === "facebook")) {
+    return "Facebook";
+  }
+  return "Google";
 }
 
 function firstReason(entry: StudyEntry): string {
@@ -588,7 +590,7 @@ function executiveSummary(entries: StudyEntry[], args: Args): ExecutiveSummary {
       acc[entry.preferred_contact.medium] += 1;
       return acc;
     },
-    { instagram: 0, whatsapp: 0, whatsapp_probable: 0, phone: 0, missing: 0 },
+    { instagram: 0, facebook: 0, whatsapp: 0, whatsapp_probable: 0, phone: 0, email: 0, missing: 0 },
   );
 
   return {
@@ -626,18 +628,16 @@ function mdList(items: string[]): string[] {
   return items.map((item) => `- ${item}`);
 }
 
+function markdownContact(contact: ContactChoice): string {
+  return contact.href ? `[${contact.label}: ${contact.value}](${contact.href})` : `${contact.label}: ${contact.value}`;
+}
+
 function renderOutreach(entry: StudyEntry): string[] {
   return [
-    "#### Mensaje corto WhatsApp",
+    "#### Mensaje inicial",
     "",
     "```text",
-    entry.outreach.whatsapp_short,
-    "```",
-    "",
-    "#### Mensaje formal Instagram/email",
-    "",
-    "```text",
-    entry.outreach.formal_message,
+    entry.outreach.initial_message,
     "```",
     "",
     "#### Follow-up 24 hs",
@@ -646,16 +646,10 @@ function renderOutreach(entry: StudyEntry): string[] {
     entry.outreach.follow_up_24h,
     "```",
     "",
-    "#### Follow-up 48 hs",
+    "#### Follow-up 28 hs",
     "",
     "```text",
-    entry.outreach.follow_up_48h,
-    "```",
-    "",
-    "#### Cierre directo",
-    "",
-    "```text",
-    entry.outreach.direct_close,
+    entry.outreach.follow_up_28h,
     "```",
     "",
     "#### Objeciones",
@@ -672,7 +666,7 @@ function renderMarkdown(entries: StudyEntry[], args: Args, summary: ExecutiveSum
     `- precio oferta: \`${args.price}\``,
     `- base_url: ${args.baseUrl ? `\`${args.baseUrl}\`` : "`no configurada; se usan paths locales`"}`,
     "",
-    "## Regla de contacto favorito",
+    "## Regla de prioridad interna de contacto",
     "",
     "1. Instagram verificado en datos/brief.",
     "2. Link de WhatsApp verificado.",
@@ -683,7 +677,7 @@ function renderMarkdown(entries: StudyEntry[], args: Args, summary: ExecutiveSum
     "",
     `- total landings: ${summary.total_landings}`,
     `- precio sugerido: ${summary.suggested_price}`,
-    `- contactos: Instagram ${summary.contact_breakdown.instagram}, WhatsApp ${summary.contact_breakdown.whatsapp}, WhatsApp probable ${summary.contact_breakdown.whatsapp_probable}, telefono ${summary.contact_breakdown.phone}, faltantes ${summary.contact_breakdown.missing}`,
+    `- contactos prioritarios: Instagram ${summary.contact_breakdown.instagram}, WhatsApp ${summary.contact_breakdown.whatsapp}, WhatsApp probable ${summary.contact_breakdown.whatsapp_probable}, teléfono ${summary.contact_breakdown.phone}, Facebook ${summary.contact_breakdown.facebook}, email ${summary.contact_breakdown.email}, faltantes ${summary.contact_breakdown.missing}`,
     "",
     "### Top 3 para contactar primero",
     "",
@@ -705,11 +699,11 @@ function renderMarkdown(entries: StudyEntry[], args: Args, summary: ExecutiveSum
     "",
     "## Resumen",
     "",
-    "| Negocio | Prioridad | Prob. contacto | Landing | Contacto favorito | Confianza | Razon |",
+    "| Negocio | Prioridad | Prob. contacto | Landing | Contactos | Confianza | Razon |",
     "| --- | ---: | --- | --- | --- | --- | --- |",
     ...entries.map(
       (entry) =>
-        `| ${entry.business_name} | ${entry.lead_score.priority}/10 | ${entry.lead_score.contact_probability} | [Abrir](${entry.landing_url}) | ${entry.preferred_contact.label}: ${entry.preferred_contact.value} | ${entry.preferred_contact.confidence} | ${entry.preferred_contact.reason} |`,
+        `| ${entry.business_name} | ${entry.lead_score.priority}/10 | ${entry.lead_score.contact_probability} | [Abrir](${entry.landing_url}) | ${entry.contacts.map(markdownContact).join("<br>") || "Sin contacto"} | ${entry.preferred_contact.confidence} | ${entry.preferred_contact.reason} |`,
     ),
     "",
     "## Detalle por negocio",
@@ -719,7 +713,8 @@ function renderMarkdown(entries: StudyEntry[], args: Args, summary: ExecutiveSum
   for (const entry of entries) {
     lines.push(`### ${entry.business_name}`, "");
     lines.push(`- landing: ${entry.landing_url}`);
-    lines.push(`- contacto favorito: ${entry.preferred_contact.label} (${entry.preferred_contact.value})`);
+    lines.push("- contacto:");
+    lines.push(...(entry.contacts.length > 0 ? mdList(entry.contacts.map(markdownContact)) : ["  - Sin contacto directo verificado."]));
     lines.push(`- prioridad: ${entry.lead_score.priority}/10`);
     lines.push(`- probabilidad de contacto: ${entry.lead_score.contact_probability}`);
     lines.push(`- oportunidad comercial: ${entry.lead_score.opportunity}`);
@@ -745,12 +740,6 @@ function renderMarkdown(entries: StudyEntry[], args: Args, summary: ExecutiveSum
     lines.push("");
     lines.push("Mejoras vendibles:");
     lines.push(...mdList(entry.commercial_audit.suggested_improvements));
-    lines.push("");
-    lines.push("#### Mensaje base");
-    lines.push("");
-    lines.push("```text");
-    lines.push(entry.proposal_message);
-    lines.push("```");
     lines.push("");
     lines.push(...renderOutreach(entry));
     lines.push("");
@@ -782,7 +771,8 @@ async function main(): Promise<void> {
     const source = [stringifyUnknown(rawBusiness), stringifyUnknown(rawSpec), brief, html].join("\n");
     const landing_path = path.join(args.generatedDir, site.directory, "index.html").replaceAll("\\", "/");
     const service = site.service ?? business.main_product_or_service;
-    const preferred_contact = chooseContact(business, source);
+    const contacts = collectContacts(business, source);
+    const preferred_contact = chooseContact(contacts);
     const commercial_audit = commercialAudit(business, service, preferred_contact);
     const lead_score = leadScore(business, service, preferred_contact);
 
@@ -794,14 +784,16 @@ async function main(): Promise<void> {
       service,
       rating: site.rating ?? `${business.rating.value.toFixed(1)} (${business.rating.reviews_count})`,
       preferred_contact,
+      contacts,
       lead_score,
       commercial_audit,
+      outreach_detail: concreteOutreachDetail(business, service),
+      public_info_source: publicInfoSource(contacts),
     };
 
     entries.push({
       ...baseEntry,
       outreach: outreachPack(baseEntry, args.price),
-      proposal_message: proposalMessage(baseEntry, args.price),
     });
   }
 

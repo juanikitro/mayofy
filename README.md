@@ -73,7 +73,7 @@ npm run agent:briefs -- --input data/<run>-businesses.json --specs data/site-spe
 
 El brief de remake incluye contexto de la version anterior y obliga a reemplazar la estructura si no llega a barra de producto real.
 
-`npm run study:final -- --price "[PRECIO]"` escribe `generated/<sesion>/final-study.md` y `generated/<sesion>/final-study.json` junto a las landings, con el contacto recomendado, lead score, mini auditoria comercial, paquete de mensajes/follow-ups/objeciones y propuesta lista para enviar por negocio. El precio no se inventa: pasalo por `--price` o quedara como placeholder.
+`npm run study:final -- --price "[PRECIO]"` escribe `generated/<sesion>/final-study.md` y `generated/<sesion>/final-study.json` junto a las landings, con todos los contactos encontrados como links, lead score, mini auditoria comercial y un paquete de outreach con mensaje inicial personalizado, follow-ups y objeciones por negocio. El precio no se inventa: pasalo por `--price` o quedara como placeholder para las respuestas a objeciones.
 
 ## Busqueda automatica de candidatos
 

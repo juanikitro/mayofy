@@ -144,16 +144,15 @@ La carpeta `generated/<sesion>/` es el paquete de salida de la corrida: contiene
 El estudio final debe incluir, por cada negocio:
 
 - link/path de la landing generada
-- medio de contacto recomendado
-- nivel de confianza y razon del contacto elegido
+- todos los contactos encontrados, enlazados (WhatsApp mediante `wa.me`)
+- prioridad interna, nivel de confianza y razon del canal elegido para el lead score
 - lead score con prioridad, probabilidad de contacto, oportunidad, motivos y riesgos
 - mini auditoria comercial con problema que resuelve, señales publicas usadas, datos a pedirle al dueño y mejoras vendibles
-- paquete de outreach: mensaje corto, mensaje formal, follow-ups, cierre directo y respuestas a objeciones
-- mensaje de propuesta listo para enviar
+- paquete de outreach: mensaje inicial personalizado con una señal pública concreta, follow-ups de 24 y 28 horas y respuestas a objeciones
 
 Tambien debe incluir un resumen ejecutivo con top 3 para contactar primero, contactos mas fuertes, mejores oportunidades, negocios que requieren validar canal y desglose de canales.
 
-Regla de contacto favorito:
+Regla de prioridad interna de contacto:
 
 1. Si hay Instagram verificado en datos, brief o HTML, usar Instagram.
 2. Si hay link de WhatsApp verificado, usar WhatsApp.

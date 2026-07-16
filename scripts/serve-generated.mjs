@@ -138,6 +138,36 @@ function listItems(items) {
   return values.length ? `<ul>${values.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : "<p>No informado.</p>";
 }
 
+function safeContactHref(value) {
+  const href = String(value ?? "");
+  if (/^(?:tel:|mailto:)/iu.test(href)) {
+    return href;
+  }
+  try {
+    const url = new URL(href);
+    if (url.protocol === "https:" && /(?:^|\.)(?:instagram\.com|facebook\.com|fb\.com|wa\.me)$/iu.test(url.hostname)) {
+      return url.href;
+    }
+  } catch {
+    // Invalid links are rendered as plain text below.
+  }
+  return "";
+}
+
+function contactList(contacts) {
+  const values = Array.isArray(contacts) ? contacts : [];
+  if (values.length === 0) {
+    return "<p>No se encontraron contactos directos.</p>";
+  }
+  return `<ul>${values
+    .map((contact) => {
+      const label = `${contact?.label ?? "Contacto"}: ${contact?.value ?? ""}`;
+      const href = safeContactHref(contact?.href);
+      return `<li>${href ? `<a href="${escapeHtml(href)}">${escapeHtml(label)}</a>` : escapeHtml(label)}</li>`;
+    })
+    .join("")}</ul>`;
+}
+
 function messageBlock(label, value) {
   return `<h3>${escapeHtml(label)}</h3><pre>${escapeHtml(value || "No informado.")}</pre>`;
 }
@@ -163,7 +193,7 @@ async function renderStudy(res, sessionName, slug) {
     return;
   }
 
-  const contact = entry.preferred_contact ?? {};
+  const contacts = entry.contacts ?? [];
   const lead = entry.lead_score ?? {};
   const audit = entry.commercial_audit ?? {};
   const outreach = entry.outreach ?? {};
@@ -171,10 +201,8 @@ async function renderStudy(res, sessionName, slug) {
   const body = `<p><a href="/${encodeURIComponent(sessionName)}/">← Volver a la tanda</a></p>
     <h1>${escapeHtml(entry.business_name ?? slug)}</h1>
     <section class="section">
-      <h2>Contacto recomendado</h2>
-      <p><strong>${escapeHtml(contact.label ?? contact.medium ?? "No informado")}</strong>: ${escapeHtml(contact.value ?? "")}</p>
-      <p>${escapeHtml(contact.reason ?? "")}</p>
-      <p class="meta">Confianza: ${escapeHtml(contact.confidence ?? "no informada")}</p>
+      <h2>Contacto</h2>
+      ${contactList(contacts)}
     </section>
     <section class="section">
       <h2>Lead score</h2>
@@ -193,17 +221,11 @@ async function renderStudy(res, sessionName, slug) {
     </section>
     <section class="section">
       <h2>Mensajes de outreach</h2>
-      ${messageBlock("Corto", outreach.whatsapp_short)}
-      ${messageBlock("Formal", outreach.formal_message)}
+      ${messageBlock("Mensaje inicial", outreach.initial_message)}
       ${messageBlock("Follow-up 24h", outreach.follow_up_24h)}
-      ${messageBlock("Follow-up 48h", outreach.follow_up_48h)}
-      ${messageBlock("Cierre directo", outreach.direct_close)}
+      ${messageBlock("Follow-up 28h", outreach.follow_up_28h)}
       <h3>Objeciones</h3>
       ${objections.length ? objections.map((item) => `<p><strong>${escapeHtml(item.objection)}</strong><br>${escapeHtml(item.reply)}</p>`).join("") : "<p>No informado.</p>"}
-    </section>
-    <section class="section">
-      <h2>Mensaje de propuesta</h2>
-      <pre>${escapeHtml(entry.proposal_message || "No informado.")}</pre>
     </section>`;
 
   sendHtml(res, 200, `Estudio ${entry.business_name ?? slug}`, body);
