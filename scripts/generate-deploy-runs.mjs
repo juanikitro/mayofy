@@ -5,6 +5,8 @@ import { spawn } from "node:child_process";
 import path from "node:path";
 import process from "node:process";
 
+const PUBLIC_CATALOG_BASE_URL = "https://mayofy.vercel.app";
+
 function argValue(argv, flag) {
   const index = argv.indexOf(flag);
   if (index < 0) {
@@ -140,6 +142,8 @@ async function validateAndGenerate(runName, options) {
     runName,
     "--price",
     "[PRECIO]",
+    "--base-url",
+    PUBLIC_CATALOG_BASE_URL,
   ]);
 }
 

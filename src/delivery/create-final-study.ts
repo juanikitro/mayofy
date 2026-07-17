@@ -287,7 +287,7 @@ function chooseContact(contacts: ContactChoice[]): ContactChoice {
 
 function landingUrl(args: Args, site: SiteRecord): string {
   if (args.baseUrl) {
-    return `${args.baseUrl.replace(/\/+$/u, "")}/${site.directory}/`;
+    return `${args.baseUrl.replace(/\/+$/u, "")}/${path.basename(args.generatedDir)}/${site.directory}/`;
   }
   return path.join(args.generatedDir, site.directory, "index.html").replaceAll("\\", "/");
 }
