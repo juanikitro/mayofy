@@ -422,6 +422,15 @@ function studyPage(sessionName, slug, entry) {
         ${contactList(contacts)}
       </section>
       <section class="section">
+        <h2>Referencias de precios en Argentina</h2>
+        <p>Relevamiento comercial de julio de 2026 para contextualizar la propuesta; no reemplaza la cotizacion final segun alcance.</p>
+        <ul>
+          <li><strong>Landing express o basada en plantilla:</strong> AR$ 90.000 a AR$ 200.000.</li>
+          <li><strong>Landing profesional para un negocio:</strong> AR$ 200.000 a AR$ 500.000.</li>
+          <li><strong>Landing a medida con integraciones, metricas o automatizaciones:</strong> desde AR$ 500.000.</li>
+        </ul>
+      </section>
+      <section class="section">
         <h2>Objeciones</h2>
         ${objections.length ? objections.map((item) => `<p><strong>${escapeHtml(item.objection)}</strong><br>${escapeHtml(item.reply)}</p>`).join("") : "<p>No informado.</p>"}
       </section>
