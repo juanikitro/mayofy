@@ -33,10 +33,19 @@ Validar intake:
 tsx src/validators/validate-dataset.ts data/intake/chivilcoy-ropa-candidates.json --allow-incomplete
 ```
 
+Antes de armar el shortlist, investigar Instagram para cada candidato. Verificar que el perfil publico corresponda al negocio por nombre y ciudad, direccion, telefono o un enlace desde una fuente publica. Guardar hasta tres fotos seleccionadas en `data/intake/chivilcoy-ropa-instagram-research.json` con perfil, post, URL directa de media y evidencia; no inventar handles ni asociar homonimos. En demos, las fotos de un perfil verificado se usan sin una revision de permiso extra.
+
+```powershell
+npm run research:instagram -- --input data/intake/chivilcoy-ropa-candidates.json --research data/intake/chivilcoy-ropa-instagram-research.json --out data/intake/chivilcoy-ropa-instagram-candidates.json --assets-dir data/intake/chivilcoy-ropa-assets
+tsx src/validators/validate-dataset.ts data/intake/chivilcoy-ropa-instagram-candidates.json --allow-incomplete
+```
+
+Usar `data/intake/chivilcoy-ropa-instagram-candidates.json` como input del shortlist. Si no se encontraron perfiles verificables, dejar el manifest con `{"businesses": []}`: el archivo enriquecido conserva las fotos de Google Places.
+
 Generar shortlist:
 
 ```powershell
-npm run shortlist -- --input data/intake/chivilcoy-ropa-candidates.json --out data/intake/chivilcoy-ropa-shortlist.json --limit 10 --terms "ropa|indumentaria|boutique|moda|prenda|zapateria|lenceria" --title "Chivilcoy ropa shortlist"
+npm run shortlist -- --input data/intake/chivilcoy-ropa-instagram-candidates.json --out data/intake/chivilcoy-ropa-shortlist.json --limit 10 --terms "ropa|indumentaria|boutique|moda|prenda|zapateria|lenceria" --title "Chivilcoy ropa shortlist"
 ```
 
 Promover dataset final de la corrida:

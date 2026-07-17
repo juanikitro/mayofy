@@ -1,0 +1,21 @@
+{
+  "businesses": [
+    {
+      "slug": "lavadero-centro-demo",
+      "profile_url": "https://www.instagram.com/lavadero.centro.demo/",
+      "match_evidence": [
+        {
+          "source_url": "https://www.google.com/maps/search/?api=1&query=Lavadero%20Centro%20Demo",
+          "note": "Nombre y telefono coinciden con el candidato de Google Places."
+        }
+      ],
+      "photos": [
+        {
+          "media_url": "https://httpbin.org/image/jpeg",
+          "source_url": "https://www.instagram.com/p/lavadero-centro-demo/",
+          "type": "facade"
+        }
+      ]
+    }
+  ]
+}

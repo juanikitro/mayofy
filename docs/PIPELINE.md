@@ -53,6 +53,39 @@ El resultado se guarda en `data/intake/<run>-candidates.json`.
 
 Esta salida no aprueba negocios para deploy. Marca `approved_for_generation: false`. Por configuracion local, las fotos de Google Places se cargan como `allowed` por defecto. Los candidatos con `websiteUri` informado por Google Places se descartan automaticamente.
 
+### Enriquecimiento de fotos con Instagram
+
+Despues de la busqueda de Places, el agente realiza research publico de Instagram. Solo puede asociar un perfil si la coincidencia con el negocio queda verificada por nombre y ciudad, direccion, telefono o un enlace desde otra fuente publica. El resultado se guarda en un manifest auditable:
+
+```json
+{
+  "businesses": [
+    {
+      "slug": "nombre-del-negocio",
+      "profile_url": "https://www.instagram.com/nombre_del_negocio/",
+      "match_evidence": [
+        { "source_url": "https://www.google.com/maps/...", "note": "Mismo nombre y telefono publicado." }
+      ],
+      "photos": [
+        {
+          "media_url": "https://cdn.example.com/foto.jpg",
+          "source_url": "https://www.instagram.com/p/post-verificado/",
+          "type": "product"
+        }
+      ]
+    }
+  ]
+}
+```
+
+Luego ejecutar:
+
+```powershell
+npm run research:instagram -- --input data/intake/<run>-candidates.json --research data/intake/<run>-instagram-research.json --out data/intake/<run>-instagram-candidates.json --assets-dir data/intake/<run>-assets
+```
+
+El comando descarga hasta tres fotos por negocio y las antepone a las de Google Places. Si un perfil es ambiguo o una descarga falla, conserva el candidato sin cambios y Places queda como fallback. No se agrega scraping automatizado ni URLs temporales de CDN al dataset final.
+
 Crear shortlist automatico:
 
 ```bash

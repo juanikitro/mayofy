@@ -35,6 +35,8 @@ Solo `usage_status: "allowed"` puede usarse para generar un sitio final.
 
 Por decision local del proyecto, las fotos encontradas por Google Places se cargan como `allowed` por defecto y el paso manual de permiso queda omitido.
 
+Para demos, las fotos de un perfil publico de Instagram previamente verificado tambien se cargan como `allowed`. El research debe conservar la URL del perfil, las URLs de los posts seleccionados y evidencia de que el perfil corresponde al negocio. Durante el enrichment esas fotos se descargan como archivos locales; no usar URLs temporales del CDN de Instagram en el sitio final.
+
 El HTML final no apunta directo al endpoint de Google Places. Durante `npm run generate`, la foto se descarga como asset local si hay `GOOGLE_PLACES_API_KEY`; si no, se usa una imagen SVG local de fallback.
 
 Las fotos ya versionadas en el repo pueden referenciarse por ruta local relativa al repo y el generador las copia como asset del sitio.
