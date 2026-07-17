@@ -214,6 +214,16 @@ function contactFrom(medium: ContactMedium, label: string, value: string, href: 
   return { medium, label, value, href, confidence, reason };
 }
 
+function isMayofyInstagram(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    const handle = parsed.pathname.split("/").filter(Boolean)[0]?.toLowerCase();
+    return (parsed.hostname === "instagram.com" || parsed.hostname === "www.instagram.com") && handle === "mayofy.web";
+  } catch {
+    return false;
+  }
+}
+
 function hasWhatsappMention(source: string): boolean {
   return /\b(whatsapp|wsp|wa\.me)\b/iu.test(source);
 }
@@ -233,10 +243,10 @@ function collectContacts(business: Business, source: string): ContactChoice[] {
     }
   };
 
-  for (const url of uniqueValues([...source.matchAll(/https?:\/\/(?:www\.)?instagram\.com\/([a-z0-9._-]+)/giu)].map((match) => `https://instagram.com/${match[1]}`))) {
+  for (const url of uniqueValues([...source.matchAll(/https?:\/\/(?:www\.)?instagram\.com\/([a-z0-9._-]+)/giu)].map((match) => `https://instagram.com/${match[1]}`)).filter((url) => !isMayofyInstagram(url))) {
     add(contactFrom("instagram", "Instagram", url, url, "high", "Perfil o link de Instagram encontrado en los datos disponibles."));
   }
-  for (const handle of uniqueValues([...source.matchAll(/instagram[^@\n\r]{0,80}@([a-z0-9._]+)/giu)].map((match) => match[1]))) {
+  for (const handle of uniqueValues([...source.matchAll(/instagram[^@\n\r]{0,80}@([a-z0-9._]+)/giu)].map((match) => match[1])).filter((handle) => handle !== "mayofy.web")) {
     const href = `https://instagram.com/${handle}`;
     add(contactFrom("instagram", "Instagram", `@${handle}`, href, "high", "Usuario de Instagram encontrado en los datos disponibles."));
   }

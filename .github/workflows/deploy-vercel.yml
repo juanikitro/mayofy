@@ -11,6 +11,7 @@ on:
       - "scripts/generate-deploy-runs.mjs"
       - "scripts/build-vercel-catalog.mjs"
       - "scripts/deploy-generated.mjs"
+      - "src/delivery/create-final-study.ts"
       - ".github/workflows/deploy-vercel.yml"
       - "package.json"
       - "package-lock.json"
