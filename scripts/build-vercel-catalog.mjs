@@ -399,8 +399,10 @@ function studyPage(sessionName, slug, entry) {
       <div class="topbar"><a class="button secondary" href="/catalog/${safeUrlSegment(sessionName)}/">Volver</a>${logoutButton()}</div>
       <h1>${escapeHtml(entry.business_name ?? slug)}</h1>
       <section class="section">
-        <h2>Contacto</h2>
-        ${contactList(contacts)}
+        <h2>Mensajes de outreach</h2>
+        ${messageBlock("Mensaje inicial", outreach.initial_message, contacts)}
+        ${messageBlock("Follow-up 24h", outreach.follow_up_24h, contacts)}
+        ${messageBlock("Follow-up 48h", outreach.follow_up_48h, contacts)}
       </section>
       <section class="section">
         <h2>Lead score</h2>
@@ -414,16 +416,22 @@ function studyPage(sessionName, slug, entry) {
         <p><strong>Problema que resuelve:</strong> ${escapeHtml(audit.problem_solved ?? "No informado.")}</p>
         <p><strong>Angulo de oferta:</strong> ${escapeHtml(audit.offer_angle ?? "No informado.")}</p>
         <h3>Senales usadas</h3>${listItems(audit.public_signals_used)}
-        <h3>Datos a pedir</h3>${listItems(audit.owner_data_to_request)}
-        <h3>Mejoras sugeridas</h3>${listItems(audit.suggested_improvements)}
       </section>
       <section class="section">
-        <h2>Mensajes de outreach</h2>
-        ${messageBlock("Mensaje inicial", outreach.initial_message, contacts)}
-        ${messageBlock("Follow-up 24h", outreach.follow_up_24h, contacts)}
-        ${messageBlock("Follow-up 48h", outreach.follow_up_48h, contacts)}
-        <h3>Objeciones</h3>
+        <h2>Contacto</h2>
+        ${contactList(contacts)}
+      </section>
+      <section class="section">
+        <h2>Objeciones</h2>
         ${objections.length ? objections.map((item) => `<p><strong>${escapeHtml(item.objection)}</strong><br>${escapeHtml(item.reply)}</p>`).join("") : "<p>No informado.</p>"}
+      </section>
+      <section class="section">
+        <h2>Mejoras sugeridas</h2>
+        ${listItems(audit.suggested_improvements)}
+      </section>
+      <section class="section">
+        <h2>Datos a pedir</h2>
+        ${listItems(audit.owner_data_to_request)}
       </section>
     </main>`,
     { guarded: true },
