@@ -210,6 +210,36 @@ function whatsappHref(value: string): string | null {
   }
 }
 
+function internationalWhatsappHref(contacts: ContactChoice[]): string | null {
+  const phone = contacts.find((contact) => contact.medium === "phone" && /^tel:\+\d+$/u.test(contact.href));
+  return phone ? `https://wa.me/${phone.href.slice("tel:+".length)}` : null;
+}
+
+function phoneHref(phone: string, address: string): string {
+  const digits = phone.replace(/\D/gu, "");
+  if (!digits) {
+    return "";
+  }
+  if (phone.trim().startsWith("+")) {
+    return `tel:+${digits}`;
+  }
+
+  const normalizedAddress = address.toLocaleLowerCase();
+  if (normalizedAddress.includes("chile")) {
+    return `tel:+56${digits}`;
+  }
+  if (normalizedAddress.includes("argentina") || normalizedAddress.includes("provincia de buenos aires")) {
+    const isMobile = /^0?[\d\s-]+?\s+15(?:[\s-]|$)/u.test(phone.trim());
+    const localNumber = phone
+      .trim()
+      .replace(/^0\s*/u, "")
+      .replace(/^([\d\s-]+?)\s+15(?:[\s-]|$)/u, "$1")
+      .replace(/\D/gu, "");
+    return `tel:+54${isMobile ? "9" : ""}${localNumber}`;
+  }
+  return `tel:${digits}`;
+}
+
 function contactFrom(medium: ContactMedium, label: string, value: string, href: string, confidence: ContactConfidence, reason: string): ContactChoice {
   return { medium, label, value, href, confidence, reason };
 }
@@ -263,19 +293,19 @@ function collectContacts(business: Business, source: string): ContactChoice[] {
     add(contactFrom("email", "Email", email, `mailto:${email}`, "high", "Email encontrado en los datos disponibles."));
   }
   if (business.phone) {
-    add(contactFrom("phone", "Teléfono", business.phone, `tel:${business.phone.replace(/[^+\d]/gu, "")}`, "high", "Teléfono publicado en el dataset."));
+    add(contactFrom("phone", "Teléfono", business.phone, phoneHref(business.phone, business.address), "high", "Teléfono publicado en el dataset."));
   }
   for (const value of uniqueValues([...source.matchAll(/href=["']tel:([^"']+)["']/giu)].map((match) => decodeURIComponent(match[1])))) {
-    add(contactFrom("phone", "Teléfono", value, `tel:${value.replace(/[^+\d]/gu, "")}`, "high", "Teléfono enlazado en la landing generada."));
+    add(contactFrom("phone", "Teléfono", value, phoneHref(value, business.address), "high", "Teléfono enlazado en la landing generada."));
   }
   if (business.phone && hasWhatsappMention(source) && !contacts.some((contact) => contact.medium === "whatsapp")) {
-    const href = whatsappHref(business.phone);
+    const href = internationalWhatsappHref(contacts) ?? whatsappHref(business.phone);
     if (href) {
       add(contactFrom("whatsapp_probable", "WhatsApp probable", business.phone, href, "medium", "Se menciona WhatsApp sin un link verificado; se usa el teléfono publicado."));
     }
   }
   if (business.phone && looksLikeMobilePhone(business.phone) && !contacts.some((contact) => contact.medium === "whatsapp" || contact.medium === "whatsapp_probable")) {
-    const href = whatsappHref(business.phone);
+    const href = internationalWhatsappHref(contacts) ?? whatsappHref(business.phone);
     if (href) {
       add(contactFrom("whatsapp_probable", "WhatsApp probable", business.phone, href, "medium", "El teléfono publicado parece celular, pero WhatsApp no está verificado."));
     }

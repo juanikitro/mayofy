@@ -173,8 +173,9 @@ function contactList(contacts) {
 
 function whatsappMessageUrl(contacts, message) {
   const values = Array.isArray(contacts) ? contacts : [];
-  const whatsapp = values.find((contact) => ["whatsapp", "whatsapp_probable"].includes(contact?.medium) && typeof contact?.href === "string");
-  const baseUrl = whatsapp?.href?.replace(/\?.*$/u, "") || "https://wa.me/";
+  const whatsapp = values.find((contact) => ["whatsapp", "whatsapp_probable"].includes(contact?.medium) && /^https:\/\/wa\.me\/\d+$/u.test(contact?.href));
+  const phone = values.find((contact) => contact?.medium === "phone" && /^tel:\+\d+$/u.test(contact?.href));
+  const baseUrl = whatsapp?.href || (phone ? `https://wa.me/${phone.href.slice("tel:+".length)}` : "https://wa.me/");
   return `${baseUrl}?text=${encodeURIComponent(message || "")}`;
 }
 
