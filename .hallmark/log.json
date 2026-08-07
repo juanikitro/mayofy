@@ -1,0 +1,30 @@
+[
+  {
+    "date": "2026-07-12",
+    "macrostructure": "Workbench",
+    "theme": "custom",
+    "theme_axes": "nocturnal-petroleum / grotesk-sans / mayofy-green",
+    "vibe": "casos tecnicos sobre paisaje nocturno",
+    "enrichment": "hand-built abstract nature SVG placeholders",
+    "brief": "Seis proyectos placeholder con tres portales iniciales y paginas de detalle"
+  },
+  {
+    "date": "2026-07-12",
+    "macrostructure": "Photographic",
+    "theme": "custom",
+    "theme_axes": "nocturnal-petroleum / editorial-serif / mayofy-green",
+    "vibe": "surrealismo natural cinematografico y humano",
+    "enrichment": "generated photorealistic art-directed still",
+    "brief": "Portfolio comercial de Mayofy para convertir atencion existente en consultas"
+  },
+  {
+    "date": "2026-07-13",
+    "macrostructure": "Photographic",
+    "theme": "custom",
+    "theme_axes": "nocturnal-petroleum / editorial-serif / mayofy-green",
+    "vibe": "bosque continuo con movimiento visible",
+    "enrichment": "regenerated lossless forest masters at q90 and asynchronous radial-halo firefly field",
+    "brief": "Integrar el recorrido de oferta al bosque y refinar interacciones",
+    "knob_deltas": "forest=full-offer-hq-lossless-q90; forest-current=removed; path=over-image; particles=closed-path-pulse-radial-halo; details=first-open"
+  }
+]

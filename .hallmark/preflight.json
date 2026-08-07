@@ -1,0 +1,14 @@
+{
+  "date": "2026-07-12",
+  "framework": "Next.js 16 App Router with React 19",
+  "fonts": "Cormorant Garamond, Manrope and IBM Plex Mono through next/font",
+  "palette": "Custom OKLCH nocturnal Mayofy tokens anchored on #00F69D",
+  "motion": "CSS and a small IntersectionObserver controller; no motion dependency",
+  "spacing": "Named 4-point CSS token scale",
+  "preserve": [
+    "Umbral Vivo visual system",
+    "existing font stack",
+    "existing tokens",
+    "server-first architecture"
+  ]
+}

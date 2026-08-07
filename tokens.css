@@ -1,0 +1,88 @@
+/* Hallmark · macrostructure: Photographic · tone: nocturnal natural threshold · anchor hue: #00F69D
+ * hero: H6 Photographic Fold · nav: N5 Floating Pill · footer: Ft2 Closing Statement
+ * contrast: pass (40–41) · honest: pass (46) · chrome: pass (47) · tokens: pass (48)
+ * Hallmark · pre-emit critique: P5 H5 E4 S5 R4 V5
+ */
+
+:root {
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-body: var(--font-manrope), "Segoe UI", sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), "SFMono-Regular", monospace;
+
+  --color-shell: oklch(10% 0.015 208);
+  --color-night-deep: oklch(12% 0.017 208);
+  --color-night: oklch(14% 0.018 206);
+  --color-night-raised: oklch(18% 0.02 206);
+  --color-night-soft: oklch(24% 0.018 206);
+  --color-night-green: oklch(20% 0.032 178);
+  --color-ink-on-night: oklch(94% 0.01 190);
+  --color-ink-on-night-soft: oklch(78% 0.014 188);
+  --color-muted-on-night: oklch(66% 0.012 188);
+  --color-paper: oklch(94% 0.018 101);
+  --color-paper-soft: oklch(89% 0.02 105);
+  --color-paper-deep: oklch(83% 0.025 108);
+  --color-ink: oklch(18% 0.022 205);
+  --color-ink-soft: oklch(36% 0.02 202);
+  --color-muted: oklch(48% 0.018 200);
+  --color-rule-dark: oklch(33% 0.018 198);
+  --color-rule-light: oklch(74% 0.024 112);
+  --color-accent: oklch(85.735% 0.1995 158.29);
+  --color-accent-deep: oklch(73% 0.181 158.29);
+  --color-accent-ink: oklch(16% 0.024 205);
+  --color-focus-on-dark: oklch(90% 0.16 158.29);
+  --color-focus-on-light: oklch(45% 0.14 158.29);
+  --color-error: oklch(54% 0.17 27);
+  --color-error-on-dark: oklch(76% 0.13 27);
+  --color-success: oklch(72% 0.14 158.29);
+  --color-overlay: oklch(8% 0.016 208 / 84%);
+  --color-overlay-soft: oklch(9% 0.016 208 / 44%);
+  --color-shadow: oklch(5% 0.012 208 / 42%);
+
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 9rem;
+  --space-5xl: 12rem;
+
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: clamp(1.0625rem, 0.96rem + 0.42vw, 1.25rem);
+  --text-lg: clamp(1.35rem, 1.12rem + 0.9vw, 1.75rem);
+  --text-xl: clamp(1.9rem, 1.35rem + 2vw, 3rem);
+  --text-2xl: clamp(2.6rem, 1.75rem + 3.4vw, 5rem);
+  --text-display: clamp(3.25rem, 2rem + 5.8vw, 6.75rem);
+
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+  --dur-scene: 1200ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --rule-hair: 1px;
+  --rule-strong: 2px;
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-pill: 999px;
+  --content-max: 86rem;
+  --copy-max: 65ch;
+  --nav-height: 3.5rem;
+  --tap-target: 2.75rem;
+
+  --z-base: 1;
+  --z-atmosphere: 6;
+  --z-raised: 10;
+  --z-sticky: 200;
+  --z-sticky-nav: 300;
+  --z-modal: 400;
+}
