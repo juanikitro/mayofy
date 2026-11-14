@@ -41,7 +41,7 @@ Complementarios:
 
 - **Mantenimiento mensual:** USD 50 por mes para Landing; USD 25 por mes desde Web + Gestión en adelante, como precio promocional (oferta estratégica). Una nota (*) aclara los límites: hasta 5 cambios menores o 90 minutos de trabajo por mes, lo que ocurra primero, sin acumular.
 - **Automatizaciones sueltas:** WhatsApp, formularios, planillas e integraciones puntuales. Se cotizan aparte.
-- **Bot de WhatsApp y Telegram:** se publica como "Próximamente", con un CTA para avisar cuando esté disponible. Su alcance y precio se detallan más adelante.
+- **Bot de WhatsApp y Telegram:** se publica como "Próximamente", con un CTA para avisar cuando esté disponible. Precios aprobados: Bot Esencial desde USD 120 (2 a 3 semanas) y Bot Integrado desde USD 250 (4 a 6 semanas), más USD 30 por mes; las tarifas de Meta y el uso de IA se trasladan aparte. El detalle está en `docs/plans/landing-iteration-backlog.md`.
 
 Reglas comerciales:
 
@@ -111,7 +111,8 @@ Debe cubrir como mínimo: plazos, costo y qué incluye cada pack, forma de pago,
 
 ## 11. Calidad y arquitectura técnica (se conserva)
 
-- Next.js con TypeScript, despliegue en Vercel, contenido versionado en `src/content/`, sin CMS.
+- Next.js con TypeScript, contenido versionado en `src/content/`, sin CMS.
+- Despliegue en Railway (proyecto `mayofy`, servicio `web`, dominio `mayofy.juanikitro.com`) mediante el `Dockerfile`; cada push a `master` en GitHub dispara un deploy. El proyecto de Vercel `mayofy-landing` no se usa.
 - Accesibilidad básica obligatoria: contraste AA, teclado, foco visible, alternativas de contenido y `prefers-reduced-motion`.
 - Buenos Core Web Vitals en móvil; mensaje y CTA disponibles antes de cargar efectos secundarios.
 

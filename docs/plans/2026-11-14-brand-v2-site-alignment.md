@@ -1,7 +1,7 @@
 # Sitio alineado al brief de marca v2
 
 **Fecha:** 14 de noviembre de 2026
-**Estado:** implementado en local, sin commit ni deploy.
+**Estado:** publicado en Railway (`https://mayofy.juanikitro.com`), que despliega automáticamente cada push a `master` en GitHub.
 **Fuente:** `BRIEF.md` (brief v2), construido a partir del benchmark contra Villex, QKStudio, Ideas Web, Paisanos y DHNN y del formulario de definiciones respondido por Juani.
 
 ## Qué cambió
@@ -31,7 +31,7 @@
 
 ## Limitaciones
 
-- "Prefiero que me contacten" solo funciona en producción si `CONTACT_FORM_ENDPOINT` está configurado en Vercel.
+- "Prefiero que me contacten" solo funciona en producción si `CONTACT_FORM_ENDPOINT` está configurado en Railway.
 - La política de privacidad es un borrador; conviene revisión profesional y evaluar la inscripción de la base de datos en el Registro Nacional de Bases de Datos.
 - Los precios se muestran en USD con la aclaración de pago en pesos al cambio del día, sin un equivalente fijo en pesos que quedaría desactualizado.
 - El sitio está solo en español; portugués e inglés quedan para una etapa posterior.

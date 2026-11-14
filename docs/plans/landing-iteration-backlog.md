@@ -5,17 +5,17 @@
 
 ## Para decidir en la iteración
 
-1. **Destino del formulario.** "Prefiero que me contacten" usa `/api/contact`, que reenvía a `CONTACT_FORM_ENDPOINT`. Sin esa variable en Vercel, el sitio muestra un aviso y deriva a WhatsApp. Opciones: un correo (por ejemplo, con Resend), una planilla de Google (Apps Script) o un servicio de formularios (Formspree, Basin). Elegir uno y configurar la variable.
-2. **Dominio propio y correo comercial.** Hoy el sitio está en `mayofy.vercel.app` y el correo de contacto es `jpkitro@gmail.com` (también figura en `/privacidad`). Al tener dominio: conectar en Vercel, actualizar `NEXT_PUBLIC_SITE_URL`, cambiar `publicChannels.email` en `src/content/site.ts`.
+1. **Destino del formulario.** "Prefiero que me contacten" usa `/api/contact`, que reenvía a `CONTACT_FORM_ENDPOINT`. Sin esa variable en Railway, el sitio muestra un aviso y deriva a WhatsApp. Opciones: un correo (por ejemplo, con Resend), una planilla de Google (Apps Script) o un servicio de formularios (Formspree, Basin). Elegir uno y configurar la variable.
+2. **Dominio propio y correo comercial.** Hoy el sitio está en `mayofy.juanikitro.com` (Railway) y el correo de contacto es `jpkitro@gmail.com` (también figura en `/privacidad`). Al tener dominio propio: agregarlo al servicio `web` de Railway, actualizar `NEXT_PUBLIC_SITE_URL` en Railway y cambiar `publicChannels.email` en `src/content/site.ts`.
 3. **Imagen de Juani.** Decisión: usar un avatar en lugar de una foto. Recomendación: un avatar basado en una foto real y reconocible, tratado con la estética de `Umbral Vivo`, mejor que uno genérico o caricaturesco. La sección "Quién está detrás" vende trato directo, y un avatar que no se parece a nadie resta confianza. Hoy la sección muestra la letra "J".
-4. **Bot de WhatsApp y Telegram.** Hoy figura como "Próximamente". Hay que definir alcance, precio y plazo. Propuesta inicial (pendiente de aprobación):
+4. **Bot de WhatsApp y Telegram.** Hoy figura como "Próximamente". Precios y plazos aprobados por Juani el 14 de noviembre de 2026; falta publicarlos en el sitio y detallar el alcance final:
 
    | Escalón | Qué incluye | Desde | Plazo |
    |---|---|---|---|
    | Bot Esencial | Un canal (WhatsApp o Telegram), respuestas a preguntas frecuentes, toma de datos del cliente y derivación a una persona. | USD 120 | 2 a 3 semanas |
    | Bot Integrado | Todo lo anterior, los dos canales y conexión con Web + Gestión o un sistema: reservar turnos, consultar estados o datos. | USD 250 | 4 a 6 semanas |
 
-   Abono mensual sugerido: USD 30 por hosting, monitoreo y ajustes menores. Las tarifas de WhatsApp Business (Meta cobra por conversación) y el uso de IA, si se usa, se trasladan aparte.
+   Abono mensual: USD 30 por hosting, monitoreo y ajustes menores. Las tarifas de WhatsApp Business (Meta cobra por conversación) y el uso de IA, si se usa, se trasladan aparte.
 
 ## Para hacer en la iteración
 
