@@ -112,7 +112,7 @@ Debe cubrir como mínimo: plazos, costo y qué incluye cada pack, forma de pago,
 ## 11. Calidad y arquitectura técnica (se conserva)
 
 - Next.js con TypeScript, contenido versionado en `src/content/`, sin CMS.
-- Despliegue en Railway (proyecto `mayofy`, servicio `web`, dominio `mayofy.juanikitro.com`) mediante el `Dockerfile`; cada push a `master` en GitHub dispara un deploy. El proyecto de Vercel `mayofy-landing` no se usa.
+- Despliegue en Railway (proyecto `mayofy`, servicio `web`, dominio principal `mayofy.dev`, con `www.mayofy.dev` y `mayofy.juanikitro.com` también apuntando al servicio; ver `docs/ops/domains.md`) mediante el `Dockerfile`; cada push a `master` en GitHub dispara un deploy. El proyecto de Vercel `mayofy-landing` fue eliminado el 14 de noviembre de 2026 junto con su integración de Git; el repo no tiene conexión con Vercel.
 - Accesibilidad básica obligatoria: contraste AA, teclado, foco visible, alternativas de contenido y `prefers-reduced-motion`.
 - Buenos Core Web Vitals en móvil; mensaje y CTA disponibles antes de cargar efectos secundarios.
 

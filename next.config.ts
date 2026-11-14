@@ -7,6 +7,15 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     qualities: [70, 80, 90],
   },
+  // Secondary domains redirect to the canonical domain (see docs/ops/domains.md).
+  async redirects() {
+    return ["www.mayofy.dev", "mayofy.juanikitro.com"].map((host) => ({
+      source: "/:path*",
+      has: [{ type: "host" as const, value: host }],
+      destination: "https://mayofy.dev/:path*",
+      permanent: true,
+    }));
+  },
   async headers() {
     return [
       {
