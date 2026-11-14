@@ -34,22 +34,22 @@ const googleAnalyticsId =
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
   title: {
-    default: "Mayofy — páginas web que abren conversaciones",
+    default: "Mayofy — webs que venden, sistemas que ordenan",
     template: "%s — Mayofy",
   },
   description:
-    "Diseñamos páginas web y landings para negocios de servicios que ya reciben atención y necesitan convertirla en consultas.",
+    "Landings, webs con turnos y sistemas a medida para negocios de servicios en Argentina y LATAM. Empezamos con una reunión de diagnóstico gratis.",
   applicationName: "Mayofy",
   authors: [{ name: "Mayofy" }],
   creator: "Mayofy",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    locale: "es_419",
+    locale: "es_AR",
     siteName: "Mayofy",
-    title: "Mayofy — la consulta entra por acá",
+    title: "Mayofy — webs que venden, sistemas que ordenan",
     description:
-      "Páginas web y landings con identidad para transformar atención existente en conversaciones reales.",
+      "Landings, webs con turnos y sistemas a medida para negocios de servicios. Reunión de diagnóstico gratis.",
     images: [
       {
         url: "/images/hero-umbral-desktop.png",
@@ -61,9 +61,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mayofy — la consulta entra por acá",
+    title: "Mayofy — webs que venden, sistemas que ordenan",
     description:
-      "Páginas web y landings con identidad para negocios de servicios.",
+      "Landings, webs con turnos y sistemas a medida para negocios de servicios.",
     images: ["/images/hero-umbral-desktop.png"],
   },
 };
@@ -75,7 +75,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="es"
+      lang="es-AR"
       className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`}
     >
       <body>{children}</body>

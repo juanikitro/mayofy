@@ -7,7 +7,7 @@ import { MotionController } from "@/components/motion-controller";
 import { ProjectVisual } from "@/components/project-visual";
 import {
   getProject,
-  projects,
+  placeholderProjects,
   type ProjectVisualVariant,
 } from "@/content/projects";
 import { getWhatsAppHref } from "@/lib/whatsapp";
@@ -28,7 +28,7 @@ const galleryVariants: readonly ProjectVisualVariant[] = [
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  return placeholderProjects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { CanopyConvergence } from "@/components/canopy-convergence";
 import { CommercialPlans } from "@/components/commercial-plans";
@@ -17,9 +18,7 @@ import { getWhatsAppHref } from "@/lib/whatsapp";
 
 export default function Home() {
   const whatsappHref = getWhatsAppHref();
-  const heroWhatsAppHref = getWhatsAppHref(
-    "Hola Juani, vi la propuesta de Mayofy y quiero contarte sobre mi negocio.",
-  );
+  const heroWhatsAppHref = getWhatsAppHref(siteContent.hero.primaryMessage);
 
   return (
     <>
@@ -41,6 +40,7 @@ export default function Home() {
           <div className="site-nav__links">
             <a href="#trabajos">Trabajos</a>
             <a href="#servicio">Qué hacemos</a>
+            <a href="#planes">Packs</a>
             <a href="#sobre-mayofy">Quién está detrás</a>
           </div>
           <a className="site-nav__action" href={heroWhatsAppHref} data-magnetic>
@@ -60,7 +60,11 @@ export default function Home() {
           <div className="hero__light-breath" aria-hidden="true" />
           <div className="hero__content page-shell">
             <p className="hero__descriptor">{siteContent.descriptor}</p>
-            <h1>{siteContent.hero.title}</h1>
+            <h1>
+              {siteContent.hero.titleLines.map((line) => (
+                <span key={line}>{line} </span>
+              ))}
+            </h1>
             <p className="hero__body">{siteContent.hero.body}</p>
             <div className="hero__actions">
               <a
@@ -68,10 +72,10 @@ export default function Home() {
                 href={heroWhatsAppHref}
                 data-magnetic
               >
-                Escribinos por WhatsApp
+                {siteContent.hero.primaryCta}
               </a>
-              <a className="button button--quiet" href="#trabajos" data-magnetic>
-                Ver trabajos
+              <a className="button button--quiet" href="#planes" data-magnetic>
+                {siteContent.hero.secondaryCta}
               </a>
             </div>
           </div>
@@ -144,10 +148,10 @@ export default function Home() {
         >
           <div className="page-shell process__layout">
             <div className="process__statement">
-              <h2>Una idea clara. Seis movimientos.</h2>
+              <h2>Un proceso claro. Seis movimientos.</h2>
               <p>
-                Vas a saber qué estamos resolviendo, por qué tomamos cada decisión
-                y qué falta para publicar.
+                Vas a saber en qué etapa está tu proyecto, por qué tomamos cada
+                decisión y qué falta para publicar. Y después no te dejamos solo.
               </p>
             </div>
             <ol className="process__list">
@@ -169,14 +173,11 @@ export default function Home() {
         >
           <div className="page-shell capabilities__layout">
             <div>
-              <h2>La página es la base. No el límite.</h2>
-              <p>
-                Cuando el problema lo pide, podemos extender la solución sin
-                convertir la tecnología en protagonista.
-              </p>
+              <h2>{siteContent.systems.title}</h2>
+              <p>{siteContent.systems.body}</p>
             </div>
             <ul>
-              {siteContent.capabilities.map((capability) => (
+              {siteContent.systems.items.map((capability) => (
                 <li key={capability}>{capability}</li>
               ))}
             </ul>
@@ -196,16 +197,9 @@ export default function Home() {
               <small>dirección directa</small>
             </div>
             <div className="founder__copy">
-              <h2>Mayofy es la marca. Detrás estoy yo.</h2>
-              <p className="founder__lead">
-                Soy Juani. Combino dirección creativa con experiencia construyendo
-                productos web, APIs, integraciones y automatizaciones.
-              </p>
-              <p>
-                Vas a hablar conmigo desde la primera conversación hasta la
-                publicación. Sin capas comerciales, sin un equipo ficticio y sin
-                perder el contexto de tu negocio entre etapas.
-              </p>
+              <h2>{siteContent.founder.title}</h2>
+              <p className="founder__lead">{siteContent.founder.lead}</p>
+              <p>{siteContent.founder.body}</p>
               <a
                 className="text-link"
                 href={publicChannels.linkedin}
@@ -249,15 +243,16 @@ export default function Home() {
         <section id="contacto" className="contact section-night kinetic-section">
           <div className="page-shell contact__layout">
             <div className="contact__intro" data-reveal>
-              <h2>Contanos dónde está trabada la conversación.</h2>
+              <h2>Empecemos por una reunión de diagnóstico gratis.</h2>
               <p>
-                Si ya te encuentran pero tu presencia digital no acompaña, podemos
-                empezar por ahí.
+                Contanos qué necesitás: una web que convierta, turnos online o un
+                sistema para ordenar tu operación. Te respondemos en menos de 24
+                horas hábiles.
               </p>
-              <a className="button button--accent" href={whatsappHref} data-magnetic>
-                Abrir WhatsApp
+              <a className="button button--accent" href={heroWhatsAppHref} data-magnetic>
+                {siteContent.hero.primaryCta}
               </a>
-              <span>O explicanos mejor tu necesidad:</span>
+              <span>O completá estos datos y lo vemos por WhatsApp:</span>
             </div>
             <div data-reveal>
               <ContactForm whatsappHref={whatsappHref} />
@@ -268,7 +263,7 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="page-shell site-footer__layout">
-          <p>Una presencia propia para que la atención no se pierda.</p>
+          <p>{siteContent.hero.title}</p>
           <div className="site-footer__links">
             <a href={whatsappHref}>WhatsApp</a>
             <a href={publicChannels.instagram} target="_blank" rel="noreferrer">
@@ -277,8 +272,9 @@ export default function Home() {
             <a href={publicChannels.linkedin} target="_blank" rel="noreferrer">
               LinkedIn
             </a>
+            <Link href="/privacidad">Privacidad</Link>
           </div>
-          <small>Mayofy · Estudio digital unipersonal · LATAM</small>
+          <small>Mayofy · Webs y software a medida · Argentina y LATAM</small>
         </div>
       </footer>
 

@@ -1,131 +1,181 @@
+export const commercialIntro = {
+  title: "Tres packs. Desde una landing hasta tu propio sistema.",
+  body: "Precios de referencia para que sepas por dónde arrancar. El alcance, el plazo y la inversión final se definen después de una reunión de diagnóstico gratis.",
+  payment:
+    "Pago: 50% al inicio y 50% en la entrega. Precios en USD; podés pagar en pesos al cambio del día.",
+} as const;
+
 export const commercialPlans = [
   {
-    id: "esencial",
-    name: "Landing Esencial",
+    id: "landing",
+    name: "Landing",
     eyebrow: undefined,
-    price: "USD 119",
-    payment: "Pago único",
-    maintenance: "Mantenimiento opcional: USD 50 por mes.",
+    price: "USD 85",
+    timeline: "1 a 2 semanas",
     description:
-      "Una página profesional para que quienes te encuentran entiendan qué ofrecés y te escriban con facilidad.",
+      "Una página propia para que quienes te encuentran entiendan qué ofrecés y te escriban por WhatsApp.",
     idealFor:
-      "Negocios locales que quieren verse profesionales online, mostrar un servicio concreto o llevar personas desde Instagram, Google Maps o WhatsApp a una página propia.",
+      "Negocios de servicios que reciben atención por Instagram, Google Maps o recomendaciones y necesitan un lugar propio para convertirla en consultas.",
     detailGroups: [
       {
         title: "Incluye",
         items: [
           "Un cuestionario breve para conocer tu negocio, tu servicio y a quién querés atraer.",
           "Una página con hasta 5 secciones para contar lo importante sin marear a nadie.",
-          "Un diseño cuidado, inspirado en referencias y adaptado a tu rubro.",
-          "Textos base para presentar tu negocio y que puedas ajustar a tu estilo.",
+          "Un diseño cuidado y adaptado a tu rubro.",
+          "Textos base para presentar tu negocio, ajustables a tu estilo.",
           "Botones para que te escriban por WhatsApp con el mensaje listo.",
           "Enlaces a Instagram, ubicación y las redes que uses.",
-          "Tus fotos, menú, catálogo o contenido integrado en la página.",
           "Una buena presentación cuando compartís el enlace por WhatsApp o redes.",
           "Tu dominio conectado y la página publicada.",
-          "Una instancia para reunir tus ajustes antes de publicar.",
-          "Corrección de errores que aparezcan después del lanzamiento.",
+          "Una instancia de ajustes antes de publicar.",
         ],
       },
       {
         title: "No incluye",
         items: [
-          "Un estudio profundo de tu mercado o de tus competidores.",
+          "Formularios especiales, turnos o reservas.",
           "La creación completa de tu marca o logo.",
-          "Un diseño hecho desde cero para tu negocio.",
-          "Un plan para posicionarte en Google o medir cada consulta.",
-          "Formularios especiales, respuestas automáticas o mantenimiento mensual.",
           "Secciones o páginas adicionales a las acordadas.",
         ],
       },
     ],
-    note: "El dominio, hosting y los servicios externos se abonan por separado.",
+    footnote:
+      "¿Necesitás varias páginas? La web institucional arranca desde USD 95 y se entrega en 3 a 4 semanas.",
+    note: "El dominio, el hosting y los servicios externos se abonan por separado.",
     cta: "Quiero mi landing",
-    whatsappMessage: "Hola, quiero consultar por la Landing Esencial de Mayofy.",
+    whatsappMessage: "Hola, quiero consultar por el pack Landing de Mayofy.",
   },
   {
-    id: "conversion",
-    name: "Landing Conversión",
-    eyebrow: "Más completa",
-    price: "USD 399",
-    payment: "Pago único",
-    maintenance: "Mantenimiento opcional: USD 25 por mes.",
+    id: "web-gestion",
+    name: "Web + Gestión",
+    eyebrow: "Web y sistema en uno",
+    price: "USD 150",
+    timeline: "3 a 9 semanas",
     description:
-      "Una página pensada para mostrar por qué elegirte, hacer que más personas consulten y saber qué resultados está dando.",
+      "Tu web más un sistema simple para que tus clientes saquen turno o reserven solos y vos gestiones todo desde un panel propio.",
     idealFor:
-      "Negocios locales que quieren conseguir más consultas, destacarse en su zona o aprovechar mejor la publicidad, Instagram y Google.",
+      "Consultorios, gimnasios, estudios, academias y centros de estética que necesitan más que una vidriera.",
     detailGroups: [
       {
-        title: "Todo lo de Landing Esencial, más",
+        title: "Incluye en el precio base",
         items: [
-          "Una reunión para entender tu negocio, tu cliente ideal y qué te diferencia en tu zona.",
-          "Un mensaje claro que explica qué ofrecés, por qué elegirte y cómo dar el siguiente paso.",
-          "Un diseño hecho a medida para que tu negocio se vea más sólido y memorable.",
-          "Hasta 8 secciones para mostrar servicios, beneficios, preguntas frecuentes, testimonios o casos reales.",
-          "Fotos y piezas visuales ajustadas para que la página se vea mejor al compartirla.",
-          "La forma de contacto que más te convenga: WhatsApp, formulario, llamada o reserva.",
-          "Un formulario simple para ordenar las consultas y recibirlas por mail o en una planilla.",
-          "Una base para que te encuentren mejor cuando buscan tu servicio y tu ubicación en Google.",
-          "Estadísticas para saber cuántas personas te visitan, te escriben o completan un formulario.",
-          "La página lista para acompañar campañas en Google o redes cuando decidas hacer publicidad.",
-          "Dos instancias de ajustes y 30 días de acompañamiento después de publicar.",
+          "Todo lo del pack Landing.",
+          "Turnos o reservas online para una agenda.",
+          "Un panel para ver y gestionar reservas y clientes.",
+          "Acceso para una persona administradora.",
+          "Aviso por correo de cada reserva nueva.",
+          "Carga inicial de tus servicios y horarios.",
+        ],
+      },
+      {
+        title: "Se cotiza aparte",
+        items: [
+          "Varias sedes, profesionales o agendas.",
+          "Pagos online o cobro de señas.",
+          "Recordatorios automáticos por WhatsApp.",
+          "Usuarios con distintos roles y permisos.",
         ],
       },
     ],
-    note:
-      "La optimización para Google es una base inicial y no asegura aparecer primero ni generar una cantidad específica de consultas. Las campañas de publicidad, respuestas automáticas y funciones especiales se cotizan por separado.",
-    cta: "Quiero generar más consultas",
-    whatsappMessage: "Hola, quiero consultar por la Landing Conversión de Mayofy.",
+    footnote: undefined,
+    note: "El precio base cubre una agenda y un panel simple. Si tu operación necesita más, lo definimos en la propuesta antes de empezar.",
+    cta: "Quiero web con turnos",
+    whatsappMessage: "Hola, quiero consultar por el pack Web + Gestión de Mayofy.",
+  },
+  {
+    id: "sistema",
+    name: "Sistema a Medida",
+    eyebrow: undefined,
+    price: "USD 450",
+    timeline: "1 a 6 meses",
+    description:
+      "Software pensado para tu operación cuando las planillas y las herramientas genéricas ya no alcanzan.",
+    idealFor:
+      "Negocios con procesos propios: gestión interna, stock, clientes, cobranzas o equipos con distintos roles.",
+    detailGroups: [
+      {
+        title: "Incluye",
+        items: [
+          "Relevamiento de tus procesos y de lo que hoy se hace a mano.",
+          "Diseño del sistema y de sus datos pensado para tu caso.",
+          "Usuarios con roles y permisos.",
+          "Paneles con la información que necesitás para decidir.",
+          "Integración con lo que ya usás: facturación, planillas o pagos.",
+          "Entregas por etapas para que lo uses antes de terminarlo todo.",
+          "Documentación y capacitación para tu equipo.",
+        ],
+      },
+    ],
+    footnote: undefined,
+    note: "El alcance y la inversión final se definen después de la reunión de diagnóstico.",
+    cta: "Quiero un sistema a medida",
+    whatsappMessage: "Hola, quiero consultar por un Sistema a Medida de Mayofy.",
   },
 ] as const;
 
-export const commercialBenefits = [
-  "Se ve bien y es fácil de usar desde el celular, la tablet y la compu.",
-  "Carga ágil y guía a cada visitante hacia la información importante.",
-  "Botones de contacto que funcionan y navegación protegida.",
-  "Tu propio dominio conectado.",
-  "Preparada para compartirla y para que Google entienda de qué trata.",
-  "Publicación profesional y una base lista para crecer con tu negocio.",
-] as const;
+export const comingSoon = {
+  label: "Próximamente",
+  title: "Bot de WhatsApp y Telegram",
+  description:
+    "Un asistente que responde las consultas frecuentes, toma los datos de cada cliente y te deriva la conversación cuando hace falta una persona.",
+  cta: "Quiero que me avisen",
+  whatsappMessage:
+    "Hola, quiero que me avisen cuando esté disponible el bot de WhatsApp y Telegram de Mayofy.",
+} as const;
+
+export const guarantees = {
+  title: "Lo que garantizamos en todos los packs",
+  items: [
+    "El código y el dominio son tuyos.",
+    "Te respondemos en menos de 24 horas hábiles.",
+    "Carga rápida en el celular, medida con Core Web Vitals. Si no pasa, la corregimos sin costo.",
+    "SEO técnico desde el primer día.",
+    "Accesible y cómoda de usar en cualquier pantalla.",
+    "Una semana de soporte después de publicar.",
+    "Rondas de revisión acordadas antes de empezar.",
+  ],
+} as const;
 
 export const maintenancePlan = {
-  price: "USD 50 por mes",
+  prices: [
+    { label: "Landing", price: "USD 50 por mes", asterisk: false },
+    { label: "Web + Gestión y Sistema a Medida", price: "USD 25 por mes", asterisk: true },
+  ],
   description:
-    "Mantenemos tu landing actualizada, funcionando correctamente y acompañando los cambios de tu negocio. Para Landing Conversión, el mantenimiento opcional tiene un precio preferencial de USD 25 por mes.",
-  note: "Los cambios no utilizados no se acumulan para el mes siguiente.",
+    "Mantenemos tu web o tu sistema actualizado, funcionando y acompañando los cambios de tu negocio.",
+  footnotes: [
+    "Cada mes incluye hasta 5 cambios menores o 90 minutos de trabajo, lo que ocurra primero. Los cambios no usados no se acumulan para el mes siguiente.",
+    "Precio promocional para clientes de Web + Gestión y Sistema a Medida, con los mismos límites mensuales.",
+  ],
   cta: "Quiero mantenimiento mensual",
-  whatsappMessage:
-    "Hola, quiero consultar por el mantenimiento mensual de mi landing.",
+  whatsappMessage: "Hola, quiero consultar por el mantenimiento mensual de Mayofy.",
   detailGroups: [
     {
       title: "Incluye",
       items: [
-        "Hasta 5 cambios menores o un máximo de 90 minutos de trabajo mensual.",
-        "Revisión de formularios, enlaces y botones.",
-        "Control básico del funcionamiento de la landing.",
+        "Revisión de formularios, enlaces, botones y reservas.",
+        "Control básico del funcionamiento.",
         "Actualizaciones técnicas necesarias.",
-        "Resumen simple de visitas y consultas para Landing Conversión.",
-        "Soporte para publicar los cambios.",
+        "Resumen simple de visitas y consultas.",
+        "Publicación de los cambios.",
       ],
     },
     {
       title: "Cambios menores",
       items: [
         "Modificar un texto o reemplazar una imagen.",
-        "Actualizar horarios o precios.",
+        "Actualizar horarios, servicios o precios.",
         "Cambiar un enlace o mensaje de WhatsApp.",
         "Agregar un testimonio.",
-        "Agregar o quitar un servicio dentro de una sección existente.",
       ],
     },
     {
       title: "Se cotiza por separado",
       items: [
-        "Crear una sección o página nueva.",
-        "Rediseñar completamente una parte de la landing.",
+        "Crear una sección, página o función nueva.",
+        "Rediseñar una parte completa.",
         "Integrar una plataforma externa.",
-        "Agregar reservas, pagos o automatizaciones.",
-        "Reescribir toda la página.",
         "Crear o administrar campañas publicitarias.",
       ],
     },
@@ -133,26 +183,23 @@ export const maintenancePlan = {
 } as const;
 
 export const extensions = {
+  title: "Automatizaciones sueltas",
+  body: "No hace falta contratar un sistema completo para dejar de hacer una tarea a mano. Sumamos solo lo que necesitás, sobre lo que ya tenés.",
   categories: [
     {
       title: "Conseguí más consultas",
       items: [
         "Landings para campañas específicas.",
-        "Páginas adicionales por servicio.",
-        "Páginas orientadas a ciudades o zonas.",
+        "Páginas adicionales por servicio o zona.",
         "Meta Pixel y Google Ads.",
-        "Google Business Profile.",
-        "SEO local.",
+        "Google Business Profile y SEO local.",
         "Versiones en otros idiomas.",
-        "Sitios multipágina.",
       ],
     },
     {
       title: "Simplificá el contacto",
       items: [
         "Formularios avanzados.",
-        "Sistemas de reservas.",
-        "Calendarios de turnos.",
         "Cotizadores interactivos.",
         "Pago de señas.",
         "Catálogos de productos o servicios.",
@@ -165,13 +212,11 @@ export const extensions = {
         "Integración con CRM.",
         "Notificaciones por correo.",
         "Respuestas automáticas.",
-        "Clasificación de consultas.",
-        "Seguimiento de potenciales clientes.",
-        "Panel de consultas.",
+        "Clasificación y seguimiento de consultas.",
       ],
     },
   ],
-  note: "Estas ampliaciones se cotizan según las necesidades del proyecto.",
-  cta: "Consultar por una ampliación",
-  whatsappMessage: "Hola, quiero consultar por una ampliación para mi landing.",
+  note: "Estas automatizaciones se cotizan según cada caso.",
+  cta: "Consultar por una automatización",
+  whatsappMessage: "Hola, quiero consultar por una automatización con Mayofy.",
 } as const;

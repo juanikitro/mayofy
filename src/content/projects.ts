@@ -23,17 +23,18 @@ export type ProjectEntry = {
   scope: string;
   visual: ProjectVisualVariant;
   layout: ProjectPortalLayout;
-  placeholder: true;
+  placeholder: boolean;
+  url?: string;
 };
 
 export const projects = [
   {
-    slug: "proyecto-01",
+    slug: "shineapp",
     index: "01",
-    title: "Nombre del proyecto 01",
-    category: "Categoría por definir",
+    title: "Sistema de gestión para lavaderos",
+    category: "Sistema a medida",
     summary:
-      "Resumen breve del negocio, el desafío y la solución construida. Reemplazar con contenido real.",
+      "Plataforma para que lavaderos y negocios de detailing gestionen clientes, servicios y la operación del día a día.",
     context:
       "Contexto del negocio, su oferta, su audiencia y la forma en que llegaban las consultas antes del proyecto.",
     challenge:
@@ -53,18 +54,19 @@ export const projects = [
     ],
     outcome:
       "Resultado, aprendizaje o señal verificable a completar cuando el caso sea reemplazado.",
-    scope: "Alcance por definir",
+    scope: "Producto, diseño y desarrollo",
     visual: "threshold",
     layout: "split-left",
-    placeholder: true,
+    placeholder: false,
+    url: "https://shineapp.lat/",
   },
   {
-    slug: "proyecto-02",
+    slug: "consignataria-hacienda",
     index: "02",
-    title: "Nombre del proyecto 02",
-    category: "Categoría por definir",
+    title: "Landing para una consignataria de hacienda",
+    category: "Landing",
     summary:
-      "Resumen breve del negocio, el desafío y la solución construida. Reemplazar con contenido real.",
+      "Presencia propia para una consignataria familiar: qué hace, cómo trabaja y una vía directa de contacto.",
     context:
       "Contexto del negocio, su oferta, su audiencia y la forma en que llegaban las consultas antes del proyecto.",
     challenge:
@@ -84,18 +86,19 @@ export const projects = [
     ],
     outcome:
       "Resultado, aprendizaje o señal verificable a completar cuando el caso sea reemplazado.",
-    scope: "Alcance por definir",
+    scope: "Diseño, desarrollo y publicación",
     visual: "current",
     layout: "split-right",
-    placeholder: true,
+    placeholder: false,
+    url: "https://gymg.com.ar/",
   },
   {
-    slug: "proyecto-03",
+    slug: "portfolio-desarrollador",
     index: "03",
-    title: "Nombre del proyecto 03",
-    category: "Categoría por definir",
+    title: "Portfolio de un desarrollador",
+    category: "Web personal",
     summary:
-      "Resumen breve del negocio, el desafío y la solución construida. Reemplazar con contenido real.",
+      "Sitio de presentación profesional con trayectoria y casos técnicos explicados con claridad.",
     context:
       "Contexto del negocio, su oferta, su audiencia y la forma en que llegaban las consultas antes del proyecto.",
     challenge:
@@ -115,10 +118,11 @@ export const projects = [
     ],
     outcome:
       "Resultado, aprendizaje o señal verificable a completar cuando el caso sea reemplazado.",
-    scope: "Alcance por definir",
+    scope: "Diseño, desarrollo y publicación",
     visual: "canopy",
     layout: "horizon",
-    placeholder: true,
+    placeholder: false,
+    url: "https://juanikitro.com/",
   },
   {
     slug: "proyecto-04",
@@ -187,6 +191,8 @@ export const projects = [
     placeholder: true,
   },
 ] as const satisfies readonly ProjectEntry[];
+
+export const placeholderProjects = projects.filter((project) => project.placeholder);
 
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);

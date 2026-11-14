@@ -1,8 +1,10 @@
 import { AnimatedDetails } from "@/components/animated-details";
 import {
-  commercialBenefits,
+  comingSoon,
+  commercialIntro,
   commercialPlans,
   extensions,
+  guarantees,
   maintenancePlan,
 } from "@/content/commercial-plans";
 import { getWhatsAppHref } from "@/lib/whatsapp";
@@ -34,18 +36,9 @@ export function CommercialPlans() {
     <section id="planes" className="commercial kinetic-section" aria-labelledby="planes-title">
       <div className="page-shell">
         <header className="commercial__intro section-intro" data-reveal>
-          <h2 id="planes-title">Elegí la landing que necesita tu negocio</h2>
-          <p>
-            Desde una presencia digital profesional hasta una herramienta comercial
-            completa para generar y medir consultas.
-          </p>
+          <h2 id="planes-title">{commercialIntro.title}</h2>
+          <p>{commercialIntro.body}</p>
         </header>
-
-        <ul className="commercial-benefits" aria-label="Incluido en todos los planes">
-          {commercialBenefits.map((benefit) => (
-            <li key={benefit}>{benefit}</li>
-          ))}
-        </ul>
 
         <div className="commercial-plans">
           {commercialPlans.map((plan) => {
@@ -58,9 +51,11 @@ export function CommercialPlans() {
                 <header className="commercial-plan__header">
                   {plan.eyebrow ? <p className="commercial-plan__eyebrow">{plan.eyebrow}</p> : null}
                   <h3>{plan.name}</h3>
+                  <p className="commercial-plan__from">Desde</p>
                   <p className="commercial-plan__price">{plan.price}</p>
-                  <p className="commercial-plan__payment">{plan.payment}</p>
-                  <p className="commercial-plan__maintenance">{plan.maintenance}</p>
+                  <p className="commercial-plan__timeline">
+                    Plazo estimado: <strong>{plan.timeline}</strong>
+                  </p>
                   <p className="commercial-plan__description">{plan.description}</p>
                 </header>
 
@@ -77,6 +72,13 @@ export function CommercialPlans() {
                   {plan.cta}
                 </a>
 
+                {plan.footnote ? (
+                  <p className="commercial-plan__footnote">
+                    <span aria-hidden="true">(*) </span>
+                    {plan.footnote}
+                  </p>
+                ) : null}
+
                 <AnimatedDetails
                   className="commercial-details"
                   summary="Ver todo lo que incluye"
@@ -89,10 +91,46 @@ export function CommercialPlans() {
           })}
         </div>
 
+        <p className="commercial__payment">{commercialIntro.payment}</p>
+
+        <article className="coming-soon" data-reveal>
+          <p className="coming-soon__label">{comingSoon.label}</p>
+          <div className="coming-soon__copy">
+            <h3>{comingSoon.title}</h3>
+            <p>{comingSoon.description}</p>
+          </div>
+          <a
+            className="button button--quiet coming-soon__cta"
+            href={getWhatsAppHref(comingSoon.whatsappMessage)}
+            data-magnetic
+          >
+            {comingSoon.cta}
+          </a>
+        </article>
+
+        <section className="guarantees" aria-labelledby="garantias-title" data-reveal>
+          <h3 id="garantias-title">{guarantees.title}</h3>
+          <ul className="commercial-list guarantees__list">
+            {guarantees.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+
         <article className="maintenance" data-reveal>
           <header className="maintenance__intro">
             <h3>Mantenimiento mensual</h3>
-            <p className="maintenance__price">{maintenancePlan.price}</p>
+            <dl className="maintenance__prices">
+              {maintenancePlan.prices.map((tier) => (
+                <div key={tier.label}>
+                  <dt>{tier.label}</dt>
+                  <dd className="maintenance__price">
+                    {tier.price}
+                    <span aria-hidden="true">{tier.asterisk ? " (**)" : " (*)"}</span>
+                  </dd>
+                </div>
+              ))}
+            </dl>
             <p>{maintenancePlan.description}</p>
           </header>
           <div className="maintenance__content">
@@ -106,18 +144,21 @@ export function CommercialPlans() {
             <AnimatedDetails className="commercial-details" summary="¿Qué cambios incluye?">
               <DetailGroups groups={maintenancePlan.detailGroups} />
             </AnimatedDetails>
-            <p className="commercial-details__note">{maintenancePlan.note}</p>
+            <ol className="maintenance__footnotes" aria-label="Límites del mantenimiento">
+              {maintenancePlan.footnotes.map((footnote, index) => (
+                <li key={footnote}>
+                  <span aria-hidden="true">{index === 0 ? "(*) " : "(**) "}</span>
+                  {footnote}
+                </li>
+              ))}
+            </ol>
           </div>
         </article>
 
         <section className="extensions" aria-labelledby="ampliaciones-title" data-reveal>
           <header className="extensions__intro">
-            <h3 id="ampliaciones-title">¿Necesitás algo más?</h3>
-            <p>
-              Tu landing puede crecer junto con tu negocio. Agregamos únicamente las
-              funcionalidades que necesitás, sin obligarte a contratar un sistema
-              complejo desde el comienzo.
-            </p>
+            <h3 id="ampliaciones-title">{extensions.title}</h3>
+            <p>{extensions.body}</p>
           </header>
           <div className="extensions__grid">
             {extensions.categories.map((category) => (

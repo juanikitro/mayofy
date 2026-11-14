@@ -1,12 +1,63 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useEffect, useRef, useState } from "react";
+
+import {
+  type ContactDetails,
+  type ContactOptionField,
+  contactOptions,
+  formatContactMessage,
+} from "@/content/contact-options";
+import { getWhatsAppHref } from "@/lib/whatsapp";
 
 type SubmissionState = "idle" | "submitting" | "success" | "error";
 
 type ContactFormProps = {
   whatsappHref: string;
 };
+
+function readDetails(form: FormData): ContactDetails {
+  const read = (key: string) => String(form.get(key) ?? "").trim();
+
+  return {
+    name: read("name"),
+    business: read("business"),
+    contact: read("contact"),
+    pack: read("pack"),
+    timeline: read("timeline"),
+    budget: read("budget"),
+    domain: read("domain"),
+    reference: read("reference"),
+    need: read("need"),
+  };
+}
+
+function SelectField({
+  field,
+  label,
+  placeholder,
+}: {
+  field: ContactOptionField;
+  label: string;
+  placeholder: string;
+}) {
+  return (
+    <label className="field">
+      <span>{label}</span>
+      <select name={field} defaultValue="">
+        <option value="" disabled>
+          {placeholder}
+        </option>
+        {contactOptions[field].map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
 
 export function ContactForm({ whatsappHref }: ContactFormProps) {
   const [submissionState, setSubmissionState] =
@@ -21,15 +72,25 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    const submitter = (event.nativeEvent as SubmitEvent).submitter;
+    const form = new FormData(event.currentTarget);
+    const details = readDetails(form);
+
+    if (submitter?.getAttribute("value") === "whatsapp") {
+      const href = getWhatsAppHref(formatContactMessage(details));
+      const opened = window.open(href, "_blank", "noopener");
+      if (!opened) window.location.href = href;
+      setSubmissionState("success");
+      setFeedback("Abrimos WhatsApp con tu consulta lista para enviar.");
+      return;
+    }
+
     setSubmissionState("submitting");
     setFeedback("Enviando tu consulta…");
 
-    const form = new FormData(event.currentTarget);
     const payload = {
-      name: String(form.get("name") ?? ""),
-      business: String(form.get("business") ?? ""),
-      contact: String(form.get("contact") ?? ""),
-      need: String(form.get("need") ?? ""),
+      ...details,
       company: String(form.get("company") ?? ""),
       startedAt: startedAt.current,
     };
@@ -50,7 +111,7 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
       }
 
       setSubmissionState("success");
-      setFeedback("Consulta enviada. Te vamos a responder por el canal indicado.");
+      setFeedback("Consulta enviada. Te respondemos en menos de 24 horas hábiles.");
       formRef.current?.reset();
       startedAt.current = Date.now();
     } catch (error) {
@@ -106,8 +167,34 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
           required
         />
       </label>
+      <div className="contact-form__row">
+        <SelectField field="pack" label="¿Qué necesitás?" placeholder="Elegí una opción" />
+        <SelectField field="timeline" label="Plazo estimado" placeholder="Elegí un plazo" />
+      </div>
+      <div className="contact-form__row">
+        <SelectField
+          field="budget"
+          label="Presupuesto aproximado"
+          placeholder="Elegí un rango"
+        />
+        <SelectField
+          field="domain"
+          label="¿Ya tenés dominio o hosting?"
+          placeholder="Elegí una opción"
+        />
+      </div>
       <label className="field">
-        <span>Contanos qué necesitás</span>
+        <span>Una web que te guste como referencia (opcional)</span>
+        <input
+          name="reference"
+          type="url"
+          inputMode="url"
+          maxLength={300}
+          placeholder="https://"
+        />
+      </label>
+      <label className="field">
+        <span>Contanos sobre tu proyecto</span>
         <textarea name="need" minLength={20} maxLength={1800} required />
       </label>
       <label className="field field--trap" aria-hidden="true">
@@ -118,19 +205,33 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
         <button
           className="button button--accent"
           type="submit"
+          name="channel"
+          value="whatsapp"
           data-magnetic
+        >
+          Enviar por WhatsApp
+        </button>
+        <button
+          className="button button--quiet"
+          type="submit"
+          name="channel"
+          value="callback"
           disabled={submissionState === "submitting"}
         >
-          {submissionState === "submitting" ? "Enviando…" : "Enviar consulta"}
+          {submissionState === "submitting" ? "Enviando…" : "Prefiero que me contacten"}
         </button>
-        <p
-          id="contact-feedback"
-          className={`contact-form__feedback contact-form__feedback--${submissionState}`}
-          aria-live="polite"
-        >
-          {feedback || "Respondemos de forma directa, sin listas ni automatizaciones invasivas."}
-        </p>
       </div>
+      <p
+        id="contact-feedback"
+        className={`contact-form__feedback contact-form__feedback--${submissionState}`}
+        aria-live="polite"
+      >
+        {feedback || "Te respondemos en menos de 24 horas hábiles."}
+      </p>
+      <p className="contact-form__privacy">
+        Usamos tus datos solo para responder tu consulta. No los vendemos ni los
+        cedemos. <Link href="/privacidad">Política de privacidad</Link>.
+      </p>
       {submissionState === "error" ? (
         <a className="contact-form__fallback" href={whatsappHref}>
           Continuar por WhatsApp

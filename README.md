@@ -37,6 +37,9 @@ npm run build
 - `CONTEXT.md`: lenguaje canónico.
 - `docs/plans/`: diseño aprobado y plan de implementación.
 - `src/content/site.ts`: copy estructurado de la home.
+- `src/content/commercial-plans.ts`: packs, garantías, mantenimiento y automatizaciones.
+- `src/content/contact-options.ts`: opciones del formulario calificador, compartidas entre el formulario y `/api/contact`.
+- `src/app/privacidad/page.tsx`: política de privacidad (borrador basado en la Ley 25.326).
 - `tokens.css`: sistema visual portable.
 - `.hallmark/log.json`: registro de la dirección estructural.
 

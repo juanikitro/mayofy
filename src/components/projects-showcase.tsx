@@ -2,9 +2,9 @@ import Link from "next/link";
 
 import { AnimatedDetails } from "@/components/animated-details";
 import { ProjectVisual } from "@/components/project-visual";
-import { projects } from "@/content/projects";
+import { type ProjectEntry, projects } from "@/content/projects";
 
-const featuredProjects = projects.slice(0, 3);
+const featuredProjects: readonly ProjectEntry[] = projects.slice(0, 3);
 const additionalProjects = projects.slice(3);
 
 export function ProjectsShowcase() {
@@ -13,12 +13,12 @@ export function ProjectsShowcase() {
       <div className="page-shell">
         <header className="projects__intro" data-reveal>
           <div>
-            <p>Selección provisional · 03 visibles de 06</p>
+            <p>Trabajos seleccionados</p>
             <h2>Primero, el trabajo.</h2>
           </div>
           <p>
-            Esta estructura está lista para recibir casos reales. Por ahora, cada
-            entrada señala con claridad qué contenido falta reemplazar.
+            Un sistema a medida, una landing y una web personal, publicados y
+            funcionando. Los casos completos se suman a medida que avanzan.
           </p>
         </header>
 
@@ -32,7 +32,9 @@ export function ProjectsShowcase() {
                 <ProjectVisual label={project.title} variant={project.visual} />
               </div>
               <div className="project-portal__copy">
-                <p className="project-placeholder">Placeholder de contenido</p>
+                <p className="project-placeholder">
+                  {project.placeholder ? "Placeholder de contenido" : project.category}
+                </p>
                 <div className="project-portal__heading">
                   <span>{project.index}</span>
                   <h3>{project.title}</h3>
@@ -48,9 +50,20 @@ export function ProjectsShowcase() {
                     <dd>{project.scope}</dd>
                   </div>
                 </dl>
-                <Link className="project-link" href={`/proyectos/${project.slug}`}>
-                  Ver detalle <span aria-hidden="true">→</span>
-                </Link>
+                {project.url ? (
+                  <a
+                    className="project-link"
+                    href={project.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Visitar sitio <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <Link className="project-link" href={`/proyectos/${project.slug}`}>
+                    Ver detalle <span aria-hidden="true">→</span>
+                  </Link>
+                )}
               </div>
             </article>
           ))}

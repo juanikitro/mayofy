@@ -1,7 +1,17 @@
+import {
+  type ContactOptionField,
+  getContactOptionLabel,
+} from "@/content/contact-options";
+
 type ContactPayload = {
   name?: unknown;
   business?: unknown;
   contact?: unknown;
+  pack?: unknown;
+  timeline?: unknown;
+  budget?: unknown;
+  domain?: unknown;
+  reference?: unknown;
   need?: unknown;
   company?: unknown;
   startedAt?: unknown;
@@ -11,6 +21,23 @@ const MAX_BODY_BYTES = 12_000;
 
 function readText(value: unknown, maxLength: number) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+}
+
+function readOption(field: ContactOptionField, value: unknown) {
+  const text = readText(value, 40);
+  return getContactOptionLabel(field, text) ? text : "";
+}
+
+function readReference(value: unknown) {
+  const text = readText(value, 300);
+  if (!text) return "";
+
+  try {
+    const url = new URL(text);
+    return url.protocol === "https:" || url.protocol === "http:" ? url.toString() : "";
+  } catch {
+    return "";
+  }
 }
 
 export async function POST(request: Request) {
@@ -37,6 +64,11 @@ export async function POST(request: Request) {
   const name = readText(payload.name, 80);
   const business = readText(payload.business, 120);
   const contact = readText(payload.contact, 160);
+  const pack = readOption("pack", payload.pack);
+  const timeline = readOption("timeline", payload.timeline);
+  const budget = readOption("budget", payload.budget);
+  const domain = readOption("domain", payload.domain);
+  const reference = readReference(payload.reference);
   const need = readText(payload.need, 1800);
   const company = readText(payload.company, 120);
   const startedAt =
@@ -99,7 +131,18 @@ export async function POST(request: Request) {
           ? { Authorization: `Bearer ${process.env.CONTACT_FORM_TOKEN}` }
           : {}),
       },
-      body: JSON.stringify({ name, business, contact, need, source: "mayofy-web" }),
+      body: JSON.stringify({
+        name,
+        business,
+        contact,
+        pack,
+        timeline,
+        budget,
+        domain,
+        reference,
+        need,
+        source: "mayofy-web",
+      }),
       signal: AbortSignal.timeout(8_000),
     });
 
