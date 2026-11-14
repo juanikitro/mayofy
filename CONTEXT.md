@@ -13,33 +13,41 @@ Negocio que opera en un territorio concreto, vende mediante consultas o reservas
 _Avoid_: Todo negocio, cualquier emprendedor, público general
 
 **Mercado local**:
-Negocios de servicios de LATAM hispanohablante atendidos de forma remota. Local describe el modelo comercial del cliente, no su cercanía geográfica con Juani.
-_Avoid_: Solo Argentina, Brasil en el lanzamiento inicial, mercado global indiferenciado
+Negocios de servicios de Argentina primero y LATAM hispanohablante después, atendidos de forma remota. Local describe el modelo comercial del cliente, no su cercanía geográfica con Juani.
+_Avoid_: Brasil en el lanzamiento inicial, mercado global indiferenciado
 
 **Nombre Mayofy**:
 Nombre abstracto sin historia de origen pública que construye significado mediante el trabajo y la experiencia de la marca.
 _Avoid_: Etimología ficticia, relato fundacional inventado
 
 **Descriptor Mayofy**:
-Explicación funcional de la actividad de Mayofy, distinta de un eslogan permanente.
-_Avoid_: Eslogan fijo, frase grandilocuente vacía
+Promesa en una línea de la actividad de Mayofy: "Webs que venden. Sistemas que ordenan."
+_Avoid_: Frase grandilocuente vacía, promesa de resultados medibles
 
 ## Oferta y relación comercial
 
 **Oferta principal**:
-Páginas web y landing pages orientadas a transformar atención existente en consultas por el canal comercial elegido.
-_Avoid_: Página informativa, presencia web genérica, catálogo de tecnologías
+Escalera de tres packs con el mismo peso entre webs y software a medida: Landing, Web + Gestión y Sistema a Medida.
+_Avoid_: Página informativa, presencia web genérica, catálogo de tecnologías, sistemas como capacidad secundaria
+
+**Pack**:
+Escalón de la Oferta principal con destinatario, precio "desde" y plazo estimado públicos.
+_Avoid_: Precio cerrado, plazo garantizado, paquete sin destinatario claro
+
+**Reunión de diagnóstico**:
+Reunión gratuita para entender qué necesita el negocio antes de preparar la Propuesta comercial. Es el gancho de captación de Mayofy.
+_Avoid_: Consultoría gratuita sin límite, venta encubierta
 
 **Lanzamiento integral**:
 Servicio que comprende entender el negocio, ordenar el mensaje, definir el recorrido comercial, diseñar, desarrollar, publicar y configurar contacto y medición básica.
 _Avoid_: Entrega de código aislada, autogestión sin guía, alcance ilimitado
 
 **Capacidades complementarias**:
-Automatizaciones, integraciones y herramientas personalizadas que amplían la Oferta principal cuando el problema lo justifica.
-_Avoid_: Lista indiferenciada de servicios, capacidades presentadas al mismo nivel
+Automatizaciones sueltas (WhatsApp, formularios, planillas, integraciones puntuales) que se cotizan aparte de los packs.
+_Avoid_: Lista indiferenciada de servicios
 
 **Servicio adicional**:
-Mantenimiento, campañas, branding completo o automatizaciones complejas contratadas fuera del Lanzamiento integral.
+Mantenimiento mensual, campañas o branding completo contratados fuera del Lanzamiento integral.
 _Avoid_: Inclusión implícita, soporte infinito
 
 **Oferta existente**:
@@ -51,8 +59,8 @@ Servicio adaptado a la identidad, oferta y recorrido comercial de cada negocio, 
 _Avoid_: Entrega express, plazo universal, plantilla por rubro
 
 **Propuesta comercial**:
-Definición privada del alcance y la inversión preparada después de comprender la necesidad del negocio.
-_Avoid_: Lista pública de precios, paquete barato, presupuesto automático
+Definición privada del alcance, la inversión final y el plazo, preparada después de la Reunión de diagnóstico. Parte del precio "desde" publicado del Pack.
+_Avoid_: Precio cerrado publicado, presupuesto automático
 
 **Consulta**:
 Cualquier contacto genuino iniciado por una persona interesada en Mayofy, independientemente de su preparación, presupuesto o proximidad a contratar.
@@ -85,7 +93,7 @@ Una o dos cifras o señales de escala verificables y no sensibles que demuestran
 _Avoid_: Métrica inventada, dato confidencial, listado exhaustivo
 
 **Proyecto conceptual**:
-Trabajo demostrativo identificado explícitamente como concepto, demo o exploración y nunca presentado como cliente real.
+Trabajo demostrativo identificado explícitamente como concepto, demo o exploración y nunca presentado como cliente real. Desde el brief v2 no se usa: el portfolio muestra proyectos reales o placeholders.
 _Avoid_: Cliente ficticio, testimonio inventado, resultado no medido
 
 **Caso de proyecto**:

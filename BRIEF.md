@@ -1,176 +1,128 @@
-# Portfolio Mayofy — Brief validado
+# Mayofy — Brief de marca v2
 
-**Estado:** entrevista cerrada, dirección visual elegida e implementación V1 iniciada el 12 de julio de 2026.  
-**Límite actual:** `Umbral Vivo` está implementada como preview local. La publicación requiere contenido y canales finales, validación completa y aprobación de Juani.
+**Estado:** reconstruido el 14 de noviembre de 2026 a partir del benchmark contra Villex, QKStudio, Ideas Web, Paisanos y DHNN y del formulario de definiciones respondido por Juani.
+**Reemplaza:** el brief v1 del 12 de julio de 2026 en todo lo comercial. La dirección visual `Umbral Vivo` y las reglas técnicas se conservan.
+**Referencia principal:** [villex.com.ar](https://villex.com.ar/). Se adopta su modelo comercial (escalera de 3 packs con precio "desde", plazos y formulario calificador), no su estética.
 
 ## 1. Objetivo
 
-- Generar consultas de negocios locales de servicios que puedan interesarse en contratar a Mayofy.
-- Funcionar también como pieza-manifiesto y demostración del nivel creativo y técnico de Mayofy.
-- Medir cualquier consulta genuina como resultado; no clasificar contactos como calificados o no calificados.
-- Resolver cada decisión con doble exigencia: claridad comercial e impacto visual extraordinario.
+- Salir a vender servicios de desarrollo web y software a medida con una oferta clara, precios de referencia públicos y una vía de contacto que califique la consulta.
+- El sitio de Mayofy es la herramienta de venta principal y, a la vez, la demostración del nivel creativo y técnico.
+- Toda consulta genuina cuenta como resultado.
 
-## 2. Audiencia y mercado
+## 2. Identidad
 
-- Negocios locales de servicios que ya reciben atención por Instagram, Google Maps o recomendaciones.
-- Venden mediante consultas o reservas y necesitan transformar interés en contactos por WhatsApp u otro canal.
-- Mercado inicial: LATAM hispanohablante, atendido de forma remota.
-- Brasil queda fuera del lanzamiento inicial.
-- Comunicación en español rioplatense comprensible para el resto de LATAM.
+- **Modelo:** estudio liderado por Juani, con trato directo. No simula equipo ni estructura de agencia.
+- **Rol de Juani:** secundario pero visible (sección "Quién está detrás", FAQ y reunión inicial), representado con un avatar en lugar de una foto. Mayofy no es una marca personal.
+- **Promesa en una línea:** "Webs que venden. Sistemas que ordenan."
+- **Voz:** híbrida (Mayofy en plural, Juani en primera persona cuando aporta confianza). Voseo natural, segura, directa, sin jerga técnica ni soberbia.
+- **Nombre:** abstracto, sin relato de origen.
 
-## 3. Posicionamiento y oferta
+## 3. Mercado y cliente
 
-- Mayofy debe percibirse como un estudio digital creativo de alto nivel con trato humano y directo.
-- Oferta principal: páginas web y landings orientadas a generar consultas.
-- Automatizaciones, integraciones y herramientas personalizadas aparecen más abajo como capacidades complementarias.
-- Servicio principal: lanzamiento integral desde comprensión del negocio hasta publicación, contacto y medición básica.
-- El cliente aporta conocimiento, materiales y validación; Mayofy guía y ejecuta.
-- Mayofy ordena y expresa una oferta existente, pero no inventa el negocio desde cero.
-- Mantenimiento, campañas, branding completo y automatizaciones complejas son adicionales.
-- Posicionamiento personalizado, no express.
-- No publicar precios ni el rango inicial bajo. La propuesta y la inversión se definen en privado.
+- **Mercado inicial:** Argentina primero, LATAM hispanohablante después, atendido en remoto.
+- **Cliente:** negocios de servicios en general. Todos los rubros de servicios son bienvenidos.
+- **Rubros que se nombran como ejemplo** (en copy, packs y FAQ): salud, gimnasios y entrenadores, estética y bienestar, estudios profesionales, academias, gastronomía e inmobiliarias.
 
-## 4. Diferenciación
+## 4. Oferta
 
-- Diseño con personalidad, no plantillas recicladas.
-- Pensamiento comercial, no estética aislada.
-- Capacidad técnica para extender la solución.
-- Trato directo, adaptación y responsabilidad.
-- No competir principalmente por precio ni velocidad.
+Landings y software a medida tienen el mismo peso. La oferta se presenta como una escalera de tres packs más servicios complementarios.
 
-## 5. Marca, voz y presencia de Juani
+| Pack | Para quién | Desde | Plazo estimado |
+|---|---|---|---|
+| **Landing** | Negocios que necesitan una página propia que convierta visitas en consultas por WhatsApp. | USD 85 | 1-2 semanas |
+| **Web + Gestión** | Negocios de servicios que, además de la web, necesitan turnos, reservas o un panel para gestionar clientes. | USD 150 | 3-9 semanas |
+| **Sistema a Medida** | Operaciones que no encajan en software genérico: gestión interna, roles, procesos e integraciones con lo que ya usan. | USD 450 | 1-6 meses |
 
-- Mayofy es una marca operada por una sola persona; no debe fingir equipo ni estructura de agencia.
-- Voz híbrida: Mayofy habla en plural; Juani aparece en primera persona cuando aporta confianza.
-- Mayofy no es una marca personal y Juani no es el protagonista del portfolio.
-- Deben aparecer rostro, experiencia y criterio de Juani de forma secundaria pero visible.
-- Si la dirección creativa requiere una fotografía específica, se solicitará con instrucciones de luz, encuadre y actitud.
-- Voz verbal: segura, directa, inteligente y ligeramente desafiante.
-- Usar voseo natural sin modismos cerrados, jerga técnica, soberbia ni promesas mágicas.
-- Mayofy es un nombre abstracto sin relato de origen.
-- No habrá eslogan fijo en la V1; sí un descriptor funcional estable.
+- **Web institucional (*):** no es un pack propio. Aparece como nota al pie del pack Landing: desde USD 95, 3 a 4 semanas.
+- **Precio base de Web + Gestión:** una agenda, un panel simple, una persona administradora y avisos por correo. Varias sedes o agendas, pagos, recordatorios por WhatsApp y roles se cotizan aparte. Este límite protege el precio estratégico.
 
-## 6. Experiencia y confianza
+Complementarios:
 
-- Usar el LinkedIn de Juani como base, con revisión de exactitud antes de publicar.
-- Priorizar experiencia en sistemas reales, liderazgo técnico, productos web, APIs, integraciones, automatización, seguridad y operación.
-- Evitar nombres propios de empresas u organizaciones salvo autorización y valor claro.
-- Utilizar una o dos señales de escala verificables, anonimizadas y no sensibles.
-- No convertir la sección en un CV ni en una pared de tecnologías.
-- La IA aparece como capacidad de ejecución y automatización, no como promesa principal.
-- Criterio, responsabilidad y validación siguen siendo humanos.
+- **Mantenimiento mensual:** USD 50 por mes para Landing; USD 25 por mes desde Web + Gestión en adelante, como precio promocional (oferta estratégica). Una nota (*) aclara los límites: hasta 5 cambios menores o 90 minutos de trabajo por mes, lo que ocurra primero, sin acumular.
+- **Automatizaciones sueltas:** WhatsApp, formularios, planillas e integraciones puntuales. Se cotizan aparte.
+- **Bot de WhatsApp y Telegram:** se publica como "Próximamente", con un CTA para avisar cuando esté disponible. Su alcance y precio se detallan más adelante.
 
-## 7. Proyectos y casos
+Reglas comerciales:
 
-- Aceptar proyectos reales autorizados y proyectos conceptuales claramente etiquetados.
-- Juani proporcionará el listado de candidatos en una etapa posterior.
-- Nunca inventar clientes, testimonios, logos, métricas ni resultados.
-- Home con selección de trabajos y páginas individuales para los casos más importantes.
-- Cada caso debe cubrir contexto, problema comercial, enfoque, decisiones, recorrido de conversión, resultado demostrable y métricas solo cuando existan.
-- Mostrar tecnologías solo si aportan confianza o explican una capacidad especial.
-- Preferir demos públicas estables y seguras; usar video o capturas de alta calidad cuando una demo no sea posible.
-- No reservar secciones vacías de testimonios. Incorporar prueba social solo cuando sea real, específica y autorizada.
+- Los precios se publican como "desde" en USD con su equivalente en pesos. El alcance y la inversión final se definen en una propuesta privada.
+- Forma de pago: 50% al inicio y 50% en la entrega.
+- Los plazos se publican como estimados y dependen de lo que se construya; se confirman en la propuesta.
+- Sin producto propio con abono (tipo V-Shop) por ahora.
 
-## 8. Conversión y contacto
+## 5. Garantías públicas
 
-- CTA principal: abrir WhatsApp inmediatamente, sin formulario previo.
-- Precargar un mensaje contextual según el lugar desde donde se hizo clic.
-- Vía secundaria: formulario breve.
-- Datos mínimos del formulario: nombre, negocio o actividad, canal de contacto y necesidad.
-- Envío a un destino directo, con aviso de privacidad y protección antispam.
-- No crear cuentas ni una base de prospectos innecesaria.
-- Canales públicos: WhatsApp, formulario, Instagram de Mayofy, LinkedIn de Juani y correo.
-- Publicar únicamente canales activos que puedan atenderse.
-- FAQ breve sobre alcance, aportes del cliente, plazos, propuesta, pospublicación, atención remota y servicios adicionales.
+Mayofy promete más que Villex, pero solo cosas que se pueden medir y cumplir siempre:
 
-## 9. Medición y descubrimiento
+- El código y el dominio son del cliente.
+- Respuesta en menos de 24 h hábiles.
+- Carga rápida en el celular medida con Core Web Vitals; si no pasa, se corrige sin costo.
+- SEO técnico desde el primer día.
+- Accesible y cómoda de usar en el celular.
+- Una semana de soporte post-lanzamiento incluida.
+- Rondas de revisión acordadas con el cliente en la propuesta.
 
-- Medición respetuosa de clics hacia WhatsApp, formularios enviados, interés expresado y fuente de llegada cuando sea conocida.
-- Sin perfilado invasivo ni recolección innecesaria.
-- SEO técnico y de contenido sólido desde el lanzamiento.
-- Optimizar home y casos para búsquedas relevantes en LATAM.
-- Sin blog inicial ni páginas artificiales por ciudad.
+No se prometen resultados de negocio (ventas, posiciones en Google, cantidad de consultas).
 
-## 10. Dirección creativa acordada
+## 6. Prueba y portfolio
 
-- Dirección seleccionada: `Umbral Vivo`.
-- Macroestructura de referencia: Photographic, hero H6 Photographic Fold y navegación N5 Floating Pill.
-- Promesa visual: una escena natural imposible pero creíble funciona como umbral entre la atención dispersa y una consulta concreta.
-- Identidad visual personalizada; no usar un tema de catálogo de Hallmark.
-- Frase guía: “surrealismo natural, impacto cinematográfico, contraste y cercanía humana”.
-- Mantener `#00F69D` como ancla cromática. El resto de la paleta queda libre.
-- Libertad para seleccionar tipografías display, de lectura y una tercera voz puntual si aporta valor.
-- No copiar una referencia dominante. Usar las ocho referencias como moodboard colectivo.
-- Extraer impacto cinematográfico, tipografía dominante, composición editorial, contraste, profundidad y atmósfera.
-- Naturaleza como motivo de marca recurrente pero controlado.
-- Escenas imposibles con credibilidad fotográfica; evitar renders brillantes, fantasía épica e imagen de IA evidente.
-- Recorrido completamente oscuro, con transiciones continuas entre petróleo, azul mineral y verde profundo; evitar cortes claro/oscuro que hagan percibir secciones pegadas.
-- Movimiento rico y coordinado como un ecosistema nocturno continuo: una corriente vertical, profundidad contenida en el hero y puentes naturales conectan el recorrido.
-- El hero usa una sola cámara fotográfica con parallax corto y un primer plano vectorial independiente; no duplica la imagen ni mantiene superficies Canvas globales.
-- Las secciones conectan mediante agua, raíces, copa y niebla con reveals de una sola ejecución, no con cálculos continuos durante todo el scroll.
-- Los CTAs principales admiten respuesta magnética en dispositivos con puntero fino; la lectura y el contacto siguen funcionando sin ese comportamiento.
-- Sin scroll secuestrado ni información esencial dependiente de una animación.
-- Tres niveles de ejecución: completo, liviano para ahorro de datos y estático para `prefers-reduced-motion`.
-- Móvil como composición propia con la misma ambición, no escritorio encogido.
+- **Proyectos reales disponibles hoy:**
+  - [juanikitro.com](https://juanikitro.com/): portfolio de Juani.
+  - [shineapp.lat](https://shineapp.lat/): sistema a medida (SaaS multi-tenant para lavaderos y detailing).
+  - [gymg.com.ar](https://gymg.com.ar/): landing de una consignataria de hacienda.
+- **Plan:** construir como mínimo un proyecto por pack para mostrar.
+- **Mientras tanto:** los tres proyectos reales se muestran de forma general y enlazan a cada sitio en vivo; los tres espacios restantes siguen como placeholders. No se usan proyectos conceptuales rotulados.
+- **Testimonios:** no hay todavía; quedan para una etapa posterior. Nunca inventar clientes, testimonios, logos ni métricas.
+- **Señales de experiencia de Juani** (verificadas contra su CV y juanikitro.com; LinkedIn no se pudo consultar):
+  - 5 años desarrollando software, desde 2021.
+  - Technical Lead de un sistema estatal en producción con unos 750 usuarios activos, liderando un equipo de 4 desarrolladores.
+  - APIs, integraciones entre sistemas, automatizaciones, migraciones de datos y operación en cloud (Docker, Kubernetes, GCP, Azure).
+  - Nombrar organizaciones (Ministerio, GCBA, MailAmericas) requiere decisión explícita de Juani; por defecto se anonimizan.
 
-## 11. Anti-patrones
+## 7. Conversión y contacto
 
-- Estructura hero + tres tarjetas + logos + CTA como plantilla repetida.
-- Bento grid de relleno.
-- Gradientes violeta/azul de startup de IA.
-- Glassmorphism y tarjetas flotantes sin función.
-- Minimalismo vacío o página excesivamente simple.
-- Chrome falso de navegador, teléfono o IDE.
-- Íconos genéricos usados como contenido.
-- `#00F69D` aplicado en todo.
-- Titulares abstractos que no explican la oferta.
-- Efectos llamativos desconectados de una idea.
-- Reskin de un template o mezcla literal de referencias.
+- **CTA principal:** WhatsApp con mensaje precargado según desde dónde se hizo clic.
+- **Formulario calificador** (como Villex): nombre, contacto, pack de interés, plazo, presupuesto aproximado, si ya tiene dominio, link de referencia y mensaje. Termina en WhatsApp.
+- **Gancho de captación:** reunión de diagnóstico gratuita para ver qué necesita el negocio. Se ofrece en el hero, en los packs y al final del sitio.
+- **Agenda de llamada:** disponible para todos los packs.
+- **Canales:** WhatsApp +54 2345 455007; correo `jpkitro@gmail.com` hasta tener el dominio propio; Instagram `@mayofy.web`; LinkedIn de Juani.
+- **Stack tecnológico:** no tiene sección propia; se explica en la FAQ.
 
-## 12. Calidad y restricciones técnicas
+## 8. FAQ mínima
 
+Debe cubrir como mínimo: plazos, costo y qué incluye cada pack, forma de pago, tecnologías usadas, hosting y dominio, mantenimiento, si se puede traer un diseño propio, alcance geográfico, con quién se trabaja y qué pasa en la reunión de diagnóstico.
+
+## 9. Presencia y formalidad
+
+- **Dominio propio:** en trámite. Al tenerlo, se migra el correo comercial.
+- **Idiomas:** español rioplatense como idioma principal, portugués como secundario e inglés como terciario. Las versiones en portugués e inglés quedan para una etapa posterior; hoy el sitio está solo en español.
+- **Redes con contenido:** Instagram y LinkedIn de Juani. TikTok queda descartado.
+- **Formalidad resuelta:** facturación.
+- **Política de privacidad:** publicada en `/privacidad` como borrador basado en la Ley 25.326. Conviene que la revise un profesional.
+- **Pendiente:** términos del servicio, contrato o propuesta modelo, registro de marca y evaluar la inscripción de la base de datos de contactos en el Registro Nacional de Bases de Datos.
+
+## 10. Dirección visual (se conserva)
+
+- Dirección `Umbral Vivo`: hero fotográfico nocturno, naturaleza surrealista creíble, tipografía editorial y salida comercial inmediata hacia WhatsApp.
+- Verde Mayofy `#00F69D` como ancla cromática, sin aplicarlo en todo.
+- Tipografías: Cormorant Garamond (display), Manrope (lectura), IBM Plex Mono (utilidad).
+- Recorrido oscuro continuo entre petróleo, azul mineral y verde profundo; movimiento coordinado con niveles completo, liviano y estático (`prefers-reduced-motion`).
+- Anti-patrones: plantilla hero + tres tarjetas + logos, bento de relleno, gradientes violeta/azul, glassmorphism sin función, chrome falso, íconos genéricos como contenido y titulares abstractos que no explican la oferta.
+
+## 11. Calidad y arquitectura técnica (se conserva)
+
+- Next.js con TypeScript, despliegue en Vercel, contenido versionado en `src/content/`, sin CMS.
 - Accesibilidad básica obligatoria: contraste AA, teclado, foco visible, alternativas de contenido y `prefers-reduced-motion`.
-- No se requiere certificación AAA ni auditoría formal exhaustiva.
-- Buscar buenos Core Web Vitals en móvil.
-- Mensaje y CTA disponibles antes de cargar efectos secundarios.
-- Optimizar imágenes por dispositivo y cargar progresivamente video, escenas y animaciones.
-- Dispositivos modestos reciben variantes más livianas con la misma intención.
+- Buenos Core Web Vitals en móvil; mensaje y CTA disponibles antes de cargar efectos secundarios.
 
-## 13. Arquitectura técnica
+## 12. Riesgos aceptados
 
-- Next.js con TypeScript.
-- Despliegue en Vercel.
-- URL inicial: `mayofy.vercel.app`.
-- Contenido versionado en archivos estructurados; sin CMS en la V1.
-- Herramientas de movimiento se eligen después de aprobar la dirección visual.
-- WebGL solo si un efecto central lo justifica.
-- Open Design desarrolla y refina la dirección; el resultado se integra y endurece como implementación de producción.
-- No publicar directamente un prototipo sin validación.
+Decisiones revisadas con Juani el 14 de noviembre de 2026 y mantenidas como estrategia:
 
-## 14. Proceso de trabajo
+1. **Precios bajos en Web + Gestión y Sistema a Medida.** USD 150 por 3 a 9 semanas deja entre USD 17 y USD 50 por semana de trabajo. Se acepta como estrategia de entrada mientras cubra la infraestructura. Mitigación: el pack lista qué incluye el precio base y qué se cotiza aparte.
+2. **Mantenimiento más barato para los packs grandes.** Se acepta como oferta. Mitigación: nota (*) con los límites mensuales.
+3. **Placeholders publicados.** Se mantienen hasta tener un proyecto real por pack.
 
-- Aprobación por etapas: alcance y mensaje, dirección visual, implementación final.
-- Una devolución consolidada por etapa.
-- Reabrir una etapa aprobada o ampliar alcance requiere nueva estimación.
-- No hay deadline externo.
-- Avance por hitos para evitar perfeccionismo indefinido.
-- V1 pequeña pero impecable: home terminada, contacto funcional, identidad consolidada y pocos casos fuertes.
-- Sin secciones vacías, “próximamente” ni proyectos de relleno.
+## 13. Pendientes
 
-## 15. Proceso de diseño futuro
-
-- La exploración comparativa terminó y `Umbral Vivo` fue seleccionada.
-- Usar Open Design para generar y refinar propuestas.
-- Usar Hallmark como guardarraíl anti-slop y de variedad estructural.
-- Preservar el equilibrio de `Umbral Vivo`: escena cinematográfica, lectura comercial inmediata y CTA dentro del primer pliegue.
-- La implementación productiva queda pendiente de aprobación explícita.
-- Preparar el copy completo en español rioplatense con datos reales y validarlo antes del diseño final.
-
-## 16. Insumos diferidos
-
-- Listado de proyectos candidatos y material de cada caso.
-- Número de WhatsApp y correo finales.
-- Fotografía de Juani según la dirección seleccionada.
-- Herramienta concreta de analítica.
-- Proveedor o mecanismo del formulario y antispam.
-- Biblioteca de movimiento y eventual necesidad real de WebGL.
+Los pendientes para la próxima iteración de la landing están en `docs/plans/landing-iteration-backlog.md`.
