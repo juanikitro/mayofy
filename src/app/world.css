@@ -2012,7 +2012,7 @@ html[data-motion-tier="lite"] .campfire__flame-core {
 
 .dawn__alt {
   flex-basis: 100%;
-  width: fit-content;
+  max-width: max-content;
   font-weight: 600;
   color: var(--moss);
   text-decoration: underline;
