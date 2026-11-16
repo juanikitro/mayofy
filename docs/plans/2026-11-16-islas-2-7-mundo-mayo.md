@@ -34,6 +34,8 @@ Con Playwright sobre `next dev` en Chromium, 1440×900 y 390×844:
 
 No verificado: Firefox y Safari reales, dispositivo físico, nivel liviano real, lector de pantalla.
 
+Un verificador independiente (agente de solo lectura) repitió las pruebas sobre `b89618a`: S2, S3, S4, S5 y S7 en PASS, sin bloqueos. Avisos atendidos o registrados: el indicador de huellas quedaba último en el orden de tabulación (después del pie); se movió en el DOM justo después del pill para que esté a pocos Tab del inicio. `src/components/commercial-plans.tsx` quedó como componente viejo sin uso; se elimina al migrar las rutas restantes. El `aria-current` del indicador se demora durante saltos largos con scroll suave; se asienta solo.
+
 ## Limitaciones y pendientes
 
 - Arte provisorio en SVG en todas las islas y en la caída; se reemplaza por las imágenes del agente de producción sin cambiar la estructura.

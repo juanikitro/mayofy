@@ -37,6 +37,7 @@ export default function Home() {
       </a>
 
       <IslandNav />
+      <IslandProgress />
 
       <main id="contenido">
         <section id="inicio" className="dawn" data-island="1" aria-labelledby="dawn-title">
@@ -94,7 +95,6 @@ export default function Home() {
         </div>
       </footer>
 
-      <IslandProgress />
       <WorldMotion />
     </div>
   );
