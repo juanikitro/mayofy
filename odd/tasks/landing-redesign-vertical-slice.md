@@ -18,10 +18,10 @@ Objective: design the Mayo island world landing and ship a working vertical slic
 ## Tasks
 
 - [x] T1 (S2) route: inline. Visual bible `docs/plans/2026-11-16-biblia-visual-mundo-mayo.md`: palette tokens, type decision with evidence, sky/light/camera per island, prompts and step-by-step guide. Commit: f8cb9bb.
-- [x] T2 (S3, S4, S5, S9) route: inline. New token set and fonts (Instrument Sans, Fraunces, Caveat), new page shell for the island journey replacing the Umbral Vivo hero; hero island with promise + CTA in first fold; tier detection reused from motion-controller. Commit: slice commit (see L5).
-- [x] T3 (S3, S5) route: inline. Island 3: rocks assembled with CSS Scroll-Driven Animations under `@supports`, fallback (lite/static) already assembled; three platforms host the existing `CommercialPlans`. Commit: pending.
-- [x] T4 (S6) route: inline. Provisional Mayo image component with the three tiers (static image now; slot for the GLB later). Commit: pending.
-- [x] T5 (S7) route: inline. Browser verification at 1440 and 390 px, reduced motion, keyboard focus, no horizontal scroll; verification doc in `docs/plans/`; open local browser. Commit: pending.
+- [x] T2 (S3, S4, S5, S9) route: inline. New token set and fonts (Instrument Sans, Fraunces, Caveat), new page shell for the island journey replacing the Umbral Vivo hero; hero island with promise + CTA in first fold; tier detection reused from motion-controller. Commit: 0a5b5cf.
+- [x] T3 (S3, S5) route: inline. Island 3: rocks assembled with CSS Scroll-Driven Animations under `@supports`, fallback (lite/static) already assembled; three platforms host the existing `CommercialPlans`. Commit: 0a5b5cf.
+- [x] T4 (S6) route: inline. Provisional Mayo image component with the three tiers (static image now; slot for the GLB later). Commit: 0a5b5cf.
+- [x] T5 (S7) route: inline. Browser verification at 1440 and 390 px, reduced motion, keyboard focus, no horizontal scroll; verification doc in `docs/plans/`; open local browser. Commit: 0a5b5cf.
 
 ## Log
 
