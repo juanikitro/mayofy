@@ -1,11 +1,7 @@
 import { siteContent } from "@/content/site";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
-/**
- * Floating pill navigation. The vertical slice only links to the islands
- * that exist (hero and packs); "Trabajos" and "Preguntas" join when their
- * islands are built.
- */
+/** Floating pill navigation: Packs, Trabajos, Preguntas and the CTA (decision 15). */
 export function IslandNav() {
   return (
     <header className="island-nav-wrap">
@@ -15,6 +11,12 @@ export function IslandNav() {
         </a>
         <a className="island-nav__link" href="#packs">
           Packs
+        </a>
+        <a className="island-nav__link" href="#trabajos">
+          Trabajos
+        </a>
+        <a className="island-nav__link" href="#preguntas">
+          Preguntas
         </a>
         <a
           className="btn btn--moss island-nav__cta"

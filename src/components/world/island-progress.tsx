@@ -1,0 +1,110 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+import { siteContent } from "@/content/site";
+import { getWhatsAppHref } from "@/lib/whatsapp";
+
+export const islands = [
+  { id: "inicio", number: 1, label: "Inicio" },
+  { id: "problema", number: 2, label: "El problema" },
+  { id: "packs", number: 3, label: "Packs" },
+  { id: "sistemas", number: 4, label: "Sistemas" },
+  { id: "trabajos", number: 5, label: "Trabajos" },
+  { id: "preguntas", number: 6, label: "Preguntas" },
+  { id: "contacto", number: 7, label: "Contacto" },
+] as const;
+
+function PawIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <ellipse cx="7" cy="8" rx="2.2" ry="3" />
+      <ellipse cx="12" cy="5.5" rx="2.2" ry="3" />
+      <ellipse cx="17" cy="8" rx="2.2" ry="3" />
+      <path d="M12 10c-4 0-7 3.5-7 6.5 0 2 1.5 3 3 3 1.3 0 2.4-.6 4-.6s2.7.6 4 .6c1.5 0 3-1 3-3 0-3-3-6.5-7-6.5z" />
+    </svg>
+  );
+}
+
+/**
+ * Paw-print progress indicator (side on desktop, bottom on mobile) and the
+ * mobile WhatsApp float that appears from island 2 on. Both are pure
+ * enhancement: the islands are reachable by scrolling and by the nav.
+ */
+export function IslandProgress() {
+  const [active, setActive] = useState<string>("inicio");
+  const [pastHero, setPastHero] = useState(false);
+
+  useEffect(() => {
+    const sections = islands
+      .map((island) => document.getElementById(island.id))
+      .filter((element): element is HTMLElement => element !== null);
+    if (!("IntersectionObserver" in window) || sections.length === 0) return;
+
+    const visible = new Map<string, number>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          visible.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
+        }
+        let bestId = "inicio";
+        let bestRatio = 0;
+        for (const [id, ratio] of visible) {
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            bestId = id;
+          }
+        }
+        if (bestRatio > 0) setActive(bestId);
+      },
+      { threshold: [0.1, 0.25, 0.5, 0.75] },
+    );
+    sections.forEach((section) => observer.observe(section));
+
+    const hero = document.getElementById("inicio");
+    const heroObserver = hero
+      ? new IntersectionObserver(([entry]) => setPastHero(!entry.isIntersecting), {
+          threshold: 0.2,
+        })
+      : null;
+    if (hero && heroObserver) heroObserver.observe(hero);
+
+    return () => {
+      observer.disconnect();
+      heroObserver?.disconnect();
+    };
+  }, []);
+
+  return (
+    <>
+      <nav className="progress" aria-label="Islas del recorrido">
+        <ol>
+          {islands.map((island) => (
+            <li key={island.id}>
+              <a
+                href={`#${island.id}`}
+                className="progress__paw"
+                aria-current={active === island.id ? "location" : undefined}
+                aria-label={`Isla ${island.number}: ${island.label}`}
+                title={island.label}
+              >
+                <PawIcon />
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+      <a
+        className={`wa-float${pastHero ? " wa-float--visible" : ""}`}
+        href={getWhatsAppHref(siteContent.hero.primaryMessage)}
+        aria-label="Escribir por WhatsApp"
+        tabIndex={pastHero ? 0 : -1}
+        aria-hidden={!pastHero}
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z" />
+        </svg>
+      </a>
+    </>
+  );
+}

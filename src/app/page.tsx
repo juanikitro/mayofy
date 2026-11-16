@@ -1,7 +1,16 @@
 import Link from "next/link";
 
+import { CloudFall } from "@/components/world/cloud-fall";
 import { HeroIsland } from "@/components/world/hero-island";
 import { IslandNav } from "@/components/world/island-nav";
+import { IslandProgress } from "@/components/world/island-progress";
+import {
+  JuaniIsland,
+  ProblemIsland,
+  QuestionsIsland,
+  SystemsIsland,
+  WorksIsland,
+} from "@/components/world/islands";
 import { PackDetails } from "@/components/world/pack-details";
 import { RockIsland } from "@/components/world/rock-island";
 import { WorldMotion } from "@/components/world/world-motion";
@@ -30,7 +39,7 @@ export default function Home() {
       <IslandNav />
 
       <main id="contenido">
-        <section id="inicio" className="dawn" aria-labelledby="dawn-title">
+        <section id="inicio" className="dawn" data-island="1" aria-labelledby="dawn-title">
           <HeroIsland />
           <div className="dawn__content world-shell">
             <p className="dawn__descriptor">{siteContent.descriptor}</p>
@@ -58,8 +67,14 @@ export default function Home() {
           </div>
         </section>
 
+        <CloudFall />
+        <ProblemIsland />
         <RockIsland />
         <PackDetails />
+        <SystemsIsland />
+        <WorksIsland />
+        <QuestionsIsland />
+        <JuaniIsland />
       </main>
 
       <footer className="world-footer">
@@ -79,6 +94,7 @@ export default function Home() {
         </div>
       </footer>
 
+      <IslandProgress />
       <WorldMotion />
     </div>
   );

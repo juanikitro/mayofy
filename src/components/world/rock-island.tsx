@@ -65,7 +65,7 @@ export function RockIsland() {
   const titleParts = commercialIntro.title.split(". ");
 
   return (
-    <section id="packs" className="rocks" aria-labelledby="packs-title">
+    <section id="packs" className="rocks" data-island="3" aria-labelledby="packs-title">
       <div className="rocks__stage">
         <div className="scene scene--noon" aria-hidden="true">
           <div className="scene__sky" />

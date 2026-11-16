@@ -5,17 +5,27 @@
  * The wrapper keeps the slot the real asset will take: same class names,
  * same position hooks, same sizing.
  */
+export type MayoPose = "idle" | "fall" | "play" | "jump" | "dig" | "run" | "chase" | "rest";
+
+const labels: Record<MayoPose, string> = {
+  idle: "Mayo, la border collie de Mayofy, parada en el borde de la isla",
+  fall: "Mayo cayendo entre las nubes",
+  play: "Mayo jugando entre rocas sueltas",
+  jump: "Mayo saltando entre las plataformas de los packs",
+  dig: "Mayo escarbando junto al invernadero",
+  run: "Mayo corriendo por el sendero del proceso",
+  chase: "Mayo persiguiendo luciérnagas",
+  rest: "Mayo echada junto al fogón",
+};
+
 export function MayoFigure({
   pose,
   className = "",
 }: {
-  pose: "idle" | "jump";
+  pose: MayoPose;
   className?: string;
 }) {
-  const label =
-    pose === "idle"
-      ? "Mayo, la border collie de Mayofy, parada en el borde de la isla"
-      : "Mayo saltando entre las plataformas de los packs";
+  const label = labels[pose];
 
   return (
     <div className={`mayo mayo--${pose} ${className}`.trim()} data-mayo-pose={pose}>

@@ -1,38 +1,16 @@
 import { AnimatedDetails } from "@/components/animated-details";
+import { DetailGroups } from "@/components/world/pack-groups";
 import {
-  comingSoon,
   commercialIntro,
   commercialPlans,
-  extensions,
   guarantees,
-  maintenancePlan,
 } from "@/content/commercial-plans";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
-type DetailGroup = {
-  title: string;
-  items: readonly string[];
-};
-
-function DetailGroups({ groups }: { groups: readonly DetailGroup[] }) {
-  return (
-    <div className="pack-groups">
-      {groups.map((group) => (
-        <section key={group.title} className="pack-group">
-          <h4>{group.title}</h4>
-          <ul className="pack-list">
-            {group.items.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </section>
-      ))}
-    </div>
-  );
-}
-
 /**
- * Full commercial substance of island 3, rendered below the rock stage.
+ * Commercial substance of island 3, rendered below the rock stage: the three
+ * packs, the payment line and the guarantees. The bot and the loose
+ * automations live on island 4; maintenance lives on island 6.
  * Content comes verbatim from src/content/commercial-plans.ts.
  */
 export function PackDetails() {
@@ -82,17 +60,6 @@ export function PackDetails() {
 
       <p className="packs__payment">{commercialIntro.payment}</p>
 
-      <article className="soon">
-        <p className="soon__label">{comingSoon.label}</p>
-        <div className="soon__copy">
-          <h3>{comingSoon.title}</h3>
-          <p>{comingSoon.description}</p>
-        </div>
-        <a className="btn btn--quiet" href={getWhatsAppHref(comingSoon.whatsappMessage)}>
-          {comingSoon.cta}
-        </a>
-      </article>
-
       <section className="promises" aria-labelledby="garantias-title">
         <h3 id="garantias-title">{guarantees.title}</h3>
         <ul className="pack-list promises__list">
@@ -100,65 +67,6 @@ export function PackDetails() {
             <li key={item}>{item}</li>
           ))}
         </ul>
-      </section>
-
-      <article className="upkeep">
-        <header className="upkeep__intro">
-          <h3>Mantenimiento mensual</h3>
-          <dl className="upkeep__prices">
-            {maintenancePlan.prices.map((tier) => (
-              <div key={tier.label}>
-                <dt>{tier.label}</dt>
-                <dd className="upkeep__price">
-                  {tier.price}
-                  <span aria-hidden="true">{tier.asterisk ? " (**)" : " (*)"}</span>
-                </dd>
-              </div>
-            ))}
-          </dl>
-          <p>{maintenancePlan.description}</p>
-        </header>
-        <div className="upkeep__content">
-          <a className="btn btn--quiet" href={getWhatsAppHref(maintenancePlan.whatsappMessage)}>
-            {maintenancePlan.cta}
-          </a>
-          <AnimatedDetails className="pack-details" summary="¿Qué cambios incluye?">
-            <DetailGroups groups={maintenancePlan.detailGroups} />
-          </AnimatedDetails>
-          <ol className="upkeep__footnotes" aria-label="Límites del mantenimiento">
-            {maintenancePlan.footnotes.map((footnote, index) => (
-              <li key={footnote}>
-                <span aria-hidden="true">{index === 0 ? "(*) " : "(**) "}</span>
-                {footnote}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </article>
-
-      <section className="addons" aria-labelledby="ampliaciones-title">
-        <header className="addons__intro">
-          <h3 id="ampliaciones-title">{extensions.title}</h3>
-          <p>{extensions.body}</p>
-        </header>
-        <div className="addons__grid">
-          {extensions.categories.map((category) => (
-            <section key={category.title}>
-              <h4>{category.title}</h4>
-              <ul className="pack-list">
-                {category.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </section>
-          ))}
-        </div>
-        <footer className="addons__footer">
-          <p>{extensions.note}</p>
-          <a className="btn btn--moss" href={getWhatsAppHref(extensions.whatsappMessage)}>
-            {extensions.cta}
-          </a>
-        </footer>
       </section>
     </div>
   );

@@ -1200,3 +1200,810 @@ html[data-motion-tier="reduced"] .scene__mayo .mayo__art {
     justify-items: start;
   }
 }
+
+/* Islands 2 and 4–7 ------------------------------------------------------ */
+
+.isle {
+  position: relative;
+  min-height: 100svh;
+  padding-block: 7rem 46vh;
+  overflow: clip;
+  color: var(--ink);
+}
+
+.isle--dark {
+  color: var(--night-ink);
+}
+
+.isle__content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 1rem;
+  max-width: 48rem;
+}
+
+.isle h2 {
+  font-size: clamp(2rem, 1.2rem + 3.4vw, 3.6rem);
+}
+
+.isle--dark h2 em {
+  color: var(--mint);
+}
+
+.isle__eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+.isle--dark .isle__eyebrow {
+  color: var(--mint);
+}
+
+.isle__lead {
+  font-size: clamp(1.2rem, 1rem + 0.8vw, 1.5rem);
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+.isle__body {
+  max-width: 52ch;
+  color: var(--ink-soft);
+}
+
+.isle--dark .isle__body {
+  color: var(--night-ink-soft);
+}
+
+.isle__channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.isle__channels span,
+.isle__chips li {
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklch, var(--cream) 80%, transparent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--moss);
+}
+
+.isle__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.isle__panels {
+  display: grid;
+  gap: 1.25rem;
+  margin-block-start: 1.5rem;
+}
+
+.panel {
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: color-mix(in oklch, var(--cream) 92%, transparent);
+  box-shadow: var(--shadow-soft);
+  color: var(--ink);
+}
+
+.isle--dark .panel {
+  background: color-mix(in oklch, oklch(22% 0.04 265) 90%, transparent);
+  color: var(--night-ink);
+  box-shadow: none;
+}
+
+.isle--dark .panel h3,
+.isle--dark .panel h4 {
+  color: var(--night-ink);
+}
+
+.isle--dark .pack-list,
+.isle--dark .upkeep__prices dt,
+.isle--dark .upkeep__footnotes,
+.isle--dark .pack-details__note {
+  color: var(--night-ink-soft);
+}
+
+.isle--dark .upkeep__price,
+.isle--dark .pack-details summary,
+.isle--dark .pack-list li::marker {
+  color: var(--mint);
+}
+
+.isle--dark .btn--moss {
+  color: var(--night-deep);
+  background: var(--mint);
+}
+
+.isle--dark .btn--moss:hover {
+  background: oklch(90% 0.17 158);
+}
+
+.isle--dark .btn--quiet {
+  color: var(--mint);
+  border-color: color-mix(in oklch, var(--mint) 45%, transparent);
+  background: transparent;
+}
+
+.isle--dark .btn--quiet:hover {
+  background: color-mix(in oklch, var(--mint) 12%, transparent);
+}
+
+.isle--dark :focus-visible {
+  outline-color: var(--mint);
+}
+
+.isle .soon,
+.isle .addons,
+.isle .upkeep {
+  margin-block-start: 0;
+}
+
+/* Skies per island (bible, section 3) */
+
+.scene--morning .scene__sky {
+  background: linear-gradient(180deg, oklch(84% 0.08 225) 0%, oklch(90% 0.05 220) 60%, var(--beige) 100%);
+}
+
+.scene--golden .scene__sky {
+  background: linear-gradient(180deg, oklch(85% 0.09 75) 0%, oklch(91% 0.05 80) 60%, var(--cream) 100%);
+}
+
+.scene--sunset .scene__sky {
+  background: linear-gradient(180deg, oklch(70% 0.1 310) 0%, oklch(78% 0.13 40) 55%, oklch(86% 0.08 60) 100%);
+}
+
+.scene--dusk .scene__sky {
+  background: linear-gradient(180deg, oklch(28% 0.07 285) 0%, oklch(40% 0.09 280) 55%, oklch(30% 0.05 220) 100%);
+}
+
+.scene--night .scene__sky {
+  background: radial-gradient(ellipse at 50% 100%, oklch(24% 0.05 265), var(--night-deep) 70%);
+}
+
+.scene--dusk .island__rock,
+.scene--night .island__rock {
+  fill: oklch(28% 0.03 60);
+}
+
+.scene--dusk .island__moss,
+.scene--night .island__moss {
+  fill: oklch(28% 0.06 150);
+}
+
+.scene--dusk .island__meadow,
+.scene--night .island__meadow {
+  fill: oklch(34% 0.08 150);
+}
+
+.scene--dusk .island__meadow-light,
+.scene--night .island__meadow-light {
+  fill: oklch(40% 0.08 150);
+  opacity: 0.6;
+}
+
+.scene--sunset .island__meadow {
+  fill: oklch(48% 0.12 140);
+}
+
+.scene--sunset .island__meadow-light {
+  fill: oklch(62% 0.12 110);
+}
+
+.scene--golden .island__meadow-light {
+  fill: oklch(78% 0.13 110);
+}
+
+.scene__stars {
+  position: absolute;
+  inset: 0 0 auto;
+  width: 100%;
+  height: 60%;
+  fill: var(--night-ink);
+  opacity: 0.8;
+}
+
+.scene--dusk .scene__stars {
+  opacity: 0.35;
+}
+
+/* Ornaments */
+
+.ornament {
+  position: absolute;
+  inset: auto 0 0;
+  width: 100%;
+  height: 46%;
+}
+
+.ornament--rocks {
+  height: 30%;
+  inset-block-end: 6%;
+}
+
+.greenhouse__frame {
+  fill: none;
+  stroke: var(--bark);
+  stroke-width: 6;
+  stroke-linejoin: round;
+}
+
+.greenhouse__glass {
+  fill: color-mix(in oklch, var(--cream) 55%, oklch(85% 0.06 220));
+  opacity: 0.85;
+}
+
+.greenhouse__door {
+  fill: var(--bark);
+}
+
+.greenhouse__soil {
+  fill: var(--bark);
+}
+
+.greenhouse__gear {
+  fill: var(--stone-deep);
+}
+
+.greenhouse__box {
+  fill: oklch(55% 0.08 60);
+}
+
+.path__trail {
+  fill: none;
+  stroke: color-mix(in oklch, var(--cream) 70%, transparent);
+  stroke-width: 18;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.path__stone {
+  fill: var(--stone-deep);
+}
+
+.path__stone-top {
+  fill: var(--stone);
+}
+
+.firefly__halo {
+  fill: var(--mint);
+  opacity: 0.18;
+}
+
+.firefly__core {
+  fill: var(--mint);
+}
+
+.lantern__post {
+  fill: oklch(30% 0.03 60);
+}
+
+.lantern__body {
+  fill: oklch(45% 0.06 55);
+}
+
+.campfire__glow {
+  fill: oklch(75% 0.15 60);
+  opacity: 0.18;
+}
+
+.campfire__ring {
+  fill: oklch(28% 0.03 60);
+}
+
+.campfire__log {
+  fill: var(--bark);
+}
+
+.campfire__flame {
+  fill: oklch(72% 0.17 50);
+}
+
+.campfire__flame-core {
+  fill: oklch(88% 0.14 85);
+}
+
+.bench__log,
+.bench__leg {
+  fill: oklch(38% 0.05 55);
+}
+
+@keyframes firefly-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+html[data-motion-tier="full"] .firefly {
+  animation: firefly-pulse 3.5s ease-in-out infinite;
+  animation-delay: var(--firefly-delay, 0s);
+}
+
+@keyframes flame-flicker {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(0.96, 1.06);
+  }
+}
+
+html[data-motion-tier="full"] .campfire__flame,
+html[data-motion-tier="full"] .campfire__flame-core {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: flame-flicker 1.6s ease-in-out infinite;
+}
+
+/* Mayo on each island (provisional poses) */
+
+.isle__mayo {
+  --mayo-size: clamp(5rem, 9vw, 8rem);
+
+  z-index: 1;
+}
+
+.isle__mayo--play {
+  inset: auto 30% 18% auto;
+}
+
+.isle__mayo--dig {
+  inset: auto auto 17% 30%;
+  transform: scaleX(-1) rotate(8deg);
+}
+
+.isle__mayo--run {
+  inset: auto 18% 20% auto;
+  transform: scaleX(-1);
+}
+
+.isle__mayo--chase {
+  inset: auto auto 19% 24%;
+}
+
+.isle__mayo--rest {
+  inset: auto 34% 14% auto;
+  transform: scaleX(-1) scaleY(0.75);
+}
+
+/* Cloud fall (transition 1 → 2) */
+
+.fall {
+  position: relative;
+  height: 160vh;
+  background: linear-gradient(180deg, var(--beige) 0%, oklch(90% 0.05 220) 100%);
+  view-timeline-name: --fall;
+}
+
+.fall__stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: clip;
+}
+
+.fall__layer {
+  position: absolute;
+  inset: -20% 0;
+  width: 100%;
+  height: 140%;
+  fill: color-mix(in oklch, var(--cream) 85%, transparent);
+}
+
+.fall__layer--far {
+  opacity: 0.6;
+}
+
+.fall__layer--near {
+  fill: color-mix(in oklch, var(--cream) 95%, transparent);
+}
+
+.fall__mayo {
+  --mayo-size: clamp(6rem, 12vw, 10rem);
+
+  inset: 30% auto auto 50%;
+  transform: translateX(-50%) rotate(14deg);
+}
+
+@keyframes clouds-up-far {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-12%);
+  }
+}
+
+@keyframes clouds-up-mid {
+  from {
+    transform: translateY(6%);
+  }
+
+  to {
+    transform: translateY(-22%);
+  }
+}
+
+@keyframes clouds-up-near {
+  from {
+    transform: translateY(14%);
+  }
+
+  to {
+    transform: translateY(-36%);
+  }
+}
+
+@keyframes mayo-fall {
+  from {
+    transform: translate(-50%, -20%) rotate(6deg);
+  }
+
+  to {
+    transform: translate(-50%, 70%) rotate(22deg);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .fall__layer--far {
+    animation: clouds-up-far linear both;
+    animation-timeline: --fall;
+    animation-range: cover 0% cover 100%;
+  }
+
+  .fall__layer--mid {
+    animation: clouds-up-mid linear both;
+    animation-timeline: --fall;
+    animation-range: cover 0% cover 100%;
+  }
+
+  .fall__layer--near {
+    animation: clouds-up-near linear both;
+    animation-timeline: --fall;
+    animation-range: cover 0% cover 100%;
+  }
+
+  .fall__mayo {
+    animation: mayo-fall linear both;
+    animation-timeline: --fall;
+    animation-range: cover 20% cover 80%;
+  }
+}
+
+html[data-motion-tier="lite"] .fall__layer,
+html[data-motion-tier="lite"] .fall__mayo,
+html[data-motion-tier="reduced"] .fall__layer,
+html[data-motion-tier="reduced"] .fall__mayo,
+html[data-motion-tier="lite"] .firefly,
+html[data-motion-tier="lite"] .campfire__flame,
+html[data-motion-tier="lite"] .campfire__flame-core {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fall__layer,
+  .fall__mayo,
+  .firefly,
+  .campfire__flame,
+  .campfire__flame-core {
+    animation: none !important;
+  }
+
+  .fall {
+    height: 60vh;
+  }
+
+  .fall__stage {
+    position: relative;
+    height: 60vh;
+  }
+}
+
+/* Works (island 5) */
+
+.works {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin-block-start: 0.5rem;
+}
+
+.work {
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  background: color-mix(in oklch, var(--cream) 92%, transparent);
+  box-shadow: var(--shadow-soft);
+}
+
+.work--placeholder {
+  background: color-mix(in oklch, var(--cream) 55%, transparent);
+  box-shadow: none;
+  outline: 1px dashed color-mix(in oklch, var(--bark) 40%, transparent);
+}
+
+.work h3 {
+  font-size: 1.15rem;
+}
+
+.work p {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.work__category {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+.work__link,
+.host-link {
+  font-weight: 600;
+  color: var(--moss);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.isle--dark .host-link {
+  color: var(--mint);
+}
+
+.steps {
+  margin-block-start: 1.5rem;
+}
+
+.steps h3 {
+  font-size: 1.35rem;
+}
+
+.steps > p {
+  margin-block: 0.5rem 1.25rem;
+  color: var(--ink-soft);
+}
+
+.steps__steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+}
+
+.steps__steps li {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.9rem 1rem;
+  border-radius: calc(var(--radius) - 0.5rem);
+  background: var(--beige);
+}
+
+.steps__steps span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--moss);
+}
+
+/* FAQ (island 6) */
+
+.questions {
+  display: grid;
+  gap: 0.5rem;
+  margin-block-start: 0.5rem;
+}
+
+.questions__item {
+  padding: 0.25rem 1rem;
+  border-radius: calc(var(--radius) - 0.5rem);
+  background: color-mix(in oklch, oklch(22% 0.04 265) 90%, transparent);
+}
+
+.questions__item summary {
+  cursor: pointer;
+  padding-block: 0.75rem;
+  font-weight: 600;
+  list-style: none;
+}
+
+.questions__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.questions__item summary::before {
+  content: "+";
+  display: inline-block;
+  width: 1.25rem;
+  color: var(--mint);
+  font-weight: 700;
+}
+
+.questions__item[open] summary::before {
+  content: "\2212";
+}
+
+.questions__item p {
+  padding-block: 0 1rem;
+  color: var(--night-ink-soft);
+}
+
+/* Island 7: host + reach */
+
+.host {
+  display: grid;
+  gap: 1rem;
+}
+
+.reach {
+  display: grid;
+  gap: 1.5rem;
+  margin-block-start: 2rem;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: color-mix(in oklch, oklch(22% 0.04 265) 90%, transparent);
+}
+
+.reach__intro {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+}
+
+.reach__intro h3 {
+  font-size: 1.5rem;
+}
+
+.reach__intro p,
+.reach__intro span {
+  color: var(--night-ink-soft);
+}
+
+.world .contact-form,
+.world .contact-form .field,
+.world .contact-form input,
+.world .contact-form select,
+.world .contact-form textarea,
+.world .contact-form button {
+  font-family: var(--font-world-sans);
+}
+
+/* Navigation extras */
+
+.progress {
+  position: fixed;
+  inset: 50% 1rem auto auto;
+  z-index: 40;
+  transform: translateY(-50%);
+}
+
+.progress ol {
+  display: grid;
+  gap: 0.35rem;
+  list-style: none;
+  padding: 0.4rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklch, var(--cream) 80%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+}
+
+.progress__paw {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  color: color-mix(in oklch, var(--ink-soft) 55%, transparent);
+  transition:
+    color 200ms var(--ease-out),
+    background-color 200ms var(--ease-out);
+}
+
+.progress__paw svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+
+.progress__paw:hover,
+.progress__paw[aria-current="location"] {
+  color: var(--cream);
+  background: var(--moss);
+}
+
+.wa-float {
+  position: fixed;
+  inset: auto 1rem 4.5rem auto;
+  z-index: 40;
+  display: none;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  color: var(--cream);
+  background: oklch(55% 0.17 150);
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition:
+    opacity 250ms var(--ease-out),
+    transform 250ms var(--ease-out);
+}
+
+.wa-float svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  fill: currentColor;
+}
+
+@media (max-width: 48rem) {
+  .isle {
+    padding-block: 5.5rem 40vh;
+  }
+
+  .isle__content {
+    gap: 0.75rem;
+  }
+
+  .isle__mayo {
+    --mayo-size: clamp(4.5rem, 22vw, 6rem);
+  }
+
+  .ornament {
+    height: 34%;
+  }
+
+  .fall {
+    height: 120vh;
+  }
+
+  .progress {
+    inset: auto 0 0;
+    transform: none;
+    display: flex;
+    justify-content: center;
+    padding-block-end: 0.5rem;
+    pointer-events: none;
+  }
+
+  .progress ol {
+    grid-auto-flow: column;
+    pointer-events: auto;
+  }
+
+  .wa-float {
+    display: grid;
+  }
+
+  .wa-float--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .world-footer {
+    padding-block-end: 5.5rem;
+  }
+}
