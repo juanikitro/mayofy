@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import {
+  Caveat,
   Cormorant_Garamond,
+  Fraunces,
   IBM_Plex_Mono,
+  Instrument_Sans,
   Manrope,
 } from "next/font/google";
 import { getSiteUrl } from "@/lib/site-url";
@@ -25,6 +28,30 @@ const monoFont = IBM_Plex_Mono({
   variable: "--font-ibm-plex-mono",
   weight: ["400", "500", "600"],
   subsets: ["latin"],
+  display: "swap",
+});
+
+// Mayo world fonts (see docs/plans/2026-11-16-biblia-visual-mundo-mayo.md).
+// The legacy fonts above stay until the remaining routes move to the new world.
+const worldSansFont = Instrument_Sans({
+  variable: "--font-instrument-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const worldSerifFont = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  style: ["italic"],
+  weight: "variable",
+  axes: ["opsz", "SOFT"],
+  display: "swap",
+});
+
+const worldHandFont = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["600"],
   display: "swap",
 });
 
@@ -76,7 +103,7 @@ export default function RootLayout({
   return (
     <html
       lang="es-AR"
-      className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`}
+      className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} ${worldSansFont.variable} ${worldSerifFont.variable} ${worldHandFont.variable}`}
     >
       <body>{children}</body>
       {googleAnalyticsId ? <GoogleAnalytics gaId={googleAnalyticsId} /> : null}
