@@ -18,6 +18,24 @@ type ContactPayload = {
 };
 
 const MAX_BODY_BYTES = 12_000;
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/**
+ * CONTACT_FORM_ENDPOINT accepts either an HTTPS URL that receives the JSON
+ * payload, or a plain email address. An email address is delivered through
+ * FormSubmit (https://formsubmit.co), which forwards the fields to that
+ * mailbox without an account; the first submission triggers an activation
+ * email that Juani must confirm once.
+ */
+function resolveEndpoint(value: string) {
+  const trimmed = value.trim().replace(/^mailto:/i, "");
+  if (EMAIL_PATTERN.test(trimmed)) {
+    return new URL(`https://formsubmit.co/ajax/${encodeURIComponent(trimmed)}`);
+  }
+  const url = new URL(trimmed);
+  if (url.protocol !== "https:") throw new Error("Invalid protocol");
+  return url;
+}
 
 function readText(value: unknown, maxLength: number) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -112,8 +130,7 @@ export async function POST(request: Request) {
   let endpoint: URL;
 
   try {
-    endpoint = new URL(endpointValue);
-    if (endpoint.protocol !== "https:") throw new Error("Invalid protocol");
+    endpoint = resolveEndpoint(endpointValue);
   } catch {
     return Response.json(
       { ok: false, message: "El formulario no está disponible." },
@@ -127,6 +144,7 @@ export async function POST(request: Request) {
       cache: "no-store",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
         ...(process.env.CONTACT_FORM_TOKEN
           ? { Authorization: `Bearer ${process.env.CONTACT_FORM_TOKEN}` }
           : {}),
@@ -142,6 +160,8 @@ export async function POST(request: Request) {
         reference,
         need,
         source: "mayofy-web",
+        _subject: `Consulta de ${name} (${business}) desde mayofy.dev`,
+        _template: "table",
       }),
       signal: AbortSignal.timeout(8_000),
     });

@@ -5,10 +5,10 @@
 
 ## Para decidir en la iteración
 
-1. **Destino del formulario.** "Prefiero que me contacten" usa `/api/contact`, que reenvía a `CONTACT_FORM_ENDPOINT`. Sin esa variable en Railway, el sitio muestra un aviso y deriva a WhatsApp. Opciones: un correo (por ejemplo, con Resend), una planilla de Google (Apps Script) o un servicio de formularios (Formspree, Basin). Elegir uno y configurar la variable.
+1. **Destino del formulario.** *Decidido el 16 de noviembre de 2026: `CONTACT_FORM_ENDPOINT` debe ser `jpkitro@gmail.com` por ahora.* La ruta `/api/contact` acepta un correo y lo entrega por FormSubmit (sin cuenta ni dependencia). Falta configurar la variable en Railway con ese valor y confirmar el correo de activación que FormSubmit manda en la primera consulta.
 2. **Correo comercial.** El dominio `mayofy.dev` ya está activo (ver `docs/ops/domains.md`). Falta un correo en ese dominio: hoy el contacto es `jpkitro@gmail.com` (también figura en `/privacidad`). Al tenerlo, cambiar `publicChannels.email` en `src/content/site.ts`.
 3. **Imagen de Juani.** Decisión: usar un avatar en lugar de una foto. Recomendación: un avatar basado en una foto real y reconocible, tratado con la estética de `Umbral Vivo`, mejor que uno genérico o caricaturesco. La sección "Quién está detrás" vende trato directo, y un avatar que no se parece a nadie resta confianza. Hoy la sección muestra la letra "J".
-4. **Bot de WhatsApp y Telegram.** Hoy figura como "Próximamente". Precios y plazos aprobados por Juani el 14 de noviembre de 2026; falta publicarlos en el sitio y detallar el alcance final:
+4. **Bot de WhatsApp y Telegram.** Precios y plazos aprobados por Juani el 14 de noviembre de 2026 y *publicados el 16 de noviembre de 2026 en la isla 4 de la rama del rediseño* ("apruebo los precios, aunque probablemente los cambie despues"); el bot sigue como "Próximamente":
 
    | Escalón | Qué incluye | Desde | Plazo |
    |---|---|---|---|
