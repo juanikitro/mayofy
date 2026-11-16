@@ -1157,8 +1157,9 @@ html[data-motion-tier="reduced"] .scene__mayo .mayo__art {
   }
 
   .mayo-note--dawn {
-    inset: auto 1rem 43% auto;
-    font-size: 1.3rem;
+    inset: auto 1rem 31% auto;
+    max-width: 11ch;
+    font-size: 1.25rem;
   }
 
   .rocks {

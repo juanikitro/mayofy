@@ -53,6 +53,8 @@ Con Playwright sobre `next dev` en `http://localhost:3010`, en Chromium:
 
 Capturas de la verificación: en el scratchpad de la sesión (no se versionan).
 
+Además, un verificador independiente (agente de solo lectura, sin acceso a este contexto) repitió las pruebas sobre el commit `0a5b5cf`: S3, S5, S7 y S9 en PASS, y S4 con un bloqueo a 390 px: la nota manuscrita de Mayo tapaba la palabra "gratis" del CTA principal. Se corrigió moviendo la nota (`.mayo-note--dawn` en celular) y se volvió a medir: los rectángulos de la nota y de los dos CTA ya no se superponen y `scrollWidth` sigue en 390. Hallazgo útil del verificador: Chromium reporta la transformación final de una animación atada al scroll como `matrix(1, 0, 0, 1, 0, 0)` y no como `none`.
+
 No verificado: Firefox y Safari reales (la vía sin soporte de `animation-timeline` se cubre por diseño, pero no se observó), celular físico, nivel "liviano" en un dispositivo real (solo por lógica del detector) y el detalle expandido de cada pack con lector de pantalla.
 
 ## Limitaciones y pendientes
