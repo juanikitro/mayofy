@@ -1,7 +1,7 @@
 # Biblia visual: el mundo de Mayo
 
 **Fecha:** 16 de noviembre de 2026
-**Estado:** propuesta para aprobación de Juani. Complementa `2026-11-16-landing-redesign-mayo-world.md` (las decisiones de ese documento no se reabren acá).
+**Estado:** aprobada por Juani el 16 de noviembre de 2026, con una corrección: Mayo no habla, así que no hay notas manuscritas ni fuente Caveat. Complementa `2026-11-16-landing-redesign-mayo-world.md` (las decisiones de ese documento no se reabren acá).
 **Para qué sirve:** fija paleta, tipografía, luz y cámara por isla, y deja listos los prompts de ChatGPT para generar las imágenes del hero (isla 1) y del ensamble de rocas (isla 3).
 
 ## 1. Paleta
@@ -47,14 +47,14 @@ Regla: en las islas claras el verde es tinta (moss) y el beige es fondo; en las 
 
 Se probaron Instrument Sans y Geist como sans, Fraunces en cursiva para la palabra clave y Caveat, Patrick Hand y Kalam como acento manuscrito, sobre fondos de amanecer, mediodía y noche, a 1440 px y 390 px.
 
-**Elegida:** Instrument Sans (titulares en 600 y texto en 400) + Fraunces cursiva (ejes `opsz 120`, `SOFT 60`, peso 400) para la palabra clave + Caveat 600 para las notas de Mayo.
+**Elegida:** Instrument Sans (titulares en 600 y texto en 400) + Fraunces cursiva (ejes `opsz 120`, `SOFT 60`, peso 400) para la palabra clave. Caveat se había elegido para las notas de Mayo, pero Juani decidió que Mayo no habla: no hay notas manuscritas ni acento caligráfico, y la fuente no se carga.
 
 - Instrument Sans es firme pero tiene calor: las curvas de la "a" y la "g" conviven con las islas. Geist se lee más frío y más "herramienta de desarrollador"; funciona, pero empuja al sitio hacia el SaaS y no hacia el mundo de Mayo.
 - Fraunces cursiva con `SOFT` alto da la nota orgánica sin volverse decorativa. Va en una o dos palabras por titular, nunca en frases enteras.
-- Caveat gana a Patrick Hand (infantil, de trazo parejo) y a Kalam (correcta pero más seca). Se usa como máximo una vez por isla, solo en las notas de Mayo, en marrón corteza sobre claro y en menta sobre noche, con una rotación de -3° a -5°.
+- Caveat ganaba a Patrick Hand (infantil, de trazo parejo) y a Kalam (correcta pero más seca); queda registrado por si algún día se quiere un acento manuscrito, pero hoy no se usa.
 - La mono desaparece. Los números de precio van en Instrument Sans con `font-variant-numeric: tabular-nums`.
 
-Escala: titular del hero `clamp(2.6rem, 1.5rem + 5.4vw, 5.5rem)` con interlineado 0.98 y tracking -0.03em; cuerpo 1.0625 a 1.1875rem con interlineado 1.5; notas de Mayo 1.5 a 1.9rem.
+Escala: titular del hero `clamp(2.6rem, 1.4rem + 4.6vw, 4.75rem)` con interlineado 0.98 y tracking -0.03em; cuerpo 1.0625 a 1.1875rem con interlineado 1.5.
 
 ## 3. Luz, cielo y cámara por isla
 
@@ -215,10 +215,8 @@ Generar cuatro variantes cambiando "pequeña redondeada" por "alargada", "achata
 
 Qué no hace falta todavía: la caída entre nubes (islas 1 y 2), las islas 2 y 4 a 7 y el avatar de Juani. Van en la próxima tanda, después de aprobar la porción vertical.
 
-## 7. Pendiente de aprobación
+## 7. Aprobación
 
-- Paleta y tipografía de las secciones 1 y 2.
-- Cámara base y tabla de luz por isla de la sección 3.
-- Estilo base y prompts de las secciones 4 y 5 (Juani los ejecuta en ChatGPT).
+Juani aprobó el 16 de noviembre de 2026 la paleta, la tipografía, la cámara base, la tabla de luz por isla, el estilo base y los prompts. Única corrección: sin notas de Mayo. Siguiente paso: generar las imágenes de la sección 6.
 
 Hasta que lleguen las imágenes, la porción vertical se construye con escenas provisorias (degradés y formas CSS) que se reemplazan por las imágenes sin tocar el código.

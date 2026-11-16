@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import {
-  Caveat,
   Cormorant_Garamond,
   Fraunces,
   IBM_Plex_Mono,
@@ -32,6 +31,7 @@ const monoFont = IBM_Plex_Mono({
 });
 
 // Mayo world fonts (see docs/plans/2026-11-16-biblia-visual-mundo-mayo.md).
+// No handwritten accent: Juani decided Mayo does not "speak" in notes.
 // The legacy fonts above stay until the remaining routes move to the new world.
 const worldSansFont = Instrument_Sans({
   variable: "--font-instrument-sans",
@@ -45,13 +45,6 @@ const worldSerifFont = Fraunces({
   style: ["italic"],
   weight: "variable",
   axes: ["opsz", "SOFT"],
-  display: "swap",
-});
-
-const worldHandFont = Caveat({
-  variable: "--font-caveat",
-  subsets: ["latin"],
-  weight: ["600"],
   display: "swap",
 });
 
@@ -103,7 +96,7 @@ export default function RootLayout({
   return (
     <html
       lang="es-AR"
-      className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} ${worldSansFont.variable} ${worldSerifFont.variable} ${worldHandFont.variable}`}
+      className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} ${worldSansFont.variable} ${worldSerifFont.variable}`}
     >
       <body>{children}</body>
       {googleAnalyticsId ? <GoogleAnalytics gaId={googleAnalyticsId} /> : null}

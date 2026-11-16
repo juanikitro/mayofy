@@ -7,7 +7,6 @@
 .world {
   --font-world-sans: var(--font-instrument-sans), "Segoe UI", sans-serif;
   --font-world-serif: var(--font-fraunces), Georgia, serif;
-  --font-world-hand: var(--font-caveat), "Segoe Script", cursive;
 
   --moss: oklch(42% 0.11 150);
   --leaf: oklch(55% 0.14 145);
@@ -394,29 +393,6 @@ html:has(.world) {
   inset: auto auto 100% 20%;
   transform: scaleX(-1);
   opacity: 0;
-}
-
-/* Mayo's handwritten notes: at most one per island ---------------------- */
-
-.mayo-note {
-  position: absolute;
-  z-index: 2;
-  max-width: 14ch;
-  font-family: var(--font-world-hand);
-  font-weight: 600;
-  font-size: clamp(1.35rem, 1rem + 1.3vw, 1.9rem);
-  line-height: 1.05;
-  color: var(--bark);
-  transform: rotate(-4deg);
-  pointer-events: none;
-}
-
-.mayo-note--dawn {
-  inset: auto 6% 22% auto;
-}
-
-.mayo-note--rocks {
-  inset: auto 6% 9% auto;
 }
 
 /* Hero: island 1 ------------------------------------------------------- */
@@ -1156,12 +1132,6 @@ html[data-motion-tier="reduced"] .scene__mayo .mayo__art {
     inset: auto auto 17% 46%;
   }
 
-  .mayo-note--dawn {
-    inset: auto 1rem 31% auto;
-    max-width: 11ch;
-    font-size: 1.25rem;
-  }
-
   .rocks {
     height: auto;
   }
@@ -1219,12 +1189,6 @@ html[data-motion-tier="reduced"] .scene__mayo .mayo__art {
   .platform__mayo {
     animation-timeline: --platform;
     animation-range: entry 70% entry 100%;
-  }
-
-  .mayo-note--rocks {
-    position: static;
-    margin: 0 auto;
-    text-align: center;
   }
 
   .promises__list {

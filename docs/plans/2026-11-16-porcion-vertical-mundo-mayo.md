@@ -1,7 +1,7 @@
 # Porción vertical del mundo de Mayo: hero e isla de rocas
 
 **Fecha:** 16 de noviembre de 2026
-**Estado:** construida y verificada en local, pendiente de aprobación de Juani. No está publicada.
+**Estado:** aprobada por Juani el 16 de noviembre de 2026 (con las notas de Mayo eliminadas). No está publicada.
 **Rama:** `juanikitro/landing-redesign` (worktree `landing-redesign`). Sin push.
 **Depende de:** `2026-11-16-landing-redesign-mayo-world.md` (decisiones) y `2026-11-16-biblia-visual-mundo-mayo.md` (paleta, tipografía, prompts).
 
@@ -11,7 +11,7 @@ La página de inicio pasa a ser el comienzo del recorrido por islas: la isla 1 (
 
 - `src/app/page.tsx`: nueva página de inicio. Hero con la promesa "Webs que venden. Sistemas que ordenan." y los dos CTA en el primer pliegue, renderizados en el servidor y sin depender de ninguna animación. Debajo, la isla de rocas y el detalle de los packs. Cierra con un pie de página nocturno.
 - `src/app/world.css`: hoja de estilos nueva del mundo de Mayo, con los tokens de la biblia visual. Está acotada al contenedor `.world` para no romper `/privacidad` ni `/proyectos`, que siguen usando `globals.css` hasta que migren.
-- `src/app/layout.tsx`: carga Instrument Sans, Fraunces (cursiva variable, ejes `opsz` y `SOFT`) y Caveat con `next/font/google`. Las fuentes viejas siguen cargadas para las rutas que todavía no migraron.
+- `src/app/layout.tsx`: carga Instrument Sans y Fraunces (cursiva variable, ejes `opsz` y `SOFT`) con `next/font/google`. Las fuentes viejas siguen cargadas para las rutas que todavía no migraron.
 - `src/components/world/`:
   - `hero-island.tsx`: escena provisoria de la isla 1 dibujada en SVG por capas (cielo, islas lejanas, isla principal, hojas en primer plano). Cada capa corresponde a una imagen de la biblia y se reemplaza sin tocar la estructura.
   - `rock-island.tsx`: isla 3. Tres plataformas de cuatro rocas cada una, con una tarjeta resumen por pack (nombre, precio "desde", plazo y enlace al detalle).
@@ -60,8 +60,8 @@ No verificado: Firefox y Safari reales (la vía sin soporte de `animation-timeli
 ## Limitaciones y pendientes
 
 - Todas las imágenes son provisorias (SVG plano). Se reemplazan por las que Juani genere con los prompts de la biblia visual; las rocas provisorias no tienen el encastre que tendrán las generadas.
-- Las notas manuscritas de Mayo ("¡Guau! Acá empieza todo." y "Una roca por pack.") son texto propuesto, pendiente de aprobación según la regla de texto del rediseño.
+- Las notas manuscritas de Mayo se propusieron y Juani las rechazó ("no me gusta que hable"): se eliminaron junto con la fuente Caveat. Mayo comunica solo con acciones.
 - La marca en el nav es texto; el PNG del wordmark es para fondo oscuro y necesita una versión para beige.
-- Se cargan seis familias tipográficas mientras conviven el mundo nuevo y las rutas viejas. Al migrar `/privacidad` y `/proyectos` se eliminan Cormorant, Manrope e IBM Plex Mono y `globals.css` se reduce.
+- Se cargan cinco familias tipográficas mientras conviven el mundo nuevo y las rutas viejas. Al migrar `/privacidad` y `/proyectos` se eliminan Cormorant, Manrope e IBM Plex Mono y `globals.css` se reduce.
 - Las islas 2 y 4 a 7, la caída entre nubes, el indicador de progreso con huella, el CTA flotante de WhatsApp y Cal.com quedan para después de la aprobación.
 - Three.js no se agregó: se propone al integrar el GLB de Mayo (costo: unos 150 KB comprimidos más el modelo, cargado solo en el nivel completo y después del primer pliegue).

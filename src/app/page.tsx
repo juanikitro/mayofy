@@ -56,9 +56,6 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <p className="mayo-note mayo-note--dawn" aria-hidden="true">
-            ¡Guau! Acá empieza todo.
-          </p>
         </section>
 
         <RockIsland />

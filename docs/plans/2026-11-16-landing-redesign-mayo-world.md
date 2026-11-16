@@ -1,7 +1,7 @@
 # Rediseño de la landing: el mundo de Mayo
 
 **Fecha:** 16 de noviembre de 2026
-**Estado:** en definición con Juani (sesión de preguntas). Todavía no hay implementación.
+**Estado:** biblia visual y porción vertical (hero + isla 3) aprobadas por Juani el 16 de noviembre de 2026; ver `2026-11-16-biblia-visual-mundo-mayo.md` y `2026-11-16-porcion-vertical-mundo-mayo.md`.
 **Objetivo:** reunir las decisiones para lanzar después una sesión dedicada de diseño de la landing.
 
 ## Decisiones tomadas
@@ -15,7 +15,7 @@
 7. **Mundo:** un archipiélago de islas flotantes, una por sección. El cielo avanza del amanecer a la noche: las secciones claras son de día y las oscuras, del crepúsculo y la noche.
 8. **Metáfora de orden (inspirada en Villex, pero con elementos naturales):** rocas sueltas que se ensamblan y con las que Mayo interactúa y juega.
 9. **Paleta:** el verde evoluciona. El principal pasa a un verde hoja o musgo, más profundo y natural, que se lea sobre beige. El menta actual (`oklch(86% 0.2 158)`) queda como color de "luz" en las secciones nocturnas (luciérnagas, brillos, CTA sobre fondo oscuro). El beige es cálido y apenas tirando a durazno.
-10. **Tipografía:** firme y cálida, nada infantil. Mayo y las islas aportan lo lúdico; el texto aporta la seriedad comercial. Los titulares usan una sans firme y moderna (candidatas: Instrument Sans o Geist) y la palabra clave va en una serif suave en cursiva (candidata: Fraunces). Se suma un acento artesanal o manuscrito en pocas palabras clave: como máximo uno por sección, por ejemplo en las notas que acompañan a Mayo. Se elimina la mono. Las fuentes finales las elige el agente de diseño probándolas sobre las escenas.
+10. **Tipografía:** firme y cálida, nada infantil. Mayo y las islas aportan lo lúdico; el texto aporta la seriedad comercial. Los titulares usan una sans firme y moderna (candidatas: Instrument Sans o Geist) y la palabra clave va en una serif suave en cursiva (candidata: Fraunces). Se elimina la mono. **Actualización del 16 de noviembre de 2026:** Juani descartó el acento manuscrito y las notas de Mayo; la tipografía queda en dos familias (sans firme y serif cursiva para la palabra clave). Las fuentes finales las elige el agente de diseño probándolas sobre las escenas.
 11. **Niveles de rendimiento (automáticos):**
     - **Completo** (escritorio y celulares buenos): Mayo en 3D en tiempo real.
     - **Liviano** (celulares lentos, ahorro de datos o conexión mala): una imagen prerenderizada de Mayo por isla, con animación CSS simple.
@@ -26,7 +26,7 @@
     - **Ensamble de rocas (isla 3):** sin video. Rocas prerenderizadas independientes, movidas con Scroll-Driven Animations en CSS (`animation-timeline: view()` dentro de `@supports`). Flotan dispersas y se encastran hasta formar las tres plataformas de los packs. Con movimiento reducido se muestran ya ensambladas.
     - **Único video breve:** la caída de Mayo entre nubes, en la transición entre las islas 1 y 2. Va como secuencia corta de imágenes livianas, no como video atado al scroll. En el nivel liviano se reemplaza por una sola imagen.
 13. **Generación de imágenes:** Juani genera las imágenes con su ChatGPT Pro, siempre con la misma herramienta y una imagen de referencia de estilo para mantener la coherencia. El agente de diseño arma la biblia visual (estilo, luz, paleta y cámara por isla) con un prompt listo para cada imagen, y después recorta, separa en capas, optimiza y monta los resultados. Se estiman entre 30 y 50 imágenes en varias tandas.
-14. **Texto:** la sustancia comercial (precios, plazos, contenido de los packs, garantías y FAQ) no cambia. Se reescriben los títulos y las entradas de cada isla para acompañar la narrativa, y se acorta el texto en general. La promesa del hero se mantiene. Mayo puede "hablar" en notas manuscritas breves, siempre al servicio del mensaje. El agente de diseño propone el texto y Juani lo aprueba antes de implementarlo.
+14. **Texto:** la sustancia comercial (precios, plazos, contenido de los packs, garantías y FAQ) no cambia. Se reescriben los títulos y las entradas de cada isla para acompañar la narrativa, y se acorta el texto en general. La promesa del hero se mantiene. Mayo no habla: Juani decidió el 16 de noviembre de 2026 eliminar las notas manuscritas; Mayo comunica solo con acciones. El agente de diseño propone el texto y Juani lo aprueba antes de implementarlo.
 15. **Navegación:**
     - Pill flotante con Packs, Trabajos, Preguntas y el CTA "Agendá tu diagnóstico". Al saltar a una isla, Mayo aparece en la pose que corresponde.
     - Indicador de progreso con una huella de Mayo: al costado en escritorio y abajo en celular, con clic para ir a cada isla.

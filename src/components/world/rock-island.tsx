@@ -110,10 +110,6 @@ export function RockIsland() {
             </div>
           ))}
         </div>
-
-        <p className="mayo-note mayo-note--rocks" aria-hidden="true">
-          Una roca por pack.
-        </p>
       </div>
     </section>
   );
