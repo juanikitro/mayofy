@@ -97,6 +97,8 @@ export function IslandProgress() {
       <a
         className={`wa-float${pastHero ? " wa-float--visible" : ""}`}
         href={getWhatsAppHref(siteContent.hero.primaryMessage)}
+        target="_blank"
+        rel="noreferrer"
         aria-label="Escribir por WhatsApp"
         tabIndex={pastHero ? 0 : -1}
         aria-hidden={!pastHero}

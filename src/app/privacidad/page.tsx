@@ -45,8 +45,8 @@ export default function PrivacyPage() {
             <li>
               Los que completás en el formulario de contacto: nombre, negocio o
               actividad, canal de contacto, el tipo de proyecto, plazo,
-              presupuesto aproximado, si tenés dominio, una web de referencia y tu
-              mensaje.
+              presupuesto aproximado, una referencia y tu mensaje. Ninguno es
+              obligatorio.
             </li>
             <li>Los que nos enviás al escribirnos por WhatsApp o por correo.</li>
             <li>

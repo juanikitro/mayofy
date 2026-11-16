@@ -10,7 +10,9 @@ export function WorldFooter() {
       <div className="world-shell world-footer__layout">
         <p>{siteContent.hero.title}</p>
         <div className="world-footer__links">
-          <a href={getWhatsAppHref()}>WhatsApp</a>
+          <a href={getWhatsAppHref()} target="_blank" rel="noreferrer">
+            WhatsApp
+          </a>
           <a href={publicChannels.instagram} target="_blank" rel="noreferrer">
             Instagram
           </a>

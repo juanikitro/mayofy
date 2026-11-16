@@ -27,7 +27,6 @@ function readDetails(form: FormData): ContactDetails {
     pack: read("pack"),
     timeline: read("timeline"),
     budget: read("budget"),
-    domain: read("domain"),
     reference: read("reference"),
     need: read("need"),
   };
@@ -78,9 +77,15 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
     const details = readDetails(form);
 
     if (submitter?.getAttribute("value") === "whatsapp") {
-      const href = getWhatsAppHref(formatContactMessage(details));
-      const opened = window.open(href, "_blank", "noopener");
-      if (!opened) window.location.href = href;
+      // window.open returns null with "noopener", so an anchor click is the
+      // reliable way to open WhatsApp in a new tab and keep mayofy.dev open.
+      const anchor = document.createElement("a");
+      anchor.href = getWhatsAppHref(formatContactMessage(details));
+      anchor.target = "_blank";
+      anchor.rel = "noopener noreferrer";
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
       setSubmissionState("success");
       setFeedback("Abrimos WhatsApp con tu consulta lista para enviar.");
       return;
@@ -134,25 +139,11 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
       <div className="contact-form__row">
         <label className="field">
           <span>Tu nombre</span>
-          <input
-            name="name"
-            type="text"
-            autoComplete="name"
-            minLength={2}
-            maxLength={80}
-            required
-          />
+          <input name="name" type="text" autoComplete="name" maxLength={80} />
         </label>
         <label className="field">
           <span>Negocio o actividad</span>
-          <input
-            name="business"
-            type="text"
-            autoComplete="organization"
-            minLength={2}
-            maxLength={120}
-            required
-          />
+          <input name="business" type="text" autoComplete="organization" maxLength={120} />
         </label>
       </div>
       <label className="field">
@@ -161,10 +152,8 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
           name="contact"
           type="text"
           autoComplete="email"
-          minLength={5}
           maxLength={160}
           placeholder="WhatsApp o correo"
-          required
         />
       </label>
       <div className="contact-form__row">
@@ -177,25 +166,14 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
           label="Presupuesto aproximado"
           placeholder="Elegí un rango"
         />
-        <SelectField
-          field="domain"
-          label="¿Ya tenés dominio o hosting?"
-          placeholder="Elegí una opción"
-        />
+        <label className="field">
+          <span>Una web o negocio que te guste como referencia</span>
+          <input name="reference" type="text" maxLength={300} placeholder="Un nombre o un enlace" />
+        </label>
       </div>
       <label className="field">
-        <span>Una web que te guste como referencia (opcional)</span>
-        <input
-          name="reference"
-          type="url"
-          inputMode="url"
-          maxLength={300}
-          placeholder="https://"
-        />
-      </label>
-      <label className="field">
         <span>Contanos sobre tu proyecto</span>
-        <textarea name="need" minLength={20} maxLength={1800} required />
+        <textarea name="need" maxLength={1800} />
       </label>
       <label className="field field--trap" aria-hidden="true">
         <span>Empresa</span>
@@ -232,7 +210,7 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
         cedemos. <Link href="/privacidad">Política de privacidad</Link>.
       </p>
       {submissionState === "error" ? (
-        <a className="contact-form__fallback" href={whatsappHref}>
+        <a className="contact-form__fallback" href={whatsappHref} target="_blank" rel="noreferrer">
           Continuar por WhatsApp
         </a>
       ) : null}

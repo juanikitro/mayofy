@@ -1,5 +1,4 @@
-const defaultMessage =
-  "Hola Juani, vi el portfolio de Mayofy y quiero contarte sobre mi negocio.";
+const defaultMessage = "👋 Hola Juani, quiero trabajar con Mayofy...";
 const publicWhatsAppNumber = "542345455007";
 
 export function getWhatsAppHref(message = defaultMessage) {

@@ -161,7 +161,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <Link className="btn btn--moss btn--lg" href="/#agenda">
               {siteContent.hero.primaryCta}
             </Link>
-            <a className="btn btn--quiet btn--lg" href={whatsappHref}>
+            <a className="btn btn--quiet btn--lg" href={whatsappHref} target="_blank" rel="noreferrer">
               Escribir por WhatsApp
             </a>
           </div>

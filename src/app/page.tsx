@@ -60,7 +60,7 @@ export default function Home() {
               <a className="btn btn--quiet btn--lg" href="#packs">
                 {siteContent.hero.secondaryCta}
               </a>
-              <a className="dawn__alt" href={heroWhatsAppHref}>
+              <a className="dawn__alt" href={heroWhatsAppHref} target="_blank" rel="noreferrer">
                 o escribinos por WhatsApp
               </a>
             </div>

@@ -24,11 +24,6 @@ export const contactOptions = {
     { value: "mas-450", label: "Más de USD 450" },
     { value: "a-definir", label: "Prefiero verlo en la reunión" },
   ],
-  domain: [
-    { value: "si", label: "Sí" },
-    { value: "no", label: "No" },
-    { value: "no-se", label: "No sé" },
-  ],
 } as const satisfies Record<string, readonly ContactOption[]>;
 
 export type ContactOptionField = keyof typeof contactOptions;
@@ -44,22 +39,26 @@ export type ContactDetails = {
   pack: string;
   timeline: string;
   budget: string;
-  domain: string;
   reference: string;
   need: string;
 };
 
+/** Builds the WhatsApp message from the form. Every field is optional; empty ones are skipped. */
 export function formatContactMessage(details: ContactDetails) {
-  const lines = [
-    `Hola Juani, soy ${details.name} (${details.business}).`,
-    `Me interesa: ${getContactOptionLabel("pack", details.pack) ?? "No sé todavía"}.`,
-    `Plazo: ${getContactOptionLabel("timeline", details.timeline) ?? "Sin definir"}.`,
-    `Presupuesto: ${getContactOptionLabel("budget", details.budget) ?? "Sin definir"}.`,
-    `¿Tengo dominio?: ${getContactOptionLabel("domain", details.domain) ?? "No sé"}.`,
-  ];
+  const who = [details.name, details.business && `(${details.business})`]
+    .filter(Boolean)
+    .join(" ");
+  const lines = [who ? `\u{1F44B} Hola Juani, soy ${who}.` : "\u{1F44B} Hola Juani, quiero trabajar con Mayofy..."];
 
+  const pack = getContactOptionLabel("pack", details.pack);
+  const timeline = getContactOptionLabel("timeline", details.timeline);
+  const budget = getContactOptionLabel("budget", details.budget);
+  if (pack) lines.push(`Me interesa: ${pack}.`);
+  if (timeline) lines.push(`Plazo: ${timeline}.`);
+  if (budget) lines.push(`Presupuesto: ${budget}.`);
+  if (details.contact) lines.push(`Contacto: ${details.contact}`);
   if (details.reference) lines.push(`Referencia: ${details.reference}`);
-  lines.push("", details.need);
+  if (details.need) lines.push("", details.need);
 
   return lines.join("\n");
 }

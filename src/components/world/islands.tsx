@@ -91,7 +91,7 @@ export function SystemsIsland() {
             </div>
             <footer className="addons__footer">
               <p>{extensions.note}</p>
-              <a className="btn btn--moss" href={getWhatsAppHref(extensions.whatsappMessage)}>
+              <a className="btn btn--moss" href={getWhatsAppHref(extensions.whatsappMessage)} target="_blank" rel="noreferrer">
                 {extensions.cta}
               </a>
             </footer>
@@ -117,7 +117,7 @@ export function SystemsIsland() {
             </dl>
             <p className="soon__monthly">{comingSoon.monthly}</p>
             <p className="soon__note">{comingSoon.note}</p>
-            <a className="btn btn--quiet" href={getWhatsAppHref(comingSoon.whatsappMessage)}>
+            <a className="btn btn--quiet" href={getWhatsAppHref(comingSoon.whatsappMessage)} target="_blank" rel="noreferrer">
               {comingSoon.cta}
             </a>
           </article>
@@ -225,7 +225,7 @@ export function QuestionsIsland() {
             <p>{maintenancePlan.description}</p>
           </header>
           <div className="upkeep__content">
-            <a className="btn btn--quiet" href={getWhatsAppHref(maintenancePlan.whatsappMessage)}>
+            <a className="btn btn--quiet" href={getWhatsAppHref(maintenancePlan.whatsappMessage)} target="_blank" rel="noreferrer">
               {maintenancePlan.cta}
             </a>
             <AnimatedDetails className="pack-details" summary="¿Qué cambios incluye?">
@@ -278,7 +278,7 @@ export function JuaniIsland() {
               horas hábiles.
             </p>
             <CalBooking url={siteContent.scheduling.url} calLink={siteContent.scheduling.calLink} />
-            <a className="host-link" href={heroWhatsAppHref}>
+            <a className="host-link" href={heroWhatsAppHref} target="_blank" rel="noreferrer">
               Prefiero escribir por WhatsApp
             </a>
             <span>O completá estos datos y lo vemos por WhatsApp:</span>

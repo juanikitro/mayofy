@@ -16,7 +16,7 @@ export default function NotFound() {
           <Link className="btn btn--moss btn--lg" href="/">
             Volver al inicio
           </Link>
-          <a className="btn btn--quiet btn--lg" href={getWhatsAppHref()}>
+          <a className="btn btn--quiet btn--lg" href={getWhatsAppHref()} target="_blank" rel="noreferrer">
             Escribir por WhatsApp
           </a>
         </div>

@@ -10,7 +10,6 @@ type ContactPayload = {
   pack?: unknown;
   timeline?: unknown;
   budget?: unknown;
-  domain?: unknown;
   reference?: unknown;
   need?: unknown;
   company?: unknown;
@@ -46,18 +45,6 @@ function readOption(field: ContactOptionField, value: unknown) {
   return getContactOptionLabel(field, text) ? text : "";
 }
 
-function readReference(value: unknown) {
-  const text = readText(value, 300);
-  if (!text) return "";
-
-  try {
-    const url = new URL(text);
-    return url.protocol === "https:" || url.protocol === "http:" ? url.toString() : "";
-  } catch {
-    return "";
-  }
-}
-
 export async function POST(request: Request) {
   const contentLength = Number(request.headers.get("content-length") ?? 0);
 
@@ -85,8 +72,7 @@ export async function POST(request: Request) {
   const pack = readOption("pack", payload.pack);
   const timeline = readOption("timeline", payload.timeline);
   const budget = readOption("budget", payload.budget);
-  const domain = readOption("domain", payload.domain);
-  const reference = readReference(payload.reference);
+  const reference = readText(payload.reference, 300);
   const need = readText(payload.need, 1800);
   const company = readText(payload.company, 120);
   const startedAt =
@@ -103,14 +89,10 @@ export async function POST(request: Request) {
     );
   }
 
-  if (
-    name.length < 2 ||
-    business.length < 2 ||
-    contact.length < 5 ||
-    need.length < 20
-  ) {
+  // No field is mandatory, but an entirely empty form has nothing to deliver.
+  if (!name && !business && !contact && !need && !reference) {
     return Response.json(
-      { ok: false, message: "Revisá los campos antes de enviar." },
+      { ok: false, message: "Contanos al menos cómo contactarte o qué necesitás." },
       { status: 400 },
     );
   }
@@ -156,17 +138,25 @@ export async function POST(request: Request) {
         pack,
         timeline,
         budget,
-        domain,
         reference,
         need,
         source: "mayofy-web",
         _subject: `Consulta de ${name} (${business}) desde mayofy.dev`,
         _template: "table",
       }),
-      signal: AbortSignal.timeout(8_000),
+      signal: AbortSignal.timeout(20_000),
     });
 
     if (!response.ok) throw new Error("Contact endpoint rejected request");
+
+    // FormSubmit answers 200 even when it could not deliver (for example
+    // while the mailbox is still unactivated); its JSON carries the verdict.
+    const result = (await response.json().catch(() => null)) as
+      | { success?: boolean | string; message?: string }
+      | null;
+    if (result && String(result.success) === "false") {
+      throw new Error(result.message ?? "Contact endpoint could not deliver");
+    }
 
     return Response.json({ ok: true });
   } catch {

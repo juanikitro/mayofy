@@ -6,8 +6,7 @@ export const siteContent = {
     titleLines: ["Webs que venden.", "Sistemas que ordenan."],
     body: "Diseñamos landings, webs con turnos y sistemas a medida para negocios de servicios. Empezamos con una reunión de diagnóstico gratis para entender qué necesitás.",
     primaryCta: "Agendá tu diagnóstico gratis",
-    primaryMessage:
-      "Hola Juani, quiero agendar la reunión de diagnóstico gratis de Mayofy.",
+    primaryMessage: "👋 Hola Juani, quiero trabajar con Mayofy...",
     secondaryCta: "Ver packs",
   },
   scheduling: {

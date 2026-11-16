@@ -39,7 +39,7 @@ export function PackDetails() {
               <span>{plan.idealFor}</span>
             </div>
 
-            <a className="btn btn--moss pack__cta" href={getWhatsAppHref(plan.whatsappMessage)}>
+            <a className="btn btn--moss pack__cta" href={getWhatsAppHref(plan.whatsappMessage)} target="_blank" rel="noreferrer">
               {plan.cta}
             </a>
 
