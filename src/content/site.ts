@@ -10,6 +10,10 @@ export const siteContent = {
       "Hola Juani, quiero agendar la reunión de diagnóstico gratis de Mayofy.",
     secondaryCta: "Ver packs",
   },
+  scheduling: {
+    url: "https://cal.com/juan-ignacio-portilla-kitroser-svfbs3/mayofy-first-meeting",
+    cta: "Elegí día y horario",
+  },
   channels: ["Instagram", "Google Maps", "Recomendaciones"],
   offerPath: [
     {

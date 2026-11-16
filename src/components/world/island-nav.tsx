@@ -1,6 +1,3 @@
-import { siteContent } from "@/content/site";
-import { getWhatsAppHref } from "@/lib/whatsapp";
-
 /** Floating pill navigation: Packs, Trabajos, Preguntas and the CTA (decision 15). */
 export function IslandNav() {
   return (
@@ -18,10 +15,7 @@ export function IslandNav() {
         <a className="island-nav__link" href="#preguntas">
           Preguntas
         </a>
-        <a
-          className="btn btn--moss island-nav__cta"
-          href={getWhatsAppHref(siteContent.hero.primaryMessage)}
-        >
+        <a className="btn btn--moss island-nav__cta" href="#agenda">
           Agendá tu diagnóstico
         </a>
       </nav>

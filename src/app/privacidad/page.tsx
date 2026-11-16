@@ -66,6 +66,10 @@ export default function PrivacyPage() {
               </li>
               <li>Los que nos enviás al escribirnos por WhatsApp o por correo.</li>
               <li>
+                Los que cargás al reservar la reunión de diagnóstico en Cal.com:
+                nombre, correo y lo que quieras contarnos.
+              </li>
+              <li>
                 Datos de navegación anónimos y agregados, como páginas visitadas o
                 tipo de dispositivo, mediante Google Analytics.
               </li>
@@ -82,8 +86,8 @@ export default function PrivacyPage() {
             <p>
               No vendemos ni cedemos tus datos. Solo intervienen los servicios que
               hacen funcionar el sitio y la comunicación: el proveedor que recibe el
-              formulario, WhatsApp, el correo electrónico, Google Analytics y el
-              alojamiento del sitio. Algunos de ellos pueden procesar datos fuera de
+              formulario, WhatsApp, el correo electrónico, Cal.com para la agenda,
+              Google Analytics y el alojamiento del sitio. Algunos de ellos pueden procesar datos fuera de
               Argentina.
             </p>
           </section>

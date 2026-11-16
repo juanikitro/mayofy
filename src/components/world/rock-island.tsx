@@ -1,7 +1,9 @@
 import type { CSSProperties } from "react";
 
 import { MayoFigure } from "@/components/world/mayo-figure";
-import { commercialIntro, commercialPlans } from "@/content/commercial-plans";
+import { IslandTitle } from "@/components/world/island-title";
+import { commercialPlans } from "@/content/commercial-plans";
+import { islandCopy } from "@/content/islands";
 
 type RockKind = "base" | "left" | "right" | "top";
 
@@ -62,8 +64,6 @@ function Rock({ kind, index }: { kind: RockKind; index: number }) {
 }
 
 export function RockIsland() {
-  const titleParts = commercialIntro.title.split(". ");
-
   return (
     <section id="packs" className="rocks" data-island="3" aria-labelledby="packs-title">
       <div className="rocks__stage">
@@ -85,9 +85,9 @@ export function RockIsland() {
 
         <header className="rocks__intro">
           <h2 id="packs-title">
-            <em>{titleParts[0]}.</em> {titleParts.slice(1).join(". ")}
+            <IslandTitle segments={islandCopy.packs.title} />
           </h2>
-          <p>{commercialIntro.body}</p>
+          <p>{islandCopy.packs.body}</p>
         </header>
 
         <div className="platforms">

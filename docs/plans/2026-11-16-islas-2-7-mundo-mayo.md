@@ -1,7 +1,7 @@
 # Islas 2 y 4 a 7, caída entre nubes y navegación completa
 
 **Fecha:** 16 de noviembre de 2026
-**Estado:** construido con arte provisorio y verificado en local. Pendiente: imágenes del agente de producción, texto nuevo aprobado y enlace de Cal.com. No está publicado.
+**Estado:** construido con arte provisorio y verificado en local; texto aprobado aplicado y Cal.com embebido. Pendiente: imágenes del agente de producción. No está publicado.
 **Rama:** `juanikitro/landing-redesign`. Sin push.
 **Depende de:** `2026-11-16-landing-redesign-mayo-world.md`, `2026-11-16-biblia-visual-mundo-mayo.md`, `2026-11-16-porcion-vertical-mundo-mayo.md`.
 
@@ -39,7 +39,7 @@ Un verificador independiente (agente de solo lectura) repitió las pruebas sobre
 ## Limitaciones y pendientes
 
 - Arte provisorio en SVG en todas las islas y en la caída; se reemplaza por las imágenes del agente de producción sin cambiar la estructura.
-- Texto: los títulos siguen siendo los actuales hasta que Juani apruebe `2026-11-16-texto-islas-propuesta.md`.
-- Cal.com: el bloque de agenda de la isla 7 (`data-scheduling-slot`) enlaza a WhatsApp hasta tener el enlace de reserva de Juani.
+- Texto: aplicado el 16 de noviembre de 2026 desde `2026-11-16-texto-islas-propuesta.md`, en `src/content/islands.ts`. La isla 1 conserva la promesa.
+- Cal.com: `src/components/world/cal-booking.tsx` embebe la agenda `mayofy-first-meeting` en un iframe que se carga solo al pulsar "Elegí día y horario" (ancla `#agenda`), con enlace directo a Cal.com como alternativa. Los CTA "Agendá tu diagnóstico" del hero y del pill llevan a `#agenda`; WhatsApp sigue visible como alternativa en el hero y en la isla 7. `/privacidad` menciona Cal.com entre los servicios.
 - El formulario de contacto reutiliza `contact-form.tsx` con sus estilos de `globals.css`; se migra al mundo nuevo junto con `/privacidad` y `/proyectos`.
 - Las rutas `/proyectos/[slug]` de los placeholders siguen con la hoja vieja.

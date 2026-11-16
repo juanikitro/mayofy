@@ -10,6 +10,8 @@ import {
   LooseRocks,
   PathStones,
 } from "@/components/world/island-scene";
+import { CalBooking } from "@/components/world/cal-booking";
+import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure } from "@/components/world/mayo-figure";
 import { DetailGroups } from "@/components/world/pack-groups";
 import {
@@ -17,14 +19,14 @@ import {
   extensions,
   maintenancePlan,
 } from "@/content/commercial-plans";
+import { islandCopy } from "@/content/islands";
 import { type ProjectEntry, projects } from "@/content/projects";
 import { publicChannels, siteContent } from "@/content/site";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
 /*
- * Islands 2 and 4–7. Titles and intros are the existing strings, kept
- * verbatim until Juani approves the proposed copy in
- * docs/plans/2026-11-16-texto-islas-propuesta.md. Mayo never speaks.
+ * Islands 2 and 4–7. Titles and intros come from src/content/islands.ts
+ * (approved by Juani on 2026-11-16). Mayo never speaks.
  */
 
 /** Island 2: loose rocks, morning. The problem: the business that gets attention but has no order. */
@@ -42,14 +44,9 @@ export function ProblemIsland() {
           ))}
         </div>
         <h2 id="problema-title">
-          Ya te están <em>mirando</em>.
+          <IslandTitle segments={islandCopy.problem.title} />
         </h2>
-        <p className="isle__lead">La página decide qué pasa después.</p>
-        <p className="isle__body">
-          No inventamos demanda ni convertimos tu negocio en otra cosa. Tomamos
-          la atención que ya existe, ordenamos la propuesta y construimos un
-          lugar propio para que la consulta tenga por dónde entrar.
-        </p>
+        <p className="isle__body">{islandCopy.problem.body}</p>
       </div>
     </section>
   );
@@ -65,9 +62,9 @@ export function SystemsIsland() {
       </IslandScene>
       <div className="isle__content world-shell">
         <h2 id="sistemas-title">
-          Cuando una planilla ya no <em>alcanza</em>.
+          <IslandTitle segments={islandCopy.systems.title} />
         </h2>
-        <p className="isle__body">{siteContent.systems.body}</p>
+        <p className="isle__body">{islandCopy.systems.body}</p>
         <ul className="isle__chips" aria-label="Qué construimos a medida">
           {siteContent.systems.items.map((item) => (
             <li key={item}>{item}</li>
@@ -127,12 +124,9 @@ export function WorksIsland() {
       <div className="isle__content world-shell">
         <p className="isle__eyebrow">Trabajos seleccionados</p>
         <h2 id="trabajos-title">
-          Primero, el <em>trabajo</em>.
+          <IslandTitle segments={islandCopy.works.title} />
         </h2>
-        <p className="isle__body">
-          Un sistema a medida, una landing y una web personal, publicados y
-          funcionando. Los casos completos se suman a medida que avanzan.
-        </p>
+        <p className="isle__body">{islandCopy.works.body}</p>
 
         <ul className="works" aria-label="Proyectos">
           {(projects as readonly ProjectEntry[]).map((project) => (
@@ -159,11 +153,10 @@ export function WorksIsland() {
         </ul>
 
         <div className="steps panel">
-          <h3>Un proceso claro. Seis movimientos.</h3>
-          <p>
-            Vas a saber en qué etapa está tu proyecto, por qué tomamos cada
-            decisión y qué falta para publicar. Y después no te dejamos solo.
-          </p>
+          <h3>
+            <IslandTitle segments={islandCopy.process.title} />
+          </h3>
+          <p>{islandCopy.process.body}</p>
           <ol className="steps__steps">
             {siteContent.process.map((step, index) => (
               <li key={step}>
@@ -188,9 +181,9 @@ export function QuestionsIsland() {
       </IslandScene>
       <div className="isle__content world-shell">
         <h2 id="preguntas-title">
-          Antes de <em>escribir</em>.
+          <IslandTitle segments={islandCopy.questions.title} />
         </h2>
-        <p className="isle__body">Lo importante, sin letra chica ni respuestas de agencia.</p>
+        <p className="isle__body">{islandCopy.questions.body}</p>
 
         <div className="questions">
           {siteContent.faq.map((item) => (
@@ -252,7 +245,7 @@ export function JuaniIsland() {
       <div className="isle__content world-shell">
         <div className="host">
           <h2 id="contacto-title">
-            Mayofy es la marca. Detrás <em>estoy yo</em>.
+            <IslandTitle segments={islandCopy.host.title} />
           </h2>
           <p className="isle__lead">{siteContent.founder.lead}</p>
           <p className="isle__body">{siteContent.founder.body}</p>
@@ -269,9 +262,9 @@ export function JuaniIsland() {
               sistema para ordenar tu operación. Te respondemos en menos de 24
               horas hábiles.
             </p>
-            {/* Scheduling slot: Cal.com embed goes here once Juani shares the booking link. */}
-            <a className="btn btn--moss btn--lg" href={heroWhatsAppHref} data-scheduling-slot>
-              {siteContent.hero.primaryCta}
+            <CalBooking url={siteContent.scheduling.url} label={siteContent.scheduling.cta} />
+            <a className="host-link" href={heroWhatsAppHref}>
+              Prefiero escribir por WhatsApp
             </a>
             <span>O completá estos datos y lo vemos por WhatsApp:</span>
           </div>

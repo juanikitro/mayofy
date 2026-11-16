@@ -58,11 +58,14 @@ export default function Home() {
             </h1>
             <p className="dawn__body">{siteContent.hero.body}</p>
             <div className="dawn__actions">
-              <a className="btn btn--moss btn--lg" href={heroWhatsAppHref}>
+              <a className="btn btn--moss btn--lg" href="#agenda">
                 {siteContent.hero.primaryCta}
               </a>
               <a className="btn btn--quiet btn--lg" href="#packs">
                 {siteContent.hero.secondaryCta}
+              </a>
+              <a className="dawn__alt" href={heroWhatsAppHref}>
+                o escribinos por WhatsApp
               </a>
             </div>
           </div>

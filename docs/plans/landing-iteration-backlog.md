@@ -17,7 +17,7 @@
 
    Abono mensual: USD 30 por hosting, monitoreo y ajustes menores. Las tarifas de WhatsApp Business (Meta cobra por conversación) y el uso de IA, si se usa, se trasladan aparte.
 
-5. **Agenda online para la reunión de diagnóstico.** Objetivo: que el cliente reserve la reunión de diagnóstico directamente en el calendario de Juani, sin ir y venir por WhatsApp. Hoy todos los CTA "Agendá tu diagnóstico gratis" abren WhatsApp con un mensaje precargado.
+5. **Agenda online para la reunión de diagnóstico.** *Resuelto el 16 de noviembre de 2026 en la rama del rediseño: Cal.com (`mayofy-first-meeting`, 30 minutos, Cal Video) embebido en la isla 7; ver `2026-11-16-islas-2-7-mundo-mayo.md`. Falta el evento de Analytics.* Objetivo: que el cliente reserve la reunión de diagnóstico directamente en el calendario de Juani, sin ir y venir por WhatsApp. Hoy todos los CTA "Agendá tu diagnóstico gratis" abren WhatsApp con un mensaje precargado.
    - **Herramienta (a decidir):** Google Calendar con páginas de reserva (gratis con la cuenta de Google actual y sin otra plataforma), Cal.com (código abierto, plan gratuito, se embebe bien y sincroniza con Google Calendar) o Calendly (el más conocido; el plan gratuito permite un solo tipo de evento).
    - **Definir:** duración de la reunión, días y horarios disponibles, margen entre reuniones, anticipación mínima, videollamada (Google Meet) y recordatorios por correo.
    - **Preguntas previas:** reutilizar los datos del formulario calificador (negocio, pack de interés, plazo y presupuesto) como preguntas de la reserva.

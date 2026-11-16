@@ -2007,3 +2007,37 @@ html[data-motion-tier="lite"] .campfire__flame-core {
     padding-block-end: 5.5rem;
   }
 }
+
+/* Booking (island 7) and hero alternative link */
+
+.dawn__alt {
+  flex-basis: 100%;
+  width: fit-content;
+  font-weight: 600;
+  color: var(--moss);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.booking {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+  width: 100%;
+  scroll-margin-top: 5rem;
+}
+
+.booking__frame {
+  width: 100%;
+  min-height: 42rem;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--night-deep);
+}
+
+.booking__link {
+  font-size: 0.9rem;
+  color: var(--mint);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
