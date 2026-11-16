@@ -23,4 +23,5 @@ Objective: publish the approved bot prices, make the contact form deliver to Jua
 ## Log
 
 - L1 (2026-11-16) Juani verbatim: "1 y 2 dependen de los assets asi que esperamos 3. apruebo los precios, aunque probablemente los cambie despues 4. CONTACT_FORM_ENDPOINT debe ser jpkitro@gmail.com por ahora 5. Crea un template para que cada proyecto que cargue siga un mismo camino, luego entrare en detalle con eso 6. Postergalo para el final, al igual que el SEO, la performance y todo lo que haya que hacer relacionado Migra /privacidad".
+- L3 (2026-11-16) Juani: "autorizo a que la cargues". Set in Railway (project mayofy, env production, service web): CONTACT_FORM_ENDPOINT=https://formsubmit.co/ajax/jpkitro@gmail.com (URL form so the live master build also works); read back OK. Railway may redeploy the current master on variable change.
 - L2 (2026-11-16) All tasks done inline. Hero OG image still points to /images/hero-umbral-desktop.png (kept on purpose until the OG batch, S4). Pending from Juani: set CONTACT_FORM_ENDPOINT=jpkitro@gmail.com in Railway (config change, outside the agent's grant) and confirm FormSubmit's activation email on the first submission.
