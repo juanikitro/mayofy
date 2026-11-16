@@ -171,11 +171,11 @@ export function WorksIsland() {
   );
 }
 
-/** Island 6: questions, dusk. FAQ and the monthly maintenance. */
+/** Island 7: questions, starry night. FAQ and the monthly maintenance. Closes the journey. */
 export function QuestionsIsland() {
   return (
-    <section id="preguntas" className="isle isle--dusk isle--dark" data-island="6" aria-labelledby="preguntas-title">
-      <IslandScene variant="dusk">
+    <section id="preguntas" className="isle isle--night isle--dark" data-island="7" aria-labelledby="preguntas-title">
+      <IslandScene variant="night">
         <Fireflies />
         <MayoFigure pose="chase" className="isle__mayo isle__mayo--chase" />
       </IslandScene>
@@ -231,14 +231,14 @@ export function QuestionsIsland() {
   );
 }
 
-/** Island 7: Juani's island, starry night. Who is behind, scheduling and contact. */
+/** Island 6: Juani's island, dusk. Who is behind, Cal.com booking and contact. */
 export function JuaniIsland() {
   const whatsappHref = getWhatsAppHref();
   const heroWhatsAppHref = getWhatsAppHref(siteContent.hero.primaryMessage);
 
   return (
-    <section id="contacto" className="isle isle--night isle--dark" data-island="7" aria-labelledby="contacto-title">
-      <IslandScene variant="night">
+    <section id="contacto" className="isle isle--dusk isle--dark" data-island="6" aria-labelledby="contacto-title">
+      <IslandScene variant="dusk">
         <Campfire />
         <MayoFigure pose="rest" className="isle__mayo isle__mayo--rest" />
       </IslandScene>
@@ -262,7 +262,7 @@ export function JuaniIsland() {
               sistema para ordenar tu operación. Te respondemos en menos de 24
               horas hábiles.
             </p>
-            <CalBooking url={siteContent.scheduling.url} label={siteContent.scheduling.cta} />
+            <CalBooking url={siteContent.scheduling.url} calLink={siteContent.scheduling.calLink} />
             <a className="host-link" href={heroWhatsAppHref}>
               Prefiero escribir por WhatsApp
             </a>

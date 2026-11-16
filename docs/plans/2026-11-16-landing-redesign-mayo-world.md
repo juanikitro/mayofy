@@ -42,8 +42,10 @@
 | 3 | Las rocas se ensamblan | Mediodía | Packs con precios (momento "orden") | Salta entre tres plataformas, una por pack |
 | 4 | Taller o invernadero | Tarde dorada | Sistemas a medida, automatizaciones y bot "Próximamente" | Escarba y desentierra piezas |
 | 5 | Jardín de trabajos | Atardecer | Trabajos y proceso | Corre por un sendero de seis pasos |
-| 6 | Isla de las preguntas | Crepúsculo | FAQ y mantenimiento | Persigue luciérnagas (una por pregunta) |
-| 7 | Isla de Juani | Noche estrellada | Quién está detrás, agenda Cal.com y contacto | Llega y se echa al lado de Juani |
+| 6 | Isla de Juani | Crepúsculo | Quién está detrás, agenda Cal.com y contacto | Llega y se echa al lado de Juani |
+| 7 | Isla de las preguntas | Noche estrellada | FAQ y mantenimiento | Persigue luciérnagas (una por pregunta) |
+
+**Actualización del 16 de noviembre de 2026:** Juani pidió intercambiar las islas 6 y 7 ("quiero que la seccion 'algunos detalles' intercambie el orden con 'mayofy es la marca, detras estoy yo'"). Los cielos se intercambiaron con ellas para conservar la progresión crepúsculo → noche.
 
 Fusiones respecto del sitio actual: el proceso pasa a la isla de trabajos, el mantenimiento a la FAQ y las automatizaciones a la isla de sistemas.
 

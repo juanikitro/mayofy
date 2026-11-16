@@ -11,8 +11,8 @@ export const islands = [
   { id: "packs", number: 3, label: "Packs" },
   { id: "sistemas", number: 4, label: "Sistemas" },
   { id: "trabajos", number: 5, label: "Trabajos" },
-  { id: "preguntas", number: 6, label: "Preguntas" },
-  { id: "contacto", number: 7, label: "Contacto" },
+  { id: "contacto", number: 6, label: "Contacto" },
+  { id: "preguntas", number: 7, label: "Preguntas" },
 ] as const;
 
 function PawIcon() {

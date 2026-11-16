@@ -77,8 +77,8 @@ export default function Home() {
         <PackDetails />
         <SystemsIsland />
         <WorksIsland />
-        <QuestionsIsland />
         <JuaniIsland />
+        <QuestionsIsland />
       </main>
 
       <footer className="world-footer">

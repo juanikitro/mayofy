@@ -12,7 +12,7 @@ export const siteContent = {
   },
   scheduling: {
     url: "https://cal.com/juan-ignacio-portilla-kitroser-svfbs3/mayofy-first-meeting",
-    cta: "Elegí día y horario",
+    calLink: "juan-ignacio-portilla-kitroser-svfbs3/mayofy-first-meeting",
   },
   channels: ["Instagram", "Google Maps", "Recomendaciones"],
   offerPath: [
