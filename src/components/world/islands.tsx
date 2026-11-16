@@ -153,15 +153,16 @@ export function WorksIsland() {
                 {project.title}
               </h3>
               <p>{project.summary}</p>
-              {project.url ? (
-                <a className="work__link" href={project.url} target="_blank" rel="noreferrer">
-                  Visitar sitio <span aria-hidden="true">↗</span>
-                </a>
-              ) : (
+              <div className="work__links">
                 <Link className="work__link" href={`/proyectos/${project.slug}`}>
-                  Ver detalle <span aria-hidden="true">→</span>
+                  Ver el caso <span aria-hidden="true">→</span>
                 </Link>
-              )}
+                {project.url ? (
+                  <a className="work__link" href={project.url} target="_blank" rel="noreferrer">
+                    Visitar sitio <span aria-hidden="true">↗</span>
+                  </a>
+                ) : null}
+              </div>
             </li>
           ))}
         </ul>
