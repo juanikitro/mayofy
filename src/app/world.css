@@ -2046,3 +2046,76 @@ html[data-motion-tier="lite"] .campfire__flame-core {
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
+
+/* Bot tiers (island 4) */
+
+.soon {
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "label copy"
+    "tiers tiers"
+    "monthly monthly"
+    "note note"
+    "cta cta";
+  justify-items: start;
+}
+
+.soon__label {
+  grid-area: label;
+}
+
+.soon__copy {
+  grid-area: copy;
+}
+
+.soon__tiers {
+  grid-area: tiers;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+  width: 100%;
+  margin-block-start: 0.5rem;
+}
+
+.soon__tiers > div {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem;
+  border-radius: calc(var(--radius) - 0.5rem);
+  background: var(--beige);
+}
+
+.soon__tiers dt {
+  font-weight: 600;
+}
+
+.soon__tiers dd {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.soon__price {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--moss);
+}
+
+.soon__timeline,
+.soon__includes,
+.soon__monthly,
+.soon__note {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.soon__monthly {
+  grid-area: monthly;
+}
+
+.soon__note {
+  grid-area: note;
+}
+
+.soon .btn {
+  grid-area: cta;
+}

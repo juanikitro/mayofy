@@ -119,6 +119,24 @@ export const comingSoon = {
   title: "Bot de WhatsApp y Telegram",
   description:
     "Un asistente que responde las consultas frecuentes, toma los datos de cada cliente y te deriva la conversación cuando hace falta una persona.",
+  tiers: [
+    {
+      name: "Bot Esencial",
+      price: "USD 120",
+      timeline: "2 a 3 semanas",
+      includes:
+        "Un canal (WhatsApp o Telegram), respuestas a preguntas frecuentes, toma de datos del cliente y derivación a una persona.",
+    },
+    {
+      name: "Bot Integrado",
+      price: "USD 250",
+      timeline: "4 a 6 semanas",
+      includes:
+        "Todo lo anterior, los dos canales y conexión con Web + Gestión o un sistema: reservar turnos, consultar estados o datos.",
+    },
+  ],
+  monthly: "USD 30 por mes por hosting, monitoreo y ajustes menores.",
+  note: "Las tarifas de WhatsApp Business (Meta cobra por conversación) y el uso de IA, si se usa, se trasladan aparte.",
   cta: "Quiero que me avisen",
   whatsappMessage:
     "Hola, quiero que me avisen cuando esté disponible el bot de WhatsApp y Telegram de Mayofy.",

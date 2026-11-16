@@ -103,6 +103,20 @@ export function SystemsIsland() {
               <h3>{comingSoon.title}</h3>
               <p>{comingSoon.description}</p>
             </div>
+            <dl className="soon__tiers">
+              {comingSoon.tiers.map((tier) => (
+                <div key={tier.name}>
+                  <dt>{tier.name}</dt>
+                  <dd>
+                    <span className="soon__price">Desde {tier.price}</span>
+                    <span className="soon__timeline">{tier.timeline}</span>
+                    <span className="soon__includes">{tier.includes}</span>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <p className="soon__monthly">{comingSoon.monthly}</p>
+            <p className="soon__note">{comingSoon.note}</p>
             <a className="btn btn--quiet" href={getWhatsAppHref(comingSoon.whatsappMessage)}>
               {comingSoon.cta}
             </a>
