@@ -203,16 +203,15 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
       </label>
       <div className="contact-form__footer">
         <button
-          className="button button--accent"
+          className="btn btn--moss"
           type="submit"
           name="channel"
           value="whatsapp"
-          data-magnetic
         >
           Enviar por WhatsApp
         </button>
         <button
-          className="button button--quiet"
+          className="btn btn--quiet"
           type="submit"
           name="channel"
           value="callback"

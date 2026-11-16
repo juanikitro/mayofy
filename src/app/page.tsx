@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { CloudFall } from "@/components/world/cloud-fall";
 import { HeroIsland } from "@/components/world/hero-island";
 import { IslandNav } from "@/components/world/island-nav";
@@ -13,11 +11,10 @@ import {
 } from "@/components/world/islands";
 import { PackDetails } from "@/components/world/pack-details";
 import { RockIsland } from "@/components/world/rock-island";
+import { WorldFooter } from "@/components/world/world-footer";
 import { WorldMotion } from "@/components/world/world-motion";
-import { publicChannels, siteContent } from "@/content/site";
+import { siteContent } from "@/content/site";
 import { getWhatsAppHref } from "@/lib/whatsapp";
-
-import "./world.css";
 
 /** Splits "Webs que venden." into ["Webs que", "venden", "."] for the serif keyword. */
 function splitKeyword(line: string) {
@@ -27,7 +24,6 @@ function splitKeyword(line: string) {
 }
 
 export default function Home() {
-  const whatsappHref = getWhatsAppHref();
   const heroWhatsAppHref = getWhatsAppHref(siteContent.hero.primaryMessage);
 
   return (
@@ -81,22 +77,7 @@ export default function Home() {
         <QuestionsIsland />
       </main>
 
-      <footer className="world-footer">
-        <div className="world-shell world-footer__layout">
-          <p>{siteContent.hero.title}</p>
-          <div className="world-footer__links">
-            <a href={whatsappHref}>WhatsApp</a>
-            <a href={publicChannels.instagram} target="_blank" rel="noreferrer">
-              Instagram
-            </a>
-            <a href={publicChannels.linkedin} target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-            <Link href="/privacidad">Privacidad</Link>
-          </div>
-          <small>Mayofy · Webs y software a medida · Argentina y LATAM</small>
-        </div>
-      </footer>
+      <WorldFooter />
 
       <WorldMotion />
     </div>

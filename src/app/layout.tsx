@@ -1,38 +1,11 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import {
-  Cormorant_Garamond,
-  Fraunces,
-  IBM_Plex_Mono,
-  Instrument_Sans,
-  Manrope,
-} from "next/font/google";
+import { Fraunces, Instrument_Sans } from "next/font/google";
 import { getSiteUrl } from "@/lib/site-url";
-import "./globals.css";
-
-const displayFont = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const bodyFont = Manrope({
-  variable: "--font-manrope",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const monoFont = IBM_Plex_Mono({
-  variable: "--font-ibm-plex-mono",
-  weight: ["400", "500", "600"],
-  subsets: ["latin"],
-  display: "swap",
-});
+import "./world.css";
 
 // Mayo world fonts (see docs/plans/2026-11-16-biblia-visual-mundo-mayo.md).
 // No handwritten accent: Juani decided Mayo does not "speak" in notes.
-// The legacy fonts above stay until the remaining routes move to the new world.
 const worldSansFont = Instrument_Sans({
   variable: "--font-instrument-sans",
   subsets: ["latin"],
@@ -75,7 +48,7 @@ export const metadata: Metadata = {
         url: "/images/hero-umbral-desktop.png",
         width: 1816,
         height: 866,
-        alt: "Umbral Vivo, la dirección visual de Mayofy",
+        alt: "Mayofy: webs que venden, sistemas que ordenan",
       },
     ],
   },
@@ -96,7 +69,7 @@ export default function RootLayout({
   return (
     <html
       lang="es-AR"
-      className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} ${worldSansFont.variable} ${worldSerifFont.variable}`}
+      className={`${worldSansFont.variable} ${worldSerifFont.variable}`}
     >
       <body>{children}</body>
       {googleAnalyticsId ? <GoogleAnalytics gaId={googleAnalyticsId} /> : null}

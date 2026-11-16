@@ -1,3 +1,93 @@
+/* Base (globals.css retired on 2026-11-16) ------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  min-height: 100%;
+  overflow-x: clip;
+  scroll-behavior: smooth;
+  background: oklch(92% 0.03 68);
+}
+
+body {
+  min-height: 100%;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+}
+
+button,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.animated-details__content {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  opacity: 1;
+  transition:
+    grid-template-rows 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animated-details__inner {
+  min-height: 0;
+  overflow: clip;
+}
+
+details[data-collapsing="true"] > .animated-details__content {
+  grid-template-rows: minmax(0, 0fr);
+  opacity: 0;
+}
+
+details[data-preparing-open="true"] > .animated-details__content {
+  transition: none;
+}
+
 /* Mayo world: tokens and layout for the island journey.
  * Scoped under .world so the legacy routes (/privacidad, /proyectos) keep
  * their stylesheet until they move to the new world.
@@ -50,12 +140,8 @@
   line-height: 1.5;
 }
 
-html:has(.world) {
-  background: var(--beige, oklch(92% 0.03 68));
-}
-
 @media (prefers-reduced-motion: reduce) {
-  html:has(.world) {
+  html {
     scroll-behavior: auto;
   }
 }
@@ -2118,4 +2204,419 @@ html[data-motion-tier="lite"] .campfire__flame-core {
 
 .soon .btn {
   grid-area: cta;
+}
+
+/* Contact form (island 6) ------------------------------------------------ */
+
+.contact-form {
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: var(--night-deep);
+  color: var(--night-ink);
+}
+
+.contact-form__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+  margin-block-end: 1rem;
+}
+
+.field > span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--night-ink-soft);
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid oklch(32% 0.03 265);
+  border-radius: 0.6rem;
+  background: oklch(20% 0.04 265);
+  color: var(--night-ink);
+  transition:
+    border-color 200ms var(--ease-out),
+    background-color 200ms var(--ease-out);
+}
+
+.field textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+
+.field input:hover,
+.field select:hover,
+.field textarea:hover {
+  border-color: oklch(45% 0.03 265);
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+  border-color: var(--mint);
+  outline-color: var(--mint);
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: oklch(60% 0.02 240);
+  opacity: 1;
+}
+
+.field input:user-invalid,
+.field select:user-invalid,
+.field textarea:user-invalid {
+  border-color: oklch(76% 0.13 27);
+}
+
+.field select {
+  appearance: none;
+  padding-inline-end: 2.5rem;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--mint) 50%),
+    linear-gradient(135deg, var(--mint) 50%, transparent 50%);
+  background-position:
+    calc(100% - 1.15rem) 52%,
+    calc(100% - 0.8rem) 52%;
+  background-size: 0.35rem 0.35rem;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.field select option {
+  color: var(--night-ink);
+  background: oklch(20% 0.04 265);
+}
+
+.field--trap {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: clip;
+  clip-path: inset(50%);
+}
+
+.contact-form__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-block-start: 0.25rem;
+}
+
+.contact-form .btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.contact-form__feedback {
+  min-height: 1lh;
+  margin-block-start: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--night-ink-soft);
+}
+
+.contact-form__feedback--error {
+  color: oklch(76% 0.13 27);
+}
+
+.contact-form__feedback--success {
+  color: var(--mint);
+}
+
+.contact-form__privacy {
+  margin-block-start: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--night-ink-soft);
+}
+
+.contact-form__privacy a,
+.contact-form__fallback {
+  color: var(--mint);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.contact-form__fallback {
+  display: inline-block;
+  margin-block-start: 0.75rem;
+  font-size: 0.9rem;
+}
+
+/* Reading pages (/privacidad) ------------------------------------------- */
+
+.reading {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 68ch;
+  padding-block: 7rem 5rem;
+}
+
+.reading h1 {
+  font-size: clamp(2.2rem, 1.4rem + 3vw, 3.4rem);
+}
+
+.reading__updated {
+  margin-block-start: -0.75rem;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.reading section {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.reading h2 {
+  font-size: 1.3rem;
+}
+
+.reading p,
+.reading li {
+  color: var(--ink-soft);
+}
+
+.reading ul {
+  display: grid;
+  gap: 0.4rem;
+  padding-inline-start: 1.2em;
+}
+
+.reading a:not(.study__back) {
+  color: var(--moss);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* Case studies (/proyectos/[slug]) --------------------------------------- */
+
+.study__back {
+  width: fit-content;
+  font-weight: 600;
+  color: var(--moss);
+}
+
+.study__cover {
+  padding-block: 7rem 3rem;
+  background: linear-gradient(180deg, var(--sky-dawn-top) 0%, var(--sky-dawn-mid) 50%, var(--beige) 100%);
+}
+
+.study__cover-layout {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+  max-width: 48rem;
+}
+
+.study__category {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+.study__cover h1 {
+  font-size: clamp(2.2rem, 1.3rem + 3.6vw, 4rem);
+}
+
+.study__summary {
+  max-width: 52ch;
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+}
+
+.study__facts {
+  padding-block: 2rem;
+}
+
+.study__facts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 1rem;
+}
+
+.study__facts-grid > div {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  background: var(--cream);
+}
+
+.study__facts-grid dt {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+.study__story {
+  display: grid;
+  grid-template-columns: 12rem minmax(0, 1fr);
+  gap: 2.5rem;
+  padding-block: 2rem 3rem;
+}
+
+.study__index {
+  position: sticky;
+  top: 6rem;
+  display: grid;
+  gap: 0.4rem;
+  align-self: start;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.study__index a:hover {
+  color: var(--moss);
+}
+
+.study__chapters {
+  display: grid;
+  gap: 2.5rem;
+  max-width: 60ch;
+}
+
+.study__chapters h2 {
+  margin-block-end: 0.6rem;
+  font-size: 1.5rem;
+}
+
+.study__chapters p,
+.study__chapters li p {
+  color: var(--ink-soft);
+}
+
+.study__decisions,
+.study__journey {
+  display: grid;
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+}
+
+.study__decisions li,
+.study__journey li {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.9rem 1rem;
+  border-radius: calc(var(--radius) - 0.5rem);
+  background: var(--cream);
+}
+
+.study__decisions span,
+.study__journey span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--moss);
+}
+
+.study__gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+}
+
+.study__gallery li {
+  display: grid;
+  place-content: center;
+  gap: 0.25rem;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  background: var(--beige-deep);
+  text-align: center;
+  color: var(--ink-soft);
+  outline: 1px dashed color-mix(in oklch, var(--bark) 40%, transparent);
+}
+
+.study__gallery span {
+  font-weight: 600;
+}
+
+.study__next {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+  padding-block: 2rem 5rem;
+}
+
+.study__next h2 {
+  font-size: 1.6rem;
+}
+
+.study__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.work__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* 404 -------------------------------------------------------------------- */
+
+.lost {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+  min-height: 70svh;
+  padding-block: 8rem 4rem;
+  align-content: center;
+}
+
+.lost__code {
+  font-weight: 600;
+  color: var(--moss);
+}
+
+.lost h1 {
+  font-size: clamp(2rem, 1.2rem + 3.4vw, 3.4rem);
+}
+
+.lost p {
+  color: var(--ink-soft);
+}
+
+.lost__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+@media (max-width: 48rem) {
+  .contact-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .study__story {
+    grid-template-columns: 1fr;
+  }
+
+  .study__index {
+    position: static;
+    grid-auto-flow: column;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
 }
