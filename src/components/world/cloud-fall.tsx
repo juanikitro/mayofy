@@ -32,7 +32,7 @@ export function CloudFall() {
             ))}
           </svg>
         ))}
-        <MayoFigure pose="fall" className="fall__mayo" />
+        <MayoFigure slot="fall" className="fall__mayo" />
       </div>
     </section>
   );

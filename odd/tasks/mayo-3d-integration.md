@@ -1,0 +1,25 @@
+# Mayo 3D integration: real poses in every tier and the travelling canvas
+
+Objective: replace the provisional SVG Mayo with the real character from `mayo-3d`: still images (static tier), animated loops (lite tier) and the real-time GLB on a square canvas that travels between island anchors (full tier). Branch: `juanikitro/landing-redesign`. Delivery: ask-on-risk, work-unit commits, no push. Runner: `npm run lint`, `npm run typecheck`, `npm run build`; Playwright at 1440/390.
+
+## Specs
+
+- S1. Juani (2026-11-17): "apruebo" to `three` 0.187.0 as a dependency after the tradeoff in docs/plans/2026-11-17-integracion-mayo-assets.md §5 (≈150 KB gzipped + 1.63 MB GLB, full tier only, after the first fold).
+- S2. Reference contract: `mayo-3d/docs/LANDING_INTEGRATION.md` (approved 2026-11-16): moments, clips, camera per moment, light presets per island, gaze only in `idle`/`sit`/`rest`, one-shot clips clamp then hand over, images captured with the moment camera so the image → 3D swap must keep that camera.
+- S3. Tiers (spec decision 11): full = real-time canvas loaded lazily after the hero paints, hero shows the still first; lite = `mayo-pose-<id>-loop.avif` (WebP fallback); reduced = `mayo-pose-<id>.avif` (WebP fallback). The promise and CTA never depend on this.
+- S4. Islands 6/7 are swapped vs. the reference: Juani's island (arrive + rest) is 6 at twilight, questions (chase firefly) is 7 at night. Light presets in the landing copy follow the landing order; images for moments 08–10 keep the old light until the Mayo agent recaptures (open item for Juani).
+- S5. Mayo never speaks. No scroll hijacking. No horizontal scroll at 390. Reduced motion never loads WebGL.
+- S6. Placement is data (`src/content/stage.ts`): one slot per island with moment id and square size; anchors in % of the plate are applied when the plates arrive (today the slots keep the provisional CSS positions).
+
+## Tasks
+
+- [x] T1 (S1) inline. `three` + `@types/three` pinned to 0.187.0; GLB and poses copied to `public/mayo/`. Commit: see L2.
+- [x] T2 (S2, S4, S6) inline. `src/lib/mayo/` (moments, lighting, scene port in TypeScript) and `src/content/stage.ts`. Commit: see L2.
+- [x] T3 (S3) inline. `MayoFigure` renders the real still/loop pictures per tier (eager in the hero, lazy elsewhere). Commit: see L2.
+- [x] T4 (S2, S3, S5) inline. `MayoStage` client component (dynamic, no SSR, full tier only): square travelling canvas, moment blending with scroll, gaze, swap flag on `<html>`. Commit: see L2.
+- [x] T5 (S5) inline. Verification 1440/390: tiers, no horizontal scroll, reduced motion without WebGL, lint/typecheck/build; docs. Commit: see L2.
+
+## Log
+
+- L1 (2026-11-17) Juani verbatim: "apruebo" (three dependency). Previous turn: "El modelo 3d de mayo, con sus videos y poses, ya esta. Ese conocimiento ya esta en engram o en C:/Users/Juanito/Desktop/Repositorios/MAYOFY/mayo-3d/docs/LANDING_INTEGRATION.md. Ademas, se que el agente que esta preparando los assets lo esta haciendo en C:\Users\Juanito\Desktop\MayofyMundo. Asi que podrias ir analizando la interaccion entre Mayo, la pagina y los assets" → analysis in docs/plans/2026-11-17-integracion-mayo-assets.md (6c31df0).
+- L2 (2026-11-17) Built inline in one unit (feat: integrate the real Mayo). Verified in Chromium: full tier canvas 272×272 exactly on the hero slot with the still hidden (`data-mayo3d`, dataset camelCase → attribute `data-mayo3d`, not `data-mayo-3d`), reduced tier without canvas, 390 px without horizontal scroll, no console errors after replacing THREE.Clock with THREE.Timer; lint/typecheck/build clean. Doc: docs/plans/2026-11-17-mayo-3d-en-la-landing.md. Risk: item 5 (new dependency `three`, approved by Juani) and item 6 (no automated tests). Pending for Juani: island cutouts for parallax, cloud frames vs CSS, light swap + recapture of moments 08–10.

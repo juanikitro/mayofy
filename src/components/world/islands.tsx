@@ -35,7 +35,7 @@ export function ProblemIsland() {
     <section id="problema" className="isle isle--morning" data-island="2" aria-labelledby="problema-title">
       <IslandScene variant="morning">
         <LooseRocks />
-        <MayoFigure pose="play" className="isle__mayo isle__mayo--play" />
+        <MayoFigure slot="problem" className="isle__mayo isle__mayo--play" />
       </IslandScene>
       <div className="isle__content world-shell">
         <div className="isle__channels" aria-label="Canales de atención existente">
@@ -58,7 +58,7 @@ export function SystemsIsland() {
     <section id="sistemas" className="isle isle--golden" data-island="4" aria-labelledby="sistemas-title">
       <IslandScene variant="golden">
         <Greenhouse />
-        <MayoFigure pose="dig" className="isle__mayo isle__mayo--dig" />
+        <MayoFigure slot="systems" className="isle__mayo isle__mayo--dig" />
       </IslandScene>
       <div className="isle__content world-shell">
         <h2 id="sistemas-title">
@@ -133,7 +133,7 @@ export function WorksIsland() {
     <section id="trabajos" className="isle isle--sunset" data-island="5" aria-labelledby="trabajos-title">
       <IslandScene variant="sunset">
         <PathStones />
-        <MayoFigure pose="run" className="isle__mayo isle__mayo--run" />
+        <MayoFigure slot="works" className="isle__mayo isle__mayo--run" />
       </IslandScene>
       <div className="isle__content world-shell">
         <p className="isle__eyebrow">Trabajos seleccionados</p>
@@ -192,7 +192,7 @@ export function QuestionsIsland() {
     <section id="preguntas" className="isle isle--night isle--dark" data-island="7" aria-labelledby="preguntas-title">
       <IslandScene variant="night">
         <Fireflies />
-        <MayoFigure pose="chase" className="isle__mayo isle__mayo--chase" />
+        <MayoFigure slot="questions" className="isle__mayo isle__mayo--chase" />
       </IslandScene>
       <div className="isle__content world-shell">
         <h2 id="preguntas-title">
@@ -255,7 +255,7 @@ export function JuaniIsland() {
     <section id="contacto" className="isle isle--dusk isle--dark" data-island="6" aria-labelledby="contacto-title">
       <IslandScene variant="dusk">
         <Campfire />
-        <MayoFigure pose="rest" className="isle__mayo isle__mayo--rest" />
+        <MayoFigure slot="host" className="isle__mayo isle__mayo--rest" />
       </IslandScene>
       <div className="isle__content world-shell">
         <div className="host">

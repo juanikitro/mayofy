@@ -2,6 +2,7 @@ import { CloudFall } from "@/components/world/cloud-fall";
 import { HeroIsland } from "@/components/world/hero-island";
 import { IslandNav } from "@/components/world/island-nav";
 import { IslandProgress } from "@/components/world/island-progress";
+import { MayoStageLoader } from "@/components/world/mayo-stage-loader";
 import {
   JuaniIsland,
   ProblemIsland,
@@ -60,10 +61,12 @@ export default function Home() {
               <a className="btn btn--quiet btn--lg" href="#packs">
                 {siteContent.hero.secondaryCta}
               </a>
-              <a className="dawn__alt" href={heroWhatsAppHref} target="_blank" rel="noreferrer">
+            </div>
+            <p className="dawn__alt">
+              <a href={heroWhatsAppHref} target="_blank" rel="noreferrer">
                 o escribinos por WhatsApp
               </a>
-            </div>
+            </p>
           </div>
         </section>
 
@@ -80,6 +83,7 @@ export default function Home() {
       <WorldFooter />
 
       <WorldMotion />
+      <MayoStageLoader />
     </div>
   );
 }

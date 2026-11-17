@@ -99,7 +99,7 @@ export function RockIsland() {
                 <Rock kind="right" index={index} />
                 <Rock kind="top" index={index} />
               </div>
-              {index === 2 ? <MayoFigure pose="jump" className="platform__mayo" /> : null}
+              {index === 2 ? <MayoFigure slot="packs" className="platform__mayo" /> : null}
               <a className="platform__card" href={`#pack-${plan.id}`}>
                 <span className="platform__name">{plan.name}</span>
                 <span className="platform__from">Desde</span>

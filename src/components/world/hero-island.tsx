@@ -79,7 +79,7 @@ export function HeroIsland() {
         <path className="scene__fore-light" d="M20 300c30-60 60-100 100-120-40 50-60 80-70 120z" />
       </svg>
 
-      <MayoFigure pose="idle" className="scene__mayo" />
+      <MayoFigure slot="hero" className="scene__mayo" eager />
     </div>
   );
 }
