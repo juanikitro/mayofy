@@ -889,13 +889,18 @@ html[data-motion-tier="reduced"] .scene__sky {
 .packs__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-  gap: 1.25rem;
+  gap: 2rem 1.25rem;
 }
 
+/* The three cards share their rows (subgrid): header, "ideal para", call to
+ * action, footnote and details line up across the cards whatever the length
+ * of each description. */
 .pack {
+  position: relative;
   display: grid;
-  align-content: start;
-  gap: 1rem;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+  row-gap: 1rem;
   padding: 1.5rem;
   border-radius: var(--radius);
   background: var(--cream);
@@ -903,8 +908,42 @@ html[data-motion-tier="reduced"] .scene__sky {
   scroll-margin-top: 5rem;
 }
 
+.pack__footnote {
+  grid-row: 4;
+}
+
+.pack .pack-details {
+  grid-row: 5;
+}
+
+/* One card per row on phones: nothing to line up with, so no empty
+ * footnote row either. */
+@media (max-width: 48rem) {
+  .pack {
+    grid-row: auto;
+    grid-template-rows: none;
+  }
+
+  .pack__footnote,
+  .pack .pack-details {
+    grid-row: auto;
+  }
+}
+
 .pack--featured {
   outline: 2px solid color-mix(in oklch, var(--moss) 40%, transparent);
+}
+
+/* The featured label sits on the card's top edge, so it does not push the
+ * name and price of the middle card below the other two. */
+.pack--featured .pack__eyebrow {
+  position: absolute;
+  inset: 0 auto auto 1.5rem;
+  translate: 0 -50%;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--moss);
+  color: var(--cream);
 }
 
 .pack__eyebrow,
@@ -942,6 +981,7 @@ html[data-motion-tier="reduced"] .scene__sky {
 
 .pack__ideal {
   display: grid;
+  align-content: start;
   gap: 0.25rem;
   padding: 0.9rem 1rem;
   border-radius: calc(var(--radius) - 0.5rem);
