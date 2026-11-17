@@ -26,6 +26,46 @@ export function IslandPlate({
     "--plate-x": plate.anchorX ?? "50%",
   } as CSSProperties;
 
+  const loading = eager ? "eager" : "lazy";
+  const priority = eager ? "high" : "auto";
+
+  if (plate.layers) {
+    // Parallax pair: the background (sky, clouds, far islands) drifts slower
+    // than the island cutout; mobile keeps the single plate.
+    return (
+      <div className="plate plate--layered" style={style}>
+        <picture className="plate__picture plate__picture--background">
+          {plate.mobile ? (
+            <source media="(max-width: 48rem)" type="image/avif" srcSet={plate.mobile.avif} />
+          ) : null}
+          <source type="image/avif" srcSet={plate.layers.background.avif} />
+          <img
+            src={plate.layers.background.webp}
+            alt=""
+            width={plate.layers.background.width}
+            height={plate.layers.background.height}
+            loading={loading}
+            decoding="async"
+            fetchPriority={priority}
+          />
+        </picture>
+        <picture className="plate__picture plate__picture--island">
+          <source type="image/avif" srcSet={plate.layers.island.avif} />
+          <img
+            src={plate.layers.island.webp}
+            alt=""
+            width={plate.layers.island.width}
+            height={plate.layers.island.height}
+            loading={loading}
+            decoding="async"
+            fetchPriority={priority}
+          />
+        </picture>
+        {children}
+      </div>
+    );
+  }
+
   return (
     <div className="plate" style={style}>
       <picture className="plate__picture">
@@ -38,9 +78,9 @@ export function IslandPlate({
           alt=""
           width={plate.desktop.width}
           height={plate.desktop.height}
-          loading={eager ? "eager" : "lazy"}
+          loading={loading}
           decoding="async"
-          fetchPriority={eager ? "high" : "auto"}
+          fetchPriority={priority}
         />
       </picture>
       {children}

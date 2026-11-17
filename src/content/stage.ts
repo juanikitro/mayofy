@@ -64,6 +64,8 @@ export type PlateSpec = {
   mobile?: PlateImage;
   /** Horizontal anchor kept in view when the plate is cropped (default 50%). */
   anchorX?: string;
+  /** Parallax pair (desktop): the plate without its island, and the island cut out with alpha. */
+  layers?: { background: PlateImage; island: PlateImage };
 };
 
 const assetRoot = "/images/mundo-mayo";
@@ -77,7 +79,12 @@ const mobilePlate = (name: string) => plateImage(name, 864, 1536);
 
 /** Generated plates per island (asset manifest docs/plans/mundo-mayo-assets.md). */
 export const islandPlates = {
-  hero: { desktop: desktopPlate("01-hero-escritorio"), mobile: mobilePlate("02-hero-celular"), anchorX: "72%" },
+  hero: {
+    desktop: desktopPlate("01-hero-escritorio"),
+    mobile: mobilePlate("02-hero-celular"),
+    anchorX: "72%",
+    layers: { background: desktopPlate("01-hero-escritorio-fondo"), island: desktopPlate("01-hero-escritorio-isla") },
+  },
   problem: { desktop: desktopPlate("30-isla2-escritorio"), mobile: mobilePlate("30-isla2-celular") },
   packs: { desktop: desktopPlate("10-isla3-base") },
   systems: { desktop: desktopPlate("40-isla4-escritorio"), mobile: mobilePlate("40-isla4-celular") },

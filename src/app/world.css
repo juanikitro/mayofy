@@ -2767,3 +2767,40 @@ html[data-motion-tier="reduced"] .rock-shadow {
     width: var(--anchor-size-m);
   }
 }
+
+/* Parallax pair: background drifts while the island cutout holds ---------- */
+
+@keyframes plate-background-drift {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-9%);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .dawn .plate__picture--background {
+    animation: plate-background-drift linear both;
+    animation-timeline: --dawn;
+    animation-range: exit 0% exit 100%;
+  }
+}
+
+html[data-motion-tier="lite"] .plate__picture--background,
+html[data-motion-tier="reduced"] .plate__picture--background {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plate__picture--background {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 48rem) {
+  .plate--layered .plate__picture--island {
+    display: none;
+  }
+}
