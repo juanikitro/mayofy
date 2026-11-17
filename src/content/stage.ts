@@ -133,7 +133,12 @@ export const islandPlates = {
     layers: { background: desktopPlate("30-isla2-escritorio-fondo"), island: desktopPlate("30-isla2-escritorio-isla") },
     mobileLayers: { background: mobilePlate("30-isla2-celular-fondo"), island: mobilePlate("30-isla2-celular-isla") },
   },
-  packs: { desktop: desktopPlate("10-isla3-base") },
+  packs: {
+    desktop: desktopPlate("10-isla3-base"),
+    // No mobile plate: the same pair serves both sizes, so the cutout stays visible on phones.
+    layers: { background: desktopPlate("10-isla3-base-fondo"), island: desktopPlate("10-isla3-base-isla") },
+    mobileLayers: { background: desktopPlate("10-isla3-base-fondo"), island: desktopPlate("10-isla3-base-isla") },
+  },
   systems: { desktop: desktopPlate("40-isla4-escritorio"), mobile: mobilePlate("40-isla4-celular") },
   works: { desktop: desktopPlate("45-isla5-escritorio"), mobile: mobilePlate("45-isla5-celular") },
   host: { desktop: desktopPlate("50-isla6-escritorio"), mobile: mobilePlate("50-isla6-celular") },

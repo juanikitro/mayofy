@@ -2886,6 +2886,13 @@ html[data-motion-tier="reduced"] .plate-object--chased {
     animation-timeline: --isle;
     animation-range: entry 0% exit 100%;
   }
+
+  /* Island 3 lives in the sticky rock stage: drift across its own timeline. */
+  .rocks .plate__picture--background {
+    animation: plate-background-drift linear both;
+    animation-timeline: --rocks;
+    animation-range: cover 0% cover 100%;
+  }
 }
 
 html[data-motion-tier="reduced"] .plate__picture--background {
