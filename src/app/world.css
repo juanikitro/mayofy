@@ -538,7 +538,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 .dawn__content {
   position: relative;
   z-index: 2;
-  max-width: 44rem;
+  max-width: 48rem;
   margin-inline-start: max(var(--gutter), calc((100% - var(--shell-max)) / 2));
   color: var(--ink);
 }
@@ -568,7 +568,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 .dawn__body {
   margin-block: 1.5rem 1.75rem;
-  max-width: 44ch;
+  max-width: 34ch;
   font-size: clamp(1.05rem, 1rem + 0.35vw, 1.2rem);
   color: var(--ink-soft);
 }
@@ -758,9 +758,14 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 }
 
+/* Individual `translate` and `rotate`, not `transform`: the anchored Mayo
+ * already uses `transform` to put her feet on the anchor, and a `transform`
+ * keyframe (with fill `both`) replaced it, so she sat half a body to the
+ * right and a body lower than her anchor, on the island's front rim. */
 @keyframes mayo-leap {
   from {
-    transform: translate(0, 0) rotate(0deg);
+    translate: 0 0;
+    rotate: 0deg;
     opacity: 1;
   }
 
@@ -769,7 +774,8 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 
   to {
-    transform: translate(28vw, -34vh) rotate(-18deg);
+    translate: 28vw -34vh;
+    rotate: -18deg;
     opacity: 0;
   }
 }
@@ -1164,10 +1170,13 @@ html[data-motion-tier="reduced"] .scene__sky {
     padding-inline: 1rem;
   }
 
+  /* The bottom padding is the island's share of the mobile plate (art from
+   * 67.5 %), so the island and Mayo end inside the first screen at 390 x 844
+   * instead of below it. */
   .dawn {
     height: auto;
-    min-height: 100svh;
-    padding-block: 5.5rem 44vh;
+    min-height: 0;
+    padding-block: 5.5rem calc(100% * 1536 / 864 * 0.33 + 1rem);
   }
 
   .dawn h1 {
@@ -2676,6 +2685,32 @@ html[data-motion-tier="reduced"] .fall__mayo {
  * clears the text column (bible analysis §2). */
 .dawn .plate {
   --plate-scale: 1.14;
+}
+
+/* Desktop: the sky layer keeps covering the section while the island cutout
+ * and Mayo move a further 12vw right, so the tree clears the text column
+ * (the body ends at 34ch) at 1280 and 1440 px. */
+@media (min-width: 48.01rem) {
+  .dawn {
+    --hero-shift: 12vw;
+  }
+
+  .dawn .plate__picture--island {
+    translate: var(--hero-shift) 0;
+  }
+
+  .dawn .mayo--anchored {
+    left: calc(var(--anchor-x) + var(--hero-shift));
+  }
+}
+
+/* Narrow desktops and tablets in landscape: the island is wider than the
+ * room beside the text, so it moves further and lets its far rim pass
+ * under the paw rail rather than its tree behind the buttons. */
+@media (min-width: 48.01rem) and (max-width: 75rem) {
+  .dawn {
+    --hero-shift: 20vw;
+  }
 }
 
 /* One continuous sky down the page. Each section's sky starts with the
