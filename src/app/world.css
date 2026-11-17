@@ -842,7 +842,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     animation-range: exit 0% exit 55%;
   }
 
-  .scene--dawn .scene__sky {
+  .scene--dawn:not(.scene--plated) .scene__sky {
     animation: sky-drift linear both;
     animation-timeline: --dawn;
     animation-range: exit 0% exit 100%;
@@ -1761,6 +1761,13 @@ html[data-motion-tier="full"] .campfire__flame-core {
   top: 0;
   height: 100svh;
   overflow: clip;
+  /* Clouds fade at the stage's edges instead of being cut flat where the
+   * stage ends and island 2's sky begins. */
+  mask-image: linear-gradient(180deg, transparent 0, #000 8%, #000 82%, transparent 100%);
+}
+
+.fall__defs {
+  position: absolute;
 }
 
 .fall__layer {
@@ -1768,18 +1775,23 @@ html[data-motion-tier="full"] .campfire__flame-core {
   inset: -20% 0;
   width: 100%;
   height: 140%;
-  fill: color-mix(in oklch, var(--cream) 85%, transparent);
+  overflow: visible;
+  fill: url(#fall-cloud-light);
+  opacity: 0.8;
 }
 
 .fall__layer--far {
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
+/* The near clouds pass in front of Mayo. */
 .fall__layer--near {
-  fill: color-mix(in oklch, var(--cream) 95%, transparent);
+  z-index: 2;
+  opacity: 0.92;
 }
 
 .fall__mayo {
+  z-index: 1;
   inset: 30% auto auto 50%;
   transform: translateX(-50%) rotate(14deg);
 }
