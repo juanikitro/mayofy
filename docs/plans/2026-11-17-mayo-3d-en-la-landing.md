@@ -32,7 +32,7 @@ No verificado: nivel liviano en un dispositivo real (solo por la lógica del det
 
 ## Limitaciones y pendientes
 
-- Las imágenes de los momentos 08 (luciérnagas), 09 (llegada) y 10 (descanso) se capturaron con las luces del orden anterior de islas; el agente de Mayo debe intercambiarlas y recapturar. El 3D ya usa las luces correctas.
+- Resuelto el 17 de noviembre (mayo-3d `dbe11a2`): el worker de Mayo comprobó sobre las placas reales que el preset cálido de fogón corresponde a la isla 6 y el frío con borde menta a la isla 7, así que intercambió el contenido de los presets `twilight`/`night` (no las imágenes), agregó un degradé en el borde de la sombra de contacto para que las poses y el canvas no muestren un corte duro, y recapturó las diez poses. La landing refleja ambos cambios en `src/lib/mayo/lighting.ts` y `src/lib/mayo/scene.ts` y tiene las poses nuevas en `public/mayo/poses/`.
 - Las anclas definitivas de Mayo se aplican cuando lleguen las placas; hoy Mayo se apoya en las islas provisorias.
 - El avatar de Juani (repo `juani-3d`) no está integrado; comparte el preset `twilight` de la isla 6.
 - El salto entre plataformas de la isla 3 se reproduce una vez al llegar al slot, no sincronizado con el ensamble de las rocas.

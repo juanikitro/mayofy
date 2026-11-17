@@ -4,7 +4,8 @@ import type { LightName } from "@/lib/mayo/moments";
 
 /**
  * Light presets per island, ported from mayo-3d/preview/lighting.js (visual
- * bible §3). Directions are relative to the camera azimuth so the sun keeps
+ * bible §3; twilight/night contents mirrored from mayo-3d commit dbe11a2).
+ * Directions are relative to the camera azimuth so the sun keeps
  * its screen side from any angle: offset 0 = from the camera, +90 = from
  * screen right, 180 = backlight. `el` is the elevation in degrees.
  */
@@ -61,21 +62,23 @@ export const LIGHT_PRESETS: Record<LightName, LightPreset> = {
     hemi: { sky: 0xffa48f, ground: 0x5b4a7a, intensity: 0.45 },
     shadow: 0.18,
   },
+  // Island 6 (Juani, twilight): warm campfire key, cool fill, mint rim.
   twilight: {
-    exposure: 1.12, env: 0.12,
-    key: { color: 0x8fa3ff, intensity: 1.2, offset: -30, el: 40 },
-    fill: { color: 0x6f84d6, intensity: 0.5, offset: 70, el: 15 },
-    rim: { color: 0x7dffd0, intensity: 2.0, offset: 150, el: 35 },
-    hemi: { sky: 0x5463a6, ground: 0x1f2c3a, intensity: 0.5 },
-    shadow: 0.2,
-  },
-  night: {
     exposure: 1.12, env: 0.1,
     key: { color: 0xffa65e, intensity: 2.3, offset: 70, el: 22 },
     fill: { color: 0x4c5c9e, intensity: 0.4, offset: -70, el: 25 },
     rim: { color: 0x8dffd8, intensity: 1.4, offset: 170, el: 30 },
     hemi: { sky: 0x2c3762, ground: 0x15151f, intensity: 0.38 },
     shadow: 0.22,
+  },
+  // Island 7 (questions, starry night): cool residual light, mint fireflies.
+  night: {
+    exposure: 1.12, env: 0.12,
+    key: { color: 0x8fa3ff, intensity: 1.2, offset: -30, el: 40 },
+    fill: { color: 0x6f84d6, intensity: 0.5, offset: 70, el: 15 },
+    rim: { color: 0x7dffd0, intensity: 2.0, offset: 150, el: 35 },
+    hemi: { sky: 0x5463a6, ground: 0x1f2c3a, intensity: 0.5 },
+    shadow: 0.2,
   },
 };
 

@@ -17,6 +17,8 @@ import { FPS, GAZE_CLIPS, type CameraSpec, type Moment } from "@/lib/mayo/moment
 const SENSOR = 36;
 const MARGIN = 1.12;
 const AO_DIRECT = 0.6;
+/** NDC band (of 1) where the contact shadow fades out at the frame edge. */
+const SHADOW_EDGE = 0.3;
 
 export type CameraPose = {
   position: THREE.Vector3;
@@ -71,7 +73,24 @@ export async function createMayoScene({
   let camAzimuth = 0;
   const camTarget = new THREE.Vector3();
 
+  // Long low-sun shadows reach the edge of the square frame; fade them out
+  // over the outer SHADOW_EDGE of the viewport so the canvas (and the
+  // captured images) never show a hard cut line.
   const floorMaterial = new THREE.ShadowMaterial({ opacity: 0.2 });
+  floorMaterial.onBeforeCompile = (shader) => {
+    const declare = "varying vec4 vClip;\nvoid main() {";
+    shader.vertexShader = shader.vertexShader
+      .replace("void main() {", declare)
+      .replace("#include <project_vertex>", "#include <project_vertex>\n  vClip = gl_Position;");
+    shader.fragmentShader = shader.fragmentShader
+      .replace("void main() {", declare)
+      .replace(
+        "#include <tonemapping_fragment>",
+        `vec2 ndc = abs(vClip.xy / vClip.w);
+        gl_FragColor.a *= smoothstep(0.0, ${SHADOW_EDGE.toFixed(2)}, 1.0 - max(ndc.x, ndc.y));
+        #include <tonemapping_fragment>`,
+      );
+  };
   const floor = new THREE.Mesh(new THREE.PlaneGeometry(8, 8), floorMaterial);
   floor.rotation.x = -Math.PI / 2;
   floor.receiveShadow = true;
