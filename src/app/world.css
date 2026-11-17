@@ -853,6 +853,16 @@ html[data-motion-tier="reduced"] .scene__sky {
   padding-block: 3rem 5rem;
 }
 
+/* Full-bleed band that carries the noon plate's last row into the beige. */
+.packs::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(50% - 50vw) auto;
+  z-index: -1;
+  height: 8rem;
+  background: linear-gradient(180deg, #c0d0df, var(--beige));
+}
+
 .packs__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
@@ -1089,7 +1099,8 @@ html[data-motion-tier="reduced"] .scene__sky {
 .world-footer {
   padding-block: 3rem 2.5rem;
   color: var(--night-ink);
-  background: var(--night);
+  /* Continues the night island's last row before settling on the footer ink. */
+  background: linear-gradient(180deg, #013567 0, var(--night) 7rem);
 }
 
 .world-footer__layout {
@@ -1619,7 +1630,8 @@ html[data-motion-tier="full"] .campfire__flame-core {
 .fall {
   position: relative;
   height: 160vh;
-  background: linear-gradient(180deg, var(--beige) 0%, oklch(90% 0.05 220) 100%);
+  /* From the hero plate's last row to island 2's first. */
+  background: linear-gradient(180deg, #b38fa0 0%, #90c5fb 100%);
   view-timeline-name: --fall;
 }
 
@@ -1998,6 +2010,7 @@ html[data-motion-tier="reduced"] .fall__mayo {
 
   .fall {
     height: 120vh;
+    background: linear-gradient(180deg, #b690b3 0%, #8bc3f8 100%);
   }
 
   .progress {
@@ -2602,33 +2615,86 @@ html[data-motion-tier="reduced"] .fall__mayo {
   --plate-scale: 1.14;
 }
 
-/* Section skies continue the plate's top colour so the seam disappears. */
-.scene--plated.scene--dawn .scene__sky {
-  background: linear-gradient(180deg, oklch(66% 0.11 300) 0%, #a08dcc 100%);
+/* One continuous sky down the page. Each section's sky starts with the
+ * colour the section above ends with (`--sky-from`), blends into the colour
+ * the content sits on (`--sky-hold`) within `--sky-blend`, reaches the
+ * plate's own top colour (`--sky-plate`) where the plate's faded top rows end
+ * (`--plate-top`, from the plate's aspect ratio set on the scene) and
+ * ends with the plate's bottom colour (`--sky-bottom`), which is what a
+ * drifting parallax background uncovers at the bottom. Colours are the mean
+ * of the first and last pixel rows of each plate. */
+.scene--plated .scene__sky {
+  --plate-top: calc(100cqh - 100cqw * var(--plate-h, 0.5628));
+
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    var(--sky-from) 0,
+    var(--sky-hold, var(--sky-from)) var(--sky-blend, 8rem),
+    var(--sky-plate) max(var(--sky-blend, 8rem) + 1px, var(--plate-top) + 100cqw * var(--plate-h, 0.5628) * var(--plate-fade, 0.09)),
+    var(--sky-bottom, var(--sky-plate)) 100%
+  );
 }
 
-.scene--plated.scene--morning .scene__sky {
-  background: linear-gradient(180deg, oklch(70% 0.13 240) 0%, #90c5fb 100%);
+.scene--plated.scene--dawn {
+  --sky-from: #a08dcc;
+  --sky-plate: #a08dcc;
+  --sky-bottom: #b38fa0;
 }
 
-.scene--plated.scene--noon .scene__sky {
-  background: linear-gradient(180deg, oklch(55% 0.19 255) 0%, #3494f1 100%);
+.scene--plated.scene--morning {
+  --sky-from: #90c5fb;
+  --sky-plate: #90c5fb;
+  --sky-bottom: #fae2cc;
 }
 
-.scene--plated.scene--golden .scene__sky {
-  background: linear-gradient(180deg, oklch(70% 0.14 45) 0%, #f29e7a 100%);
+.scene--plated.scene--noon {
+  --sky-from: #fae2cc;
+  --sky-hold: #9cc6f2;
+  --sky-blend: 5.5rem;
+  --sky-plate: #3494f0;
+  --sky-bottom: #c0d0df;
+  /* Only ~90 px of sky sit above this plate at 1440 x 900: its own clear
+   * top third fades in so peach turns to noon blue over a third of a screen. */
+  --plate-fade: 0.32;
 }
 
-.scene--plated.scene--sunset .scene__sky {
-  background: linear-gradient(180deg, oklch(48% 0.14 300) 0%, #8e67b5 100%);
+.scene--plated.scene--golden {
+  --sky-from: oklch(92% 0.03 68);
+  --sky-plate: #f19e79;
+  --sky-bottom: #fdeac1;
 }
 
-.scene--plated.scene--dusk .scene__sky {
-  background: linear-gradient(180deg, oklch(18% 0.08 275) 0%, #132a63 100%);
+/* Sunset keeps the content on light peach and turns violet only towards
+ * the island, so dark ink keeps its contrast. */
+.scene--plated.scene--sunset {
+  --sky-from: #fdeac1;
+  --sky-hold: #f8d3b4;
+  --sky-plate: #8e68b5;
+  --sky-bottom: #c57fa1;
 }
 
-.scene--plated.scene--night .scene__sky {
-  background: linear-gradient(180deg, oklch(8% 0.05 265) 0%, #011334 100%);
+/* Dusk and night fall within the first rows, before the light text starts. */
+.scene--plated.scene--dusk {
+  --sky-from: #c57fa1;
+  --sky-hold: #1b2c63;
+  --sky-blend: 6rem;
+  --sky-plate: #142a63;
+  --sky-bottom: #2d4b84;
+}
+
+.scene--plated.scene--night {
+  --sky-from: #2d4b84;
+  --sky-hold: #04173b;
+  --sky-blend: 6rem;
+  --sky-plate: #011233;
+  --sky-bottom: #013567;
+}
+
+/* The plate's own top rows (`--plate-fade` of its height) fade into that
+ * sky, so a plate whose top row is not perfectly flat never draws a line. */
+.scene--plated .plate__picture {
+  mask-image: linear-gradient(180deg, transparent 0, #000 calc(var(--plate-fade, 0.09) * 100%));
 }
 
 .scene--plated .scene__stars {
@@ -2853,6 +2919,48 @@ html[data-motion-tier="reduced"] .plate-object--chased {
     left: var(--anchor-x-m);
     top: var(--anchor-y-m);
     width: var(--anchor-size-m);
+  }
+
+  .scene--plated .scene__sky {
+    --plate-h: var(--plate-h-m);
+  }
+
+  /* Mobile plates end and start with slightly different colours. */
+  .scene--plated.scene--dawn {
+    --sky-bottom: #b690b3;
+  }
+
+  .scene--plated.scene--morning {
+    --sky-from: #8bc3f8;
+    --sky-plate: #8bc3f8;
+    --sky-bottom: #fbdfc7;
+  }
+
+  .scene--plated.scene--noon {
+    --sky-from: #fbdfc7;
+  }
+
+  .scene--plated.scene--golden {
+    --sky-plate: #f1927a;
+    --sky-bottom: #fbe7be;
+  }
+
+  .scene--plated.scene--sunset {
+    --sky-from: #fbe7be;
+    --sky-plate: #815eae;
+    --sky-bottom: #b77aa3;
+  }
+
+  .scene--plated.scene--dusk {
+    --sky-from: #b77aa3;
+    --sky-plate: #092063;
+    --sky-bottom: #304889;
+  }
+
+  .scene--plated.scene--night {
+    --sky-from: #304889;
+    --sky-plate: #000e2e;
+    --sky-bottom: #003567;
   }
 }
 

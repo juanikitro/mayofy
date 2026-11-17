@@ -9,6 +9,19 @@ import type { PlateSpec } from "@/content/stage";
  * inside (objects, Mayo) is positioned in percent of the plate, so anchors
  * measured on the image hold at any viewport size.
  */
+/**
+ * Height of the plate as a fraction of its width (desktop and mobile), set on
+ * the scene so its sky can reach the plate's top colour exactly where the
+ * plate starts (`--plate-top` in world.css).
+ */
+export function plateSceneStyle(plate: PlateSpec) {
+  const mobile = plate.mobile ?? plate.desktop;
+  return {
+    "--plate-h": plate.desktop.height / plate.desktop.width,
+    "--plate-h-m": mobile.height / mobile.width,
+  } as CSSProperties;
+}
+
 export function IslandPlate({
   plate,
   children,

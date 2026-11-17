@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- already-optimised AVIF cutouts; next/image would re-encode them */
 import { Fragment, type CSSProperties } from "react";
 
-import { IslandPlate } from "@/components/world/island-plate";
+import { IslandPlate, plateSceneStyle } from "@/components/world/island-plate";
 import { MayoFigure } from "@/components/world/mayo-figure";
 import { IslandTitle } from "@/components/world/island-title";
 import { commercialPlans } from "@/content/commercial-plans";
@@ -66,7 +66,7 @@ export function RockIsland() {
   return (
     <section id="packs" className="rocks" data-island="3" aria-labelledby="packs-title">
       <div className="rocks__stage">
-        <div className="scene scene--noon scene--plated" aria-hidden="true">
+        <div className="scene scene--noon scene--plated" style={plateSceneStyle(islandPlates.packs)} aria-hidden="true">
           <div className="scene__sky" />
           <IslandPlate plate={islandPlates.packs}>
             <MayoFigure slot="packs" className="rocks__mayo" />

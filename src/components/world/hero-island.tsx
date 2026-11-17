@@ -1,4 +1,4 @@
-import { IslandPlate } from "@/components/world/island-plate";
+import { IslandPlate, plateSceneStyle } from "@/components/world/island-plate";
 import { MayoFigure } from "@/components/world/mayo-figure";
 import { islandPlates } from "@/content/stage";
 
@@ -10,7 +10,7 @@ import { islandPlates } from "@/content/stage";
  */
 export function HeroIsland() {
   return (
-    <div className="scene scene--dawn scene--plated" aria-hidden="true">
+    <div className="scene scene--dawn scene--plated" style={plateSceneStyle(islandPlates.hero)} aria-hidden="true">
       <div className="scene__sky" />
       <IslandPlate plate={islandPlates.hero} eager>
         <MayoFigure slot="hero" className="scene__mayo" eager />

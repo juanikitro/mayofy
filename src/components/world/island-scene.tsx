@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { IslandPlate } from "@/components/world/island-plate";
+import { IslandPlate, plateSceneStyle } from "@/components/world/island-plate";
 import type { PlateSpec } from "@/content/stage";
 
 export type SceneVariant = "morning" | "golden" | "sunset" | "dusk" | "night";
@@ -24,7 +24,7 @@ export function IslandScene({
 
   if (plate) {
     return (
-      <div className={`scene scene--${variant} scene--plated`} aria-hidden="true">
+      <div className={`scene scene--${variant} scene--plated`} style={plateSceneStyle(plate)} aria-hidden="true">
         <div className="scene__sky" />
         <IslandPlate plate={plate}>{children}</IslandPlate>
       </div>
