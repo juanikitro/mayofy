@@ -1,7 +1,7 @@
 # Revisión de UI/UX de la landing (mundo de Mayo)
 
 **Fecha:** 17 de noviembre de 2026
-**Rama:** `juanikitro/landing-ui-review` (creada desde `juanikitro/landing-redesign`, `72668fa`). No está publicada ni mergeada.
+**Rama:** `juanikitro/landing-ui-review`, creada desde `juanikitro/landing-redesign` (`72668fa`) y rebasada el mismo día sobre `f7b0bba`, que monta los pares de parallax de las islas 3 a 7. No está publicada ni mergeada.
 **Alcance:** maquetación y estructura de lo construido: alineación, ubicación de cada elemento, superposiciones, ritmo y fluidez de las animaciones. No se reabren decisiones aprobadas, no se reescribe copy y no se tocan imágenes de `public/`.
 **Método:** skill `design-taste-frontend` (checker y finish gate) más revisión en Chromium real a 1440 × 900, 1280 × 720, 1024 × 768, 820 × 1180, 390 × 844 y 320 px.
 
@@ -88,7 +88,7 @@ Antes / después: `antes/d-sistemas-1.jpg` → `despues/d-sistemas-0.jpg`; `ante
 | Hallazgo | Regla | Corrección |
 | --- | --- | --- |
 | Texto gris y verde sobre violeta plano: contraste insuficiente para el cuerpo y el antetítulo. | Contraste | El atardecer mantiene el texto sobre durazno claro y recién se vuelve violeta hacia la isla. |
-| Grilla de trabajos en tres columnas angostas dentro de 768 px. | Alineación | La grilla ocupa todo el ancho en tres columnas y los seis pasos quedan en una fila; la sección baja de 1711 a 1483 px. |
+| Grilla de trabajos en tres columnas angostas dentro de 768 px. | Alineación | La grilla ocupa todo el ancho en tres columnas y los seis pasos quedan en una fila; la sección baja de 1711 a 1499 px. |
 | El panel de pasos tapaba el borde superior de la isla. | Superposición | Holgura calculada (ver "Cómo funciona la holgura"). |
 | En celular las piedras y los hitos del sendero flotaban en el cielo. | Ubicación | Doce posiciones móviles a lo largo del sendero de la placa móvil. |
 
@@ -99,7 +99,7 @@ Antes / después: `antes/d-trabajos-0.jpg` → `despues/d-trabajos-0.jpg`; `ante
 | Hallazgo | Regla | Corrección |
 | --- | --- | --- |
 | El formulario tapaba la cabeza de Mayo y el fogón. | Superposición | Holgura calculada. |
-| Cal.com en una columna de ~720 px usaba su diseño apilado: 1940 px de alto. | Tamaño, ritmo | El panel de reserva ocupa todo el ancho: Cal.com muestra el mes y los horarios lado a lado (570 px). El enlace a WhatsApp va al lado del formulario. La sección baja de 3550 a 2630 px. |
+| Cal.com en una columna de ~720 px usaba su diseño apilado: 1940 px de alto. | Tamaño, ritmo | El panel de reserva ocupa todo el ancho: Cal.com muestra el mes y los horarios lado a lado (570 px). El enlace a WhatsApp va al lado del formulario. La sección baja de 3550 a 2763 px. |
 | Paso de rosa a azul noche sin transición. | Costura | El crepúsculo cae en los primeros 6rem (4rem en celular), antes del texto claro. |
 | En celular el banco flotaba sobre la isla. | Ubicación | Banco y fogón sobre el claro de la placa móvil; Mayo echada mirando al fogón (24 %). |
 
@@ -110,7 +110,7 @@ Antes / después: `antes/d-contacto-0.jpg` y `antes/d-contacto-2.jpg` → `despu
 | Hallazgo | Regla | Corrección |
 | --- | --- | --- |
 | El mantenimiento tapaba a Mayo, el farol y la copa del árbol. | Superposición | Holgura calculada. |
-| FAQ y mantenimiento apilados en una columna centrada. | Alineación, ritmo | Desde 64rem, FAQ (7/12) y mantenimiento (5/12, fijo al hacer scroll) lado a lado; la sección baja de 1641 a 1379 px. |
+| FAQ y mantenimiento apilados en una columna centrada. | Alineación, ritmo | Desde 64rem, FAQ (7/12) y mantenimiento (5/12, fijo al hacer scroll) lado a lado; la sección baja de 1641 a 1598 px, aun dejando a la vista el árbol completo. |
 | En celular el farol y las luciérnagas flotaban en el cielo. | Ubicación | Posiciones propias; la luciérnaga perseguida también tiene su destino móvil. |
 
 Antes / después: `antes/d-preguntas-1.jpg` → `despues/d-preguntas-0.jpg`.
@@ -128,11 +128,11 @@ Antes / después: `antes/d-preguntas-1.jpg` → `despues/d-preguntas-0.jpg`.
 
 ### El cielo continuo
 
-Cada escena con placa define cuatro colores en `world.css`: `--sky-from` (el último color de la sección anterior), `--sky-hold` (sobre el que va el texto), `--sky-plate` (la primera fila de la placa) y `--sky-bottom` (la última). El degradado llega a `--sky-plate` justo donde empieza la placa: `IslandPlate` expone la relación alto/ancho de la placa (`plateSceneStyle`, variables `--plate-h` y `--plate-h-m`) y el cielo la usa con unidades de contenedor (`100cqh - 100cqw * --plate-h`). La placa además funde sus primeras filas con una máscara (`--plate-fade`, 9 % por defecto). Los colores son el promedio de la primera y la última fila de cada placa; las placas móviles tienen los suyos.
+Cada escena con placa define cuatro colores en `world.css`: `--sky-from` (el último color de la sección anterior), `--sky-hold` (sobre el que va el texto), `--sky-plate` (la primera fila de la placa) y `--sky-bottom` (la última). El degradado llega a `--sky-plate` justo donde empieza la placa: `IslandPlate` expone la relación alto/ancho de la placa (`plateSceneStyle`, variables `--plate-h` y `--plate-h-m`) y el cielo la usa con unidades de contenedor (`100cqh - 100cqw * --plate-h`). La placa además funde sus primeras filas con una máscara (`--plate-fade`, 9 % por defecto). Los colores son el promedio de la primera y la última fila de cada placa (de su capa de fondo cuando la isla tiene par de parallax, porque es lo que se ve en la unión); las placas móviles tienen los suyos.
 
 ### La holgura sobre la isla
 
-`stage.ts` registra en cada placa `clear: { desktop, mobile }`: la parte de su alto, medida desde abajo, que ocupa el arte (prado, objetos, Mayo). El `padding` inferior de `.isle` es esa parte de la placa más un margen; como un `padding` en porcentaje se mide contra el ancho de la sección, que es el ancho de la placa, la cuenta vale en cualquier pantalla. Se midió sobre las placas y los objetos (por ejemplo, el techo del invernadero al 47 %).
+`stage.ts` registra en cada placa `clear: { desktop, mobile }`: la parte de su alto, medida desde abajo, que ocupa el arte (prado, objetos, Mayo). El `padding` inferior de `.isle` es esa parte de la placa más un margen; como un `padding` en porcentaje se mide contra el ancho de la sección, que es el ancho de la placa, la cuenta vale en cualquier pantalla. Se midió sobre el canal alfa de los recortes de cada isla y sobre los objetos: el techo del invernadero arranca al 47 % de la placa, los arbustos de la isla 5 al 45,7 % y los árboles de las islas 6 y 7 al 30,6 % y al 19,3 %. Una primera estimación sobre capturas había dejado esos dos árboles parcialmente tapados; los recortes de los pares de parallax permitieron corregirla.
 
 ### Objetos en la placa móvil
 
@@ -165,6 +165,7 @@ El nivel `reduced` sigue apagando todo: verificado con `prefers-reduced-motion: 
 ## Verificación
 
 - Chromium (Playwright) contra `next dev` en el puerto 3011: 1440 × 900, 1280 × 720, 1024 × 768, 820 × 1180, 390 × 844 y 320 px. Sin scroll horizontal en 1440, 390 y 320; sin errores de consola.
+- Después del rebase sobre `f7b0bba` se repitieron las capturas "después" y la revisión a 1440 × 900 y 390 × 844 con los siete pares de parallax montados: sin scroll horizontal, sin errores de consola, contenido por encima de cada isla y cielo continuo en las uniones.
 - Teclado: el primer Tab llega al enlace "Saltar al contenido"; las tarjetas de packs enfocadas se ven con su anillo.
 - Movimiento reducido emulado: todo en reposo y visible.
 - `npm run lint`, `npm run typecheck` y `npm run build` sin errores. No hay test runner en el repo.
