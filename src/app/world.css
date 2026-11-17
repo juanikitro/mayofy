@@ -890,7 +890,7 @@ html[data-motion-tier="reduced"] .scene__sky {
   inset: 0 calc(50% - 50vw) auto;
   z-index: -1;
   height: 8rem;
-  background: linear-gradient(180deg, #c0d0df, var(--beige));
+  background: linear-gradient(180deg, #c0d6eb, var(--beige));
 }
 
 .packs__grid {
@@ -2826,7 +2826,8 @@ html[data-motion-tier="reduced"] .fall__mayo {
  * (`--plate-top`, from the plate's aspect ratio set on the scene) and
  * ends with the plate's bottom colour (`--sky-bottom`), which is what a
  * drifting parallax background uncovers at the bottom. Colours are the mean
- * of the first and last pixel rows of each plate. */
+ * of the first and last pixel rows of each plate (of its background layer
+ * when the island has a parallax pair). */
 .scene--plated .scene__sky {
   --plate-top: calc(100cqh - 100cqw * var(--plate-h, 0.5628));
 
@@ -2856,8 +2857,8 @@ html[data-motion-tier="reduced"] .fall__mayo {
   --sky-from: #fae2cc;
   --sky-hold: #9cc6f2;
   --sky-blend: 5.5rem;
-  --sky-plate: #3494f0;
-  --sky-bottom: #c0d0df;
+  --sky-plate: #3f9bf2;
+  --sky-bottom: #c0d6eb;
   /* Only ~90 px of sky sit above this plate at 1440 x 900: its own clear
    * top third fades in so peach turns to noon blue over a third of a screen. */
   --plate-fade: 0.32;
@@ -2874,13 +2875,13 @@ html[data-motion-tier="reduced"] .fall__mayo {
 .scene--plated.scene--sunset {
   --sky-from: #fdeac1;
   --sky-hold: #f8d3b4;
-  --sky-plate: #8e68b5;
-  --sky-bottom: #c57fa1;
+  --sky-plate: #936bb9;
+  --sky-bottom: #c581a9;
 }
 
 /* Dusk and night fall within the first rows, before the light text starts. */
 .scene--plated.scene--dusk {
-  --sky-from: #c57fa1;
+  --sky-from: #c581a9;
   --sky-hold: #1b2c63;
   --sky-blend: 6rem;
   --sky-plate: #142a63;
@@ -3182,13 +3183,13 @@ html[data-motion-tier="reduced"] .plate-object--chased {
 
   .scene--plated.scene--sunset {
     --sky-from: #fbe7be;
-    --sky-plate: #815eae;
-    --sky-bottom: #b77aa3;
+    --sky-plate: #8861b2;
+    --sky-bottom: #bd7da8;
   }
 
   .scene--plated.scene--dusk {
     --sky-blend: 4rem;
-    --sky-from: #b77aa3;
+    --sky-from: #bd7da8;
     --sky-plate: #092063;
     --sky-bottom: #304889;
   }
