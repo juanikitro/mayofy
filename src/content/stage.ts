@@ -85,7 +85,7 @@ const sprite = (slot: MayoSlotId, frames: number, fps: number, feetY: string, lo
 
 /** Painted strips delivered so far (manifest docs/plans/mundo-mayo-assets.md). */
 export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
-  hero: sprite("hero", 6, 6, "94.7%"),
+  hero: sprite("hero", 12, 10, "94.7%"),
   fall: sprite("fall", 12, 10, "87.9%"),
   problem: sprite("problem", 12, 10, "92.8%"),
   packs: sprite("packs", 12, 10, "90.8%", "cycle"),
