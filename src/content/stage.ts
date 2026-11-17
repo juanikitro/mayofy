@@ -151,15 +151,27 @@ export type MayoAnchor = {
   xMobile?: string;
   yMobile?: string;
   sizeMobile?: string;
+  /** The strips are painted facing left; `right` mirrors Mayo towards what she interacts with. */
+  face?: "left" | "right";
+  /** Scroll-driven travel across the plate: `x` moves from `from` to `to` while the island crosses the viewport. */
+  travel?: { from: string; to: string };
+  /** Contact shadow under the feet (default on; off when airborne). */
+  shadow?: boolean;
 };
 
 export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
-  hero: { x: "58%", y: "69%", size: "13%", xMobile: "52%", yMobile: "79%", sizeMobile: "30%" },
-  problem: { x: "46%", y: "63%", size: "12%", xMobile: "50%", yMobile: "76%", sizeMobile: "28%" },
-  systems: { x: "40%", y: "74%", size: "12%", xMobile: "40%", yMobile: "80%", sizeMobile: "28%" },
-  works: { x: "48%", y: "60%", size: "11%", xMobile: "50%", yMobile: "75%", sizeMobile: "26%" },
-  host: { x: "45%", y: "64%", size: "12%", xMobile: "48%", yMobile: "77%", sizeMobile: "28%" },
-  questions: { x: "40%", y: "62%", size: "11%", xMobile: "44%", yMobile: "75%", sizeMobile: "26%" },
+  // Hero: seated inside the meadow, between the sign and the right edge.
+  hero: { x: "54%", y: "70%", size: "13%", xMobile: "52%", yMobile: "79%", sizeMobile: "30%" },
+  // Island 2: play bow in front of the loose rocks she is "sorting" (rocks 07 and 01 sit to her left).
+  problem: { x: "38%", y: "71%", size: "12%", xMobile: "46%", yMobile: "77%", sizeMobile: "28%" },
+  // Island 4: digging into the soil mound (tierra-02 at 30 %, 73 %).
+  systems: { x: "36%", y: "74%", size: "12%", xMobile: "38%", yMobile: "80%", sizeMobile: "28%" },
+  // Island 5: runs right-to-left across the meadow below the path while the island scrolls by.
+  works: { x: "50%", y: "66%", size: "11%", xMobile: "50%", yMobile: "77%", sizeMobile: "26%", travel: { from: "68%", to: "30%" } },
+  // Island 6: resting, turned towards the campfire (fogon at 56 %, 66 %).
+  host: { x: "44%", y: "66%", size: "12%", xMobile: "40%", yMobile: "77%", sizeMobile: "28%", face: "right" },
+  // Island 7: chases a firefly that drifts ahead of her, away from the lantern.
+  questions: { x: "40%", y: "62%", size: "11%", xMobile: "40%", yMobile: "75%", sizeMobile: "26%", face: "right", travel: { from: "30%", to: "52%" } },
 };
 
 /* --------------------------------------------------------------- objects */
@@ -177,6 +189,8 @@ export type PlateObject = {
   glow?: boolean;
   /** Full tier: gentle idle animation. */
   float?: boolean;
+  /** Drifts across the plate with the scroll (the firefly Mayo chases): `x` moves to this value. */
+  chasedTo?: string;
 };
 
 const obj = (name: string, width: number, height: number, x: number, y: number, w: number, extra: Partial<PlateObject> = {}): PlateObject => ({
@@ -233,7 +247,7 @@ export const plateObjects: Partial<Record<MayoSlotId, readonly PlateObject[]>> =
     obj("58-isla7-luciernaga-02", 512, 512, 52, 40, 4, { glow: true, float: true }),
     obj("58-isla7-luciernaga-01", 512, 512, 60, 48, 3, { glow: true, float: true }),
     obj("58-isla7-luciernaga-02", 512, 512, 68, 42, 4, { glow: true, float: true }),
-    obj("58-isla7-luciernaga-01", 512, 512, 44, 52, 3, { glow: true, float: true }),
+    obj("58-isla7-luciernaga-01", 512, 512, 44, 52, 3, { glow: true, float: true, chasedTo: "66%" }),
     obj("58-isla7-luciernaga-03", 512, 512, 74, 54, 5, { glow: true, float: true }),
     obj("58-isla7-luciernaga-01", 512, 512, 26, 50, 3, { glow: true, float: true }),
     obj("58-isla7-luciernaga-02", 512, 512, 58, 58, 4, { glow: true, float: true }),

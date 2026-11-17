@@ -36,13 +36,25 @@ export function MayoFigure({
           "--anchor-x-m": anchor.xMobile ?? anchor.x,
           "--anchor-y-m": anchor.yMobile ?? anchor.y,
           "--anchor-size-m": anchor.sizeMobile ?? anchor.size,
+          "--travel-from": anchor.travel?.from ?? anchor.x,
+          "--travel-to": anchor.travel?.to ?? anchor.x,
         } as Record<string, string>)
       : ({ "--mayo-size": size } as Record<string, string>)
   ) as CSSProperties;
 
   return (
     <div
-      className={`mayo mayo--${slot}${anchor ? " mayo--anchored" : ""} ${className}`.trim()}
+      className={[
+        "mayo",
+        `mayo--${slot}`,
+        anchor ? "mayo--anchored" : "",
+        anchor && anchor.shadow !== false ? "mayo--shadow" : "",
+        anchor?.face === "right" ? "mayo--face-right" : "",
+        anchor?.travel ? "mayo--travel" : "",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
       data-mayo-slot={slot}
       data-mayo-moment={moment}
       style={style}

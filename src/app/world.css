@@ -2782,6 +2782,79 @@ html[data-motion-tier="reduced"] .rock-shadow {
   transform: translate(-50%, calc(-1 * var(--feet-y, 80%)));
 }
 
+/* Contact shadow: a soft ellipse under the feet line so Mayo rests on the grass. */
+.mayo--shadow::after {
+  content: "";
+  position: absolute;
+  left: 14%;
+  top: calc(var(--feet-y, 80%) - 5%);
+  width: 72%;
+  height: 10%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgb(24 18 10 / 0.42), rgb(24 18 10 / 0) 68%);
+  z-index: -1;
+}
+
+/* The strips are painted facing left; mirror Mayo towards what she interacts with. */
+.mayo--face-right .mayo__sprite,
+.mayo--face-right .mayo__picture {
+  transform: scaleX(-1);
+}
+
+/* Scroll-driven travel across the plate (run, chase): `left` moves from
+ * `--travel-from` to `--travel-to` while the island section crosses the
+ * viewport; without scroll-driven animations she stays at the anchor. */
+@supports (animation-timeline: view()) {
+  .mayo--travel {
+    animation: mayo-travel linear both;
+    animation-timeline: --isle;
+    animation-range: entry 40% exit 60%;
+  }
+
+  /* The chased firefly keeps its idle float and adds the scroll-driven drift. */
+  .plate-object--chased,
+  html[data-motion-tier="full"] .plate-object--chased {
+    animation: object-chase linear both, object-float 5s ease-in-out infinite;
+    animation-timeline: --isle, auto;
+    animation-range: entry 40% exit 60%, normal;
+    animation-delay: 0s, var(--float-delay, 0s);
+  }
+}
+
+@keyframes mayo-travel {
+  from {
+    left: var(--travel-from);
+  }
+
+  to {
+    left: var(--travel-to);
+  }
+}
+
+@keyframes object-chase {
+  from {
+    left: var(--chase-from);
+  }
+
+  to {
+    left: var(--chase-to);
+  }
+}
+
+html[data-motion-tier="lite"] .mayo--travel,
+html[data-motion-tier="reduced"] .mayo--travel,
+html[data-motion-tier="lite"] .plate-object--chased,
+html[data-motion-tier="reduced"] .plate-object--chased {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mayo--travel,
+  .plate-object--chased {
+    animation: none !important;
+  }
+}
+
 @media (max-width: 48rem) {
   .plate {
     --r: var(--plate-ratio-m, var(--plate-ratio, 9 / 16));

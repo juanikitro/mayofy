@@ -10,14 +10,14 @@ export function PlateObjects({ objects }: { objects: readonly PlateObject[] }) {
       {objects.map((object, index) => (
         <img
           key={`${object.src}-${index}`}
-          className={`plate-object${object.glow ? " plate-object--glow" : ""}${object.float ? " plate-object--float" : ""}`}
+          className={`plate-object${object.glow ? " plate-object--glow" : ""}${object.float ? " plate-object--float" : ""}${object.chasedTo ? " plate-object--chased" : ""}`}
           src={object.src}
           alt=""
           width={object.width}
           height={object.height}
           loading="lazy"
           decoding="async"
-          style={{ left: object.x, top: object.y, width: object.w, "--float-delay": `${(index % 5) * 0.7}s` } as CSSProperties}
+          style={{ left: object.x, top: object.y, width: object.w, "--float-delay": `${(index % 5) * 0.7}s`, "--chase-from": object.x, "--chase-to": object.chasedTo } as CSSProperties}
         />
       ))}
     </>
