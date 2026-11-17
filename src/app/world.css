@@ -671,7 +671,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   z-index: 4;
   display: grid;
   gap: 0.1rem;
-  width: max-content;
+  width: 12rem;
   max-width: 100%;
   padding: 0.9rem 1.1rem 0.8rem;
   border-radius: var(--radius);
@@ -681,8 +681,15 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   transform: translateX(-50%);
 }
 
-.platform__card:hover .platform__link {
+.platform__card:hover .platform__link,
+.platform__card:focus-visible .platform__link {
   text-decoration-color: var(--moss);
+}
+
+/* A card reached with Tab before its platform has assembled shows at once:
+ * keyboard focus never lands on something invisible. */
+.platform__card:focus-visible {
+  opacity: 1 !important;
 }
 
 .platform__name {
@@ -956,7 +963,7 @@ html[data-motion-tier="reduced"] .scene__sky {
 }
 
 .pack__header h3 {
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   margin-block: 0.25rem 0.75rem;
 }
 
@@ -1223,7 +1230,7 @@ html[data-motion-tier="reduced"] .scene__sky {
    * instead of below it. */
   .dawn {
     height: auto;
-    min-height: 0;
+    min-height: 100svh;
     padding-block: 5.5rem calc(100% * 1536 / 864 * 0.33 + 1rem);
   }
 
@@ -1914,7 +1921,7 @@ html[data-motion-tier="reduced"] .fall__mayo {
 }
 
 .work h3 {
-  font-size: 1.15rem;
+  font-size: 1.35rem;
 }
 
 .work p {
@@ -1932,6 +1939,9 @@ html[data-motion-tier="reduced"] .fall__mayo {
 
 .work__link,
 .host-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
   font-weight: 600;
   color: var(--moss);
   text-decoration: underline;
@@ -2042,7 +2052,7 @@ html[data-motion-tier="reduced"] .fall__mayo {
 }
 
 .reach__intro h3 {
-  font-size: 1.5rem;
+  font-size: 1.35rem;
 }
 
 .reach__intro p,
@@ -2654,7 +2664,7 @@ html[data-motion-tier="reduced"] .fall__mayo {
 .work__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0 1.25rem;
 }
 
 /* 404 -------------------------------------------------------------------- */
@@ -3143,12 +3153,14 @@ html[data-motion-tier="reduced"] .plate-object--chased {
   }
 
   .scene--plated.scene--dusk {
+    --sky-blend: 4rem;
     --sky-from: #b77aa3;
     --sky-plate: #092063;
     --sky-bottom: #304889;
   }
 
   .scene--plated.scene--night {
+    --sky-blend: 4rem;
     --sky-from: #304889;
     --sky-plate: #000e2e;
     --sky-bottom: #003567;
