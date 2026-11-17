@@ -627,10 +627,13 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 }
 
 .platform {
+  --rocks-max: 19rem;
+
   position: relative;
   display: grid;
   justify-items: center;
   padding-block-start: 9rem;
+  container-type: inline-size;
 }
 
 .platform--1 {
@@ -648,7 +651,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 .platform__rocks {
   position: relative;
   width: 100%;
-  max-width: 19rem;
+  max-width: var(--rocks-max);
   aspect-ratio: 1;
   margin-block-start: 1rem;
 }
@@ -659,9 +662,12 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   will-change: transform;
 }
 
+/* Each card rests on the highest rock of its own platform (`--rock-top`,
+ * share of the square rock canvas, set from stage.ts) and overlaps it a
+ * little, instead of all three hanging on one line above the platforms. */
 .platform__card {
   position: absolute;
-  inset: 0 auto auto 50%;
+  inset: auto auto calc(min(100cqw, var(--rocks-max)) * (1 - var(--rock-top, 0)) - 0.6rem) 50%;
   z-index: 4;
   display: grid;
   gap: 0.1rem;
@@ -798,8 +804,10 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 }
 
 @supports (animation-timeline: view()) {
+  /* Ease-out over the scroll range: the rocks travel early and slow down as
+   * they settle, instead of arriving at full speed. */
   .rock {
-    animation: rock-settle linear both;
+    animation: rock-settle var(--ease-out) both;
     animation-timeline: --rocks;
     animation-range: cover 28% cover 50%;
   }
@@ -1231,10 +1239,12 @@ html[data-motion-tier="reduced"] .scene__sky {
     view-timeline-name: --platform;
   }
 
+  .platform {
+    --rocks-max: 14rem;
+  }
+
   .platform__rocks {
     --scatter: 0.45;
-
-    max-width: 14rem;
   }
 
   .rock,

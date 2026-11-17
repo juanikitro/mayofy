@@ -20,15 +20,19 @@ type ScatterStyle = { "--sx": string; "--sy": string; "--sr": string };
 
 /**
  * Scatter offsets per rock (where it floats before the scroll assembles it).
- * The assembled state is the default layout, so every fallback tier shows
- * the platforms already built without extra CSS.
+ * The rocks rise from below and the sides, never through the title above
+ * the platforms. The assembled state is the default layout, so every
+ * fallback tier shows the platforms already built without extra CSS.
  */
 const scatter: Record<RockKind, ScatterStyle> = {
-  base: { "--sx": "-26vw", "--sy": "-34vh", "--sr": "-28deg" },
-  left: { "--sx": "-34vw", "--sy": "10vh", "--sr": "48deg" },
-  right: { "--sx": "30vw", "--sy": "-18vh", "--sr": "-54deg" },
-  top: { "--sx": "18vw", "--sy": "-46vh", "--sr": "76deg" },
+  base: { "--sx": "-26vw", "--sy": "30vh", "--sr": "-28deg" },
+  left: { "--sx": "-34vw", "--sy": "14vh", "--sr": "48deg" },
+  right: { "--sx": "30vw", "--sy": "22vh", "--sr": "-54deg" },
+  top: { "--sx": "22vw", "--sy": "-12vh", "--sr": "76deg" },
 };
+
+/** Highest point of a platform's rocks, as a share of the design canvas: its card rests there. */
+const rockTop = (index: number) => Math.min(...platforms[index].pieces.map((piece) => piece.y)) / PLATFORM_CANVAS;
 
 const pct = (value: number) => `${(value / PLATFORM_CANVAS) * 100}%`;
 
@@ -82,7 +86,7 @@ export function RockIsland() {
 
         <div className="platforms">
           {commercialPlans.map((plan, index) => (
-            <div className={`platform platform--${index + 1}`} key={plan.id}>
+            <div className={`platform platform--${index + 1}`} style={{ "--rock-top": rockTop(index) } as CSSProperties} key={plan.id}>
               <div className="platform__rocks" aria-hidden="true">
                 {/* Manifest rule: each contact shadow sits under its emitter and over the receivers. */}
                 {platforms[index].pieces.map((piece) => (
