@@ -44,12 +44,14 @@ export function MayoStageLoader() {
       if (idle) idle(() => !cancelled && setReady(true), { timeout: 2500 });
       else window.setTimeout(() => !cancelled && setReady(true), 1200);
     };
-    if (document.readyState === "complete") schedule();
-    else window.addEventListener("load", schedule, { once: true });
+    // Wait for the document to be parsed (not for every image to finish), then
+    // for an idle moment: the hero still is already on screen by then.
+    if (document.readyState !== "loading") schedule();
+    else document.addEventListener("DOMContentLoaded", schedule, { once: true });
 
     return () => {
       cancelled = true;
-      window.removeEventListener("load", schedule);
+      document.removeEventListener("DOMContentLoaded", schedule);
     };
   }, []);
 
