@@ -102,9 +102,164 @@ export type MayoAnchor = {
 
 export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   hero: { x: "58%", y: "69%", size: "13%", xMobile: "52%", yMobile: "79%", sizeMobile: "30%" },
-  problem: { x: "52%", y: "64%", size: "12%", xMobile: "50%", yMobile: "76%", sizeMobile: "28%" },
-  systems: { x: "44%", y: "67%", size: "12%", xMobile: "46%", yMobile: "78%", sizeMobile: "28%" },
-  works: { x: "50%", y: "61%", size: "11%", xMobile: "50%", yMobile: "75%", sizeMobile: "26%" },
-  host: { x: "56%", y: "63%", size: "12%", xMobile: "54%", yMobile: "76%", sizeMobile: "28%" },
-  questions: { x: "46%", y: "61%", size: "11%", xMobile: "48%", yMobile: "75%", sizeMobile: "26%" },
+  problem: { x: "46%", y: "63%", size: "12%", xMobile: "50%", yMobile: "76%", sizeMobile: "28%" },
+  systems: { x: "40%", y: "74%", size: "12%", xMobile: "40%", yMobile: "80%", sizeMobile: "28%" },
+  works: { x: "48%", y: "60%", size: "11%", xMobile: "50%", yMobile: "75%", sizeMobile: "26%" },
+  host: { x: "45%", y: "64%", size: "12%", xMobile: "48%", yMobile: "77%", sizeMobile: "28%" },
+  questions: { x: "40%", y: "62%", size: "11%", xMobile: "44%", yMobile: "75%", sizeMobile: "26%" },
 };
+
+/* --------------------------------------------------------------- objects */
+
+/** An isolated object placed on a plate: bottom-centre at (x, y), width in % of the plate. */
+export type PlateObject = {
+  src: string;
+  x: string;
+  y: string;
+  w: string;
+  /** Natural size of the AVIF, for layout. */
+  width: number;
+  height: number;
+  /** Additive glow (black background): composited with screen blending. */
+  glow?: boolean;
+  /** Full tier: gentle idle animation. */
+  float?: boolean;
+};
+
+const obj = (name: string, width: number, height: number, x: number, y: number, w: number, extra: Partial<PlateObject> = {}): PlateObject => ({
+  src: `${assetRoot}/${name}.avif`,
+  width,
+  height,
+  x: `${x}%`,
+  y: `${y}%`,
+  w: `${w}%`,
+  ...extra,
+});
+
+/** Objects per island, in paint order (first = furthest back). */
+export const plateObjects: Partial<Record<MayoSlotId, readonly PlateObject[]>> = {
+  problem: [
+    obj("33-isla2-roca-04", 1024, 500, 30, 62, 8, { float: true }),
+    obj("33-isla2-roca-02", 1024, 486, 62, 60, 9, { float: true }),
+    obj("33-isla2-roca-06", 1024, 520, 72, 66, 7, { float: true }),
+    obj("33-isla2-roca-01", 916, 780, 36, 70, 7, { float: true }),
+    obj("33-isla2-roca-05", 1024, 520, 56, 69, 6, { float: true }),
+    obj("33-isla2-roca-03", 994, 464, 66, 74, 8, { float: true }),
+    obj("33-isla2-roca-07", 1024, 520, 24, 72, 5, { float: true }),
+    obj("33-isla2-roca-08", 1024, 520, 50, 76, 6, { float: true }),
+  ],
+  systems: [
+    obj("43-isla4-invernadero", 1024, 807, 64, 72, 18),
+    obj("43-isla4-tierra-02", 1024, 423, 30, 73, 9),
+    obj("43-isla4-tierra-01", 1024, 423, 46, 77, 11),
+    obj("43-isla4-maceta", 863, 700, 25, 71, 5),
+    obj("43-isla4-engranaje", 996, 692, 51, 75, 6),
+    obj("43-isla4-caja", 1024, 684, 74, 64, 7),
+  ],
+  works: [
+    obj("48-isla5-paso-01", 1024, 522, 52, 54, 6),
+    obj("48-isla5-hito-01", 883, 672, 56, 52, 3),
+    obj("48-isla5-paso-02", 1024, 522, 47, 58, 6),
+    obj("48-isla5-hito-02", 883, 672, 43, 56, 3),
+    obj("48-isla5-paso-03", 1024, 522, 42, 62, 6),
+    obj("48-isla5-hito-03", 883, 672, 46, 60, 3),
+    obj("48-isla5-paso-04", 1024, 522, 43, 66, 6),
+    obj("48-isla5-hito-04", 883, 672, 39, 65, 3),
+    obj("48-isla5-paso-05", 1024, 522, 48, 70, 6),
+    obj("48-isla5-hito-05", 883, 672, 52, 68, 3),
+    obj("48-isla5-paso-06", 1024, 522, 53, 73, 6),
+    obj("48-isla5-hito-06", 883, 672, 57, 71, 3),
+  ],
+  host: [
+    obj("53-isla6-banco", 1024, 457, 66, 61, 12),
+    obj("53-isla6-fogon", 1024, 1024, 56, 66, 9),
+  ],
+  questions: [
+    obj("58-isla7-farol", 592, 1024, 30, 58, 4),
+    obj("58-isla7-luciernaga-03", 512, 512, 36, 46, 6, { glow: true, float: true }),
+    obj("58-isla7-luciernaga-02", 512, 512, 52, 40, 4, { glow: true, float: true }),
+    obj("58-isla7-luciernaga-01", 512, 512, 60, 48, 3, { glow: true, float: true }),
+    obj("58-isla7-luciernaga-02", 512, 512, 68, 42, 4, { glow: true, float: true }),
+    obj("58-isla7-luciernaga-01", 512, 512, 44, 52, 3, { glow: true, float: true }),
+    obj("58-isla7-luciernaga-03", 512, 512, 74, 54, 5, { glow: true, float: true }),
+    obj("58-isla7-luciernaga-01", 512, 512, 26, 50, 3, { glow: true, float: true }),
+    obj("58-isla7-luciernaga-02", 512, 512, 58, 58, 4, { glow: true, float: true }),
+  ],
+};
+
+/* ------------------------------------------------------------- platforms */
+
+/** A rock piece of a pack platform on the 1254 x 1254 design canvas of the asset manifest. */
+export type PlatformPiece = {
+  kind: "base" | "left" | "right" | "top";
+  src: string;
+  x: number;
+  y: number;
+  w: number;
+  width: number;
+  height: number;
+};
+
+export type PlatformShadow = { src: string; x: number; y: number; w: number; h: number; under: PlatformPiece["kind"] };
+
+export type Platform = { pieces: readonly PlatformPiece[]; shadows: readonly PlatformShadow[] };
+
+const piece = (kind: PlatformPiece["kind"], name: string, width: number, height: number, x: number, y: number, w: number): PlatformPiece => ({
+  kind,
+  src: `${assetRoot}/${name}.avif`,
+  width,
+  height,
+  x,
+  y,
+  w,
+});
+
+const shadow = (name: string, geometry: string, under: PlatformPiece["kind"]): PlatformShadow => {
+  const [, w, h, x, y] = geometry.match(/^(\d+)x(\d+)\+(\d+)\+(\d+)$/)!;
+  return { src: `${assetRoot}/${name}.avif`, w: Number(w), h: Number(h), x: Number(x), y: Number(y), under };
+};
+
+export const PLATFORM_CANVAS = 1254;
+
+/** Assembly coordinates from docs/plans/mundo-mayo-assets.md, in paint order. */
+export const platforms: readonly Platform[] = [
+  {
+    pieces: [
+      piece("right", "14-p1-der", 736, 938, 765, 355, 350),
+      piece("base", "14-p1-base", 1024, 500, 320, 550, 815),
+      piece("top", "14-p1-tapa", 980, 670, 390, 400, 450),
+      piece("left", "14-p1-izq", 962, 659, 120, 650, 435),
+    ],
+    shadows: [
+      shadow("14-p1-shadow-tapa", "442x192+420+550", "top"),
+      shadow("14-p1-shadow-izq", "262x261+320+677", "left"),
+    ],
+  },
+  {
+    pieces: [
+      piece("base", "15-p2-base", 958, 623, 310, 705, 625),
+      piece("right", "15-p2-der", 602, 951, 565, 300, 335),
+      piece("left", "15-p2-izq", 614, 872, 340, 420, 320),
+      piece("top", "15-p2-tapa", 900, 608, 395, 180, 435),
+    ],
+    shadows: [
+      shadow("15-p2-shadow-der", "295x153+579+705", "right"),
+      shadow("15-p2-shadow-izq", "315x455+369+448", "left"),
+      shadow("15-p2-shadow-tapa", "412x203+439+300", "top"),
+    ],
+  },
+  {
+    pieces: [
+      piece("base", "16-p3-base", 952, 597, 240, 675, 740),
+      piece("right", "16-p3-der", 550, 903, 550, 300, 345),
+      piece("left", "16-p3-izq", 617, 853, 265, 365, 365),
+      piece("top", "16-p3-tapa", 908, 699, 420, 130, 385),
+    ],
+    shadows: [
+      shadow("16-p3-shadow-der", "334x221+539+675", "right"),
+      shadow("16-p3-shadow-izq", "369x482+285+417", "left"),
+      shadow("16-p3-shadow-tapa", "397x155+422+300", "top"),
+    ],
+  },
+];
+

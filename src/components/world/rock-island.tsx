@@ -1,67 +1,64 @@
-import type { CSSProperties } from "react";
+/* eslint-disable @next/next/no-img-element -- already-optimised AVIF cutouts; next/image would re-encode them */
+import { Fragment, type CSSProperties } from "react";
 
 import { IslandPlate } from "@/components/world/island-plate";
 import { MayoFigure } from "@/components/world/mayo-figure";
 import { IslandTitle } from "@/components/world/island-title";
 import { commercialPlans } from "@/content/commercial-plans";
 import { islandCopy } from "@/content/islands";
-import { islandPlates } from "@/content/stage";
+import {
+  islandPlates,
+  PLATFORM_CANVAS,
+  platforms,
+  type PlatformPiece,
+  type PlatformShadow,
+} from "@/content/stage";
 
-type RockKind = "base" | "left" | "right" | "top";
+type RockKind = PlatformPiece["kind"];
 
-type RockStyle = CSSProperties & {
-  "--sx": string;
-  "--sy": string;
-  "--sr": string;
-};
+type ScatterStyle = { "--sx": string; "--sy": string; "--sr": string };
 
 /**
  * Scatter offsets per rock (where it floats before the scroll assembles it).
  * The assembled state is the default layout, so every fallback tier shows
  * the platforms already built without extra CSS.
  */
-const scatter: Record<RockKind, RockStyle> = {
+const scatter: Record<RockKind, ScatterStyle> = {
   base: { "--sx": "-26vw", "--sy": "-34vh", "--sr": "-28deg" },
   left: { "--sx": "-34vw", "--sy": "10vh", "--sr": "48deg" },
   right: { "--sx": "30vw", "--sy": "-18vh", "--sr": "-54deg" },
   top: { "--sx": "18vw", "--sy": "-46vh", "--sr": "76deg" },
 };
 
-function Rock({ kind, index }: { kind: RockKind; index: number }) {
+const pct = (value: number) => `${(value / PLATFORM_CANVAS) * 100}%`;
+
+function Rock({ piece }: { piece: PlatformPiece }) {
   return (
-    <div
-      className={`rock rock--${kind}`}
-      style={{ ...scatter[kind], "--rock-index": index } as CSSProperties}
-    >
-      <svg viewBox="0 0 200 140" aria-hidden="true">
-        {kind === "base" ? (
-          <>
-            <path className="rock__stone" d="M14 90c-10-40 30-80 90-82 60-2 100 30 92 74-6 36-40 54-96 54S22 118 14 90z" />
-            <path className="rock__moss" d="M22 68c20-30 60-50 100-48 40 2 66 24 70 50-30-16-70-24-110-18-26 4-44 10-60 16z" />
-            <path className="rock__shade" d="M30 110c40 20 110 20 150-6-10 24-40 36-80 36s-60-12-70-30z" />
-          </>
-        ) : null}
-        {kind === "left" ? (
-          <>
-            <path className="rock__stone" d="M30 110c-20-30-14-70 20-90 30-18 70-10 90 20 18 30 8 70-20 86-30 16-70 12-90-16z" />
-            <path className="rock__moss" d="M40 40c30-22 70-18 92 10-24-6-54-6-80 4-10 4-18 8-24 12 2-10 6-18 12-26z" />
-          </>
-        ) : null}
-        {kind === "right" ? (
-          <>
-            <path className="rock__stone" d="M40 104c-24-26-20-66 10-86 32-20 80-10 100 24 16 28 6 66-24 82-28 16-64 8-86-20z" />
-            <path className="rock__moss" d="M52 32c30-16 70-12 96 16-26-8-54-10-82 0-10 4-18 8-26 12 2-10 6-20 12-28z" />
-          </>
-        ) : null}
-        {kind === "top" ? (
-          <>
-            <path className="rock__stone" d="M8 72c0-30 50-52 100-52s92 20 92 50c0 28-44 48-96 48S8 100 8 72z" />
-            <path className="rock__moss" d="M12 66c10-26 56-42 100-42s84 14 94 40c-30-12-66-18-100-18-36 0-66 6-94 20z" />
-            <path className="rock__shade" d="M20 90c40 18 120 18 164-4-8 20-44 32-84 32S30 108 20 90z" />
-          </>
-        ) : null}
-      </svg>
-    </div>
+    <img
+      className={`rock rock--${piece.kind}`}
+      src={piece.src}
+      alt=""
+      width={piece.width}
+      height={piece.height}
+      loading="lazy"
+      decoding="async"
+      style={{ ...scatter[piece.kind], left: pct(piece.x), top: pct(piece.y), width: pct(piece.w) } as CSSProperties}
+    />
+  );
+}
+
+function Shadow({ shadow }: { shadow: PlatformShadow }) {
+  return (
+    <img
+      className="rock-shadow"
+      src={shadow.src}
+      alt=""
+      width={shadow.w}
+      height={shadow.h}
+      loading="lazy"
+      decoding="async"
+      style={{ left: pct(shadow.x), top: pct(shadow.y), width: pct(shadow.w) } as CSSProperties}
+    />
   );
 }
 
@@ -85,10 +82,17 @@ export function RockIsland() {
           {commercialPlans.map((plan, index) => (
             <div className={`platform platform--${index + 1}`} key={plan.id}>
               <div className="platform__rocks" aria-hidden="true">
-                <Rock kind="base" index={index} />
-                <Rock kind="left" index={index} />
-                <Rock kind="right" index={index} />
-                <Rock kind="top" index={index} />
+                {/* Manifest rule: each contact shadow sits under its emitter and over the receivers. */}
+                {platforms[index].pieces.map((piece) => (
+                  <Fragment key={piece.kind}>
+                    {platforms[index].shadows
+                      .filter((shadow) => shadow.under === piece.kind)
+                      .map((shadow) => (
+                        <Shadow key={shadow.src} shadow={shadow} />
+                      ))}
+                    <Rock piece={piece} />
+                  </Fragment>
+                ))}
               </div>
               {index === 2 ? <MayoFigure slot="packs" className="platform__mayo" /> : null}
               <a className="platform__card" href={`#pack-${plan.id}`}>

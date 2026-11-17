@@ -595,63 +595,15 @@ html[data-mayo3d="ready"] .mayo__picture {
 .platform__rocks {
   position: relative;
   width: 100%;
-  max-width: 17rem;
-  height: var(--platform-height);
+  max-width: 19rem;
+  aspect-ratio: 1;
   margin-block-start: 1rem;
 }
 
 .rock {
   position: absolute;
-  width: var(--rock-w, 60%);
-  aspect-ratio: 200 / 140;
+  height: auto;
   will-change: transform;
-}
-
-.rock svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.rock__stone {
-  fill: var(--stone);
-}
-
-.rock__moss {
-  fill: var(--leaf);
-}
-
-.rock__shade {
-  fill: var(--stone-deep);
-  opacity: 0.55;
-}
-
-.rock--base {
-  --rock-w: 78%;
-
-  inset: auto auto 0 11%;
-  z-index: 2;
-}
-
-.rock--left {
-  --rock-w: 42%;
-
-  inset: auto auto 34% -4%;
-  z-index: 1;
-}
-
-.rock--right {
-  --rock-w: 44%;
-
-  inset: auto -6% 32% auto;
-  z-index: 1;
-}
-
-.rock--top {
-  --rock-w: 70%;
-
-  inset: 0 auto auto 15%;
-  z-index: 3;
 }
 
 .platform__card {
@@ -1219,12 +1171,7 @@ html[data-motion-tier="reduced"] .scene__sky {
   .platform__rocks {
     --scatter: 0.45;
 
-    max-width: 13rem;
-    height: 7rem;
-  }
-
-  .platform--3 .platform__rocks {
-    height: 8rem;
+    max-width: 14rem;
   }
 
   .rock,
@@ -2627,10 +2574,158 @@ html[data-motion-tier="lite"] .campfire__flame-core {
   position: absolute;
   bottom: 0;
   left: var(--plate-x, 50%);
-  width: max(100cqw, calc(100cqh * var(--r)));
+  width: calc(100cqw * var(--plate-scale, 1));
   aspect-ratio: var(--r);
   transform: translateX(calc(-1 * var(--plate-x, 50%)));
 }
+
+/* The hero plate is scaled up a little and shifted right so the island
+ * clears the text column (bible analysis §2). */
+.dawn .plate {
+  --plate-scale: 1.14;
+}
+
+/* Section skies continue the plate's top colour so the seam disappears. */
+.scene--plated.scene--dawn .scene__sky {
+  background: linear-gradient(180deg, oklch(66% 0.11 300) 0%, #a08dcc 100%);
+}
+
+.scene--plated.scene--morning .scene__sky {
+  background: linear-gradient(180deg, oklch(70% 0.13 240) 0%, #90c5fb 100%);
+}
+
+.scene--plated.scene--noon .scene__sky {
+  background: linear-gradient(180deg, oklch(55% 0.19 255) 0%, #3494f1 100%);
+}
+
+.scene--plated.scene--golden .scene__sky {
+  background: linear-gradient(180deg, oklch(70% 0.14 45) 0%, #f29e7a 100%);
+}
+
+.scene--plated.scene--sunset .scene__sky {
+  background: linear-gradient(180deg, oklch(48% 0.14 300) 0%, #8e67b5 100%);
+}
+
+.scene--plated.scene--dusk .scene__sky {
+  background: linear-gradient(180deg, oklch(18% 0.08 275) 0%, #132a63 100%);
+}
+
+.scene--plated.scene--night .scene__sky {
+  background: linear-gradient(180deg, oklch(8% 0.05 265) 0%, #011334 100%);
+}
+
+.scene--plated .scene__stars {
+  display: none;
+}
+
+/* Objects on a plate */
+
+.plate-object {
+  position: absolute;
+  height: auto;
+  transform: translate(-50%, -100%);
+  pointer-events: none;
+}
+
+.plate-object--glow {
+  mix-blend-mode: screen;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes object-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -1.5%;
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+html[data-motion-tier="full"] .plate-object--float {
+  animation: object-float 5s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+}
+
+html[data-motion-tier="full"] .plate-object--glow {
+  animation: glow-pulse 3.2s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+}
+
+/* Platform pieces (island 3): real rocks on the 1254 design canvas */
+
+.rock-shadow {
+  position: absolute;
+  height: auto;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@supports (animation-timeline: view()) {
+  .rock-shadow {
+    animation: card-rise-opacity linear both;
+    animation-timeline: --rocks;
+    animation-range: cover 52% cover 58%;
+  }
+}
+
+@keyframes card-rise-opacity {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@supports not (animation-timeline: view()) {
+  .rock-shadow {
+    opacity: 1;
+  }
+}
+
+html[data-motion-tier="lite"] .rock-shadow,
+html[data-motion-tier="reduced"] .rock-shadow {
+  animation: none;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rock-shadow {
+    animation: none !important;
+    opacity: 1;
+  }
+
+  .plate-object--float,
+  .plate-object--glow {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 48rem) {
+  .dawn .plate {
+    --plate-scale: 1;
+  }
+
+  .rock-shadow {
+    animation-timeline: --platform;
+    animation-range: entry 85% entry 100%;
+  }
+}
+
 
 .plate__picture,
 .plate__picture img {

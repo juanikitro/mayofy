@@ -2,17 +2,11 @@ import Link from "next/link";
 
 import { AnimatedDetails } from "@/components/animated-details";
 import { ContactForm } from "@/components/contact-form";
-import {
-  Campfire,
-  Fireflies,
-  Greenhouse,
-  IslandScene,
-  LooseRocks,
-  PathStones,
-} from "@/components/world/island-scene";
+import { IslandScene } from "@/components/world/island-scene";
 import { CalBooking } from "@/components/world/cal-booking";
 import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure } from "@/components/world/mayo-figure";
+import { PlateObjects } from "@/components/world/plate-objects";
 import { DetailGroups } from "@/components/world/pack-groups";
 import {
   comingSoon,
@@ -20,7 +14,7 @@ import {
   maintenancePlan,
 } from "@/content/commercial-plans";
 import { islandCopy } from "@/content/islands";
-import { islandPlates } from "@/content/stage";
+import { islandPlates, plateObjects } from "@/content/stage";
 import { type ProjectEntry, projects } from "@/content/projects";
 import { publicChannels, siteContent } from "@/content/site";
 import { getWhatsAppHref } from "@/lib/whatsapp";
@@ -35,7 +29,7 @@ export function ProblemIsland() {
   return (
     <section id="problema" className="isle isle--morning" data-island="2" aria-labelledby="problema-title">
       <IslandScene variant="morning" plate={islandPlates.problem}>
-        <LooseRocks />
+        <PlateObjects objects={plateObjects.problem!} />
         <MayoFigure slot="problem" className="isle__mayo isle__mayo--play" />
       </IslandScene>
       <div className="isle__content world-shell">
@@ -58,7 +52,7 @@ export function SystemsIsland() {
   return (
     <section id="sistemas" className="isle isle--golden" data-island="4" aria-labelledby="sistemas-title">
       <IslandScene variant="golden" plate={islandPlates.systems}>
-        <Greenhouse />
+        <PlateObjects objects={plateObjects.systems!} />
         <MayoFigure slot="systems" className="isle__mayo isle__mayo--dig" />
       </IslandScene>
       <div className="isle__content world-shell">
@@ -133,7 +127,7 @@ export function WorksIsland() {
   return (
     <section id="trabajos" className="isle isle--sunset" data-island="5" aria-labelledby="trabajos-title">
       <IslandScene variant="sunset" plate={islandPlates.works}>
-        <PathStones />
+        <PlateObjects objects={plateObjects.works!} />
         <MayoFigure slot="works" className="isle__mayo isle__mayo--run" />
       </IslandScene>
       <div className="isle__content world-shell">
@@ -192,7 +186,7 @@ export function QuestionsIsland() {
   return (
     <section id="preguntas" className="isle isle--night isle--dark" data-island="7" aria-labelledby="preguntas-title">
       <IslandScene variant="night" plate={islandPlates.questions}>
-        <Fireflies />
+        <PlateObjects objects={plateObjects.questions!} />
         <MayoFigure slot="questions" className="isle__mayo isle__mayo--chase" />
       </IslandScene>
       <div className="isle__content world-shell">
@@ -255,7 +249,7 @@ export function JuaniIsland() {
   return (
     <section id="contacto" className="isle isle--dusk isle--dark" data-island="6" aria-labelledby="contacto-title">
       <IslandScene variant="dusk" plate={islandPlates.host}>
-        <Campfire />
+        <PlateObjects objects={plateObjects.host!} />
         <MayoFigure slot="host" className="isle__mayo isle__mayo--rest" />
       </IslandScene>
       <div className="isle__content world-shell">
