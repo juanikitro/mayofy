@@ -255,7 +255,7 @@ export function JuaniIsland() {
         <PlateObjects objects={plateObjects.host!} />
         <MayoFigure slot="host" className="isle__mayo isle__mayo--rest" />
       </IslandScene>
-      <div className="isle__content isle__content--split world-shell">
+      <div className="isle__content world-shell">
         <div className="host">
           <h2 id="contacto-title">
             <IslandTitle segments={islandCopy.host.title} />

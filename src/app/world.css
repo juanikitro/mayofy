@@ -1351,7 +1351,7 @@ html[data-motion-tier="reduced"] .scene__sky {
   gap: 1rem;
 }
 
-.isle__content > :is(h2, .isle__eyebrow, .isle__lead, .isle__body, .isle__channels, .isle__chips) {
+.isle__content > :is(h2, .isle__eyebrow, .isle__lead, .isle__body, .isle__channels, .isle__chips, .host) {
   max-width: 48rem;
 }
 
@@ -1359,8 +1359,7 @@ html[data-motion-tier="reduced"] .scene__sky {
   /* Two columns on wide screens: the long blocks of an island sit side by
    * side instead of stacking into a tower above the island. */
   .isle__panels,
-  .isle__split,
-  .isle__content--split {
+  .isle__split {
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     gap: 1.5rem 3rem;
@@ -1369,20 +1368,55 @@ html[data-motion-tier="reduced"] .scene__sky {
 
   .isle__panels {
     gap: 1.5rem;
+    align-items: stretch;
   }
 
-  .isle__content--split {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  }
-
-  .isle__content--split .host,
   .isle__split .upkeep {
     position: sticky;
     top: 6.5rem;
   }
 
-  .isle__content--split .reach {
-    margin-block-start: 0;
+  /* Booking panel: Cal.com gets the whole width, where it shows the month
+   * and the free times side by side (about 570 px tall instead of 1940 px
+   * stacked in a column); the WhatsApp link sits beside the form. */
+  .reach {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-areas:
+      "title title"
+      "text text"
+      "booking booking"
+      "alt form-intro"
+      ". form";
+    column-gap: 3rem;
+    align-items: start;
+  }
+
+  .reach > .reach__intro {
+    display: contents;
+  }
+
+  .reach__intro > h3 {
+    grid-area: title;
+  }
+
+  .reach__intro > p {
+    grid-area: text;
+  }
+
+  .reach__intro > .booking {
+    grid-area: booking;
+  }
+
+  .reach__intro > .host-link {
+    grid-area: alt;
+  }
+
+  .reach__intro > span {
+    grid-area: form-intro;
+  }
+
+  .reach > .contact-form {
+    grid-area: form;
   }
 
   .isle__split .upkeep {
