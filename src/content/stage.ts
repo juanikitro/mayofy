@@ -62,9 +62,27 @@ export function mayoPoseSources(moment: string) {
  * slot has a strip, MayoFigure renders it instead of the still/loop
  * pictures. Strips arrive as `/images/mundo-mayo/70-mayo-<slot>-tira.avif|.webp`.
  */
-export type MayoSprite = { strip: { avif: string; webp: string }; frames: number; fps: number; cell: number };
+export type MayoSprite = {
+  strip: { avif: string; webp: string };
+  frames: number;
+  fps: number;
+  cell: number;
+  /** Feet line as a percentage of the cell height (manifest "feet anchor"). */
+  feetY: string;
+};
 
-export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {};
+const sprite = (slot: MayoSlotId, frames: number, fps: number, feetY: string): MayoSprite => ({
+  strip: { avif: `/images/mundo-mayo/70-mayo-${slot}-tira.avif`, webp: `/images/mundo-mayo/70-mayo-${slot}-tira.webp` },
+  frames,
+  fps,
+  cell: 1024,
+  feetY,
+});
+
+/** Painted strips delivered so far (manifest docs/plans/mundo-mayo-assets.md). */
+export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
+  hero: sprite("hero", 6, 6, "94.7%"),
+};
 
 /* ---------------------------------------------------------------- plates */
 

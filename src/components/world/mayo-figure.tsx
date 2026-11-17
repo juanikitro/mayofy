@@ -29,6 +29,7 @@ export function MayoFigure({
     anchor
       ? ({
           "--mayo-size": size,
+          "--feet-y": sprite?.feetY ?? "80%",
           "--anchor-x": anchor.x,
           "--anchor-y": anchor.y,
           "--anchor-size": anchor.size,

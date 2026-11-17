@@ -2776,7 +2776,8 @@ html[data-motion-tier="reduced"] .rock-shadow {
   left: var(--anchor-x);
   top: var(--anchor-y);
   width: var(--anchor-size);
-  transform: translate(-50%, -80%);
+  /* Feet on the anchor: the strip cells say where the feet line is. */
+  transform: translate(-50%, calc(-1 * var(--feet-y, 80%)));
 }
 
 @media (max-width: 48rem) {
