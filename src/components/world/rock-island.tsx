@@ -68,7 +68,9 @@ export function RockIsland() {
       <div className="rocks__stage">
         <div className="scene scene--noon scene--plated" aria-hidden="true">
           <div className="scene__sky" />
-          <IslandPlate plate={islandPlates.packs} />
+          <IslandPlate plate={islandPlates.packs}>
+            <MayoFigure slot="packs" className="rocks__mayo" />
+          </IslandPlate>
         </div>
 
         <header className="rocks__intro">
@@ -94,7 +96,6 @@ export function RockIsland() {
                   </Fragment>
                 ))}
               </div>
-              {index === 2 ? <MayoFigure slot="packs" className="platform__mayo" /> : null}
               <a className="platform__card" href={`#pack-${plan.id}`}>
                 <span className="platform__name">{plan.name}</span>
                 <span className="platform__from">Desde</span>

@@ -165,6 +165,8 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   hero: { x: "54%", y: "70%", size: "13%", xMobile: "52%", yMobile: "79%", sizeMobile: "30%" },
   // Island 2: play bow in front of the loose rocks she is "sorting" (rocks 07 and 01 sit to her left).
   problem: { x: "38%", y: "71%", size: "12%", xMobile: "46%", yMobile: "77%", sizeMobile: "28%" },
+  // Island 3: jumps on the meadow beside the third platform (anchored on the plate, not on a card).
+  packs: { x: "85%", y: "53%", size: "10%", xMobile: "74%", yMobile: "50%", sizeMobile: "24%" },
   // Island 4: digging into the soil mound (tierra-02 at 30 %, 73 %).
   systems: { x: "36%", y: "74%", size: "12%", xMobile: "38%", yMobile: "80%", sizeMobile: "28%" },
   // Island 5: runs right-to-left across the meadow below the path while the island scrolls by.

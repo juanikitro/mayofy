@@ -511,14 +511,19 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   transform-origin: 50% 100%;
 }
 
-.platform__mayo {
-  inset: auto auto 92% 12%;
+/* Mayo appears on the meadow once the platforms have settled. */
+.rocks__mayo {
   opacity: 0;
 }
 
-/* The platform top is the box's bottom edge: drop the strip so its ground line sits there. */
-.platform__mayo .mayo__sprite {
-  top: calc(100% - var(--feet-y, 100%));
+@keyframes mayo-appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 /* Hero: island 1 ------------------------------------------------------- */
@@ -786,7 +791,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 /* Fallback: no scroll-driven animations → platforms stay assembled and the
  * cards and Mayo on platform 3 are simply visible. */
 .platform__card,
-.platform__mayo {
+.rocks__mayo {
   opacity: 1;
 }
 
@@ -815,8 +820,8 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     animation-range: cover 54% cover 60%;
   }
 
-  .platform__mayo {
-    animation: mayo-arrive var(--ease-out) both;
+  .rocks__mayo {
+    animation: mayo-appear var(--ease-out) both;
     animation-timeline: --rocks;
     animation-range: cover 58% cover 63%;
   }
@@ -837,7 +842,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 /* Lite tier: no scroll-driven work, only a gentle idle on Mayo. */
 html[data-motion-tier="lite"] .rock,
 html[data-motion-tier="lite"] .platform__card,
-html[data-motion-tier="lite"] .platform__mayo,
+html[data-motion-tier="lite"] .rocks__mayo,
 html[data-motion-tier="lite"] .scene__mayo,
 html[data-motion-tier="lite"] .scene__sky {
   animation: none;
@@ -847,17 +852,16 @@ html[data-motion-tier="lite"] .scene__sky {
 @media (prefers-reduced-motion: reduce) {
   .rock,
   .platform__card,
-  .platform__mayo,
+  .rocks__mayo,
   .scene__mayo,
-  .scene__sky,
-  .scene__mayo {
+  .scene__sky {
     animation: none !important;
   }
 }
 
 html[data-motion-tier="reduced"] .rock,
 html[data-motion-tier="reduced"] .platform__card,
-html[data-motion-tier="reduced"] .platform__mayo,
+html[data-motion-tier="reduced"] .rocks__mayo,
 html[data-motion-tier="reduced"] .scene__mayo,
 html[data-motion-tier="reduced"] .scene__sky {
   animation: none;
@@ -1239,9 +1243,10 @@ html[data-motion-tier="reduced"] .scene__sky {
     animation-range: entry 60% entry 100%;
   }
 
-  .platform__mayo {
-    animation-timeline: --platform;
-    animation-range: entry 70% entry 100%;
+  /* Mobile: the platforms reveal one by one; Mayo simply sits on the meadow. */
+  .rocks__mayo {
+    animation: none;
+    opacity: 1;
   }
 
   .promises__list {
