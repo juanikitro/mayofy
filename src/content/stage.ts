@@ -202,7 +202,7 @@ export type MayoAnchor = {
 
 export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   // Hero: seated inside the meadow, between the sign and the right edge.
-  hero: { x: "54%", y: "70%", size: "13%", xMobile: "52%", yMobile: "79%", sizeMobile: "30%" },
+  hero: { x: "54%", y: "70%", size: "13%", xMobile: "64%", yMobile: "79%", sizeMobile: "30%" },
   // Island 2: play bow in front of the loose rocks she is "sorting" (rocks 07 and 01 sit to her left).
   problem: { x: "38%", y: "71%", size: "12%", xMobile: "42%", yMobile: "73%", sizeMobile: "26%" },
   // Island 3: jumps on the meadow beside the third platform (anchored on the plate, not on a card).
