@@ -161,6 +161,7 @@ export const islandPlates = {
     desktop: desktopPlate("55-isla7-escritorio"),
     mobile: mobilePlate("55-isla7-celular"),
     layers: { background: desktopPlate("55-isla7-escritorio-fondo"), island: desktopPlate("55-isla7-escritorio-isla") },
+    mobileLayers: { background: mobilePlate("55-isla7-celular-fondo"), island: mobilePlate("55-isla7-celular-isla") },
   },
 } as const satisfies Record<string, PlateSpec>;
 

@@ -22,8 +22,8 @@ Chromium a 1440×900 y 390×844 sobre `next dev`: las siete islas con sus placas
 
 ## Pendiente
 
-- Par de parallax de la isla 7 en celular (el worker lo está produciendo); islas 4, 5, 6 y 7 (escritorio) montadas el 17 de noviembre en escritorio y celular (deriva medida de 0 a −44 px). Isla 3 montada el 17 de noviembre sobre el escenario pegajoso de las rocas con su propia timeline (`--rocks`, deriva medida de −8 a −57 px); como no tiene placa de celular, el mismo par sirve en ambos tamaños. El hero en celular queda bloqueado: tres recortes de ChatGPT y uno local (BiRefNet) fallaron en el suelo y las raíces. Isla 2 montada el 17 de noviembre: la deriva medida va de 0 a −72 px en escritorio y de 0 a −62 px en celular a lo largo de la sección, sin costura visible en las raíces.
-- Lote C (cuadros de nubes) para la caída.
+- Pares de parallax completos: islas 2 a 7 en escritorio y celular (isla 3 con un solo par para ambos tamaños), hero solo en escritorio el 17 de noviembre en escritorio y celular (deriva medida de 0 a −44 px). Isla 3 montada el 17 de noviembre sobre el escenario pegajoso de las rocas con su propia timeline (`--rocks`, deriva medida de −8 a −57 px); como no tiene placa de celular, el mismo par sirve en ambos tamaños. El hero en celular queda bloqueado: tres recortes de ChatGPT y uno local (BiRefNet) fallaron en el suelo y las raíces. Isla 2 montada el 17 de noviembre: la deriva medida va de 0 a −72 px en escritorio y de 0 a −62 px en celular a lo largo de la sección, sin costura visible en las raíces.
+- Lote C (cuadros de nubes) para la caída: el worker está produciendo una vista previa de los tres primeros cuadros.
 - ~~WebP con pérdida para el respaldo de los AVIF.~~ Entregados y versionados el 17 de noviembre (90 archivos, calidad 82, 5,8 MB en total).
 - Afinar anclas de Mayo con Juani sobre las placas definitivas.
 
