@@ -1250,10 +1250,14 @@ html[data-motion-tier="reduced"] .scene__sky {
 
 /* Islands 2 and 4–7 ------------------------------------------------------ */
 
+/* The content stops above the island art: the bottom padding is the share
+ * of the plate the island takes (`clear` in stage.ts) plus a gap. A
+ * percentage padding resolves against the section's width, which is the
+ * plate's width. */
 .isle {
   position: relative;
   min-height: 100svh;
-  padding-block: 7rem 46vh;
+  padding-block: 7rem calc(100% * var(--plate-h, 0.5628) * var(--plate-clear, 0.55) + 3rem);
   overflow: clip;
   color: var(--ink);
 }
@@ -1997,7 +2001,7 @@ html[data-motion-tier="reduced"] .fall__mayo {
 
 @media (max-width: 48rem) {
   .isle {
-    padding-block: 5.5rem 40vh;
+    padding-block: 5.5rem calc(100% * var(--plate-h-m, 1.778) * var(--plate-clear-m, 0.45) + 2rem);
   }
 
   .isle__content {

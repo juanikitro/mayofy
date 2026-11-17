@@ -3,25 +3,27 @@ import type { CSSProperties, ReactNode } from "react";
 import type { PlateSpec } from "@/content/stage";
 
 /**
- * A generated island plate as the background of a scene. The plate keeps
- * its own aspect ratio and covers the scene like `object-fit: cover`,
- * anchored at the bottom and at `anchorX` horizontally; everything placed
- * inside (objects, Mayo) is positioned in percent of the plate, so anchors
- * measured on the image hold at any viewport size.
- */
-/**
- * Height of the plate as a fraction of its width (desktop and mobile), set on
- * the scene so its sky can reach the plate's top colour exactly where the
- * plate starts (`--plate-top` in world.css).
+ * Height of the plate as a fraction of its width (desktop and mobile) and the
+ * share of it the island art takes, set on the section (or the scene) so the
+ * sky can reach the plate's top colour where the plate starts (`--plate-top`
+ * in world.css) and the content can stop above the island (`.isle` padding).
  */
 export function plateSceneStyle(plate: PlateSpec) {
   const mobile = plate.mobile ?? plate.desktop;
   return {
     "--plate-h": plate.desktop.height / plate.desktop.width,
     "--plate-h-m": mobile.height / mobile.width,
+    ...(plate.clear ? { "--plate-clear": plate.clear.desktop, "--plate-clear-m": plate.clear.mobile } : {}),
   } as CSSProperties;
 }
 
+/**
+ * A generated island plate as the background of a scene. The plate keeps
+ * its own aspect ratio and covers the scene like `object-fit: cover`,
+ * anchored at the bottom and at `anchorX` horizontally; everything placed
+ * inside (objects, Mayo) is positioned in percent of the plate, so anchors
+ * measured on the image hold at any viewport size.
+ */
 export function IslandPlate({
   plate,
   children,

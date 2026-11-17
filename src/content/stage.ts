@@ -108,6 +108,12 @@ export type PlateSpec = {
   layers?: { background: PlateImage; island: PlateImage };
   /** Parallax pair for the mobile plate, when the cutout was delivered. */
   mobileLayers?: { background: PlateImage; island: PlateImage };
+  /**
+   * Share of the plate's height, measured from its bottom, taken by the
+   * island art (meadow, objects, Mayo). The section's content stays above it,
+   * so panels never cover the island. Measured on the plates and objects.
+   */
+  clear?: { desktop: number; mobile: number };
 };
 
 const assetRoot = "/images/mundo-mayo";
@@ -132,6 +138,7 @@ export const islandPlates = {
     mobile: mobilePlate("30-isla2-celular"),
     layers: { background: desktopPlate("30-isla2-escritorio-fondo"), island: desktopPlate("30-isla2-escritorio-isla") },
     mobileLayers: { background: mobilePlate("30-isla2-celular-fondo"), island: mobilePlate("30-isla2-celular-isla") },
+    clear: { desktop: 0.49, mobile: 0.43 },
   },
   packs: {
     desktop: desktopPlate("10-isla3-base"),
@@ -144,24 +151,32 @@ export const islandPlates = {
     mobile: mobilePlate("40-isla4-celular"),
     layers: { background: desktopPlate("40-isla4-escritorio-fondo"), island: desktopPlate("40-isla4-escritorio-isla") },
     mobileLayers: { background: mobilePlate("40-isla4-celular-fondo"), island: mobilePlate("40-isla4-celular-isla") },
+    // Greenhouse roof at 47 % of the desktop plate.
+    clear: { desktop: 0.53, mobile: 0.37 },
   },
   works: {
     desktop: desktopPlate("45-isla5-escritorio"),
     mobile: mobilePlate("45-isla5-celular"),
     layers: { background: desktopPlate("45-isla5-escritorio-fondo"), island: desktopPlate("45-isla5-escritorio-isla") },
     mobileLayers: { background: mobilePlate("45-isla5-celular-fondo"), island: mobilePlate("45-isla5-celular-isla") },
+    // Path milestones from 48 % (desktop) and 51 % (mobile).
+    clear: { desktop: 0.53, mobile: 0.5 },
   },
   host: {
     desktop: desktopPlate("50-isla6-escritorio"),
     mobile: mobilePlate("50-isla6-celular"),
     layers: { background: desktopPlate("50-isla6-escritorio-fondo"), island: desktopPlate("50-isla6-escritorio-isla") },
     mobileLayers: { background: mobilePlate("50-isla6-celular-fondo"), island: mobilePlate("50-isla6-celular-isla") },
+    // Tree tops and Mayo's ears from 46 %; bench and campfire from 59 % on mobile.
+    clear: { desktop: 0.54, mobile: 0.41 },
   },
   questions: {
     desktop: desktopPlate("55-isla7-escritorio"),
     mobile: mobilePlate("55-isla7-celular"),
     layers: { background: desktopPlate("55-isla7-escritorio-fondo"), island: desktopPlate("55-isla7-escritorio-isla") },
     mobileLayers: { background: mobilePlate("55-isla7-celular-fondo"), island: mobilePlate("55-isla7-celular-isla") },
+    // The lantern from 46 % (desktop) and 54 % (mobile); the fireflies may rise above it.
+    clear: { desktop: 0.54, mobile: 0.46 },
   },
 } as const satisfies Record<string, PlateSpec>;
 

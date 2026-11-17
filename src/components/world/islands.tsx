@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { AnimatedDetails } from "@/components/animated-details";
 import { ContactForm } from "@/components/contact-form";
+import { plateSceneStyle } from "@/components/world/island-plate";
 import { IslandScene } from "@/components/world/island-scene";
 import { CalBooking } from "@/components/world/cal-booking";
 import { IslandTitle } from "@/components/world/island-title";
@@ -27,7 +28,7 @@ import { getWhatsAppHref } from "@/lib/whatsapp";
 /** Island 2: loose rocks, morning. The problem: the business that gets attention but has no order. */
 export function ProblemIsland() {
   return (
-    <section id="problema" className="isle isle--morning" data-island="2" aria-labelledby="problema-title">
+    <section id="problema" className="isle isle--morning" data-island="2" style={plateSceneStyle(islandPlates.problem)} aria-labelledby="problema-title">
       <IslandScene variant="morning" plate={islandPlates.problem}>
         <PlateObjects objects={plateObjects.problem!} />
         <MayoFigure slot="problem" className="isle__mayo isle__mayo--play" />
@@ -50,7 +51,7 @@ export function ProblemIsland() {
 /** Island 4: workshop / greenhouse, golden afternoon. Custom systems, loose automations and the upcoming bot. */
 export function SystemsIsland() {
   return (
-    <section id="sistemas" className="isle isle--golden" data-island="4" aria-labelledby="sistemas-title">
+    <section id="sistemas" className="isle isle--golden" data-island="4" style={plateSceneStyle(islandPlates.systems)} aria-labelledby="sistemas-title">
       <IslandScene variant="golden" plate={islandPlates.systems}>
         <PlateObjects objects={plateObjects.systems!} />
         <MayoFigure slot="systems" className="isle__mayo isle__mayo--dig" />
@@ -125,7 +126,7 @@ export function SystemsIsland() {
 /** Island 5: garden of works, sunset. Projects and the six-step steps. */
 export function WorksIsland() {
   return (
-    <section id="trabajos" className="isle isle--sunset" data-island="5" aria-labelledby="trabajos-title">
+    <section id="trabajos" className="isle isle--sunset" data-island="5" style={plateSceneStyle(islandPlates.works)} aria-labelledby="trabajos-title">
       <IslandScene variant="sunset" plate={islandPlates.works}>
         <PlateObjects objects={plateObjects.works!} />
         <MayoFigure slot="works" className="isle__mayo isle__mayo--run" />
@@ -184,7 +185,7 @@ export function WorksIsland() {
 /** Island 7: questions, starry night. FAQ and the monthly maintenance. Closes the journey. */
 export function QuestionsIsland() {
   return (
-    <section id="preguntas" className="isle isle--night isle--dark" data-island="7" aria-labelledby="preguntas-title">
+    <section id="preguntas" className="isle isle--night isle--dark" data-island="7" style={plateSceneStyle(islandPlates.questions)} aria-labelledby="preguntas-title">
       <IslandScene variant="night" plate={islandPlates.questions}>
         <PlateObjects objects={plateObjects.questions!} />
         <MayoFigure slot="questions" className="isle__mayo isle__mayo--chase" />
@@ -247,7 +248,7 @@ export function JuaniIsland() {
   const heroWhatsAppHref = getWhatsAppHref(siteContent.hero.primaryMessage);
 
   return (
-    <section id="contacto" className="isle isle--dusk isle--dark" data-island="6" aria-labelledby="contacto-title">
+    <section id="contacto" className="isle isle--dusk isle--dark" data-island="6" style={plateSceneStyle(islandPlates.host)} aria-labelledby="contacto-title">
       <IslandScene variant="dusk" plate={islandPlates.host}>
         <PlateObjects objects={plateObjects.host!} />
         <MayoFigure slot="host" className="isle__mayo isle__mayo--rest" />
