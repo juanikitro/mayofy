@@ -90,7 +90,7 @@ Recomendación: aprobar `three` como dependencia y portar `preview/mayo-scene.js
 2. Las sombras de contacto de las plataformas como PNG separados, más las coordenadas finales en el manifiesto (ya están para las plataformas 1 a 3 como prueba).
 3. Isla 7 completa: placa de celular, cielo, primer plano, luciérnagas y farol.
 4. Lote C (caída entre nubes): 10 a 12 cuadros o la decisión de mantener las nubes CSS sobre los cielos reales.
-5. Opcional pero recomendado: la isla de cada placa recortada con alpha (`*-isla.png`). Permite parallax real entre cielo e isla y que el texto pueden pisar el cielo sin tocar la isla. Sin eso, el parallax es de la placa entera.
+5. **Aprobado por Juani el 17 de noviembre:** la isla de cada placa recortada con alpha (`*-isla.png`) más el fondo sin isla (`*-fondo.png`). Pedido redactado en `2026-11-17-pedido-islas-recortadas.md`. Permite parallax real entre cielo e isla y que el texto pise el cielo sin tocar la isla.
 6. Sin uso: `05-mayo-provisoria.png` (las poses reales la reemplazan).
 
 ## 7. Qué falta del lado de Mayo
@@ -112,6 +112,6 @@ Recomendación: aprobar `three` como dependencia y portar `preview/mayo-scene.js
 ## 9. Decisiones que necesita Juani
 
 1. Aprobar `three` como dependencia (sección 5).
-2. Pedirle al agente de assets las islas recortadas con alpha (sección 6, punto 5) o aceptar parallax de placa entera.
+2. ~~Islas recortadas con alpha~~: aprobado el 17 de noviembre (sección 6, punto 5).
 3. Lote C: producir los cuadros de nubes o quedarse con las nubes CSS.
 4. Autorizar al agente de Mayo a intercambiar las luces de los momentos 08 a 10 y recapturar (sección 7, punto 1).
