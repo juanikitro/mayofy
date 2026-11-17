@@ -2,7 +2,7 @@
 
 **Fecha:** 17 de noviembre de 2026
 **Estado:** en curso. Placas, rocas, plataformas con sombras y objetos de las siete islas montados con los archivos optimizados del worker de assets; parallax real en el hero y en la isla 2 (escritorio y celular), las islas con recorte entregado. No está publicado.
-**Rama:** `juanikitro/landing-redesign`. Los AVIF se versionan acá; los WebP de respaldo llegan cuando el worker los reencode con pérdida (hoy son sin pérdida, de 1 MB cada uno, y quedan fuera del commit).
+**Rama:** `juanikitro/landing-redesign`. Los AVIF y los WebP con pérdida (calidad 82) se versionan acá.
 
 ## Qué cambió
 
@@ -23,5 +23,5 @@ Chromium a 1440×900 y 390×844 sobre `next dev`: las siete islas con sus placas
 
 - Pares de parallax de las islas 3 a 7 y del hero en celular (el worker los está produciendo). Isla 2 montada el 17 de noviembre: la deriva medida va de 0 a −72 px en escritorio y de 0 a −62 px en celular a lo largo de la sección, sin costura visible en las raíces.
 - Lote C (cuadros de nubes) para la caída.
-- WebP con pérdida para el respaldo de los AVIF.
+- ~~WebP con pérdida para el respaldo de los AVIF.~~ Entregados y versionados el 17 de noviembre (90 archivos, calidad 82, 5,8 MB en total).
 - Afinar anclas de Mayo con Juani sobre las placas definitivas.
