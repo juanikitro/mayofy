@@ -111,7 +111,8 @@ export type PlateSpec = {
   /**
    * Share of the plate's height, measured from its bottom, taken by the
    * island art (meadow, objects, Mayo). The section's content stays above it,
-   * so panels never cover the island. Measured on the plates and objects.
+   * so panels never cover the island. Measured on the alpha of the island
+   * cutouts and on the objects placed on them.
    */
   clear?: { desktop: number; mobile: number };
 };
@@ -159,24 +160,24 @@ export const islandPlates = {
     mobile: mobilePlate("45-isla5-celular"),
     layers: { background: desktopPlate("45-isla5-escritorio-fondo"), island: desktopPlate("45-isla5-escritorio-isla") },
     mobileLayers: { background: mobilePlate("45-isla5-celular-fondo"), island: mobilePlate("45-isla5-celular-isla") },
-    // Path milestones from 48 % (desktop) and 51 % (mobile).
-    clear: { desktop: 0.53, mobile: 0.5 },
+    // Bushes from 45.7 % (desktop cutout); path milestones from 51 % on mobile.
+    clear: { desktop: 0.55, mobile: 0.5 },
   },
   host: {
     desktop: desktopPlate("50-isla6-escritorio"),
     mobile: mobilePlate("50-isla6-celular"),
     layers: { background: desktopPlate("50-isla6-escritorio-fondo"), island: desktopPlate("50-isla6-escritorio-isla") },
     mobileLayers: { background: mobilePlate("50-isla6-celular-fondo"), island: mobilePlate("50-isla6-celular-isla") },
-    // Tree tops and Mayo's ears from 46 %; bench and campfire from 59 % on mobile.
-    clear: { desktop: 0.54, mobile: 0.41 },
+    // The tree from 30.6 % of the desktop cutout; bench and campfire from 59 % on mobile.
+    clear: { desktop: 0.7, mobile: 0.41 },
   },
   questions: {
     desktop: desktopPlate("55-isla7-escritorio"),
     mobile: mobilePlate("55-isla7-celular"),
     layers: { background: desktopPlate("55-isla7-escritorio-fondo"), island: desktopPlate("55-isla7-escritorio-isla") },
     mobileLayers: { background: mobilePlate("55-isla7-celular-fondo"), island: mobilePlate("55-isla7-celular-isla") },
-    // The lantern from 46 % (desktop) and 54 % (mobile); the fireflies may rise above it.
-    clear: { desktop: 0.54, mobile: 0.46 },
+    // The tree from 19.3 % of the desktop cutout and 54 % of the mobile one; fireflies may rise above it.
+    clear: { desktop: 0.81, mobile: 0.46 },
   },
 } as const satisfies Record<string, PlateSpec>;
 
