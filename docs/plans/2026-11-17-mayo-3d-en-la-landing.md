@@ -1,6 +1,7 @@
 # Mayo 3D en la landing
 
 **Fecha:** 17 de noviembre de 2026
+**Estado: archivado (17 de noviembre de 2026).** Juani decidió que Mayo pase a ser un personaje pintado en el estilo de las islas, animado por cuadros (unos pocos cuadros por pose a 4–8 fps, con gesticulación de boca y lengua donde convenga), en lugar del GLB en tiempo real. El modelo 3D queda como referencia de identidad y poses. Nada se perdió: la integración completa (`src/lib/mayo/`, `MayoStage`, `MayoStageLoader`) vive en `docs/archive/mayo-3d-integration/` con un README que explica cómo restaurarla. Se quitaron `three` y `@types/three` de `package.json` y `public/mayo/mayo.glb` del repo; las imágenes de poses de `public/mayo/poses/` siguen siendo el fallback hasta que lleguen las tiras pintadas (`mayoSprites` en `src/content/stage.ts`). Lo que sigue describe el estado anterior a la decisión.
 **Estado:** integrado y verificado en local con las islas provisorias. Juani aprobó `three` como dependencia. No está publicado.
 **Rama:** `juanikitro/landing-redesign`. Sin push.
 **Depende de:** `2026-11-17-integracion-mayo-assets.md` (análisis y anclas) y `mayo-3d/docs/LANDING_INTEGRATION.md` (contrato del modelo).

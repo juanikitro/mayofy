@@ -1,8 +1,9 @@
 /**
  * Where Mayo stands on each island. One slot per MayoFigure in the page,
- * in journey order. `moment` is the entry of src/lib/mayo/moments.ts whose
- * camera framed the captured images; the full tier uses the same camera,
- * so the image → 3D swap is exact. `size` is the side of Mayo's square
+ * in journey order. `moment` names the captured pose (the moment ids of the
+ * archived 3D scene, docs/archive/mayo-3d-integration/) whose still and
+ * loop images are the fallback until the painted sprite strip of the slot
+ * arrives (`mayoSprites`). `size` is the side of Mayo's square
  * (images are square; the dog spans ~55% of the width and its feet sit at
  * ~80% of the height). Anchors in % of the island plate arrive with the
  * generated plates (docs/plans/2026-11-17-integracion-mayo-assets.md §4);
@@ -53,7 +54,17 @@ export function mayoPoseSources(moment: string) {
   };
 }
 
-export const mayoModelUrl = "/mayo/mayo.glb";
+/* --------------------------------------------------------------- sprites */
+
+/**
+ * Painted Mayo, animated by frames: a horizontal strip of square cells
+ * (1024 x 1024, 4-6 frames) played at `fps`, in the island style. When a
+ * slot has a strip, MayoFigure renders it instead of the still/loop
+ * pictures. Strips arrive as `/images/mundo-mayo/70-mayo-<slot>-tira.avif|.webp`.
+ */
+export type MayoSprite = { strip: { avif: string; webp: string }; frames: number; fps: number; cell: number };
+
+export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {};
 
 /* ---------------------------------------------------------------- plates */
 

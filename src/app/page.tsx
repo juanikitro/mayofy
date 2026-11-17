@@ -2,7 +2,6 @@ import { CloudFall } from "@/components/world/cloud-fall";
 import { HeroIsland } from "@/components/world/hero-island";
 import { IslandNav } from "@/components/world/island-nav";
 import { IslandProgress } from "@/components/world/island-progress";
-import { MayoStageLoader } from "@/components/world/mayo-stage-loader";
 import {
   JuaniIsland,
   ProblemIsland,
@@ -83,7 +82,6 @@ export default function Home() {
       <WorldFooter />
 
       <WorldMotion />
-      <MayoStageLoader />
     </div>
   );
 }

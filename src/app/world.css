@@ -426,8 +426,8 @@ details[data-preparing-open="true"] > .animated-details__content {
 
 /* Mayo ----------------------------------------------------------------- */
 
-/* Each slot is a square: the captured images are square and the real-time
- * canvas draws Mayo on the same square with the same camera. */
+/* Each slot is a square: the captured stills, loops and painted sprite
+ * strips are square, so every representation shares the same box. */
 .mayo {
   position: absolute;
   width: var(--mayo-size, 12rem);
@@ -454,9 +454,54 @@ html[data-motion-tier="lite"] .mayo__picture--loop {
   display: block;
 }
 
-html[data-motion-tier="lite"] .mayo__picture--still,
-html[data-mayo3d="ready"] .mayo__picture {
+html[data-motion-tier="lite"] .mayo__picture--still {
   visibility: hidden;
+}
+
+/* Painted sprite: a horizontal strip of square frames. The <img> is
+ * `--frames` times wider than the square and steps one frame at a time; the
+ * first frame is what shows before any JavaScript or when motion is off. */
+.mayo__sprite {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.mayo__sprite picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mayo__sprite img {
+  display: block;
+  width: calc(var(--frames, 1) * 100%);
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+  animation: mayo-sprite calc(var(--frames, 1) / var(--fps, 6) * 1s) steps(var(--frames, 1), end) infinite;
+  animation-play-state: paused;
+}
+
+@keyframes mayo-sprite {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+html[data-motion-tier="full"] .mayo__sprite img,
+html[data-motion-tier="lite"] .mayo__sprite img {
+  animation-play-state: running;
+}
+
+html[data-motion-tier="reduced"] .mayo__sprite img {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mayo__sprite img {
+    animation: none;
+  }
 }
 
 .scene__mayo {
@@ -2525,25 +2570,6 @@ html[data-motion-tier="lite"] .campfire__flame-core {
     flex-wrap: wrap;
     gap: 0.75rem;
   }
-}
-
-/* Real-time Mayo (full tier): a square canvas that travels between slots */
-
-.mayo-stage {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  width: 0;
-  height: 0;
-  opacity: 0;
-  pointer-events: none;
-  will-change: transform;
-  transition: opacity 300ms var(--ease-out);
-}
-
-.mayo-stage--ready {
-  opacity: 1;
 }
 
 /* ?diag overlay: tier signals for device checks */

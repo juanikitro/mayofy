@@ -1,13 +1,15 @@
 import type { CSSProperties } from "react";
 
-import { getMayoSlot, mayoAnchors, mayoPoseSources, type MayoSlotId } from "@/content/stage";
+import { getMayoSlot, mayoAnchors, mayoPoseSources, mayoSprites, type MayoSlotId } from "@/content/stage";
 
 /**
- * Mayo's slot on an island. Renders the captured images of the slot's
- * moment: the still (static tier and first paint) and the animated loop
- * (lite tier). The full tier hides both once the real-time canvas is ready
- * (`html[data-mayo3d="ready"]`) and draws Mayo on this exact square, with
- * the same camera the images were captured with.
+ * Mayo's slot on an island. When the slot has a painted sprite strip
+ * (`mayoSprites`) it renders that strip: a square window over an <img>
+ * `frames` times wider, stepped by CSS one cell at a time in the full and
+ * lite tiers; the reduced tier and the no-JavaScript first paint show the
+ * first frame. Slots without a strip keep the captured images of the
+ * slot's moment: the still (static tier and first paint) and the animated
+ * loop (lite tier).
  */
 export function MayoFigure({
   slot,
@@ -20,6 +22,7 @@ export function MayoFigure({
 }) {
   const { moment, label, size } = getMayoSlot(slot);
   const sources = mayoPoseSources(moment);
+  const sprite = mayoSprites[slot];
   const loading = eager ? "eager" : "lazy";
   const anchor = mayoAnchors[slot];
   const style = (
@@ -43,22 +46,44 @@ export function MayoFigure({
       data-mayo-moment={moment}
       style={style}
     >
-      <picture className="mayo__picture mayo__picture--still">
-        <source type="image/avif" srcSet={sources.still.avif} />
-        <img
-          src={sources.still.webp}
-          alt={label}
-          width={1600}
-          height={1600}
-          loading={loading}
-          decoding="async"
-          fetchPriority={eager ? "high" : "auto"}
-        />
-      </picture>
-      <picture className="mayo__picture mayo__picture--loop">
-        <source type="image/avif" srcSet={sources.loop.avif} />
-        <img src={sources.loop.webp} alt="" width={800} height={800} loading="lazy" decoding="async" />
-      </picture>
+      {sprite ? (
+        <div
+          className="mayo__sprite"
+          style={{ "--frames": sprite.frames, "--fps": sprite.fps } as CSSProperties}
+        >
+          <picture>
+            <source type="image/avif" srcSet={sprite.strip.avif} />
+            <img
+              src={sprite.strip.webp}
+              alt={label}
+              width={sprite.cell * sprite.frames}
+              height={sprite.cell}
+              loading={loading}
+              decoding="async"
+              fetchPriority={eager ? "high" : "auto"}
+            />
+          </picture>
+        </div>
+      ) : (
+        <>
+          <picture className="mayo__picture mayo__picture--still">
+            <source type="image/avif" srcSet={sources.still.avif} />
+            <img
+              src={sources.still.webp}
+              alt={label}
+              width={1600}
+              height={1600}
+              loading={loading}
+              decoding="async"
+              fetchPriority={eager ? "high" : "auto"}
+            />
+          </picture>
+          <picture className="mayo__picture mayo__picture--loop">
+            <source type="image/avif" srcSet={sources.loop.avif} />
+            <img src={sources.loop.webp} alt="" width={800} height={800} loading="lazy" decoding="async" />
+          </picture>
+        </>
+      )}
     </div>
   );
 }
