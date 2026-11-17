@@ -31,10 +31,11 @@
 8. **Testimonios.** No hay. Pedirlos a los primeros clientes con nombre, rubro y una frase concreta sobre el resultado; nunca inventarlos.
 9. **Idiomas.** Prioridad: español rioplatense (actual), portugués después e inglés en tercer lugar. Requiere decidir la estructura de rutas (`/pt`, `/en`) y traducir el contenido de `src/content/`.
 10. **Portfolio.** Los tres primeros trabajos son reales (sistema para lavaderos, landing de una consignataria y portfolio de desarrollador) y enlazan a cada sitio en vivo, pero usan visuales abstractos ("Visual pendiente"). Faltan capturas reales, casos completos y reemplazar los tres placeholders restantes con un proyecto por pack.
+11. **Movimiento en teléfonos.** *17 de noviembre de 2026:* se eliminó el nivel `lite` (sólo quedan `full` y `reduced`, este último por `prefers-reduced-motion`); ver `2026-11-17-niveles-de-movimiento.md`. Pendiente: probar en el teléfono real con `/?diag` contra una build que tenga el rediseño (producción todavía sirve la build anterior de `master`, donde `?diag` no existe) y confirmar que Mayo y el parallax se mueven.
 
 ## Diferido hasta tener conversaciones comerciales
 
-11. **Proceso comercial.** Se arma cuando llegue el primer contacto: guion de la reunión de diagnóstico, propuesta modelo (alcance, plazo, inversión y rondas de revisión) y términos del servicio (cambios de alcance, demoras, cancelación, pago y mantenimiento).
+12. **Proceso comercial.** Se arma cuando llegue el primer contacto: guion de la reunión de diagnóstico, propuesta modelo (alcance, plazo, inversión y rondas de revisión) y términos del servicio (cambios de alcance, demoras, cancelación, pago y mantenimiento).
 
 ## Descartado
 

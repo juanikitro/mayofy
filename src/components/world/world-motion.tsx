@@ -7,68 +7,63 @@ type NavigatorWithHints = Navigator & {
   deviceMemory?: number;
 };
 
-export type MotionTier = "full" | "lite" | "reduced";
-
-const slowConnections = new Set(["slow-2g", "2g", "3g"]);
+export type MotionTier = "full" | "reduced";
 
 /**
- * Picks the performance tier for the island world and exposes it as
- * `data-motion-tier` on <html>. CSS owns every visual consequence, so the
- * page already works before this runs: scroll-driven animations are gated by
- * @supports and reduced motion by the media query. This only adds the
- * "lite" tier, which the browser cannot detect on its own.
+ * Picks the motion tier for the island world and exposes it as
+ * `data-motion-tier` on <html>. Only the user's reduced-motion preference
+ * decides: every animation is CSS (scroll-driven or a stepped sprite), which
+ * is cheap enough for any phone, so hardware and network hints never lower
+ * the tier. CSS owns every visual consequence and the page already works
+ * before this runs: the no-JS first paint is the assembled, still scene.
  */
-export function detectMotionTier(nav: NavigatorWithHints, reducedMotion: boolean): MotionTier {
-  if (reducedMotion) return "reduced";
-  const connection = nav.connection;
-  if (connection?.saveData) return "lite";
-  if (connection?.effectiveType && slowConnections.has(connection.effectiveType)) return "lite";
-  if (typeof nav.deviceMemory === "number" && nav.deviceMemory <= 2) return "lite";
-  if (typeof nav.hardwareConcurrency === "number" && nav.hardwareConcurrency <= 2) return "lite";
-  return "full";
+export function detectMotionTier(reducedMotion: boolean): MotionTier {
+  return reducedMotion ? "reduced" : "full";
 }
 
 /** Signals behind the tier decision, shown by the `?diag` overlay. */
 export function describeMotionSignals(nav: NavigatorWithHints, reducedMotion: boolean) {
-  let webgl = false;
-  try {
-    const probe = document.createElement("canvas");
-    webgl = Boolean(probe.getContext("webgl2") ?? probe.getContext("webgl"));
-  } catch {
-    webgl = false;
-  }
   return {
-    tier: detectMotionTier(nav, reducedMotion),
-    reducedMotion,
+    tier: detectMotionTier(reducedMotion),
+    prefersReducedMotion: reducedMotion,
+    scrollTimeline: typeof CSS !== "undefined" && CSS.supports("animation-timeline: view()"),
     saveData: nav.connection?.saveData ?? null,
     effectiveType: nav.connection?.effectiveType ?? null,
     deviceMemory: nav.deviceMemory ?? null,
     cores: nav.hardwareConcurrency ?? null,
-    webgl,
     dpr: window.devicePixelRatio,
     viewport: `${window.innerWidth}x${window.innerHeight}`,
     ua: nav.userAgent.slice(0, 90),
   };
 }
 
+/** `?diag` or `#diag` anywhere in the URL turns the overlay on. */
+function wantsDiag(location: Location) {
+  return new URLSearchParams(location.search).has("diag") || /(^|[#&])diag(=|&|$)/.test(location.hash);
+}
+
 export function WorldMotion() {
   useEffect(() => {
     const root = document.documentElement;
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const diag = new URLSearchParams(window.location.search).has("diag");
+    const diag = wantsDiag(window.location);
     let badge: HTMLPreElement | null = null;
 
     function apply() {
       const nav = navigator as NavigatorWithHints;
-      root.dataset.motionTier = detectMotionTier(nav, media.matches);
-      if (diag) {
-        badge ??= document.body.appendChild(document.createElement("pre"));
+      root.dataset.motionTier = detectMotionTier(media.matches);
+      if (!diag) return;
+      const signals = describeMotionSignals(nav, media.matches);
+      console.info("[motion]", signals);
+      if (!badge) {
+        badge = document.createElement("pre");
         badge.className = "motion-diag";
-        const signals = describeMotionSignals(nav, media.matches);
-        badge.textContent = Object.entries(signals)
-          .map(([key, value]) => `${key}: ${String(value)}`)
-          .join("\n");
+        badge.setAttribute("aria-hidden", "true");
+        (document.body ?? root).appendChild(badge);
       }
+      badge.textContent = Object.entries(signals)
+        .map(([key, value]) => `${key}: ${String(value)}`)
+        .join("\n");
     }
 
     apply();

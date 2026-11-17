@@ -10,7 +10,7 @@ const layers = [
  * Transition between island 1 (dawn) and island 2 (morning): Mayo falls
  * through clouds. Provisional version: three SVG cloud layers moved with
  * scroll-driven animations; the asset agent delivers the real frame
- * sequence (10–12 light images) and the lite tier shows the first frame.
+ * sequence (10–12 light images); the reduced tier shows the first frame.
  */
 export function CloudFall() {
   return (

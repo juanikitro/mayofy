@@ -5,11 +5,9 @@ import { getMayoSlot, mayoAnchors, mayoPoseSources, mayoSprites, type MayoSlotId
 /**
  * Mayo's slot on an island. When the slot has a painted sprite strip
  * (`mayoSprites`) it renders that strip: a square window over an <img>
- * `frames` times wider, stepped by CSS one cell at a time in the full and
- * lite tiers; the reduced tier and the no-JavaScript first paint show the
- * first frame. Slots without a strip keep the captured images of the
- * slot's moment: the still (static tier and first paint) and the animated
- * loop (lite tier).
+ * `frames` times wider, stepped by CSS one cell at a time in the full tier;
+ * the reduced tier and the no-JavaScript first paint show the first frame.
+ * Slots without a strip show the captured still of the slot's moment.
  */
 export function MayoFigure({
   slot,
@@ -78,24 +76,18 @@ export function MayoFigure({
           </picture>
         </div>
       ) : (
-        <>
-          <picture className="mayo__picture mayo__picture--still">
-            <source type="image/avif" srcSet={sources.still.avif} />
-            <img
-              src={sources.still.webp}
-              alt={label}
-              width={1600}
-              height={1600}
-              loading={loading}
-              decoding="async"
-              fetchPriority={eager ? "high" : "auto"}
-            />
-          </picture>
-          <picture className="mayo__picture mayo__picture--loop">
-            <source type="image/avif" srcSet={sources.loop.avif} />
-            <img src={sources.loop.webp} alt="" width={800} height={800} loading="lazy" decoding="async" />
-          </picture>
-        </>
+        <picture className="mayo__picture mayo__picture--still">
+          <source type="image/avif" srcSet={sources.still.avif} />
+          <img
+            src={sources.still.webp}
+            alt={label}
+            width={1600}
+            height={1600}
+            loading={loading}
+            decoding="async"
+            fetchPriority={eager ? "high" : "auto"}
+          />
+        </picture>
       )}
     </div>
   );

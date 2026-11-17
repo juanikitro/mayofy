@@ -446,18 +446,6 @@ details[data-preparing-open="true"] > .animated-details__content {
   object-fit: contain;
 }
 
-.mayo__picture--loop {
-  display: none;
-}
-
-html[data-motion-tier="lite"] .mayo__picture--loop {
-  display: block;
-}
-
-html[data-motion-tier="lite"] .mayo__picture--still {
-  visibility: hidden;
-}
-
 /* Painted sprite: a horizontal strip of square frames. The <img> is
  * `--frames` times wider than the square and steps one frame at a time; the
  * first frame is what shows before any JavaScript or when motion is off. */
@@ -491,8 +479,7 @@ html[data-motion-tier="lite"] .mayo__picture--still {
   }
 }
 
-html[data-motion-tier="full"] .mayo__sprite img,
-html[data-motion-tier="lite"] .mayo__sprite img {
+html[data-motion-tier="full"] .mayo__sprite img {
   animation-play-state: running;
 }
 
@@ -720,7 +707,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 }
 
 /* Scroll-driven animation: default state is "assembled", so every fallback
- * (no support, lite tier, reduced motion) shows the platforms built. */
+ * (no support, reduced motion) shows the platforms built. */
 
 @keyframes rock-settle {
   from {
@@ -837,15 +824,6 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     animation-timeline: --dawn;
     animation-range: exit 0% exit 100%;
   }
-}
-
-/* Lite tier: no scroll-driven work, only a gentle idle on Mayo. */
-html[data-motion-tier="lite"] .rock,
-html[data-motion-tier="lite"] .platform__card,
-html[data-motion-tier="lite"] .rocks__mayo,
-html[data-motion-tier="lite"] .scene__mayo,
-html[data-motion-tier="lite"] .scene__sky {
-  animation: none;
 }
 
 /* Static tier: reduced motion wins over everything, with or without JS. */
@@ -1739,13 +1717,8 @@ html[data-motion-tier="full"] .campfire__flame-core {
   }
 }
 
-html[data-motion-tier="lite"] .fall__layer,
-html[data-motion-tier="lite"] .fall__mayo,
 html[data-motion-tier="reduced"] .fall__layer,
-html[data-motion-tier="reduced"] .fall__mayo,
-html[data-motion-tier="lite"] .firefly,
-html[data-motion-tier="lite"] .campfire__flame,
-html[data-motion-tier="lite"] .campfire__flame-core {
+html[data-motion-tier="reduced"] .fall__mayo {
   animation: none;
 }
 
@@ -2584,19 +2557,25 @@ html[data-motion-tier="lite"] .campfire__flame-core {
   }
 }
 
-/* ?diag overlay: tier signals for device checks */
+/* ?diag overlay: tier signals for device checks. It is appended to <body>,
+ * outside .world, so it uses no world tokens; literal colors keep it readable
+ * anywhere. Safe-area insets keep it clear of phone bars and notches. */
 
 .motion-diag {
   position: fixed;
-  inset: auto auto 0.5rem 0.5rem;
-  z-index: 100;
-  max-width: calc(100vw - 1rem);
+  inset: auto auto calc(0.5rem + env(safe-area-inset-bottom, 0px)) calc(0.5rem + env(safe-area-inset-left, 0px));
+  z-index: 2147483647;
+  box-sizing: border-box;
+  max-width: calc(100vw - 1rem - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
+  margin: 0;
   padding: 0.5rem 0.75rem;
+  border: 1px solid oklch(85.7% 0.1995 158.3 / 60%);
   border-radius: 0.5rem;
-  background: oklch(12% 0.03 265 / 90%);
-  color: var(--mint);
-  font: 11px/1.4 ui-monospace, monospace;
+  background: oklch(12% 0.03 265 / 92%);
+  color: oklch(85.7% 0.1995 158.3);
+  font: 13px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
   pointer-events: none;
 }
 
@@ -2735,7 +2714,6 @@ html[data-motion-tier="full"] .plate-object--glow {
   }
 }
 
-html[data-motion-tier="lite"] .rock-shadow,
 html[data-motion-tier="reduced"] .rock-shadow {
   animation: none;
   opacity: 1;
@@ -2851,9 +2829,7 @@ html[data-motion-tier="reduced"] .rock-shadow {
   }
 }
 
-html[data-motion-tier="lite"] .mayo--travel,
 html[data-motion-tier="reduced"] .mayo--travel,
-html[data-motion-tier="lite"] .plate-object--chased,
 html[data-motion-tier="reduced"] .plate-object--chased {
   animation: none;
 }
@@ -2912,7 +2888,6 @@ html[data-motion-tier="reduced"] .plate-object--chased {
   }
 }
 
-html[data-motion-tier="lite"] .plate__picture--background,
 html[data-motion-tier="reduced"] .plate__picture--background {
   animation: none;
 }
