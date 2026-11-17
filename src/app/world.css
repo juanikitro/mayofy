@@ -2812,6 +2812,18 @@ html[data-motion-tier="reduced"] .rock-shadow {
     animation-timeline: --dawn;
     animation-range: exit 0% exit 100%;
   }
+
+  /* Islands below the fold drift while their section crosses the viewport
+     (the plate clips, so an anonymous view() would read the plate, not the page). */
+  .isle {
+    view-timeline-name: --isle;
+  }
+
+  .isle .plate__picture--background {
+    animation: plate-background-drift linear both;
+    animation-timeline: --isle;
+    animation-range: entry 0% exit 100%;
+  }
 }
 
 html[data-motion-tier="lite"] .plate__picture--background,
@@ -2826,7 +2838,7 @@ html[data-motion-tier="reduced"] .plate__picture--background {
 }
 
 @media (max-width: 48rem) {
-  .plate--layered .plate__picture--island {
+  .plate--layered:not(.plate--layered-mobile) .plate__picture--island {
     display: none;
   }
 }

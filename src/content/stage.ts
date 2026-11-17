@@ -77,6 +77,8 @@ export type PlateSpec = {
   anchorX?: string;
   /** Parallax pair (desktop): the plate without its island, and the island cut out with alpha. */
   layers?: { background: PlateImage; island: PlateImage };
+  /** Parallax pair for the mobile plate, when the cutout was delivered. */
+  mobileLayers?: { background: PlateImage; island: PlateImage };
 };
 
 const assetRoot = "/images/mundo-mayo";
@@ -96,7 +98,12 @@ export const islandPlates = {
     anchorX: "72%",
     layers: { background: desktopPlate("01-hero-escritorio-fondo"), island: desktopPlate("01-hero-escritorio-isla") },
   },
-  problem: { desktop: desktopPlate("30-isla2-escritorio"), mobile: mobilePlate("30-isla2-celular") },
+  problem: {
+    desktop: desktopPlate("30-isla2-escritorio"),
+    mobile: mobilePlate("30-isla2-celular"),
+    layers: { background: desktopPlate("30-isla2-escritorio-fondo"), island: desktopPlate("30-isla2-escritorio-isla") },
+    mobileLayers: { background: mobilePlate("30-isla2-celular-fondo"), island: mobilePlate("30-isla2-celular-isla") },
+  },
   packs: { desktop: desktopPlate("10-isla3-base") },
   systems: { desktop: desktopPlate("40-isla4-escritorio"), mobile: mobilePlate("40-isla4-celular") },
   works: { desktop: desktopPlate("45-isla5-escritorio"), mobile: mobilePlate("45-isla5-celular") },

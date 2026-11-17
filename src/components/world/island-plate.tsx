@@ -32,10 +32,14 @@ export function IslandPlate({
   if (plate.layers) {
     // Parallax pair: the background (sky, clouds, far islands) drifts slower
     // than the island cutout; mobile keeps the single plate.
+    const mobileLayers = plate.mobileLayers;
+    const className = mobileLayers ? "plate plate--layered plate--layered-mobile" : "plate plate--layered";
     return (
-      <div className="plate plate--layered" style={style}>
+      <div className={className} style={style}>
         <picture className="plate__picture plate__picture--background">
-          {plate.mobile ? (
+          {mobileLayers ? (
+            <source media="(max-width: 48rem)" type="image/avif" srcSet={mobileLayers.background.avif} />
+          ) : plate.mobile ? (
             <source media="(max-width: 48rem)" type="image/avif" srcSet={plate.mobile.avif} />
           ) : null}
           <source type="image/avif" srcSet={plate.layers.background.avif} />
@@ -50,6 +54,9 @@ export function IslandPlate({
           />
         </picture>
         <picture className="plate__picture plate__picture--island">
+          {mobileLayers ? (
+            <source media="(max-width: 48rem)" type="image/avif" srcSet={mobileLayers.island.avif} />
+          ) : null}
           <source type="image/avif" srcSet={plate.layers.island.avif} />
           <img
             src={plate.layers.island.webp}
