@@ -1,0 +1,82 @@
+[
+  {
+    "cropGeometry": "262x261+320+677",
+    "role": "contact-shadow",
+    "visibleOnlyWhenAssembled": true,
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "file": "14-p1-shadow-izq.png"
+  },
+  {
+    "cropGeometry": "442x192+420+550",
+    "role": "contact-shadow",
+    "visibleOnlyWhenAssembled": true,
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "file": "14-p1-shadow-tapa.png"
+  },
+  {
+    "cropGeometry": "295x153+579+705",
+    "role": "contact-shadow",
+    "visibleOnlyWhenAssembled": true,
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "file": "15-p2-shadow-der.png"
+  },
+  {
+    "cropGeometry": "315x455+369+448",
+    "role": "contact-shadow",
+    "visibleOnlyWhenAssembled": true,
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "file": "15-p2-shadow-izq.png"
+  },
+  {
+    "cropGeometry": "412x203+439+300",
+    "role": "contact-shadow",
+    "visibleOnlyWhenAssembled": true,
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "file": "15-p2-shadow-tapa.png"
+  },
+  {
+    "cropGeometry": "334x221+539+675",
+    "role": "contact-shadow",
+    "visibleOnlyWhenAssembled": true,
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "file": "16-p3-shadow-der.png"
+  },
+  {
+    "cropGeometry": "369x482+285+417",
+    "role": "contact-shadow",
+    "visibleOnlyWhenAssembled": true,
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "file": "16-p3-shadow-izq.png"
+  },
+  {
+    "cropGeometry": "397x155+422+300",
+    "role": "contact-shadow",
+    "visibleOnlyWhenAssembled": true,
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "file": "16-p3-shadow-tapa.png"
+  }
+]

@@ -1,9 +1,11 @@
 import type { CSSProperties } from "react";
 
+import { IslandPlate } from "@/components/world/island-plate";
 import { MayoFigure } from "@/components/world/mayo-figure";
 import { IslandTitle } from "@/components/world/island-title";
 import { commercialPlans } from "@/content/commercial-plans";
 import { islandCopy } from "@/content/islands";
+import { islandPlates } from "@/content/stage";
 
 type RockKind = "base" | "left" | "right" | "top";
 
@@ -67,20 +69,9 @@ export function RockIsland() {
   return (
     <section id="packs" className="rocks" data-island="3" aria-labelledby="packs-title">
       <div className="rocks__stage">
-        <div className="scene scene--noon" aria-hidden="true">
+        <div className="scene scene--noon scene--plated" aria-hidden="true">
           <div className="scene__sky" />
-          <svg className="scene__island scene__island--wide" viewBox="0 0 1600 420" preserveAspectRatio="xMidYMax meet">
-            <path
-              className="island__rock"
-              d="M140 230c-30 50 0 110 60 130 50 16 110 10 160 40 60 36 120 0 190 10 70 10 130-20 200-10 80 12 140-30 200-16 60 14 120-20 160-70 30-40 70-70 50-100-40-50-980-50-1020 16z"
-            />
-            <path
-              className="island__moss"
-              d="M130 230c0 24 20 42 50 48 20 4 40-6 60 2 30 10 50 0 80 4 40 6 60-10 100-4 40 6 70-6 110 0 50 8 80-10 120-2 40 8 80-12 120-4 60 12 110-10 140-40 20-30-780-40-780-4z"
-            />
-            <ellipse className="island__meadow" cx="800" cy="220" rx="700" ry="60" />
-            <ellipse className="island__meadow-light" cx="840" cy="206" rx="520" ry="36" />
-          </svg>
+          <IslandPlate plate={islandPlates.packs} />
         </div>
 
         <header className="rocks__intro">

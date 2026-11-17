@@ -1,0 +1,1073 @@
+{
+  "sources": 76,
+  "outputs": 152,
+  "webp": "lossless",
+  "avif": "quality 85, heic:speed 6",
+  "limitations": "No new cutouts, inpainting, or browser integration checked; existing PNG geometry and contact-shadow offsets preserved. Source PNGs unchanged. Static visual spot-check of hero, greenhouse, contact shadow and dusk plate passed; full per-image visual review remains pending.",
+  "files": [
+    {
+      "file": "01-hero-escritorio.webp",
+      "source": "01-hero-escritorio.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 1086272,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "01-hero-escritorio.avif",
+      "source": "01-hero-escritorio.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 86080,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "02-hero-celular.webp",
+      "source": "02-hero-celular.png",
+      "geometryAndOpacity": "864x1536 True",
+      "bytes": 939136,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "02-hero-celular.avif",
+      "source": "02-hero-celular.png",
+      "geometryAndOpacity": "864x1536 True",
+      "bytes": 62467,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "03-hero-cielo.webp",
+      "source": "03-hero-cielo.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 844062,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "03-hero-cielo.avif",
+      "source": "03-hero-cielo.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 29687,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "04-hero-primer-plano.webp",
+      "source": "04-hero-primer-plano.png",
+      "geometryAndOpacity": "703x435 False",
+      "bytes": 222680,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "04-hero-primer-plano.avif",
+      "source": "04-hero-primer-plano.png",
+      "geometryAndOpacity": "703x435 False",
+      "bytes": 51074,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "10-isla3-base.webp",
+      "source": "10-isla3-base.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 1207258,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "10-isla3-base.avif",
+      "source": "10-isla3-base.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 133649,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "11-plataforma-1.webp",
+      "source": "11-plataforma-1.png",
+      "geometryAndOpacity": "1024x671 False",
+      "bytes": 615838,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "11-plataforma-1.avif",
+      "source": "11-plataforma-1.png",
+      "geometryAndOpacity": "1024x671 False",
+      "bytes": 116599,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "12-plataforma-2.webp",
+      "source": "12-plataforma-2.png",
+      "geometryAndOpacity": "625x956 False",
+      "bytes": 583558,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "12-plataforma-2.avif",
+      "source": "12-plataforma-2.png",
+      "geometryAndOpacity": "625x956 False",
+      "bytes": 109157,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "13-plataforma-3.webp",
+      "source": "13-plataforma-3.png",
+      "geometryAndOpacity": "742x1013 False",
+      "bytes": 674164,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "13-plataforma-3.avif",
+      "source": "13-plataforma-3.png",
+      "geometryAndOpacity": "742x1013 False",
+      "bytes": 121064,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "14-p1-base.webp",
+      "source": "14-p1-base.png",
+      "geometryAndOpacity": "1024x500 False",
+      "bytes": 438730,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "14-p1-base.avif",
+      "source": "14-p1-base.png",
+      "geometryAndOpacity": "1024x500 False",
+      "bytes": 85237,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "14-p1-der.webp",
+      "source": "14-p1-der.png",
+      "geometryAndOpacity": "736x938 False",
+      "bytes": 597772,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "14-p1-der.avif",
+      "source": "14-p1-der.png",
+      "geometryAndOpacity": "736x938 False",
+      "bytes": 105223,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "14-p1-izq.webp",
+      "source": "14-p1-izq.png",
+      "geometryAndOpacity": "962x659 False",
+      "bytes": 612082,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "14-p1-izq.avif",
+      "source": "14-p1-izq.png",
+      "geometryAndOpacity": "962x659 False",
+      "bytes": 119712,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "14-p1-shadow-izq.webp",
+      "source": "14-p1-shadow-izq.png",
+      "geometryAndOpacity": "262x261 False",
+      "bytes": 4932,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "14-p1-shadow-izq.avif",
+      "source": "14-p1-shadow-izq.png",
+      "geometryAndOpacity": "262x261 False",
+      "bytes": 2344,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "14-p1-shadow-tapa.webp",
+      "source": "14-p1-shadow-tapa.png",
+      "geometryAndOpacity": "442x192 False",
+      "bytes": 5896,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "14-p1-shadow-tapa.avif",
+      "source": "14-p1-shadow-tapa.png",
+      "geometryAndOpacity": "442x192 False",
+      "bytes": 2997,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "14-p1-tapa.webp",
+      "source": "14-p1-tapa.png",
+      "geometryAndOpacity": "980x670 False",
+      "bytes": 593708,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "14-p1-tapa.avif",
+      "source": "14-p1-tapa.png",
+      "geometryAndOpacity": "980x670 False",
+      "bytes": 109258,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "15-p2-base.webp",
+      "source": "15-p2-base.png",
+      "geometryAndOpacity": "958x623 False",
+      "bytes": 542024,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "15-p2-base.avif",
+      "source": "15-p2-base.png",
+      "geometryAndOpacity": "958x623 False",
+      "bytes": 94515,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "15-p2-der.webp",
+      "source": "15-p2-der.png",
+      "geometryAndOpacity": "602x951 False",
+      "bytes": 517086,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "15-p2-der.avif",
+      "source": "15-p2-der.png",
+      "geometryAndOpacity": "602x951 False",
+      "bytes": 94275,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "15-p2-izq.webp",
+      "source": "15-p2-izq.png",
+      "geometryAndOpacity": "614x872 False",
+      "bytes": 515158,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "15-p2-izq.avif",
+      "source": "15-p2-izq.png",
+      "geometryAndOpacity": "614x872 False",
+      "bytes": 100554,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "15-p2-shadow-der.webp",
+      "source": "15-p2-shadow-der.png",
+      "geometryAndOpacity": "295x153 False",
+      "bytes": 6388,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "15-p2-shadow-der.avif",
+      "source": "15-p2-shadow-der.png",
+      "geometryAndOpacity": "295x153 False",
+      "bytes": 2083,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "15-p2-shadow-izq.webp",
+      "source": "15-p2-shadow-izq.png",
+      "geometryAndOpacity": "315x455 False",
+      "bytes": 10016,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "15-p2-shadow-izq.avif",
+      "source": "15-p2-shadow-izq.png",
+      "geometryAndOpacity": "315x455 False",
+      "bytes": 3218,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "15-p2-shadow-tapa.webp",
+      "source": "15-p2-shadow-tapa.png",
+      "geometryAndOpacity": "412x203 False",
+      "bytes": 7942,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "15-p2-shadow-tapa.avif",
+      "source": "15-p2-shadow-tapa.png",
+      "geometryAndOpacity": "412x203 False",
+      "bytes": 3092,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "15-p2-tapa.webp",
+      "source": "15-p2-tapa.png",
+      "geometryAndOpacity": "900x608 False",
+      "bytes": 480920,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "15-p2-tapa.avif",
+      "source": "15-p2-tapa.png",
+      "geometryAndOpacity": "900x608 False",
+      "bytes": 84294,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "16-p3-base.webp",
+      "source": "16-p3-base.png",
+      "geometryAndOpacity": "952x597 False",
+      "bytes": 558410,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "16-p3-base.avif",
+      "source": "16-p3-base.png",
+      "geometryAndOpacity": "952x597 False",
+      "bytes": 105512,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "16-p3-der.webp",
+      "source": "16-p3-der.png",
+      "geometryAndOpacity": "550x903 False",
+      "bytes": 430232,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "16-p3-der.avif",
+      "source": "16-p3-der.png",
+      "geometryAndOpacity": "550x903 False",
+      "bytes": 74577,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "16-p3-izq.webp",
+      "source": "16-p3-izq.png",
+      "geometryAndOpacity": "617x853 False",
+      "bytes": 450730,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "16-p3-izq.avif",
+      "source": "16-p3-izq.png",
+      "geometryAndOpacity": "617x853 False",
+      "bytes": 80526,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "16-p3-shadow-der.webp",
+      "source": "16-p3-shadow-der.png",
+      "geometryAndOpacity": "334x221 False",
+      "bytes": 7804,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "16-p3-shadow-der.avif",
+      "source": "16-p3-shadow-der.png",
+      "geometryAndOpacity": "334x221 False",
+      "bytes": 2302,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "16-p3-shadow-izq.webp",
+      "source": "16-p3-shadow-izq.png",
+      "geometryAndOpacity": "369x482 False",
+      "bytes": 10504,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "16-p3-shadow-izq.avif",
+      "source": "16-p3-shadow-izq.png",
+      "geometryAndOpacity": "369x482 False",
+      "bytes": 3802,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "16-p3-shadow-tapa.webp",
+      "source": "16-p3-shadow-tapa.png",
+      "geometryAndOpacity": "397x155 False",
+      "bytes": 7236,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "16-p3-shadow-tapa.avif",
+      "source": "16-p3-shadow-tapa.png",
+      "geometryAndOpacity": "397x155 False",
+      "bytes": 2831,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "16-p3-tapa.webp",
+      "source": "16-p3-tapa.png",
+      "geometryAndOpacity": "908x699 False",
+      "bytes": 542494,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "16-p3-tapa.avif",
+      "source": "16-p3-tapa.png",
+      "geometryAndOpacity": "908x699 False",
+      "bytes": 86751,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "20-roca-suelta-1.webp",
+      "source": "20-roca-suelta-1.png",
+      "geometryAndOpacity": "861x699 False",
+      "bytes": 684188,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "20-roca-suelta-1.avif",
+      "source": "20-roca-suelta-1.png",
+      "geometryAndOpacity": "861x699 False",
+      "bytes": 150668,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "20-roca-suelta-2.webp",
+      "source": "20-roca-suelta-2.png",
+      "geometryAndOpacity": "997x376 False",
+      "bytes": 425110,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "20-roca-suelta-2.avif",
+      "source": "20-roca-suelta-2.png",
+      "geometryAndOpacity": "997x376 False",
+      "bytes": 92757,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "20-roca-suelta-3.webp",
+      "source": "20-roca-suelta-3.png",
+      "geometryAndOpacity": "995x388 False",
+      "bytes": 418056,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "20-roca-suelta-3.avif",
+      "source": "20-roca-suelta-3.png",
+      "geometryAndOpacity": "995x388 False",
+      "bytes": 89624,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "20-roca-suelta-4.webp",
+      "source": "20-roca-suelta-4.png",
+      "geometryAndOpacity": "923x731 False",
+      "bytes": 668206,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "20-roca-suelta-4.avif",
+      "source": "20-roca-suelta-4.png",
+      "geometryAndOpacity": "923x731 False",
+      "bytes": 133653,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "30-isla2-celular.webp",
+      "source": "30-isla2-celular.png",
+      "geometryAndOpacity": "864x1536 True",
+      "bytes": 1030634,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "30-isla2-celular.avif",
+      "source": "30-isla2-celular.png",
+      "geometryAndOpacity": "864x1536 True",
+      "bytes": 77898,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "30-isla2-escritorio.webp",
+      "source": "30-isla2-escritorio.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 1083300,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "30-isla2-escritorio.avif",
+      "source": "30-isla2-escritorio.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 84914,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "31-isla2-cielo.webp",
+      "source": "31-isla2-cielo.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 803576,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "31-isla2-cielo.avif",
+      "source": "31-isla2-cielo.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 24105,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "32-isla2-primer-plano.webp",
+      "source": "32-isla2-primer-plano.png",
+      "geometryAndOpacity": "852x499 False",
+      "bytes": 401916,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "32-isla2-primer-plano.avif",
+      "source": "32-isla2-primer-plano.png",
+      "geometryAndOpacity": "852x499 False",
+      "bytes": 89004,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-01.webp",
+      "source": "33-isla2-roca-01.png",
+      "geometryAndOpacity": "916x780 False",
+      "bytes": 713408,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-01.avif",
+      "source": "33-isla2-roca-01.png",
+      "geometryAndOpacity": "916x780 False",
+      "bytes": 145905,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-02.webp",
+      "source": "33-isla2-roca-02.png",
+      "geometryAndOpacity": "1024x486 False",
+      "bytes": 478100,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-02.avif",
+      "source": "33-isla2-roca-02.png",
+      "geometryAndOpacity": "1024x486 False",
+      "bytes": 99698,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-03.webp",
+      "source": "33-isla2-roca-03.png",
+      "geometryAndOpacity": "994x464 False",
+      "bytes": 540636,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-03.avif",
+      "source": "33-isla2-roca-03.png",
+      "geometryAndOpacity": "994x464 False",
+      "bytes": 118491,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-04.webp",
+      "source": "33-isla2-roca-04.png",
+      "geometryAndOpacity": "911x711 False",
+      "bytes": 672608,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-04.avif",
+      "source": "33-isla2-roca-04.png",
+      "geometryAndOpacity": "911x711 False",
+      "bytes": 145073,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-05.webp",
+      "source": "33-isla2-roca-05.png",
+      "geometryAndOpacity": "943x633 False",
+      "bytes": 647354,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-05.avif",
+      "source": "33-isla2-roca-05.png",
+      "geometryAndOpacity": "943x633 False",
+      "bytes": 142161,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-06.webp",
+      "source": "33-isla2-roca-06.png",
+      "geometryAndOpacity": "1024x570 False",
+      "bytes": 529846,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-06.avif",
+      "source": "33-isla2-roca-06.png",
+      "geometryAndOpacity": "1024x570 False",
+      "bytes": 112680,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-07.webp",
+      "source": "33-isla2-roca-07.png",
+      "geometryAndOpacity": "926x503 False",
+      "bytes": 474330,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-07.avif",
+      "source": "33-isla2-roca-07.png",
+      "geometryAndOpacity": "926x503 False",
+      "bytes": 108721,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-08.webp",
+      "source": "33-isla2-roca-08.png",
+      "geometryAndOpacity": "672x961 False",
+      "bytes": 664296,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "33-isla2-roca-08.avif",
+      "source": "33-isla2-roca-08.png",
+      "geometryAndOpacity": "672x961 False",
+      "bytes": 146184,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "40-isla4-celular.webp",
+      "source": "40-isla4-celular.png",
+      "geometryAndOpacity": "864x1536 True",
+      "bytes": 932724,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "40-isla4-celular.avif",
+      "source": "40-isla4-celular.png",
+      "geometryAndOpacity": "864x1536 True",
+      "bytes": 52137,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "40-isla4-escritorio.webp",
+      "source": "40-isla4-escritorio.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 1084410,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "40-isla4-escritorio.avif",
+      "source": "40-isla4-escritorio.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 87309,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "41-isla4-cielo.webp",
+      "source": "41-isla4-cielo.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 853264,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "41-isla4-cielo.avif",
+      "source": "41-isla4-cielo.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 27306,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "42-isla4-primer-plano.webp",
+      "source": "42-isla4-primer-plano.png",
+      "geometryAndOpacity": "1024x556 False",
+      "bytes": 505004,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "42-isla4-primer-plano.avif",
+      "source": "42-isla4-primer-plano.png",
+      "geometryAndOpacity": "1024x556 False",
+      "bytes": 120282,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "43-isla4-caja.webp",
+      "source": "43-isla4-caja.png",
+      "geometryAndOpacity": "1024x684 False",
+      "bytes": 588986,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "43-isla4-caja.avif",
+      "source": "43-isla4-caja.png",
+      "geometryAndOpacity": "1024x684 False",
+      "bytes": 104249,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "43-isla4-engranaje.webp",
+      "source": "43-isla4-engranaje.png",
+      "geometryAndOpacity": "996x692 False",
+      "bytes": 667872,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "43-isla4-engranaje.avif",
+      "source": "43-isla4-engranaje.png",
+      "geometryAndOpacity": "996x692 False",
+      "bytes": 147085,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "43-isla4-invernadero.webp",
+      "source": "43-isla4-invernadero.png",
+      "geometryAndOpacity": "1024x807 False",
+      "bytes": 669426,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "43-isla4-invernadero.avif",
+      "source": "43-isla4-invernadero.png",
+      "geometryAndOpacity": "1024x807 False",
+      "bytes": 108360,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "43-isla4-maceta.webp",
+      "source": "43-isla4-maceta.png",
+      "geometryAndOpacity": "863x700 False",
+      "bytes": 642458,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "43-isla4-maceta.avif",
+      "source": "43-isla4-maceta.png",
+      "geometryAndOpacity": "863x700 False",
+      "bytes": 129033,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "43-isla4-tierra-01.webp",
+      "source": "43-isla4-tierra-01.png",
+      "geometryAndOpacity": "1024x423 False",
+      "bytes": 449280,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "43-isla4-tierra-01.avif",
+      "source": "43-isla4-tierra-01.png",
+      "geometryAndOpacity": "1024x423 False",
+      "bytes": 105515,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "43-isla4-tierra-02.webp",
+      "source": "43-isla4-tierra-02.png",
+      "geometryAndOpacity": "1024x341 False",
+      "bytes": 423764,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "43-isla4-tierra-02.avif",
+      "source": "43-isla4-tierra-02.png",
+      "geometryAndOpacity": "1024x341 False",
+      "bytes": 105229,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "45-isla5-celular.webp",
+      "source": "45-isla5-celular.png",
+      "geometryAndOpacity": "864x1536 True",
+      "bytes": 1074240,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "45-isla5-celular.avif",
+      "source": "45-isla5-celular.png",
+      "geometryAndOpacity": "864x1536 True",
+      "bytes": 101565,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "45-isla5-escritorio.webp",
+      "source": "45-isla5-escritorio.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 1104754,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "45-isla5-escritorio.avif",
+      "source": "45-isla5-escritorio.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 102462,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "46-isla5-cielo.webp",
+      "source": "46-isla5-cielo.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 937958,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "46-isla5-cielo.avif",
+      "source": "46-isla5-cielo.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 41984,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "47-isla5-primer-plano.webp",
+      "source": "47-isla5-primer-plano.png",
+      "geometryAndOpacity": "1024x594 False",
+      "bytes": 567926,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "47-isla5-primer-plano.avif",
+      "source": "47-isla5-primer-plano.png",
+      "geometryAndOpacity": "1024x594 False",
+      "bytes": 134985,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-hito-01.webp",
+      "source": "48-isla5-hito-01.png",
+      "geometryAndOpacity": "883x672 False",
+      "bytes": 607522,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-hito-01.avif",
+      "source": "48-isla5-hito-01.png",
+      "geometryAndOpacity": "883x672 False",
+      "bytes": 140509,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-hito-02.webp",
+      "source": "48-isla5-hito-02.png",
+      "geometryAndOpacity": "693x768 False",
+      "bytes": 507690,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-hito-02.avif",
+      "source": "48-isla5-hito-02.png",
+      "geometryAndOpacity": "693x768 False",
+      "bytes": 114279,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-hito-03.webp",
+      "source": "48-isla5-hito-03.png",
+      "geometryAndOpacity": "758x821 False",
+      "bytes": 646602,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-hito-03.avif",
+      "source": "48-isla5-hito-03.png",
+      "geometryAndOpacity": "758x821 False",
+      "bytes": 149131,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-hito-04.webp",
+      "source": "48-isla5-hito-04.png",
+      "geometryAndOpacity": "841x595 False",
+      "bytes": 514860,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-hito-04.avif",
+      "source": "48-isla5-hito-04.png",
+      "geometryAndOpacity": "841x595 False",
+      "bytes": 116548,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-hito-05.webp",
+      "source": "48-isla5-hito-05.png",
+      "geometryAndOpacity": "919x577 False",
+      "bytes": 609200,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-hito-05.avif",
+      "source": "48-isla5-hito-05.png",
+      "geometryAndOpacity": "919x577 False",
+      "bytes": 141531,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-hito-06.webp",
+      "source": "48-isla5-hito-06.png",
+      "geometryAndOpacity": "638x799 False",
+      "bytes": 468726,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-hito-06.avif",
+      "source": "48-isla5-hito-06.png",
+      "geometryAndOpacity": "638x799 False",
+      "bytes": 104947,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-paso-01.webp",
+      "source": "48-isla5-paso-01.png",
+      "geometryAndOpacity": "1024x522 False",
+      "bytes": 618532,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-paso-01.avif",
+      "source": "48-isla5-paso-01.png",
+      "geometryAndOpacity": "1024x522 False",
+      "bytes": 136979,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-paso-02.webp",
+      "source": "48-isla5-paso-02.png",
+      "geometryAndOpacity": "983x532 False",
+      "bytes": 609532,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-paso-02.avif",
+      "source": "48-isla5-paso-02.png",
+      "geometryAndOpacity": "983x532 False",
+      "bytes": 133306,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-paso-03.webp",
+      "source": "48-isla5-paso-03.png",
+      "geometryAndOpacity": "1024x498 False",
+      "bytes": 554828,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-paso-03.avif",
+      "source": "48-isla5-paso-03.png",
+      "geometryAndOpacity": "1024x498 False",
+      "bytes": 121707,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-paso-04.webp",
+      "source": "48-isla5-paso-04.png",
+      "geometryAndOpacity": "1024x378 False",
+      "bytes": 435406,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-paso-04.avif",
+      "source": "48-isla5-paso-04.png",
+      "geometryAndOpacity": "1024x378 False",
+      "bytes": 97877,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-paso-05.webp",
+      "source": "48-isla5-paso-05.png",
+      "geometryAndOpacity": "992x614 False",
+      "bytes": 606260,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-paso-05.avif",
+      "source": "48-isla5-paso-05.png",
+      "geometryAndOpacity": "992x614 False",
+      "bytes": 134928,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-paso-06.webp",
+      "source": "48-isla5-paso-06.png",
+      "geometryAndOpacity": "1024x465 False",
+      "bytes": 541840,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "48-isla5-paso-06.avif",
+      "source": "48-isla5-paso-06.png",
+      "geometryAndOpacity": "1024x465 False",
+      "bytes": 118706,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "50-isla6-celular.webp",
+      "source": "50-isla6-celular.png",
+      "geometryAndOpacity": "864x1536 True",
+      "bytes": 1013006,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "50-isla6-celular.avif",
+      "source": "50-isla6-celular.png",
+      "geometryAndOpacity": "864x1536 True",
+      "bytes": 86608,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "50-isla6-escritorio.webp",
+      "source": "50-isla6-escritorio.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 1251040,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "50-isla6-escritorio.avif",
+      "source": "50-isla6-escritorio.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 109991,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "51-isla6-cielo.webp",
+      "source": "51-isla6-cielo.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 902114,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "51-isla6-cielo.avif",
+      "source": "51-isla6-cielo.png",
+      "geometryAndOpacity": "1672x941 True",
+      "bytes": 36673,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "52-isla6-primer-plano.webp",
+      "source": "52-isla6-primer-plano.png",
+      "geometryAndOpacity": "1024x480 False",
+      "bytes": 414964,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "52-isla6-primer-plano.avif",
+      "source": "52-isla6-primer-plano.png",
+      "geometryAndOpacity": "1024x480 False",
+      "bytes": 105861,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "53-isla6-banco.webp",
+      "source": "53-isla6-banco.png",
+      "geometryAndOpacity": "1024x457 False",
+      "bytes": 415280,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "53-isla6-banco.avif",
+      "source": "53-isla6-banco.png",
+      "geometryAndOpacity": "1024x457 False",
+      "bytes": 90245,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "53-isla6-fogon.webp",
+      "source": "53-isla6-fogon.png",
+      "geometryAndOpacity": "1024x1024 False",
+      "bytes": 314488,
+      "status": "decoded-dimensions-opacity-verified"
+    },
+    {
+      "file": "53-isla6-fogon.avif",
+      "source": "53-isla6-fogon.png",
+      "geometryAndOpacity": "1024x1024 False",
+      "bytes": 299346,
+      "status": "decoded-dimensions-opacity-verified"
+    }
+  ]
+}

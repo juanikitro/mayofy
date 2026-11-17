@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 
-import { getMayoSlot, mayoPoseSources, type MayoSlotId } from "@/content/stage";
+import { getMayoSlot, mayoAnchors, mayoPoseSources, type MayoSlotId } from "@/content/stage";
 
 /**
  * Mayo's slot on an island. Renders the captured images of the slot's
@@ -21,13 +21,27 @@ export function MayoFigure({
   const { moment, label, size } = getMayoSlot(slot);
   const sources = mayoPoseSources(moment);
   const loading = eager ? "eager" : "lazy";
+  const anchor = mayoAnchors[slot];
+  const style = (
+    anchor
+      ? ({
+          "--mayo-size": size,
+          "--anchor-x": anchor.x,
+          "--anchor-y": anchor.y,
+          "--anchor-size": anchor.size,
+          "--anchor-x-m": anchor.xMobile ?? anchor.x,
+          "--anchor-y-m": anchor.yMobile ?? anchor.y,
+          "--anchor-size-m": anchor.sizeMobile ?? anchor.size,
+        } as Record<string, string>)
+      : ({ "--mayo-size": size } as Record<string, string>)
+  ) as CSSProperties;
 
   return (
     <div
-      className={`mayo mayo--${slot} ${className}`.trim()}
+      className={`mayo mayo--${slot}${anchor ? " mayo--anchored" : ""} ${className}`.trim()}
       data-mayo-slot={slot}
       data-mayo-moment={moment}
-      style={{ "--mayo-size": size } as CSSProperties}
+      style={style}
     >
       <picture className="mayo__picture mayo__picture--still">
         <source type="image/avif" srcSet={sources.still.avif} />

@@ -2614,3 +2614,61 @@ html[data-motion-tier="lite"] .campfire__flame-core {
   white-space: pre-wrap;
   pointer-events: none;
 }
+
+/* Generated plates ------------------------------------------------------- */
+
+.scene--plated {
+  container-type: size;
+}
+
+.plate {
+  --r: var(--plate-ratio, 16 / 9);
+
+  position: absolute;
+  bottom: 0;
+  left: var(--plate-x, 50%);
+  width: max(100cqw, calc(100cqh * var(--r)));
+  aspect-ratio: var(--r);
+  transform: translateX(calc(-1 * var(--plate-x, 50%)));
+}
+
+.plate__picture,
+.plate__picture img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.plate__picture img {
+  object-fit: fill;
+}
+
+/* Ornaments inside a plate scale with it */
+.plate .ornament {
+  height: 46%;
+}
+
+/* Mayo anchored to a plate: feet at (x, y), square = size of the plate width */
+.mayo--anchored {
+  inset: auto;
+  left: var(--anchor-x);
+  top: var(--anchor-y);
+  width: var(--anchor-size);
+  transform: translate(-50%, -80%);
+}
+
+@media (max-width: 48rem) {
+  .plate {
+    --r: var(--plate-ratio-m, var(--plate-ratio, 9 / 16));
+
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .mayo--anchored {
+    left: var(--anchor-x-m);
+    top: var(--anchor-y-m);
+    width: var(--anchor-size-m);
+  }
+}

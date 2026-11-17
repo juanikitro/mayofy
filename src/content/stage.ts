@@ -54,3 +54,57 @@ export function mayoPoseSources(moment: string) {
 }
 
 export const mayoModelUrl = "/mayo/mayo.glb";
+
+/* ---------------------------------------------------------------- plates */
+
+export type PlateImage = { avif: string; webp: string; width: number; height: number };
+
+export type PlateSpec = {
+  desktop: PlateImage;
+  mobile?: PlateImage;
+  /** Horizontal anchor kept in view when the plate is cropped (default 50%). */
+  anchorX?: string;
+};
+
+const assetRoot = "/images/mundo-mayo";
+
+function plateImage(name: string, width: number, height: number): PlateImage {
+  return { avif: `${assetRoot}/${name}.avif`, webp: `${assetRoot}/${name}.webp`, width, height };
+}
+
+const desktopPlate = (name: string) => plateImage(name, 1672, 941);
+const mobilePlate = (name: string) => plateImage(name, 864, 1536);
+
+/** Generated plates per island (asset manifest docs/plans/mundo-mayo-assets.md). */
+export const islandPlates = {
+  hero: { desktop: desktopPlate("01-hero-escritorio"), mobile: mobilePlate("02-hero-celular"), anchorX: "72%" },
+  problem: { desktop: desktopPlate("30-isla2-escritorio"), mobile: mobilePlate("30-isla2-celular") },
+  packs: { desktop: desktopPlate("10-isla3-base") },
+  systems: { desktop: desktopPlate("40-isla4-escritorio"), mobile: mobilePlate("40-isla4-celular") },
+  works: { desktop: desktopPlate("45-isla5-escritorio"), mobile: mobilePlate("45-isla5-celular") },
+  host: { desktop: desktopPlate("50-isla6-escritorio"), mobile: mobilePlate("50-isla6-celular") },
+  questions: { desktop: desktopPlate("55-isla7-escritorio"), mobile: mobilePlate("55-isla7-celular") },
+} as const satisfies Record<string, PlateSpec>;
+
+/**
+ * Where Mayo's feet touch each plate, in percent of the plate, and the side
+ * of her square as a percent of the plate width (analysis §4). Mobile
+ * plates are taller: the same object sits lower and the square grows.
+ */
+export type MayoAnchor = {
+  x: string;
+  y: string;
+  size: string;
+  xMobile?: string;
+  yMobile?: string;
+  sizeMobile?: string;
+};
+
+export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
+  hero: { x: "58%", y: "69%", size: "13%", xMobile: "52%", yMobile: "79%", sizeMobile: "30%" },
+  problem: { x: "52%", y: "64%", size: "12%", xMobile: "50%", yMobile: "76%", sizeMobile: "28%" },
+  systems: { x: "44%", y: "67%", size: "12%", xMobile: "46%", yMobile: "78%", sizeMobile: "28%" },
+  works: { x: "50%", y: "61%", size: "11%", xMobile: "50%", yMobile: "75%", sizeMobile: "26%" },
+  host: { x: "56%", y: "63%", size: "12%", xMobile: "54%", yMobile: "76%", sizeMobile: "28%" },
+  questions: { x: "46%", y: "61%", size: "11%", xMobile: "48%", yMobile: "75%", sizeMobile: "26%" },
+};

@@ -20,6 +20,7 @@ import {
   maintenancePlan,
 } from "@/content/commercial-plans";
 import { islandCopy } from "@/content/islands";
+import { islandPlates } from "@/content/stage";
 import { type ProjectEntry, projects } from "@/content/projects";
 import { publicChannels, siteContent } from "@/content/site";
 import { getWhatsAppHref } from "@/lib/whatsapp";
@@ -33,7 +34,7 @@ import { getWhatsAppHref } from "@/lib/whatsapp";
 export function ProblemIsland() {
   return (
     <section id="problema" className="isle isle--morning" data-island="2" aria-labelledby="problema-title">
-      <IslandScene variant="morning">
+      <IslandScene variant="morning" plate={islandPlates.problem}>
         <LooseRocks />
         <MayoFigure slot="problem" className="isle__mayo isle__mayo--play" />
       </IslandScene>
@@ -56,7 +57,7 @@ export function ProblemIsland() {
 export function SystemsIsland() {
   return (
     <section id="sistemas" className="isle isle--golden" data-island="4" aria-labelledby="sistemas-title">
-      <IslandScene variant="golden">
+      <IslandScene variant="golden" plate={islandPlates.systems}>
         <Greenhouse />
         <MayoFigure slot="systems" className="isle__mayo isle__mayo--dig" />
       </IslandScene>
@@ -131,7 +132,7 @@ export function SystemsIsland() {
 export function WorksIsland() {
   return (
     <section id="trabajos" className="isle isle--sunset" data-island="5" aria-labelledby="trabajos-title">
-      <IslandScene variant="sunset">
+      <IslandScene variant="sunset" plate={islandPlates.works}>
         <PathStones />
         <MayoFigure slot="works" className="isle__mayo isle__mayo--run" />
       </IslandScene>
@@ -190,7 +191,7 @@ export function WorksIsland() {
 export function QuestionsIsland() {
   return (
     <section id="preguntas" className="isle isle--night isle--dark" data-island="7" aria-labelledby="preguntas-title">
-      <IslandScene variant="night">
+      <IslandScene variant="night" plate={islandPlates.questions}>
         <Fireflies />
         <MayoFigure slot="questions" className="isle__mayo isle__mayo--chase" />
       </IslandScene>
@@ -253,7 +254,7 @@ export function JuaniIsland() {
 
   return (
     <section id="contacto" className="isle isle--dusk isle--dark" data-island="6" aria-labelledby="contacto-title">
-      <IslandScene variant="dusk">
+      <IslandScene variant="dusk" plate={islandPlates.host}>
         <Campfire />
         <MayoFigure slot="host" className="isle__mayo isle__mayo--rest" />
       </IslandScene>
