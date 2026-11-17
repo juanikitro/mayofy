@@ -2,7 +2,7 @@
 
 **Fecha:** 17 de noviembre de 2026
 **Decisión de Juani:** "Si" a entregar, además de cada placa completa, la isla recortada con alpha para parallax real (ver `2026-11-17-integracion-mayo-assets.md`, §6 punto 5 y §9 punto 2).
-**Uso:** Juani pega el bloque siguiente en la sesión del agente de assets (Codex, worktree `mayo-world-assets`).
+**Uso:** el 17 de noviembre Juani pidió que el agente de la landing se comunicara directamente con el de assets. Como el chat de Codex anterior no era alcanzable por la CLI de Orca, se lanzó un worker de Codex supervisado por orquestación de Orca en el worktree `mayo-world-assets` (run `run_b9b05ab40726`, dispatch `ctx_cb8b2108a8e5`) con este pedido, más la isla 7 completa, el lote C de nubes y el recorte y optimización de todos los lotes. El bloque siguiente queda como referencia del pedido original.
 
 ```text
 New delivery requirement, approved by Juani on 2026-11-17 (see docs/plans/2026-11-17-integracion-mayo-assets.md §6.5 in branch juanikitro/landing-redesign): for every island plate, deliver two derived layers so the landing can move sky and island at different speeds and let text overlap the sky without touching the island.
