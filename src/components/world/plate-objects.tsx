@@ -17,7 +17,19 @@ export function PlateObjects({ objects }: { objects: readonly PlateObject[] }) {
           height={object.height}
           loading="lazy"
           decoding="async"
-          style={{ left: object.x, top: object.y, width: object.w, "--float-delay": `${(index % 5) * 0.7}s`, "--chase-from": object.x, "--chase-to": object.chasedTo } as CSSProperties}
+          style={
+            {
+              "--x": object.x,
+              "--y": object.y,
+              "--w": object.w,
+              "--x-m": object.mobile?.x,
+              "--y-m": object.mobile?.y,
+              "--w-m": object.mobile?.w,
+              "--to": object.chasedTo,
+              "--to-m": object.mobile?.chasedTo,
+              "--float-delay": `${(index % 5) * 0.7}s`,
+            } as CSSProperties
+          }
         />
       ))}
     </>

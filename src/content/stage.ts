@@ -204,15 +204,15 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   // Hero: seated inside the meadow, between the sign and the right edge.
   hero: { x: "54%", y: "70%", size: "13%", xMobile: "52%", yMobile: "79%", sizeMobile: "30%" },
   // Island 2: play bow in front of the loose rocks she is "sorting" (rocks 07 and 01 sit to her left).
-  problem: { x: "38%", y: "71%", size: "12%", xMobile: "46%", yMobile: "77%", sizeMobile: "28%" },
+  problem: { x: "38%", y: "71%", size: "12%", xMobile: "42%", yMobile: "73%", sizeMobile: "26%" },
   // Island 3: jumps on the meadow beside the third platform (anchored on the plate, not on a card).
   packs: { x: "85%", y: "53%", size: "10%", xMobile: "74%", yMobile: "50%", sizeMobile: "24%" },
   // Island 4: digging into the soil mound (tierra-02 at 30 %, 73 %).
-  systems: { x: "36%", y: "74%", size: "12%", xMobile: "38%", yMobile: "80%", sizeMobile: "28%" },
+  systems: { x: "36%", y: "74%", size: "12%", xMobile: "40%", yMobile: "78.5%", sizeMobile: "22%" },
   // Island 5: runs right-to-left across the meadow below the path while the island scrolls by.
-  works: { x: "50%", y: "66%", size: "11%", xMobile: "50%", yMobile: "77%", sizeMobile: "26%", travel: { from: "68%", to: "30%" } },
+  works: { x: "50%", y: "66%", size: "11%", xMobile: "50%", yMobile: "76.5%", sizeMobile: "26%", travel: { from: "68%", to: "30%" } },
   // Island 6: resting, turned towards the campfire (fogon at 56 %, 66 %).
-  host: { x: "44%", y: "66%", size: "12%", xMobile: "40%", yMobile: "77%", sizeMobile: "28%", face: "right" },
+  host: { x: "44%", y: "66%", size: "12%", xMobile: "37%", yMobile: "76%", sizeMobile: "24%", face: "right" },
   // Island 7: chases a firefly that drifts ahead of her, away from the lantern.
   questions: { x: "40%", y: "62%", size: "11%", xMobile: "40%", yMobile: "75%", sizeMobile: "26%", face: "right", travel: { from: "30%", to: "52%" } },
 };
@@ -234,9 +234,23 @@ export type PlateObject = {
   float?: boolean;
   /** Drifts across the plate with the scroll (the firefly Mayo chases): `x` moves to this value. */
   chasedTo?: string;
+  /** Placement on the mobile plate, whose island is framed differently. */
+  mobile?: { x: string; y: string; w: string; chasedTo?: string };
 };
 
-const obj = (name: string, width: number, height: number, x: number, y: number, w: number, extra: Partial<PlateObject> = {}): PlateObject => ({
+/** x, y and width in % of the mobile plate, and the chase target. */
+type MobilePlacement = [x: number, y: number, w: number, chasedTo?: number];
+
+const obj = (
+  name: string,
+  width: number,
+  height: number,
+  x: number,
+  y: number,
+  w: number,
+  extra: Omit<Partial<PlateObject>, "mobile"> = {},
+  mobile?: MobilePlacement,
+): PlateObject => ({
   src: `${assetRoot}/${name}.avif`,
   width,
   height,
@@ -244,56 +258,64 @@ const obj = (name: string, width: number, height: number, x: number, y: number, 
   y: `${y}%`,
   w: `${w}%`,
   ...extra,
+  ...(mobile
+    ? { mobile: { x: `${mobile[0]}%`, y: `${mobile[1]}%`, w: `${mobile[2]}%`, ...(mobile[3] ? { chasedTo: `${mobile[3]}%` } : {}) } }
+    : {}),
 });
 
-/** Objects per island, in paint order (first = furthest back). */
+/**
+ * Objects per island, in paint order (first = furthest back). The last
+ * argument places the object on the mobile plate: its island sits lower and
+ * fills more of the width, so the desktop percentages left objects floating
+ * in the sky. Read on the mobile plates with a 5 % grid (17 November 2026).
+ */
 export const plateObjects: Partial<Record<MayoSlotId, readonly PlateObject[]>> = {
   problem: [
-    obj("33-isla2-roca-04", 1024, 500, 30, 62, 8, { float: true }),
-    obj("33-isla2-roca-02", 1024, 486, 62, 60, 9, { float: true }),
-    obj("33-isla2-roca-06", 1024, 520, 72, 66, 7, { float: true }),
-    obj("33-isla2-roca-01", 916, 780, 36, 70, 7, { float: true }),
-    obj("33-isla2-roca-05", 1024, 520, 56, 69, 6, { float: true }),
-    obj("33-isla2-roca-03", 994, 464, 66, 74, 8, { float: true }),
-    obj("33-isla2-roca-07", 1024, 520, 24, 72, 5, { float: true }),
-    obj("33-isla2-roca-08", 1024, 520, 50, 76, 6, { float: true }),
+    obj("33-isla2-roca-04", 1024, 500, 30, 62, 8, { float: true }, [28, 66, 12]),
+    obj("33-isla2-roca-02", 1024, 486, 62, 60, 9, { float: true }, [60, 65.5, 13]),
+    obj("33-isla2-roca-06", 1024, 520, 72, 66, 7, { float: true }, [77, 67.5, 10]),
+    obj("33-isla2-roca-01", 916, 780, 36, 70, 7, { float: true }, [30, 70.5, 10]),
+    obj("33-isla2-roca-05", 1024, 520, 56, 69, 6, { float: true }, [58, 69.5, 9]),
+    obj("33-isla2-roca-03", 994, 464, 66, 74, 8, { float: true }, [70, 72, 12]),
+    obj("33-isla2-roca-07", 1024, 520, 24, 72, 5, { float: true }, [16, 71.5, 8]),
+    obj("33-isla2-roca-08", 1024, 520, 50, 76, 6, { float: true }, [52, 73.5, 9]),
   ],
   systems: [
-    obj("43-isla4-invernadero", 1024, 807, 64, 72, 18),
-    obj("43-isla4-tierra-02", 1024, 423, 30, 73, 9),
-    obj("43-isla4-tierra-01", 1024, 423, 46, 77, 11),
-    obj("43-isla4-maceta", 863, 700, 25, 71, 5),
-    obj("43-isla4-engranaje", 996, 692, 51, 75, 6),
-    obj("43-isla4-caja", 1024, 684, 74, 64, 7),
+    obj("43-isla4-invernadero", 1024, 807, 64, 72, 18, {}, [70, 76, 20]),
+    obj("43-isla4-tierra-02", 1024, 423, 30, 73, 9, {}, [36, 77, 12]),
+    obj("43-isla4-tierra-01", 1024, 423, 46, 77, 11, {}, [52, 78.5, 13]),
+    obj("43-isla4-maceta", 863, 700, 25, 71, 5, {}, [22, 76, 6]),
+    obj("43-isla4-engranaje", 996, 692, 51, 75, 6, {}, [58, 77.5, 7]),
+    obj("43-isla4-caja", 1024, 684, 74, 64, 7, {}, [83, 76.5, 8]),
   ],
   works: [
-    obj("48-isla5-paso-01", 1024, 522, 52, 54, 6),
-    obj("48-isla5-hito-01", 883, 672, 56, 52, 3),
-    obj("48-isla5-paso-02", 1024, 522, 47, 58, 6),
-    obj("48-isla5-hito-02", 883, 672, 43, 56, 3),
-    obj("48-isla5-paso-03", 1024, 522, 42, 62, 6),
-    obj("48-isla5-hito-03", 883, 672, 46, 60, 3),
-    obj("48-isla5-paso-04", 1024, 522, 43, 66, 6),
-    obj("48-isla5-hito-04", 883, 672, 39, 65, 3),
-    obj("48-isla5-paso-05", 1024, 522, 48, 70, 6),
-    obj("48-isla5-hito-05", 883, 672, 52, 68, 3),
-    obj("48-isla5-paso-06", 1024, 522, 53, 73, 6),
-    obj("48-isla5-hito-06", 883, 672, 57, 71, 3),
+    obj("48-isla5-paso-01", 1024, 522, 52, 54, 6, {}, [57, 64.8, 8]),
+    obj("48-isla5-hito-01", 883, 672, 56, 52, 3, {}, [49, 64.4, 3.5]),
+    obj("48-isla5-paso-02", 1024, 522, 47, 58, 6, {}, [63, 67, 8]),
+    obj("48-isla5-hito-02", 883, 672, 43, 56, 3, {}, [71, 67.4, 3.5]),
+    obj("48-isla5-paso-03", 1024, 522, 42, 62, 6, {}, [51, 69.2, 8]),
+    obj("48-isla5-hito-03", 883, 672, 46, 60, 3, {}, [60, 70, 3.5]),
+    obj("48-isla5-paso-04", 1024, 522, 43, 66, 6, {}, [41, 71.2, 8]),
+    obj("48-isla5-hito-04", 883, 672, 39, 65, 3, {}, [32, 71.6, 3.5]),
+    obj("48-isla5-paso-05", 1024, 522, 48, 70, 6, {}, [45, 74, 8]),
+    obj("48-isla5-hito-05", 883, 672, 52, 68, 3, {}, [36, 74.6, 3.5]),
+    obj("48-isla5-paso-06", 1024, 522, 53, 73, 6, {}, [55, 76, 8]),
+    obj("48-isla5-hito-06", 883, 672, 57, 71, 3, {}, [64, 75.8, 3.5]),
   ],
   host: [
-    obj("53-isla6-banco", 1024, 457, 66, 61, 12),
-    obj("53-isla6-fogon", 1024, 1024, 56, 66, 9),
+    obj("53-isla6-banco", 1024, 457, 66, 61, 12, {}, [66, 72.5, 16]),
+    obj("53-isla6-fogon", 1024, 1024, 56, 66, 9, {}, [53, 75, 12]),
   ],
   questions: [
-    obj("58-isla7-farol", 592, 1024, 30, 58, 4),
-    obj("58-isla7-luciernaga-03", 512, 512, 36, 46, 6, { glow: true, float: true }),
-    obj("58-isla7-luciernaga-02", 512, 512, 52, 40, 4, { glow: true, float: true }),
-    obj("58-isla7-luciernaga-01", 512, 512, 60, 48, 3, { glow: true, float: true }),
-    obj("58-isla7-luciernaga-02", 512, 512, 68, 42, 4, { glow: true, float: true }),
-    obj("58-isla7-luciernaga-01", 512, 512, 44, 52, 3, { glow: true, float: true, chasedTo: "66%" }),
-    obj("58-isla7-luciernaga-03", 512, 512, 74, 54, 5, { glow: true, float: true }),
-    obj("58-isla7-luciernaga-01", 512, 512, 26, 50, 3, { glow: true, float: true }),
-    obj("58-isla7-luciernaga-02", 512, 512, 58, 58, 4, { glow: true, float: true }),
+    obj("58-isla7-farol", 592, 1024, 30, 58, 4, {}, [19, 76, 6]),
+    obj("58-isla7-luciernaga-03", 512, 512, 36, 46, 6, { glow: true, float: true }, [30, 63, 9]),
+    obj("58-isla7-luciernaga-02", 512, 512, 52, 40, 4, { glow: true, float: true }, [44, 56, 6]),
+    obj("58-isla7-luciernaga-01", 512, 512, 60, 48, 3, { glow: true, float: true }, [68, 61, 5]),
+    obj("58-isla7-luciernaga-02", 512, 512, 68, 42, 4, { glow: true, float: true }, [80, 58, 6]),
+    obj("58-isla7-luciernaga-01", 512, 512, 44, 52, 3, { glow: true, float: true, chasedTo: "66%" }, [44, 69, 5, 68]),
+    obj("58-isla7-luciernaga-03", 512, 512, 74, 54, 5, { glow: true, float: true }, [84, 67, 8]),
+    obj("58-isla7-luciernaga-01", 512, 512, 26, 50, 3, { glow: true, float: true }, [16, 64, 5]),
+    obj("58-isla7-luciernaga-02", 512, 512, 58, 58, 4, { glow: true, float: true }, [58, 66, 6]),
   ],
 };
 

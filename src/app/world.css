@@ -2707,11 +2707,29 @@ html[data-motion-tier="reduced"] .fall__mayo {
 
 /* Objects on a plate */
 
+/* Placement comes from stage.ts as custom properties; the mobile plate has
+ * its own (`--x-m`, `--y-m`, `--w-m`, `--to-m`). */
 .plate-object {
+  --obj-x: var(--x);
+  --obj-to: var(--to, var(--x));
+
   position: absolute;
+  left: var(--obj-x);
+  top: var(--y);
+  width: var(--w);
   height: auto;
   transform: translate(-50%, -100%);
   pointer-events: none;
+}
+
+@media (max-width: 48rem) {
+  .plate-object {
+    --obj-x: var(--x-m, var(--x));
+    --obj-to: var(--to-m, var(--to, var(--x-m, var(--x))));
+
+    top: var(--y-m, var(--y));
+    width: var(--w-m, var(--w));
+  }
 }
 
 .plate-object--glow {
@@ -2891,11 +2909,11 @@ html[data-motion-tier="reduced"] .rock-shadow {
 
 @keyframes object-chase {
   from {
-    left: var(--chase-from);
+    left: var(--obj-x);
   }
 
   to {
-    left: var(--chase-to);
+    left: var(--obj-to);
   }
 }
 
