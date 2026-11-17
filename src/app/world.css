@@ -2864,13 +2864,12 @@ html[data-motion-tier="reduced"] .fall__mayo {
 /* Objects on a plate */
 
 /* Placement comes from stage.ts as custom properties; the mobile plate has
- * its own (`--x-m`, `--y-m`, `--w-m`, `--to-m`). */
+ * its own (`--x-m`, `--y-m`, `--w-m`, `--chase-m`). */
 .plate-object {
-  --obj-x: var(--x);
-  --obj-to: var(--to, var(--x));
+  --chase: var(--chase-d, 0%);
 
   position: absolute;
-  left: var(--obj-x);
+  left: var(--x);
   top: var(--y);
   width: var(--w);
   height: auto;
@@ -2880,9 +2879,9 @@ html[data-motion-tier="reduced"] .fall__mayo {
 
 @media (max-width: 48rem) {
   .plate-object {
-    --obj-x: var(--x-m, var(--x));
-    --obj-to: var(--to-m, var(--to, var(--x-m, var(--x))));
+    --chase: var(--chase-m, var(--chase-d, 0%));
 
+    left: var(--x-m, var(--x));
     top: var(--y-m, var(--y));
     width: var(--w-m, var(--w));
   }
@@ -3033,9 +3032,22 @@ html[data-motion-tier="reduced"] .rock-shadow {
   transform: scaleX(-1);
 }
 
-/* Scroll-driven travel across the plate (run, chase): `left` moves from
- * `--travel-from` to `--travel-to` while the island section crosses the
- * viewport; without scroll-driven animations she stays at the anchor. */
+/* Scroll-driven travel across the plate (run, chase) while the island
+ * section crosses the viewport, as `translate` offsets from the anchor in
+ * Mayo's own widths (set by MayoFigure), so it runs on the compositor;
+ * without scroll-driven animations she stays at the anchor. */
+.mayo--travel {
+  --travel-from: var(--travel-from-d);
+  --travel-to: var(--travel-to-d);
+}
+
+@media (max-width: 48rem) {
+  .mayo--travel {
+    --travel-from: var(--travel-from-m);
+    --travel-to: var(--travel-to-m);
+  }
+}
+
 @supports (animation-timeline: view()) {
   .mayo--travel {
     animation: mayo-travel linear both;
@@ -3043,33 +3055,34 @@ html[data-motion-tier="reduced"] .rock-shadow {
     animation-range: entry 40% exit 60%;
   }
 
-  /* The chased firefly keeps its idle float and adds the scroll-driven drift. */
+  /* The chased firefly keeps its idle float, added on top of the drift. */
   .plate-object--chased,
   html[data-motion-tier="full"] .plate-object--chased {
     animation: object-chase linear both, object-float 5s ease-in-out infinite;
     animation-timeline: --isle, auto;
     animation-range: entry 40% exit 60%, normal;
     animation-delay: 0s, var(--float-delay, 0s);
+    animation-composition: replace, add;
   }
 }
 
 @keyframes mayo-travel {
   from {
-    left: var(--travel-from);
+    translate: var(--travel-from) 0;
   }
 
   to {
-    left: var(--travel-to);
+    translate: var(--travel-to) 0;
   }
 }
 
 @keyframes object-chase {
   from {
-    left: var(--obj-x);
+    translate: 0 0;
   }
 
   to {
-    left: var(--obj-to);
+    translate: var(--chase) 0;
   }
 }
 

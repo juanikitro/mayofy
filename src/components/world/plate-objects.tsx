@@ -3,6 +3,11 @@ import type { CSSProperties } from "react";
 
 import type { PlateObject } from "@/content/stage";
 
+const pct = (value: string) => Number.parseFloat(value);
+
+/** Chase drift as a `translate` in the object's own widths, so it runs on the compositor. */
+const chaseOffset = (to: string | undefined, x: string, w: string) => (to ? `${((pct(to) - pct(x)) / pct(w)) * 100}%` : undefined);
+
 /** Isolated objects placed on a plate, bottom-centre anchored in percent of the plate. */
 export function PlateObjects({ objects }: { objects: readonly PlateObject[] }) {
   return (
@@ -25,8 +30,8 @@ export function PlateObjects({ objects }: { objects: readonly PlateObject[] }) {
               "--x-m": object.mobile?.x,
               "--y-m": object.mobile?.y,
               "--w-m": object.mobile?.w,
-              "--to": object.chasedTo,
-              "--to-m": object.mobile?.chasedTo,
+              "--chase-d": chaseOffset(object.chasedTo, object.x, object.w),
+              "--chase-m": object.mobile ? chaseOffset(object.mobile.chasedTo, object.mobile.x, object.mobile.w) : undefined,
               "--float-delay": `${(index % 5) * 0.7}s`,
             } as CSSProperties
           }

@@ -1,6 +1,26 @@
 import type { CSSProperties } from "react";
 
-import { getMayoSlot, mayoAnchors, mayoPoseSources, mayoSprites, type MayoSlotId } from "@/content/stage";
+import { getMayoSlot, mayoAnchors, mayoPoseSources, mayoSprites, type MayoAnchor, type MayoSlotId } from "@/content/stage";
+
+/**
+ * Scroll travel as `translate` offsets in Mayo's own widths (a percentage of
+ * `translate` is relative to the element), so the run and the chase move on
+ * the compositor instead of re-laying out `left` on every scrolled frame.
+ * Offsets are measured from the anchor, where she rests without motion.
+ */
+function travelOffsets(anchor: MayoAnchor) {
+  if (!anchor.travel) return {};
+  const pct = (value: string) => Number.parseFloat(value);
+  const offset = (to: string, x: string, size: string) => `${((pct(to) - pct(x)) / pct(size)) * 100}%`;
+  const xMobile = anchor.xMobile ?? anchor.x;
+  const sizeMobile = anchor.sizeMobile ?? anchor.size;
+  return {
+    "--travel-from-d": offset(anchor.travel.from, anchor.x, anchor.size),
+    "--travel-to-d": offset(anchor.travel.to, anchor.x, anchor.size),
+    "--travel-from-m": offset(anchor.travel.from, xMobile, sizeMobile),
+    "--travel-to-m": offset(anchor.travel.to, xMobile, sizeMobile),
+  };
+}
 
 /**
  * Mayo's slot on an island. When the slot has a painted sprite strip
@@ -34,8 +54,7 @@ export function MayoFigure({
           "--anchor-x-m": anchor.xMobile ?? anchor.x,
           "--anchor-y-m": anchor.yMobile ?? anchor.y,
           "--anchor-size-m": anchor.sizeMobile ?? anchor.size,
-          "--travel-from": anchor.travel?.from ?? anchor.x,
-          "--travel-to": anchor.travel?.to ?? anchor.x,
+          ...travelOffsets(anchor),
         } as Record<string, string>)
       : ({ "--mayo-size": size, "--feet-y": sprite?.feetY ?? "100%" } as Record<string, string>)
   ) as CSSProperties;
