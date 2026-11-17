@@ -196,47 +196,49 @@ export function QuestionsIsland() {
         </h2>
         <p className="isle__body">{islandCopy.questions.body}</p>
 
-        <div className="questions">
-          {siteContent.faq.map((item) => (
-            <AnimatedDetails key={item.question} className="questions__item" summary={item.question}>
-              <p>{item.answer}</p>
-            </AnimatedDetails>
-          ))}
-        </div>
-
-        <article className="upkeep panel">
-          <header className="upkeep__intro">
-            <h3>Mantenimiento mensual</h3>
-            <dl className="upkeep__prices">
-              {maintenancePlan.prices.map((tier) => (
-                <div key={tier.label}>
-                  <dt>{tier.label}</dt>
-                  <dd className="upkeep__price">
-                    {tier.price}
-                    <span aria-hidden="true">{tier.asterisk ? " (**)" : " (*)"}</span>
-                  </dd>
-                </div>
-              ))}
-            </dl>
-            <p>{maintenancePlan.description}</p>
-          </header>
-          <div className="upkeep__content">
-            <a className="btn btn--quiet" href={getWhatsAppHref(maintenancePlan.whatsappMessage)} target="_blank" rel="noreferrer">
-              {maintenancePlan.cta}
-            </a>
-            <AnimatedDetails className="pack-details" summary="¿Qué cambios incluye?">
-              <DetailGroups groups={maintenancePlan.detailGroups} />
-            </AnimatedDetails>
-            <ol className="upkeep__footnotes" aria-label="Límites del mantenimiento">
-              {maintenancePlan.footnotes.map((footnote, index) => (
-                <li key={footnote}>
-                  <span aria-hidden="true">{index === 0 ? "(*) " : "(**) "}</span>
-                  {footnote}
-                </li>
-              ))}
-            </ol>
+        <div className="isle__split">
+          <div className="questions">
+            {siteContent.faq.map((item) => (
+              <AnimatedDetails key={item.question} className="questions__item" summary={item.question}>
+                <p>{item.answer}</p>
+              </AnimatedDetails>
+            ))}
           </div>
-        </article>
+
+          <article className="upkeep panel">
+            <header className="upkeep__intro">
+              <h3>Mantenimiento mensual</h3>
+              <dl className="upkeep__prices">
+                {maintenancePlan.prices.map((tier) => (
+                  <div key={tier.label}>
+                    <dt>{tier.label}</dt>
+                    <dd className="upkeep__price">
+                      {tier.price}
+                      <span aria-hidden="true">{tier.asterisk ? " (**)" : " (*)"}</span>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <p>{maintenancePlan.description}</p>
+            </header>
+            <div className="upkeep__content">
+              <a className="btn btn--quiet" href={getWhatsAppHref(maintenancePlan.whatsappMessage)} target="_blank" rel="noreferrer">
+                {maintenancePlan.cta}
+              </a>
+              <AnimatedDetails className="pack-details" summary="¿Qué cambios incluye?">
+                <DetailGroups groups={maintenancePlan.detailGroups} />
+              </AnimatedDetails>
+              <ol className="upkeep__footnotes" aria-label="Límites del mantenimiento">
+                {maintenancePlan.footnotes.map((footnote, index) => (
+                  <li key={footnote}>
+                    <span aria-hidden="true">{index === 0 ? "(*) " : "(**) "}</span>
+                    {footnote}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
   );
@@ -253,7 +255,7 @@ export function JuaniIsland() {
         <PlateObjects objects={plateObjects.host!} />
         <MayoFigure slot="host" className="isle__mayo isle__mayo--rest" />
       </IslandScene>
-      <div className="isle__content world-shell">
+      <div className="isle__content isle__content--split world-shell">
         <div className="host">
           <h2 id="contacto-title">
             <IslandTitle segments={islandCopy.host.title} />
