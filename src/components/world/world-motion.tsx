@@ -67,8 +67,7 @@ export function WorldMotion() {
         const signals = describeMotionSignals(nav, media.matches);
         badge.textContent = Object.entries(signals)
           .map(([key, value]) => `${key}: ${String(value)}`)
-          .join("
-");
+          .join("\n");
       }
     }
 
