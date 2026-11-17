@@ -78,7 +78,7 @@ const sprite = (slot: MayoSlotId, frames: number, fps: number, feetY: string, lo
   strip: { avif: `/images/mundo-mayo/70-mayo-${slot}-tira.avif`, webp: `/images/mundo-mayo/70-mayo-${slot}-tira.webp` },
   frames,
   fps,
-  cell: 1024,
+  cell: 640,
   feetY,
   loop,
 });

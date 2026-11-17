@@ -26,3 +26,32 @@ Chromium a 1440×900 y 390×844 sobre `next dev`: las siete islas con sus placas
 - Lote C (cuadros de nubes) para la caída.
 - ~~WebP con pérdida para el respaldo de los AVIF.~~ Entregados y versionados el 17 de noviembre (90 archivos, calidad 82, 5,8 MB en total).
 - Afinar anclas de Mayo con Juani sobre las placas definitivas.
+
+## Peso de las tiras de Mayo
+
+Las tiras pintadas (`70-mayo-<isla>-tira`) se entregaron con celdas de 1024 × 1024 y pesaban cerca de 1 MB cada una (unos 9 MB en total), pero Mayo nunca se muestra a más de ~250 px CSS (500 px a 2× DPR). El 17 de noviembre se recodificaron a celdas de 640 × 640 (misma cantidad y orden de cuadros, alfa intacto, sin recorte) desde los PNG maestros sin pérdida de los checkouts `mayo-world-assets` (hero, caída, problema, packs) y `mayo-paint-b` (sistemas, trabajos, Juani, preguntas), y `cell` en `sprite()` de `src/content/stage.ts` pasó de 1024 a 640.
+
+Calidad elegida tras un barrido con PSNR sobre la tira de trabajos (pelaje y lengua) y comparación visual al 2× de celdas sueltas: AVIF calidad 48, `effort` 9, croma 4:4:4; WebP calidad 58, `alphaQuality` 100. Por debajo de eso el pelaje fino se empasta; por encima el WebP se dispara de peso sin ganancia visible al tamaño de pantalla. Remuestreo Lanczos3 con alfa premultiplicado (sharp lo hace al redimensionar), sin halos oscuros en los bordes.
+
+Comando (desde una carpeta temporal con `npm init -y && npm i sharp`, script guardado en `docs/archive/tools/encode-mayo-strips.mjs`):
+
+```sh
+node encode-mayo-strips.mjs --out <salida> --cell 640 --avif 48 --webp 58 \
+  <checkout>/public/images/mundo-mayo/70-mayo-<isla>-tira.png ...
+```
+
+| Tira | Cuadros | AVIF antes | AVIF después | WebP antes | WebP después |
+| --- | --- | --- | --- | --- | --- |
+| hero | 6 | 465 KB | 101 KB | 376 KB | 161 KB |
+| fall | 12 | 1096 KB | 254 KB | 826 KB | 377 KB |
+| problem | 12 | 943 KB | 226 KB | 819 KB | 380 KB |
+| packs | 12 | 984 KB | 219 KB | 782 KB | 336 KB |
+| systems | 12 | 1196 KB | 263 KB | 899 KB | 403 KB |
+| works | 12 | 976 KB | 228 KB | 748 KB | 348 KB |
+| host | 12 | 1095 KB | 224 KB | 815 KB | 351 KB |
+| questions | 12 | 1002 KB | 241 KB | 729 KB | 375 KB |
+| **Total** | | **7757 KB** | **1756 KB** | **5994 KB** | **2731 KB** |
+
+Objetivo pedido: AVIF ≤ 250 KB y WebP ≤ 350 KB por tira de 12 cuadros. AVIF lo cumple salvo caída (254 KB) y sistemas (263 KB), que quedan apenas por encima; el WebP (respaldo para navegadores sin AVIF) queda entre 336 y 403 KB porque bajar más la calidad ya mostraba bloques en el pelaje. En total las tiras pasan de ~13,4 MB (ambos formatos) a ~4,4 MB; un navegador con AVIF descarga 1,7 MB en lugar de 7,6 MB.
+
+Verificado en Chromium a 1440 × 900: capturas del Mayo del hero y de trabajos antes y después en la misma posición de scroll, sin degradación visible; cada `[data-mayo-slot] .mayo__sprite img` reporta `naturalWidth = cuadros × 640` y el `transform` cambia a lo largo de 300 ms (la animación sigue avanzando). A 390 × 844, `scrollWidth === innerWidth`.
