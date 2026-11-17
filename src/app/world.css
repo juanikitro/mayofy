@@ -480,6 +480,8 @@ html[data-motion-tier="lite"] .mayo__picture--still {
   max-width: none;
   object-fit: contain;
   animation: mayo-sprite calc(var(--frames, 1) / var(--fps, 6) * 1s) steps(var(--frames, 1), end) infinite;
+  /* `alternate` ping-pongs the strip so the last frame never cuts to the first. */
+  animation-direction: var(--loop, alternate);
   animation-play-state: paused;
 }
 

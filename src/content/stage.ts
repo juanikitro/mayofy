@@ -69,14 +69,18 @@ export type MayoSprite = {
   cell: number;
   /** Feet line as a percentage of the cell height (manifest "feet anchor"). */
   feetY: string;
+  /** `pingpong` plays the strip forward then backward so the last frame never
+   * jumps to the first; `cycle` is for motions painted as a closed loop (run, chase). */
+  loop: "pingpong" | "cycle";
 };
 
-const sprite = (slot: MayoSlotId, frames: number, fps: number, feetY: string): MayoSprite => ({
+const sprite = (slot: MayoSlotId, frames: number, fps: number, feetY: string, loop: MayoSprite["loop"] = "pingpong"): MayoSprite => ({
   strip: { avif: `/images/mundo-mayo/70-mayo-${slot}-tira.avif`, webp: `/images/mundo-mayo/70-mayo-${slot}-tira.webp` },
   frames,
   fps,
   cell: 1024,
   feetY,
+  loop,
 });
 
 /** Painted strips delivered so far (manifest docs/plans/mundo-mayo-assets.md). */

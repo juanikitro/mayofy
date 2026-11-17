@@ -50,7 +50,7 @@ export function MayoFigure({
       {sprite ? (
         <div
           className="mayo__sprite"
-          style={{ "--frames": sprite.frames, "--fps": sprite.fps } as CSSProperties}
+          style={{ "--frames": sprite.frames, "--fps": sprite.fps, "--loop": sprite.loop === "cycle" ? "normal" : "alternate" } as CSSProperties}
         >
           <picture>
             <source type="image/avif" srcSet={sprite.strip.avif} />
