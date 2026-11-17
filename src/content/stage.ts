@@ -139,7 +139,12 @@ export const islandPlates = {
     layers: { background: desktopPlate("10-isla3-base-fondo"), island: desktopPlate("10-isla3-base-isla") },
     mobileLayers: { background: desktopPlate("10-isla3-base-fondo"), island: desktopPlate("10-isla3-base-isla") },
   },
-  systems: { desktop: desktopPlate("40-isla4-escritorio"), mobile: mobilePlate("40-isla4-celular") },
+  systems: {
+    desktop: desktopPlate("40-isla4-escritorio"),
+    mobile: mobilePlate("40-isla4-celular"),
+    layers: { background: desktopPlate("40-isla4-escritorio-fondo"), island: desktopPlate("40-isla4-escritorio-isla") },
+    mobileLayers: { background: mobilePlate("40-isla4-celular-fondo"), island: mobilePlate("40-isla4-celular-isla") },
+  },
   works: { desktop: desktopPlate("45-isla5-escritorio"), mobile: mobilePlate("45-isla5-celular") },
   host: { desktop: desktopPlate("50-isla6-escritorio"), mobile: mobilePlate("50-isla6-celular") },
   questions: { desktop: desktopPlate("55-isla7-escritorio"), mobile: mobilePlate("55-isla7-celular") },
