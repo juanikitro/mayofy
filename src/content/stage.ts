@@ -88,6 +88,7 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   hero: sprite("hero", 6, 6, "94.7%"),
   fall: sprite("fall", 12, 10, "87.9%"),
   problem: sprite("problem", 12, 10, "92.8%"),
+  packs: sprite("packs", 12, 10, "90.8%", "cycle"),
   systems: sprite("systems", 12, 10, "94%"),
   works: sprite("works", 12, 10, "87%", "cycle"),
   host: sprite("host", 12, 8, "91%"),

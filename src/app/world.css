@@ -516,6 +516,11 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   opacity: 0;
 }
 
+/* The platform top is the box's bottom edge: drop the strip so its ground line sits there. */
+.platform__mayo .mayo__sprite {
+  top: calc(100% - var(--feet-y, 100%));
+}
+
 /* Hero: island 1 ------------------------------------------------------- */
 
 .dawn {

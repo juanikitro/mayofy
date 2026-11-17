@@ -39,7 +39,7 @@ export function MayoFigure({
           "--travel-from": anchor.travel?.from ?? anchor.x,
           "--travel-to": anchor.travel?.to ?? anchor.x,
         } as Record<string, string>)
-      : ({ "--mayo-size": size } as Record<string, string>)
+      : ({ "--mayo-size": size, "--feet-y": sprite?.feetY ?? "100%" } as Record<string, string>)
   ) as CSSProperties;
 
   return (
