@@ -65,7 +65,8 @@ export function CalBooking({ url, calLink }: { url: string; calLink: string }) {
     <div className="booking" id="agenda">
       <div className="booking__inline" ref={hostRef} aria-label="Agenda de Cal.com" />
       <a className="booking__link" href={url} target="_blank" rel="noreferrer">
-        Si la agenda no carga, abrila en Cal.com <span aria-hidden="true">↗</span>
+        <span className="link-label">Si la agenda no carga, abrila en Cal.com</span>{" "}
+        <span className="link-arrow link-arrow--out" aria-hidden="true">↗</span>
       </a>
     </div>
   );

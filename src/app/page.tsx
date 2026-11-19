@@ -63,7 +63,7 @@ export default function Home() {
             </div>
             <p className="dawn__alt">
               <a href={heroWhatsAppHref} target="_blank" rel="noreferrer">
-                o escribinos por WhatsApp
+                <span className="link-label">o escribinos por WhatsApp</span>
               </a>
             </p>
           </div>

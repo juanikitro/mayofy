@@ -3376,3 +3376,181 @@ html[data-motion-tier="reduced"] .plate__picture--background {
     display: none;
   }
 }
+
+/* ======================================================================
+ * Micro-interactions (docs/plans/2026-11-19-microinteracciones.md)
+ *
+ * One motion system for every UI element of the Mayo world. Rules:
+ * - Only transform and opacity move (colours, borders and shadows may
+ *   change); nothing animates width, height, margin or position.
+ * - Hover in 160 ms, hover out 120 ms, press 90 ms: out is always faster
+ *   than in, so the interface never lags behind the pointer.
+ * - Curves never overshoot: --ease-ui for state changes, --ease-enter for
+ *   things arriving, --ease-travel only for something crossing a distance.
+ * - Hover motion only for a fine pointer; keyboard focus shows the same
+ *   state anywhere. Touch gets the press, never a stuck hover.
+ * - prefers-reduced-motion and html[data-motion-tier="reduced"] turn every
+ *   duration to 0 and drop every transform: states change at once.
+ * ==================================================================== */
+
+.world {
+  --m-fast: 120ms;   /* hover out, a menu or label closing */
+  --m-base: 160ms;   /* hover in, colour and underline changes */
+  --m-press: 90ms;   /* pointer down */
+  --m-panel: 220ms;  /* a disclosure opening, a toast arriving */
+  --m-reveal: 520ms; /* copy arriving */
+  --m-enter: 700ms;  /* the hero lines arriving */
+  --ease-ui: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-travel: cubic-bezier(0.65, 0, 0.35, 1);
+  --m-lift: -2px;    /* a card rising under the pointer */
+  --m-step: -1px;    /* a button rising under the pointer */
+  --m-press-scale: 0.97;
+  --m-nudge: 3px;    /* an arrow leaning into its direction */
+  --m-rise: 12px;    /* copy arriving from below */
+  --m-shadow-btn:
+    0 1px 2px oklch(30% 0.05 60 / 12%),
+    0 10px 20px -10px oklch(30% 0.06 150 / 45%);
+  --m-shadow-card:
+    0 1px 2px oklch(30% 0.05 60 / 8%),
+    0 2rem 3.5rem -1.75rem oklch(30% 0.05 60 / 50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .world {
+    --m-fast: 0ms;
+    --m-base: 0ms;
+    --m-press: 0ms;
+    --m-panel: 0ms;
+    --m-reveal: 0ms;
+    --m-enter: 0ms;
+  }
+}
+
+html[data-motion-tier="reduced"] .world {
+  --m-fast: 0ms;
+  --m-base: 0ms;
+  --m-press: 0ms;
+  --m-panel: 0ms;
+  --m-reveal: 0ms;
+  --m-enter: 0ms;
+}
+
+/* Buttons: the tone deepens and the pill steps up 1px with a soft shadow;
+ * a press sinks it back and shrinks it 3%. */
+.btn {
+  transition:
+    background-color var(--m-fast) var(--ease-ui),
+    border-color var(--m-fast) var(--ease-ui),
+    color var(--m-fast) var(--ease-ui),
+    box-shadow var(--m-fast) var(--ease-ui),
+    transform var(--m-fast) var(--ease-ui);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  transition-duration: var(--m-base);
+}
+
+.btn:active {
+  transform: none;
+  transition-duration: var(--m-press);
+}
+
+.btn--moss:active {
+  background: oklch(34% 0.09 150);
+}
+
+.btn--quiet:active {
+  background: color-mix(in oklch, var(--moss) 12%, var(--cream));
+}
+
+.isle--dark .btn--moss:active {
+  background: oklch(80% 0.17 158);
+}
+
+.isle--dark .btn--quiet:active {
+  background: color-mix(in oklch, var(--mint) 20%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @media (hover: hover) and (pointer: fine) {
+    html:not([data-motion-tier="reduced"]) .btn:hover:not(:disabled) {
+      transform: translateY(var(--m-step));
+      box-shadow: var(--m-shadow-btn);
+    }
+  }
+
+  html:not([data-motion-tier="reduced"]) .btn:active:not(:disabled) {
+    transform: scale(var(--m-press-scale));
+    box-shadow: none;
+  }
+}
+
+/* Text links: the label rests on a faint hairline; on hover or focus a
+ * full-strength line draws from the left and leaves to the right. The
+ * arrow beside a label leans 3px into its direction. */
+:is(.host-link, .work__link, .booking__link, .dawn__alt a, .world-footer__links a, .contact-form__privacy a, .contact-form__fallback) {
+  text-decoration: none;
+}
+
+.link-label {
+  background-image:
+    linear-gradient(currentColor, currentColor),
+    linear-gradient(
+      color-mix(in oklch, currentColor 40%, transparent),
+      color-mix(in oklch, currentColor 40%, transparent)
+    );
+  background-repeat: no-repeat;
+  background-position:
+    right 0 bottom 0,
+    0 bottom 0;
+  background-size:
+    0% 1px,
+    100% 1px;
+  padding-block-end: 0.04em;
+  transition: background-size var(--m-fast) var(--ease-ui);
+}
+
+:is(a, button):is(:hover, :focus-visible) > .link-label {
+  background-position:
+    left 0 bottom 0,
+    0 bottom 0;
+  background-size:
+    100% 1px,
+    100% 1px;
+  transition-duration: var(--m-base);
+}
+
+.link-arrow {
+  display: inline-block;
+  margin-inline-start: 0.3em;
+  transition: transform var(--m-fast) var(--ease-ui);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) a:focus-visible > .link-arrow {
+    transform: translateX(var(--m-nudge));
+    transition-duration: var(--m-base);
+  }
+
+  html:not([data-motion-tier="reduced"]) a:focus-visible > .link-arrow--out {
+    transform: translate(2px, -2px);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    html:not([data-motion-tier="reduced"]) a:hover > .link-arrow {
+      transform: translateX(var(--m-nudge));
+      transition-duration: var(--m-base);
+    }
+
+    html:not([data-motion-tier="reduced"]) a:hover > .link-arrow--out {
+      transform: translate(2px, -2px);
+    }
+  }
+}
+
+/* Skip link: slides down from above the viewport when it takes focus. */
+.world .skip-link {
+  transition: transform var(--m-panel) var(--ease-enter);
+}

@@ -207,11 +207,13 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
       </p>
       <p className="contact-form__privacy">
         Usamos tus datos solo para responder tu consulta. No los vendemos ni los
-        cedemos. <Link href="/privacidad">Política de privacidad</Link>.
+        cedemos. <Link href="/privacidad">
+          <span className="link-label">Política de privacidad</span>
+        </Link>.
       </p>
       {submissionState === "error" ? (
         <a className="contact-form__fallback" href={whatsappHref} target="_blank" rel="noreferrer">
-          Continuar por WhatsApp
+          <span className="link-label">Continuar por WhatsApp</span>
         </a>
       ) : null}
     </form>
