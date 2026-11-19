@@ -113,7 +113,8 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   // Tumbling in the clouds, in step with mayo-fall (cover 20-80 %).
   fall: sprite("fall", "88%", "pingpong", { timeline: "--fall", range: "cover 20% cover 80%", cycles: 3 }),
   // Play bow among the rocks.
-  problem: sprite("problem", "93%", "pingpong", { timeline: "--isle", range: "cover 30% cover 85%", rangeMobile: "cover 35% cover 88%", cycles: 3 }),
+  // Painted in place on a crop of the island 2 v2 plate (play bow among the rocks).
+  problem: { ...sprite("problem", "87.91%", "pingpong", { timeline: "--isle", range: "cover 30% cover 85%", rangeMobile: "cover 35% cover 88%", cycles: 3 }), strip: { avif: "/images/mundo-mayo/70-mayo-problem-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-problem-v2-tira.webp" } },
   // Hops beside the third platform once the assembly is over (she fades in at cover 58-63 %).
   packs: sprite("packs", "90.8%", "cycle", { timeline: "--rocks", range: "cover 25% cover 90%", rangeMobile: "cover 25% cover 96%", cycles: 4 }),
   // Digging: quick, repetitive paw strokes.
@@ -275,7 +276,8 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   // Cell = the plate crop the frames were painted on (left 798 px, side 109 px of 1672); shadow painted in.
   hero: { x: "50.99%", y: "72.5%", size: "6.52%", xMobile: "56%", yMobile: "80.5%", sizeMobile: "14.3%", shadow: false },
   // Island 2: in the free meadow patch between the rocks (rim 53.5 %, lip 70 % at x 45); morning light from the left.
-  problem: { x: "45%", y: "63%", size: "10.5%", xMobile: "43%", yMobile: "69.5%", sizeMobile: "22%", shadow: { lean: "6%", opacity: 0.28 } },
+  // Cell = plate crop (left 681 px, top 468 px, side 142 px of 1672); shadow painted in.
+  problem: { x: "44.98%", y: "63%", size: "8.49%", xMobile: "43%", yMobile: "69.5%", sizeMobile: "17.8%", shadow: false },
   // Island 3: on the grass between platforms 2 and 3, facing the third (mobile: right of its stack); noon light from above.
   packs: { x: "62.5%", y: "55.5%", size: "8%", xMobile: "72%", yMobile: "54%", sizeMobile: "18%", face: "right", shadow: { lean: "2%", opacity: 0.26 } },
   // Island 4: nose at the painted soil mound (desktop 46 %, 66 %; mobile 48.5 %, 75.8 %); golden light from the right.
