@@ -4133,3 +4133,13 @@ html[data-motion-tier="reduced"] .wa-float {
     transform: none;
   }
 }
+
+/* Focus rings follow the shape of round and pill controls instead of the
+ * generic 0.25rem corner. */
+.world .progress__paw:focus-visible {
+  border-radius: 50%;
+}
+
+.world :is(.btn, .island-nav__link, .wa-float):focus-visible {
+  border-radius: var(--radius-pill);
+}
