@@ -456,8 +456,18 @@ details[data-preparing-open="true"] > .animated-details__content {
 }
 
 /* Painted sprite: a horizontal strip of square frames. The <img> is
- * `--frames` times wider than the square and steps one frame at a time; the
- * first frame is what shows before any JavaScript or when motion is off. */
+ * `--frames` times wider than the square and steps one frame at a time with
+ * the scroll; the first frame is what shows when motion is off. */
+.mayo {
+  --scrub-range: var(--scrub-range-d);
+}
+
+@media (max-width: 48rem) {
+  .mayo {
+    --scrub-range: var(--scrub-range-m);
+  }
+}
+
 .mayo__sprite {
   position: absolute;
   inset: 0;
@@ -476,20 +486,31 @@ details[data-preparing-open="true"] > .animated-details__content {
   height: 100%;
   max-width: none;
   object-fit: contain;
-  animation: mayo-sprite calc(var(--frames, 1) / var(--fps, 6) * 1s) steps(var(--frames, 1), end) infinite;
-  /* `alternate` ping-pongs the strip so the last frame never cuts to the first. */
-  animation-direction: var(--loop, alternate);
-  animation-play-state: paused;
+}
+
+/* Scrubbed by the scroll (Juani, 19 November 2026): the frame is a function
+ * of the position on the slot's named view timeline (`--scrub-timeline` and
+ * `--scrub-range`, set by MayoFigure from `mayoSprites[].scrub`), so a still
+ * page keeps a still Mayo and scrolling back rewinds her. The strip plays
+ * `--cycles` times across the range; `alternate` ping-pongs it so the last
+ * frame never cuts to the first. `jump-none` lands exactly on the first and
+ * the last cell (the keyframe stops one cell short of the strip's end), so
+ * no step ever shows the empty space after the strip. */
+@supports (animation-timeline: view()) {
+  .mayo__sprite img {
+    animation: mayo-sprite linear both;
+    animation-timing-function: steps(var(--frames, 12), jump-none);
+    animation-iteration-count: var(--cycles, 1);
+    animation-direction: var(--loop, alternate);
+    animation-timeline: var(--scrub-timeline);
+    animation-range: var(--scrub-range);
+  }
 }
 
 @keyframes mayo-sprite {
   to {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100% * (var(--frames, 12) - 1) / var(--frames, 12)));
   }
-}
-
-html[data-motion-tier="full"] .mayo__sprite img {
-  animation-play-state: running;
 }
 
 html[data-motion-tier="reduced"] .mayo__sprite img {
@@ -498,7 +519,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 @media (prefers-reduced-motion: reduce) {
   .mayo__sprite img {
-    animation: none;
+    animation: none !important;
   }
 }
 
@@ -3181,16 +3202,19 @@ html[data-motion-tier="reduced"] .rock-shadow {
   transform: translate(-50%, calc(-1 * var(--feet-y, 80%)));
 }
 
-/* Contact shadow: a soft ellipse under the feet line so Mayo rests on the grass. */
+/* Contact shadow: a soft, low ellipse centred on the feet line so Mayo
+ * rests on the grass, leaning away from the island's key light
+ * (`--shadow-lean`, in % of her width) at a low `--shadow-opacity`. */
 .mayo--shadow::after {
   content: "";
   position: absolute;
-  left: 14%;
-  top: calc(var(--feet-y, 80%) - 5%);
-  width: 72%;
-  height: 10%;
+  left: 16%;
+  top: var(--feet-y, 80%);
+  width: 68%;
+  height: 7%;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgb(24 18 10 / 0.42), rgb(24 18 10 / 0) 68%);
+  background: radial-gradient(ellipse at center, rgb(24 18 10 / var(--shadow-opacity, 0.3)), rgb(24 18 10 / 0) 70%);
+  transform: translate(var(--shadow-lean, 0%), -50%);
   z-index: -1;
 }
 
@@ -3200,10 +3224,11 @@ html[data-motion-tier="reduced"] .rock-shadow {
   transform: scaleX(-1);
 }
 
-/* Scroll-driven travel across the plate (run, chase) while the island
- * section crosses the viewport, as `translate` offsets from the anchor in
- * Mayo's own widths (set by MayoFigure), so it runs on the compositor;
- * without scroll-driven animations she stays at the anchor. */
+/* Scroll-driven travel across the plate (run, chase) on the same timeline
+ * and range that step the sprite, so her legs and her path stay in sync, as
+ * `translate` offsets from the anchor in Mayo's own widths (set by
+ * MayoFigure), so it runs on the compositor; without scroll-driven
+ * animations she stays at the anchor. */
 .mayo--travel {
   --travel-from: var(--travel-from-d);
   --travel-to: var(--travel-to-d);
@@ -3219,16 +3244,28 @@ html[data-motion-tier="reduced"] .rock-shadow {
 @supports (animation-timeline: view()) {
   .mayo--travel {
     animation: mayo-travel linear both;
-    animation-timeline: --isle;
-    animation-range: entry 40% exit 60%;
+    animation-timeline: var(--scrub-timeline);
+    animation-range: var(--scrub-range);
   }
 
-  /* The chased firefly keeps its idle float, added on top of the drift. */
+  /* The chased firefly keeps its idle float, added on top of the drift. Its
+   * range is island 7's scrub range (`mayoSprites.questions` in stage.ts),
+   * so it stays just ahead of Mayo. */
+  .plate-object--chased {
+    --chase-range: cover 47% cover 70%;
+  }
+
+  @media (max-width: 48rem) {
+    .plate-object--chased {
+      --chase-range: cover 57% cover 77%;
+    }
+  }
+
   .plate-object--chased,
   html[data-motion-tier="full"] .plate-object--chased {
     animation: object-chase linear both, object-float 5s ease-in-out infinite;
     animation-timeline: --isle, auto;
-    animation-range: entry 40% exit 60%, normal;
+    animation-range: var(--chase-range), normal;
     animation-delay: 0s, var(--float-delay, 0s);
     animation-composition: replace, add;
   }

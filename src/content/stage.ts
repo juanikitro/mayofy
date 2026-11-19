@@ -58,41 +58,71 @@ export function mayoPoseSources(moment: string) {
 
 /**
  * Painted Mayo, animated by frames: a horizontal strip of square cells
- * (1024 x 1024, 4-6 frames) played at `fps`, in the island style. When a
- * slot has a strip, MayoFigure renders it instead of the still/loop
- * pictures. Strips arrive as `/images/mundo-mayo/70-mayo-<slot>-tira.avif|.webp`.
+ * (640 x 640, 12 frames) stepped by the scroll, not by the clock (Juani,
+ * 19 November 2026: "que se mueva solo al scrollear, no como un gif todo el
+ * tiempo"). The frame is a function of the scroll position on the slot's
+ * named view timeline: scrolling down advances it, scrolling up rewinds it
+ * and a still page keeps a still Mayo. When a slot has a strip, MayoFigure
+ * renders it instead of the still/loop pictures. Strips arrive as
+ * `/images/mundo-mayo/70-mayo-<slot>-tira.avif|.webp`.
  */
+export type MayoScrub = {
+  /** Named view timeline of the section that holds Mayo (world.css). */
+  timeline: "--dawn" | "--fall" | "--rocks" | "--isle";
+  /** Range on that timeline, roughly while Mayo is on screen, as `animation-range`. */
+  range: string;
+  /** Range on phones (<= 48rem), where the sections are taller. */
+  rangeMobile?: string;
+  /** How many times the strip plays across the range (a `pingpong` play is one way). */
+  cycles: number;
+};
+
 export type MayoSprite = {
   strip: { avif: string; webp: string };
   frames: number;
-  fps: number;
   cell: number;
-  /** Feet line as a percentage of the cell height (manifest "feet anchor"). */
+  /** Feet line as a percentage of the cell height: the lowest opaque pixels of
+   * the grounded frames (or the painted ground shadow for run and jump strips). */
   feetY: string;
   /** `pingpong` plays the strip forward then backward so the last frame never
    * jumps to the first; `cycle` is for motions painted as a closed loop (run, chase). */
   loop: "pingpong" | "cycle";
+  scrub: MayoScrub;
 };
 
-const sprite = (slot: MayoSlotId, frames: number, fps: number, feetY: string, loop: MayoSprite["loop"] = "pingpong"): MayoSprite => ({
+const sprite = (slot: MayoSlotId, feetY: string, loop: MayoSprite["loop"], scrub: MayoScrub): MayoSprite => ({
   strip: { avif: `/images/mundo-mayo/70-mayo-${slot}-tira.avif`, webp: `/images/mundo-mayo/70-mayo-${slot}-tira.webp` },
-  frames,
-  fps,
+  frames: 12,
   cell: 640,
   feetY,
   loop,
+  scrub,
 });
 
-/** Painted strips delivered so far (manifest docs/plans/mundo-mayo-assets.md). */
+/**
+ * Painted strips delivered so far (manifest docs/plans/mundo-mayo-assets.md).
+ * Ranges were measured on the page as the share of each section's `cover`
+ * range during which Mayo is on screen at 1440 x 900 and 390 x 844; the
+ * island ranges also drive her travel (`mayoAnchors[].travel`). Island 7 is
+ * the last section, so its range ends before the page stops scrolling.
+ */
 export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
-  hero: sprite("hero", 12, 10, "94.7%"),
-  fall: sprite("fall", 12, 10, "87.9%"),
-  problem: sprite("problem", 12, 10, "92.8%"),
-  packs: sprite("packs", 12, 10, "90.8%", "cycle"),
-  systems: sprite("systems", 12, 10, "94%"),
-  works: sprite("works", 12, 10, "87%", "cycle"),
-  host: sprite("host", 12, 8, "91%"),
-  questions: sprite("questions", 12, 10, "91%", "cycle"),
+  // Seated, tail wag: two gentle plays while she leaps off the island (mayo-leap, exit 0-55 %).
+  hero: sprite("hero", "95%", "pingpong", { timeline: "--dawn", range: "cover 50% cover 78%", rangeMobile: "cover 48% cover 78%", cycles: 2 }),
+  // Tumbling in the clouds, in step with mayo-fall (cover 20-80 %).
+  fall: sprite("fall", "88%", "pingpong", { timeline: "--fall", range: "cover 20% cover 80%", cycles: 3 }),
+  // Play bow among the rocks.
+  problem: sprite("problem", "93%", "pingpong", { timeline: "--isle", range: "cover 30% cover 85%", rangeMobile: "cover 35% cover 88%", cycles: 3 }),
+  // Hops beside the third platform once the assembly is over (she fades in at cover 58-63 %).
+  packs: sprite("packs", "90.8%", "cycle", { timeline: "--rocks", range: "cover 60% cover 90%", rangeMobile: "cover 55% cover 96%", cycles: 3 }),
+  // Digging: quick, repetitive paw strokes.
+  systems: sprite("systems", "94%", "pingpong", { timeline: "--isle", range: "cover 50% cover 92%", rangeMobile: "cover 66% cover 97%", cycles: 4 }),
+  // Running across the path: about one stride per body length of travel.
+  works: sprite("works", "87%", "cycle", { timeline: "--isle", range: "cover 46% cover 88%", rangeMobile: "cover 68% cover 96%", cycles: 4 }),
+  // Resting by the fire: breathing and ears, barely.
+  host: sprite("host", "91.5%", "pingpong", { timeline: "--isle", range: "cover 62% cover 93%", rangeMobile: "cover 72% cover 98%", cycles: 2 }),
+  // Trotting after a firefly.
+  questions: sprite("questions", "92%", "cycle", { timeline: "--isle", range: "cover 47% cover 70%", rangeMobile: "cover 57% cover 77%", cycles: 3 }),
 };
 
 /* ---------------------------------------------------------------- plates */
@@ -209,8 +239,12 @@ export const cloudFall = {
 
 /**
  * Where Mayo's feet touch each plate, in percent of the plate, and the side
- * of her square as a percent of the plate width (analysis §4). Mobile
- * plates are taller: the same object sits lower and the square grows.
+ * of her square as a percent of the plate width. Read on the rendered
+ * plates (desktop and mobile `-v2-isla` cutouts, hero and island 3 plates)
+ * with a 5 % grid on 19 November 2026: the feet sit on the meadow surface,
+ * between its back rim and the front lip, and the size follows the painted
+ * objects nearby. Mobile plates are taller: the same spot sits lower and the
+ * square grows.
  */
 export type MayoAnchor = {
   x: string;
@@ -221,27 +255,54 @@ export type MayoAnchor = {
   sizeMobile?: string;
   /** The strips are painted facing left; `right` mirrors Mayo towards what she interacts with. */
   face?: "left" | "right";
-  /** Scroll-driven travel across the plate: `x` moves from `from` to `to` while the island crosses the viewport. */
+  /** Scroll-driven travel across the plate: `x` moves from `from` to `to` along the slot's scrub range. */
   travel?: { from: string; to: string };
-  /** Contact shadow under the feet (default on; off when airborne). */
-  shadow?: boolean;
+  /** Travel on the mobile plate, when its meadow is framed differently. */
+  travelMobile?: { from: string; to: string };
+  /**
+   * Contact shadow at the feet line (default on; `false` when airborne).
+   * `lean` shifts it away from the island's key light, in % of Mayo's width
+   * (negative = to her left); `opacity` keeps it subtle.
+   */
+  shadow?: false | { lean: string; opacity: number };
 };
 
 export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
-  // Hero: seated inside the meadow, between the sign and the right edge.
-  hero: { x: "54%", y: "70%", size: "13%", xMobile: "64%", yMobile: "79%", sizeMobile: "30%" },
-  // Island 2: play bow in front of the loose rocks she is "sorting" (rocks 07 and 01 sit to her left).
-  problem: { x: "38%", y: "71%", size: "12%", xMobile: "42%", yMobile: "73%", sizeMobile: "26%" },
-  // Island 3: jumps on the meadow beside the third platform (anchored on the plate, not on a card).
-  packs: { x: "85%", y: "53%", size: "10%", xMobile: "74%", yMobile: "50%", sizeMobile: "24%" },
-  // Island 4: digging into the soil mound (tierra-02 at 30 %, 73 %).
-  systems: { x: "36%", y: "74%", size: "12%", xMobile: "40%", yMobile: "78.5%", sizeMobile: "22%" },
-  // Island 5: runs right-to-left across the meadow below the path while the island scrolls by.
-  works: { x: "50%", y: "66%", size: "11%", xMobile: "50%", yMobile: "76.5%", sizeMobile: "26%", travel: { from: "68%", to: "30%" } },
-  // Island 6: resting, turned towards the campfire (fogon at 56 %, 66 %).
-  host: { x: "44%", y: "66%", size: "12%", xMobile: "37%", yMobile: "76%", sizeMobile: "24%", face: "right" },
-  // Island 7: chases a firefly that drifts ahead of her, away from the lantern.
-  questions: { x: "40%", y: "62%", size: "11%", xMobile: "40%", yMobile: "75%", sizeMobile: "26%", face: "right", travel: { from: "30%", to: "52%" } },
+  // Hero: seated mid-meadow to the right of the big tree (trunk at 42 %, 68.6 %); dawn light from the right.
+  hero: { x: "51%", y: "72.5%", size: "10%", xMobile: "56%", yMobile: "80.5%", sizeMobile: "22%", shadow: { lean: "-6%", opacity: 0.3 } },
+  // Island 2: in the free meadow patch between the rocks (rim 53.5 %, lip 70 % at x 45); morning light from the left.
+  problem: { x: "45%", y: "63%", size: "10.5%", xMobile: "43%", yMobile: "69.5%", sizeMobile: "22%", shadow: { lean: "6%", opacity: 0.28 } },
+  // Island 3: on the grass between platforms 2 and 3, facing the third (mobile: right of its stack); noon light from above.
+  packs: { x: "62.5%", y: "55.5%", size: "8%", xMobile: "72%", yMobile: "54%", sizeMobile: "18%", face: "right", shadow: { lean: "2%", opacity: 0.26 } },
+  // Island 4: nose at the painted soil mound (desktop 46 %, 66 %; mobile 48.5 %, 75.8 %); golden light from the right.
+  systems: { x: "42.5%", y: "67.5%", size: "11%", xMobile: "42%", yMobile: "76.8%", sizeMobile: "17%", face: "right", shadow: { lean: "-6%", opacity: 0.3 } },
+  // Island 5: runs right-to-left across the middle band of the meadow, over the path; sunset light from the left.
+  works: {
+    x: "49%",
+    y: "67%",
+    size: "10%",
+    xMobile: "48%",
+    yMobile: "72.5%",
+    sizeMobile: "20%",
+    travel: { from: "60%", to: "38%" },
+    travelMobile: { from: "58%", to: "38%" },
+    shadow: { lean: "6%", opacity: 0.26 },
+  },
+  // Island 6: resting on the grass facing the campfire (fire at 55 %, 59.5 %; mobile 53 %, 75 %), which lights her from the right.
+  host: { x: "45%", y: "61.5%", size: "10.5%", xMobile: "36%", yMobile: "74.5%", sizeMobile: "21%", face: "right", shadow: { lean: "-8%", opacity: 0.32 } },
+  // Island 7: trots after a firefly on the meadow behind the front lip (rim 41 %, lip 49.5 %), right of the lantern (36.6 %, 48 %), which lights her from the left.
+  questions: {
+    x: "45.5%",
+    y: "47%",
+    size: "7%",
+    xMobile: "45%",
+    yMobile: "73.5%",
+    sizeMobile: "18%",
+    face: "right",
+    travel: { from: "40.5%", to: "50.5%" },
+    travelMobile: { from: "37%", to: "53%" },
+    shadow: { lean: "7%", opacity: 0.3 },
+  },
 };
 
 /* --------------------------------------------------------------- objects */
@@ -302,7 +363,8 @@ export const plateObjects: Partial<Record<MayoSlotId, readonly PlateObject[]>> =
     obj("58-isla7-luciernaga-02", 512, 512, 52, 40, 4, { glow: true, float: true }, [44, 56, 6]),
     obj("58-isla7-luciernaga-01", 512, 512, 60, 48, 3, { glow: true, float: true }, [68, 61, 5]),
     obj("58-isla7-luciernaga-02", 512, 512, 68, 42, 4, { glow: true, float: true }, [80, 58, 6]),
-    obj("58-isla7-luciernaga-01", 512, 512, 44, 52, 3, { glow: true, float: true, chasedTo: "66%" }, [44, 69, 5, 68]),
+    // Ahead of Mayo's head while she trots along the meadow (mayoAnchors.questions).
+    obj("58-isla7-luciernaga-01", 512, 512, 45, 41, 3, { glow: true, float: true, chasedTo: "56%" }, [45, 66.5, 5, 60]),
     obj("58-isla7-luciernaga-03", 512, 512, 74, 54, 5, { glow: true, float: true }, [84, 67, 8]),
     obj("58-isla7-luciernaga-01", 512, 512, 26, 50, 3, { glow: true, float: true }, [16, 64, 5]),
     obj("58-isla7-luciernaga-02", 512, 512, 58, 58, 4, { glow: true, float: true }, [58, 66, 6]),

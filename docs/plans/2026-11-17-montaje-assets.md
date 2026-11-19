@@ -104,3 +104,58 @@ Juani decidió que las islas dejen de ser un collage: los objetos fijos (rocas, 
 - **Isla 5:** seis piedras planas en el sendero y seis hitos bajos (tres de madera y tres de piedra) fuera del camino, con los más altos detrás de la franja por donde corre Mayo; se quitaron los doce objetos pegados (`plateObjects.works`). El fondo nuevo empieza y termina unos tonos más oscuro, así que se actualizaron los colores de unión del atardecer y el comienzo de la isla 6 (escritorio `#8d68b4` / `#c47fa1`, celular `#805dad` / `#b57aa2`).
 - **Estado:** las islas 2, 4, 5, 6 y 7 ya son una sola ilustración; ya no queda ningún objeto fijo pegado encima (sólo las luciérnagas, que se mueven). El hero ya era una sola pieza y las plataformas de packs siguen separadas porque se arman con el scroll.
 - **Observado sin resolver:** en celular, alrededor de la placa de la isla 2 se ve un recuadro más claro y, en escritorio, un borde horizontal al pie de algunas islas cuando el fondo deriva; no lo causan las placas nuevas, queda para revisar la deriva del fondo.
+
+## Mayo atada al scroll y apoyada en el suelo
+
+**Fecha:** 19 de noviembre de 2026. Pedido de Juani, textual: "quiero cambiar el comportamiento. La idea es que se mueva solo al scrollear, no como un gif todo el tiempo, entonces al scrollear avanza la animacion y al volver lo mismo". Además pidió integrar bien a Mayo en cada isla, porque parecía pegada encima.
+
+### Comportamiento
+
+- La tira de Mayo ya no corre con el reloj. El cuadro depende de la posición del scroll sobre la timeline con nombre de la sección: al bajar avanza, al subir retrocede y, con la página quieta, Mayo queda quieta. Se quitó el bucle infinito por tiempo y el `fps` de los datos (ya no significaba nada).
+- CSS puro (`.mayo__sprite img` en `world.css`): `animation-timeline: var(--scrub-timeline)`, `animation-range: var(--scrub-range)`, `steps(<cuadros>, jump-none)` para que nunca se mezclen dos cuadros y `animation-iteration-count: var(--cycles)`. El fotograma clave termina una celda antes del final de la tira (`translateX(-100% · 11/12)`), así `jump-none` cae justo en el primer y el último cuadro y nunca muestra el vacío después de la tira. Las tiras `pingpong` alternan la dirección en cada vuelta y las `cycle` repiten hacia adelante.
+- `MayoFigure` toma los valores de `mayoSprites[].scrub` en `stage.ts` (timeline, rango de escritorio, rango de celular y vueltas) y los publica como variables en el elemento de Mayo. El recorrido (`mayo--travel`) usa la misma timeline y el mismo rango, así las patas y el desplazamiento van juntos. La luciérnaga perseguida de la isla 7 usa el mismo rango que Mayo (`--chase-range` en `world.css`).
+- Sin animaciones por scroll, en el nivel `reduced` y con `prefers-reduced-motion: reduce` se ve el cuadro 1 fijo; no hay respaldo por tiempo.
+
+### Timelines, rangos y vueltas
+
+Los rangos se midieron en la página: la parte del rango `cover` de cada sección durante la que Mayo está en pantalla, a 1440 × 900 y a 390 × 844. La isla 7 es la última sección, así que su rango termina antes de que la página deje de scrollear (a 1440 el scroll llega a `cover 71,7 %`; el recorrido anterior, `entry 40 %`–`exit 60 %`, nunca terminaba).
+
+| Lugar | Timeline | Rango escritorio | Rango celular | Tira | Vueltas |
+| --- | --- | --- | --- | --- | --- |
+| Hero | `--dawn` | `cover 50%`–`78%` | `cover 48%`–`78%` | pingpong | 2 (cola, mientras salta con `mayo-leap`) |
+| Caída | `--fall` | `cover 20%`–`80%` | igual | pingpong | 3 (al ritmo de `mayo-fall`) |
+| Isla 2 | `--isle` | `cover 30%`–`85%` | `cover 35%`–`88%` | pingpong | 3 |
+| Isla 3 | `--rocks` | `cover 60%`–`90%` (aparece en 58–63 %) | `cover 55%`–`96%` | cycle | 3 |
+| Isla 4 | `--isle` | `cover 50%`–`92%` | `cover 66%`–`97%` | pingpong | 4 (escarbar es repetitivo) |
+| Isla 5 | `--isle` | `cover 46%`–`88%` | `cover 68%`–`96%` | cycle | 4 (cerca de una zancada por largo de cuerpo recorrido) |
+| Isla 6 | `--isle` | `cover 62%`–`93%` | `cover 72%`–`98%` | pingpong | 2 (respira, apenas se mueve) |
+| Isla 7 | `--isle` | `cover 47%`–`70%` | `cover 57%`–`77%` | cycle | 3 |
+
+### Cómo se derivaron las anclas
+
+- Sobre la página real se superpuso una grilla del 5 % a cada `.plate` (que es el sistema de coordenadas de las anclas) y se leyó, sobre el recorte `-v2-isla` que se pinta, el borde trasero del prado, el labio delantero y los objetos pintados; para el celular se usaron las placas móviles con la misma grilla. Las patas quedan sobre el prado, entre el borde trasero y el labio, y el tamaño se ajustó a los objetos vecinos (más chica cuanto más atrás y cuanto más chica es la isla).
+- Se midió la línea de patas de cada tira (el píxel opaco más bajo de cada celda): hero 95 %, caída 88 %, isla 2 93 %, isla 6 91,6 %, isla 7 92 %; isla 3 y 5 se quedan en la sombra pintada de la tira (90,8 % y 87 %) porque tienen cuadros en el aire; isla 4 94 %.
+- La sombra de contacto ahora está centrada justo en la línea de patas, más baja y tenue (`--shadow-opacity` 0,26–0,32) y se corre en contra de la luz principal de cada isla (`--shadow-lean`, en % del ancho de Mayo).
+
+| Lugar | Escritorio (x, y, tamaño) | Celular (x, y, tamaño) | Mira a | Sombra | Antes |
+| --- | --- | --- | --- | --- | --- |
+| Hero | 51 %, 72,5 %, 10 % | 56 %, 80,5 %, 22 % | izquierda | −6 % (amanecer por la derecha) | flotaba contra el borde trasero, demasiado grande frente al árbol |
+| Isla 2 | 45 %, 63 %, 10,5 % | 43 %, 69,5 %, 22 % | izquierda | +6 % (mañana por la izquierda) | sobre el labio delantero |
+| Isla 3 | 62,5 %, 55,5 %, 8 % (entre las plataformas 2 y 3) | 72 %, 54 %, 18 % (a la derecha de la pila) | derecha | +2 % (mediodía) | en el aire junto a la tarjeta 3 |
+| Isla 4 | 42,5 %, 67,5 %, 11 % (hocico en el montículo de 46 %, 66 %) | 42 %, 76,8 %, 17 % (montículo de 48,5 %, 75,8 %) | derecha | −6 % (dorada por la derecha) | escarbaba en el borde |
+| Isla 5 | 49 %, 67 %, 10 %; corre de 60 % a 38 % | 48 %, 72,5 %, 20 %; de 58 % a 38 % | izquierda | +6 % (atardecer por la izquierda) | corría por el borde |
+| Isla 6 | 45 %, 61,5 %, 10,5 % | 36 %, 74,5 %, 21 % | derecha (al fogón) | −8 % (fogón a su derecha) | sobre el labio |
+| Isla 7 | 45,5 %, 47 %, 7 %; trota de 40,5 % a 50,5 % | 45 %, 73,5 %, 18 %; de 37 % a 53 % | derecha | +7 % (farol a su izquierda) | caminaba sobre las raíces (y 62 %, debajo del prado) |
+
+`MayoAnchor` suma `travelMobile` (el recorrido en la placa de celular, que encuadra el prado distinto) y `shadow` pasa a ser `false` o `{ lean, opacity }`. La luciérnaga perseguida de la isla 7 se movió para ir delante de la cabeza de Mayo (escritorio 45 %, 41 % → 56 %; celular 45 %, 66,5 % → 60 %).
+
+### Cómo se verificó
+
+Chromium (Playwright) sobre `next dev`, a 1440 × 900 y 390 × 844, en los ocho lugares: con el scroll quieto 1,5 s la transformación de la tira no cambia; bajando en diez pasos el índice de cuadro avanza (por ejemplo isla 4: 0, 1, 2 … 10) y subiendo por las mismas posiciones vuelven los mismos índices; antes del rango se ve el cuadro 1. Con `prefers-reduced-motion: reduce` las ocho tiras quedan con `animation: none` y cuadro 1 en todo el recorrido. Recortes alrededor de Mayo revisados a ojo (patas en el prado, sin tapar objetos pintados). `scrollWidth === innerWidth` a 390, sin errores de consola; typecheck, lint y build.
+
+### Pendiente
+
+- Los rangos son porcentajes de `cover` medidos a 1440 × 900 y 390 × 844; en alturas de ventana muy distintas Mayo puede empezar a moverse un poco antes o después de entrar en pantalla.
+- El resto de las luciérnagas de la isla 7 sigue en las posiciones de la placa anterior (varias quedan debajo del prado en escritorio); conviene reubicarlas.
+- En la isla 4 de celular la cola de Mayo roza la maceta pintada; en la isla 3 la ubicación depende de dónde caen las tarjetas a cada ancho.
+- Validar con Juani la cantidad de vueltas por isla (la sensación de "velocidad" depende de cuánto se scrollea por cuadro).
