@@ -1445,16 +1445,17 @@ html[data-motion-tier="reduced"] .scene__sky {
 }
 
 /* Wide screens: Cal.com keeps its compact 820 px frame (51.5rem) and the
- * invitation, its text and the WhatsApp link sit beside it, instead of the
- * calendar stretching to 1040 px inside a 1230 px dark box. */
+ * invitation, its text and the WhatsApp link come first on the panel's left
+ * line beside it, instead of the calendar stretching to 1040 px inside a
+ * 1230 px dark box. */
 @media (min-width: 88rem) {
   .reach {
-    grid-template-columns: 51.5rem minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) 51.5rem;
     grid-template-rows: auto auto 1fr auto auto;
     grid-template-areas:
-      "booking title"
-      "booking text"
-      "booking alt"
+      "title booking"
+      "text booking"
+      "alt booking"
       "form-intro form-intro"
       "form form";
   }
