@@ -108,7 +108,8 @@ const sprite = (slot: MayoSlotId, feetY: string, loop: MayoSprite["loop"], scrub
  */
 export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   // Seated, tail wag, scrubbed by the scroll; she stays seated (no leap).
-  hero: sprite("hero", "95%", "pingpong", { timeline: "--dawn", range: "cover 50% cover 78%", rangeMobile: "cover 48% cover 78%", cycles: 2 }),
+  // Painted in place on a crop of the hero plate (seated, scale ~1/3 of the tree).
+  hero: { ...sprite("hero", "88.28%", "pingpong", { timeline: "--dawn", range: "cover 50% cover 78%", rangeMobile: "cover 48% cover 78%", cycles: 2 }), strip: { avif: "/images/mundo-mayo/70-mayo-hero-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-hero-v2-tira.webp" } },
   // Tumbling in the clouds, in step with mayo-fall (cover 20-80 %).
   fall: sprite("fall", "88%", "pingpong", { timeline: "--fall", range: "cover 20% cover 80%", cycles: 3 }),
   // Play bow among the rocks.
@@ -270,7 +271,8 @@ export type MayoAnchor = {
 
 export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   // Hero: seated mid-meadow to the right of the big tree (trunk at 42 %, 68.6 %); dawn light from the right.
-  hero: { x: "51%", y: "72.5%", size: "10%", xMobile: "56%", yMobile: "80.5%", sizeMobile: "22%", shadow: { lean: "-6%", opacity: 0.3 } },
+  // Cell = the plate crop the frames were painted on (left 798 px, side 109 px of 1672); shadow painted in.
+  hero: { x: "50.99%", y: "72.5%", size: "6.52%", xMobile: "56%", yMobile: "80.5%", sizeMobile: "14.3%", shadow: false },
   // Island 2: in the free meadow patch between the rocks (rim 53.5 %, lip 70 % at x 45); morning light from the left.
   problem: { x: "45%", y: "63%", size: "10.5%", xMobile: "43%", yMobile: "69.5%", sizeMobile: "22%", shadow: { lean: "6%", opacity: 0.28 } },
   // Island 3: on the grass between platforms 2 and 3, facing the third (mobile: right of its stack); noon light from above.
