@@ -148,10 +148,10 @@ export const islandPlates = {
     mobileLayers: { background: desktopPlate("10-isla3-base-fondo"), island: desktopPlate("10-isla3-base-isla") },
   },
   systems: {
-    desktop: desktopPlate("40-isla4-escritorio"),
-    mobile: mobilePlate("40-isla4-celular"),
-    layers: { background: desktopPlate("40-isla4-escritorio-fondo"), island: desktopPlate("40-isla4-escritorio-isla") },
-    mobileLayers: { background: mobilePlate("40-isla4-celular-fondo"), island: mobilePlate("40-isla4-celular-isla") },
+    desktop: desktopPlate("40-isla4-escritorio-v2"),
+    mobile: mobilePlate("40-isla4-celular-v2"),
+    layers: { background: desktopPlate("40-isla4-escritorio-v2-fondo"), island: desktopPlate("40-isla4-escritorio-v2-isla") },
+    mobileLayers: { background: mobilePlate("40-isla4-celular-v2-fondo"), island: mobilePlate("40-isla4-celular-v2-isla") },
     // Greenhouse roof at 47 % of the desktop plate.
     clear: { desktop: 0.53, mobile: 0.37 },
   },
@@ -297,14 +297,6 @@ const obj = (
  * in the sky. Read on the mobile plates with a 5 % grid (17 November 2026).
  */
 export const plateObjects: Partial<Record<MayoSlotId, readonly PlateObject[]>> = {
-  systems: [
-    obj("43-isla4-invernadero", 1024, 807, 64, 72, 18, {}, [70, 76, 20]),
-    obj("43-isla4-tierra-02", 1024, 423, 30, 73, 9, {}, [36, 77, 12]),
-    obj("43-isla4-tierra-01", 1024, 423, 46, 77, 11, {}, [52, 78.5, 13]),
-    obj("43-isla4-maceta", 863, 700, 25, 71, 5, {}, [22, 76, 6]),
-    obj("43-isla4-engranaje", 996, 692, 51, 75, 6, {}, [58, 77.5, 7]),
-    obj("43-isla4-caja", 1024, 684, 74, 64, 7, {}, [83, 76.5, 8]),
-  ],
   works: [
     obj("48-isla5-paso-01", 1024, 522, 52, 54, 6, {}, [57, 64.8, 8]),
     obj("48-isla5-hito-01", 883, 672, 56, 52, 3, {}, [49, 64.4, 3.5]),

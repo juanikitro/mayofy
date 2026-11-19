@@ -52,7 +52,6 @@ export function SystemsIsland() {
   return (
     <section id="sistemas" className="isle isle--golden" data-island="4" style={plateSceneStyle(islandPlates.systems)} aria-labelledby="sistemas-title">
       <IslandScene variant="golden" plate={islandPlates.systems}>
-        <PlateObjects objects={plateObjects.systems!} />
         <MayoFigure slot="systems" className="isle__mayo isle__mayo--dig" />
       </IslandScene>
       <div className="isle__content world-shell">
