@@ -1793,7 +1793,9 @@ html[data-motion-tier="full"] .campfire__flame-core {
   position: relative;
   height: 160vh;
   /* From the hero plate's last row to island 2's first. */
-  background: linear-gradient(180deg, #b38fa0 0%, #90c5fb 100%);
+  --fall-top: #b38fa0;
+  --fall-bottom: #90c5fb;
+  background: linear-gradient(180deg, var(--fall-top) 0%, var(--fall-bottom) 100%);
   view-timeline-name: --fall;
 }
 
@@ -1807,28 +1809,80 @@ html[data-motion-tier="full"] .campfire__flame-core {
   mask-image: linear-gradient(180deg, transparent 0, #000 8%, #000 82%, transparent 100%);
 }
 
-.fall__defs {
+/* Painted frames of the descent, stacked full-bleed. Without animation only
+ * the still frame shows, so the first paint never flashes the whole stack. */
+.fall__frame {
   position: absolute;
+  inset: 0;
+  opacity: 0;
 }
 
-.fall__layer {
+.fall__frame[data-still] {
+  opacity: 1;
+}
+
+/* Seams: frame 01 opens on a lavender sky and frame 10 closes on a pale
+ * haze; both are tinted towards the section ends so the hero's last row
+ * and island 2's first one continue without a band. */
+.fall__frame[data-position="first"]::after,
+.fall__frame[data-position="last"]::after {
+  content: "";
   position: absolute;
-  inset: -20% 0;
+  inset: 0;
+}
+
+.fall__frame[data-position="first"]::after {
+  background: linear-gradient(180deg, var(--fall-top) 0%, transparent 30%);
+}
+
+.fall__frame[data-position="last"]::after {
+  background: linear-gradient(180deg, transparent 45%, var(--fall-bottom) 85%);
+}
+
+.fall__frame img {
+  display: block;
   width: 100%;
-  height: 140%;
-  overflow: visible;
-  fill: url(#fall-cloud-light);
-  opacity: 0.8;
+  height: 100%;
+  object-fit: cover;
 }
 
-.fall__layer--far {
-  opacity: 0.5;
+/* Isolated puffs: foreground parallax that rises faster than the frames.
+ * Their rest position is the static composition; 1 and 2 pass behind Mayo,
+ * 3 and 4 in front of her. */
+.fall__puff {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
 }
 
-/* The near clouds pass in front of Mayo. */
-.fall__layer--near {
+.fall__puff img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.fall__puff--1 {
+  inset: 56% auto auto -6%;
+  width: min(34vw, 32rem);
+  opacity: 0.85;
+}
+
+.fall__puff--2 {
+  inset: 38% -8% auto auto;
+  width: min(30vw, 30rem);
+  opacity: 0.85;
+}
+
+.fall__puff--3 {
   z-index: 2;
-  opacity: 0.92;
+  inset: 62% auto auto 12%;
+  width: min(38vw, 38rem);
+}
+
+.fall__puff--4 {
+  z-index: 2;
+  inset: 72% -12% auto auto;
+  width: min(40vw, 40rem);
 }
 
 .fall__mayo {
@@ -1837,33 +1891,61 @@ html[data-motion-tier="full"] .campfire__flame-core {
   transform: translateX(-50%) rotate(14deg);
 }
 
-@keyframes clouds-up-far {
-  from {
-    transform: translateY(0);
+@keyframes fall-frame-first {
+  0%,
+  99.9% {
+    opacity: 1;
   }
 
-  to {
-    transform: translateY(-12%);
-  }
-}
-
-@keyframes clouds-up-mid {
-  from {
-    transform: translateY(6%);
-  }
-
-  to {
-    transform: translateY(-22%);
+  100% {
+    opacity: 0;
   }
 }
 
-@keyframes clouds-up-near {
+/* Fades in over the first half of its range, then drops out once the next
+ * frame is fully opaque over it. */
+@keyframes fall-frame {
+  0% {
+    opacity: 0;
+  }
+
+  50%,
+  99.9% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fall-frame-last {
   from {
-    transform: translateY(14%);
+    opacity: 0;
   }
 
   to {
-    transform: translateY(-36%);
+    opacity: 1;
+  }
+}
+
+@keyframes puff-rise-back {
+  from {
+    transform: translateY(45vh);
+  }
+
+  to {
+    transform: translateY(-95vh);
+  }
+}
+
+@keyframes puff-rise-front {
+  from {
+    transform: translateY(75vh);
+  }
+
+  to {
+    transform: translateY(-140vh);
   }
 }
 
@@ -1878,22 +1960,42 @@ html[data-motion-tier="full"] .campfire__flame-core {
 }
 
 @supports (animation-timeline: view()) {
-  .fall__layer--far {
-    animation: clouds-up-far linear both;
+  /* Each frame's range comes from cloud-fall.tsx (--frame-from/--frame-to). */
+  .fall__frame {
+    animation: fall-frame linear both;
     animation-timeline: --fall;
-    animation-range: cover 0% cover 100%;
+    animation-range: cover var(--frame-from) cover var(--frame-to);
   }
 
-  .fall__layer--mid {
-    animation: clouds-up-mid linear both;
-    animation-timeline: --fall;
-    animation-range: cover 0% cover 100%;
+  .fall__frame[data-position="first"] {
+    animation-name: fall-frame-first;
   }
 
-  .fall__layer--near {
-    animation: clouds-up-near linear both;
+  .fall__frame[data-position="last"] {
+    animation-name: fall-frame-last;
+  }
+
+  .fall__puff {
+    animation: puff-rise-back linear both;
     animation-timeline: --fall;
-    animation-range: cover 0% cover 100%;
+  }
+
+  .fall__puff--1 {
+    animation-range: cover 8% cover 70%;
+  }
+
+  .fall__puff--2 {
+    animation-range: cover 18% cover 78%;
+  }
+
+  .fall__puff--3 {
+    animation-name: puff-rise-front;
+    animation-range: cover 22% cover 82%;
+  }
+
+  .fall__puff--4 {
+    animation-name: puff-rise-front;
+    animation-range: cover 32% cover 88%;
   }
 
   .fall__mayo {
@@ -1903,13 +2005,15 @@ html[data-motion-tier="full"] .campfire__flame-core {
   }
 }
 
-html[data-motion-tier="reduced"] .fall__layer,
+html[data-motion-tier="reduced"] .fall__frame,
+html[data-motion-tier="reduced"] .fall__puff,
 html[data-motion-tier="reduced"] .fall__mayo {
   animation: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fall__layer,
+  .fall__frame,
+  .fall__puff,
   .fall__mayo,
   .firefly,
   .campfire__flame,
@@ -2187,7 +2291,26 @@ html[data-motion-tier="reduced"] .fall__mayo {
 
   .fall {
     height: 120vh;
-    background: linear-gradient(180deg, #b690b3 0%, #8bc3f8 100%);
+    --fall-top: #b690b3;
+    --fall-bottom: #8bc3f8;
+  }
+
+  /* Portrait stage: the puffs take a larger share of the width. */
+  .fall__puff--1 {
+    width: 62vw;
+  }
+
+  .fall__puff--2 {
+    width: 56vw;
+  }
+
+  .fall__puff--3 {
+    left: -14%;
+    width: 58vw;
+  }
+
+  .fall__puff--4 {
+    width: 70vw;
   }
 
   .progress {

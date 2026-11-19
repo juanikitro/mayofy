@@ -1,49 +1,72 @@
-import { MayoFigure } from "@/components/world/mayo-figure";
+import type { CSSProperties } from "react";
 
-// The mid and near layers also carry clouds along their bottom edge: they
-// rise faster than the stage, and without them the last third of the fall
-// showed empty sky above island 2.
-const layers = [
-  { className: "fall__layer fall__layer--far", clouds: [[200, 120, 180, 50], [900, 80, 220, 60], [1400, 200, 160, 44]] },
-  { className: "fall__layer fall__layer--mid", clouds: [[500, 300, 260, 70], [1200, 420, 300, 80], [100, 520, 200, 60], [320, 900, 280, 75], [1050, 950, 320, 85]] },
-  { className: "fall__layer fall__layer--near", clouds: [[300, 700, 360, 100], [1100, 640, 420, 110], [1500, 820, 260, 80], [700, 960, 380, 110], [1480, 990, 300, 90]] },
-] as const;
+import { MayoFigure } from "@/components/world/mayo-figure";
+import { cloudFall } from "@/content/stage";
+
+/** Share of the `--fall` cover range where the frames crossfade. */
+const CROSSFADE_START = 18;
+const CROSSFADE_END = 82;
+
+/**
+ * Scroll range (percent of `cover`) of frame `index`: from the moment it
+ * starts fading in until the next frame is fully opaque over it, when it
+ * drops out, so at most two frames are ever visible. Frame 01 is opaque from
+ * the start and frame 10 never drops out.
+ */
+function frameRange(index: number, count: number) {
+  const step = (CROSSFADE_END - CROSSFADE_START) / (count - 1);
+  const start = index === 0 ? 0 : CROSSFADE_START + (index - 1) * step;
+  const end = index === count - 1 ? CROSSFADE_END : CROSSFADE_START + (index + 1) * step;
+  return { "--frame-from": `${start.toFixed(2)}%`, "--frame-to": `${end.toFixed(2)}%` } as CSSProperties;
+}
 
 /**
  * Transition between island 1 (dawn) and island 2 (morning): Mayo falls
- * through clouds. Provisional version: three SVG cloud layers moved with
- * scroll-driven animations; the asset agent delivers the real frame
- * sequence (10–12 light images); the reduced tier shows the first frame.
- * The near layer passes in front of Mayo (world.css), so she falls between
- * the clouds rather than over them; each cloud is lit from above.
+ * through the clouds. Inside the sticky stage the ten painted frames of the
+ * camera descent (60-nubes desktop, 61-nubes-cel mobile) are stacked
+ * full-bleed and crossfade in order along the `--fall` view timeline (CSS
+ * only, no scroll hijacking). The four isolated puffs (62-nube-suelta) rise
+ * faster than the frames as foreground parallax: two behind Mayo's painted
+ * fall strip and two in front of her, so she falls between the clouds.
+ * The stage fades at its edges into the section gradient, which runs from
+ * the hero plate's last row to island 2's first. The reduced tier,
+ * `prefers-reduced-motion` and browsers without scroll-driven animations
+ * show one static composition: the `still` frame, the puffs at rest and Mayo.
  */
 export function CloudFall() {
+  const count = cloudFall.frames.length;
   return (
     <section className="fall" aria-label="Transición: Mayo cae entre las nubes">
       <div className="fall__stage" aria-hidden="true">
-        <svg className="fall__defs" width="0" height="0" focusable="false">
-          <defs>
-            <linearGradient id="fall-cloud-light" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="#fffaf6" />
-              <stop offset="1" stopColor="#ecdde6" />
-            </linearGradient>
-          </defs>
-        </svg>
-        {layers.map((layer) => (
-          <svg
-            key={layer.className}
-            className={layer.className}
-            viewBox="0 0 1600 1000"
-            preserveAspectRatio="xMidYMid slice"
-          >
-            {layer.clouds.map(([x, y, rx, ry], index) => (
-              <g key={index} className="fall__cloud">
-                <ellipse cx={x} cy={y} rx={rx} ry={ry} />
-                <ellipse cx={x + rx * 0.35} cy={y - ry * 0.6} rx={rx * 0.55} ry={ry * 0.9} />
-                <ellipse cx={x - rx * 0.4} cy={y - ry * 0.3} rx={rx * 0.45} ry={ry * 0.7} />
-              </g>
-            ))}
-          </svg>
+        {cloudFall.frames.map((frame, index) => {
+          const position = index === 0 ? "first" : index === count - 1 ? "last" : "middle";
+          return (
+            <picture
+              key={frame.id}
+              className="fall__frame"
+              data-frame={frame.id}
+              data-position={position}
+              data-still={frame.id === cloudFall.still ? "" : undefined}
+              style={frameRange(index, count)}
+            >
+              {/* WebP only: in this batch it is ~40 % lighter than the AVIF encode. */}
+              <source media="(max-width: 48rem)" type="image/webp" srcSet={frame.mobile.webp} />
+              <img
+                src={frame.desktop.webp}
+                alt=""
+                width={frame.desktop.width}
+                height={frame.desktop.height}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          );
+        })}
+        {cloudFall.puffs.map((puff, index) => (
+          <picture key={puff.avif} className={`fall__puff fall__puff--${index + 1}`}>
+            <source type="image/avif" srcSet={puff.avif} />
+            <img src={puff.webp} alt="" width={puff.width} height={puff.height} loading="lazy" decoding="async" />
+          </picture>
         ))}
         <MayoFigure slot="fall" className="fall__mayo" />
       </div>

@@ -24,7 +24,7 @@ Chromium a 1440×900 y 390×844 sobre `next dev`: las siete islas con sus placas
 ## Pendiente
 
 - Pares de parallax completos: islas 2 a 7 en escritorio y celular (isla 3 con un solo par para ambos tamaños), hero solo en escritorio el 17 de noviembre en escritorio y celular (deriva medida de 0 a −44 px). Isla 3 montada el 17 de noviembre sobre el escenario pegajoso de las rocas con su propia timeline (`--rocks`, deriva medida de −8 a −57 px); como no tiene placa de celular, el mismo par sirve en ambos tamaños. El hero en celular queda bloqueado: tres recortes de ChatGPT y uno local (BiRefNet) fallaron en el suelo y las raíces. Isla 2 montada el 17 de noviembre: la deriva medida va de 0 a −72 px en escritorio y de 0 a −62 px en celular a lo largo de la sección, sin costura visible en las raíces.
-- Lote C (cuadros de nubes) para la caída: el worker está produciendo una vista previa de los tres primeros cuadros.
+- ~~Lote C (cuadros de nubes) para la caída.~~ Montado el 19 de noviembre: diez cuadros por orientación y cuatro nubes sueltas (ver "Caída entre nubes con cuadros pintados").
 - ~~WebP con pérdida para el respaldo de los AVIF.~~ Entregados y versionados el 17 de noviembre (90 archivos, calidad 82, 5,8 MB en total).
 - Afinar anclas de Mayo con Juani sobre las placas definitivas.
 
@@ -56,3 +56,39 @@ node encode-mayo-strips.mjs --out <salida> --cell 640 --avif 48 --webp 58 \
 Objetivo pedido: AVIF ≤ 250 KB y WebP ≤ 350 KB por tira de 12 cuadros. AVIF lo cumple salvo caída (254 KB) y sistemas (263 KB), que quedan apenas por encima; el WebP (respaldo para navegadores sin AVIF) queda entre 336 y 403 KB porque bajar más la calidad ya mostraba bloques en el pelaje. En total las tiras pasan de ~13,4 MB (ambos formatos) a ~4,4 MB; un navegador con AVIF descarga 1,7 MB en lugar de 7,6 MB.
 
 Verificado en Chromium a 1440 × 900: capturas del Mayo del hero y de trabajos antes y después en la misma posición de scroll, sin degradación visible; cada `[data-mayo-slot] .mayo__sprite img` reporta `naturalWidth = cuadros × 640` y el `transform` cambia a lo largo de 300 ms (la animación sigue avanzando). A 390 × 844, `scrollWidth === innerWidth`.
+
+## Caída entre nubes con cuadros pintados
+
+El 19 de noviembre la caída entre la isla 1 y la isla 2 (`src/components/world/cloud-fall.tsx`) dejó las capas SVG provisorias y pasó a los assets del lote C: `60-nubes-01..10` (escritorio, 1672 × 941), `61-nubes-cel-01..10` (celular, 864 × 1536) y `62-nube-suelta-1..4` (nubes aisladas con alfa). Se copiaron sólo el AVIF y el WebP desde el checkout `mayo-world-assets`; la lista de cuadros y nubes vive en `cloudFall` de `src/content/stage.ts`.
+
+### Cómo funciona
+
+- Sigue siendo CSS puro sobre la timeline `--fall` (la sección de 160vh con su escenario pegajoso de 100svh), sin secuestrar el scroll. La altura de la sección, el degradado de fondo y la máscara que desvanece los bordes del escenario no cambiaron.
+- Los diez cuadros están apilados a pantalla completa (`object-fit: cover`), cada uno en un `<picture>` con AVIF primero, WebP de respaldo y `<source media="(max-width: 48rem)">` para los cuadros de celular.
+- El cuadro 01 está opaco desde el principio; entre `cover 18%` y `cover 82%` los cuadros 02 a 10 entran en orden, cada uno en un tramo de ~7,1 % del rango. Cada cuadro aparece en la primera mitad de su rango y se apaga de golpe cuando el siguiente ya está opaco encima, así nunca hay más de dos cuadros visibles. Los rangos se calculan en `frameRange()` y llegan al CSS como `--frame-from` y `--frame-to`.
+- Costuras: el cuadro 01 abre con un cielo lavanda y el 10 cierra con una bruma clara, así que cada uno lleva un velo (`::after`) hacia el color del extremo de la sección (`--fall-top` = `#b38fa0`, `--fall-bottom` = `#90c5fb`; en celular `#b690b3` y `#8bc3f8`). Sin ese velo quedaba una franja blanquecina sobre el cielo de la isla 2.
+- La tira pintada de Mayo (`[data-mayo-slot="fall"]`, z-index 1) sigue cayendo con la animación `mayo-fall` (`cover 20%`–`80%`). Las nubes sueltas suben más rápido que los cuadros: la 1 y la 2 pasan por detrás de Mayo (z-index 0, 85 % de opacidad, de +45vh a −95vh) y la 3 y la 4 por delante (z-index 2, de +75vh a −140vh), cada una con su propio rango entre `cover 8%` y `cover 88%`. La nube 3 está corrida a la izquierda para que tape a Mayo sólo en parte al cruzarla.
+
+### Modo reducido
+
+Con `data-motion-tier="reduced"`, con `prefers-reduced-motion: reduce` y en navegadores sin animaciones por scroll se ve una sola composición fija: el cuadro 05 (el último con horizonte, el que mejor se lee quieto), las cuatro nubes en su posición de reposo y Mayo. El CSS deja todos los cuadros en opacidad 0 salvo el marcado `data-still`, así que el primer pintado nunca muestra la pila entera. Con `prefers-reduced-motion` la sección baja a 60vh como antes.
+
+### Pesos
+
+Todas las imágenes son `loading="lazy"` y `decoding="async"` con `width` y `height`; la caída queda lejos del primer viewport, por eso ni el cuadro 01 se pide de entrada.
+
+| Lo que carga | 1440 × 900 | 390 × 844 |
+| --- | --- | --- |
+| Diez cuadros (AVIF) | 579 KB (`60-nubes`) | 531 KB (`61-nubes-cel`) |
+| Cuatro nubes sueltas (AVIF) | 152 KB | 152 KB |
+| **Total** | **731 KB** | **683 KB** |
+
+El navegador sólo descarga la orientación que corresponde (medido con `performance.getEntriesByType("resource")`). Ojo: en este lote el WebP pesa menos que el AVIF (cuadros de escritorio 359 KB contra 579 KB; de celular 328 KB contra 531 KB), así que el AVIF primero cuesta ~220 KB de más por orientación. Conviene recodificar el AVIF o servir WebP primero para estos cuadros.
+
+### Cómo se verificó
+
+Chromium (Playwright) a 1440 × 900 y 390 × 844 sobre `next dev`, recorriendo la caída en nueve pasos: los cuadros visibles fueron `01`, `01+02`, `02+03`, `04+05`, `05+06`, `06+07`, `08+09`, `09+10`, `10` en ambos tamaños (avance monótono, nunca más de dos). La transformación de Mayo cambia en cada paso, las nubes 3 y 4 tienen z-index 2 sobre el 1 de Mayo, `scrollWidth === innerWidth` a 390 y no hubo errores de consola. Con `reducedMotion: 'reduce'` sólo el cuadro 05 queda visible y no corre ninguna animación dentro de la caída. Capturas al principio, al medio y al final: el color en la unión con el hero es continuo (`#b38fa0` a ambos lados) y el final se funde con el cielo de la isla 2 sin franja. `npm run typecheck`, `npm run lint` y `npm run build` limpios; el repositorio no tiene runner de tests.
+
+Pendiente: las nubes sueltas traen un halo rosado en el borde del alfa que se nota sobre los cuadros más oscuros; si molesta, pedir un recorte más limpio al agente de assets. En el hero, la placa termina en una banda plana de `#b38fa0` con un borde horizontal visible por encima de la caída; es anterior a este cambio.
+
+Los cuadros de la caída se sirven sólo en WebP: en este lote el WebP pesa alrededor de un 40 % menos que el AVIF (359 KB contra 579 KB en escritorio, 328 KB contra 531 KB en celular), así que los AVIF de 60 y 61 no se versionan. Las nubes sueltas (62) siguen con AVIF primero.

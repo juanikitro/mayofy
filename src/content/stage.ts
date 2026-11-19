@@ -181,6 +181,32 @@ export const islandPlates = {
   },
 } as const satisfies Record<string, PlateSpec>;
 
+/* ------------------------------------------------------------ cloud fall */
+
+const fallFrameIds = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"] as const;
+
+/**
+ * Painted camera descent between island 1 and island 2 (lote C): ten frames
+ * per orientation, warm dawn with horizon (01–05), cooling (06), inside the
+ * cloud deck (07–08) and below it in the blue morning (09–10). `still` is the
+ * frame shown alone when the fall cannot animate.
+ */
+export const cloudFall = {
+  frames: fallFrameIds.map((id) => ({
+    id,
+    desktop: desktopPlate(`60-nubes-${id}`),
+    mobile: mobilePlate(`61-nubes-cel-${id}`),
+  })),
+  still: "05",
+  /** Isolated dawn-lit puffs with alpha, used as foreground parallax. */
+  puffs: [
+    plateImage("62-nube-suelta-1", 812, 471),
+    plateImage("62-nube-suelta-2", 1024, 725),
+    plateImage("62-nube-suelta-3", 1024, 813),
+    plateImage("62-nube-suelta-4", 1024, 915),
+  ],
+} as const;
+
 /**
  * Where Mayo's feet touch each plate, in percent of the plate, and the side
  * of her square as a percent of the plate width (analysis §4). Mobile
