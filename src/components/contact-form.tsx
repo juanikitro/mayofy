@@ -58,6 +58,20 @@ function SelectField({
   );
 }
 
+/** A check that draws itself, or an exclamation mark, before the message. */
+function FeedbackIcon({ state }: { state: "success" | "error" }) {
+  return (
+    <svg className="contact-form__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+      <circle cx="8" cy="8" r="7" />
+      {state === "success" ? (
+        <path className="contact-form__tick" d="M4.8 8.3 7 10.4l4.2-4.6" pathLength={1} />
+      ) : (
+        <path d="M8 4.5v4.2M8 11.2v.3" />
+      )}
+    </svg>
+  );
+}
+
 export function ContactForm({ whatsappHref }: ContactFormProps) {
   const [submissionState, setSubmissionState] =
     useState<SubmissionState>("idle");
@@ -135,6 +149,7 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
       className="contact-form"
       onSubmit={handleSubmit}
       aria-describedby="contact-feedback"
+      aria-busy={submissionState === "submitting"}
     >
       <div className="contact-form__row">
         <label className="field">
@@ -195,7 +210,14 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
           value="callback"
           disabled={submissionState === "submitting"}
         >
-          {submissionState === "submitting" ? "Enviando…" : "Prefiero que me contacten"}
+          {submissionState === "submitting" ? (
+            <>
+              <span className="btn__spinner" aria-hidden="true" />
+              Enviando…
+            </>
+          ) : (
+            "Prefiero que me contacten"
+          )}
         </button>
       </div>
       <p
@@ -203,7 +225,12 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
         className={`contact-form__feedback contact-form__feedback--${submissionState}`}
         aria-live="polite"
       >
-        {feedback || "Te respondemos en menos de 24 horas hábiles."}
+        <span className="contact-form__message" key={`${submissionState}-${feedback}`}>
+          {submissionState === "success" || submissionState === "error" ? (
+            <FeedbackIcon state={submissionState} />
+          ) : null}
+          {feedback || "Te respondemos en menos de 24 horas hábiles."}
+        </span>
       </p>
       <p className="contact-form__privacy">
         Usamos tus datos solo para responder tu consulta. No los vendemos ni los

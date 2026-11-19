@@ -3892,3 +3892,180 @@ html[data-motion-tier="reduced"] .wa-float {
 .questions__item > summary:focus-visible {
   outline-offset: 0.35rem;
 }
+
+/* Contact form --------------------------------------------------------- */
+
+/* Focus: the field's border turns mint with a soft 3px halo, drawn at once
+ * (a focus ring never animates), and its label lights up with it. */
+.field > span {
+  transition: color var(--m-fast) var(--ease-ui);
+}
+
+.field:focus-within > span {
+  color: var(--mint);
+  transition-duration: var(--m-base);
+}
+
+.field input,
+.field select,
+.field textarea {
+  transition:
+    border-color var(--m-fast) var(--ease-ui),
+    background-color var(--m-fast) var(--ease-ui);
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+  outline: none;
+  border-color: var(--mint);
+  background-color: oklch(22% 0.045 265);
+  box-shadow:
+    0 0 0 1px var(--mint),
+    0 0 0 4px color-mix(in oklch, var(--mint) 22%, transparent);
+}
+
+.field input:user-invalid:focus-visible,
+.field select:user-invalid:focus-visible,
+.field textarea:user-invalid:focus-visible {
+  border-color: oklch(76% 0.13 27);
+  box-shadow:
+    0 0 0 1px oklch(76% 0.13 27),
+    0 0 0 4px oklch(76% 0.13 27 / 22%);
+}
+
+/* Sending: a 14px ring turns inside the button; nothing else moves. */
+.btn__spinner {
+  flex: none;
+  width: 0.875rem;
+  height: 0.875rem;
+  border: 2px solid currentColor;
+  border-inline-end-color: transparent;
+  border-radius: 50%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .btn__spinner {
+    animation: spinner-turn 800ms linear infinite;
+  }
+}
+
+@keyframes spinner-turn {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* Each new message arrives 4px from below; success draws its tick. */
+.contact-form__message {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.contact-form__icon {
+  flex: none;
+  width: 1.05em;
+  height: 1.05em;
+  margin-block-start: 0.15em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .contact-form__message {
+    animation: message-in var(--m-panel) var(--ease-enter) both;
+  }
+
+  html:not([data-motion-tier="reduced"]) .contact-form__tick {
+    stroke-dasharray: 1;
+    animation: tick-draw 320ms var(--ease-ui) 120ms both;
+  }
+}
+
+@keyframes message-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@keyframes tick-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Cal.com: loading state ----------------------------------------------- */
+
+/* Until Cal.com reports the calendar ready, a skeleton of the month view
+ * holds the space (a slow breathing of its tiles), then fades away. */
+.booking__frame {
+  position: relative;
+  width: 100%;
+}
+
+.booking__skeleton {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: min(100%, 28rem);
+  align-content: start;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: clamp(1rem, 3vw, 2rem);
+  border-radius: var(--radius);
+  background: var(--night-deep);
+  pointer-events: none;
+  transition: opacity var(--m-panel) var(--ease-ui);
+}
+
+.booking__frame[data-ready] > .booking__skeleton {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--m-panel) var(--ease-ui),
+    visibility 0s linear var(--m-panel);
+}
+
+.booking__skeleton-title {
+  width: min(12rem, 50%);
+  height: 0.9rem;
+  border-radius: var(--radius-pill);
+  background: oklch(26% 0.04 265);
+}
+
+.booking__skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.booking__skeleton-grid > span {
+  aspect-ratio: 1;
+  border-radius: 0.6rem;
+  background: oklch(22% 0.04 265);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .booking__frame:not([data-ready]) :is(.booking__skeleton-title, .booking__skeleton-grid) {
+    animation: skeleton-breathe 1.6s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes skeleton-breathe {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.55;
+  }
+}
