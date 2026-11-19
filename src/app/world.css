@@ -1370,23 +1370,44 @@ html[data-motion-tier="reduced"] .scene__sky {
     top: 6.5rem;
   }
 
-  /* Booking panel: Cal.com gets the whole width, where it shows the month
-   * and the free times side by side (about 570 px tall instead of 1940 px
-   * stacked in a column); the WhatsApp link sits beside the form. */
+  /* Booking panel: Cal.com shows the month and the free times side by side
+   * (about 530 px tall) from an 820 px wide frame and stacks them below
+   * that. Up to 88rem it takes the panel's width; the form follows in three
+   * columns instead of a tall column beside an empty one. */
   .reach {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
-      "title title"
-      "text text"
-      "booking booking"
-      "alt form-intro"
-      ". form";
+      "title"
+      "text"
+      "booking"
+      "alt"
+      "form-intro"
+      "form";
     column-gap: 3rem;
     align-items: start;
   }
 
   .reach > .reach__intro {
     display: contents;
+  }
+
+  .reach .contact-form {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 1rem;
+    align-items: start;
+  }
+
+  .reach .contact-form__row {
+    display: contents;
+  }
+
+  .reach .field:has(textarea) {
+    grid-column: span 2;
+  }
+
+  .reach .contact-form > :is(.contact-form__footer, .contact-form__feedback, .contact-form__privacy, .contact-form__fallback) {
+    grid-column: 1 / -1;
   }
 
   .reach__intro > h3 {
@@ -1399,6 +1420,7 @@ html[data-motion-tier="reduced"] .scene__sky {
 
   .reach__intro > .booking {
     grid-area: booking;
+    max-width: 51.5rem;
   }
 
   .reach__intro > .host-link {
@@ -1423,6 +1445,22 @@ html[data-motion-tier="reduced"] .scene__sky {
 
   .isle .works {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Wide screens: Cal.com keeps its compact 820 px frame (51.5rem) and the
+ * invitation, its text and the WhatsApp link sit beside it, instead of the
+ * calendar stretching to 1040 px inside a 1230 px dark box. */
+@media (min-width: 88rem) {
+  .reach {
+    grid-template-columns: 51.5rem minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr auto auto;
+    grid-template-areas:
+      "booking title"
+      "booking text"
+      "booking alt"
+      "form-intro form-intro"
+      "form form";
   }
 }
 
@@ -2175,6 +2213,45 @@ html[data-motion-tier="reduced"] .fall__mayo {
   padding: 1.5rem;
   border-radius: var(--radius);
   background: color-mix(in oklch, oklch(22% 0.04 265) 90%, transparent);
+}
+
+/* The form lies on the booking panel itself, not in a second dark card, and
+ * its fields keep the 44 px tap height without the 48 px boxes, large
+ * placeholder type and 9rem message box that made it outgrow the calendar. */
+.reach .contact-form {
+  padding: 0;
+  background: none;
+}
+
+.reach .field {
+  gap: 0.3rem;
+  margin-block-end: 0.85rem;
+}
+
+/* Fields carry their own bottom margin; a stacked row adds no gap of its own. */
+.reach .contact-form__row {
+  row-gap: 0;
+}
+
+.reach .field :is(input, select, textarea) {
+  min-height: 2.75rem;
+  padding: 0.55rem 0.85rem;
+  font-size: 1rem;
+}
+
+.reach .field select {
+  padding-inline-end: 2.5rem;
+}
+
+.reach .field textarea {
+  min-height: 2.75rem;
+  height: 6.5rem;
+}
+
+@media (max-width: 48rem) {
+  .reach {
+    padding: 1rem;
+  }
 }
 
 .reach__intro {
