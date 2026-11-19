@@ -3512,7 +3512,7 @@ html[data-motion-tier="reduced"] .world {
   transition: background-size var(--m-fast) var(--ease-ui);
 }
 
-:is(a, button):is(:hover, :focus-visible) > .link-label {
+:is(a, button, summary):is(:hover, :focus-visible) > .link-label {
   background-position:
     left 0 bottom 0,
     left 0 bottom 0;
@@ -3787,4 +3787,108 @@ html[data-motion-tier="reduced"] .progress__paw::after {
 html[data-motion-tier="reduced"] .wa-float {
   transform: none;
   transition-duration: 0ms;
+}
+
+/* Cards ---------------------------------------------------------------- */
+
+/* Pack and work cards hold links: under a fine pointer the card rises 2px
+ * and its shadow deepens (one elevation step, never a tilt or a scale). */
+.pack,
+.work {
+  transition:
+    transform var(--m-fast) var(--ease-ui),
+    box-shadow var(--m-fast) var(--ease-ui);
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  html:not([data-motion-tier="reduced"]) :is(.pack, .work:not(.work--placeholder)):hover {
+    transform: translateY(var(--m-lift));
+    box-shadow: var(--m-shadow-card);
+    transition-duration: 180ms;
+  }
+
+  html:not([data-motion-tier="reduced"]) .work--placeholder:hover {
+    transform: translateY(var(--m-lift));
+    transition-duration: 180ms;
+  }
+}
+
+/* Disclosures (pack details, maintenance, FAQ) -------------------------- */
+
+/* The plus is two bars: the upright one turns 90 degrees and lies on the
+ * other, so the plus becomes a minus as the panel opens (and back as it
+ * closes, following AnimatedDetails' data-collapsing). The panel's content
+ * settles 4px as it fades in. */
+:is(.pack-details, .questions__item) > summary {
+  --sum-pad: 0.5rem;
+  position: relative;
+  padding-inline-start: 1.5rem;
+  transition: color var(--m-fast) var(--ease-ui);
+}
+
+.questions__item > summary {
+  --sum-pad: 0.75rem;
+}
+
+:is(.pack-details, .questions__item) > summary::before,
+:is(.pack-details, .questions__item) > summary::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--sum-pad) + 0.5lh - 1px) auto auto 0.15rem;
+  width: 0.75rem;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+}
+
+/* Outranks the "+" / "2" glyphs of the open state set earlier. */
+:is(.pack-details, .questions__item)[open] > summary::before {
+  content: "";
+}
+
+.questions__item > summary::before,
+.questions__item > summary::after {
+  color: var(--mint);
+}
+
+:is(.pack-details, .questions__item) > summary::after {
+  transform: rotate(90deg);
+  transition: transform var(--m-panel) var(--ease-ui);
+}
+
+:is(.pack-details, .questions__item)[open]:not([data-collapsing="true"]) > summary::after {
+  transform: rotate(180deg);
+}
+
+.pack-details > summary:hover {
+  color: var(--leaf-deep);
+}
+
+.isle--dark .pack-details > summary:hover {
+  color: oklch(92% 0.15 158);
+}
+
+.animated-details__inner {
+  transition: transform var(--m-panel) var(--ease-ui);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) details[data-collapsing="true"] > .animated-details__content > .animated-details__inner {
+    transform: translateY(-0.25rem);
+  }
+}
+
+/* FAQ rows answer the pointer with a lighter ground; an open row keeps it. */
+.questions__item {
+  transition: background-color var(--m-fast) var(--ease-ui);
+}
+
+.questions__item:has(> summary:hover),
+.questions__item[open]:not([data-collapsing="true"]) {
+  background: color-mix(in oklch, oklch(27% 0.045 265) 92%, transparent);
+  transition-duration: var(--m-base);
+}
+
+.questions__item > summary:focus-visible {
+  outline-offset: 0.35rem;
 }

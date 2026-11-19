@@ -224,7 +224,7 @@ export function QuestionsIsland() {
               <a className="btn btn--quiet" href={getWhatsAppHref(maintenancePlan.whatsappMessage)} target="_blank" rel="noreferrer">
                 {maintenancePlan.cta}
               </a>
-              <AnimatedDetails className="pack-details" summary="¿Qué cambios incluye?">
+              <AnimatedDetails className="pack-details" summary={<span className="link-label">¿Qué cambios incluye?</span>}>
                 <DetailGroups groups={maintenancePlan.detailGroups} />
               </AnimatedDetails>
               <ol className="upkeep__footnotes" aria-label="Límites del mantenimiento">
