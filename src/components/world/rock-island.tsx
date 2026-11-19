@@ -357,7 +357,7 @@ const depthOrder = [1, 0, 2];
 
 export function RockIsland() {
   return (
-    <section id="packs" className="rocks" data-island="3" aria-labelledby="packs-title">
+    <section id="packs" className={packsAssembledPlate.desktop ? "rocks rocks--painted" : "rocks"} data-island="3" aria-labelledby="packs-title">
       <div className="rocks__stage">
         <header className="rocks__intro">
           <h2 id="packs-title">

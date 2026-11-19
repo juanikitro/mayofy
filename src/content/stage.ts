@@ -561,10 +561,15 @@ export const looseRocks: readonly LooseRock[] = [
 ];
 
 /**
- * The painted end state, when commissioned: the plate's island cutout with
- * the three stacks painted in (1672 x 941, same framing as
- * `10-isla3-base-isla`). When present, the live stacks crossfade into it at
- * the end of the assembly (world.css `.plate__picture--assembled`); until then
- * the live stacks stay.
+ * The painted end state (illustrator, 19 November 2026): the plate's island
+ * cutout with the three stacks painted in (1672 x 941, same framing as
+ * `10-isla3-base-isla`), one per composition (phones place the stacks at
+ * 32.5 / 50 / 67.5 %). The live stacks crossfade into it at the end of the
+ * assembly (world.css `.plate__picture--assembled`); measured against the
+ * live render, the painted stacks sit within 1 px of the live ones. Its sky
+ * is transparent, so the parallax background and the far rocks stay live.
  */
-export const packsAssembledPlate: { desktop?: PlateImage; mobile?: PlateImage } = {};
+export const packsAssembledPlate: { desktop?: PlateImage; mobile?: PlateImage } = {
+  desktop: desktopPlate("10-isla3-armada-escritorio-isla"),
+  mobile: desktopPlate("10-isla3-armada-celular-isla"),
+};

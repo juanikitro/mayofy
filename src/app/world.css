@@ -1112,10 +1112,41 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 }
 
-/* The commissioned painted end state (stage.ts packsAssembledPlate), over
- * the live stacks and under Mayo; static tiers show it at once. */
+/* The painted end state (stage.ts packsAssembledPlate), over the live
+ * stacks and under Mayo, fading in once the last platform has settled. Its
+ * sky is transparent, so it needs no top fade. Once it is opaque the live
+ * pieces, their painted and ground shadows and the grass strips are hidden
+ * (`live-out`), so no live edge can peek past the painting and no shadow is
+ * doubled; scrolling back shows them again before the painting fades out.
+ * Static tiers (no scroll-driven animations, reduced motion) show the
+ * painting alone: it is the assembled state, better integrated. */
 .plate__picture--assembled {
   z-index: 3;
+}
+
+.rocks .scene--plated .plate__picture--assembled {
+  mask-image: none;
+}
+
+.rocks--painted {
+  --live-out: cover 67.9% cover 68%;
+}
+
+.rocks--painted .rock,
+.rocks--painted .rock-shadow,
+.rocks--painted .rock-ground,
+.rocks--painted .rock-grass {
+  visibility: hidden;
+}
+
+@keyframes live-out {
+  from {
+    visibility: visible;
+  }
+
+  to {
+    visibility: hidden;
+  }
 }
 
 @keyframes rock-ground-in {
@@ -1231,6 +1262,42 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     animation-range: cover 64% cover 68%;
   }
 
+  .rocks--painted .rock {
+    animation:
+      rock-fly-x linear both,
+      rock-fly-y linear both,
+      rock-turn linear both,
+      rock-pre cubic-bezier(0.3, 0, 0.4, 1) both,
+      live-out linear both;
+    animation-duration: auto;
+    animation-timeline: --rocks;
+    animation-range: var(--range), var(--range), var(--range), cover 4% cover 34%, var(--live-out);
+  }
+
+  .rocks--painted .rock-shadow {
+    animation:
+      rock-shadow-in linear both,
+      live-out linear both;
+    animation-duration: auto;
+    animation-timeline: --rocks;
+    animation-range: var(--range), var(--live-out);
+  }
+
+  .rocks--painted .rock-ground {
+    animation:
+      rock-ground-in linear both,
+      live-out linear both;
+    animation-duration: auto;
+    animation-timeline: --rocks;
+    animation-range: var(--range), var(--live-out);
+  }
+
+  .rocks--painted .rock-grass {
+    animation: live-out linear both;
+    animation-timeline: --rocks;
+    animation-range: var(--live-out);
+  }
+
   .rock-ground {
     animation: rock-ground-in linear both;
     animation-timeline: --rocks;
@@ -1279,6 +1346,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   .rock,
   .rock__body,
   .rock-far,
+  .rock-grass,
   .plate__picture--assembled,
   .rock-ground,
   .rock-shadow,
@@ -1293,6 +1361,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 html[data-motion-tier="reduced"] .rock,
 html[data-motion-tier="reduced"] .rock__body,
 html[data-motion-tier="reduced"] .rock-far,
+html[data-motion-tier="reduced"] .rock-grass,
 html[data-motion-tier="reduced"] .plate__picture--assembled,
 html[data-motion-tier="reduced"] .rock-ground,
 html[data-motion-tier="reduced"] .rock-shadow,
