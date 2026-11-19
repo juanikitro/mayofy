@@ -2443,6 +2443,17 @@ html[data-motion-tier="reduced"] .fall__mayo {
   border: 0;
 }
 
+/* Phones: Cal.com stacks its details, the month and every free time of the
+ * chosen day in one column (about 1650 px, two screens). The frame stops at
+ * about one screen and scrolls inside, with the first times showing at its
+ * foot, so the form and the island still follow. */
+@media (max-width: 48rem) {
+  .booking__inline {
+    max-height: min(44rem, 82svh);
+    overflow-y: auto;
+  }
+}
+
 .booking__link {
   font-size: 0.9rem;
   color: var(--mint);
