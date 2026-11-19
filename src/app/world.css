@@ -460,11 +460,15 @@ details[data-preparing-open="true"] > .animated-details__content {
  * the scroll; the first frame is what shows when motion is off. */
 .mayo {
   --scrub-range: var(--scrub-range-d);
+  --cycles: var(--cycles-d);
+  --travel-steps: var(--travel-steps-d);
 }
 
 @media (max-width: 48rem) {
   .mayo {
     --scrub-range: var(--scrub-range-m);
+    --cycles: var(--cycles-m);
+    --travel-steps: var(--travel-steps-m);
   }
 }
 
@@ -3204,7 +3208,12 @@ html[data-motion-tier="reduced"] .rock-shadow {
 
 @supports (animation-timeline: view()) {
   .mayo--travel {
-    animation: mayo-travel linear both;
+    animation: mayo-travel both;
+    /* One step per painted frame, on the sprite's own step boundaries
+     * (`jump-none`, cycles x frames over the same range): the strip's
+     * planted paws barely move inside the cell, so a smooth travel made
+     * every held pose slide. */
+    animation-timing-function: steps(var(--travel-steps, 2), jump-none);
     animation-timeline: var(--scrub-timeline);
     animation-range: var(--scrub-range);
   }

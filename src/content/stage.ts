@@ -75,6 +75,8 @@ export type MayoScrub = {
   rangeMobile?: string;
   /** How many times the strip plays across the range (a `pingpong` play is one way). */
   cycles: number;
+  /** Plays on phones, where a travelling slot covers a shorter stretch of meadow. */
+  cyclesMobile?: number;
 };
 
 export type MayoSprite = {
@@ -117,8 +119,10 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   packs: sprite("packs", "90.8%", "cycle", { timeline: "--rocks", range: "cover 25% cover 90%", rangeMobile: "cover 25% cover 96%", cycles: 4 }),
   // Digging: quick, repetitive paw strokes.
   systems: sprite("systems", "94%", "pingpong", { timeline: "--isle", range: "cover 50% cover 92%", rangeMobile: "cover 66% cover 97%", cycles: 4 }),
-  // Running across the path: about one stride per body length of travel.
-  works: sprite("works", "87%", "cycle", { timeline: "--isle", range: "cover 46% cover 88%", rangeMobile: "cover 68% cover 96%", cycles: 4 }),
+  // Running across the path: one stride per body length of travel (her body
+  // spans ~87 % of the cell). Desktop travels 22 % of the plate at a size of
+  // 8 % (2.75 cells, 3 strides); mobile 20 % at 16 % (1.25 cells, 1.5 strides).
+  works: sprite("works", "87%", "cycle", { timeline: "--isle", range: "cover 46% cover 88%", rangeMobile: "cover 68% cover 96%", cycles: 3, cyclesMobile: 1.5 }),
   // Resting by the fire: breathing and ears, barely.
   host: sprite("host", "91.5%", "pingpong", { timeline: "--isle", range: "cover 62% cover 93%", rangeMobile: "cover 72% cover 98%", cycles: 2 }),
   // Trotting after a firefly.
