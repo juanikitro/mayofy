@@ -35,17 +35,12 @@ function shadowStyle(anchor: MayoAnchor) {
  */
 function scrubStyle(sprite: MayoSprite | undefined) {
   if (!sprite) return {};
-  const { timeline, range, rangeMobile, cycles, cyclesMobile = cycles } = sprite.scrub;
+  const { timeline, range, rangeMobile, cycles } = sprite.scrub;
   return {
     "--scrub-timeline": timeline,
     "--scrub-range-d": range,
     "--scrub-range-m": rangeMobile ?? range,
-    "--cycles-d": String(cycles),
-    "--cycles-m": String(cyclesMobile),
-    // The travel advances once per painted frame, never between two, so a
-    // held pose never glides over the meadow.
-    "--travel-steps-d": String(Math.round(cycles * sprite.frames)),
-    "--travel-steps-m": String(Math.round(cyclesMobile * sprite.frames)),
+    "--cycles": String(cycles),
   };
 }
 
