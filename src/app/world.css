@@ -3334,9 +3334,35 @@ html[data-motion-tier="reduced"] .plate-object--chased {
   }
 }
 
+/* Hero and islands 2, 4-7: the background sinks behind the island instead of
+ * rising past it, so the far sky moves slower than the island (it reads as
+ * depth), and it fades out over its last rows into the section's sky, which
+ * ends with the plate's bottom colour. Rising, it uncovered a flat band of
+ * that sky under a hard edge (the "visible sky transition" below the hero
+ * island and at the foot of the islands). */
+@keyframes plate-background-depth {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(var(--drift, 7%));
+  }
+}
+
+:is(.dawn, .isle) .plate--layered .plate__picture--background {
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0,
+    #000 calc(var(--plate-fade, 0.09) * 100%),
+    #000 calc(100% - var(--plate-fade-bottom, 14%)),
+    transparent 100%
+  );
+}
+
 @supports (animation-timeline: view()) {
   .dawn .plate__picture--background {
-    animation: plate-background-drift linear both;
+    animation: plate-background-depth linear both;
     animation-timeline: --dawn;
     animation-range: exit 0% exit 100%;
   }
@@ -3348,7 +3374,7 @@ html[data-motion-tier="reduced"] .plate-object--chased {
   }
 
   .isle .plate__picture--background {
-    animation: plate-background-drift linear both;
+    animation: plate-background-depth linear both;
     animation-timeline: --isle;
     animation-range: entry 0% exit 100%;
   }
@@ -3374,5 +3400,13 @@ html[data-motion-tier="reduced"] .plate__picture--background {
 @media (max-width: 48rem) {
   .plate--layered:not(.plate--layered-mobile) .plate__picture--island {
     display: none;
+  }
+
+  /* Without a mobile pair (the hero) the background layer shows the single
+   * mobile plate, island included: it holds still, so Mayo stays on her
+   * meadow, and keeps its painted roots unfaded. */
+  :is(.dawn, .isle) .plate--layered:not(.plate--layered-mobile) .plate__picture--background {
+    animation: none;
+    mask-image: linear-gradient(180deg, transparent 0, #000 calc(var(--plate-fade, 0.09) * 100%));
   }
 }
