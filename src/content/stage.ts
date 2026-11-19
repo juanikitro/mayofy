@@ -113,8 +113,9 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   fall: sprite("fall", "88%", "pingpong", { timeline: "--fall", range: "cover 20% cover 80%", cycles: 3 }),
   // Play bow among the rocks.
   problem: sprite("problem", "93%", "pingpong", { timeline: "--isle", range: "cover 30% cover 85%", rangeMobile: "cover 35% cover 88%", cycles: 3 }),
-  // Hops beside the third platform once the assembly is over (she fades in at cover 58-63 %).
-  packs: sprite("packs", "90.8%", "cycle", { timeline: "--rocks", range: "cover 25% cover 90%", rangeMobile: "cover 25% cover 96%", cycles: 4 }),
+  // One hop per finished platform: each cycle takes off just after a platform's top rock lands
+  // (rockTiming: tops land at cover 44.7, 52.7 and 60.7 %), so she follows the order as it appears.
+  packs: sprite("packs", "90.8%", "cycle", { timeline: "--rocks", range: "cover 43.8% cover 67.8%", cycles: 3 }),
   // Digging: quick, repetitive paw strokes.
   systems: sprite("systems", "94%", "pingpong", { timeline: "--isle", range: "cover 50% cover 92%", rangeMobile: "cover 66% cover 97%", cycles: 4 }),
   // Running across the path: about one stride per body length of travel.
@@ -272,8 +273,9 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   hero: { x: "51%", y: "72.5%", size: "10%", xMobile: "56%", yMobile: "80.5%", sizeMobile: "22%", shadow: { lean: "-6%", opacity: 0.3 } },
   // Island 2: in the free meadow patch between the rocks (rim 53.5 %, lip 70 % at x 45); morning light from the left.
   problem: { x: "45%", y: "63%", size: "10.5%", xMobile: "43%", yMobile: "69.5%", sizeMobile: "22%", shadow: { lean: "6%", opacity: 0.28 } },
-  // Island 3: on the grass between platforms 2 and 3, facing the third (mobile: right of its stack); noon light from above.
-  packs: { x: "62.5%", y: "55.5%", size: "8%", xMobile: "72%", yMobile: "54%", sizeMobile: "18%", face: "right", shadow: { lean: "2%", opacity: 0.26 } },
+  // Island 3: on the meadow in front of the platforms, facing the third; this is where her hops end
+  // (packsMayoHops) and where she stands without motion; noon light from above.
+  packs: { x: "63%", y: "57%", size: "8%", xMobile: "59.5%", yMobile: "57%", sizeMobile: "9.5%", face: "right", shadow: { lean: "2%", opacity: 0.26 } },
   // Island 4: nose at the painted soil mound (desktop 46 %, 66 %; mobile 48.5 %, 75.8 %); golden light from the right.
   systems: { x: "42.5%", y: "67.5%", size: "11%", xMobile: "42%", yMobile: "76.8%", sizeMobile: "17%", face: "right", shadow: { lean: "-6%", opacity: 0.3 } },
   // Island 5: runs right-to-left across the middle band of the meadow, over the path; sunset light from the left.
@@ -445,3 +447,80 @@ export const platforms: readonly Platform[] = [
   },
 ];
 
+
+/* ------------------------------------------------- island 3 rock assembly */
+
+/**
+ * Where each assembled platform stands on the island-3 plate (Juani, 19
+ * November 2026: "que al scrollear se ordenen pero en un lugar realista"):
+ * `x`, `y` are its feet (the bottom centre of its rocks) in % of the plate
+ * width and height, on the meadow between the far rim (44 %) and the walkable
+ * front edge (59 %); `canvas` is the size of its 1254 design canvas in % of
+ * the plate width. The middle platform stands a little further back, so it
+ * is drawn a little smaller. Phones scale the plate up (world.css), so the
+ * platforms close in to sit under three side-by-side cards.
+ */
+export type PlatformPlacement = { x: number; y: number; canvas: number };
+
+export const platformPlacements: { desktop: readonly PlatformPlacement[]; mobile: readonly PlatformPlacement[] } = {
+  desktop: [
+    { x: 26, y: 54.5, canvas: 15.5 },
+    { x: 50, y: 51.5, canvas: 14.6 },
+    { x: 74, y: 54, canvas: 15.5 },
+  ],
+  mobile: [
+    { x: 32.5, y: 54.5, canvas: 15 },
+    { x: 50, y: 51.5, canvas: 14.2 },
+    { x: 67.5, y: 54, canvas: 15 },
+  ],
+};
+
+/**
+ * Where a rock floats before the scroll gathers it: its centre in % of the
+ * plate, its tilt and its depth. `back` rocks hang behind the island (drawn
+ * under the island cutout, so its rim hides their lower part), smaller and
+ * hazier; `front` rocks hang in front of the island's underside, larger and
+ * slightly out of focus. None floats over the meadow itself, where a real
+ * rock would cast a shadow on the grass.
+ */
+export type RockFloat = { x: number; y: number; rotate: number; scale: number; layer: "back" | "front" };
+
+export const rockFloats: readonly Record<PlatformPiece["kind"], RockFloat>[] = [
+  {
+    base: { x: 22, y: 77, rotate: -18, scale: 1.22, layer: "front" },
+    left: { x: 6, y: 50, rotate: 34, scale: 0.94, layer: "back" },
+    right: { x: 31, y: 34, rotate: -26, scale: 0.92, layer: "back" },
+    top: { x: 15, y: 25, rotate: 44, scale: 0.9, layer: "back" },
+  },
+  {
+    base: { x: 47, y: 82, rotate: 12, scale: 1.28, layer: "front" },
+    left: { x: 42, y: 25, rotate: -38, scale: 0.9, layer: "back" },
+    right: { x: 59, y: 41, rotate: 22, scale: 0.92, layer: "back" },
+    top: { x: 35, y: 70, rotate: -30, scale: 1.18, layer: "front" },
+  },
+  {
+    base: { x: 69, y: 78, rotate: -10, scale: 1.24, layer: "front" },
+    left: { x: 72, y: 40, rotate: 28, scale: 0.92, layer: "back" },
+    right: { x: 93, y: 51, rotate: -40, scale: 0.94, layer: "back" },
+    top: { x: 86, y: 21, rotate: -52, scale: 0.9, layer: "back" },
+  },
+];
+
+/**
+ * Scroll timing of the assembly on the `--rocks` cover range (the stage is
+ * pinned from 29.4 % to 70.6 % of it at 240vh): the rocks float until
+ * `start`; each platform then gathers `stagger` after the previous one, its
+ * pieces `pieceStagger` apart in landing order (base, left, right, top), each
+ * flight lasting `flight`. Mayo's three hops are timed from these numbers.
+ */
+export const rockTiming = { start: 34, stagger: 8, pieceStagger: 1.6, flight: 7, landing: 0.84 } as const;
+
+/** Landing order of a platform's pieces: what holds comes before what rests on it. */
+export const landingOrder: readonly PlatformPiece["kind"][] = ["base", "left", "right", "top"];
+
+/**
+ * Mayo's stops on island 3, in % of the plate width: she waits by the first
+ * platform while it gathers, and with each finished platform hops on to the
+ * next gap (the last hop is a small one, in place, as the third lands).
+ */
+export const packsMayoHops = { desktop: [34, 41, 61, 63], mobile: [39, 43, 57, 59.5] } as const;
