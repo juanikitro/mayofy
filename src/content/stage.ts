@@ -126,7 +126,8 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   // Painted in place on a crop of the island 6 v2 plate (resting, facing the campfire).
   host: { ...sprite("host", "85.16%", "pingpong", { timeline: "--isle", range: "cover 62% cover 93%", rangeMobile: "cover 72% cover 98%", cycles: 2 }), strip: { avif: "/images/mundo-mayo/70-mayo-host-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-host-v2-tira.webp" } },
   // Trotting after a firefly.
-  questions: sprite("questions", "92%", "cycle", { timeline: "--isle", range: "cover 47% cover 70%", rangeMobile: "cover 57% cover 77%", cycles: 3 }),
+  // Painted in place on a crop of the island 7 v2 plate: seated, following a firefly with her head.
+  questions: { ...sprite("questions", "88.27%", "pingpong", { timeline: "--isle", range: "cover 47% cover 70%", rangeMobile: "cover 57% cover 77%", cycles: 2 }), strip: { avif: "/images/mundo-mayo/70-mayo-questions-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-questions-v2-tira.webp" } },
 };
 
 /* ---------------------------------------------------------------- plates */
@@ -299,16 +300,8 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   // Cell = plate crop (left 681 px, side 142 px of 1672); she faces the fire as painted; shadow painted in.
   host: { x: "44.98%", y: "61.1%", size: "8.49%", xMobile: "36%", yMobile: "74.5%", sizeMobile: "17%", shadow: false },
   // Island 7: trots after a firefly on the meadow behind the front lip (rim 41 %, lip 49.5 %), right of the lantern (36.6 %, 48 %), which lights her from the left.
-  questions: {
-    x: "45.5%",
-    y: "47%",
-    size: "7%",
-    xMobile: "45%",
-    yMobile: "73.5%",
-    sizeMobile: "18%",
-    face: "right",
-    shadow: { lean: "7%", opacity: 0.3 },
-  },
+  // Cell = plate crop (left 711 px, top 354 px, side 100 px of 1672); light and shadow painted in.
+  questions: { x: "45.51%", y: "47%", size: "5.98%", xMobile: "45%", yMobile: "73.5%", sizeMobile: "15.4%", shadow: false },
 };
 
 /* --------------------------------------------------------------- objects */
