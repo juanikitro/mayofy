@@ -171,6 +171,8 @@ export const islandPlates = {
   problem: {
     desktop: desktopPlate("30-isla2-escritorio-v2"),
     mobile: mobilePlate("30-isla2-celular-v2"),
+    // Only used while the plate is scaled up (desktop, world.css): leans the island right of the copy.
+    anchorX: "30%",
     layers: { background: desktopPlate("30-isla2-escritorio-v2-fondo"), island: desktopPlate("30-isla2-escritorio-v2-isla") },
     mobileLayers: { background: mobilePlate("30-isla2-celular-v2-fondo"), island: mobilePlate("30-isla2-celular-v2-isla") },
     clear: { desktop: 0.49, mobile: 0.43 },

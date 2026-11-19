@@ -1316,9 +1316,19 @@ html[data-motion-tier="reduced"] .scene__sky {
 .isle {
   position: relative;
   min-height: 100svh;
-  padding-block: 7rem calc(100% * var(--plate-h, 0.5628) * var(--plate-clear, 0.55) + 3rem);
+  padding-block: 7rem calc(100% * var(--plate-h, 0.5628) * var(--plate-clear, 0.55) * var(--plate-scale, 1) + 3rem);
   overflow: clip;
   color: var(--ink);
+}
+
+/* Island 2 holds only a short statement, so on wide screens its small island
+ * sat under a screen of empty sky. Its plate grows by a quarter and leans
+ * right (`anchorX` in stage.ts), so the island and its rocks fill the width
+ * under the copy and the section stays one screen tall. */
+@media (min-width: 64rem) {
+  .isle--morning {
+    --plate-scale: 1.25;
+  }
 }
 
 .isle--dark {
@@ -2936,14 +2946,14 @@ html[data-motion-tier="reduced"] .fall__mayo {
  * of the first and last pixel rows of each plate (of its background layer
  * when the island has a parallax pair). */
 .scene--plated .scene__sky {
-  --plate-top: calc(100cqh - 100cqw * var(--plate-h, 0.5628));
+  --plate-top: calc(100cqh - 100cqw * var(--plate-h, 0.5628) * var(--plate-scale, 1));
 
   inset: 0;
   background: linear-gradient(
     180deg,
     var(--sky-from) 0,
     var(--sky-hold, var(--sky-from)) var(--sky-blend, 8rem),
-    var(--sky-plate) max(var(--sky-blend, 8rem) + 1px, var(--plate-top) + 100cqw * var(--plate-h, 0.5628) * var(--plate-fade, 0.09)),
+    var(--sky-plate) max(var(--sky-blend, 8rem) + 1px, var(--plate-top) + 100cqw * var(--plate-h, 0.5628) * var(--plate-scale, 1) * var(--plate-fade, 0.09)),
     var(--sky-bottom, var(--sky-plate)) 100%
   );
 }
