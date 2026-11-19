@@ -126,7 +126,6 @@ export function WorksIsland() {
   return (
     <section id="trabajos" className="isle isle--sunset" data-island="5" style={plateSceneStyle(islandPlates.works)} aria-labelledby="trabajos-title">
       <IslandScene variant="sunset" plate={islandPlates.works}>
-        <PlateObjects objects={plateObjects.works!} />
         <MayoFigure slot="works" className="isle__mayo isle__mayo--run" />
       </IslandScene>
       <div className="isle__content world-shell">

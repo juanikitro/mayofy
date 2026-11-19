@@ -2998,13 +2998,13 @@ html[data-motion-tier="reduced"] .fall__mayo {
 .scene--plated.scene--sunset {
   --sky-from: #fdeac1;
   --sky-hold: #f8d3b4;
-  --sky-plate: #936bb9;
-  --sky-bottom: #c581a9;
+  --sky-plate: #8d68b4;
+  --sky-bottom: #c47fa1;
 }
 
 /* Dusk and night fall within the first rows, before the light text starts. */
 .scene--plated.scene--dusk {
-  --sky-from: #c581a9;
+  --sky-from: #c47fa1;
   --sky-hold: #1b2c63;
   --sky-blend: 6rem;
   --sky-plate: #142a63;
@@ -3307,13 +3307,13 @@ html[data-motion-tier="reduced"] .plate-object--chased {
 
   .scene--plated.scene--sunset {
     --sky-from: #fbe7be;
-    --sky-plate: #8861b2;
-    --sky-bottom: #bd7da8;
+    --sky-plate: #805dad;
+    --sky-bottom: #b57aa2;
   }
 
   .scene--plated.scene--dusk {
     --sky-blend: 4rem;
-    --sky-from: #bd7da8;
+    --sky-from: #b57aa2;
     --sky-plate: #092063;
     --sky-bottom: #304889;
   }

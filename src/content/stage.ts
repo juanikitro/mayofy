@@ -156,10 +156,10 @@ export const islandPlates = {
     clear: { desktop: 0.53, mobile: 0.37 },
   },
   works: {
-    desktop: desktopPlate("45-isla5-escritorio"),
-    mobile: mobilePlate("45-isla5-celular"),
-    layers: { background: desktopPlate("45-isla5-escritorio-fondo"), island: desktopPlate("45-isla5-escritorio-isla") },
-    mobileLayers: { background: mobilePlate("45-isla5-celular-fondo"), island: mobilePlate("45-isla5-celular-isla") },
+    desktop: desktopPlate("45-isla5-escritorio-v2"),
+    mobile: mobilePlate("45-isla5-celular-v2"),
+    layers: { background: desktopPlate("45-isla5-escritorio-v2-fondo"), island: desktopPlate("45-isla5-escritorio-v2-isla") },
+    mobileLayers: { background: mobilePlate("45-isla5-celular-v2-fondo"), island: mobilePlate("45-isla5-celular-v2-isla") },
     // Bushes from 45.7 % (desktop cutout); path milestones from 51 % on mobile.
     clear: { desktop: 0.55, mobile: 0.5 },
   },
@@ -297,20 +297,6 @@ const obj = (
  * in the sky. Read on the mobile plates with a 5 % grid (17 November 2026).
  */
 export const plateObjects: Partial<Record<MayoSlotId, readonly PlateObject[]>> = {
-  works: [
-    obj("48-isla5-paso-01", 1024, 522, 52, 54, 6, {}, [57, 64.8, 8]),
-    obj("48-isla5-hito-01", 883, 672, 56, 52, 3, {}, [49, 64.4, 3.5]),
-    obj("48-isla5-paso-02", 1024, 522, 47, 58, 6, {}, [63, 67, 8]),
-    obj("48-isla5-hito-02", 883, 672, 43, 56, 3, {}, [71, 67.4, 3.5]),
-    obj("48-isla5-paso-03", 1024, 522, 42, 62, 6, {}, [51, 69.2, 8]),
-    obj("48-isla5-hito-03", 883, 672, 46, 60, 3, {}, [60, 70, 3.5]),
-    obj("48-isla5-paso-04", 1024, 522, 43, 66, 6, {}, [41, 71.2, 8]),
-    obj("48-isla5-hito-04", 883, 672, 39, 65, 3, {}, [32, 71.6, 3.5]),
-    obj("48-isla5-paso-05", 1024, 522, 48, 70, 6, {}, [45, 74, 8]),
-    obj("48-isla5-hito-05", 883, 672, 52, 68, 3, {}, [36, 74.6, 3.5]),
-    obj("48-isla5-paso-06", 1024, 522, 53, 73, 6, {}, [55, 76, 8]),
-    obj("48-isla5-hito-06", 883, 672, 57, 71, 3, {}, [64, 75.8, 3.5]),
-  ],
   questions: [
     obj("58-isla7-luciernaga-03", 512, 512, 36, 46, 6, { glow: true, float: true }, [30, 63, 9]),
     obj("58-isla7-luciernaga-02", 512, 512, 52, 40, 4, { glow: true, float: true }, [44, 56, 6]),
