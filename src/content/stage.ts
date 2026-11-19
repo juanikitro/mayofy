@@ -269,9 +269,11 @@ export type MayoAnchor = {
 
 export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   // Hero: seated mid-meadow to the right of the big tree (trunk at 42 %, 68.6 %); dawn light from the right.
-  hero: { x: "51%", y: "72.5%", size: "10%", xMobile: "56%", yMobile: "80.5%", sizeMobile: "22%", shadow: { lean: "-6%", opacity: 0.3 } },
+  // Seated, her head reaches about a third of the tree and stands just over the signpost behind her.
+  hero: { x: "51%", y: "72.5%", size: "6.5%", xMobile: "56%", yMobile: "80.5%", sizeMobile: "14.5%", shadow: { lean: "-6%", opacity: 0.3 } },
   // Island 2: in the free meadow patch between the rocks (rim 53.5 %, lip 70 % at x 45); morning light from the left.
-  problem: { x: "45%", y: "63%", size: "10.5%", xMobile: "43%", yMobile: "69.5%", sizeMobile: "22%", shadow: { lean: "6%", opacity: 0.28 } },
+  // Play bow about as tall as the mossy boulders around her.
+  problem: { x: "45%", y: "63%", size: "8.5%", xMobile: "43%", yMobile: "69.5%", sizeMobile: "18%", shadow: { lean: "6%", opacity: 0.28 } },
   // Island 3: on the grass between platforms 2 and 3, facing the third (mobile: right of its stack); noon light from above.
   packs: { x: "62.5%", y: "55.5%", size: "8%", xMobile: "72%", yMobile: "54%", sizeMobile: "18%", face: "right", shadow: { lean: "2%", opacity: 0.26 } },
   // Island 4: nose at the painted soil mound (desktop 46 %, 66 %; mobile 48.5 %, 75.8 %); golden light from the right.
@@ -280,24 +282,27 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   works: {
     x: "49%",
     y: "67%",
-    size: "10%",
+    // Her stride spans about two stepping stones.
+    size: "8%",
     xMobile: "48%",
     yMobile: "72.5%",
-    sizeMobile: "20%",
+    sizeMobile: "16%",
     travel: { from: "60%", to: "38%" },
     travelMobile: { from: "58%", to: "38%" },
     shadow: { lean: "6%", opacity: 0.26 },
   },
   // Island 6: resting on the grass facing the campfire (fire at 55 %, 59.5 %; mobile 53 %, 75 %), which lights her from the right.
-  host: { x: "45%", y: "61.5%", size: "10.5%", xMobile: "36%", yMobile: "74.5%", sizeMobile: "21%", face: "right", shadow: { lean: "-8%", opacity: 0.32 } },
+  // Lying down she is about half the log bench, her head below its seat.
+  host: { x: "45%", y: "61.5%", size: "8.5%", xMobile: "36%", yMobile: "74.5%", sizeMobile: "17%", face: "right", shadow: { lean: "-8%", opacity: 0.32 } },
   // Island 7: trots after a firefly on the meadow behind the front lip (rim 41 %, lip 49.5 %), right of the lantern (36.6 %, 48 %), which lights her from the left.
   questions: {
     x: "45.5%",
     y: "47%",
-    size: "7%",
+    // Under a third of the tree, which stands at the back of a small, distant island.
+    size: "6%",
     xMobile: "45%",
     yMobile: "73.5%",
-    sizeMobile: "18%",
+    sizeMobile: "15.5%",
     face: "right",
     shadow: { lean: "7%", opacity: 0.3 },
   },
