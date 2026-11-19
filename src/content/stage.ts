@@ -524,3 +524,47 @@ export const landingOrder: readonly PlatformPiece["kind"][] = ["base", "left", "
  * next gap (the last hop is a small one, in place, as the third lands).
  */
 export const packsMayoHops = { desktop: [34, 41, 61, 63], mobile: [39, 43, 57, 59.5] } as const;
+
+/**
+ * Loose rocks that never join a platform (Juani, 19 November 2026: "que queden
+ * algunas mas lejanas sin ordenar"): far away behind the island, small, pale
+ * and soft (`depth` 0 is near, 1 is the far haze), drifting on their own
+ * before and after the order is built. Painted loose rocks and platform pieces
+ * reused at other scales and turns. `x`, `y` are their centres and `w` their
+ * width, in % of the plate; phones pull them towards the centre like the
+ * platform pieces.
+ */
+export type LooseRock = { src: string; width: number; height: number; x: number; y: number; w: number; rotate: number; depth: number };
+
+const loose = (name: string, width: number, height: number, x: number, y: number, w: number, rotate: number, depth: number): LooseRock => ({
+  src: `${assetRoot}/${name}.avif`,
+  width,
+  height,
+  x,
+  y,
+  w,
+  rotate,
+  depth,
+});
+
+export const looseRocks: readonly LooseRock[] = [
+  loose("20-roca-suelta-1", 861, 699, 9, 30, 3.2, -12, 0.55),
+  loose("20-roca-suelta-2", 997, 376, 21, 16, 2.4, 18, 0.85),
+  loose("16-p3-izq", 617, 853, 37, 33, 1.6, 64, 1),
+  loose("20-roca-suelta-3", 995, 388, 63, 19, 2.6, -24, 0.8),
+  loose("20-roca-suelta-4", 923, 731, 80, 31, 3, 30, 0.6),
+  loose("14-p1-tapa", 980, 670, 95, 22, 2.2, -40, 0.9),
+  loose("20-roca-suelta-1", 861, 699, 2, 58, 2.6, 52, 0.7),
+  loose("15-p2-izq", 614, 872, 98, 62, 2, -18, 0.75),
+  loose("20-roca-suelta-2", 997, 376, 55, 38, 1.8, 8, 0.95),
+  loose("20-roca-suelta-4", 923, 731, 89, 44, 1.7, -62, 1),
+];
+
+/**
+ * The painted end state, when commissioned: the plate's island cutout with
+ * the three stacks painted in (1672 x 941, same framing as
+ * `10-isla3-base-isla`). When present, the live stacks crossfade into it at
+ * the end of the assembly (world.css `.plate__picture--assembled`); until then
+ * the live stacks stay.
+ */
+export const packsAssembledPlate: { desktop?: PlateImage; mobile?: PlateImage } = {};

@@ -9,13 +9,16 @@ import { islandCopy } from "@/content/islands";
 import {
   islandPlates,
   landingOrder,
+  looseRocks,
   mayoAnchors,
+  packsAssembledPlate,
   packsMayoHops,
   PLATFORM_CANVAS,
   platformPlacements,
   platforms,
   rockFloats,
   rockTiming,
+  type LooseRock,
   type Platform,
   type PlatformPiece,
   type PlatformPlacement,
@@ -96,22 +99,53 @@ function flightRange(index: number, kind: PlatformPiece["kind"]) {
 
 const cover = (start: number, end: number) => `cover ${round(start)}% cover ${round(end)}%`;
 
+/** A stable pseudo-random number in [0, 1) per serial and seed, so server and client agree. */
+const noise = (serial: number, seed: number) => Math.abs((Math.sin(serial * 12.9898 + seed * 78.233) * 43758.5453) % 1);
+
 /**
- * Idle float of each rock, never in step with another: its own bob, sway and
- * drift periods (seconds) and amplitudes, from the piece's position in the
- * twelve, with negative delays so they start mid-swing.
+ * Idle float of each rock, never in step with another (Juani: "mas ritmo y
+ * variedad previo al orden, que se muevan mas"): its own bob, sway, lateral
+ * drift and depth breathing (it grows and shrinks a little, as if coming
+ * closer and drifting away), each with its own period (seconds) and
+ * amplitude, and one rock in three tumbles slowly end over end. Negative
+ * delays start them mid-swing. `scale` shrinks the motion of far rocks.
  */
-function idleVars(serial: number) {
-  const wave = (seed: number) => (Math.sin(serial * 12.9898 + seed * 78.233) * 43758.5453) % 1;
-  const pick = (seed: number, min: number, max: number) => round(min + Math.abs(wave(seed)) * (max - min));
+function idleVars(serial: number, scale = 1) {
+  const pick = (seed: number, min: number, max: number) => round(min + noise(serial, seed) * (max - min));
+  const tumbles = serial % 3 === 0;
   return {
-    "--bob-dur": `${pick(1, 4.2, 7.4)}s`,
-    "--bob-amp": pick(2, 0.45, 1),
-    "--sway-dur": `${pick(3, 5.5, 9.5)}s`,
-    "--sway-amp": `${pick(4, 2, 5.5)}deg`,
-    "--drift-dur": `${pick(5, 7, 12)}s`,
-    "--drift-amp": pick(6, 0.25, 0.7),
+    "--bob-dur": `${pick(1, 3.4, 6.8)}s`,
+    "--bob-amp": round(pick(2, 0.9, 2.2) * scale),
+    "--sway-dur": `${pick(3, 4.5, 8.5)}s`,
+    "--sway-amp": `${pick(4, 3, 9)}deg`,
+    "--drift-dur": `${pick(5, 6, 12)}s`,
+    "--drift-amp": round(pick(6, 1.2, 3) * scale),
+    "--breath-dur": `${pick(8, 5, 10)}s`,
+    "--breath-amp": round(pick(9, 0.04, 0.1) * scale),
+    "--tumble-dur": `${pick(10, 16, 34)}s`,
+    "--tumble-turn": tumbles ? `${noise(serial, 11) > 0.5 ? 360 : -360}deg` : "0deg",
     "--idle-delay": `${-pick(7, 0, 9)}s`,
+  };
+}
+
+/** Island-3 centre the rocks swirl around before the order, in % of the plate. */
+const SWIRL_CENTRE = { x: 50, y: 48 };
+
+/**
+ * Where a rock is pushed along its swirl at the start of the section
+ * (`--pre` 0, world.css): a turn around the island plus a little outwards,
+ * in % of the plate width, so as the stage arrives the rocks circle in on
+ * the scroll and pass in front of and behind each other.
+ */
+function swirlVars(x: number, y: number, serial: number, size: Size) {
+  const ox = x - SWIRL_CENTRE.x;
+  const oy = (y - SWIRL_CENTRE.y) * RATIO;
+  const length = Math.hypot(ox, oy) || 1;
+  const turn = (5 + noise(serial, 12) * 5) * (serial % 2 === 0 ? 1 : -1) * (size === "d" ? 1 : 0.6);
+  const out = 2 * (size === "d" ? 1 : 0.6);
+  return {
+    [`--px-${size}`]: round((-oy / length) * turn + (ox / length) * out),
+    [`--py-${size}`]: round((ox / length) * turn + (oy / length) * out),
   };
 }
 
@@ -121,24 +155,135 @@ function Rock({ piece, index }: { piece: PlatformPiece; index: number }) {
   const desktop = onPlate(platform, platformPlacements.desktop[index], piece.x, piece.y, piece.w, height);
   const mobile = onPlate(platform, platformPlacements.mobile[index], piece.x, piece.y, piece.w, height);
   const float = rockFloats[index][piece.kind];
+  const serial = index * 4 + landingOrder.indexOf(piece.kind);
   const { start, end } = flightRange(index, piece.kind);
   const style = {
     ...boxVars(desktop, "d"),
     ...boxVars(mobile, "m"),
     ...flightVars(desktop, piece.kind, index, "d"),
     ...flightVars(mobile, piece.kind, index, "m"),
-    ...idleVars(index * 4 + landingOrder.indexOf(piece.kind)),
+    ...idleVars(serial),
+    ...swirlVars(float.x, float.y, serial, "d"),
+    ...swirlVars(floatX(float.x, "m"), float.y, serial, "m"),
     "--r0": `${float.rotate}deg`,
     // Settles with a small tilt against its spin, then rocks back to rest.
     "--wobble": `${float.rotate > 0 ? -3.5 : 3.5}deg`,
     "--s0": float.scale,
     "--z0": LAYER_Z[float.layer],
     "--range": cover(start, end),
+    "--mask": `url("${piece.src}")`,
   } as CSSProperties;
   return (
-    <div className={`rock rock--${piece.kind} rock--${float.layer}`} style={style}>
-      <img className="rock__img" src={piece.src} alt="" width={piece.width} height={piece.height} loading="lazy" decoding="async" />
+    <div className={`rock rock--${piece.kind} rock--${float.layer} rock--platform-${index + 1}`} style={style}>
+      {/* The body carries the idle float; its ::after grades the rock into the plate once it lands. */}
+      <div className="rock__body">
+        {/* Eager: its grading mask fetches the same file with the page anyway, and a late image would show the mask alone. */}
+        <img className="rock__img" src={piece.src} alt="" width={piece.width} height={piece.height} loading="eager" decoding="async" />
+      </div>
     </div>
+  );
+}
+
+/**
+ * A loose rock that stays far away and never joins a platform: paler, softer
+ * and slower the further it is (`--depth`), drifting a little with the scroll
+ * (parallax, less when further) and on its own clock.
+ */
+function FarRock({ rock, serial }: { rock: LooseRock; serial: number }) {
+  const height = (rock.w * rock.height) / rock.width / RATIO;
+  const style = {
+    "--x-d": `${round(rock.x - rock.w / 2)}%`,
+    "--y-d": `${round(rock.y - height / 2)}%`,
+    "--w-d": `${rock.w}%`,
+    "--x-m": `${round(floatX(rock.x, "m") - rock.w / 2)}%`,
+    "--y-m": `${round(rock.y - height / 2)}%`,
+    "--w-m": `${rock.w}%`,
+    "--r0": `${rock.rotate}deg`,
+    "--depth": rock.depth,
+    "--far-dx": round((noise(serial, 13) - 0.5) * 6 * (1 - rock.depth * 0.6)),
+    "--far-dy": round((2 + noise(serial, 14) * 3) * (1 - rock.depth * 0.6)),
+    ...idleVars(serial + 40, 1 - rock.depth * 0.55),
+  } as CSSProperties;
+  return (
+    <div className="rock-far" style={style}>
+      <div className="rock__body">
+        <img className="rock__img" src={rock.src} alt="" width={rock.width} height={rock.height} loading="lazy" decoding="async" />
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Ragged top edge of grass as an SVG alpha mask, different per platform:
+ * clumps of overlapping blades of mixed width, height and lean over a solid
+ * sod band, softened a little so no blade reads as a cut-out spike.
+ */
+function tuftMask(seed: number) {
+  const blades = 220;
+  const shapes = Array.from({ length: blades }, (_, blade) => {
+    const serial = seed * 1000 + blade;
+    const x = noise(serial, 15) * 200;
+    // Only the outer tenth of the strip thins out, so the base's curved sides sink too.
+    const edge = Math.min(1, Math.min(x, 200 - x) / 20);
+    // Mostly short blades, so the gaps between them stay shallow, with a few tall ones.
+    const height = (blade % 7 === 0 ? 8 + noise(serial, 16) * 6 : 3 + noise(serial, 16) * 6) * (0.45 + 0.55 * edge);
+    const lean = (noise(serial, 17) - 0.5) * 7;
+    const half = 1.8 + noise(serial, 18) * 3;
+    return `M${round(x - half)} 27L${round(x + lean)} ${round(27 - height)}L${round(x + half)} 27Z`;
+  });
+  const svg =
+    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'>` +
+    `<filter id='s'><feGaussianBlur stdDeviation='0.7'/></filter>` +
+    `<path filter='url(#s)' d='${shapes.join("")}M0 25h200v15H0Z'/></svg>`;
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+}
+
+/**
+ * Grass in front of a platform's base: the plate's own meadow (the island
+ * cutout, aligned to the plate) cut to a strip of blades along the feet, so
+ * the bottom of the stack sinks into the grass. Over bare meadow it shows the
+ * very pixels beneath it, so it needs no animation.
+ */
+function GrassTufts({ index }: { index: number }) {
+  const platform = platforms[index];
+  const { minX, maxX } = bounds(platform);
+  const island = islandPlates.packs.layers.island;
+  const vars = (size: Size) => {
+    const placement = platformPlacements[size === "d" ? "desktop" : "mobile"][index];
+    const width = ((maxX - minX) * placement.canvas * 1.2) / PLATFORM_CANVAS;
+    const left = placement.x - width / 2;
+    const top = placement.y - GRASS_RISE;
+    return {
+      [`--x-${size}`]: `${round(left)}%`,
+      [`--y-${size}`]: `${round(top)}%`,
+      [`--w-${size}`]: `${round(width)}%`,
+      // Offsets of the meadow behind the strip, in % of the plate width.
+      [`--gx-${size}`]: round(left),
+      [`--gy-${size}`]: round(top * RATIO),
+    };
+  };
+  const style = {
+    ...vars("d"),
+    ...vars("m"),
+    "--tufts": tuftMask(index + 1),
+    backgroundImage: `image-set(url("${island.avif}") type("image/avif"), url("${island.webp}") type("image/webp"))`,
+  } as CSSProperties;
+  return <span className="rock-grass" style={style} />;
+}
+
+/** How far the grass strip reaches above a platform's feet, in % of the plate height (it is 7 % tall). */
+const GRASS_RISE = 5.2;
+
+/** The commissioned painted end state, crossfading in over the live stacks at the end (stage.ts). */
+function AssembledPlate() {
+  const { desktop, mobile } = packsAssembledPlate;
+  if (!desktop) return null;
+  return (
+    <picture className="plate__picture plate__picture--assembled">
+      {mobile ? <source media="(max-width: 48rem)" type="image/avif" srcSet={mobile.avif} /> : null}
+      <source type="image/avif" srcSet={desktop.avif} />
+      <img src={desktop.webp} alt="" width={desktop.width} height={desktop.height} loading="lazy" decoding="async" />
+    </picture>
   );
 }
 
@@ -224,9 +369,11 @@ export function RockIsland() {
         <div className="scene scene--noon scene--plated" style={plateSceneStyle(islandPlates.packs)} aria-hidden="true">
           <div className="scene__sky" />
           <IslandPlate plate={islandPlates.packs}>
+            {looseRocks.map((rock, serial) => (
+              <FarRock key={serial} rock={rock} serial={serial} />
+            ))}
             {depthOrder.map((index) => (
               <Fragment key={index}>
-                <GroundShadow index={index} />
                 {/* Manifest rule: each contact shadow sits under its emitter and over the receivers. */}
                 {platforms[index].pieces.map((piece) => (
                   <Fragment key={piece.kind}>
@@ -238,8 +385,12 @@ export function RockIsland() {
                     <Rock piece={piece} index={index} />
                   </Fragment>
                 ))}
+                <GrassTufts index={index} />
+                {/* Over the grass too: the blades at the stack's feet stand in its shade. */}
+                <GroundShadow index={index} />
               </Fragment>
             ))}
+            <AssembledPlate />
             <div className="rocks__mayo-path" style={hopVars()}>
               <MayoFigure slot="packs" className="rocks__mayo" />
             </div>
