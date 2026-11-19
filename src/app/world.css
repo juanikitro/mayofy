@@ -1150,7 +1150,7 @@ html[data-motion-tier="reduced"] .scene__sky {
   padding-block: 3rem 2.5rem;
   color: var(--night-ink);
   /* Continues the night island's last row before settling on the footer ink. */
-  background: linear-gradient(180deg, #013567 0, var(--night) 7rem);
+  background: linear-gradient(180deg, #072a57 0, var(--night) 7rem);
 }
 
 .world-footer__layout {
@@ -2979,24 +2979,26 @@ html[data-motion-tier="reduced"] .fall__mayo {
   --sky-from: #fdeac1;
   --sky-hold: #f8d3b4;
   --sky-plate: #8d68b4;
-  --sky-bottom: #c47fa1;
+  /* The plate's faded foot settles on an early-dusk violet, so the turn to
+   * night spreads over the foot of this island and the top of the next. */
+  --sky-bottom: #6a5592;
 }
 
 /* Dusk and night fall within the first rows, before the light text starts. */
 .scene--plated.scene--dusk {
-  --sky-from: #c47fa1;
+  --sky-from: #6a5592;
   --sky-hold: #1b2c63;
-  --sky-blend: 6rem;
+  --sky-blend: 7rem;
   --sky-plate: #142a63;
-  --sky-bottom: #2d4b84;
+  --sky-bottom: #1c3268;
 }
 
 .scene--plated.scene--night {
-  --sky-from: #2d4b84;
+  --sky-from: #1c3268;
   --sky-hold: #04173b;
-  --sky-blend: 6rem;
+  --sky-blend: 7rem;
   --sky-plate: #011233;
-  --sky-bottom: #013567;
+  --sky-bottom: #072a57;
 }
 
 /* The plate's own top rows (`--plate-fade` of its height) fade into that
@@ -3304,21 +3306,21 @@ html[data-motion-tier="reduced"] .plate-object--chased {
   .scene--plated.scene--sunset {
     --sky-from: #fbe7be;
     --sky-plate: #805dad;
-    --sky-bottom: #b57aa2;
+    --sky-bottom: #634f8f;
   }
 
   .scene--plated.scene--dusk {
     --sky-blend: 4rem;
-    --sky-from: #b57aa2;
+    --sky-from: #634f8f;
     --sky-plate: #092063;
-    --sky-bottom: #304889;
+    --sky-bottom: #1d346c;
   }
 
   .scene--plated.scene--night {
     --sky-blend: 4rem;
-    --sky-from: #304889;
+    --sky-from: #1d346c;
     --sky-plate: #000e2e;
-    --sky-bottom: #003567;
+    --sky-bottom: #072a57;
   }
 }
 
