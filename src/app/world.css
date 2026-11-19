@@ -1864,6 +1864,58 @@ html[data-motion-tier="full"] .campfire__flame-core {
   background: linear-gradient(180deg, var(--fall-top) 0%, transparent 30%);
 }
 
+/* While the stage still rises under the hero, the frames have already moved
+ * past frame 01 and its veil (02 is opaque from cover ~18 %), so a cooler
+ * lavender band met the hero's dawn as a stripe. The stage carries its own
+ * veil in the hero's last colour, above the frames and the back puffs and
+ * under Mayo, and lets it go by the time the stage pins (contain 0 %). */
+.fall__stage::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 0;
+  height: 45%;
+  background: linear-gradient(
+    180deg,
+    var(--fall-top) 0%,
+    var(--fall-top) 14%,
+    color-mix(in oklch, var(--fall-top) 55%, transparent) 40%,
+    color-mix(in oklch, var(--fall-top) 15%, transparent) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+@supports (animation-timeline: view()) {
+  .fall__stage::after {
+    animation: fall-veil linear both;
+    animation-timeline: --fall;
+    animation-range: cover 0% contain 0%;
+  }
+}
+
+@keyframes fall-veil {
+  0%,
+  60% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+/* The still fall keeps the veil, which joins its frame to the hero. */
+html[data-motion-tier="reduced"] .fall__stage::after {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fall__stage::after {
+    animation: none !important;
+  }
+}
+
 .fall__frame[data-position="last"]::after {
   background: linear-gradient(180deg, transparent 45%, var(--fall-bottom) 85%);
 }
