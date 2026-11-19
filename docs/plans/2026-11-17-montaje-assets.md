@@ -99,5 +99,6 @@ Juani decidió que las islas dejen de ser un collage: los objetos fijos (rocas, 
 
 - **Isla 2 (piloto, aprobada por Juani):** siete rocas con musgo y ramilletes de flores blancas, amarillas y rosa pálido. Se quitaron las ocho rocas pegadas (`plateObjects.problem`). La placa de celular conserva su cielo original, distinto del fondo de parallax anterior, así que se actualizaron los colores de unión de la isla en celular (`--sky-plate: #8bb8e3`, `--sky-bottom: #eed5c2` y el comienzo de la isla 3).
 - **Isla 6:** banco y fogón pintados, con la luz cálida del fuego sobre el pasto, el banco y las piedras. Se quitaron los objetos pegados (`plateObjects.host`).
-- **Pendientes:** islas 4, 5 y 7 en producción. El hero ya era una sola pieza y las plataformas de packs siguen separadas porque se arman con el scroll.
+- **Isla 7:** el farol quedó pintado en el suelo, delante de la roca de la izquierda (escritorio ~36,6 % / 48 %, celular ~27 % / 73,3 %), con su luz cálida sobre el pasto; en su lugar original habría quedado fuera del suelo. Las luciérnagas siguen siendo sprites animados. Se quitó el farol pegado.
+- **Pendientes:** islas 4 y 5 en producción. El hero ya era una sola pieza y las plataformas de packs siguen separadas porque se arman con el scroll.
 - **Observado sin resolver:** en celular, alrededor de la placa de la isla 2 se ve un recuadro más claro y, en escritorio, un borde horizontal al pie de algunas islas cuando el fondo deriva; no lo causan las placas nuevas, queda para revisar la deriva del fondo.

@@ -172,10 +172,10 @@ export const islandPlates = {
     clear: { desktop: 0.7, mobile: 0.41 },
   },
   questions: {
-    desktop: desktopPlate("55-isla7-escritorio"),
-    mobile: mobilePlate("55-isla7-celular"),
-    layers: { background: desktopPlate("55-isla7-escritorio-fondo"), island: desktopPlate("55-isla7-escritorio-isla") },
-    mobileLayers: { background: mobilePlate("55-isla7-celular-fondo"), island: mobilePlate("55-isla7-celular-isla") },
+    desktop: desktopPlate("55-isla7-escritorio-v2"),
+    mobile: mobilePlate("55-isla7-celular-v2"),
+    layers: { background: desktopPlate("55-isla7-escritorio-v2-fondo"), island: desktopPlate("55-isla7-escritorio-v2-isla") },
+    mobileLayers: { background: mobilePlate("55-isla7-celular-v2-fondo"), island: mobilePlate("55-isla7-celular-v2-isla") },
     // The tree from 19.3 % of the desktop cutout and 54 % of the mobile one; fireflies may rise above it.
     clear: { desktop: 0.81, mobile: 0.46 },
   },
@@ -320,7 +320,6 @@ export const plateObjects: Partial<Record<MayoSlotId, readonly PlateObject[]>> =
     obj("48-isla5-hito-06", 883, 672, 57, 71, 3, {}, [64, 75.8, 3.5]),
   ],
   questions: [
-    obj("58-isla7-farol", 592, 1024, 30, 58, 4, {}, [19, 76, 6]),
     obj("58-isla7-luciernaga-03", 512, 512, 36, 46, 6, { glow: true, float: true }, [30, 63, 9]),
     obj("58-isla7-luciernaga-02", 512, 512, 52, 40, 4, { glow: true, float: true }, [44, 56, 6]),
     obj("58-isla7-luciernaga-01", 512, 512, 60, 48, 3, { glow: true, float: true }, [68, 61, 5]),
