@@ -30,7 +30,6 @@ export function ProblemIsland() {
   return (
     <section id="problema" className="isle isle--morning" data-island="2" style={plateSceneStyle(islandPlates.problem)} aria-labelledby="problema-title">
       <IslandScene variant="morning" plate={islandPlates.problem}>
-        <PlateObjects objects={plateObjects.problem!} />
         <MayoFigure slot="problem" className="isle__mayo isle__mayo--play" />
       </IslandScene>
       <div className="isle__content world-shell">
@@ -252,7 +251,6 @@ export function JuaniIsland() {
   return (
     <section id="contacto" className="isle isle--dusk isle--dark" data-island="6" style={plateSceneStyle(islandPlates.host)} aria-labelledby="contacto-title">
       <IslandScene variant="dusk" plate={islandPlates.host}>
-        <PlateObjects objects={plateObjects.host!} />
         <MayoFigure slot="host" className="isle__mayo isle__mayo--rest" />
       </IslandScene>
       <div className="isle__content world-shell">

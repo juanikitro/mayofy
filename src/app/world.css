@@ -3289,14 +3289,15 @@ html[data-motion-tier="reduced"] .plate-object--chased {
     --sky-bottom: #b690b3;
   }
 
+  /* Island 2 v2 plate (rocks and flowers painted in) keeps the original mobile sky. */
   .scene--plated.scene--morning {
     --sky-from: #8bc3f8;
-    --sky-plate: #8bc3f8;
-    --sky-bottom: #fbdfc7;
+    --sky-plate: #8bb8e3;
+    --sky-bottom: #eed5c2;
   }
 
   .scene--plated.scene--noon {
-    --sky-from: #fbdfc7;
+    --sky-from: #eed5c2;
   }
 
   .scene--plated.scene--golden {

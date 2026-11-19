@@ -92,3 +92,12 @@ Chromium (Playwright) a 1440 × 900 y 390 × 844 sobre `next dev`, recorriendo l
 Pendiente: las nubes sueltas traen un halo rosado en el borde del alfa que se nota sobre los cuadros más oscuros; si molesta, pedir un recorte más limpio al agente de assets. En el hero, la placa termina en una banda plana de `#b38fa0` con un borde horizontal visible por encima de la caída; es anterior a este cambio.
 
 Los cuadros de la caída se sirven sólo en WebP: en este lote el WebP pesa alrededor de un 40 % menos que el AVIF (359 KB contra 579 KB en escritorio, 328 KB contra 531 KB en celular), así que los AVIF de 60 y 61 no se versionan. Las nubes sueltas (62) siguen con AVIF primero.
+
+## Islas como una sola ilustración (19 de noviembre de 2026)
+
+Juani decidió que las islas dejen de ser un collage: los objetos fijos (rocas, invernadero, sendero, banco, fogón, farol) se pintan dentro de cada placa con la placa como base de edición, así toman su luz, su perspectiva y su sombra de contacto. La edición se limita al prado con una máscara difuminada y fuera de ella la placa queda idéntica a la original. Mayo y las luciérnagas siguen separadas porque se mueven; en cada isla queda libre su parcela o su recorrido. Las placas nuevas llevan el sufijo `-v2` (placa, `-v2-isla` y `-v2-fondo`, en escritorio y celular) y se producen en las ramas de los ilustradores a partir de `juanikitro/mayo-world-assets`.
+
+- **Isla 2 (piloto, aprobada por Juani):** siete rocas con musgo y ramilletes de flores blancas, amarillas y rosa pálido. Se quitaron las ocho rocas pegadas (`plateObjects.problem`). La placa de celular conserva su cielo original, distinto del fondo de parallax anterior, así que se actualizaron los colores de unión de la isla en celular (`--sky-plate: #8bb8e3`, `--sky-bottom: #eed5c2` y el comienzo de la isla 3).
+- **Isla 6:** banco y fogón pintados, con la luz cálida del fuego sobre el pasto, el banco y las piedras. Se quitaron los objetos pegados (`plateObjects.host`).
+- **Pendientes:** islas 4, 5 y 7 en producción. El hero ya era una sola pieza y las plataformas de packs siguen separadas porque se arman con el scroll.
+- **Observado sin resolver:** en celular, alrededor de la placa de la isla 2 se ve un recuadro más claro y, en escritorio, un borde horizontal al pie de algunas islas cuando el fondo deriva; no lo causan las placas nuevas, queda para revisar la deriva del fondo.
