@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { useActiveIsland } from "@/components/world/use-active-island";
 import { siteContent } from "@/content/site";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
@@ -14,6 +15,8 @@ export const islands = [
   { id: "contacto", number: 6, label: "Contacto" },
   { id: "preguntas", number: 7, label: "Preguntas" },
 ] as const;
+
+export const islandIds = islands.map((island) => island.id);
 
 function PawIcon() {
   return (
@@ -32,47 +35,17 @@ function PawIcon() {
  * enhancement: the islands are reachable by scrolling and by the nav.
  */
 export function IslandProgress() {
-  const [active, setActive] = useState<string>("inicio");
+  const active = useActiveIsland(islandIds) ?? "inicio";
   const [pastHero, setPastHero] = useState(false);
 
   useEffect(() => {
-    const sections = islands
-      .map((island) => document.getElementById(island.id))
-      .filter((element): element is HTMLElement => element !== null);
-    if (!("IntersectionObserver" in window) || sections.length === 0) return;
-
-    const visible = new Map<string, number>();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          visible.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
-        }
-        let bestId = "inicio";
-        let bestRatio = 0;
-        for (const [id, ratio] of visible) {
-          if (ratio > bestRatio) {
-            bestRatio = ratio;
-            bestId = id;
-          }
-        }
-        if (bestRatio > 0) setActive(bestId);
-      },
-      { threshold: [0.1, 0.25, 0.5, 0.75] },
-    );
-    sections.forEach((section) => observer.observe(section));
-
     const hero = document.getElementById("inicio");
-    const heroObserver = hero
-      ? new IntersectionObserver(([entry]) => setPastHero(!entry.isIntersecting), {
-          threshold: 0.2,
-        })
-      : null;
-    if (hero && heroObserver) heroObserver.observe(hero);
-
-    return () => {
-      observer.disconnect();
-      heroObserver?.disconnect();
-    };
+    if (!hero || !("IntersectionObserver" in window)) return;
+    const heroObserver = new IntersectionObserver(([entry]) => setPastHero(!entry.isIntersecting), {
+      threshold: 0.2,
+    });
+    heroObserver.observe(hero);
+    return () => heroObserver.disconnect();
   }, []);
 
   return (
@@ -86,7 +59,7 @@ export function IslandProgress() {
                 className="progress__paw"
                 aria-current={active === island.id ? "location" : undefined}
                 aria-label={`Isla ${island.number}: ${island.label}`}
-                title={island.label}
+                data-label={island.label}
               >
                 <PawIcon />
               </a>
