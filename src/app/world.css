@@ -507,6 +507,14 @@ details[data-preparing-open="true"] > .animated-details__content {
   }
 }
 
+/* The fall is the one place Mayo moves on her own (Juani, 19 November
+ * 2026): her tumble loops in time while the clouds follow the scroll. */
+@supports (animation-timeline: view()) {
+  .fall__mayo .mayo__sprite img {
+    animation: mayo-sprite 1.2s steps(var(--frames, 12), jump-none) infinite alternate;
+  }
+}
+
 @keyframes mayo-sprite {
   to {
     transform: translateX(calc(-100% * (var(--frames, 12) - 1) / var(--frames, 12)));
@@ -526,21 +534,6 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 .scene__mayo {
   inset: auto 20% 22% auto;
   transform-origin: 50% 100%;
-}
-
-/* Mayo appears on the meadow once the platforms have settled. */
-.rocks__mayo {
-  opacity: 0;
-}
-
-@keyframes mayo-appear {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
 }
 
 /* Hero: island 1 ------------------------------------------------------- */
@@ -792,28 +785,6 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 }
 
-/* Individual `translate` and `rotate`, not `transform`: the anchored Mayo
- * already uses `transform` to put her feet on the anchor, and a `transform`
- * keyframe (with fill `both`) replaced it, so she sat half a body to the
- * right and a body lower than her anchor, on the island's front rim. */
-@keyframes mayo-leap {
-  from {
-    translate: 0 0;
-    rotate: 0deg;
-    opacity: 1;
-  }
-
-  60% {
-    opacity: 1;
-  }
-
-  to {
-    translate: 28vw -34vh;
-    rotate: -18deg;
-    opacity: 0;
-  }
-}
-
 @keyframes sky-drift {
   from {
     transform: translateY(0);
@@ -856,18 +827,6 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     animation: card-rise var(--ease-out) both;
     animation-timeline: --rocks;
     animation-range: cover 54% cover 60%;
-  }
-
-  .rocks__mayo {
-    animation: mayo-appear var(--ease-out) both;
-    animation-timeline: --rocks;
-    animation-range: cover 58% cover 63%;
-  }
-
-  .scene__mayo {
-    animation: mayo-leap linear both;
-    animation-timeline: --dawn;
-    animation-range: exit 0% exit 55%;
   }
 
   .scene--dawn:not(.scene--plated) .scene__sky {

@@ -159,3 +159,11 @@ Chromium (Playwright) sobre `next dev`, a 1440 × 900 y 390 × 844, en los ocho 
 - El resto de las luciérnagas de la isla 7 sigue en las posiciones de la placa anterior (varias quedan debajo del prado en escritorio); conviene reubicarlas.
 - En la isla 4 de celular la cola de Mayo roza la maceta pintada; en la isla 3 la ubicación depende de dónde caen las tarjetas a cada ancho.
 - Validar con Juani la cantidad de vueltas por isla (la sensación de "velocidad" depende de cuánto se scrollea por cuadro).
+
+### Ajustes de Juani (19 de noviembre de 2026)
+
+- **Hero:** "mayo no debe volar, debe quedarse sentada". Se quitó el salto (`mayo-leap`); sigue sentada y su animación avanza con el scroll.
+- **Caída:** "si me gustaria que se mueva constantemente". Es el único lugar donde Mayo se mueve sola: su tira corre en bucle de 1,2 s (ida y vuelta) mientras las nubes siguen el scroll.
+- **Isla 3:** "debe aparecer desde el inicio, no al final de la aparicion de las piedras". Se quitó la aparición diferida (`mayo-appear`) y el rango de su animación empieza al 25 % de la sección. La animación de las piedras y su ubicación quedan para después, como pidió Juani.
+- **Isla 4:** "no me parece que este bien integrada, quizas por el angulo". Piloto en curso: repintar sus cuadros sobre un recorte de la placa v2 para que tome la cámara, la luz y la sombra de la escena.
+- **Isla 7:** "quiero que sea como la primera". Se interpretó como el hero: Mayo queda en su lugar, sin recorrido, y su animación avanza con el scroll; la luciérnaga que perseguía queda flotando delante de ella.

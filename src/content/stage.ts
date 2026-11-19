@@ -107,14 +107,14 @@ const sprite = (slot: MayoSlotId, feetY: string, loop: MayoSprite["loop"], scrub
  * the last section, so its range ends before the page stops scrolling.
  */
 export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
-  // Seated, tail wag: two gentle plays while she leaps off the island (mayo-leap, exit 0-55 %).
+  // Seated, tail wag, scrubbed by the scroll; she stays seated (no leap).
   hero: sprite("hero", "95%", "pingpong", { timeline: "--dawn", range: "cover 50% cover 78%", rangeMobile: "cover 48% cover 78%", cycles: 2 }),
   // Tumbling in the clouds, in step with mayo-fall (cover 20-80 %).
   fall: sprite("fall", "88%", "pingpong", { timeline: "--fall", range: "cover 20% cover 80%", cycles: 3 }),
   // Play bow among the rocks.
   problem: sprite("problem", "93%", "pingpong", { timeline: "--isle", range: "cover 30% cover 85%", rangeMobile: "cover 35% cover 88%", cycles: 3 }),
   // Hops beside the third platform once the assembly is over (she fades in at cover 58-63 %).
-  packs: sprite("packs", "90.8%", "cycle", { timeline: "--rocks", range: "cover 60% cover 90%", rangeMobile: "cover 55% cover 96%", cycles: 3 }),
+  packs: sprite("packs", "90.8%", "cycle", { timeline: "--rocks", range: "cover 25% cover 90%", rangeMobile: "cover 25% cover 96%", cycles: 4 }),
   // Digging: quick, repetitive paw strokes.
   systems: sprite("systems", "94%", "pingpong", { timeline: "--isle", range: "cover 50% cover 92%", rangeMobile: "cover 66% cover 97%", cycles: 4 }),
   // Running across the path: about one stride per body length of travel.
@@ -299,8 +299,6 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
     yMobile: "73.5%",
     sizeMobile: "18%",
     face: "right",
-    travel: { from: "40.5%", to: "50.5%" },
-    travelMobile: { from: "37%", to: "53%" },
     shadow: { lean: "7%", opacity: 0.3 },
   },
 };
@@ -364,7 +362,7 @@ export const plateObjects: Partial<Record<MayoSlotId, readonly PlateObject[]>> =
     obj("58-isla7-luciernaga-01", 512, 512, 60, 48, 3, { glow: true, float: true }, [68, 61, 5]),
     obj("58-isla7-luciernaga-02", 512, 512, 68, 42, 4, { glow: true, float: true }, [80, 58, 6]),
     // Ahead of Mayo's head while she trots along the meadow (mayoAnchors.questions).
-    obj("58-isla7-luciernaga-01", 512, 512, 45, 41, 3, { glow: true, float: true, chasedTo: "56%" }, [45, 66.5, 5, 60]),
+    obj("58-isla7-luciernaga-01", 512, 512, 56, 41, 3, { glow: true, float: true }, [58, 64, 5]),
     obj("58-isla7-luciernaga-03", 512, 512, 74, 54, 5, { glow: true, float: true }, [84, 67, 8]),
     obj("58-isla7-luciernaga-01", 512, 512, 26, 50, 3, { glow: true, float: true }, [16, 64, 5]),
     obj("58-isla7-luciernaga-02", 512, 512, 58, 58, 4, { glow: true, float: true }, [58, 66, 6]),
