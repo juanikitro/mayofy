@@ -4069,3 +4069,67 @@ html[data-motion-tier="reduced"] .wa-float {
     opacity: 0.55;
   }
 }
+
+/* Copy entrance -------------------------------------------------------- */
+
+/* The hero arrives once on load: the descriptor with the first line, the
+ * two title lines 80ms apart, then the body, the buttons and the WhatsApp
+ * line fade up 12px, 60ms apart. All of it is over by about 1 s; links take
+ * clicks from the first frame. */
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) :is(.dawn__descriptor, .dawn__line) {
+    animation: copy-rise var(--m-enter) var(--ease-enter) both;
+  }
+
+  html:not([data-motion-tier="reduced"]) .dawn__line + .dawn__line {
+    animation-delay: 80ms;
+  }
+
+  html:not([data-motion-tier="reduced"]) :is(.dawn__body, .dawn__actions, .dawn__alt) {
+    animation: copy-rise var(--m-reveal) var(--ease-enter) 240ms both;
+  }
+
+  html:not([data-motion-tier="reduced"]) .dawn__actions {
+    animation-delay: 300ms;
+  }
+
+  html:not([data-motion-tier="reduced"]) .dawn__alt {
+    animation-delay: 360ms;
+  }
+}
+
+@keyframes copy-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--m-rise));
+  }
+}
+
+/* Island copy: each eyebrow, title and lead settles 12px as it comes up
+ * from the bottom edge, scrubbed by the scroll and finished before it
+ * reaches the reading zone (about the lower fifth of the screen), so text
+ * is never caught half-faded where someone reads. Above the fold, after an
+ * anchor jump or without scroll timelines it simply stands. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-motion-tier="reduced"]) .isle__content > :is(.isle__eyebrow, h2, .isle__lead, .isle__body),
+    html:not([data-motion-tier="reduced"]) .host > :is(h2, .isle__lead, .isle__body) {
+      animation: copy-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 20%;
+    }
+  }
+}
+
+@keyframes copy-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(var(--m-rise));
+    animation-timing-function: var(--ease-enter);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
