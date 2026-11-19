@@ -1166,7 +1166,7 @@ html[data-motion-tier="reduced"] .scene__sky {
 .world-footer__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: 0 1.25rem;
 }
 
 .world-footer__links a {
@@ -4023,8 +4023,9 @@ html[data-motion-tier="reduced"] .wa-float {
 
 /* Until Cal.com reports the calendar ready, a skeleton of the month view
  * holds the space (a slow breathing of its tiles), then fades away. */
-/* The fallback link stands alone under the calendar: a 44px tap target. */
-.booking__link {
+/* The fallback link and the footer links stand alone: 44px tap targets. */
+.booking__link,
+.world-footer__links a {
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
