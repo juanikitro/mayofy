@@ -116,7 +116,8 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   // Hops beside the third platform once the assembly is over (she fades in at cover 58-63 %).
   packs: sprite("packs", "90.8%", "cycle", { timeline: "--rocks", range: "cover 25% cover 90%", rangeMobile: "cover 25% cover 96%", cycles: 4 }),
   // Digging: quick, repetitive paw strokes.
-  systems: sprite("systems", "94%", "pingpong", { timeline: "--isle", range: "cover 50% cover 92%", rangeMobile: "cover 66% cover 97%", cycles: 4 }),
+  // Painted in place on a crop of the island 4 v2 plate (camera, light and shadow from the scene).
+  systems: { ...sprite("systems", "88.09%", "pingpong", { timeline: "--isle", range: "cover 50% cover 92%", rangeMobile: "cover 66% cover 97%", cycles: 4 }), strip: { avif: "/images/mundo-mayo/70-mayo-systems-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-systems-v2-tira.webp" } },
   // Running across the path: about one stride per body length of travel.
   works: sprite("works", "87%", "cycle", { timeline: "--isle", range: "cover 46% cover 88%", rangeMobile: "cover 68% cover 96%", cycles: 4 }),
   // Resting by the fire: breathing and ears, barely.
@@ -275,7 +276,8 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   // Island 3: on the grass between platforms 2 and 3, facing the third (mobile: right of its stack); noon light from above.
   packs: { x: "62.5%", y: "55.5%", size: "8%", xMobile: "72%", yMobile: "54%", sizeMobile: "18%", face: "right", shadow: { lean: "2%", opacity: 0.26 } },
   // Island 4: nose at the painted soil mound (desktop 46 %, 66 %; mobile 48.5 %, 75.8 %); golden light from the right.
-  systems: { x: "42.5%", y: "67.5%", size: "11%", xMobile: "42%", yMobile: "76.8%", sizeMobile: "17%", face: "right", shadow: { lean: "-6%", opacity: 0.3 } },
+  // The cell is the plate crop the frames were painted on (left 31.52 %, width 22.01 %); her shadow is painted in.
+  systems: { x: "42.52%", y: "67.5%", size: "22.01%", xMobile: "42%", yMobile: "76.8%", sizeMobile: "34%", shadow: false },
   // Island 5: runs right-to-left across the middle band of the meadow, over the path; sunset light from the left.
   works: {
     x: "49%",
