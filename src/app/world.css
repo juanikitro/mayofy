@@ -3596,8 +3596,8 @@ html[data-motion-tier="reduced"] .world {
   }
 }
 
-/* The link of the island in view becomes a solid pill inside the pill
- * (the active segment of a segmented control); hover is a faint tint. */
+/* The link of the island in view keeps a still 2px moss bar under its word
+ * (no gliding indicator); hover is a faint tint. */
 .island-nav__link,
 .island-nav__brand {
   transition:
@@ -3612,12 +3612,28 @@ html[data-motion-tier="reduced"] .world {
   transition-duration: var(--m-base);
 }
 
+.island-nav__link {
+  position: relative;
+}
+
+.island-nav__link::after {
+  content: "";
+  position: absolute;
+  inset: auto 0.75rem 0.3rem;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--moss);
+  opacity: 0;
+  transition: opacity var(--m-fast) var(--ease-ui);
+}
+
 .island-nav__link[aria-current="location"] {
   color: var(--moss);
-  background: oklch(99% 0.008 75);
-  box-shadow:
-    0 0 0 1px oklch(30% 0.05 60 / 6%),
-    0 1px 3px oklch(30% 0.05 60 / 16%);
+}
+
+.island-nav__link[aria-current="location"]::after {
+  opacity: 1;
+  transition-duration: var(--m-panel);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -3976,7 +3992,7 @@ html[data-motion-tier="reduced"] .wa-float {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion-tier="reduced"]) .contact-form__message {
+  html:not([data-motion-tier="reduced"]) .contact-form__feedback:not(.contact-form__feedback--idle) > .contact-form__message {
     animation: message-in var(--m-panel) var(--ease-enter) both;
   }
 
@@ -4007,6 +4023,13 @@ html[data-motion-tier="reduced"] .wa-float {
 
 /* Until Cal.com reports the calendar ready, a skeleton of the month view
  * holds the space (a slow breathing of its tiles), then fades away. */
+/* The fallback link stands alone under the calendar: a 44px tap target. */
+.booking__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+}
+
 .booking__frame {
   position: relative;
   width: 100%;
