@@ -122,7 +122,8 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   // Running across the path: about one stride per body length of travel.
   works: sprite("works", "87%", "cycle", { timeline: "--isle", range: "cover 46% cover 88%", rangeMobile: "cover 68% cover 96%", cycles: 4 }),
   // Resting by the fire: breathing and ears, barely.
-  host: sprite("host", "91.5%", "pingpong", { timeline: "--isle", range: "cover 62% cover 93%", rangeMobile: "cover 72% cover 98%", cycles: 2 }),
+  // Painted in place on a crop of the island 6 v2 plate (resting, facing the campfire).
+  host: { ...sprite("host", "85.16%", "pingpong", { timeline: "--isle", range: "cover 62% cover 93%", rangeMobile: "cover 72% cover 98%", cycles: 2 }), strip: { avif: "/images/mundo-mayo/70-mayo-host-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-host-v2-tira.webp" } },
   // Trotting after a firefly.
   questions: sprite("questions", "92%", "cycle", { timeline: "--isle", range: "cover 47% cover 70%", rangeMobile: "cover 57% cover 77%", cycles: 3 }),
 };
@@ -293,7 +294,8 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
     shadow: { lean: "6%", opacity: 0.26 },
   },
   // Island 6: resting on the grass facing the campfire (fire at 55 %, 59.5 %; mobile 53 %, 75 %), which lights her from the right.
-  host: { x: "45%", y: "61.5%", size: "10.5%", xMobile: "36%", yMobile: "74.5%", sizeMobile: "21%", face: "right", shadow: { lean: "-8%", opacity: 0.32 } },
+  // Cell = plate crop (left 681 px, side 142 px of 1672); she faces the fire as painted; shadow painted in.
+  host: { x: "44.98%", y: "61.1%", size: "8.49%", xMobile: "36%", yMobile: "74.5%", sizeMobile: "17%", shadow: false },
   // Island 7: trots after a firefly on the meadow behind the front lip (rim 41 %, lip 49.5 %), right of the lantern (36.6 %, 48 %), which lights her from the left.
   questions: {
     x: "45.5%",
