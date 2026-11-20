@@ -467,3 +467,9 @@ Pedido de Juani (textual): "En la isla 2, la propuesta del sistema a medida no d
 - Capturas: `implementacion/r3-isla2-{d,m}-*.jpg`, `r3-casos-{d,m}-progreso.jpg` y `r3-reducido-{d,m}.jpg`.
 
 **Pendiente:** los tres archivos del ilustrador. La mariposa espera una tira de cinco cuadros cuadrados; si llega en otra proporción, hay que sumar la proporción de celda al tipo `CaseArt`.
+
+### Isla 2: arte del selector montado (20/11, coordinador)
+
+- **Qué cambió:** la flor (`34-isla2-flor`), la plantita (`34-isla2-brote`) y la mariposa (`34-isla2-mariposa-tira`, 5 cuadros en vaivén) reemplazan a los recortes de plantas, en ese orden. Las pintó el ilustrador en `b683cc4`; las notas del arte están en `docs/plans/mundo-mayo-assets.md`.
+- **Tamaño y posición:** las celdas son cuadradas, con la línea de suelo al 88 %. Por eso `--plant-w` bajó a 4.7rem y `--plant-bottom` hunde esa línea apenas bajo el borde delantero de la maceta. La mariposa vuela: va más chica (3.9rem) y queda flotando sobre la maceta. Ninguna pieza llega a la tarjeta de arriba.
+- **Verificación:** revisado en el navegador a 1440x900 y 390x844, sin errores de consola. Lint y typecheck limpios.
