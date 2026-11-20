@@ -347,3 +347,23 @@ Juani:
   - Sin scroll horizontal ni errores de consola. Lint, typecheck y build limpios.
   - Capturas de los seis reposos en `docs/plans/seis-pasos/{d,m}-paso1..6.jpg`.
 - **Límite:** sin escenario fijado (movimiento reducido o navegadores sin animaciones por scroll), los botones de paso no hacen nada; todos los pasos están abiertos.
+
+#### Asentamiento sin apuro (20 de noviembre de 2026)
+
+Juani:
+
+> "el efecto que digo en el punto anterior, que pusiste en "seis pasos sin sorpresa" no funciona correctamente ya que parece que mayo hace la animacion super apurada"
+
+- **Causa.** El asentamiento y los clics usaban `window.scrollTo({ behavior: "smooth" })`. El navegador recorre ese desplazamiento en unos 300 a 500 ms aunque cruce varios tramos, así que los cuadros pintados de Mayo pasaban a 30 o 100 por segundo.
+- **Cambio.** El desplazamiento ahora lo conduce la página, cuadro a cuadro (`src/components/world/guided-scroll.ts`, `guideScrollTo`, con curva seno de entrada y salida).
+  - Su duración sale de los cuadros pintados que cruza, a unos 10 por segundo. `stopsLegFrames("works")` (en `mayo-figure.tsx`) da cuántos cuadros toca cada tramo en escritorio y en celular, con la misma coreografía que arma los keyframes.
+  - El asentamiento dura entre 0,5 y 1,4 s. Un clic que cruza varias piedras dura hasta 3,2 s.
+  - Cualquier entrada del lector (rueda, toque, puntero o tecla) lo corta en el acto. Si después queda Mayo a mitad de tramo, el asentamiento normal decide según hacia dónde iba.
+  - Mientras dura, los `scrollend` propios no disparan otro asentamiento (`onScrollRest` lo ignora).
+- **Verificado (1440 × 900 y 390 × 844).** Se grabó con un contador en pantalla de cuadros pintados por segundo (`.playwright-mcp/isla5-video/settle-{d,m}.webm`, sin versionar; fotogramas en `docs/plans/isla4-guiada/asentar-{d,m}-{medio,fin}.jpg`).
+  - Terminar un tramo de galope: 0,50 a 0,52 s, 6 cuadros (11,5 a 12,1 por segundo).
+  - Volver a la piedra anterior: 0,52 a 0,74 s, 4 o 5 cuadros (7 a 8 por segundo).
+  - Clic del paso 1 al 6: 3,1 s, 45 cuadros en escritorio (14,4 por segundo) y 55 en celular (17,6).
+  - Una rueda durante el asentamiento lo corta, y después vuelve a la piedra que dejó.
+  - `aria-current` termina en el paso pedido. Sin errores de consola. Lint, typecheck y build limpios.
+- **Límite:** el clic del 1 al 6 sigue un poco más rápido que el ritmo pintado (14 a 18 cuadros por segundo). Alargarlo más haría esperar más de 3 s después de un clic.

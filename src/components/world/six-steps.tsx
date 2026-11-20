@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 
 import { IslandTitle } from "@/components/world/island-title";
-import { MayoFigure } from "@/components/world/mayo-figure";
+import { MayoFigure, stopsLegFrames } from "@/components/world/mayo-figure";
 import { SenderoController } from "@/components/world/sendero-controller";
 import { islandCopy } from "@/content/islands";
 import { islandPlates, mayoSprites } from "@/content/stage";
@@ -99,7 +99,7 @@ export function SixSteps() {
           </div>
         </div>
       </div>
-      <SenderoController legShare={mayoSprites.works?.legShare ?? 0.5} />
+      <SenderoController legShare={mayoSprites.works?.legShare ?? 0.5} legFrames={stopsLegFrames("works")} />
     </div>
   );
 }
