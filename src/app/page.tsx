@@ -7,6 +7,7 @@ import { QuestionsIsland, WorksIsland } from "@/components/world/islands";
 import { PackDetails } from "@/components/world/pack-details";
 import { ProblemIsland } from "@/components/world/problem-island";
 import { RockIsland } from "@/components/world/rock-island";
+import { SectionSnap } from "@/components/world/section-snap";
 import { SystemsIsland } from "@/components/world/systems-island";
 import { WhatsAppIcon } from "@/components/world/whatsapp-icon";
 import { WorldFooter } from "@/components/world/world-footer";
@@ -85,6 +86,7 @@ export default function Home() {
       <WorldFooter />
 
       <WorldMotion />
+      <SectionSnap />
     </div>
   );
 }
