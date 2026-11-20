@@ -36,7 +36,7 @@ export function IslandNav() {
           </Link>
         ))}
         <Link className="btn btn--moss island-nav__cta" href="/#agenda">
-          Agendá tu diagnóstico
+          Agendá
         </Link>
       </nav>
     </header>

@@ -35,13 +35,6 @@ export function ProblemIsland() {
         <MayoFigure slot="problem" className="isle__mayo isle__mayo--play" />
       </IslandScene>
       <div className="isle__content world-shell">
-        <div className="isle__channels" aria-label="Canales de atención existente">
-          {siteContent.channels.map((channel, index) => (
-            <span key={channel} style={staggerStyle(index)}>
-              {channel}
-            </span>
-          ))}
-        </div>
         <h2 id="problema-title">
           <IslandTitle segments={islandCopy.problem.title} />
         </h2>

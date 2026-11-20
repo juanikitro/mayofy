@@ -39,7 +39,6 @@ export default function Home() {
         <section id="inicio" className="dawn" data-island="1" aria-labelledby="dawn-title">
           <HeroIsland />
           <div className="dawn__content world-shell">
-            <p className="dawn__descriptor">{siteContent.descriptor}</p>
             <h1 id="dawn-title">
               {siteContent.hero.titleLines.map((line) => {
                 const { lead, keyword, tail } = splitKeyword(line);
@@ -52,7 +51,6 @@ export default function Home() {
                 );
               })}
             </h1>
-            <p className="dawn__body">{siteContent.hero.body}</p>
             <div className="dawn__actions">
               <a className="btn btn--moss btn--lg" href="#agenda">
                 {siteContent.hero.primaryCta}

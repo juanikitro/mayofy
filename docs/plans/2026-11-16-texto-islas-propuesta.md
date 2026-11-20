@@ -22,3 +22,11 @@ Bloques secundarios:
 - Isla 7, contacto: "Empecemos por una reunión de diagnóstico gratis." → se mantiene.
 
 Los títulos y entradas viven en `src/content/islands.ts` (segmentos con `{ em }` para la palabra en Fraunces). Para cambiarlos más adelante se edita ese archivo; la sustancia comercial sigue en `commercial-plans.ts`, `projects.ts` y `site.ts`.
+
+## Cambios del 20 de noviembre de 2026 (pedido de Juani)
+
+- Navegación: el botón dice "Agendá" (antes "Agendá tu diagnóstico").
+- Hero: se quitaron la bajada "Estudio de desarrollo web y software a medida" y el párrafo "Diseñamos landings, webs con turnos y sistemas a medida..."; quedan la promesa y los botones.
+- Isla 2: se quitaron las etiquetas Instagram, Google Maps y Recomendaciones.
+- Isla 3: se quitó "Precios de referencia para saber por dónde arrancar...".
+- Los textos siguen en  por si se reutilizan (metadatos, otras páginas).

@@ -399,7 +399,6 @@ export function RockIsland() {
           <h2 id="packs-title">
             <IslandTitle segments={islandCopy.packs.title} />
           </h2>
-          <p>{islandCopy.packs.body}</p>
         </header>
 
         <div className="scene scene--noon scene--plated" style={plateSceneStyle(islandPlates.packs)} aria-hidden="true">
