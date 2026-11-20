@@ -389,3 +389,43 @@ Helpers nuevos: `staggerStyle(index)` (`src/components/world/stagger.ts`) escrib
 
 - No se probó en un teléfono real, en tablet táctil ni en Safari/Firefox.
 - En pantallas táctiles el tooltip no aparece (no hay hover); el nombre accesible sigue ahí para los lectores de pantalla.
+
+## Iteración 7 (20 de noviembre de 2026): sin botones de pausa y capturas reales de los trabajos
+
+**Pedidos de Juani:**
+- "sobre los botones de pausa, quita tambien el de la isla 2, no debe haber elementos de pausa en la landing".
+- Tres capturas reales para los trabajos (panel de ShineApp, inicio de juanikitro.com e inicio de gymg.com.ar).
+
+**Base:** `juanikitro/landing-redesign` en `ee685a8`.
+
+### Sin botones de pausa
+
+- Se quitó el botón de pausa del índice de trabajos (`works-index.tsx`) y el del selector de casos de la isla 2 (`case-picker.tsx`, hecho por el agente de islas; este cambio lo tomé yo), con su estado, su texto (`casePicker.pauseLabel`), sus estilos (`.motion-toggle`, `.cases__toggle`, `.works-index__toggle`) y la regla que pausaba la mariposa del selector.
+- Todo lo demás de ambos recorridos sigue igual: avanzan cada 5 s con su barra de progreso, el hover o el foco seleccionan y dejan la cuenta en cero mientras el puntero o el foco siguen ahí, se detienen fuera de pantalla y con la pestaña oculta, y con movimiento reducido no avanzan solos (sin barras).
+- **Para el registro:** con esto ya no queda en la landing ningún control de pausa para lo que se mueve solo, a pedido de Juani. La página deja de cumplir WCAG 2.2.2 (pausar, detener u ocultar), y el skill también pide un botón de pausa por panel. La mitigación que queda: nada se mueve fuera de pantalla ni con la pestaña oculta, el hover y el foco detienen los recorridos, y quien tenga activado "reducir movimiento" en su sistema no ve ninguna animación automática.
+
+### Capturas reales de los trabajos
+
+- **ShineApp:** el panel (dashboard) es ahora la **primera** imagen (`public/images/proyectos/shineapp/panel.jpg`); la pantalla de acceso queda segunda. **Privacidad:** antes de publicar se difuminaron con un desenfoque suave, que sigue leyéndose como interfaz, los nombres, autos y fechas de la lista "Ahora", el nombre y la foto de la persona conectada (abajo a la izquierda) y, por precaución, el título de una tarea personal ("Préstamo…"). Los montos y gráficos quedan como estaban. El recorte deja fuera la barra de desplazamiento y el borde derecho de la cuarta columna de tarjetas.
+- **Consignataria y portfolio:** las capturas nuevas muestran la misma vista que las anteriores (el inicio), así que **las reemplazan** (`escritorio.jpg`). La del portfolio está en tema oscuro.
+- Las tres se recortaron a 16:10 sin la barra de desplazamiento ni el borde de la ventana, se llevaron a 1440 × 900 y se exportaron en JPG progresivo (100 a 190 KB, como las anteriores), con textos alternativos en castellano. Se borró la carpeta `entrantes/`.
+- El índice muestra la primera imagen de cada proyecto; la segunda de ShineApp queda en los datos (la usaría una galería o la página del caso).
+- Las capturas de celular de la vista previa siguen siendo las del mockup: la de ShineApp es la pantalla de acceso y la del portfolio está en tema claro, así que no acompañan del todo a las nuevas de escritorio. Faltan capturas de celular equivalentes.
+
+### Grabaciones
+
+| Interacción | Cuadros |
+| --- | --- |
+| Selector de casos sin pausa | `28-isla2-sin-pausa.jpg` |
+| Trabajos con las capturas nuevas | `28-trabajos-shineapp-panel.jpg`, `28-trabajos-consignataria.jpg`, `28-trabajos-portfolio-oscuro.jpg`, `28-trabajos-celular.jpg` |
+
+### Verificación
+
+- `npm run lint`, `npm run typecheck` y `npm run build` sin errores; sin errores de consola.
+- Playwright a 1440 × 900 y 390 × 844: ningún botón de pausa en la página; el selector de casos y el índice siguen corriendo (`data-running`); el índice pasa por el panel de ShineApp, la consignataria y el portfolio oscuro cada 5 s; el hover retiene la cuenta; con Tab, después del último trabajo el foco pasa a la sección siguiente (ya no hay un botón en el medio); en celular la primera miniatura es el panel de ShineApp; con movimiento reducido ninguno de los dos recorridos tiene autoplay ni barras; sin scroll horizontal.
+- Finish gate (build nuevo): **`GATE: FAIL 98 (round 1 of 3)`**. No aparecieron hallazgos de pausa (`loop-pause`) ni de imágenes. En el selector de casos de la isla 2 siguen los que ya tenía antes de este cambio (`focus-visible`, `spill` y `stagger` en celular); en mis secciones, los ya conocidos (`section-gaps` alrededor de la franja, `split-pair` del índice).
+
+### Límites
+
+- No se probó en un teléfono real, en tablet táctil ni en Safari/Firefox.
+- Conviene que Juani revise el panel de ShineApp difuminado antes de publicar.
