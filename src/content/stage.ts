@@ -75,6 +75,8 @@ export type MayoScrub = {
   rangeMobile?: string;
   /** How many times the strip plays across the range (a `pingpong` play is one way). */
   cycles: number;
+  /** Plays on phones, where a travelling slot covers a shorter stretch of meadow. */
+  cyclesMobile?: number;
 };
 
 export type MayoSprite = {
@@ -120,8 +122,10 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   // Digging: quick, repetitive paw strokes.
   // Painted in place on a crop of the island 4 v2 plate (camera, light and shadow from the scene).
   systems: { ...sprite("systems", "88.09%", "pingpong", { timeline: "--isle", range: "cover 50% cover 92%", rangeMobile: "cover 66% cover 97%", cycles: 4 }), strip: { avif: "/images/mundo-mayo/70-mayo-systems-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-systems-v2-tira.webp" } },
-  // Running across the path: about one stride per body length of travel.
-  works: sprite("works", "87%", "cycle", { timeline: "--isle", range: "cover 46% cover 88%", rangeMobile: "cover 68% cover 96%", cycles: 4 }),
+  // Painted in place on a crop of the island 5 v2 plate (gallop seen from the scene camera).
+  // One stride per body length of travel: desktop travels 22 % of the plate at a size of
+  // 8 % (3 strides); mobile 20 % at 16 % (1.5 strides). The travel steps once per frame.
+  works: { ...sprite("works", "78.13%", "cycle", { timeline: "--isle", range: "cover 46% cover 88%", rangeMobile: "cover 68% cover 96%", cycles: 3, cyclesMobile: 1.5 }), strip: { avif: "/images/mundo-mayo/70-mayo-works-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-works-v2-tira.webp" } },
   // Resting by the fire: breathing and ears, barely.
   // Painted in place on a crop of the island 6 v2 plate (resting, facing the campfire).
   host: { ...sprite("host", "85.16%", "pingpong", { timeline: "--isle", range: "cover 62% cover 93%", rangeMobile: "cover 72% cover 98%", cycles: 2 }), strip: { avif: "/images/mundo-mayo/70-mayo-host-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-host-v2-tira.webp" } },
@@ -285,16 +289,17 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   // The cell is the plate crop the frames were painted on (left 31.52 %, width 22.01 %); her shadow is painted in.
   systems: { x: "42.52%", y: "67.5%", size: "22.01%", xMobile: "42%", yMobile: "76.8%", sizeMobile: "34%", shadow: false },
   // Island 5: runs right-to-left across the middle band of the meadow, over the path; sunset light from the left.
+  // Cell = plate crop (left 752 px, top 513 px, side 134 px of 1672); shadow painted in.
   works: {
-    x: "49%",
-    y: "67%",
-    size: "10%",
+    x: "48.98%",
+    y: "65.64%",
+    size: "8.01%",
     xMobile: "48%",
     yMobile: "72.5%",
-    sizeMobile: "20%",
+    sizeMobile: "16%",
     travel: { from: "60%", to: "38%" },
     travelMobile: { from: "58%", to: "38%" },
-    shadow: { lean: "6%", opacity: 0.26 },
+    shadow: false,
   },
   // Island 6: resting on the grass facing the campfire (fire at 55 %, 59.5 %; mobile 53 %, 75 %), which lights her from the right.
   // Cell = plate crop (left 681 px, side 142 px of 1672); she faces the fire as painted; shadow painted in.
