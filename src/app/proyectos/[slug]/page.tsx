@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { IslandNav } from "@/components/world/island-nav";
+import { staggerStyle } from "@/components/world/stagger";
+import { StudyIndex } from "@/components/world/study-index";
 import { WorldFooter } from "@/components/world/world-footer";
 import { getProject, projects } from "@/content/projects";
 import { siteContent } from "@/content/site";
@@ -59,7 +61,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <header className="study__cover">
           <div className="world-shell study__cover-layout">
             <Link className="study__back" href="/#trabajos">
-              <span aria-hidden="true">←</span> Volver a trabajos
+              <span className="link-arrow link-arrow--back" aria-hidden="true">←</span>{" "}
+              <span className="link-label">Volver a trabajos</span>
             </Link>
             <p className="study__category">
               {project.placeholder ? "Proyecto placeholder" : project.category}
@@ -70,7 +73,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <p className="study__summary">{project.summary}</p>
             {"url" in project && project.url ? (
               <a className="btn btn--moss" href={project.url} target="_blank" rel="noreferrer">
-                Visitar sitio <span aria-hidden="true">↗</span>
+                Visitar sitio <span className="link-arrow link-arrow--out" aria-hidden="true">↗</span>
               </a>
             ) : null}
           </div>
@@ -98,14 +101,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </section>
 
         <section className="study__story world-shell">
-          <nav className="study__index" aria-label="Recorrido del caso">
-            <a href="#contexto">Contexto</a>
-            <a href="#desafio">Desafío</a>
-            <a href="#enfoque">Enfoque</a>
-            <a href="#decisiones">Decisiones</a>
-            <a href="#recorrido">Recorrido</a>
-            <a href="#galeria">Galería</a>
-          </nav>
+          <StudyIndex />
           <div className="study__chapters">
             <article id="contexto">
               <h2>Qué estaba pasando.</h2>
@@ -123,7 +119,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <h2>Las decisiones que sostienen la pieza.</h2>
               <ol className="study__decisions">
                 {project.decisions.map((decision, index) => (
-                  <li key={decision}>
+                  <li key={decision} style={staggerStyle(index)}>
                     <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                     <p>{decision}</p>
                   </li>
@@ -134,7 +130,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <h2>El recorrido de conversión.</h2>
               <ol className="study__journey">
                 {project.conversionSteps.map((step, index) => (
-                  <li key={`${step}-${index}`}>
+                  <li key={`${step}-${index}`} style={staggerStyle(index)}>
                     <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                     <strong>{step}</strong>
                   </li>
