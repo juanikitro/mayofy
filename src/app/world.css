@@ -618,11 +618,11 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 /* The stage is pinned while the section scrolls (cover 29.4 % to 70.6 % of
  * `--rocks` at 240vh). Rocks, contact shadows and Mayo live inside the plate,
  * positioned in % of it (stage.ts), so they share the island's perspective;
- * the cards sit in `.platforms`, a box with the plate's exact frame outside
- * the decorative (aria-hidden) scene, each resting on its platform's top.
- * The assembled state is the default layout: without scroll-driven
- * animations and with reduced motion the platforms stand built, the cards
- * show and Mayo waits by the third platform. */
+ * the one-line markers sit in `.platforms`, a box with the plate's exact
+ * frame outside the decorative (aria-hidden) scene, each standing on its
+ * platform's top. The assembled state is the default layout: without
+ * scroll-driven animations and with reduced motion the platforms stand built,
+ * the markers show and Mayo waits by the third platform. */
 
 @property --gate {
   syntax: "<number>";
@@ -685,12 +685,13 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 .rocks {
   /* The plate is dropped (a share of its own height, `translate` %) so the
-   * meadow sits low enough for the platforms and their cards to clear the
-   * title and the intro (about 20rem): 15 % on 16:10 screens, more on wider
-   * or shorter ones, where the plate is taller for the same screen height
-   * (the cards' tops sit at 85.7 % of the plate's height above its bottom,
-   * i.e. 48.25cqw). The hanging root tips and, on short screens, part of the
-   * underside leave the frame. */
+   * meadow sits low enough for the platforms and what stands on them to
+   * clear the title and the intro (about 20rem): 15 % on 16:10 screens, more
+   * on wider or shorter ones, where the plate is taller for the same screen
+   * height. Measured for the former cards (their tops at 85.7 % of the
+   * plate's height above its bottom, i.e. 48.25cqw); the one-line markers are
+   * shorter, so they clear it with room to spare. The hanging root tips and,
+   * on short screens, part of the underside leave the frame. */
   --rocks-drop: max(15%, 20rem - 100cqh + 48.25cqw);
 
   position: relative;
@@ -705,7 +706,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   grid-template-rows: auto 1fr;
   height: 100svh;
   overflow: clip;
-  /* The cards' frame (`.platforms`) measures the stage as the scene does. */
+  /* The markers' frame (`.platforms`) measures the stage as the scene does. */
   container-type: size;
 }
 
@@ -934,8 +935,11 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   scale: calc(1.8 - 0.8 * var(--ground));
 }
 
-/* The cards: a box with the plate's frame (bottom-anchored, full width, the
- * plate's ratio and drop), each card's bottom on its platform's top rock. */
+/* The markers: a box with the plate's frame (bottom-anchored, full width,
+ * the plate's ratio and drop), each marker standing on its platform's top
+ * rock on a short stem (Juani, 20 November 2026, option A). One line on
+ * desktop ("Landing  USD 85  ↓"), name over price on phones; each leads to its
+ * full pack card below (platform-markers.tsx). */
 .platforms {
   position: absolute;
   inset: auto 0 0;
@@ -945,70 +949,113 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   pointer-events: none;
 }
 
-.platform__card {
+.platform__marker {
   --x: var(--x-d);
   --top: var(--top-d);
+  --stem: 0.9rem;
 
   position: absolute;
   left: var(--x);
-  bottom: calc(100% - var(--top) - 0.5rem);
-  display: grid;
-  gap: 0.1rem;
-  width: 11rem;
-  padding: 0.85rem 1rem 0.75rem;
-  border-radius: var(--radius);
+  bottom: calc(100% - var(--top) + var(--stem));
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  padding: 0.55rem 1rem 0.55rem 0.85rem;
+  border-radius: 999px;
   background: var(--cream);
   box-shadow: var(--shadow-soft);
-  text-align: center;
-  transform: translateX(-50%);
+  color: var(--ink);
+  font-size: 1.02rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  translate: -50% 0;
   pointer-events: auto;
+  transition: translate 160ms var(--ease-out);
 }
 
-.platform__card:hover .platform__link,
-.platform__card:focus-visible .platform__link {
-  text-decoration-color: var(--moss);
+/* The stem down to the rock it names. */
+.platform__marker::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 2px;
+  height: var(--stem);
+  background: var(--cream);
+  translate: -50% 0;
 }
 
-/* A card reached with Tab before its platform has assembled shows at once:
+.platform__marker:hover {
+  translate: -50% -3px;
+}
+
+.platform__marker:focus-visible {
+  outline: 3px solid var(--moss);
+  outline-offset: 3px;
+}
+
+/* A marker reached with Tab before its platform has assembled shows at once:
  * keyboard focus never lands on something invisible. */
-.platform__card:focus-visible {
+.platform__marker:focus-visible {
   opacity: 1 !important;
 }
 
-.platform__name {
-  font-weight: 600;
-  font-size: 1.05rem;
+.platform__marker-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--leaf);
 }
 
-.platform__from {
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-
-.platform__price {
-  font-size: 1.6rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+.platform__marker-price {
+  color: var(--moss);
   font-variant-numeric: tabular-nums;
-  color: var(--moss);
 }
 
-.platform__timeline {
-  font-size: 0.85rem;
-  color: var(--ink-soft);
+.platform__marker-arrow {
+  color: var(--moss);
+  transition: translate 160ms var(--ease-out);
 }
 
-.platform__link {
-  margin-block-start: 0.35rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--moss);
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  text-underline-offset: 0.2em;
-  transition: text-decoration-color 200ms var(--ease-out);
+.platform__marker:hover .platform__marker-arrow,
+.platform__marker:focus-visible .platform__marker-arrow {
+  translate: 0 3px;
+}
+
+/* Spoken, not shown: where the marker leads. */
+.platform__marker-hint {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* The pack card a marker leads to rings for a moment on arrival (also when
+ * reached by its address without JavaScript, `:target`). */
+@keyframes pack-target-ring {
+  0% {
+    outline-color: transparent;
+  }
+
+  20%,
+  60% {
+    outline-color: var(--moss);
+  }
+
+  100% {
+    outline-color: transparent;
+  }
+}
+
+.packs .flip.is-target,
+.packs .flip:target {
+  outline: 3px solid transparent;
+  outline-offset: 4px;
+  animation: pack-target-ring 1.4s var(--ease-out) 1;
 }
 
 /* Flight of one rock over its own range (`--range`, stage.ts rockTiming),
@@ -1267,15 +1314,15 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 }
 
-@keyframes card-rise {
+@keyframes marker-rise {
   from {
     opacity: 0;
-    transform: translate(-50%, 1rem);
+    transform: translateY(0.75rem);
   }
 
   to {
     opacity: 1;
-    transform: translate(-50%, 0);
+    transform: none;
   }
 }
 
@@ -1408,8 +1455,8 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     animation-range: var(--range);
   }
 
-  .platform__card {
-    animation: card-rise var(--ease-out) both;
+  .platform__marker {
+    animation: marker-rise var(--ease-out) both;
     animation-timeline: --rocks;
     animation-range: var(--range);
   }
@@ -1455,7 +1502,9 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   .plate__picture--assembled,
   .rock-ground,
   .rock-shadow,
-  .platform__card,
+  .platform__marker,
+  .packs .flip.is-target,
+  .packs .flip:target,
   .rocks__mayo,
   .rocks__mayo::after,
   .scene__mayo,
@@ -1471,7 +1520,9 @@ html[data-motion-tier="reduced"] .rock-grass,
 html[data-motion-tier="reduced"] .plate__picture--assembled,
 html[data-motion-tier="reduced"] .rock-ground,
 html[data-motion-tier="reduced"] .rock-shadow,
-html[data-motion-tier="reduced"] .platform__card,
+html[data-motion-tier="reduced"] .platform__marker,
+html[data-motion-tier="reduced"] .packs .flip.is-target,
+html[data-motion-tier="reduced"] .packs .flip:target,
 html[data-motion-tier="reduced"] .rocks__mayo,
 html[data-motion-tier="reduced"] .rocks__mayo::after,
 html[data-motion-tier="reduced"] .scene__mayo,
@@ -1481,14 +1532,15 @@ html[data-motion-tier="reduced"] .scene__sky {
 
 /* Phones: the same pinned assembly on a plate scaled up around its centre,
  * so the meadow fills the width; the platforms close in under three compact
- * cards side by side, and the floating rocks stay nearer the island and
+ * markers side by side, and the floating rocks stay nearer the island and
  * lose their blur (cheaper to paint). */
 @media (max-width: 48rem) {
   .rocks {
     --plate-scale: 1.9;
-    /* Raised a quarter of its height, less on short phones so the cards
-     * (their tops 97.7 % of the plate's height above its bottom, 104.5cqw)
-     * still clear the intro (15rem). */
+    /* Raised a quarter of its height, less on short phones so what stands on
+     * the platforms still clears the intro (15rem); measured for the former
+     * cards (their tops 97.7 % of the plate's height above its bottom,
+     * 104.5cqw), which the shorter markers clear with room to spare. */
     --rocks-drop: max(-25%, 15rem - 100cqh + 104.5cqw);
   }
 
@@ -1561,36 +1613,26 @@ html[data-motion-tier="reduced"] .scene__sky {
     transform: translate(-50%, var(--rocks-drop));
   }
 
-  .platform__card {
+  /* Name over price, no dot or arrow, 44 px tall; a long name may wrap. */
+  .platform__marker {
     --x: var(--x-m);
     --top: var(--top-m);
+    --stem: 0.6rem;
 
-    width: 7.25rem;
-    padding: 0.6rem 0.4rem 0.55rem;
+    flex-direction: column;
     gap: 0;
-  }
-
-  .platform__name {
+    max-width: 7.6rem;
+    padding: 0.45rem 0.7rem;
+    border-radius: 1.2rem;
     font-size: 0.82rem;
     line-height: 1.2;
+    text-align: center;
+    white-space: normal;
   }
 
-  .platform__from {
-    margin-block-start: 0.2rem;
-    font-size: 0.6rem;
-  }
-
-  .platform__price {
-    font-size: 1.2rem;
-  }
-
-  .platform__timeline,
-  .platform__link {
-    font-size: 0.72rem;
-  }
-
-  .platform__link {
-    margin-block-start: 0.2rem;
+  .platform__marker-dot,
+  .platform__marker-arrow {
+    display: none;
   }
 }
 

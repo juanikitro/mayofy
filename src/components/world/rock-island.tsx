@@ -3,6 +3,7 @@ import { Fragment, type CSSProperties } from "react";
 
 import { IslandPlate, plateSceneStyle } from "@/components/world/island-plate";
 import { MayoFigure } from "@/components/world/mayo-figure";
+import { PlatformMarkers } from "@/components/world/platform-markers";
 import { IslandTitle } from "@/components/world/island-title";
 import { commercialPlans } from "@/content/commercial-plans";
 import { islandCopy } from "@/content/islands";
@@ -360,8 +361,8 @@ function GroundShadow({ index }: { index: number }) {
   return <span className="rock-ground" style={style} />;
 }
 
-/** Highest point of a platform's rocks, in % of the plate height: its card rests there. */
-function cardVars(index: number) {
+/** Highest point of a platform's rocks, in % of the plate height: its marker stands there, shown once its top rock lands. */
+function markerVars(index: number) {
   const platform = platforms[index];
   const { minY, maxY } = bounds(platform);
   const top = (placement: PlatformPlacement) => placement.y + ((minY - maxY) * placement.canvas) / PLATFORM_CANVAS / RATIO;
@@ -432,18 +433,10 @@ export function RockIsland() {
           </IslandPlate>
         </div>
 
-        {/* The cards share the plate's frame, so each rests on top of its own platform. */}
-        <div className="platforms">
-          {commercialPlans.map((plan, index) => (
-            <a className={`platform__card platform__card--${index + 1}`} href={`#pack-${plan.id}`} style={cardVars(index)} key={plan.id}>
-              <span className="platform__name">{plan.name}</span>
-              <span className="platform__from">Desde</span>
-              <span className="platform__price">{plan.price}</span>
-              <span className="platform__timeline">{plan.timeline}</span>
-              <span className="platform__link">Ver qué incluye</span>
-            </a>
-          ))}
-        </div>
+        {/* The markers share the plate's frame, so each stands on top of its own platform. */}
+        <PlatformMarkers
+          markers={commercialPlans.map((plan, index) => ({ id: plan.id, name: plan.name, price: plan.price, style: markerVars(index) }))}
+        />
       </div>
     </section>
   );
