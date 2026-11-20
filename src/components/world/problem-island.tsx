@@ -85,26 +85,28 @@ export function ProblemIsland() {
       <div className="problem__stage">
         <IslandScene variant="morning" plate={islandPlates.problem}>
           <MayoFigure slot="problem" className="isle__mayo isle__mayo--play" />
-          <div className="problem__demo">
-            <Proposal inScene />
-            {/* After the proposal, so a question is never painted behind it. */}
-            {proposal.modules.map((module, index) => (
-              <span
-                className="problem__ask"
-                key={module.question}
-                style={
-                  {
-                    "--x0": askStarts[index][0],
-                    "--y0": askStarts[index][1],
-                    "--row": index,
-                  } as CSSProperties
-                }
-              >
-                {module.question}
-              </span>
-            ))}
-          </div>
         </IslandScene>
+        {/* Over the scene (and its morning veil), in the plate's frame: the
+            proposal stays crisp and the questions fly above everything. */}
+        <div className="problem__demo" aria-hidden="true">
+          <Proposal inScene />
+          {/* After the proposal, so a question is never painted behind it. */}
+          {proposal.modules.map((module, index) => (
+            <span
+              className="problem__ask"
+              key={module.question}
+              style={
+                {
+                  "--x0": askStarts[index][0],
+                  "--y0": askStarts[index][1],
+                  "--row": index,
+                } as CSSProperties
+              }
+            >
+              {module.question}
+            </span>
+          ))}
+        </div>
         <div className="isle__content world-shell problem__content">
           <h2 id="problema-title">
             <IslandTitle segments={islandCopy.problem.title} />

@@ -6740,9 +6740,30 @@ html[data-motion-tier="reduced"] .works-index__shot {
   margin-block-start: 0.5rem;
 }
 
+.cases__head {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .cases__prompt {
   font-weight: 500;
   color: var(--ink-soft);
+}
+
+.cases__toggle {
+  margin-inline-end: -0.5rem;
+}
+
+/* The visitor's own choice is read out; the automatic tour is not. */
+.cases__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .cases__options {
@@ -6841,12 +6862,80 @@ html[data-motion-tier="reduced"] .works-index__shot {
   box-shadow: var(--m-shadow-card);
 }
 
+/* The three recommendations share one cell: the tallest sets its height,
+ * so nothing under it moves when the selection changes. */
+.cases__result {
+  display: grid;
+}
+
 .case-result {
   display: grid;
+  grid-area: 1 / 1;
   gap: 0.35rem;
+  align-content: start;
   justify-items: start;
   padding: 1.1rem 1.25rem 1.25rem;
-  animation: case-result-in var(--m-panel) var(--ease-enter);
+  transition:
+    opacity var(--m-panel) var(--ease-out),
+    translate var(--m-panel) var(--ease-out),
+    visibility 0s;
+}
+
+.case-result:not([data-active]) {
+  visibility: hidden;
+  opacity: 0;
+  translate: 0 6px;
+  transition:
+    opacity var(--m-fast) var(--ease-out),
+    translate var(--m-fast) var(--ease-out),
+    visibility 0s var(--m-fast);
+}
+
+/* The selected case counts its 5 s with a moss bar along its foot, like the
+ * works index; it pauses off screen, in a hidden tab or with the pause
+ * button, and rests at zero while the pointer or focus is on the list. */
+.case__progress {
+  position: absolute;
+  inset: auto 0.9rem -1.5px;
+  height: 3px;
+  border-radius: 1px;
+  background: var(--moss);
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: works-progress 5s linear forwards;
+  animation-play-state: paused;
+}
+
+.cases[data-running] .case__progress {
+  animation-play-state: running;
+}
+
+.cases[data-hold] .case__progress {
+  animation: none;
+}
+
+/* A strip of square cells (the butterfly) flutters back and forth; it rests
+ * on its first cell with reduced motion and stops with the pause button. */
+.case__plant--strip {
+  display: block;
+  aspect-ratio: 1;
+  background: var(--strip) 0 0 / calc(var(--frames) * 100%) 100% no-repeat;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .case__plant--strip {
+    animation: case-flutter 0.7s steps(var(--frames), jump-none) infinite alternate;
+  }
+
+  html:not([data-motion-tier="reduced"]) .cases[data-paused] .case__plant--strip {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes case-flutter {
+  to {
+    background-position-x: 100%;
+  }
 }
 
 .case-result__eyebrow {
@@ -6880,13 +6969,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
   flex-wrap: wrap;
   gap: 0.6rem;
   margin-block-start: 0.5rem;
-}
-
-@keyframes case-result-in {
-  from {
-    opacity: 0;
-    translate: 0 8px;
-  }
 }
 
 /* The proposal: the base system and its modules hanging from one stem, a
@@ -7032,11 +7114,18 @@ html[data-motion-tier="reduced"] .works-index__shot {
   font-size: 0.75rem;
 }
 
-/* The questions and the proposal on the island only exist on the pinned stage. */
+/* The questions and the proposal on the island only exist on the pinned
+ * stage. They live over the scene, in a box with the plate's own frame, so
+ * the morning veil over the top of the scene never fades the proposal. */
 .problem__demo {
   position: absolute;
-  inset: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 3;
   display: none;
+  width: 100%;
+  aspect-ratio: 1672 / 941;
+  pointer-events: none;
 }
 
 /* Each question lands on its module's slot (measured on the pinned stage). */
@@ -7100,8 +7189,22 @@ html[data-motion-tier="reduced"] .works-index__shot {
     padding-block-start: max(6.5rem, 13svh);
   }
 
-  .problem .plate__picture--island,
-  .problem .mayo--anchored,
+  /* The island (and Mayo on its meadow) leans right and drops until its
+   * roots touch the foot of the screen (`--problem-drop`, % of the plate's
+   * height); the far sky, the proposal and the questions keep the plate's
+   * frame. */
+  .problem {
+    --problem-drop: 12;
+  }
+
+  .problem .plate__picture--island {
+    translate: var(--problem-shift) calc(var(--problem-drop) * 1%);
+  }
+
+  .problem .mayo--anchored {
+    translate: var(--problem-shift) calc(100cqw * 0.5628 * var(--problem-drop) / 100);
+  }
+
   .problem__demo {
     translate: var(--problem-shift) 0;
   }
