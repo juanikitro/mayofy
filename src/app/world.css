@@ -5697,3 +5697,145 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   display: grid;
   gap: 1.25rem;
 }
+
+/* Work carousels ------------------------------------------------------- */
+
+/* A native scroller with snap points: swipe, trackpad and arrow keys move it,
+ * arrows and dots step it, nothing moves by itself. The current dot
+ * stretches into a short bar (transform only). */
+.carousel {
+  display: grid;
+  gap: 0.25rem;
+  margin-block-end: 0.5rem;
+}
+
+.carousel__track {
+  display: flex;
+  aspect-ratio: 16 / 10;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: calc(var(--radius) - 0.45rem);
+}
+
+.carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel__slide {
+  position: relative;
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.carousel__slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel__placeholder {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.35rem;
+  height: 100%;
+  border: 1px dashed color-mix(in oklch, var(--bark) 28%, transparent);
+  border-radius: inherit;
+  background: linear-gradient(160deg, color-mix(in oklch, var(--cream) 70%, var(--sky-dawn-mid)), var(--beige-deep));
+}
+
+.carousel__slide:nth-child(3n + 2) .carousel__placeholder {
+  background: linear-gradient(160deg, color-mix(in oklch, var(--cream) 72%, var(--sky-noon-low)), color-mix(in oklch, var(--beige) 80%, var(--leaf-light)));
+}
+
+.carousel__slide:nth-child(3n + 3) .carousel__placeholder {
+  background: linear-gradient(160deg, color-mix(in oklch, var(--cream) 70%, var(--leaf-light)), color-mix(in oklch, var(--beige-deep) 85%, var(--sky-dawn-top)));
+}
+
+.carousel__placeholder-index {
+  font-family: var(--font-world-serif);
+  font-size: clamp(2.6rem, 2rem + 2vw, 3.4rem);
+  font-style: italic;
+  line-height: 1;
+  color: color-mix(in oklch, var(--moss) 45%, transparent);
+}
+
+.carousel__placeholder-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.carousel__dots {
+  display: flex;
+}
+
+.carousel__arrow,
+.carousel__dot {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--moss);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.carousel__arrow {
+  transition:
+    background-color var(--m-fast) var(--ease-ui),
+    opacity var(--m-fast) var(--ease-ui),
+    transform var(--m-press) var(--ease-ui);
+}
+
+.carousel__arrow:hover:not(:disabled) {
+  background: color-mix(in oklch, var(--moss) 10%, transparent);
+  transition-duration: var(--m-base);
+}
+
+.carousel__arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.carousel__dot::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklch, var(--moss) 30%, transparent);
+  transition:
+    background-color var(--m-fast) var(--ease-ui),
+    transform var(--m-panel) var(--ease-ui);
+}
+
+.carousel__dot:hover::before {
+  background: color-mix(in oklch, var(--moss) 55%, transparent);
+}
+
+.carousel__dot[aria-current="true"]::before {
+  background: var(--moss);
+  transform: scaleX(2.2);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .carousel__arrow:active:not(:disabled) {
+    transform: scale(0.9);
+  }
+}

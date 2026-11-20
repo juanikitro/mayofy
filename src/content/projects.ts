@@ -8,6 +8,18 @@ export type ProjectVisualVariant =
 
 export type ProjectPortalLayout = "split-left" | "split-right" | "horizon";
 
+/**
+ * A screenshot of a project for its card carousel. Drop the file in
+ * public/images/proyectos/<slug>/ and list it here; an empty list shows the
+ * placeholder slides (see WorkCarousel).
+ */
+export type ProjectImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
 export type ProjectEntry = {
   slug: string;
   index: string;
@@ -24,6 +36,8 @@ export type ProjectEntry = {
   visual: ProjectVisualVariant;
   layout: ProjectPortalLayout;
   placeholder: boolean;
+  /** Card carousel images, in order. Empty until the screenshots exist. */
+  images: readonly ProjectImage[];
   url?: string;
 };
 
@@ -58,6 +72,7 @@ export const projects = [
     visual: "threshold",
     layout: "split-left",
     placeholder: false,
+    images: [],
     url: "https://shineapp.lat/",
   },
   {
@@ -90,6 +105,7 @@ export const projects = [
     visual: "current",
     layout: "split-right",
     placeholder: false,
+    images: [],
     url: "https://gymg.com.ar/",
   },
   {
@@ -122,6 +138,7 @@ export const projects = [
     visual: "canopy",
     layout: "horizon",
     placeholder: false,
+    images: [],
     url: "https://juanikitro.com/",
   },
   {
@@ -145,6 +162,7 @@ export const projects = [
     visual: "monolith",
     layout: "split-left",
     placeholder: true,
+    images: [],
   },
   {
     slug: "proyecto-05",
@@ -167,6 +185,7 @@ export const projects = [
     visual: "delta",
     layout: "split-right",
     placeholder: true,
+    images: [],
   },
   {
     slug: "proyecto-06",
@@ -189,6 +208,7 @@ export const projects = [
     visual: "grove",
     layout: "horizon",
     placeholder: true,
+    images: [],
   },
 ] as const satisfies readonly ProjectEntry[];
 
