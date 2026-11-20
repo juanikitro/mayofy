@@ -160,6 +160,22 @@ function stopsKeyframes(name: string, stops: MayoStops, x: string, y: string, si
   );
 }
 
+/**
+ * How many painted frames each leg of a slot's walk plays (desktop, mobile),
+ * so a guided scroll can give a leg time for all of them.
+ */
+export function stopsLegFrames(slot: MayoSlotId) {
+  const anchor = mayoAnchors[slot];
+  const sprite = mayoSprites[slot];
+  if (!anchor?.stops || !sprite?.stride || !sprite.arrival) return null;
+  const count = (stops: MayoStops, size: string) =>
+    stops.points.slice(1).map((to, leg) => legPoses(stops.points[leg], to, stops.aspect, pct(size), sprite).length);
+  return {
+    desktop: count(anchor.stops, anchor.size),
+    mobile: count(anchor.stopsMobile ?? anchor.stops, anchor.sizeMobile ?? anchor.size),
+  };
+}
+
 /** A slot's walk between stops as keyframes (desktop and mobile), named for world.css. */
 function stopsStyle(slot: MayoSlotId, anchor: MayoAnchor, sprite: MayoSprite | undefined) {
   if (!anchor.stops || !sprite?.stride || !sprite.arrival) return { css: "", style: {} };
