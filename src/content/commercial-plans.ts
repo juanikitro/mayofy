@@ -144,6 +144,17 @@ export const comingSoon = {
 
 export const guarantees = {
   title: "Lo que garantizamos en todos los packs",
+  /** Short seals for the strip under the pack cards; the speed guarantee first. */
+  stripTitle: "En todos los packs",
+  seals: [
+    { icon: "speed", label: "Carga rápida en el celular o la corregimos gratis" },
+    { icon: "ownership", label: "Código y dominio tuyos" },
+    { icon: "reply", label: "Respuesta en menos de 24 h hábiles" },
+    { icon: "seo", label: "SEO técnico desde el primer día" },
+    { icon: "screens", label: "Accesible en cualquier pantalla" },
+    { icon: "support", label: "Una semana de soporte" },
+    { icon: "revisions", label: "Rondas de revisión acordadas" },
+  ],
   items: [
     "El código y el dominio son tuyos.",
     "Te respondemos en menos de 24 horas hábiles.",

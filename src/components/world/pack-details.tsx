@@ -1,15 +1,12 @@
 import { FlipCard } from "@/components/world/flip-card";
 import { DetailGroups } from "@/components/world/pack-groups";
-import {
-  commercialIntro,
-  commercialPlans,
-  guarantees,
-} from "@/content/commercial-plans";
+import { GuaranteesStrip } from "@/components/world/guarantees-strip";
+import { commercialIntro, commercialPlans } from "@/content/commercial-plans";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
 /**
  * Commercial substance of island 3, rendered below the rock stage: the three
- * packs, the payment line and the guarantees. The bot and the loose
+ * packs, the guarantees strip and the payment line. The bot and the loose
  * automations live on island 4; maintenance lives on island 6.
  * Content comes verbatim from src/content/commercial-plans.ts.
  */
@@ -66,16 +63,9 @@ export function PackDetails() {
         ))}
       </div>
 
-      <p className="packs__payment">{commercialIntro.payment}</p>
+      <GuaranteesStrip />
 
-      <section className="promises" aria-labelledby="garantias-title">
-        <h3 id="garantias-title">{guarantees.title}</h3>
-        <ul className="pack-list promises__list">
-          {guarantees.items.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </section>
+      <p className="packs__payment">{commercialIntro.payment}</p>
     </div>
   );
 }
