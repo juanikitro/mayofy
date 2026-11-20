@@ -6829,12 +6829,15 @@ html[data-motion-tier="reduced"] .works-index__shot {
   gap: 0.9rem;
 }
 
-/* Each case stands in its card like a planter: the plant sits in a recess
- * cut into the card, its base hidden below the recess's front edge, and
- * grows past the card's top edge, more as the problem grows (a sprout, a
- * plant, a bush). */
+/* Each case stands in its card like a planter: the painted piece (a flower,
+ * a sprout, a butterfly; square cells with the ground line at 88 %) sits in
+ * a recess cut into the card, its base hidden below the recess's front edge,
+ * and rises a little past the card's top edge, never as far as the card
+ * above. */
 .case {
-  --plant-w: 4.9rem;
+  --plant-w: 4.7rem;
+  /* Sinks the painted ground line (12 % above the cell's foot) just below the recess's front edge. */
+  --plant-bottom: calc(-0.4rem - var(--plant-w) * 0.12);
 
   position: relative;
   display: grid;
@@ -6858,12 +6861,10 @@ html[data-motion-tier="reduced"] .works-index__shot {
     box-shadow var(--m-base);
 }
 
-.case:nth-child(2) {
-  --plant-w: 6.4rem;
-}
-
+/* The butterfly flies: smaller, and hovering just above the recess. */
 .case:nth-child(3) {
-  --plant-w: 7.6rem;
+  --plant-w: 3.9rem;
+  --plant-bottom: 0.05rem;
 }
 
 .case__planter {
@@ -6883,7 +6884,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
 .case__plant {
   position: absolute;
   left: 50%;
-  bottom: -0.5rem;
+  bottom: var(--plant-bottom);
   width: var(--plant-w);
   max-width: none;
   height: auto;

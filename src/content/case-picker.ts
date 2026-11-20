@@ -23,21 +23,16 @@ export type CaseOption = {
  * Custom art for an option, painted for the picker (Juani, 2026-11-20: "una
  * flor, una plantita y una mariposa colorida"), a file in
  * public/images/mundo-mayo. `frames` > 1 is a horizontal strip of square
- * cells played back and forth (the butterfly's flutter). Until the
- * illustrator delivers 34-isla2-flor, 34-isla2-brote and the five-frame
- * 34-isla2-mariposa-tira, the slots show the plant crops already painted
- * (34-isla2-planta-*): swap `src` (and set `frames: 5` on the butterfly).
+ * cells played back and forth (the butterfly's flutter).
  */
 export type CaseArt = { src: string; frames?: number };
 
 export const casePicker = {
   prompt: "¿Qué te está pasando hoy? Elegí lo que más se parece y te mostramos por dónde empezar.",
-  // Art in order: the flower (34-isla2-flor), the small plant (34-isla2-brote), the butterfly
-  // (34-isla2-mariposa-tira, 5 frames). Placeholders until they arrive.
   options: [
-    { planId: "landing", text: "Me encuentran, pero no tengo dónde mostrar lo que hago.", art: { src: "34-isla2-planta-01" } },
-    { planId: "web-gestion", text: "Paso el día coordinando turnos por WhatsApp.", art: { src: "34-isla2-planta-02" } },
-    { planId: "sistema", text: "Mi operación vive en planillas y ya no alcanza.", art: { src: "34-isla2-planta-03" } },
+    { planId: "landing", text: "Me encuentran, pero no tengo dónde mostrar lo que hago.", art: { src: "34-isla2-flor" } },
+    { planId: "web-gestion", text: "Paso el día coordinando turnos por WhatsApp.", art: { src: "34-isla2-brote" } },
+    { planId: "sistema", text: "Mi operación vive en planillas y ya no alcanza.", art: { src: "34-isla2-mariposa-tira", frames: 5 } },
   ] satisfies readonly CaseOption[],
   resultEyebrow: "Te conviene empezar por",
   detailsCta: "Ver qué incluye",

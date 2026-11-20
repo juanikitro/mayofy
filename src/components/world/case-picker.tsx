@@ -11,7 +11,7 @@ function CaseArtwork({ art }: { art: CaseArt }) {
     return <span className="case__plant case__plant--strip" style={{ "--strip": `url("${src}")`, "--frames": art.frames } as CSSProperties} />;
   }
   // eslint-disable-next-line @next/next/no-img-element -- small decorative cut-out
-  return <img className="case__plant" src={src} alt="" width={240} height={140} loading="lazy" decoding="async" />;
+  return <img className="case__plant" src={src} alt="" width={512} height={512} loading="lazy" decoding="async" />;
 }
 
 /**
