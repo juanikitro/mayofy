@@ -147,9 +147,7 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   // Play bow among the rocks.
   // Painted in place on a crop of the island 2 v2 plate (play bow among the rocks).
   problem: { ...sprite("problem", "87.91%", "pingpong", { timeline: "--isle", range: "cover 30% cover 85%", rangeMobile: "cover 35% cover 88%", cycles: 3 }), strip: { avif: "/images/mundo-mayo/70-mayo-problem-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-problem-v2-tira.webp" } },
-  // One hop per finished platform: each cycle takes off just after a platform's top rock lands
-  // (rockTiming: tops land at cover 44.7, 52.7 and 60.7 %), so she follows the order as it appears.
-  packs: sprite("packs", "90.8%", "cycle", { timeline: "--rocks", range: "cover 43.8% cover 67.8%", cycles: 3 }),
+  // Island 3 mounts its own four painted strips (packsMayo below, rock-island.tsx).
   // Digging: quick, repetitive paw strokes.
   // Painted in place on a crop of the island 4 v2 plate (camera, light and shadow from the scene).
   // The island is pinned for the whole section (systems-island.tsx): she digs while it is pinned.
@@ -435,9 +433,7 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
       ],
     },
   },
-  // Island 3: on the meadow in front of the platforms, facing the third; this is where her hops end
-  // (packsMayoHops) and where she stands without motion; noon light from above.
-  packs: { x: "62.5%", y: "57%", size: "8%", xMobile: "59%", yMobile: "57%", sizeMobile: "9.5%", face: "right", shadow: { lean: "8%", opacity: 0.4 } },
+  // Island 3 places its own painted strips (packsMayo below).
   // Island 4: digging the left soil mound; golden light from the right. The frames were painted on a
   // plate crop (left 31.52 %, width 22.01 %, feet at 67.5 %); on 2026-11-20 Juani asked for her smaller,
   // at the scale of the mini greenhouse: the cell is scaled by 0.6 around her feet and the anchor moved
@@ -745,14 +741,38 @@ export const rockTiming = { start: 34, stagger: 8, pieceStagger: 1.6, flight: 7,
 export const landingOrder: readonly PlatformPiece["kind"][] = ["base", "left", "right", "top"];
 
 /**
- * Mayo's stops on island 3, in % of the plate width: she waits in the
- * middle of the gap between the first two platforms (desktop 32.1-46.4 %,
- * phones 38.4-46.5 %) while the first gathers, gives a small hop when it is
- * done, leaps across in front of the second to the gap before the third
- * (53.6-69.4 %, phones 53.5-63.1 %) when the second is done, and a small
- * hop when the third lands.
+ * Mayo on island 3, painted in place (illustrator, 20 November 2026; manifest
+ * docs/plans/mundo-mayo-assets.md): four strips of 640 px cells with alpha,
+ * her light and dark-green shadow painted in. `mira` (watching the floating
+ * rocks, a loop in time) and `salto` (one hop, scrubbed by the scroll) were
+ * painted on the plate crop left 585, top 418, side 134 px of 1672 (centre
+ * 38.995 %); `sentarse` (sitting down, once, scrubbed) and `sentada` (seated
+ * admiring the third stack, a loop in time) on the assembled plate crop left
+ * 978 (centre 62.5 %). All share the cell (8.014 % of the plate width) and
+ * the feet line (563 of 640 px, 87.969 % of the cell, at 56.952 % of the
+ * plate's height). The joins are the same painted frame: mira f1 = salto f1
+ * = salto f12 = sentarse f1, sentarse f6 = sentada f1.
+ *
+ * `stops` are where she stands, in % of the plate width: she watches from
+ * the middle of the gap between the first two platforms (desktop 32.1-46.4 %,
+ * phones 38.4-46.5 %), hops a little when the first is done, leaps in front
+ * of the second to the gap before the third when the second is done (the
+ * sitting crop's centre on desktop), and sits there as the third lands.
+ * Phones place the same strips in their own composition.
  */
-export const packsMayoHops = { desktop: [39, 40.5, 61.5, 62.5], mobile: [42, 43, 58, 59] } as const;
+export const packsMayo = {
+  strips: {
+    mira: { frames: 12, avif: `${assetRoot}/70-mayo-packs-mira-tira.avif`, webp: `${assetRoot}/70-mayo-packs-mira-tira.webp` },
+    salto: { frames: 12, avif: `${assetRoot}/70-mayo-packs-salto-tira.avif`, webp: `${assetRoot}/70-mayo-packs-salto-tira.webp` },
+    sentarse: { frames: 6, avif: `${assetRoot}/70-mayo-packs-sentarse-tira.avif`, webp: `${assetRoot}/70-mayo-packs-sentarse-tira.webp` },
+    sentada: { frames: 12, avif: `${assetRoot}/70-mayo-packs-sentada-tira.avif`, webp: `${assetRoot}/70-mayo-packs-sentada-tira.webp` },
+  },
+  cell: 640,
+  feetY: 87.969,
+  y: 56.952,
+  size: { desktop: 8.014, mobile: 8.5 },
+  stops: { desktop: [38.995, 40.5, 62.5], mobile: [42, 43, 59] },
+} as const;
 
 /**
  * Loose rocks that never join a platform (Juani, 19 November 2026: "que queden

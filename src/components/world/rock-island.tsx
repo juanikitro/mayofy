@@ -2,7 +2,6 @@
 import { Fragment, type CSSProperties } from "react";
 
 import { IslandPlate, plateSceneStyle } from "@/components/world/island-plate";
-import { MayoFigure } from "@/components/world/mayo-figure";
 import { PlatformMarkers } from "@/components/world/platform-markers";
 import { IslandTitle } from "@/components/world/island-title";
 import { commercialPlans } from "@/content/commercial-plans";
@@ -11,9 +10,8 @@ import {
   islandPlates,
   landingOrder,
   looseRocks,
-  mayoAnchors,
   packsAssembledPlate,
-  packsMayoHops,
+  packsMayo,
   PLATFORM_CANVAS,
   platformGroundShadows,
   platformPlacements,
@@ -377,16 +375,52 @@ function markerVars(index: number) {
   } as CSSProperties;
 }
 
-/** Mayo's hop stops as `translate` offsets from her resting anchor, in her own widths. */
-function hopVars() {
-  const anchor = mayoAnchors.packs!;
-  const offset = (to: number, x: string, size: string) => `${round(((to - parseFloat(x)) / parseFloat(size)) * 100)}%`;
-  return Object.fromEntries(
-    packsMayoHops.desktop.flatMap((stop, hop) => [
-      [`--hop-${hop}-d`, offset(stop, anchor.x, anchor.size)],
-      [`--hop-${hop}-m`, offset(packsMayoHops.mobile[hop], anchor.xMobile ?? anchor.x, anchor.sizeMobile ?? anchor.size)],
-    ]),
-  ) as CSSProperties;
+type PacksStrip = keyof typeof packsMayo.strips;
+
+/**
+ * Mayo's cell and stops: the cell stands where she ends (seated by the third
+ * platform), the feet line on the painted feet; the earlier stops are
+ * `translate` offsets from there, in her own widths (world.css
+ * `packs-mayo-hops`).
+ */
+function packsMayoVars() {
+  const vars = (size: Size) => {
+    const width = packsMayo.size[size === "d" ? "desktop" : "mobile"];
+    const stops = packsMayo.stops[size === "d" ? "desktop" : "mobile"];
+    const end = stops[stops.length - 1];
+    return {
+      [`--x-${size}`]: `${round(end - width / 2)}%`,
+      [`--y-${size}`]: `${round(packsMayo.y - ((width * packsMayo.feetY) / 100) / RATIO)}%`,
+      [`--w-${size}`]: `${width}%`,
+      ...Object.fromEntries(stops.map((stop, hop) => [`--hop-${hop}-${size}`, `${round(((stop - end) / width) * 100)}%`])),
+    };
+  };
+  return { ...vars("d"), ...vars("m") } as CSSProperties;
+}
+
+/**
+ * Mayo on island 3, painted in place (stage.ts packsMayo): four strip windows
+ * share one cell and world.css shows the one the moment calls for, watching
+ * while the rocks float, hopping as the first two platforms land, sitting
+ * down as the third lands and seated afterwards. Every window steps its strip
+ * one painted frame at a time; without motion only the seated one shows.
+ */
+function PacksMayo() {
+  return (
+    <div className="packs-mayo" style={packsMayoVars()}>
+      {(Object.keys(packsMayo.strips) as PacksStrip[]).map((name) => {
+        const strip = packsMayo.strips[name];
+        return (
+          <div className={`packs-mayo__strip packs-mayo__strip--${name}`} style={{ "--frames": strip.frames } as CSSProperties} key={name}>
+            <picture>
+              <source type="image/avif" srcSet={strip.avif} />
+              <img src={strip.webp} alt="" width={packsMayo.cell * strip.frames} height={packsMayo.cell} loading="lazy" decoding="async" />
+            </picture>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
 /** Back to front: the middle platform stands furthest back, so it is painted first. */
@@ -427,9 +461,7 @@ export function RockIsland() {
               </Fragment>
             ))}
             <AssembledPlate />
-            <div className="rocks__mayo-path" style={hopVars()}>
-              <MayoFigure slot="packs" className="rocks__mayo" />
-            </div>
+            <PacksMayo />
           </IslandPlate>
         </div>
 
