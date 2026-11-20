@@ -2,15 +2,12 @@ import { CloudFall } from "@/components/world/cloud-fall";
 import { HeroIsland } from "@/components/world/hero-island";
 import { IslandNav } from "@/components/world/island-nav";
 import { IslandProgress } from "@/components/world/island-progress";
-import {
-  JuaniIsland,
-  ProblemIsland,
-  QuestionsIsland,
-  SystemsIsland,
-  WorksIsland,
-} from "@/components/world/islands";
+import { JuaniIsland } from "@/components/world/host-island";
+import { QuestionsIsland, WorksIsland } from "@/components/world/islands";
 import { PackDetails } from "@/components/world/pack-details";
+import { ProblemIsland } from "@/components/world/problem-island";
 import { RockIsland } from "@/components/world/rock-island";
+import { SystemsIsland } from "@/components/world/systems-island";
 import { WhatsAppIcon } from "@/components/world/whatsapp-icon";
 import { WorldFooter } from "@/components/world/world-footer";
 import { WorldMotion } from "@/components/world/world-motion";

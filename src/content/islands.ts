@@ -14,21 +14,17 @@ export type IslandCopy = {
 export const islandCopy = {
   problem: {
     title: ["Construyamos tu lugar en ", { em: "internet" }],
-    body: "Instagram, Google Maps y recomendaciones ya te traen gente. Sin una página propia, cada consulta queda suelta, como estas rocas.",
+    // 2026-11-20: the lead of option B (docs/plans/2026-11-20-propuestas.md); the case picker follows it.
+    body: "Cada pregunta que hoy respondés a mano, tu página la contesta antes. Y la consulta te llega por WhatsApp con el mensaje listo.",
   },
   packs: {
     title: ["Encontramos lo que necesita ", { em: "tu negocio" }, "."],
     body: "Precios de referencia para saber por dónde arrancar. El alcance y la inversión final se definen después de una reunión de diagnóstico gratis.",
   },
+  // Shortened on 2026-11-20 with option B of docs/plans/2026-11-20-propuestas.md.
   systems: {
-    title: [
-      "Desde una web memorable para ",
-      { em: "impactar," },
-      " hasta un sistema a medida para ",
-      { em: "optimizar" },
-      ".",
-    ],
-    body: "Construimos el software que tu operación necesita, sin convertir la tecnología en protagonista.",
+    title: ["Sistemas y automatizaciones ", { em: "a medida" }, "."],
+    body: "Lo que tu operación necesita, sin convertir la tecnología en protagonista.",
   },
   works: {
     title: ["Nuestra siembra, ", { em: "tus resultados" }, "."],
@@ -45,6 +41,11 @@ export const islandCopy = {
   host: {
     title: ["Mayofy es la marca. Detrás ", { em: "estoy yo" }, "."],
     body: "",
+  },
+  // Island 6, under the intro (option A of docs/plans/2026-11-20-propuestas.md).
+  reach: {
+    title: ["Empecemos por una reunión de diagnóstico ", { em: "gratis" }, "."],
+    body: "Contanos qué necesitás. Te respondemos en menos de 24 horas hábiles.",
   },
 } as const satisfies Record<string, IslandCopy>;
 

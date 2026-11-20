@@ -143,7 +143,8 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   packs: sprite("packs", "90.8%", "cycle", { timeline: "--rocks", range: "cover 43.8% cover 67.8%", cycles: 3 }),
   // Digging: quick, repetitive paw strokes.
   // Painted in place on a crop of the island 4 v2 plate (camera, light and shadow from the scene).
-  systems: { ...sprite("systems", "88.09%", "pingpong", { timeline: "--isle", range: "cover 50% cover 92%", rangeMobile: "cover 66% cover 97%", cycles: 4 }), strip: { avif: "/images/mundo-mayo/70-mayo-systems-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-systems-v2-tira.webp" } },
+  // The island is pinned for the whole section (systems-island.tsx): she digs while it is pinned.
+  systems: { ...sprite("systems", "88.09%", "pingpong", { timeline: "--isle", range: "contain 0% contain 100%", cycles: 8 }), strip: { avif: "/images/mundo-mayo/70-mayo-systems-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-systems-v2-tira.webp" } },
   // Front three-quarter gallop painted in place on a crop of the island 5 v2 plate
   // (works-v3: 786, 467, 134 px of 1672; two strides, f10/f11 reuse f4/f5), then the
   // arrival strip (works-llegada: 694, 513, 134 px): f1 picks up a front-stance start of
@@ -219,7 +220,8 @@ export const islandPlates = {
     anchorX: "30%",
     layers: { background: desktopPlate("30-isla2-escritorio-v2-fondo"), island: desktopPlate("30-isla2-escritorio-v2-isla") },
     mobileLayers: { background: mobilePlate("30-isla2-celular-v2-fondo"), island: mobilePlate("30-isla2-celular-v2-isla") },
-    clear: { desktop: 0.49, mobile: 0.43 },
+    // The "your page" phone stands on the meadow (problem-island.tsx): its top at 14 % (desktop) and 24 % (mobile).
+    clear: { desktop: 0.86, mobile: 0.77 },
   },
   packs: {
     desktop: desktopPlate("10-isla3-base"),
@@ -387,15 +389,18 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   // Island 3: on the meadow in front of the platforms, facing the third; this is where her hops end
   // (packsMayoHops) and where she stands without motion; noon light from above.
   packs: { x: "62.5%", y: "57%", size: "8%", xMobile: "59%", yMobile: "57%", sizeMobile: "9.5%", face: "right", shadow: { lean: "8%", opacity: 0.4 } },
-  // Island 4: nose at the painted soil mound (desktop 46 %, 66 %; mobile 48.5 %, 75.8 %); golden light from the right.
-  // The cell is the plate crop the frames were painted on (left 31.52 %, width 22.01 %); her shadow is painted in.
+  // Island 4: digging the left soil mound; golden light from the right. The frames were painted on a
+  // plate crop (left 31.52 %, width 22.01 %, feet at 67.5 %); on 2026-11-20 Juani asked for her smaller,
+  // at the scale of the mini greenhouse: the cell is scaled by 0.6 around her feet and the anchor moved
+  // so her nose stays on the mound (desktop 39.6 %, 63 %; mobile 37.5 %, 74.6 %, measured on frame 1).
+  // The contact layers are in % of the cell, so they shrink with her. Her shadow is painted in.
   systems: {
-    x: "42.52%",
-    y: "67.5%",
-    size: "22.01%",
-    xMobile: "42%",
-    yMobile: "76.8%",
-    sizeMobile: "34%",
+    x: "41.35%",
+    y: "65.7%",
+    size: "13.21%",
+    xMobile: "40.19%",
+    yMobile: "75.92%",
+    sizeMobile: "20.4%",
     shadow: false,
     // The painted shadow is right but light next to the long dark shadows the pot, the mounds and the
     // gear throw to the right: her hind paws (cell 58-72 %, 75 %) hovered. Occlusion under the front
