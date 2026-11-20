@@ -558,13 +558,18 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 /* Hero: island 1 ------------------------------------------------------- */
 
+/* Balanced first fold (Juani, 20 November 2026: "pondria el texto + botones
+ * en el centro de la pantalla y moveria la isla hacia la derecha"): the copy
+ * and its buttons sit centred in the fold in a left column of about 45 % of
+ * the screen, and on wider screens the island fills the right half
+ * (`--hero-shift`, below). */
 .dawn {
   position: relative;
   display: grid;
-  align-items: start;
+  align-items: center;
   height: 100svh;
   min-height: 44rem;
-  padding-block: 6rem 2rem;
+  padding-block: 6rem 3rem;
   overflow: clip;
   view-timeline-name: --dawn;
 }
@@ -575,6 +580,12 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   max-width: 48rem;
   margin-inline-start: max(var(--gutter), calc((100% - var(--shell-max)) / 2));
   color: var(--ink);
+}
+
+@media (min-width: 48.01rem) {
+  .dawn__content {
+    max-width: min(38rem, 44vw);
+  }
 }
 
 .dawn h1 {
@@ -590,8 +601,9 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   color: var(--moss);
 }
 
+/* Sized to the column: "Sistemas que ordenan." fills it at 4rem on a 1440 screen. */
 .dawn h1 {
-  font-size: clamp(2.6rem, 1.4rem + 4.6vw, 4.75rem);
+  font-size: clamp(2.6rem, 4.4vw, 4rem);
   line-height: 0.98;
   letter-spacing: -0.03em;
 }
@@ -611,6 +623,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  margin-block-start: 1.75rem;
 }
 
 /* Island 3: rock assembly ---------------------------------------------- */
@@ -4156,35 +4169,25 @@ html[data-motion-tier="reduced"] .mayo--stops {
   transform: translateX(calc(-1 * var(--plate-x, 50%)));
 }
 
-/* The hero plate is scaled up a little and shifted right so the island
- * clears the text column (bible analysis §2). */
-.dawn .plate {
-  --plate-scale: 1.14;
-}
-
 /* Desktop: the sky layer keeps covering the section while the island cutout
- * and Mayo move a further 12vw right, so the tree clears the text column
- * (the body ends at 34ch) at 1280 and 1440 px. */
+ * (at the plate's own scale, about 48 % of the screen wide) and Mayo move
+ * 22vw right, so the island fills the right half beside the copy column:
+ * 700 to 1380 px at 1440, clear of the paw rail. Mayo is placed in % of the
+ * plate plus the same shift, so she stays on her meadow. */
 @media (min-width: 48.01rem) {
   .dawn {
-    --hero-shift: 12vw;
+    --hero-shift: 22vw;
+    /* Lifted by 16 % of the plate so the meadow sits level with the copy's centre. */
+    --hero-lift: -16%;
   }
 
   .dawn .plate__picture--island {
-    translate: var(--hero-shift) 0;
+    translate: var(--hero-shift) var(--hero-lift);
   }
 
   .dawn .mayo--anchored {
     left: calc(var(--anchor-x) + var(--hero-shift));
-  }
-}
-
-/* Narrow desktops and tablets in landscape: the island is wider than the
- * room beside the text, so it moves further and lets its far rim pass
- * under the paw rail rather than its tree behind the buttons. */
-@media (min-width: 48.01rem) and (max-width: 75rem) {
-  .dawn {
-    --hero-shift: 20vw;
+    top: calc(var(--anchor-y) + var(--hero-lift));
   }
 }
 

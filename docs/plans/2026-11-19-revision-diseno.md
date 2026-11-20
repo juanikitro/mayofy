@@ -133,3 +133,17 @@ No se tocaron el ensamble de rocas, las plataformas ni Mayo de la isla 3.
 - El velo de la isla 3 vale 0 durante todo el tramo fijo (muestras al 10, 40, 70 y 98 %), 0,5 a 45 px de la salida y 1 a los 90 px.
 - Capturas en `docs/plans/uniones-cielo/antes|despues/` (`d-`/`m-`, `caida-isla2-` e `isla3-packs-` con el porcentaje).
 - Lint, typecheck y build limpios.
+
+## Hero equilibrado (20 de noviembre)
+
+Juani: "Quisiera que el hero este mas equilibrado: pondria el texto + botones en el centro de la pantalla y moveria la isla hacia la derecha."
+
+- **Antes:** el título y los tres botones arriba a la izquierda, debajo un vacío grande, y la isla al centro (escalada 1,14, corrida 12vw).
+- **Ahora (desde 48rem):**
+  - El texto y los botones van centrados en el alto del primer pliegue (`align-items: center`), en una columna de `min(38rem, 44vw)`.
+  - El h1 se ajusta a esa columna: `clamp(2,6rem, 4,4vw, 4rem)`, 4rem a 1440 en lugar de 4,75rem. "Sistemas que ordenan." llena la columna y los botones pasan a dos más uno.
+  - La isla vuelve a la escala propia de la placa (alrededor del 48 % del ancho), se corre 22vw a la derecha y sube un 16 % de la placa (`--hero-lift`), así el prado queda a la altura del centro del texto. A 1440 ocupa de 696 a 1381 px, libre del riel de huellas.
+  - Mayo se posiciona en % de la placa más el mismo corrimiento y la misma subida, así que sigue sentada en su prado.
+  - El cielo (capa de fondo) sigue cubriendo la sección.
+- **Celular:** sin columna limitada. El texto queda centrado en el espacio sobre la isla y la isla con Mayo entra en el primer pliegue.
+- **Verificado:** 1440 × 900, 1280 × 800, 1024 × 768, 1920 × 1080 y 390 × 844, sin scroll horizontal. Capturas en `docs/plans/heroe-equilibrio/` (`antes-*` del servidor del coordinador y `despues-*`; `d` 1440, `d1280`, `d1024`, `m` 390).
