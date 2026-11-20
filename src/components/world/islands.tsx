@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { AnimatedDetails } from "@/components/animated-details";
 import { ContactForm } from "@/components/contact-form";
 import { plateSceneStyle } from "@/components/world/island-plate";
@@ -10,7 +8,7 @@ import { MayoFigure } from "@/components/world/mayo-figure";
 import { PlateObjects } from "@/components/world/plate-objects";
 import { SceneGlow } from "@/components/world/scene-glow";
 import { staggerStyle } from "@/components/world/stagger";
-import { WorkCarousel } from "@/components/world/work-carousel";
+import { WorksIndex } from "@/components/world/works-index";
 import { DetailGroups } from "@/components/world/pack-groups";
 import { FlipCard } from "@/components/world/flip-card";
 import {
@@ -135,33 +133,7 @@ export function WorksIsland() {
         </h2>
         <p className="isle__body">{islandCopy.works.body}</p>
 
-        <ul className="works" aria-label="Proyectos">
-          {(projects as readonly ProjectEntry[]).map((project, index) => (
-            <li className={`work${project.placeholder ? " work--placeholder" : ""}`} key={project.slug} style={staggerStyle(index % 3)}>
-              <WorkCarousel images={project.images} title={project.title} index={project.index} />
-              <p className="work__category">
-                {project.placeholder ? "Placeholder de contenido" : project.category}
-              </p>
-              <h3>
-                <span aria-hidden="true">{project.index} </span>
-                {project.title}
-              </h3>
-              <p>{project.summary}</p>
-              <div className="work__links">
-                <Link className="work__link" href={`/proyectos/${project.slug}`}>
-                  <span className="link-label">Ver el caso</span>{" "}
-                  <span className="link-arrow" aria-hidden="true">→</span>
-                </Link>
-                {project.url ? (
-                  <a className="work__link" href={project.url} target="_blank" rel="noreferrer">
-                    <span className="link-label">Visitar sitio</span>{" "}
-                    <span className="link-arrow link-arrow--out" aria-hidden="true">↗</span>
-                  </a>
-                ) : null}
-              </div>
-            </li>
-          ))}
-        </ul>
+        <WorksIndex projects={projects as readonly ProjectEntry[]} />
 
         <div className="steps panel">
           <h3>

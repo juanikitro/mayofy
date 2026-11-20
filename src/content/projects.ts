@@ -9,9 +9,9 @@ export type ProjectVisualVariant =
 export type ProjectPortalLayout = "split-left" | "split-right" | "horizon";
 
 /**
- * A screenshot of a project for its card carousel. Drop the file in
- * public/images/proyectos/<slug>/ and list it here; an empty list shows the
- * placeholder slides (see WorkCarousel).
+ * A screenshot of a project for the works index preview. Drop the file in
+ * public/images/proyectos/<slug>/ and list it here; with none, the preview
+ * shows a placeholder in the site's style (see WorksIndex).
  */
 export type ProjectImage = {
   src: string;
@@ -36,8 +36,10 @@ export type ProjectEntry = {
   visual: ProjectVisualVariant;
   layout: ProjectPortalLayout;
   placeholder: boolean;
-  /** Card carousel images, in order. Empty until the screenshots exist. */
+  /** Desktop screenshots, in order; the works index previews the first. */
   images: readonly ProjectImage[];
+  /** Optional phone screenshot shown beside the desktop one in the preview. */
+  phoneImage?: ProjectImage;
   url?: string;
 };
 
@@ -72,7 +74,10 @@ export const projects = [
     visual: "threshold",
     layout: "split-left",
     placeholder: false,
-    images: [],
+    images: [
+      { src: "/images/proyectos/shineapp/escritorio.jpg", alt: "Pantalla de acceso de ShineApp", width: 1440, height: 900 },
+    ],
+    phoneImage: { src: "/images/proyectos/shineapp/celular.jpg", alt: "Pantalla de acceso de ShineApp en el celular", width: 390, height: 844 },
     url: "https://shineapp.lat/",
   },
   {
@@ -105,7 +110,10 @@ export const projects = [
     visual: "current",
     layout: "split-right",
     placeholder: false,
-    images: [],
+    images: [
+      { src: "/images/proyectos/consignataria-hacienda/escritorio.jpg", alt: "Inicio de la landing de la consignataria", width: 1440, height: 900 },
+    ],
+    phoneImage: { src: "/images/proyectos/consignataria-hacienda/celular.jpg", alt: "Inicio de la landing de la consignataria en el celular", width: 390, height: 844 },
     url: "https://gymg.com.ar/",
   },
   {
@@ -138,7 +146,10 @@ export const projects = [
     visual: "canopy",
     layout: "horizon",
     placeholder: false,
-    images: [],
+    images: [
+      { src: "/images/proyectos/portfolio-desarrollador/escritorio.jpg", alt: "Inicio del portfolio", width: 1440, height: 900 },
+    ],
+    phoneImage: { src: "/images/proyectos/portfolio-desarrollador/celular.jpg", alt: "Inicio del portfolio en el celular", width: 390, height: 844 },
     url: "https://juanikitro.com/",
   },
   {
