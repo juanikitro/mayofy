@@ -4961,8 +4961,8 @@ html[data-motion-tier="reduced"] .wa-float {
 /* Staggered groups ----------------------------------------------------- */
 
 /* Chips, work cards, the six steps and the case-study lists settle 16px as
- * they cross the bottom edge, each item 32px of scroll after the one before
- * (`--i`, set by staggerStyle), all done within 180px of entering, so
+ * they cross the bottom edge, each item 16px of scroll after the one before
+ * (`--i`, set by staggerStyle), all done within about 200px of entering, so
  * nothing is caught half-faded where someone reads. `translate` is used so
  * the cards keep their hover lift (a `transform`). */
 @supports (animation-timeline: view()) {
@@ -4970,7 +4970,7 @@ html[data-motion-tier="reduced"] .wa-float {
     html:not([data-motion-tier="reduced"]) :is(.isle__channels > span, .isle__chips > li, .works > li, .steps__steps > li, .study__decisions > li, .study__journey > li) {
       animation: item-reveal linear both;
       animation-timeline: view();
-      animation-range: entry calc(var(--i, 0) * 32px) entry calc(180px + var(--i, 0) * 32px);
+      animation-range: entry calc(var(--i, 0) * 16px) entry calc(120px + var(--i, 0) * 16px);
     }
   }
 }
