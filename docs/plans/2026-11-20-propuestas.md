@@ -335,3 +335,55 @@ La entrada se acorta a "Vas a saber en qué etapa está tu proyecto y qué falta
 - El copy nuevo de cada opción es propuesta y necesita la aprobación de Juani antes de pasar a `src/content/`.
 - Falta una captura del panel de ShineApp por dentro para cualquier opción de trabajos.
 - El avatar de Juani para el banco de la isla 6 sigue pendiente.
+
+---
+
+## Implementación de las opciones elegidas (20 de noviembre de 2026)
+
+Elección de Juani (textual): "Sobre la isla 2, me gustan la opcion A y B" / "Sobre la isla 4 quisiera jugar con la opcion B, haciendo que el scroll vaya explicando y animando los items. Ademas, quiero hacer a mayo mas pequeña para que tenga mas sentido con el mini ivernadero." / "Sobre la isla 6, elijo la opcion A".
+
+Rama `juanikitro/landing-propuestas`, al día con `juanikitro/landing-redesign` (`04b3be0`). Cada isla vive en su archivo y su CSS en un solo bloque al final de `src/app/world.css` ("Islands 2, 4 and 6: the proposals Juani chose on 2026-11-20"), para que el merge con las otras tres ramas toque lo mínimo.
+
+### Isla 2: A y B juntas (`problem-island.tsx`, `case-picker.tsx`, `src/content/case-picker.ts`)
+
+- **Cómo conviven:** a la izquierda, título, la entrada de B y el selector de A ("¿Qué te está pasando hoy?…", tres situaciones con las rocas pintadas de la isla). Al elegir una aparece el pack recomendado con precio, plazo y su descripción (de `commercial-plans.ts`), "Ver qué incluye" (lleva a `#pack-<id>`) y "Agendá tu diagnóstico" (`#agenda`). A la derecha, sobre el prado de la isla, el celular de "tu página" de B: con el scroll, las cuatro preguntas flotan sobre la isla como las rocas sueltas y van aterrizando en su renglón del celular, que se completa hasta el botón de WhatsApp. La demostración de B explica para qué sirve una página; el selector de A dice por dónde empezar.
+- **Escritorio (≥ 64rem de ancho y ≥ 40rem de alto):** la escena queda fija 2,3 pantallas mientras pasa la demostración; la isla, Mayo y el celular se corren a la derecha (`--problem-shift: 26vw`, como el árbol del hero) para que el selector no los tape.
+- **Celular y tablet:** el mismo orden que las demás islas (texto y selector arriba, isla con el celular abajo); la demostración corre mientras el celular cruza la pantalla, sin fijar nada. `clear` de la placa de la isla 2 sube a 0,86 / 0,77 para que el texto no pise el celular.
+- **Movimiento reducido o sin scroll-driven animations:** el celular aparece ya respondido y las preguntas no se muestran.
+- **Assets:** tres miniaturas de las rocas para los botones (`33-isla2-roca-0{2,4,5}-icono.webp`, ~5 KB cada una, en lugar de las originales de ~100 KB). La placa v2 y la tira de Mayo quedan como estaban.
+
+### Isla 4: opción B (`systems-island.tsx`, `src/content/workshop.ts`)
+
+- **Escena fija:** el escenario (cielo, placa y Mayo) cubre la pantalla durante toda la sección. Las cuatro partes pasan por la derecha en escritorio y por la mitad de abajo en celular: invernadero = sistema a medida, maceta = conseguí más consultas, caja de herramientas = simplificá el contacto, engranaje = automatizá el seguimiento. Al final aparece la franja del bot.
+- **Explicar y animar con el scroll:** cada parte tiene su propia línea de tiempo de vista (`--part-*`, compartida con la escena por `timeline-scope`). Mientras la parte cruza la zona de lectura, su objeto se ilumina con un halo y su marcador se pone verde. Sus ítems entran de a uno desde la derecha. Todo es reversible: se arma al bajar y se desarma al subir. En celular los marcadores son números (1 a 4, los de las partes) y cada parte se desvanece antes de llegar a la isla, que ocupa la parte de arriba de la pantalla.
+- **Movimiento reducido:** las cuatro partes y los cuatro marcadores visibles, sin halos. En celular la escena no queda fija: primero la isla y después las partes. Sin scroll-driven animations pasa lo mismo en celular; en escritorio la escena sigue fija pero quieta.
+- **Mayo más chica:** la celda de la tira se escaló a 0,6 alrededor de sus patas y el ancla se movió para que la nariz siga sobre el montículo que escarba (escritorio 41,35 % / 65,7 % / 13,21 %, antes 42,52 / 67,5 / 22,01; celular 40,19 / 75,92 / 20,4, antes 42 / 76,8 / 34). Las sombras de contacto están en % de la celda y se achican con ella. Ahora queda más baja que el invernadero; a 390 px sigue leyéndose como un perro escarbando (`implementacion/isla4-m-*.jpg`). Escarba durante todo el tramo fijo (`contain 0%–100%`, 8 pasadas).
+- **Copy:** título y entrada de la opción B ("Sistemas y automatizaciones *a medida*." / "Lo que tu operación necesita, sin convertir la tecnología en protagonista."). Los ítems salen textuales de `site.ts` y `commercial-plans.ts`; se quitan las etiquetas que repetían el pack.
+
+### Isla 6: opción A (`host-island.tsx`)
+
+- **Primera pantalla:** la presentación a la izquierda y la isla a la derecha, con el fogón encendido y Mayo echada. El recorte de la isla, Mayo y el brillo del fogón se corren 26vw; el cielo lejano queda donde estaba. En celular, la isla va debajo del texto.
+- **Debajo:** la invitación ("Empecemos por una reunión de diagnóstico *gratis*.", "Contanos qué necesitás…") con el botón "Escribir por WhatsApp", la agenda de Cal.com al lado desde 88rem, y el formulario plegado en "Prefiero completar un formulario". El fondo de esa parte es el último color del crepúsculo, del que arranca la isla 7.
+- **Altura:** 1690 px a 1440 × 900 (antes 2331) y 1652 px a 390 × 844 con el formulario cerrado (antes 2860).
+- **Copy:** la entrada y el párrafo de Juani acortados como en la maqueta A (`site.ts`, `founder`).
+
+### Copy nuevo fuera de las maquetas (a confirmar)
+
+- Isla 4, franja del bot: además de "desde USD 120", se mantiene la descripción del bot y los dos niveles con sus precios, plazos y notas, plegados en "Ver los dos niveles". La maqueta no los mostraba, pero son sustancia comercial.
+- Isla 6: "Completá estos datos y lo vemos por WhatsApp." encabeza el formulario desplegado (la frase existente sin la "O").
+- Isla 2: el negocio de ejemplo del celular ("Estudio Ámbar", precio, horarios y barrio) es ilustrativo y decorativo (`aria-hidden`), como en la maqueta B.
+
+### Verificación
+
+- Chromium (Playwright) sobre `next dev` en el puerto 3017, a 1440 × 900 y 390 × 844, con `scrollTo({behavior: "instant"})`: secuencias de cada isla en `docs/plans/propuestas/implementacion/` (`isla2-*`, `isla4-*`, `isla6-*`, `isla2-*-elegido`, `isla6-*-formulario`, `reducido-*`).
+- Teclado: Tab llega a las situaciones de la isla 2; Enter elige una (`aria-pressed="true"`), el anillo de foco se ve y el resultado se anuncia (`aria-live`). "Prefiero completar un formulario" se abre con teclado.
+- Movimiento reducido emulado: preguntas ocultas, celular respondido, partes y marcadores de la isla 4 visibles, sin escena fija en celular.
+- Sin scroll horizontal a 390 (`scrollWidth === innerWidth`) y sin errores de consola.
+- `npm run lint`, `npm run typecheck` y `npm run build` limpios. No hay test runner.
+
+### Límites y pendientes
+
+- Quedan reglas de CSS que ya no usa nadie (`.reach*` salvo lo de la agenda, `.isle__chips`, `.isle__panels`, `.addons*`, parte de `.soon`). No las borré para no generar conflictos con las otras ramas de esta ronda: conviene limpiarlas después del merge.
+- La demostración de la isla 2 en celular avanza mientras el celular cruza la pantalla; los rangos se midieron con el texto actual y conviene revisarlos si el selector crece.
+- El halo de la isla 4 es sutil a propósito (luz cálida sobre el objeto): si Juani lo quiere más marcado, se sube la opacidad de `.workshop__halo`.
+- No se probó en un teléfono real ni en Safari o Firefox (sin scroll-driven animations ven el estado quieto descrito arriba).
