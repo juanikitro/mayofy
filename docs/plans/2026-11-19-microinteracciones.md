@@ -254,3 +254,58 @@ Helpers nuevos: `staggerStyle(index)` (`src/components/world/stagger.ts`) escrib
 - No se probó en un teléfono real ni en Safari/Firefox. `inert` requiere Safari 15.5+ y Firefox 112+.
 - Los placeholders son tres por proyecto; cuando lleguen las capturas, la cantidad la define la lista `images`.
 - El tercer botón del hero contradice la regla de dos acciones del skill; si se prefiere respetarla, la alternativa es volver al enlace de texto con el glifo, en su propia línea.
+
+## Iteración 4 (20 de noviembre de 2026): franja de garantías e índice de trabajos
+
+**Pedidos de Juani:**
+- "Sobre lo que garantizamos en todos los packs, elijo la opcion B, con iconos mejores y una breve microanimacion en cada uno".
+- "Sobre los trabajos a mostrar, la opcion A y al hacer hover se actualiza la imagen. Elimina la piedra".
+
+**Base:** `juanikitro/landing-redesign` en `04b3be0`. Opciones en `docs/plans/2026-11-20-propuestas.md` (rama `juanikitro/landing-propuestas`, `ede7ee5`). Cada sección tiene su componente y su bloque delimitado al final de `world.css` ("Guarantees strip" y "Works index").
+
+### Franja de garantías (opción B)
+
+- `src/components/world/guarantees-strip.tsx`, montada en `pack-details.tsx` justo debajo de las tres tarjetas y antes de la línea de pago; reemplaza el panel "Lo que garantizamos en todos los packs".
+- Título "En todos los packs" y los siete sellos del mockup aprobado, con la garantía de velocidad primero y resaltada. Los textos están en `guarantees.seals` (`commercial-plans.ts`); las frases completas siguen en `guarantees.items`.
+- **Iconos propios** (SVG en línea, grilla de 24 px, trazo redondeado de 1,7 px, el mismo dibujo para los siete), cada uno con una sola parte que se mueve:
+
+  | Sello | Icono | Microanimación |
+  | --- | --- | --- |
+  | Carga rápida en el celular o la corregimos gratis | celular con un rayo | el rayo se carga (crece desde 0,3) |
+  | Código y dominio tuyos | llave | la llave gira 50° como en la cerradura |
+  | Respuesta en menos de 24 h hábiles | reloj | el minutero da una vuelta |
+  | SEO técnico desde el primer día | lupa sobre una línea que sube | la línea se dibuja |
+  | Accesible en cualquier pantalla | pantalla y celular | el celular entra deslizándose |
+  | Una semana de soporte | calendario con un corazón | el corazón late |
+  | Rondas de revisión acordadas | dos flechas en círculo | las flechas giran media vuelta |
+
+- **Cuándo se mueven:** una sola vez cuando la franja entra en pantalla (IntersectionObserver, 90 ms entre un icono y el siguiente, 700 ms cada uno) y, después, cada sello repite su animación bajo el puntero. En reposo cada icono está en su estado final: sin JavaScript o con movimiento reducido la franja se ve completa y quieta.
+- **Celular:** los sellos se apilan, uno por renglón, con la velocidad arriba.
+
+### Índice de trabajos (opción A, sin la piedra)
+
+- `src/components/world/works-index.tsx` reemplaza las tarjetas con carrusel (se borró `work-carousel.tsx` y su CSS). Lista numerada (número en Fraunces itálica, título grande, categoría) y, a la derecha, una ventana de navegador con la captura y un celular superpuesto en la esquina, flotando con un vaivén lento de 6 s. **Sin la piedra.**
+- **Interacción:** pasar el mouse o enfocar con Tab un proyecto actualiza la vista previa: la captura de escritorio, la del celular y la dirección de la barra se funden (260 ms) y la nueva imagen se asienta desde 1,02. La fila activa toma el musgo, se corre 12 px y muestra su flecha. En pantallas táctiles anchas (tablet) el primer toque muestra la vista previa y el segundo abre el caso; en celular no hay vista previa flotante: cada fila lleva su captura arriba del título.
+- **Enlaces:** el título es el enlace al caso y cubre toda la fila; "Visitar sitio ↗" queda aparte, encima, en cada fila con sitio publicado.
+- **Datos:** `images[]` y el nuevo `phoneImage` de cada proyecto (`projects.ts`). Los proyectos marcador (04 a 06) no se muestran hasta tener contenido, como en el mockup. Sin captura, la vista previa muestra un placeholder del estilo del sitio.
+- **Capturas:** usé las capturas reales de los tres sitios publicados que traía el mockup aprobado (`public/images/proyectos/<slug>/escritorio.jpg` y `celular.jpg`, 1440 × 900 y 390 × 844). La de ShineApp es la pantalla de acceso; para lucirlo falta una captura del panel por dentro.
+- La nota "Los casos completos se suman a medida que avanzan." del mockup no se repitió: el texto de la isla ya la dice.
+
+### Grabaciones
+
+| Interacción | Cuadros |
+| --- | --- |
+| Franja de garantías al entrar | `22-garantias-80ms.jpg`, `22-garantias-300ms.jpg`, `22-garantias-600ms.jpg`, `22-garantias-1500ms.jpg`; hover `22-garantias-hover-llave.jpg`; celular `22-garantias-celular.jpg` |
+| Índice de trabajos | `23-trabajos-01.jpg`, `23-trabajos-02-130ms.jpg`, `23-trabajos-02.jpg`, `23-trabajos-03.jpg`; celular `23-trabajos-celular.jpg` |
+
+### Verificación
+
+- `npm run lint`, `npm run typecheck` y `npm run build` sin errores; sin errores de consola.
+- Playwright a 1440 × 900 y 390 × 844: la franja pasa de `idle` a `revealing` al entrar y a `done` a los 1,6 s; el índice marca la fila con hover y con foco de teclado (`oox` al enfocar la tercera); "Visitar sitio" recibe su propio clic y el resto de la fila abre el caso; el celular de la vista previa termina en el borde del contenido (1360 px), sin tapar el riel de huellas; sin scroll horizontal a 390. Con movimiento reducido: sin animación en los iconos ni vaivén en la vista previa, y la fila activa no se desplaza.
+- Finish gate (build nuevo): 77 → **`GATE: FAIL 75 (round 2 of 3)`**; la tercera corrida no cuenta como ronda porque no hubo cambios. De esta iteración se corrigió la alineación superior del índice (`split-pair`). Waivers: el celular que se superpone al navegador a propósito (`spill`), los sellos que no llegan a ambos bordes (`row-lines`) y `no-visual` en la franja (tiene sus iconos), más los dos falsos positivos del beige detrás de la isla nocturna. Quedan abiertos de esta zona: `split-pair` (el checker cree que la columna izquierda del índice empieza con una caja, por la lista con borde superior) y `section-gaps` entre la franja y la isla 4 (el espacio lo dan el pie de `.packs` y la isla 4, que no son de esta iteración).
+
+### Límites
+
+- No se probó en un teléfono real, en tablet táctil ni en Safari/Firefox.
+- La vista previa usa la primera imagen de `images`; si un proyecto suma más capturas, el índice no las recorre (podrían usarse en la página del caso).
+- Las clases viejas de las tarjetas de trabajos (`.works`, `.work*`) y del panel de garantías (`.promises`) quedaron sin uso en `world.css`; se pueden borrar cuando se integren las cuatro ramas.

@@ -5273,7 +5273,7 @@ html[data-motion-tier="reduced"] .wa-float {
  * the cards keep their hover lift (a `transform`). */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    html:not([data-motion-tier="reduced"]) :is(.isle__channels > span, .isle__chips > li, .works > li, .steps__steps > li, .study__decisions > li, .study__journey > li) {
+    html:not([data-motion-tier="reduced"]) :is(.isle__channels > span, .isle__chips > li, .works-index__row, .steps__steps > li, .study__decisions > li, .study__journey > li) {
       animation: item-reveal linear both;
       animation-timeline: view();
       animation-range: entry calc(var(--i, 0) * 16px) entry calc(120px + var(--i, 0) * 16px);
@@ -5314,15 +5314,6 @@ html[data-motion-tier="reduced"] .wa-float {
   from {
     opacity: 0;
     translate: 0 4px;
-  }
-}
-
-/* Work cards: hovering anywhere on a card already leans its "Ver el caso"
- * arrow toward the case, so the card says where it leads. */
-@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
-  html:not([data-motion-tier="reduced"]) .work:hover .work__links > .work__link:first-child > .link-arrow {
-    transform: translateX(var(--m-nudge));
-    transition-duration: var(--m-base);
   }
 }
 
@@ -5522,7 +5513,7 @@ html[data-motion-tier="reduced"] .wa-float {
 
 /* ======================================================================
  * Micro-interactions, iteration 3 (2026-11-20): hero WhatsApp action,
- * flip cards, work carousels. "Iteración 3" in
+ * flip cards. "Iteración 3" in
  * docs/plans/2026-11-19-microinteracciones.md.
  * ==================================================================== */
 
@@ -5853,144 +5844,526 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   gap: 1.25rem;
 }
 
-/* Work carousels ------------------------------------------------------- */
+/* ======================================================================
+ * Guarantees strip (island 3, under the pack cards) — option B of
+ * docs/plans/2026-11-20-propuestas.md. Component: guarantees-strip.tsx.
+ * ==================================================================== */
 
-/* A native scroller with snap points: swipe, trackpad and arrow keys move it,
- * arrows and dots step it, nothing moves by itself. The current dot
- * stretches into a short bar (transform only). */
-.carousel {
+.guarantees {
   display: grid;
-  gap: 0.25rem;
-  margin-block-end: 0.5rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+  margin-block-start: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius);
+  background: var(--cream);
+  box-shadow: var(--shadow-soft);
 }
 
-.carousel__track {
+.guarantees h3 {
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
+.guarantees__seals {
   display: flex;
-  aspect-ratio: 16 / 10;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  border-radius: calc(var(--radius) - 0.45rem);
+  flex-wrap: wrap;
+  gap: 0.5rem 0.6rem;
+  padding: 0;
+  list-style: none;
 }
 
-.carousel__track::-webkit-scrollbar {
+.seal {
+  --seal-badge: color-mix(in oklch, var(--leaf-light) 40%, var(--cream));
+  --seal-ink: var(--moss);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem 0.35rem 0.35rem;
+  border-radius: var(--radius-pill);
+  background: var(--beige);
+  font-size: 0.95rem;
+}
+
+.seal--lead {
+  --seal-badge: var(--moss);
+  --seal-ink: var(--cream);
+
+  background: color-mix(in oklch, var(--leaf-light) 35%, var(--cream));
+  font-weight: 600;
+}
+
+.seal__badge {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--seal-badge);
+  color: var(--seal-ink);
+}
+
+/* The icon set: 24px grid, 1.7px round strokes, one moving part each. */
+.gi {
+  width: 1.2rem;
+  height: 1.2rem;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.gi .gi__fill {
+  fill: currentColor;
+  stroke: none;
+}
+
+.gi .gi__cover {
+  fill: var(--seal-badge);
+}
+
+.gi__move {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.seal--ownership .gi__move {
+  transform-box: view-box;
+  transform-origin: 7.6px 12px;
+}
+
+.seal--reply .gi__move {
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+}
+
+.seal--speed {
+  --gi-anim: gi-charge;
+}
+
+.seal--ownership {
+  --gi-anim: gi-turn;
+}
+
+.seal--reply {
+  --gi-anim: gi-sweep;
+}
+
+.seal--seo {
+  --gi-anim: gi-draw;
+}
+
+.seal--screens {
+  --gi-anim: gi-slide;
+}
+
+.seal--support {
+  --gi-anim: gi-beat;
+}
+
+.seal--revisions {
+  --gi-anim: gi-spin;
+}
+
+/* When the strip comes into view each icon plays once, 90ms after the one
+ * before; afterwards a seal replays its icon under the pointer. At rest every
+ * icon is in its final state (no script, reduced motion). */
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .guarantees__seals[data-phase="revealing"] .gi__move {
+    animation: var(--gi-anim) 700ms var(--ease-enter) both;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    html:not([data-motion-tier="reduced"]) .guarantees__seals:not([data-phase="revealing"]) .seal:hover .gi__move {
+      animation: var(--gi-anim) 600ms var(--ease-enter);
+    }
+  }
+}
+
+@keyframes gi-charge {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes gi-turn {
+  from {
+    transform: rotate(-50deg);
+  }
+}
+
+@keyframes gi-sweep {
+  from {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes gi-draw {
+  from {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes gi-slide {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+}
+
+@keyframes gi-beat {
+  30% {
+    transform: scale(1.3);
+  }
+
+  60% {
+    transform: scale(1);
+  }
+}
+
+@keyframes gi-spin {
+  from {
+    transform: rotate(-180deg);
+  }
+}
+
+@media (max-width: 48rem) {
+  .guarantees {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .guarantees__seals {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ======================================================================
+ * Works index (island 5) — option A of docs/plans/2026-11-20-propuestas.md,
+ * without the rock. Component: works-index.tsx.
+ * ==================================================================== */
+
+.works-index {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 4rem;
+  align-items: start;
+  margin-block-start: 1.5rem;
+}
+
+.works-index__list {
+  padding: 0;
+  list-style: none;
+  border-block-start: 1px solid oklch(24% 0.03 150 / 15%);
+}
+
+.works-index__row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: baseline;
+  padding-block: 1.25rem;
+  border-block-end: 1px solid oklch(24% 0.03 150 / 15%);
+}
+
+.works-index__number {
+  font-family: var(--font-world-serif);
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--moss);
+}
+
+.works-index__text h3 {
+  font-size: clamp(1.4rem, 1rem + 1vw, 1.9rem);
+}
+
+.works-index__case {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--m-fast) var(--ease-ui);
+}
+
+/* The title's link covers the whole row; "Visitar sitio" sits above it. */
+.works-index__case::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.works-index__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 1.25rem;
+  color: var(--ink-soft);
+}
+
+.works-index__site {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-weight: 600;
+  color: var(--moss);
+  text-decoration: none;
+}
+
+.works-index__go {
+  font-size: 1.4rem;
+  color: var(--moss);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity var(--m-fast) var(--ease-ui),
+    transform var(--m-panel) var(--ease-ui);
+}
+
+.works-index__number,
+.works-index__text {
+  transition: transform var(--m-panel) var(--ease-ui);
+}
+
+/* The project in the preview: its row leans 12px in, its title takes the
+ * moss and its arrow arrives. */
+.works-index__row[data-active] .works-index__case {
+  color: var(--moss);
+}
+
+.works-index__row[data-active] .works-index__go {
+  opacity: 1;
+  transform: none;
+  transition-duration: var(--m-base), var(--m-panel);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .works-index__row[data-active] :is(.works-index__number, .works-index__text) {
+    transform: translateX(12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .works-index__go {
+    transform: none;
+  }
+}
+
+html[data-motion-tier="reduced"] .works-index__go {
+  transform: none;
+}
+
+.works-index__thumb {
   display: none;
 }
 
-.carousel__slide {
+/* The preview: a browser frame and a phone floating on the sunset, with a
+ * slow 6s sway; the screenshots crossfade and settle from 1.02. */
+.works-index__preview {
   position: relative;
-  flex: 0 0 100%;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  padding-block-end: 6%;
 }
 
-.carousel__slide img {
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .works-index__preview {
+    animation: preview-sway 6s ease-in-out infinite;
+  }
+}
+
+@keyframes preview-sway {
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+/* The phone overlaps the browser's corner and stays inside the content
+ * edge (the paw rail lives just outside it). */
+.works-index__browser {
+  width: 92%;
+  overflow: hidden;
+  border-radius: 0.9rem;
+  background: var(--cream);
+  box-shadow:
+    0 1px 2px oklch(30% 0.05 60 / 10%),
+    0 2.5rem 4rem -2rem oklch(30% 0.06 40 / 45%);
+}
+
+.works-index__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 2rem;
+  padding-inline: 0.8rem;
+  background: oklch(93% 0.02 70);
+}
+
+.works-index__bar i {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: oklch(80% 0.03 60);
+}
+
+.works-index__url {
+  display: grid;
+  margin-inline-start: 0.6rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: var(--cream);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+
+.works-index__url > span {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity var(--m-panel) var(--ease-ui);
+}
+
+.works-index__url > span[data-active] {
+  opacity: 1;
+}
+
+.works-index__screen {
+  display: grid;
+  aspect-ratio: 16 / 10;
+}
+
+.works-index__shot {
+  display: block;
+  grid-area: 1 / 1;
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(1.02);
+  transition:
+    opacity 260ms var(--ease-ui),
+    transform 600ms var(--ease-enter);
+}
+
+.works-index__shot[data-active] {
+  opacity: 1;
+  transform: none;
+}
+
+.works-index__shot img,
+.works-index__thumb img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top;
 }
 
-.carousel__placeholder {
+.works-index__phone {
+  position: absolute;
+  inset: auto 0 0 auto;
+  display: grid;
+  width: 24%;
+  padding: 0.4rem;
+  border-radius: 1.6rem;
+  background: var(--ink);
+  box-shadow: 0 1.5rem 2.5rem -1rem oklch(30% 0.06 40 / 45%);
+}
+
+.works-index__phone .works-index__shot {
+  aspect-ratio: 9 / 18;
+  border-radius: 1.25rem;
+}
+
+.works-index__pending {
   display: grid;
   place-content: center;
   justify-items: center;
   gap: 0.35rem;
+  width: 100%;
   height: 100%;
-  border: 1px dashed color-mix(in oklch, var(--bark) 28%, transparent);
-  border-radius: inherit;
   background: linear-gradient(160deg, color-mix(in oklch, var(--cream) 70%, var(--sky-dawn-mid)), var(--beige-deep));
 }
 
-.carousel__slide:nth-child(3n + 2) .carousel__placeholder {
-  background: linear-gradient(160deg, color-mix(in oklch, var(--cream) 72%, var(--sky-noon-low)), color-mix(in oklch, var(--beige) 80%, var(--leaf-light)));
-}
-
-.carousel__slide:nth-child(3n + 3) .carousel__placeholder {
-  background: linear-gradient(160deg, color-mix(in oklch, var(--cream) 70%, var(--leaf-light)), color-mix(in oklch, var(--beige-deep) 85%, var(--sky-dawn-top)));
-}
-
-.carousel__placeholder-index {
+.works-index__pending-index {
   font-family: var(--font-world-serif);
-  font-size: clamp(2.6rem, 2rem + 2vw, 3.4rem);
+  font-size: clamp(2rem, 1.5rem + 2vw, 3.2rem);
   font-style: italic;
   line-height: 1;
   color: color-mix(in oklch, var(--moss) 45%, transparent);
 }
 
-.carousel__placeholder-label {
-  font-size: 0.72rem;
+.works-index__pending-label {
+  font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-soft);
 }
 
-.carousel__controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.works-index__phone .works-index__pending-label {
+  display: none;
 }
 
-.carousel__dots {
-  display: flex;
+@media (prefers-reduced-motion: reduce) {
+  .works-index__shot {
+    transform: none;
+  }
 }
 
-.carousel__arrow,
-.carousel__dot {
-  display: grid;
-  place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: none;
-  color: var(--moss);
-  font-weight: 700;
-  cursor: pointer;
+html[data-motion-tier="reduced"] .works-index__shot {
+  transform: none;
 }
 
-.carousel__arrow {
-  transition:
-    background-color var(--m-fast) var(--ease-ui),
-    opacity var(--m-fast) var(--ease-ui),
-    transform var(--m-press) var(--ease-ui);
-}
+/* Phones: no hover to drive a preview, so each row carries its screenshot
+ * above its title and the floating preview is left out. */
+@media (max-width: 48rem) {
+  .works-index {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
 
-.carousel__arrow:hover:not(:disabled) {
-  background: color-mix(in oklch, var(--moss) 10%, transparent);
-  transition-duration: var(--m-base);
-}
+  .works-index__preview {
+    display: none;
+  }
 
-.carousel__arrow:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
+  .works-index__row {
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
 
-.carousel__dot::before {
-  content: "";
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: var(--radius-pill);
-  background: color-mix(in oklch, var(--moss) 30%, transparent);
-  transition:
-    background-color var(--m-fast) var(--ease-ui),
-    transform var(--m-panel) var(--ease-ui);
-}
+  .works-index__go {
+    display: none;
+  }
 
-.carousel__dot:hover::before {
-  background: color-mix(in oklch, var(--moss) 55%, transparent);
-}
+  .works-index__thumb {
+    display: block;
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 10;
+    margin-block-end: 0.5rem;
+    overflow: hidden;
+    border-radius: 0.8rem;
+    box-shadow: var(--shadow-soft);
+  }
 
-.carousel__dot[aria-current="true"]::before {
-  background: var(--moss);
-  transform: scaleX(2.2);
-}
+  .works-index__row[data-active] :is(.works-index__number, .works-index__text) {
+    transform: none;
+  }
 
-@media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion-tier="reduced"]) .carousel__arrow:active:not(:disabled) {
-    transform: scale(0.9);
+  .works-index__row[data-active] .works-index__case {
+    color: inherit;
   }
 }
