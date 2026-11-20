@@ -277,6 +277,31 @@ export type MayoAnchor = {
    * (negative = to her left); `opacity` keeps it subtle.
    */
   shadow?: false | { lean: string; opacity: number };
+  /**
+   * Ground contact painted by CSS under a sprite whose own shadow is painted
+   * in but too faint to hold her on the ground. Soft ellipses in % of Mayo's
+   * square cell, so they scale with her on desktop and mobile and stay still
+   * while the strip loops.
+   */
+  contact?: MayoContact;
+};
+
+/** Contact layer: one tint (the plate's own shadow colour, as `r g b`) and its ellipses. */
+export type MayoContact = { tint: string; layers: readonly MayoContactLayer[] };
+
+/**
+ * One soft ellipse of the contact layer. `ao` is the ambient occlusion tight
+ * under the paws; `cast` is the shadow thrown away from a light. `x`, `y` are
+ * its centre and `w`, `h` its radii, in % of the cell; `opacity` is the alpha
+ * at its centre, fading to none at its rim.
+ */
+export type MayoContactLayer = {
+  kind: "ao" | "cast";
+  x: string;
+  y: string;
+  w: string;
+  h: string;
+  opacity: number;
 };
 
 export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
@@ -285,13 +310,52 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   hero: { x: "50.99%", y: "72.5%", size: "6.52%", xMobile: "56%", yMobile: "80.5%", sizeMobile: "14.3%", shadow: false },
   // Island 2: in the free meadow patch between the rocks (rim 53.5 %, lip 70 % at x 45); morning light from the left.
   // Cell = plate crop (left 681 px, top 468 px, side 142 px of 1672); shadow painted in.
-  problem: { x: "44.98%", y: "63%", size: "8.49%", xMobile: "43%", yMobile: "69.5%", sizeMobile: "17.8%", shadow: false },
+  problem: {
+    x: "44.98%",
+    y: "63%",
+    size: "8.49%",
+    xMobile: "43%",
+    yMobile: "69.5%",
+    sizeMobile: "17.8%",
+    shadow: false,
+    // Painted shadow measured at ~13 % alpha and blotchy: she floated over the grass while the rocks
+    // sit in dark green pools to their right. Occlusion under the front paws (cell 20-52 %, 88 %) and
+    // the hind paws (70-78 %, 72 %), plus a cast to the right, away from the morning sun.
+    contact: {
+      tint: "26 46 10",
+      layers: [
+        { kind: "cast", x: "56%", y: "82%", w: "34%", h: "9%", opacity: 0.38 },
+        { kind: "ao", x: "26%", y: "88%", w: "9%", h: "2.6%", opacity: 0.65 },
+        { kind: "ao", x: "46%", y: "89.5%", w: "9%", h: "2.6%", opacity: 0.65 },
+        { kind: "ao", x: "74%", y: "73%", w: "7%", h: "2%", opacity: 0.6 },
+      ],
+    },
+  },
   // Island 3: on the meadow in front of the platforms, facing the third; this is where her hops end
   // (packsMayoHops) and where she stands without motion; noon light from above.
   packs: { x: "63%", y: "57%", size: "8%", xMobile: "59.5%", yMobile: "57%", sizeMobile: "9.5%", face: "right", shadow: { lean: "2%", opacity: 0.26 } },
   // Island 4: nose at the painted soil mound (desktop 46 %, 66 %; mobile 48.5 %, 75.8 %); golden light from the right.
   // The cell is the plate crop the frames were painted on (left 31.52 %, width 22.01 %); her shadow is painted in.
-  systems: { x: "42.52%", y: "67.5%", size: "22.01%", xMobile: "42%", yMobile: "76.8%", sizeMobile: "34%", shadow: false },
+  systems: {
+    x: "42.52%",
+    y: "67.5%",
+    size: "22.01%",
+    xMobile: "42%",
+    yMobile: "76.8%",
+    sizeMobile: "34%",
+    shadow: false,
+    // The painted shadow is right but light next to the long dark shadows the pot, the mounds and the
+    // gear throw to the right: her hind paws (cell 58-72 %, 75 %) hovered. Occlusion under the front
+    // paws in the soil (30-50 %, 87 %) and the hind paws, plus a cast to the right like the objects' shadows.
+    contact: {
+      tint: "58 24 10",
+      layers: [
+        { kind: "cast", x: "66%", y: "79%", w: "22%", h: "5.5%", opacity: 0.3 },
+        { kind: "ao", x: "40%", y: "87.5%", w: "10%", h: "2.2%", opacity: 0.45 },
+        { kind: "ao", x: "65%", y: "75.5%", w: "8%", h: "1.8%", opacity: 0.5 },
+      ],
+    },
+  },
   // Island 5: runs right-to-left across the middle band of the meadow, over the path; sunset light from the left.
   // Cell = plate crop (left 752 px, top 513 px, side 134 px of 1672); shadow painted in.
   works: {
@@ -310,7 +374,26 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   host: { x: "44.98%", y: "61.1%", size: "8.49%", xMobile: "36%", yMobile: "74.5%", sizeMobile: "17%", shadow: false },
   // Island 7: trots after a firefly on the meadow behind the front lip (rim 41 %, lip 49.5 %), right of the lantern (36.6 %, 48 %), which lights her from the left.
   // Cell = plate crop (left 711 px, top 354 px, side 100 px of 1672); light and shadow painted in.
-  questions: { x: "45.51%", y: "47%", size: "5.98%", xMobile: "45%", yMobile: "73.5%", sizeMobile: "15.4%", shadow: false },
+  questions: {
+    x: "45.51%",
+    y: "47%",
+    size: "5.98%",
+    xMobile: "45%",
+    yMobile: "73.5%",
+    sizeMobile: "15.4%",
+    shadow: false,
+    // Seated on the meadow, her painted shadow too faint for the night: the rock beside her rests on a
+    // dark base. Occlusion along her seat (cell 22-66 %, 90 %), a cast to the right away from the
+    // lantern on her left, and a fainter one down-left from the mint firefly light above-right.
+    contact: {
+      tint: "2 20 22",
+      layers: [
+        { kind: "cast", x: "64%", y: "89%", w: "26%", h: "5%", opacity: 0.35 },
+        { kind: "cast", x: "36%", y: "92%", w: "18%", h: "3.5%", opacity: 0.2 },
+        { kind: "ao", x: "45%", y: "90.5%", w: "24%", h: "3%", opacity: 0.6 },
+      ],
+    },
+  },
 };
 
 /* --------------------------------------------------------------- objects */

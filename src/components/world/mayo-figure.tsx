@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 
-import { getMayoSlot, mayoAnchors, mayoPoseSources, mayoSprites, type MayoAnchor, type MayoSlotId, type MayoSprite } from "@/content/stage";
+import { getMayoSlot, mayoAnchors, mayoPoseSources, mayoSprites, type MayoAnchor, type MayoContactLayer, type MayoSlotId, type MayoSprite } from "@/content/stage";
 
 /**
  * Scroll travel as `translate` offsets in Mayo's own widths (a percentage of
@@ -27,6 +27,21 @@ function travelOffsets(anchor: MayoAnchor) {
 function shadowStyle(anchor: MayoAnchor) {
   if (!anchor.shadow) return {};
   return { "--shadow-lean": anchor.shadow.lean, "--shadow-opacity": String(anchor.shadow.opacity) };
+}
+
+/**
+ * Ground contact under a painted-in sprite: every ellipse becomes one
+ * radial-gradient layer of a single still box behind the strip, so the
+ * shadow never steps with the frames. Normal blending in the plate's own
+ * shadow tint stands in for multiply: `.mayo--anchored` is transformed, an
+ * isolated group in which multiply would only blend with transparency.
+ */
+function contactStyle(anchor: MayoAnchor) {
+  if (!anchor.contact) return {};
+  const { tint, layers } = anchor.contact;
+  const ellipse = ({ x, y, w, h, opacity }: MayoContactLayer) =>
+    `radial-gradient(${w} ${h} at ${x} ${y}, rgb(${tint} / ${opacity}), rgb(${tint} / ${(opacity * 0.5).toFixed(3)}) 50%, rgb(${tint} / 0))`;
+  return { "--mayo-contact": layers.map(ellipse).join(", ") };
 }
 
 /**
@@ -86,6 +101,7 @@ export function MayoFigure({
           "--anchor-size-m": anchor.sizeMobile ?? anchor.size,
           ...travelOffsets(anchor),
           ...shadowStyle(anchor),
+          ...contactStyle(anchor),
           ...scrubStyle(sprite),
         } as Record<string, string>)
       : ({ "--mayo-size": size, "--feet-y": sprite?.feetY ?? "100%", ...scrubStyle(sprite) } as Record<string, string>)
@@ -108,6 +124,7 @@ export function MayoFigure({
       data-mayo-moment={moment}
       style={style}
     >
+      {anchor?.contact ? <span className="mayo__contact" aria-hidden="true" /> : null}
       {sprite ? (
         <div
           className="mayo__sprite"

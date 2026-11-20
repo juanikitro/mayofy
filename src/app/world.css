@@ -3874,6 +3874,19 @@ html[data-motion-tier="full"] .plate-object--glow {
   z-index: -1;
 }
 
+/* Ground contact under a painted-in strip (`mayoAnchors[].contact`): soft
+ * ellipses in the plate's shadow tint, drawn by MayoFigure as gradient
+ * layers of one box over the whole cell, painted before the strip so they
+ * sit under her paws. It never animates, so it holds still while she loops
+ * and needs nothing for reduced motion. Positions are in screen space: a
+ * slot with `face: "right"` would need its ellipses mirrored by hand. */
+.mayo__contact {
+  position: absolute;
+  inset: 0;
+  background: var(--mayo-contact, none);
+  pointer-events: none;
+}
+
 /* The strips are painted facing left; mirror Mayo towards what she interacts with. */
 .mayo--face-right .mayo__sprite,
 .mayo--face-right .mayo__picture {

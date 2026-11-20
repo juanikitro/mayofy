@@ -181,3 +181,23 @@ Para la isla 4, Juani dijo que Mayo cavando "no me parece que este bien integrad
 ### Mayo en bucle propio (20 de noviembre de 2026)
 
 Juani: "Quiero que en las islas 1, 2, 4, 6 y 7 la animacion no dependa del scroll (como en la caida libre)". En el hero y las islas 2, 4, 6 y 7 la tira corre sola, ida y vuelta, con una duración por isla (hero 2,6 s, isla 2 1,4 s, isla 4 1,3 s, isla 6 3,2 s, isla 7 2,2 s; variable `--loop-duration` en `world.css`). Siguen atadas al scroll la isla 5 (la carrera avanza con el recorrido) y la isla 3 (los saltos entre plataformas). Con movimiento reducido no se anima.
+
+### Sombras de Mayo en las islas 2, 4 y 7
+
+Juani: "En la isla 2, 4 y 7, podriamos mejorar la sombra de mayo para que se integre mejor".
+
+**Diagnóstico.** Las tres tiras traen la sombra pintada (por eso `shadow: false`), sin cortes en los bordes de la celda y presente en los doce cuadros, con la dirección correcta (hacia la derecha, como la de los objetos de la placa). El problema es la fuerza: medida en el alfa de cada celda, la parte semitransparente promedia ~13 % en la isla 2 (además manchada, con huecos de pasto por la extracción por diferencia), ~20 % en la isla 4 y ~16 % en la isla 7, mientras que las rocas, la maceta, los montículos y el engranaje de la placa apoyan sobre sombras oscuras y bien definidas. Faltaba sobre todo la oclusión bajo las patas: en la isla 2 parecía flotar sobre el pasto, en la isla 4 las patas traseras quedaban en el aire y en la isla 7 sentada de noche no tenía base.
+
+**Qué se agregó.** Una capa de contacto CSS por debajo de la tira (`.mayo__contact` en `world.css`, generada por `MayoFigure`): elipses suaves dibujadas como capas de `radial-gradient` de una sola caja que cubre la celda, en porcentaje de la celda (escala sola en escritorio y celular) y en el tono de sombra de cada placa. Se configura con `mayoAnchors[slot].contact = { tint, layers }`, donde cada capa es `{ kind: "ao" | "cast", x, y, w, h, opacity }` (centro, radios y alfa en el centro, que se desvanece hasta el borde). Es estática: no sigue los cuadros, así que se queda quieta mientras Mayo corre en bucle y no necesita nada para movimiento reducido. Se usa mezcla normal con un tono oscuro de la placa en vez de `multiply`, porque `.mayo--anchored` tiene `transform` y es un grupo aislado donde `multiply` sólo mezclaría con transparencia. La sombra pintada de la tira se mantiene encima. Los demás slots (hero, caída, packs, trabajos, anfitriona) no cambian; packs conserva su `.mayo--shadow`.
+
+**Parámetros** (celda en %):
+
+| Isla | Tono | Capas |
+| --- | --- | --- |
+| 2 (sol de la mañana) | `26 46 10` | proyección 56/82, radios 34×9, 0,38; oclusión patas delanteras 26/88 y 46/89,5 (9×2,6, 0,65); patas traseras 74/73 (7×2, 0,6) |
+| 4 (hora dorada) | `58 24 10` | proyección 66/79, 22×5,5, 0,3; oclusión patas delanteras en la tierra 40/87,5 (10×2,2, 0,45); patas traseras 65/75,5 (8×1,8, 0,5) |
+| 7 (noche) | `2 20 22` | proyección del farol hacia la derecha 64/89, 26×5, 0,35; proyección de la luz menta hacia abajo a la izquierda 36/92, 18×3,5, 0,2; oclusión del asiento 45/90,5, 24×3, 0,6 |
+
+**Cómo se verificó.** Recortes antes y después de las tres islas a 1440×900 y 390×844 en los cuadros 0, 6 y 9 (el 9 de la isla 2 es el salto: la sombra queda en el suelo), sin errores de consola, estilos calculados de los demás slots idénticos antes y después, y la capa sin animación con movimiento reducido; `typecheck` y `lint` limpios. No hay corredor de tests en el proyecto.
+
+**Límite.** Las posiciones están en espacio de pantalla: un slot con `face: "right"` tendría que espejar sus elipses a mano. La capa no reacciona a los cuadros, así que en el salto de la isla 2 la oclusión bajo las patas delanteras sigue en el pasto (se lee como la sombra del salto).
