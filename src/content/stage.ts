@@ -352,7 +352,7 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   },
   // Island 3: on the meadow in front of the platforms, facing the third; this is where her hops end
   // (packsMayoHops) and where she stands without motion; noon light from above.
-  packs: { x: "63%", y: "57%", size: "8%", xMobile: "59.5%", yMobile: "57%", sizeMobile: "9.5%", face: "right", shadow: { lean: "2%", opacity: 0.26 } },
+  packs: { x: "62.5%", y: "57%", size: "8%", xMobile: "59%", yMobile: "57%", sizeMobile: "9.5%", face: "right", shadow: { lean: "8%", opacity: 0.4 } },
   // Island 4: nose at the painted soil mound (desktop 46 %, 66 %; mobile 48.5 %, 75.8 %); golden light from the right.
   // The cell is the plate crop the frames were painted on (left 31.52 %, width 22.01 %); her shadow is painted in.
   systems: {
@@ -650,11 +650,14 @@ export const rockTiming = { start: 34, stagger: 8, pieceStagger: 1.6, flight: 7,
 export const landingOrder: readonly PlatformPiece["kind"][] = ["base", "left", "right", "top"];
 
 /**
- * Mayo's stops on island 3, in % of the plate width: she waits by the first
- * platform while it gathers, and with each finished platform hops on to the
- * next gap (the last hop is a small one, in place, as the third lands).
+ * Mayo's stops on island 3, in % of the plate width: she waits in the
+ * middle of the gap between the first two platforms (desktop 32.1-46.4 %,
+ * phones 38.4-46.5 %) while the first gathers, gives a small hop when it is
+ * done, leaps across in front of the second to the gap before the third
+ * (53.6-69.4 %, phones 53.5-63.1 %) when the second is done, and a small
+ * hop when the third lands.
  */
-export const packsMayoHops = { desktop: [34, 41, 61, 63], mobile: [39, 43, 57, 59.5] } as const;
+export const packsMayoHops = { desktop: [39, 40.5, 61.5, 62.5], mobile: [42, 43, 58, 59] } as const;
 
 /**
  * Loose rocks that never join a platform (Juani, 19 November 2026: "que queden
@@ -703,4 +706,33 @@ export const looseRocks: readonly LooseRock[] = [
 export const packsAssembledPlate: { desktop?: PlateImage; mobile?: PlateImage } = {
   desktop: desktopPlate("10-isla3-armada-escritorio-isla"),
   mobile: desktopPlate("10-isla3-armada-celular-isla"),
+};
+
+/**
+ * Each platform's shadow on the grass, measured on the painted plates
+ * (`10-isla3-armada-*-isla` against `10-isla3-base-isla`: the darkening of
+ * the grass around each stack's feet, weighted by how much darker it is), so
+ * the live shadow already has the painted one's place, size and strength and
+ * the crossfade does not change it. `dx`, `w` are in % of the plate width and
+ * `dy`, `h` in % of its height: the centre's offset from the feet (to the
+ * right and a little behind, away from the high front-left sun) and the size
+ * of the ellipse (four standard deviations of the measured darkening), then
+ * matched against the live render, where the rocks hide the shadow's middle:
+ * a little flatter, wider and further right, so the grass beside and in front
+ * of each base comes within about 10 levels (of 255) of the painting. At its
+ * core the painted shadow keeps about 45 % of the grass's light.
+ */
+export type GroundShadowShape = { dx: number; dy: number; w: number; h: number };
+
+export const platformGroundShadows: { desktop: readonly GroundShadowShape[]; mobile: readonly GroundShadowShape[] } = {
+  desktop: [
+    { dx: 2.24, dy: -1.61, w: 19.59, h: 5.8 },
+    { dx: 1.57, dy: -0.97, w: 13.55, h: 4.76 },
+    { dx: 1.64, dy: -1.09, w: 16.14, h: 5.32 },
+  ],
+  mobile: [
+    { dx: 1.71, dy: -1.11, w: 18.98, h: 4.68 },
+    { dx: 1.35, dy: -0.64, w: 14.66, h: 4.4 },
+    { dx: 1.97, dy: -1, w: 15.77, h: 4.59 },
+  ],
 };

@@ -14,6 +14,7 @@ import {
   packsAssembledPlate,
   packsMayoHops,
   PLATFORM_CANVAS,
+  platformGroundShadows,
   platformPlacements,
   platforms,
   rockFloats,
@@ -242,7 +243,9 @@ function tuftMask(seed: number) {
  * Grass in front of a platform's base: the plate's own meadow (the island
  * cutout, aligned to the plate) cut to a strip of blades along the feet, so
  * the bottom of the stack sinks into the grass. Over bare meadow it shows the
- * very pixels beneath it, so it needs no animation.
+ * very pixels beneath it, so it needs no fade of its own; it carries the
+ * platform's grass shadow (same place and size) so the blades stand in the
+ * shade, darkening with it as the base comes down.
  */
 function GrassTufts({ index }: { index: number }) {
   const platform = platforms[index];
@@ -253,6 +256,7 @@ function GrassTufts({ index }: { index: number }) {
     const width = ((maxX - minX) * placement.canvas * 1.2) / PLATFORM_CANVAS;
     const left = placement.x - width / 2;
     const top = placement.y - GRASS_RISE;
+    const shade = groundShadowBox(index, size);
     return {
       [`--x-${size}`]: `${round(left)}%`,
       [`--y-${size}`]: `${round(top)}%`,
@@ -260,13 +264,19 @@ function GrassTufts({ index }: { index: number }) {
       // Offsets of the meadow behind the strip, in % of the plate width.
       [`--gx-${size}`]: round(left),
       [`--gy-${size}`]: round(top * RATIO),
+      // The platform's grass shadow over the blades too, at the same place and size, in % of the plate width.
+      [`--sx-${size}`]: round(shade.left - left),
+      [`--sy-${size}`]: round((shade.top - top) * RATIO),
+      [`--sw-${size}`]: round(shade.width),
+      [`--sh-${size}`]: round(shade.height * RATIO),
     };
   };
   const style = {
     ...vars("d"),
     ...vars("m"),
     "--tufts": tuftMask(index + 1),
-    backgroundImage: `image-set(url("${island.avif}") type("image/avif"), url("${island.webp}") type("image/webp"))`,
+    "--range": cover(flightRange(index, "base").start, flightRange(index, "base").end),
+    "--meadow": `image-set(url("${island.avif}") type("image/avif"), url("${island.webp}") type("image/webp"))`,
   } as CSSProperties;
   return <span className="rock-grass" style={style} />;
 }
@@ -287,10 +297,27 @@ function AssembledPlate() {
   );
 }
 
-/** A painted contact shadow between two pieces: it darkens as the piece that casts it lands. */
+/**
+ * The piece whose landing completes a painted shadow: the later to land of
+ * the piece that casts it and the pieces it falls on (those its box overlaps
+ * by more than a sixth of its area). A shadow cast on a piece that lands
+ * after its caster must wait for it, or it would hang in the air.
+ */
+function shadowCompleter(platform: Platform, shadow: PlatformShadow) {
+  const area = shadow.w * shadow.h;
+  return platform.pieces.reduce((latest, piece) => {
+    const height = (piece.w * piece.height) / piece.width;
+    const overlapX = Math.min(shadow.x + shadow.w, piece.x + piece.w) - Math.max(shadow.x, piece.x);
+    const overlapY = Math.min(shadow.y + shadow.h, piece.y + height) - Math.max(shadow.y, piece.y);
+    const receives = overlapX > 0 && overlapY > 0 && overlapX * overlapY > area / 6;
+    return receives && landingOrder.indexOf(piece.kind) > landingOrder.indexOf(latest) ? piece.kind : latest;
+  }, shadow.under);
+}
+
+/** A painted contact shadow between two pieces: it darkens as the last of them comes down. */
 function Shadow({ shadow, index }: { shadow: PlatformShadow; index: number }) {
   const platform = platforms[index];
-  const { start, end } = flightRange(index, shadow.under);
+  const { start, end } = flightRange(index, shadowCompleter(platform, shadow));
   const style = {
     ...boxVars(onPlate(platform, platformPlacements.desktop[index], shadow.x, shadow.y, shadow.w, shadow.h), "d"),
     ...boxVars(onPlate(platform, platformPlacements.mobile[index], shadow.x, shadow.y, shadow.w, shadow.h), "m"),
@@ -299,28 +326,37 @@ function Shadow({ shadow, index }: { shadow: PlatformShadow; index: number }) {
   return <img className="rock-shadow" src={shadow.src} alt="" width={shadow.w} height={shadow.h} loading="lazy" decoding="async" style={style} />;
 }
 
+/** Where a platform's grass shadow sits, as a box in % of the plate (its centre offset from the feet). */
+function groundShadowBox(index: number, size: Size): Box {
+  const placement = platformPlacements[size === "d" ? "desktop" : "mobile"][index];
+  const shape = platformGroundShadows[size === "d" ? "desktop" : "mobile"][index];
+  return {
+    left: placement.x + shape.dx - shape.w / 2,
+    top: placement.y + shape.dy - shape.h / 2,
+    width: shape.w,
+    height: shape.h,
+  };
+}
+
 /**
- * The platform's shadow on the grass under its base: wide and faint while
- * the base is still high, tight and dark as it touches down (noon sun, so
- * straight below).
+ * The platform's shadow on the grass, under its rocks, with the painted
+ * plate's shape, place and strength (stage.ts platformGroundShadows). It grows
+ * in as the base comes down (`--ground`, world.css): wide and faint while the
+ * base is high, tight and dark as it touches down, so a landed stack always
+ * has its shadow.
  */
 function GroundShadow({ index }: { index: number }) {
-  const platform = platforms[index];
-  const { minX, maxX } = bounds(platform);
   const { start, end } = flightRange(index, "base");
-  const width = (size: Size) => {
-    const placement = platformPlacements[size === "d" ? "desktop" : "mobile"][index];
-    return `${round(((maxX - minX) * placement.canvas * 1.08) / PLATFORM_CANVAS)}%`;
+  const box = (size: Size) => {
+    const { left, top, width, height } = groundShadowBox(index, size);
+    return {
+      [`--x-${size}`]: `${round(left)}%`,
+      [`--y-${size}`]: `${round(top)}%`,
+      [`--w-${size}`]: `${round(width)}%`,
+      [`--h-${size}`]: `${round(height)}%`,
+    };
   };
-  const style = {
-    "--x-d": `${platformPlacements.desktop[index].x}%`,
-    "--y-d": `${platformPlacements.desktop[index].y}%`,
-    "--w-d": width("d"),
-    "--x-m": `${platformPlacements.mobile[index].x}%`,
-    "--y-m": `${platformPlacements.mobile[index].y}%`,
-    "--w-m": width("m"),
-    "--range": cover(start, end),
-  } as CSSProperties;
+  const style = { ...box("d"), ...box("m"), "--range": cover(start, end) } as CSSProperties;
   return <span className="rock-ground" style={style} />;
 }
 
@@ -374,6 +410,8 @@ export function RockIsland() {
             ))}
             {depthOrder.map((index) => (
               <Fragment key={index}>
+                {/* On the grass, under the rocks; the grass strip in front carries the same shade. */}
+                <GroundShadow index={index} />
                 {/* Manifest rule: each contact shadow sits under its emitter and over the receivers. */}
                 {platforms[index].pieces.map((piece) => (
                   <Fragment key={piece.kind}>
@@ -386,8 +424,6 @@ export function RockIsland() {
                   </Fragment>
                 ))}
                 <GrassTufts index={index} />
-                {/* Over the grass too: the blades at the stack's feet stand in its shade. */}
-                <GroundShadow index={index} />
               </Fragment>
             ))}
             <AssembledPlate />
