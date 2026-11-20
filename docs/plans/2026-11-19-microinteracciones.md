@@ -406,7 +406,7 @@ Helpers nuevos: `staggerStyle(index)` (`src/components/world/stagger.ts`) escrib
 
 ### Capturas reales de los trabajos
 
-- **ShineApp:** el panel (dashboard) es ahora la **primera** imagen (`public/images/proyectos/shineapp/panel.jpg`); la pantalla de acceso queda segunda. **Privacidad:** antes de publicar se difuminaron con un desenfoque suave, que sigue leyéndose como interfaz, los nombres, autos y fechas de la lista "Ahora", el nombre y la foto de la persona conectada (abajo a la izquierda) y, por precaución, el título de una tarea personal ("Préstamo…"). Los montos y gráficos quedan como estaban. El recorte deja fuera la barra de desplazamiento y el borde derecho de la cuarta columna de tarjetas.
+- **ShineApp:** el panel (dashboard) es ahora la **primera** imagen (`public/images/proyectos/shineapp/panel.jpg`); la pantalla de acceso queda segunda. **Privacidad:** antes de publicar se difuminaron con un desenfoque suave, que sigue leyéndose como interfaz, los nombres, autos y fechas de la lista "Ahora", el nombre y la foto de la persona conectada (abajo a la izquierda) y, por precaución, el título de una tarea personal ("Préstamo…"). Los montos y gráficos quedan como estaban. **Revertido el 20/11 por pedido de Juani** ("No difumines nada"): el panel se publica sin ningún desenfoque, con el mismo recorte. El recorte deja fuera la barra de desplazamiento y el borde derecho de la cuarta columna de tarjetas.
 - **Consignataria y portfolio:** las capturas nuevas muestran la misma vista que las anteriores (el inicio), así que **las reemplazan** (`escritorio.jpg`). La del portfolio está en tema oscuro.
 - Las tres se recortaron a 16:10 sin la barra de desplazamiento ni el borde de la ventana, se llevaron a 1440 × 900 y se exportaron en JPG progresivo (100 a 190 KB, como las anteriores), con textos alternativos en castellano. Se borró la carpeta `entrantes/`.
 - El índice muestra la primera imagen de cada proyecto; la segunda de ShineApp queda en los datos (la usaría una galería o la página del caso).
@@ -428,4 +428,4 @@ Helpers nuevos: `staggerStyle(index)` (`src/components/world/stagger.ts`) escrib
 ### Límites
 
 - No se probó en un teléfono real, en tablet táctil ni en Safari/Firefox.
-- Conviene que Juani revise el panel de ShineApp difuminado antes de publicar.
+- Juani revisó el panel de ShineApp y pidió publicarlo sin difuminar nada.
