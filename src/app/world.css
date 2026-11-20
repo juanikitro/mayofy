@@ -7658,3 +7658,37 @@ html[data-motion-tier="reduced"] .works-index__shot {
     transform: scale(0.9);
   }
 }
+
+/* Works autoplay: a moss bar fills along the active row's bottom edge in
+ * 5 s; it pauses off screen, in a hidden tab or with the pause button, and
+ * rests at zero while the pointer or focus is on the index. */
+.works-index__progress {
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--moss);
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: works-progress 5s linear forwards;
+  animation-play-state: paused;
+}
+
+.works-index[data-running] .works-index__progress {
+  animation-play-state: running;
+}
+
+.works-index[data-hold] .works-index__progress {
+  animation: none;
+}
+
+@keyframes works-progress {
+  to {
+    transform: none;
+  }
+}
+
+.works-index__toggle {
+  position: absolute;
+  inset: auto auto -0.25rem 0;
+}
