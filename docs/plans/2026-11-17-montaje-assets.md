@@ -245,3 +245,48 @@ Se montaron las dos tiras encargadas (`70-mayo-works-v3-tira` y `70-mayo-works-l
 - Con movimiento reducido: B8 en el ancla, sin `translate`.
 - Tira en `docs/plans/isla5-mayo/llegada/` (10 posiciones a lo largo del rango, escritorio y celular).
 - Typecheck, lint y build limpios.
+
+### Isla 5: los seis pasos, "el sendero de seis piedras" (20 de noviembre de 2026)
+
+Juani: "Sobre los seis pasos sin sorpresas: elijo la opcion A" (propuesta en `docs/plans/2026-11-20-propuestas.md`, rama `juanikitro/landing-propuestas`).
+
+**Qué es.**
+
+- La isla 5 pasa a ser el sendero de los seis pasos. La sección conserva primero los trabajos y la cierra un escenario fijado de ~3,4 pantallas de scroll (`SixSteps` en `src/components/world/six-steps.tsx`; CSS en el bloque "Six steps (island 5)" de `world.css`).
+- A la izquierda va la lista de los seis pasos; a la derecha, la isla recortada (`-v2-isla`) sobre el cielo de la sección, con un número delante de cada piedra del sendero.
+- Cada paso ocupa un sexto del tramo fijado (`--sendero`, rango `contain`). Su número se enciende, su explicación se abre en la lista y los pasos recorridos quedan marcados. El primero está activo antes de fijarse y el último sigue activo después.
+- En celular la isla va arriba, en primer plano (placa móvil al 160 % del ancho, centrada en el sendero), y debajo sólo el paso actual con una barra de seis segmentos.
+- La lista es un `<ol>` con los seis pasos siempre en el DOM. Con movimiento reducido o sin animaciones por scroll no se fija nada: los seis pasos están abiertos y Mayo está de pie sobre la última piedra.
+- La sección ya no lleva placa al pie. Su cielo es un degradado propio, que termina en sus últimos 12rem con el violeta del que arranca la isla 6.
+
+**Copy nuevo (el de la maqueta aprobada).**
+
+- Entrada: "Vas a saber en qué etapa está tu proyecto y qué falta para publicar."
+- Una línea por paso: `islandCopy.process.details`.
+
+**Mayo de piedra en piedra.**
+
+- `mayoAnchors.works.stops` / `stopsMobile` tienen siete paradas: donde espera, al entrar el sendero en el prado, y los centros de las seis piedras. Se midieron con una grilla del 1 % sobre los recortes:
+  - escritorio: 56,1/55,4, 55,9/59,4, 47,3/62,8, 44,8/66,3, 47,9/69,6, 52,3/72,6;
+  - celular: 63,6/66,5, 58,3/68, 48/69,3, 41/71,2, 45,6/73,3, 55,2/75.
+- La escala de profundidad sale del ancho pintado de cada piedra y vale 1 en la última (el ancla, celda 8,535 % en escritorio y 16,2 % en celular).
+- En cada sexto del tramo llega a su piedra en el primer 55 % (`legShare`) y se queda de pie el resto.
+- `MayoFigure` arma cada tramo con los cuadros de galope que le entran, seguidos de la llegada (`works-llegada`, frena y queda de pie). Las opciones son: ninguno, un salto (f6), medio paso, uno, uno y medio, dos o dos y medio. Todas terminan en suspensión, así que la f1 de la llegada sigue como seguiría el galope.
+- Durante un paso de apoyo avanza sólo de costado, exactamente lo que avanza la pata pintada escalada por la profundidad, y la pata no patina. El resto del camino, bajada del sendero incluida, se reparte entre los pasos en el aire. Gana la opción cuyos pasos en el aire se parecen más a los del galope.
+- Mira hacia donde va: las tiras miran a la izquierda y se espejan cuando va a la derecha.
+- Resultado en escritorio: tramo 1, un paso entero espejado; 2, un salto (la piedra 2 está casi debajo de la 1); 3, uno y medio; 4, uno; 5, uno espejado; 6, medio y uno espejado. En celular, parecido.
+- Son tres keyframes por ancho (caja, tira de galope, tira de llegada), un keyframe por cuadro pintado, sostenidos con `step-end`. Reemplazan al recorrido único con relevo de rangos de la entrega anterior.
+
+**Verificado (Chromium, 1440 × 900 y 390 × 844).**
+
+- Muestreando cada 3 px de scroll, ningún cambio de posición ocurre sin cambio de cuadro.
+- Las secuencias completas se leen como galope → llegada por tramo, con el espejado correcto.
+- El paso activo y el número coinciden en ocho posiciones del tramo, y al subir se rebobina.
+- Sin scroll horizontal y sin errores de consola. Movimiento reducido: escenario sin fijar, seis pasos abiertos y Mayo en la piedra 6 sin animación.
+- Lint, typecheck y build limpios.
+- Capturas en `docs/plans/seis-pasos/` (`d-`/`m-` con el porcentaje del tramo fijado, `-reducido`, `-entrada`, `-salida`).
+
+**Cuadros que mejorarían el resultado (opcional, para el ilustrador).**
+
+- Las piedras están cerca entre sí (de 0,3 a 1,1 celdas); para esos tramos cortos se usan un salto de un solo cuadro (f6 del galope) y la llegada.
+- Una tira de salto corto, de 6 cuadros sin bucle, se leería mejor: agacharse, impulso, vuelo, apoyo en la piedra, asentarse, de pie. Pintada en tres cuartos al frente-izquierda sobre un recorte de `45-isla5-escritorio-v2` centrado en la piedra 3 (47,3 % / 62,8 %), lado 134 px de 1672 y línea de suelo al 78 % de la celda. El último cuadro debería coincidir con el f8 de `works-llegada`, para que el reposo sea el mismo.
