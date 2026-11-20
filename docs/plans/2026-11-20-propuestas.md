@@ -441,3 +441,29 @@ Chromium (Playwright) sobre `next dev`, a 1440 × 900 y 390 × 844, con `scrollT
 - Teclado: Tab y Enter eligen una situación (`aria-pressed`) con el anillo de foco visible.
 - Sin scroll horizontal y sin errores de consola.
 - `npm run lint`, `npm run typecheck` y `npm run build` limpios.
+
+---
+
+## Isla 2, tercera ronda (20 de noviembre de 2026)
+
+Pedido de Juani (textual): "En la isla 2, la propuesta del sistema a medida no debe quedar difuminado por el cielo superior. Ademas quiero que la isla este mas abajo, tocando la parte inferior de la pantalla. tambien quiero que cambies los assets 3D que te dije del listado (por ejemplo en me encuentran, pero no tengo donde mostrar lo que hago) por assets creados a medidas (una flor, una plantita y una mariposa colorida). Ademas, tiene que haber un item del listado presionado por defecto y debe ir cambiando el seleccionado cada 5 segundos (como en la parte de trabajos)".
+
+- **La propuesta ya no se difumina.** El velo de la mañana (`.isle--morning .scene--plated::after`) está encima de toda la escena, y la tarjeta vivía dentro de la placa, debajo de ese velo. Ahora la tarjeta y las preguntas van en una capa propia (`.problem__demo`) arriba de la escena, con el mismo marco que la placa (ancho completo, proporción 1672 × 941, apoyada abajo y corrida con la isla). Las posiciones en % de la placa siguen valiendo y la tarjeta se ve opaca y nítida.
+- **La isla, más abajo.** En el escenario fijo de escritorio, el recorte de la isla y Mayo bajan un 12 % del alto de la placa (`--problem-drop`), hasta que las puntas de las raíces (89 % del recorte) tocan el borde inferior de la pantalla. Mayo baja con su prado, sin cambiar de tamaño. El cielo lejano, la tarjeta y las preguntas no bajan, así que la tarjeta queda libre por arriba del prado. En celular la isla ya cierra la sección, después del texto, y no cambió.
+- **Lugares para los assets a medida.** Cada situación tiene su arte en `case-picker.ts` (`art: { src, frames? }`): flor (`34-isla2-flor`), plantita (`34-isla2-brote`) y mariposa colorida (`34-isla2-mariposa-tira`, cinco cuadros cuadrados en tira horizontal). La mariposa aletea en ida y vuelta (`steps(var(--frames), jump-none) alternate`, 0,7 s); queda quieta en su primer cuadro con movimiento reducido y se detiene con el botón de pausa. Hasta que el ilustrador entregue los archivos, los lugares muestran los recortes de plantas actuales; para cambiarlos alcanza con poner el nuevo `src` (y `frames: 5` en la mariposa).
+- **Uno siempre elegido y rotación cada 5 s, como en trabajos.** La primera situación está elegida desde el inicio y la recomendación de abajo la acompaña. Cada 5 s pasa a la siguiente y vuelve a empezar al terminar; una barra musgo se llena en el borde inferior de la tarjeta elegida.
+  - Pasar el mouse, enfocar o hacer clic elige una situación y deja la cuenta en cero mientras el puntero o el foco estén en la lista; al salir vuelve a contar.
+  - La cuenta se frena fuera de pantalla, en una pestaña oculta y con el botón de pausa, que está junto a la pregunta ("Pausar el recorrido de casos", `aria-pressed`).
+  - Con movimiento reducido no avanza sola y no aparecen ni la barra ni el botón.
+  - Las tres recomendaciones comparten una celda de grilla, así la lista no salta al cambiar.
+  - Solo se anuncia la elección del visitante, en una región `aria-live` oculta ("Te conviene empezar por: …"); el recorrido automático no se anuncia.
+
+**Verificado** (Chromium, 1440 × 900 y 390 × 844, `scrollTo` instantáneo):
+
+- Rotación: de la situación 1 a la 2 a los 5 s, en escritorio y en celular.
+- Teclado: con foco en una situación la cuenta queda en cero (`data-hold`). Enter la elige y la anuncia. Con foco, la selección no cambia después de 5,5 s. El botón de pausa alterna `aria-pressed`.
+- Movimiento reducido: la primera queda elegida, sin rotación, sin barra y sin botón.
+- Sin scroll horizontal, sin errores de consola, y `lint`, `typecheck` y `build` limpios.
+- Capturas: `implementacion/r3-isla2-{d,m}-*.jpg`, `r3-casos-{d,m}-progreso.jpg` y `r3-reducido-{d,m}.jpg`.
+
+**Pendiente:** los tres archivos del ilustrador. La mariposa espera una tira de cinco cuadros cuadrados; si llega en otra proporción, hay que sumar la proporción de celda al tipo `CaseArt`.
