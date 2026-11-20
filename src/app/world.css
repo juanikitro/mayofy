@@ -4459,9 +4459,14 @@ html[data-motion-tier="reduced"] .world {
   }
 }
 
-/* Skip link: slides down from above the viewport when it takes focus. */
+/* Skip link: shows at once when it takes focus (a focused control is never
+ * caught mid-way) and slides back up when focus leaves. */
 .world .skip-link {
   transition: transform var(--m-panel) var(--ease-enter);
+}
+
+.world .skip-link:focus {
+  transition-duration: 0s;
 }
 
 /* Pill navigation ------------------------------------------------------ */
@@ -5499,10 +5504,6 @@ html[data-motion-tier="reduced"] .wa-float {
 
 .flip__title {
   font-size: 1.35rem;
-}
-
-.flip__title:focus:not(:focus-visible) {
-  outline: none;
 }
 
 .flip__title:focus-visible {
