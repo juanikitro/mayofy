@@ -75,6 +75,7 @@ export const projects = [
     layout: "split-left",
     placeholder: false,
     images: [
+      { src: "/images/proyectos/shineapp/panel.jpg", alt: "Panel de ShineApp con la agenda del día, los indicadores del período y la caja por categoría", width: 1440, height: 900 },
       { src: "/images/proyectos/shineapp/escritorio.jpg", alt: "Pantalla de acceso de ShineApp", width: 1440, height: 900 },
     ],
     phoneImage: { src: "/images/proyectos/shineapp/celular.jpg", alt: "Pantalla de acceso de ShineApp en el celular", width: 390, height: 844 },
@@ -111,7 +112,7 @@ export const projects = [
     layout: "split-right",
     placeholder: false,
     images: [
-      { src: "/images/proyectos/consignataria-hacienda/escritorio.jpg", alt: "Inicio de la landing de la consignataria", width: 1440, height: 900 },
+      { src: "/images/proyectos/consignataria-hacienda/escritorio.jpg", alt: "Inicio de la landing de la consignataria: hacienda pastando y la propuesta con sus botones de contacto", width: 1440, height: 900 },
     ],
     phoneImage: { src: "/images/proyectos/consignataria-hacienda/celular.jpg", alt: "Inicio de la landing de la consignataria en el celular", width: 390, height: 844 },
     url: "https://gymg.com.ar/",
@@ -147,7 +148,7 @@ export const projects = [
     layout: "horizon",
     placeholder: false,
     images: [
-      { src: "/images/proyectos/portfolio-desarrollador/escritorio.jpg", alt: "Inicio del portfolio", width: 1440, height: 900 },
+      { src: "/images/proyectos/portfolio-desarrollador/escritorio.jpg", alt: "Inicio del portfolio en tema oscuro, con el titular y los proyectos SISOC y ShineApp", width: 1440, height: 900 },
     ],
     phoneImage: { src: "/images/proyectos/portfolio-desarrollador/celular.jpg", alt: "Inicio del portfolio en el celular", width: 390, height: 844 },
     url: "https://juanikitro.com/",

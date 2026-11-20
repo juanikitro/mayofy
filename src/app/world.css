@@ -6385,7 +6385,7 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
 
 /* While the strip is on screen one icon plays every second, in turn
  * (GuaranteesStrip sets data-playing); at rest every icon is in its final
- * state (no script, reduced motion, paused). */
+ * state (no script, reduced motion, off screen). */
 @media (prefers-reduced-motion: no-preference) {
   html:not([data-motion-tier="reduced"]) .seal[data-playing] .gi__move {
     animation: var(--gi-anim) 700ms var(--ease-enter);
@@ -6589,7 +6589,7 @@ html[data-motion-tier="reduced"] .works-index__go {
   padding-block-end: 6%;
 }
 
-/* The frames sway together; the pause button beside them stays still. */
+/* The frames sway together inside the preview. */
 .works-index__float {
   position: relative;
 }
@@ -6814,10 +6814,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
   color: var(--ink-soft);
 }
 
-.cases__toggle {
-  margin-inline-end: -0.5rem;
-}
-
 /* The visitor's own choice is read out; the automatic tour is not. */
 .cases__status {
   position: absolute;
@@ -6954,8 +6950,8 @@ html[data-motion-tier="reduced"] .works-index__shot {
 }
 
 /* The selected case counts its 5 s with a moss bar along its foot, like the
- * works index; it pauses off screen, in a hidden tab or with the pause
- * button, and rests at zero while the pointer or focus is on the list. */
+ * works index; it pauses off screen or in a hidden tab, and rests at zero
+ * while the pointer or focus is on the list. */
 .case__progress {
   position: absolute;
   inset: auto 0.9rem -1.5px;
@@ -6977,7 +6973,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
 }
 
 /* A strip of square cells (the butterfly) flutters back and forth; it rests
- * on its first cell with reduced motion and stops with the pause button. */
+ * on its first cell with reduced motion. */
 .case__plant--strip {
   display: block;
   aspect-ratio: 1;
@@ -6987,10 +6983,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
 @media (prefers-reduced-motion: no-preference) {
   html:not([data-motion-tier="reduced"]) .case__plant--strip {
     animation: case-flutter 0.7s steps(var(--frames), jump-none) infinite alternate;
-  }
-
-  html:not([data-motion-tier="reduced"]) .cases[data-paused] .case__plant--strip {
-    animation-play-state: paused;
   }
 }
 
@@ -8137,63 +8129,8 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
-/* Pause button for the works autoplay: a 32px disc inside a 44px target;
- * pause bars or a play triangle. */
-.motion-toggle {
-  display: grid;
-  flex: none;
-  place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: none;
-  color: var(--moss);
-  cursor: pointer;
-}
-
-.motion-toggle::before {
-  content: "";
-  grid-area: 1 / 1;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  background: color-mix(in oklch, var(--moss) 10%, var(--cream));
-  transition:
-    background-color var(--m-fast) var(--ease-ui),
-    transform var(--m-press) var(--ease-ui);
-}
-
-.motion-toggle:hover::before {
-  background: color-mix(in oklch, var(--moss) 18%, var(--cream));
-  transition-duration: var(--m-base);
-}
-
-.motion-toggle__glyph {
-  grid-area: 1 / 1;
-  width: 0.6rem;
-  height: 0.7rem;
-  border-inline: 0.2rem solid currentColor;
-}
-
-.motion-toggle__glyph--play {
-  width: 0;
-  height: 0;
-  margin-inline-start: 0.15rem;
-  border-block: 0.35rem solid transparent;
-  border-inline: 0.55rem solid currentColor;
-  border-inline-end: 0;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion-tier="reduced"]) .motion-toggle:active::before {
-    transform: scale(0.9);
-  }
-}
-
 /* Works autoplay: a moss bar fills along the active row's bottom edge in
- * 5 s; it pauses off screen, in a hidden tab or with the pause button, and
+ * 5 s; it pauses off screen or in a hidden tab, and
  * rests at zero while the pointer or focus is on the index. */
 .works-index__progress {
   position: absolute;
@@ -8219,9 +8156,4 @@ html[data-motion-tier="reduced"] .works-index__shot {
   to {
     transform: none;
   }
-}
-
-.works-index__toggle {
-  position: absolute;
-  inset: auto auto -0.25rem 0;
 }

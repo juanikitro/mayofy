@@ -40,8 +40,6 @@ export const casePicker = {
     { planId: "sistema", text: "Mi operación vive en planillas y ya no alcanza.", art: { src: "34-isla2-planta-03" } },
   ] satisfies readonly CaseOption[],
   resultEyebrow: "Te conviene empezar por",
-  /** The 5 s tour through the cases (like the works index) can be paused. */
-  pauseLabel: "Pausar el recorrido de casos",
   detailsCta: "Ver qué incluye",
   bookingCta: "Agendá tu diagnóstico",
   /**
