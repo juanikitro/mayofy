@@ -6024,7 +6024,7 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 4rem;
-  align-items: center;
+  align-items: start;
   margin-block-start: 1.5rem;
 }
 
