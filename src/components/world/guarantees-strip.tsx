@@ -2,7 +2,6 @@
 
 import { type ReactNode, useEffect, useRef, useState } from "react";
 
-import { staggerStyle } from "@/components/world/stagger";
 import { guarantees } from "@/content/commercial-plans";
 
 type SealIcon = (typeof guarantees.seals)[number]["icon"];
@@ -70,42 +69,75 @@ const icons: Record<SealIcon, ReactNode> = {
   ),
 };
 
+/** One icon plays every this many milliseconds, in turn. */
+const cadence = 2000;
+
 /**
  * The guarantees as one strip under the pack cards (option B of
- * docs/plans/2026-11-20-propuestas.md), the speed guarantee first. When the
- * strip comes into view its icons play their small motion once, one after
- * another; afterwards each replays under the pointer.
+ * docs/plans/2026-11-20-propuestas.md), the speed guarantee first and every
+ * seal alike. While the strip is on screen, one icon plays its small motion
+ * every 2 s, in turn, so the strip stays calm. It stops off screen, in a
+ * hidden tab, under reduced motion and with the pause button.
  */
 export function GuaranteesStrip() {
   const listRef = useRef<HTMLUListElement>(null);
-  const [phase, setPhase] = useState<"idle" | "revealing" | "done">("idle");
+  const [visible, setVisible] = useState(false);
+  const [tabShown, setTabShown] = useState(true);
+  const [reduced, setReduced] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [playing, setPlaying] = useState(-1);
+  const running = visible && tabShown && !reduced && !paused;
 
   useEffect(() => {
     const list = listRef.current;
-    if (!list || !("IntersectionObserver" in window)) return;
-    let timer = 0;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        observer.disconnect();
-        setPhase("revealing");
-        timer = window.setTimeout(() => setPhase("done"), 1600);
-      },
-      { threshold: 0.5 },
-    );
-    observer.observe(list);
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const onMotion = () => setReduced(motion.matches || document.documentElement.dataset.motionTier === "reduced");
+    const onTab = () => setTabShown(!document.hidden);
+    onMotion();
+    onTab();
+    motion.addEventListener("change", onMotion);
+    document.addEventListener("visibilitychange", onTab);
+    const observer = list && "IntersectionObserver" in window ? new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.5 }) : null;
+    if (list && observer) observer.observe(list);
     return () => {
-      observer.disconnect();
-      window.clearTimeout(timer);
+      motion.removeEventListener("change", onMotion);
+      document.removeEventListener("visibilitychange", onTab);
+      observer?.disconnect();
     };
   }, []);
 
+  useEffect(() => {
+    if (!running) return;
+    const count = guarantees.seals.length;
+    const next = () => setPlaying((current) => (current + 1) % count);
+    // The first icon plays shortly after the strip settles on screen.
+    const first = window.setTimeout(next, 400);
+    const timer = window.setInterval(next, cadence);
+    return () => {
+      window.clearTimeout(first);
+      window.clearInterval(timer);
+    };
+  }, [running]);
+
   return (
     <section className="guarantees" aria-labelledby="garantias-title">
-      <h3 id="garantias-title">{guarantees.stripTitle}</h3>
-      <ul className="guarantees__seals" ref={listRef} data-phase={phase}>
+      <div className="guarantees__head">
+        <h3 id="garantias-title">{guarantees.stripTitle}</h3>
+        {reduced ? null : (
+          <button
+            className="motion-toggle guarantees__toggle"
+            type="button"
+            aria-pressed={paused}
+            aria-label="Pausar las animaciones"
+            onClick={() => setPaused((value) => !value)}
+          >
+            <span className={`motion-toggle__glyph${paused ? " motion-toggle__glyph--play" : ""}`} aria-hidden="true" />
+          </button>
+        )}
+      </div>
+      <ul className="guarantees__seals" ref={listRef}>
         {guarantees.seals.map((seal, index) => (
-          <li className={`seal seal--${seal.icon}${index === 0 ? " seal--lead" : ""}`} key={seal.icon} style={staggerStyle(index)}>
+          <li className={`seal seal--${seal.icon}`} key={seal.icon} data-playing={running && index === playing ? "true" : undefined}>
             <span className="seal__badge" aria-hidden="true">
               <svg className="gi" viewBox="0 0 24 24" focusable="false">
                 {icons[seal.icon]}
