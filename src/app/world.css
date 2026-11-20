@@ -4490,7 +4490,8 @@ html[data-motion-tier="full"] .plate-object--glow {
  * slot with `face: "right"` would need its ellipses mirrored by hand. */
 .mayo__contact {
   position: absolute;
-  inset: 0;
+  /* Three cells wide and tall, centred on hers (MayoFigure maps the layers). */
+  inset: -100%;
   background: var(--mayo-contact, none);
   pointer-events: none;
 }
@@ -6678,16 +6679,23 @@ html[data-motion-tier="reduced"] .works-index__shot {
 
 .cases__options {
   display: grid;
-  gap: 0.5rem;
+  gap: 0.9rem;
 }
 
+/* Each case stands in its card like a planter: the plant sits in a recess
+ * cut into the card, its base hidden below the recess's front edge, and
+ * grows past the card's top edge, more as the problem grows (a sprout, a
+ * plant, a bush). */
 .case {
+  --plant-w: 4.9rem;
+
+  position: relative;
   display: grid;
-  grid-template-columns: 2.75rem minmax(0, 1fr);
-  gap: 0.75rem;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 0.9rem;
   align-items: center;
-  min-height: 3.25rem;
-  padding: 0.5rem 1rem 0.5rem 0.75rem;
+  min-height: 3.5rem;
+  padding: 0.375rem 1rem 0.375rem 0.375rem;
   border: 1.5px solid color-mix(in oklch, var(--moss) 20%, transparent);
   border-radius: 1rem;
   background: color-mix(in oklch, var(--cream) 82%, transparent);
@@ -6695,6 +6703,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
   font: 500 1rem/1.35 var(--font-world-sans);
   text-align: start;
   cursor: pointer;
+  box-shadow: 0 0.6rem 1.2rem -0.9rem rgb(40 50 20 / 45%);
   transition:
     translate var(--m-base) var(--ease-out),
     border-color var(--m-base),
@@ -6702,10 +6711,51 @@ html[data-motion-tier="reduced"] .works-index__shot {
     box-shadow var(--m-base);
 }
 
-.case__rock {
-  width: 2.75rem;
+.case:nth-child(2) {
+  --plant-w: 6.4rem;
+}
+
+.case:nth-child(3) {
+  --plant-w: 7.6rem;
+}
+
+.case__planter {
+  position: relative;
+  align-self: stretch;
+  min-height: 2.75rem;
+  border-radius: 0.7rem;
+  background: linear-gradient(180deg, color-mix(in oklch, var(--bark) 30%, var(--beige-deep)), color-mix(in oklch, var(--bark) 12%, var(--beige)));
+  box-shadow:
+    inset 0 0.35rem 0.6rem -0.2rem rgb(60 36 16 / 38%),
+    inset 0 -1px 0 rgb(255 250 240 / 50%);
+  /* Open at the top and the sides, closed at the front edge: the plant's
+   * base disappears into the planter. */
+  clip-path: inset(-3rem -1.5rem 0 -1.5rem);
+}
+
+.case__plant {
+  position: absolute;
+  left: 50%;
+  bottom: -0.5rem;
+  width: var(--plant-w);
+  max-width: none;
   height: auto;
-  filter: drop-shadow(0 4px 4px rgb(40 50 20 / 25%));
+  translate: -50% 0;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 0.4rem 0.35rem rgb(40 50 20 / 35%));
+  transition:
+    translate var(--m-base) var(--ease-out),
+    scale var(--m-base) var(--ease-out);
+}
+
+.case:hover .case__plant,
+.case:focus-visible .case__plant {
+  translate: -50% -3px;
+  scale: 1.04;
+}
+
+.case[aria-pressed="true"] .case__planter {
+  background: linear-gradient(180deg, color-mix(in oklch, var(--leaf) 26%, var(--beige-deep)), color-mix(in oklch, var(--leaf) 10%, var(--beige)));
 }
 
 .case:hover {
@@ -6771,92 +6821,160 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
-/* The phone and the questions live in the plate, in % of it, like Mayo. */
-.problem__demo {
-  --phone-x: 54%;
-  --phone-y: 23.5%;
-  --phone-w: 12.5%;
+/* The proposal: the base system and its modules hanging from one stem, a
+ * small diagram card. On the pinned desktop stage it stands on the island
+ * (`--scene`: placed and sized in % of the plate, type in cqi, so it scales
+ * with the island) and the questions fly into it; elsewhere it sits in the
+ * copy (`--flow`), each module under the question that brought it. */
+.proposal {
+  --p-gap: 0.6rem;
+  --p-pad: 1.1rem 1.2rem 1.2rem;
+  --stem: color-mix(in oklch, var(--moss) 35%, transparent);
 
-  position: absolute;
-  inset: 0;
-}
-
-.problem__phone {
-  position: absolute;
-  left: var(--phone-x);
-  top: var(--phone-y);
-  width: var(--phone-w);
-  aspect-ratio: 9 / 16;
-  padding: 3.5%;
-  border-radius: 14% / 8%;
-  background: var(--ink);
-  box-shadow: 0 1.5rem 2.5rem -1rem rgb(30 50 20 / 55%);
-  container-type: inline-size;
-}
-
-.problem__screen {
   display: grid;
-  grid-template-rows: auto 1fr auto;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 11% / 6%;
-  background: var(--cream);
-}
-
-.problem__brand {
-  display: grid;
-  padding: 8cqi 7cqi 5cqi;
-  background: color-mix(in oklch, var(--leaf-light) 40%, var(--cream));
-  font-size: 5.2cqi;
-  color: var(--ink-soft);
-}
-
-.problem__brand b {
-  font-size: 7.2cqi;
+  gap: var(--p-gap);
+  padding: var(--p-pad);
+  border-radius: var(--radius);
+  background: color-mix(in oklch, var(--cream) 95%, transparent);
+  box-shadow: 0 1.5rem 3rem -1.5rem rgb(30 50 20 / 45%);
   color: var(--ink);
 }
 
-.problem__answers {
+.proposal-frame--flow {
+  max-width: 36rem;
+  margin-block: 0.25rem 0.75rem;
+}
+
+.proposal__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+.proposal__base {
   display: grid;
-  align-content: start;
-  gap: 3.5cqi;
+  gap: 0.15rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.8rem;
+  background: var(--moss);
+  color: var(--cream);
+}
+
+.proposal__base b {
+  font-size: 1.1rem;
+}
+
+.proposal__base span {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.proposal__modules {
+  position: relative;
+  display: grid;
+  gap: 0.5rem;
   margin: 0;
-  padding: 5cqi;
+  padding: 0 0 0 1.5rem;
   list-style: none;
 }
 
-.problem__answers li {
+/* The stem, from under the base down to the last module. */
+.proposal__modules::before {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  top: calc(-1 * var(--p-gap));
+  bottom: 1.4rem;
+  width: 2px;
+  background: var(--stem);
+}
+
+.proposal__module {
+  position: relative;
   display: grid;
-  padding: 3.5cqi 4.5cqi;
-  border-radius: 4cqi;
+  gap: 0.1rem;
+  justify-items: start;
+  padding: 0.55rem 0.8rem;
+  border: 1.5px dashed transparent;
+  border-radius: 0.7rem;
   background: var(--beige);
-  font-size: 5cqi;
-  line-height: 1.3;
 }
 
-.problem__answers b {
-  color: var(--moss);
-  font-size: 5.4cqi;
+.proposal__module::before {
+  content: "";
+  position: absolute;
+  left: -0.9rem;
+  bottom: 1.35rem;
+  width: 0.9rem;
+  height: 2px;
+  background: var(--stem);
 }
 
-.problem__whatsapp {
-  margin: 0 5cqi 6cqi;
-  padding: 4cqi;
-  border-radius: 999px;
-  background: #1fa855;
-  color: #fff;
-  font-size: 5.4cqi;
+.proposal__module::after {
+  content: "";
+  position: absolute;
+  left: -1.2rem;
+  bottom: calc(1.35rem - 0.3rem + 1px);
+  width: 0.6rem;
+  height: 0.6rem;
+  border: 2px solid var(--cream);
+  border-radius: 50%;
+  background: var(--leaf);
+}
+
+.proposal__module b {
+  font-size: 0.98rem;
+}
+
+.proposal__module > span:last-child {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.proposal__question {
+  margin-block-end: 0.25rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 1rem 1rem 1rem 0.25rem;
+  background: #fff;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  box-shadow: 0 0.4rem 0.8rem -0.5rem rgb(30 50 20 / 40%);
+}
+
+.proposal__closing {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.9rem;
   font-weight: 600;
-  text-align: center;
+  color: var(--moss);
 }
 
-/* A question floats over the island, then lands on its row of the phone.
- * Hidden in the static state: the page already answered it. */
+.proposal__closing::before {
+  content: "✓";
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  background: color-mix(in oklch, var(--leaf-light) 45%, var(--cream));
+  font-size: 0.75rem;
+}
+
+/* The questions and the proposal on the island only exist on the pinned stage. */
+.problem__demo {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+
+/* Each question lands on its module's slot (measured on the pinned stage). */
 .problem__ask {
-  --x0: var(--x0-d);
-  --y0: var(--y0-d);
-  --x1: calc(var(--phone-x) + 1.5%);
-  --y1: calc(var(--phone-y) + 8% + var(--row) * 5.5%);
+  --x1: 50.5%;
+  --y1: calc(19.2% + var(--row) * 8.2%);
 
   position: absolute;
   left: var(--x1);
@@ -6872,47 +6990,27 @@ html[data-motion-tier="reduced"] .works-index__shot {
   opacity: 0;
 }
 
-.problem__ask:nth-child(1) { --ask-range: cover 30% cover 40%; }
-.problem__ask:nth-child(2) { --ask-range: cover 36% cover 46%; }
-.problem__ask:nth-child(3) { --ask-range: cover 42% cover 52%; }
-.problem__ask:nth-child(4) { --ask-range: cover 48% cover 58%; }
-.problem__answers li:nth-child(1) { --answer-range: cover 38% cover 42%; }
-.problem__answers li:nth-child(2) { --answer-range: cover 44% cover 48%; }
-.problem__answers li:nth-child(3) { --answer-range: cover 50% cover 54%; }
-.problem__answers li:nth-child(4) { --answer-range: cover 56% cover 60%; }
-.problem__whatsapp { --answer-range: cover 60% cover 64%; }
+/* Phones and narrow or short screens: each module of the proposal in the
+ * copy arrives as it scrolls into view, its question first. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-motion-tier="reduced"]) .proposal-frame--flow .proposal__module {
+      animation: proposal-module linear both;
+      animation-timeline: view();
+      animation-range: entry 20% entry 100%;
+    }
 
-@media (max-width: 48rem) {
-  .problem__demo {
-    --phone-x: 58%;
-    --phone-y: 24%;
-    --phone-w: 38%;
+    html:not([data-motion-tier="reduced"]) .proposal-frame--flow .proposal__question {
+      animation: proposal-question linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
   }
-
-  .problem__ask {
-    --x0: var(--x0-m);
-    --y0: var(--y0-m);
-    --x1: calc(var(--phone-x) + 3%);
-    --y1: calc(var(--phone-y) + 7.5% + var(--row) * 4.6%);
-
-    padding: 0.4rem 0.7rem;
-    font-size: 0.75rem;
-  }
-
-  .problem__ask:nth-child(1) { --ask-range: cover 38% cover 45%; }
-  .problem__ask:nth-child(2) { --ask-range: cover 43% cover 50%; }
-  .problem__ask:nth-child(3) { --ask-range: cover 48% cover 55%; }
-  .problem__ask:nth-child(4) { --ask-range: cover 53% cover 60%; }
-  .problem__answers li:nth-child(1) { --answer-range: cover 44% cover 47%; }
-  .problem__answers li:nth-child(2) { --answer-range: cover 49% cover 52%; }
-  .problem__answers li:nth-child(3) { --answer-range: cover 54% cover 57%; }
-  .problem__answers li:nth-child(4) { --answer-range: cover 59% cover 62%; }
-  .problem__whatsapp { --answer-range: cover 62% cover 65%; }
 }
 
 /* Wide and tall enough: the stage is pinned for 2.3 screens while the
  * questions land, the copy on the left and the island leaning right
- * (`--problem-shift`, like the hero's tree) so the picker never covers it. */
+ * (`--problem-shift`, like the tree of the hero) so the picker never covers it. */
 @media (min-width: 64rem) and (min-height: 40rem) {
   .problem {
     --plate-scale: 1;
@@ -6940,29 +7038,127 @@ html[data-motion-tier="reduced"] .works-index__shot {
     translate: var(--problem-shift) 0;
   }
 
-  .problem__ask:nth-child(1) { --ask-range: contain 8% contain 24%; }
-  .problem__ask:nth-child(2) { --ask-range: contain 26% contain 42%; }
-  .problem__ask:nth-child(3) { --ask-range: contain 44% contain 60%; }
-  .problem__ask:nth-child(4) { --ask-range: contain 62% contain 78%; }
-  .problem__answers li:nth-child(1) { --answer-range: contain 22% contain 28%; }
-  .problem__answers li:nth-child(2) { --answer-range: contain 40% contain 46%; }
-  .problem__answers li:nth-child(3) { --answer-range: contain 58% contain 64%; }
-  .problem__answers li:nth-child(4) { --answer-range: contain 76% contain 82%; }
-  .problem__whatsapp { --answer-range: contain 84% contain 90%; }
-}
+  .problem__demo {
+    display: block;
+  }
 
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    html:not([data-motion-tier="reduced"]) .problem__ask {
-      animation: problem-ask linear both;
-      animation-timeline: --isle;
-      animation-range: var(--ask-range);
-    }
+  /* The copy keeps the proposal for screen readers; the island shows it. */
+  .proposal-frame--flow {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
 
-    html:not([data-motion-tier="reduced"]) :is(.problem__answers li, .problem__whatsapp) {
-      animation: problem-answer linear both;
-      animation-timeline: --isle;
-      animation-range: var(--answer-range);
+  /* Right of Mayo (her tail ends near 47 %) and left of the paw rail. The
+   * frame is the size container, so the card's cqi sizes read its width. */
+  .proposal-frame--scene {
+    position: absolute;
+    left: 47.5%;
+    top: 4%;
+    width: 21%;
+    container-type: inline-size;
+  }
+
+  .proposal-frame--scene .proposal {
+    --p-gap: 2.4cqi;
+    --p-pad: 4.6cqi 5cqi 5cqi;
+  }
+
+  .proposal-frame--scene .proposal__eyebrow {
+    font-size: 3.7cqi;
+  }
+
+  .proposal-frame--scene .proposal__base {
+    padding: 3cqi 4cqi;
+    border-radius: 3.4cqi;
+  }
+
+  .proposal-frame--scene .proposal__base b {
+    font-size: 6cqi;
+  }
+
+  .proposal-frame--scene .proposal__base span {
+    font-size: 4.2cqi;
+  }
+
+  .proposal-frame--scene .proposal__modules {
+    gap: 2.2cqi;
+    padding-inline-start: 6cqi;
+  }
+
+  .proposal-frame--scene .proposal__modules::before {
+    left: 2.4cqi;
+    bottom: 6cqi;
+  }
+
+  .proposal-frame--scene .proposal__module {
+    padding: 2.4cqi 3.4cqi;
+    border-radius: 3cqi;
+  }
+
+  .proposal-frame--scene .proposal__module::before {
+    left: -3.6cqi;
+    bottom: 5.6cqi;
+    width: 3.6cqi;
+  }
+
+  .proposal-frame--scene .proposal__module::after {
+    left: -4.8cqi;
+    bottom: calc(5.6cqi - 1.2cqi + 1px);
+    width: 2.4cqi;
+    height: 2.4cqi;
+  }
+
+  .proposal-frame--scene .proposal__module b {
+    font-size: 5.1cqi;
+  }
+
+  .proposal-frame--scene .proposal__module > span:last-child {
+    font-size: 4.1cqi;
+  }
+
+  .proposal-frame--scene .proposal__closing {
+    font-size: 4.3cqi;
+  }
+
+  .problem__ask:nth-child(2) { --ask-range: contain 8% contain 24%; }
+  .problem__ask:nth-child(3) { --ask-range: contain 26% contain 42%; }
+  .problem__ask:nth-child(4) { --ask-range: contain 44% contain 60%; }
+  .problem__ask:nth-child(5) { --ask-range: contain 62% contain 78%; }
+  .proposal-frame--scene .proposal__module:nth-child(1) { --answer-range: contain 22% contain 30%; }
+  .proposal-frame--scene .proposal__module:nth-child(2) { --answer-range: contain 40% contain 48%; }
+  .proposal-frame--scene .proposal__module:nth-child(3) { --answer-range: contain 58% contain 66%; }
+  .proposal-frame--scene .proposal__module:nth-child(4) { --answer-range: contain 76% contain 84%; }
+  .proposal-frame--scene .proposal__closing { --answer-range: contain 86% contain 92%; }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      html:not([data-motion-tier="reduced"]) .problem__ask {
+        animation: problem-ask linear both;
+        animation-timeline: --isle;
+        animation-range: var(--ask-range);
+      }
+
+      html:not([data-motion-tier="reduced"]) .proposal-frame--scene .proposal__module {
+        animation: proposal-slot linear both;
+        animation-timeline: --isle;
+        animation-range: var(--answer-range);
+      }
+
+      html:not([data-motion-tier="reduced"]) .proposal-frame--scene .proposal__module > * {
+        animation: proposal-question linear both;
+        animation-timeline: --isle;
+        animation-range: var(--answer-range);
+      }
+
+      html:not([data-motion-tier="reduced"]) .proposal-frame--scene .proposal__closing {
+        animation: proposal-question linear both;
+        animation-timeline: --isle;
+        animation-range: var(--answer-range);
+      }
     }
   }
 }
@@ -6988,7 +7184,45 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
-@keyframes problem-answer {
+/* A module slides onto the stem, lit in mint, and settles into the card. */
+@keyframes proposal-module {
+  0% {
+    opacity: 0;
+    translate: -0.75rem 0;
+    background-color: color-mix(in oklch, var(--mint) 60%, var(--beige));
+  }
+
+  45% {
+    opacity: 1;
+    translate: 0 0;
+    background-color: color-mix(in oklch, var(--mint) 60%, var(--beige));
+  }
+
+  100% {
+    background-color: var(--beige);
+  }
+}
+
+/* On the island the four slots wait as dashed sockets on the stem and fill
+ * in mint as their question lands, then settle into the card. */
+@keyframes proposal-slot {
+  0% {
+    border-color: var(--stem);
+    background-color: transparent;
+  }
+
+  40% {
+    border-color: transparent;
+    background-color: color-mix(in oklch, var(--mint) 60%, var(--beige));
+  }
+
+  100% {
+    border-color: transparent;
+    background-color: var(--beige);
+  }
+}
+
+@keyframes proposal-question {
   from {
     opacity: 0;
     translate: 0 6px;
@@ -6997,9 +7231,12 @@ html[data-motion-tier="reduced"] .works-index__shot {
 
 /* Island 4: the workshop, pinned while its four parts scroll past -------- */
 
-/* The stage covers the screen for the whole section (`margin-block-end`
- * hands its height back), so the island never leaves while the offer is
- * read. Each part names a view timeline; the section shares them
+/* The stage covers the screen for the whole section, so the island never
+ * leaves while the offer is read. Stage and content share one grid cell:
+ * the sticky stage can never outlive the section, so at its end the island
+ * leaves with it instead of hanging below it under island 5 (it used a
+ * negative bottom margin, which let it stick a screen past the section).
+ * Each part names a view timeline; the section shares them
  * (`timeline-scope`) with the halos and pins inside the scene. */
 .workshop {
   --workshop-x: -19vw;
@@ -7012,14 +7249,21 @@ html[data-motion-tier="reduced"] .works-index__shot {
   padding: 0;
   /* What shows under the stage when it is not pinned (phones, reduced motion). */
   background: #fdeac1;
+  display: grid;
+  grid-template: minmax(0, auto) / minmax(0, 1fr);
   timeline-scope: --part-greenhouse, --part-pot, --part-toolbox, --part-gear;
+}
+
+.workshop__stage,
+.workshop__content {
+  grid-area: 1 / 1;
 }
 
 .workshop__stage {
   position: sticky;
   top: 0;
+  align-self: start;
   height: 100svh;
-  margin-block-end: -100svh;
   overflow: clip;
 }
 
@@ -7383,10 +7627,13 @@ html[data-motion-tier="reduced"] .works-index__shot {
 
   /* No pin without scroll-driven animations or with reduced motion. */
   @supports not (animation-timeline: view()) {
+    .workshop {
+      display: block;
+    }
+
     .workshop__stage {
       position: relative;
       height: 30rem;
-      margin-block-end: 0;
     }
 
     .workshop__content {
@@ -7394,10 +7641,13 @@ html[data-motion-tier="reduced"] .works-index__shot {
     }
   }
 
+  html[data-motion-tier="reduced"] .workshop {
+    display: block;
+  }
+
   html[data-motion-tier="reduced"] .workshop__stage {
     position: relative;
     height: 30rem;
-    margin-block-end: 0;
   }
 
   html[data-motion-tier="reduced"] .workshop__content {
@@ -7415,10 +7665,13 @@ html[data-motion-tier="reduced"] .works-index__shot {
 }
 
 @media (max-width: 48rem) and (prefers-reduced-motion: reduce) {
+  .workshop {
+    display: block;
+  }
+
   .workshop__stage {
     position: relative;
     height: 30rem;
-    margin-block-end: 0;
   }
 
   .workshop__content {

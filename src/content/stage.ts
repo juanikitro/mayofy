@@ -241,8 +241,7 @@ export const islandPlates = {
     anchorX: "30%",
     layers: { background: desktopPlate("30-isla2-escritorio-v2-fondo"), island: desktopPlate("30-isla2-escritorio-v2-isla") },
     mobileLayers: { background: mobilePlate("30-isla2-celular-v2-fondo"), island: mobilePlate("30-isla2-celular-v2-isla") },
-    // The "your page" phone stands on the meadow (problem-island.tsx): its top at 14 % (desktop) and 24 % (mobile).
-    clear: { desktop: 0.86, mobile: 0.77 },
+    clear: { desktop: 0.49, mobile: 0.43 },
   },
   packs: {
     desktop: desktopPlate("10-isla3-base"),
@@ -387,7 +386,29 @@ export type MayoContactLayer = {
 export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   // Hero: seated mid-meadow to the right of the big tree (trunk at 42 %, 68.6 %); dawn light from the right.
   // Cell = the plate crop the frames were painted on (left 798 px, side 109 px of 1672); shadow painted in.
-  hero: { x: "50.99%", y: "72.5%", size: "6.52%", xMobile: "56%", yMobile: "80.5%", sizeMobile: "14.3%", shadow: false },
+  hero: {
+    x: "50.99%",
+    y: "72.5%",
+    size: "6.52%",
+    xMobile: "56%",
+    yMobile: "80.5%",
+    sizeMobile: "14.3%",
+    shadow: false,
+    // Low sun from the right: the big tree and the sign throw long, soft shadows to the left
+    // and a little towards the camera (the tree's is ~1.1 times its height, olive on the
+    // golden grass). Hers does the same: ~0.8 cell from her seat, fading as it goes, plus
+    // occlusion under her seat and tail (Juani, 2026-11-20: "la sombra de mayo no acompaña
+    // la sombra del arbol").
+    contact: {
+      tint: "40 52 12",
+      layers: [
+        { kind: "cast", x: "30%", y: "90.5%", w: "28%", h: "6.5%", opacity: 0.62 },
+        { kind: "cast", x: "0%", y: "92.5%", w: "34%", h: "6%", opacity: 0.38 },
+        { kind: "ao", x: "50%", y: "88.5%", w: "17%", h: "2.4%", opacity: 0.55 },
+        { kind: "ao", x: "38%", y: "88.6%", w: "8%", h: "1.6%", opacity: 0.4 },
+      ],
+    },
+  },
   // Island 2: in the free meadow patch between the rocks (rim 53.5 %, lip 70 % at x 45); morning light from the left.
   // Cell = plate crop (left 681 px, top 468 px, side 142 px of 1672); shadow painted in.
   problem: {
@@ -398,13 +419,16 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
     yMobile: "69.5%",
     sizeMobile: "17.8%",
     shadow: false,
-    // Painted shadow measured at ~13 % alpha and blotchy: she floated over the grass while the rocks
-    // sit in dark green pools to their right. Occlusion under the front paws (cell 20-52 %, 88 %) and
-    // the hind paws (70-78 %, 72 %), plus a cast to the right, away from the morning sun.
+    // Painted shadow measured at ~13 % alpha and blotchy: she floated over the grass. The rocks are
+    // lit from the right and lie in dark green pools on their left, a little towards the camera
+    // (Juani, 2026-11-20: her cast pointed the other way). Occlusion under the front paws (cell
+    // 20-52 %, 88 %) and the hind paws (70-78 %, 72 %), plus a cast down-left like the rocks': from
+    // under her hindquarters to past her front paws, fading at its far end.
     contact: {
       tint: "26 46 10",
       layers: [
-        { kind: "cast", x: "56%", y: "82%", w: "34%", h: "9%", opacity: 0.38 },
+        { kind: "cast", x: "58%", y: "80%", w: "22%", h: "7%", opacity: 0.45 },
+        { kind: "cast", x: "26%", y: "90.5%", w: "34%", h: "8%", opacity: 0.5 },
         { kind: "ao", x: "26%", y: "88%", w: "9%", h: "2.6%", opacity: 0.65 },
         { kind: "ao", x: "46%", y: "89.5%", w: "9%", h: "2.6%", opacity: 0.65 },
         { kind: "ao", x: "74%", y: "73%", w: "7%", h: "2%", opacity: 0.6 },
