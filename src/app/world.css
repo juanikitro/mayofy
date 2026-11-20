@@ -7309,6 +7309,10 @@ html[data-motion-tier="reduced"] .works-index__shot {
 .workshop {
   --workshop-x: -19vw;
   --workshop-y: -4svh;
+  /* The reading zone a part is centred in after a guided scroll
+   * (WorkshopController), in % of the screen's height from its top. */
+  --workshop-zone-top: 0;
+  --workshop-zone-bottom: 100;
   /* The plate is a little taller than the screen at 16:10, so its own sky
    * (not the section's) fills the top of the pinned stage. */
   --plate-scale: 1.12;
@@ -7384,27 +7388,47 @@ html[data-motion-tier="reduced"] .works-index__shot {
   translate: -50% 0;
 }
 
+/* The title and lead ride the pinned stage with the island (Juani, 20
+ * November 2026: "debe acompañar el paralax de la isla"), clear of the
+ * parts' column. */
+.workshop__intro {
+  position: absolute;
+  inset-inline: 0;
+  top: 7rem;
+  z-index: 2;
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+.workshop__intro > * {
+  max-width: min(40rem, 100% - 31rem);
+}
+
+/* The content layer covers the stage; only its panels take the pointer, so
+ * the title under it can still be selected. */
 .workshop__content {
   position: relative;
   z-index: 2;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 28rem);
   column-gap: 3rem;
-  padding-block: 7rem 25svh;
+  padding-block: 0 20svh;
+  pointer-events: none;
 }
 
-.workshop__intro {
-  grid-column: 1 / -1;
-  display: grid;
-  gap: 1rem;
-  max-width: 40rem;
+.workshop__content > * {
+  pointer-events: auto;
 }
 
+/* Parts close together: the next one already shows under the one in the
+ * middle of the screen, and the first waits low on the screen as the
+ * section pins. */
 .workshop__parts {
   grid-column: 2;
   display: grid;
-  gap: 45svh;
-  margin: 30svh 0 0;
+  gap: 16svh;
+  margin: 62svh 0 0;
   padding: 0;
   list-style: none;
 }
@@ -7485,7 +7509,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
   grid-template: none / minmax(0, 1fr);
   gap: 0.75rem;
   justify-items: start;
-  margin-block-start: 30svh;
+  margin-block-start: 16svh;
   padding: 1.25rem 1.4rem;
 }
 
@@ -7597,21 +7621,43 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
-/* Phones: the island holds the top of the screen (the plate grows by a
- * third and rises), the parts arrive from the bottom and fade before they
- * reach it; the pins become numbers that match the parts. Without
- * scroll-driven animations or with reduced motion nothing is pinned: the
- * island first, then every part, all visible. */
+/* Phones: the title and lead hold the top of the screen, the island sits
+ * under them (the plate grows by a sixth and rises), and each part arrives
+ * from the bottom, rests centred in the space left under the island
+ * (`--workshop-zone-*`; a part taller than it rests at its top) and fades before it reaches it; the pins become
+ * numbers that match the parts. Without scroll-driven animations or with
+ * reduced motion nothing is pinned: title, island, then every part, all
+ * visible. */
 @media (max-width: 48rem) {
   .workshop {
     --workshop-x: 0px;
     --workshop-y: 0px;
-    --plate-scale: 1.3;
+    --plate-scale: 1.15;
+    /* Under the island, above the floating bottom bar. */
+    --workshop-zone-top: 53;
+    --workshop-zone-bottom: 93;
   }
 
   .workshop .plate {
     bottom: auto;
-    top: calc(14rem - 100cqw * var(--plate-scale) * 1.7778 * 0.73);
+    top: calc(19.5rem - 100cqw * var(--plate-scale) * 1.7778 * 0.73);
+  }
+
+  .workshop__intro {
+    top: 5.25rem;
+    gap: 0.5rem;
+  }
+
+  .workshop__intro > * {
+    max-width: none;
+  }
+
+  .workshop__intro h2 {
+    font-size: clamp(1.6rem, 7.4vw, 2rem);
+  }
+
+  .workshop__intro .isle__body {
+    font-size: 0.95rem;
   }
 
   .workshop .scene--plated .scene__sky {
@@ -7648,7 +7694,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
 
   .workshop__content {
     grid-template-columns: minmax(0, 1fr);
-    padding-block: 21rem 20svh;
+    padding-block: 0 20svh;
   }
 
   .workshop__parts,
@@ -7657,12 +7703,12 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 
   .workshop__parts {
-    gap: 30svh;
-    margin-block-start: 12svh;
+    gap: 12svh;
+    margin-block-start: 100svh;
   }
 
   .workshop__soon {
-    margin-block-start: 20svh;
+    margin-block-start: 12svh;
   }
 
   .workshop__part {
@@ -7679,13 +7725,13 @@ html[data-motion-tier="reduced"] .works-index__shot {
         animation-name: workshop-part-phone;
       }
 
-      /* The intro and the bot strip fade before they rise into the island. */
-      html:not([data-motion-tier="reduced"]) .workshop__intro {
-        animation: workshop-leave linear both;
-        animation-timeline: view();
-        animation-range: cover 52% cover 62%;
+      /* A part rests low on the screen, under the island: its object and pin
+       * are fully lit there. */
+      html:not([data-motion-tier="reduced"]) :is(.workshop__halo, .workshop__pin) {
+        animation-range: cover 5% cover 50%;
       }
 
+      /* The bot strip fades before it rises into the island. */
       html:not([data-motion-tier="reduced"]) .workshop__soon {
         animation: workshop-part-phone linear both;
         animation-timeline: view();
@@ -7706,6 +7752,15 @@ html[data-motion-tier="reduced"] .works-index__shot {
 
     .workshop__content {
       padding-block-start: 1rem;
+    }
+
+    .workshop__parts {
+      gap: 1rem;
+      margin-block-start: 1.5rem;
+    }
+
+    .workshop__soon {
+      margin-block-start: 1rem;
     }
   }
 
@@ -7768,12 +7823,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
 
   46%,
   100% {
-    opacity: 0;
-  }
-}
-
-@keyframes workshop-leave {
-  to {
     opacity: 0;
   }
 }

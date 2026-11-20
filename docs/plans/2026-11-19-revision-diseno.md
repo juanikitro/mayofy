@@ -147,3 +147,31 @@ Juani: "Quisiera que el hero este mas equilibrado: pondria el texto + botones en
   - El cielo (capa de fondo) sigue cubriendo la sección.
 - **Celular:** sin columna limitada. El texto queda centrado en el espacio sobre la isla y la isla con Mayo entra en el primer pliegue.
 - **Verificado:** 1440 × 900, 1280 × 800, 1024 × 768, 1920 × 1080 y 390 × 844, sin scroll horizontal. Capturas en `docs/plans/heroe-equilibrio/` (`antes-*` del servidor del coordinador y `despues-*`; `d` 1440, `d1280`, `d1024`, `m` 390).
+
+## Isla 4: título fijo con la isla y lectura guiada (20 de noviembre)
+
+Juani:
+
+> "en la isla 4, el titulo "Sistemas y automatizaciones a medida" debe acompañar el paralax de la isla. Ademas, las tarjetas que presentan los elementos deben estar mas cerca y el scroll debe ser guiado para pasar a estar en el centro siempre alguna tipo scroll snapping"
+
+- **Título con la isla.** El encabezado (título y bajada) pasó al escenario fijado (`.workshop__stage`) en `systems-island.tsx`. Ahora se queda con la isla mientras pasan las cuatro tarjetas, en vez de irse con el scroll.
+  - En escritorio queda arriba a la izquierda, sin invadir la columna de tarjetas (`max-width: min(40rem, 100% - 31rem)`).
+  - En celular va arriba en dos líneas. La isla baja y se achica (`--plate-scale` 1,3 → 1,15, ancla 14 → 19,5 rem), así entra debajo del título.
+  - Ya no hace falta el fundido del encabezado en celular (`workshop-leave`).
+- **Tarjetas más cerca.** La separación bajó de 45 a 16 svh en escritorio y de 30 a 12 svh en celular. La tarjeta "Próximamente" también quedó más cerca.
+  - En escritorio, con una tarjeta centrada ya asoma la siguiente.
+  - La primera espera abajo de la pantalla cuando la sección se fija.
+- **Lectura guiada.** `WorkshopController` (`src/components/world/workshop-controller.tsx`) usa el mismo desplazamiento guiado que los seis pasos (`guided-scroll.ts`).
+  - Cuando termina un scroll con la sección fijada y ninguna tarjeta centrada, sigue hasta la próxima tarjeta en el sentido en que se venía y la centra en la zona de lectura. Tarda cerca de 1 s por tarjeta.
+  - La zona de lectura es la pantalla en escritorio. En celular es el espacio entre la isla y la barra inferior (`--workshop-zone-top: 53`, `--workshop-zone-bottom: 93`). Una tarjeta más alta que esa zona queda alineada arriba (el engranaje, con su botón).
+  - No actúa por encima de la primera tarjeta ni por debajo de la última, ni a más de una tarjeta de distancia, así que se entra y se sale libre. Tampoco actúa con movimiento reducido ni si la sección no está fijada.
+  - Se usa este controlador y no `scroll-snap` CSS: con `mandatory` la página entera quedaría atrapada en los puntos de anclaje, y `proximity` no garantiza el centrado.
+  - En celular, el halo y el pin de cada objeto se encienden con la tarjeta en su reposo (`animation-range: cover 5% cover 50%`).
+- **Verificado (1440 × 900 y 390 × 844).** Con rueda hacia abajo, las cuatro tarjetas quedan centradas una por una, con un desvío de 0 px. Una rueda más allá de la última no se mueve. Hacia arriba vuelve por las cuatro y suelta la sección arriba de la primera.
+  - El título queda fijo (en 112–337 px en escritorio y 84–198 px en celular) durante toda la sección.
+  - El foco con Tab llega al enlace de la primera tarjeta y queda visible.
+  - Con movimiento reducido la página no se mueve sola. En celular no hay escenario fijado y todo queda legible.
+  - A 1024 px el título no toca las tarjetas.
+  - Sin scroll horizontal ni errores de consola. Lint, typecheck y build limpios.
+  - Capturas: antes en `docs/plans/isla4-guiada/antes-{d,m}-0..5.jpg`, después en `despues-{d,m}-0..4.jpg`, `despues-m-reducido.jpg` y `despues-1024.jpg`.
+- **Límite:** a 1024 px la tarjeta centrada tapa la caja de herramientas pintada. Ya pasaba antes, porque la columna de tarjetas se apoya sobre la isla a ese ancho.

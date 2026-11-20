@@ -5,6 +5,7 @@ import { plateSceneStyle } from "@/components/world/island-plate";
 import { IslandScene } from "@/components/world/island-scene";
 import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure } from "@/components/world/mayo-figure";
+import { WorkshopController } from "@/components/world/workshop-controller";
 import { comingSoon, commercialPlans, extensions } from "@/content/commercial-plans";
 import { islandCopy } from "@/content/islands";
 import { islandPlates } from "@/content/stage";
@@ -24,7 +25,10 @@ const spotStyle = (point: readonly [number, number], mobile: readonly [number, n
  * object (greenhouse, pot, toolbox, gear) and its pin while it is in the
  * reading zone, scrubbed by the scroll and reversible. With reduced motion
  * or without scroll-driven animations every part and pin stands still and
- * readable.
+ * readable. The title and lead belong to the pinned stage, so they stay with
+ * the island instead of scrolling away (Juani, 20 November 2026: "el titulo
+ * ... debe acompañar el paralax de la isla"), and every part ends centred
+ * on the screen after a scroll (WorkshopController).
  */
 export function SystemsIsland() {
   return (
@@ -41,16 +45,15 @@ export function SystemsIsland() {
             </span>
           ))}
         </IslandScene>
-      </div>
-
-      <div className="world-shell workshop__content">
-        <header className="workshop__intro">
+        <header className="world-shell workshop__intro">
           <h2 id="sistemas-title">
             <IslandTitle segments={islandCopy.systems.title} />
           </h2>
           <p className="isle__body">{islandCopy.systems.body}</p>
         </header>
+      </div>
 
+      <div className="world-shell workshop__content">
         <ol className="workshop__parts">
           {workshopParts.map((part, index) => (
             <li className={`workshop__part workshop__part--${part.object} panel`} key={part.object}>
@@ -106,6 +109,7 @@ export function SystemsIsland() {
           </a>
         </aside>
       </div>
+      <WorkshopController />
     </section>
   );
 }
