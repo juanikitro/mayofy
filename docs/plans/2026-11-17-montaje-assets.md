@@ -198,6 +198,13 @@ Juani: "En la isla 2, 4 y 7, podriamos mejorar la sombra de mayo para que se int
 | 4 (hora dorada) | `58 24 10` | proyección 66/79, 22×5,5, 0,3; oclusión patas delanteras en la tierra 40/87,5 (10×2,2, 0,45); patas traseras 65/75,5 (8×1,8, 0,5) |
 | 7 (noche) | `2 20 22` | proyección del farol hacia la derecha 64/89, 26×5, 0,35; proyección de la luz menta hacia abajo a la izquierda 36/92, 18×3,5, 0,2; oclusión del asiento 45/90,5, 24×3, 0,6 |
 
+**20 de noviembre de 2026 (Juani: "En el hero, la sombra de mayo no acompaña la sombra del arbol. Lo mismo pasa en la isla 2"):** se suman el hero y se reorienta la isla 2 para que sigan las sombras pintadas de su placa. La caja de contacto pasa a medir tres celdas centradas en la de Mayo (`inset: -100%`, con las capas traducidas en `MayoFigure`), así las proyecciones largas no se cortan; las capas siguen en % de la celda y las islas 4 y 7 se ven igual.
+
+| Isla | Tono | Capas |
+| --- | --- | --- |
+| Hero (sol bajo desde la derecha) | `40 52 12` | proyección hacia la izquierda 30/90,5 (28×6,5, 0,62) y su cola 0/92,5 (34×6, 0,38); oclusión del asiento 50/88,5 (17×2,4, 0,55) y de la cola 38/88,6 (8×1,6, 0,4) |
+| 2 (luz desde la derecha, sombras abajo a la izquierda) | `26 46 10` | proyección bajo las patas traseras 58/80 (22×7, 0,45) y hacia abajo a la izquierda 26/90,5 (34×8, 0,5); la oclusión bajo las patas no cambia |
+
 **Cómo se verificó.** Recortes antes y después de las tres islas a 1440×900 y 390×844 en los cuadros 0, 6 y 9 (el 9 de la isla 2 es el salto: la sombra queda en el suelo), sin errores de consola, estilos calculados de los demás slots idénticos antes y después, y la capa sin animación con movimiento reducido; `typecheck` y `lint` limpios. No hay corredor de tests en el proyecto.
 
 **Límite.** Las posiciones están en espacio de pantalla: un slot con `face: "right"` tendría que espejar sus elipses a mano. La capa no reacciona a los cuadros, así que en el salto de la isla 2 la oclusión bajo las patas delanteras sigue en el pasto (se lee como la sombra del salto).
