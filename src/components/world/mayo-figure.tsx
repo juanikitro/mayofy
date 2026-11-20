@@ -1,25 +1,29 @@
 import type { CSSProperties } from "react";
 
-import { getMayoSlot, mayoAnchors, mayoPoseSources, mayoSprites, type MayoAnchor, type MayoContactLayer, type MayoSlotId, type MayoSprite } from "@/content/stage";
+import { getMayoSlot, mayoAnchors, mayoPoseSources, mayoSprites, type MayoAnchor, type MayoContactLayer, type MayoRoute, type MayoSlotId, type MayoSprite } from "@/content/stage";
 
 /**
- * Scroll travel as `translate` offsets in Mayo's own widths (a percentage of
- * `translate` is relative to the element), so the run and the chase move on
- * the compositor instead of re-laying out `left` on every scrolled frame.
- * Offsets are measured from the anchor, where she rests without motion.
+ * The route as `translate` offsets in Mayo's own widths (a percentage of
+ * `translate` is relative to the element) and a depth `scale` per point, so
+ * the run moves on the compositor instead of re-laying out `left` and `top`
+ * on every scrolled frame. Offsets are measured from the anchor, where she
+ * rests without motion; a y in % of the plate's height becomes widths
+ * through the plate's aspect.
  */
-function travelOffsets(anchor: MayoAnchor) {
-  if (!anchor.travel) return {};
+function routeOffsets(anchor: MayoAnchor) {
+  if (!anchor.route) return {};
   const pct = (value: string) => Number.parseFloat(value);
-  const offset = (to: string, x: string, size: string) => `${((pct(to) - pct(x)) / pct(size)) * 100}%`;
-  const xMobile = anchor.xMobile ?? anchor.x;
-  const sizeMobile = anchor.sizeMobile ?? anchor.size;
-  const travelMobile = anchor.travelMobile ?? anchor.travel;
+  const points = (route: MayoRoute, x: string, y: string, size: string, suffix: string) =>
+    Object.fromEntries(
+      route.points.flatMap(([px, py, scale], index) => [
+        [`--r${index}x-${suffix}`, `${((px - pct(x)) / pct(size)) * 100}%`],
+        [`--r${index}y-${suffix}`, `${(((py - pct(y)) * route.aspect) / pct(size)) * 100}%`],
+        [`--r${index}s-${suffix}`, String(scale)],
+      ]),
+    );
   return {
-    "--travel-from-d": offset(anchor.travel.from, anchor.x, anchor.size),
-    "--travel-to-d": offset(anchor.travel.to, anchor.x, anchor.size),
-    "--travel-from-m": offset(travelMobile.from, xMobile, sizeMobile),
-    "--travel-to-m": offset(travelMobile.to, xMobile, sizeMobile),
+    ...points(anchor.route, anchor.x, anchor.y, anchor.size, "d"),
+    ...points(anchor.routeMobile ?? anchor.route, anchor.xMobile ?? anchor.x, anchor.yMobile ?? anchor.y, anchor.sizeMobile ?? anchor.size, "m"),
   };
 }
 
@@ -57,10 +61,10 @@ function scrubStyle(sprite: MayoSprite | undefined) {
     "--scrub-range-m": rangeMobile ?? range,
     "--cycles-d": String(cycles),
     "--cycles-m": String(cyclesMobile),
-    // The travel advances once per painted frame, never between two, so a
-    // held pose never glides over the meadow.
-    "--travel-steps-d": String(Math.round(cycles * sprite.frames)),
-    "--travel-steps-m": String(Math.round(cyclesMobile * sprite.frames)),
+    // The route advances once per painted frame, never between two, so a
+    // held pose never glides over the meadow; its three legs share the frames.
+    "--route-steps-d": String(Math.round((cycles * sprite.frames) / 3)),
+    "--route-steps-m": String(Math.round((cyclesMobile * sprite.frames) / 3)),
   };
 }
 
@@ -99,7 +103,7 @@ export function MayoFigure({
           "--anchor-x-m": anchor.xMobile ?? anchor.x,
           "--anchor-y-m": anchor.yMobile ?? anchor.y,
           "--anchor-size-m": anchor.sizeMobile ?? anchor.size,
-          ...travelOffsets(anchor),
+          ...routeOffsets(anchor),
           ...shadowStyle(anchor),
           ...contactStyle(anchor),
           ...scrubStyle(sprite),
@@ -115,7 +119,7 @@ export function MayoFigure({
         anchor ? "mayo--anchored" : "",
         anchor && anchor.shadow !== false ? "mayo--shadow" : "",
         anchor?.face === "right" ? "mayo--face-right" : "",
-        anchor?.travel ? "mayo--travel" : "",
+        anchor?.route ? "mayo--route" : "",
         className,
       ]
         .filter(Boolean)

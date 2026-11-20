@@ -105,7 +105,7 @@ const sprite = (slot: MayoSlotId, feetY: string, loop: MayoSprite["loop"], scrub
  * Painted strips delivered so far (manifest docs/plans/mundo-mayo-assets.md).
  * Ranges were measured on the page as the share of each section's `cover`
  * range during which Mayo is on screen at 1440 x 900 and 390 x 844; the
- * island ranges also drive her travel (`mayoAnchors[].travel`). Island 7 is
+ * island ranges also drive her route (`mayoAnchors[].route`). Island 7 is
  * the last section, so its range ends before the page stops scrolling.
  */
 export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
@@ -124,9 +124,13 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   // Painted in place on a crop of the island 4 v2 plate (camera, light and shadow from the scene).
   systems: { ...sprite("systems", "88.09%", "pingpong", { timeline: "--isle", range: "cover 50% cover 92%", rangeMobile: "cover 66% cover 97%", cycles: 4 }), strip: { avif: "/images/mundo-mayo/70-mayo-systems-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-systems-v2-tira.webp" } },
   // Painted in place on a crop of the island 5 v2 plate (gallop seen from the scene camera).
-  // One stride per body length of travel: desktop travels 22 % of the plate at a size of
-  // 8 % (3 strides); mobile 20 % at 16 % (1.5 strides). The travel steps once per frame.
-  works: { ...sprite("works", "78.13%", "cycle", { timeline: "--isle", range: "cover 46% cover 88%", rangeMobile: "cover 68% cover 96%", cycles: 3, cyclesMobile: 1.5 }), strip: { avif: "/images/mundo-mayo/70-mayo-works-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-works-v2-tira.webp" } },
+  // The strides match the ground she covers: in the strip a planted paw moves back ~5.5 % of
+  // the cell per frame (f0 to f2), so one 12-frame cycle covers ~0.66 cell. Her route
+  // (mayoAnchors.works) is 13.7 % of the plate width at a cell of 8.01 % on desktop
+  // (2.5 cycles) and 23.8 % at 16 % on phones (2.25 cycles), depth scale included. The
+  // range is the stretch of scroll during which she is between ~80 % and ~20 % of the
+  // viewport's height. The route steps once per frame.
+  works: { ...sprite("works", "78.13%", "cycle", { timeline: "--isle", range: "cover 52% cover 80%", rangeMobile: "cover 74% cover 89%", cycles: 2.5, cyclesMobile: 2.25 }), strip: { avif: "/images/mundo-mayo/70-mayo-works-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-works-v2-tira.webp" } },
   // Resting by the fire: breathing and ears, barely.
   // Painted in place on a crop of the island 6 v2 plate (resting, facing the campfire).
   host: { ...sprite("host", "85.16%", "pingpong", { timeline: "--isle", range: "cover 62% cover 93%", rangeMobile: "cover 72% cover 98%", cycles: 2 }), strip: { avif: "/images/mundo-mayo/70-mayo-host-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-host-v2-tira.webp" } },
@@ -258,6 +262,15 @@ export const cloudFall = {
  * objects nearby. Mobile plates are taller: the same spot sits lower and the
  * square grows.
  */
+/** Feet position in % of the plate (x of its width, y of its height) and depth scale. */
+export type RoutePoint = readonly [x: number, y: number, scale: number];
+
+export type MayoRoute = {
+  points: readonly [RoutePoint, RoutePoint, RoutePoint, RoutePoint];
+  /** Plate height / width, to turn a y in % of the height into Mayo's widths. */
+  aspect: number;
+};
+
 export type MayoAnchor = {
   x: string;
   y: string;
@@ -267,10 +280,16 @@ export type MayoAnchor = {
   sizeMobile?: string;
   /** The strips are painted facing left; `right` mirrors Mayo towards what she interacts with. */
   face?: "left" | "right";
-  /** Scroll-driven travel across the plate: `x` moves from `from` to `to` along the slot's scrub range. */
-  travel?: { from: string; to: string };
-  /** Travel on the mobile plate, when its meadow is framed differently. */
-  travelMobile?: { from: string; to: string };
+  /**
+   * Scroll-driven run along a painted path, over the slot's scrub range: four
+   * points of her feet in % of the plate with her depth scale (1 at the
+   * anchor, smaller further back), so she follows the path's curve and shrinks
+   * as it recedes. The last point should be the anchor, where she rests
+   * without motion.
+   */
+  route?: MayoRoute;
+  /** Route on the mobile plate, which frames the path differently. */
+  routeMobile?: MayoRoute;
   /**
    * Contact shadow at the feet line (default on; `false` when airborne).
    * `lean` shifts it away from the island's key light, in % of Mayo's width
@@ -356,17 +375,38 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
       ],
     },
   },
-  // Island 5: runs right-to-left across the middle band of the meadow, over the path; sunset light from the left.
-  // Cell = plate crop (left 752 px, top 513 px, side 134 px of 1672); shadow painted in.
+  // Island 5: gallops down the painted path, from its right bend to the stepping stone at its
+  // front left (the S-curve's middle run, which heads left and towards the camera); sunset
+  // light from the left. Cell = plate crop (top 513 px, side 134 px of 1672, ground line at
+  // y 65.64 %); shadow painted in. The route points sit on the path's centre line (read with a
+  // 2.5 % grid on the v2 plates) and are spaced so that, scaled by depth, each third of the run
+  // covers the same ground; the scale follows the stepping stones (4.3 % wide at y 55.5,
+  // 5.3 % at y 66 on desktop).
   works: {
-    x: "48.98%",
+    x: "45.5%",
     y: "65.64%",
     size: "8.01%",
-    xMobile: "48%",
-    yMobile: "72.5%",
+    xMobile: "41%",
+    yMobile: "71.6%",
     sizeMobile: "16%",
-    travel: { from: "60%", to: "38%" },
-    travelMobile: { from: "58%", to: "38%" },
+    route: {
+      points: [
+        [57, 57, 0.84],
+        [53.33, 59.66, 0.886],
+        [49.39, 62.07, 0.93],
+        [45.5, 65.64, 1],
+      ],
+      aspect: 941 / 1672,
+    },
+    routeMobile: {
+      points: [
+        [61.5, 66.6, 0.88],
+        [55, 68.3, 0.92],
+        [48.08, 69.87, 0.96],
+        [41, 71.6, 1],
+      ],
+      aspect: 1536 / 864,
+    },
     shadow: false,
   },
   // Island 6: resting on the grass facing the campfire (fire at 55 %, 59.5 %; mobile 53 %, 75 %), which lights her from the right.

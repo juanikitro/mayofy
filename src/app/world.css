@@ -461,14 +461,14 @@ details[data-preparing-open="true"] > .animated-details__content {
 .mayo {
   --scrub-range: var(--scrub-range-d);
   --cycles: var(--cycles-d);
-  --travel-steps: var(--travel-steps-d);
+  --route-steps: var(--route-steps-d);
 }
 
 @media (max-width: 48rem) {
   .mayo {
     --scrub-range: var(--scrub-range-m);
     --cycles: var(--cycles-m);
-    --travel-steps: var(--travel-steps-m);
+    --route-steps: var(--route-steps-m);
   }
 }
 
@@ -3893,31 +3893,56 @@ html[data-motion-tier="full"] .plate-object--glow {
   transform: scaleX(-1);
 }
 
-/* Scroll-driven travel across the plate (run, chase) on the same timeline
- * and range that step the sprite, so her legs and her path stay in sync, as
- * `translate` offsets from the anchor in Mayo's own widths (set by
- * MayoFigure), so it runs on the compositor; without scroll-driven
- * animations she stays at the anchor. */
-.mayo--travel {
-  --travel-from: var(--travel-from-d);
-  --travel-to: var(--travel-to-d);
+/* Scroll-driven run along a painted path (island 5) on the same timeline and
+ * range that step the sprite, so her legs and her path stay in sync: four
+ * route points (`mayoAnchors[].route`) as `translate` offsets from the anchor
+ * in Mayo's own widths and a depth `scale`, set by MayoFigure, so it runs on
+ * the compositor. The scale pivots on her feet, which the anchoring
+ * `transform` puts on the box's top-left corner. Without scroll-driven
+ * animations she stays at the anchor, the route's last point. */
+.mayo--route {
+  --r0x: var(--r0x-d);
+  --r0y: var(--r0y-d);
+  --r0s: var(--r0s-d);
+  --r1x: var(--r1x-d);
+  --r1y: var(--r1y-d);
+  --r1s: var(--r1s-d);
+  --r2x: var(--r2x-d);
+  --r2y: var(--r2y-d);
+  --r2s: var(--r2s-d);
+  --r3x: var(--r3x-d);
+  --r3y: var(--r3y-d);
+  --r3s: var(--r3s-d);
+
+  transform-origin: 0 0;
 }
 
 @media (max-width: 48rem) {
-  .mayo--travel {
-    --travel-from: var(--travel-from-m);
-    --travel-to: var(--travel-to-m);
+  .mayo--route {
+    --r0x: var(--r0x-m);
+    --r0y: var(--r0y-m);
+    --r0s: var(--r0s-m);
+    --r1x: var(--r1x-m);
+    --r1y: var(--r1y-m);
+    --r1s: var(--r1s-m);
+    --r2x: var(--r2x-m);
+    --r2y: var(--r2y-m);
+    --r2s: var(--r2s-m);
+    --r3x: var(--r3x-m);
+    --r3y: var(--r3y-m);
+    --r3s: var(--r3s-m);
   }
 }
 
 @supports (animation-timeline: view()) {
-  .mayo--travel {
-    animation: mayo-travel both;
-    /* One step per painted frame, on the sprite's own step boundaries
-     * (`jump-none`, cycles x frames over the same range): the strip's
-     * planted paws barely move inside the cell, so a smooth travel made
-     * every held pose slide. */
-    animation-timing-function: steps(var(--travel-steps, 2), jump-none);
+  .mayo--route {
+    animation: mayo-route both;
+    /* One step per painted frame on each leg, on the sprite's own step
+     * boundaries (cycles x frames / 3 per leg over the same range): a smooth
+     * route made every held pose slide. `jump-start` never repeats a
+     * position where two legs meet and lands on the anchor with the last
+     * frame. */
+    animation-timing-function: steps(var(--route-steps, 2), jump-start);
     animation-timeline: var(--scrub-timeline);
     animation-range: var(--scrub-range);
   }
@@ -3945,13 +3970,25 @@ html[data-motion-tier="full"] .plate-object--glow {
   }
 }
 
-@keyframes mayo-travel {
-  from {
-    translate: var(--travel-from) 0;
+@keyframes mayo-route {
+  0% {
+    translate: var(--r0x) var(--r0y);
+    scale: var(--r0s);
   }
 
-  to {
-    translate: var(--travel-to) 0;
+  33.333% {
+    translate: var(--r1x) var(--r1y);
+    scale: var(--r1s);
+  }
+
+  66.667% {
+    translate: var(--r2x) var(--r2y);
+    scale: var(--r2s);
+  }
+
+  100% {
+    translate: var(--r3x) var(--r3y);
+    scale: var(--r3s);
   }
 }
 
@@ -3965,13 +4002,13 @@ html[data-motion-tier="full"] .plate-object--glow {
   }
 }
 
-html[data-motion-tier="reduced"] .mayo--travel,
+html[data-motion-tier="reduced"] .mayo--route,
 html[data-motion-tier="reduced"] .plate-object--chased {
   animation: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mayo--travel,
+  .mayo--route,
   .plate-object--chased {
     animation: none !important;
   }

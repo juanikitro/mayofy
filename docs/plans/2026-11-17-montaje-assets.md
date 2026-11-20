@@ -201,3 +201,28 @@ Juani: "En la isla 2, 4 y 7, podriamos mejorar la sombra de mayo para que se int
 **Cómo se verificó.** Recortes antes y después de las tres islas a 1440×900 y 390×844 en los cuadros 0, 6 y 9 (el 9 de la isla 2 es el salto: la sombra queda en el suelo), sin errores de consola, estilos calculados de los demás slots idénticos antes y después, y la capa sin animación con movimiento reducido; `typecheck` y `lint` limpios. No hay corredor de tests en el proyecto.
 
 **Límite.** Las posiciones están en espacio de pantalla: un slot con `face: "right"` tendría que espejar sus elipses a mano. La capa no reacciona a los cuadros, así que en el salto de la isla 2 la oclusión bajo las patas delanteras sigue en el pasto (se lee como la sombra del salto).
+
+### Isla 5: la carrera sigue el sendero (20 de noviembre de 2026)
+
+Juani: "En la isla 5 creo que mayo podria estar mejor integrada".
+
+**Por qué se veía pegada (medido sobre la placa v2 con una grilla del 2,5 % y sobre la página):**
+
+1. **Corría en línea recta horizontal a profundidad fija** (y 65,64 % de la placa, de x 60 % a 38 %): cruzaba pasto, el sendero en S y plantas, nunca por el camino pintado, y con el mismo tamaño de punta a punta.
+2. **La zancada no correspondía al suelo recorrido.** En la tira v2 la pata apoyada retrocede ~5,5 % de la celda por cuadro (cuadros 0 a 2), así que un ciclo de 12 cuadros cubre ~0,66 celda. Con 3 vueltas en 22 % de la placa (celda 8,01 %) recorría ~0,9 celda por vuelta: avanzaba más de lo que pisaba.
+3. **La mitad de la carrera pasaba fuera de pantalla.** El rango `cover 46 %`–`88 %` empezaba con Mayo debajo del borde inferior (y 927 px de 900) y terminaba encima del superior (−81 px).
+
+**Qué cambió:**
+
+- `mayoAnchors.works.route` / `routeMobile` en `stage.ts`: cuatro puntos sobre la línea central del tramo medio del sendero, que va hacia la izquierda y hacia la cámara (escritorio de 57 % / 57 % a 45,5 % / 65,64 %; celular de 61,5 % / 66,6 % a 41 % / 71,6 %), con una escala de profundidad tomada de las piedras del sendero (escritorio 0,84 → 1; celular 0,88 → 1). Los puntos están espaciados para que cada tercio cubra el mismo suelo a su escala. El último punto es el ancla: ahí descansa sin movimiento.
+- `MayoFigure` los publica como desplazamientos en anchos de Mayo y una escala por punto; `world.css` los recorre con `@keyframes mayo-route` (`translate` + `scale` con el pivote en las patas, `transform-origin: 0 0`). El recorrido sigue avanzando un paso por cuadro pintado: `steps(vueltas × 12 / 3, jump-start)` por tramo, sobre los mismos límites que la tira. Reemplaza al `travel` horizontal (sólo lo usaba esta isla).
+- Vueltas según el suelo recorrido: 2,5 en escritorio (13,7 % de la placa) y 2,25 en celular (23,8 %).
+- Rango: `cover 52 %`–`80 %` en escritorio y `cover 74 %`–`89 %` en celular, el tramo durante el que Mayo está entre ~80 % y ~20 % del alto de la ventana.
+- Oclusión: los dos tocones que roza quedan detrás de la línea de sus patas, así que pintarla encima es correcto; no hizo falta recortar objetos de la placa.
+
+**Verificado (Chromium, 1440 × 900 y 390 × 844):** 31 posiciones en escritorio y 28 en celular. Cada paso del recorrido coincide con un cambio de cuadro, salvo uno solo al entrar en el rango (~4 px con el cuadro 0). Mayo queda en pantalla de punta a punta: el pie de su caja va de 825 a 246 px en escritorio y de 726 a 236 px en celular. Con movimiento reducido no anima y queda en el ancla, sobre la piedra delantera. Tiras de antes y después en `docs/plans/isla5-mayo/antes|despues/` (8 posiciones a lo largo del rango; `antes/d-00` y `d-07` muestran el prado a medias porque Mayo ya estaba fuera de pantalla). Typecheck, lint y build limpios.
+
+**Lo que el código no resuelve (propuesta de cuadros nuevos):** la tira es un galope de perfil hacia la izquierda, pero el tramo del sendero baja hacia la cámara unos 30°. Además, con el scroll quieto Mayo queda congelada en el aire a mitad de zancada, al principio y al final.
+
+1. **Galope en tres cuartos hacia la cámara y la izquierda.** 12 cuadros, ciclo cerrado (dos zancadas como la tira actual). Pintado sobre un recorte de `45-isla5-escritorio-v2` centrado en el medio del tramo (x ≈ 51 %, y ≈ 61 % de la placa), lado 134 px de 1672 y línea de suelo al ~78 % de la celda. Referencia de pose: los cuadros 0 a 5 de `70-mayo-works-v2-tira`, girados hacia la cámara. Para que el cálculo de vueltas siga valiendo, la pata apoyada debería retroceder a velocidad constante (como hoy, ~5,5 % de la celda por cuadro).
+2. **Llegada y reposo.** 8 cuadros sin bucle: galope → trote → parada sobre la piedra delantera, mirando hacia atrás, a la cámara. Recorte centrado en el ancla (45,5 % / 65,64 %), mismo lado y línea de suelo. El cuadro 1 empalma con un cuadro de apoyo del galope. Con esto el final del rango y el modo reducido muestran a Mayo parada y no a mitad de salto.
