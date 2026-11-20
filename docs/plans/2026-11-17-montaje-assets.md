@@ -226,3 +226,22 @@ Juani: "En la isla 5 creo que mayo podria estar mejor integrada".
 
 1. **Galope en tres cuartos hacia la cámara y la izquierda.** 12 cuadros, ciclo cerrado (dos zancadas como la tira actual). Pintado sobre un recorte de `45-isla5-escritorio-v2` centrado en el medio del tramo (x ≈ 51 %, y ≈ 61 % de la placa), lado 134 px de 1672 y línea de suelo al ~78 % de la celda. Referencia de pose: los cuadros 0 a 5 de `70-mayo-works-v2-tira`, girados hacia la cámara. Para que el cálculo de vueltas siga valiendo, la pata apoyada debería retroceder a velocidad constante (como hoy, ~5,5 % de la celda por cuadro).
 2. **Llegada y reposo.** 8 cuadros sin bucle: galope → trote → parada sobre la piedra delantera, mirando hacia atrás, a la cámara. Recorte centrado en el ancla (45,5 % / 65,64 %), mismo lado y línea de suelo. El cuadro 1 empalma con un cuadro de apoyo del galope. Con esto el final del rango y el modo reducido muestran a Mayo parada y no a mitad de salto.
+
+### Isla 5: galope de tres cuartos y llegada (20 de noviembre de 2026)
+
+Se montaron las dos tiras encargadas (`70-mayo-works-v3-tira` y `70-mayo-works-llegada-tira`; manifiesto en la rama de ilustradores, secciones works-v3 y works-llegada). Sólo se copiaron el AVIF y el WebP.
+
+- **Dos tiras en la misma caja.** Comparten celda (8,014 % de la placa) y línea de suelo (78 %). La caja de Mayo lleva las dos: el galope (`.mayo__sprite--run`) se ve en la primera parte del rango y la llegada (`.mayo__sprite--arrival`) en el resto. El cambio es instantáneo (`step-start`) justo en el paso al primer cuadro de la llegada. El galope hace 2 ciclos en escritorio (24 cuadros) y 1,5 en celular (18): el relevo cae después de f12 o de f6, y el cuadro siguiente sería un inicio de apoyo delantero (f1 o f7), que es lo que retoma la llegada en su f1. La llegada suma 8 cuadros y termina de pie en el ancla (45,5 % / 65,6238 %, la referencia de suelo del manifiesto).
+- **Un keyframe por cuadro pintado.** `MayoFigure` arma el recorrido hacia atrás desde el ancla. Cada paso avanza lo que avanza la pata apoyada en el cuadro al que lleva (tabla del manifiesto: f1→f2 6,45 %, f4→f5 7,03 %, f7→f8 5,86 %, f10→f11 7,03 % de la celda; en el aire, el promedio, 6,59 %), escalado por la profundidad. En la llegada, f1→f2 avanza 6,09 % (medido: la pata va de 191 a 230 px de 640) y desde f2 la pata queda plantada (228 a 231 px), así que no avanza más. Durante un paso de apoyo conserva altura y escala; la bajada del sendero y el cambio de escala ocurren con las patas en el aire. El resultado son `@keyframes mayo-route-works-d|m`, un keyframe por cuadro, cada uno sostenido hasta el siguiente (`step-end`). El rango de cada tira se parte en el mismo punto (`--run-range`, `--arrival-range`), así cada cuadro ocupa el mismo tramo de scroll que su paso.
+- **Ruta:** la misma línea central del sendero; el punto de partida sale de las zancadas (escritorio x 57,5 %, escala 0,834; celular x 61,4 %, escala 0,89).
+- **Reposo:** sin animaciones por scroll, en el nivel `reduced` y con movimiento reducido se ve f8 de la llegada en el ancla y el galope queda oculto. Antes del rango espera en f1 del galope al comienzo de la ruta.
+
+**Verificado (Chromium, 1440 × 900 y 390 × 844, muestreo cada 4 px de scroll):**
+
+- Secuencia completa A1–A12 ×2, B1–B8 en escritorio y A1–A12, A1–A6, B1–B8 en celular, sin ningún desplazamiento entre cuadros.
+- La punta apoyada se mueve como mucho 0,08 px en x y 0 px en y en los nueve pasos de apoyo de escritorio, y 0,03 px en celular.
+- El relevo A→B ocurre en un solo paso de scroll.
+- Al volver a subir se repiten los mismos estados.
+- Con movimiento reducido: B8 en el ancla, sin `translate`.
+- Tira en `docs/plans/isla5-mayo/llegada/` (10 posiciones a lo largo del rango, escritorio y celular).
+- Typecheck, lint y build limpios.

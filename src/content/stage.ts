@@ -90,6 +90,27 @@ export type MayoSprite = {
    * jumps to the first; `cycle` is for motions painted as a closed loop (run, chase). */
   loop: "pingpong" | "cycle";
   scrub: MayoScrub;
+  /** Ground covered between frames, for a strip that runs along a route (`mayoAnchors[].route`). */
+  stride?: MayoStride;
+  /**
+   * One-shot strip that takes over from the run on its last frames (island 5:
+   * brake and stand). Its first frame continues a stance start of the run,
+   * its last frame is the rest pose at the anchor (end of the range, reduced
+   * motion, no scroll-driven animations). Same cell and feet line as the run.
+   */
+  arrival?: { strip: { avif: string; webp: string }; frames: number; stride: MayoStride };
+};
+
+/**
+ * How far a planted paw moves back inside the cell between two frames, in %
+ * of the cell, measured on the painted strip: during a stance step Mayo must
+ * advance exactly that much, or the paw slides on the ground.
+ */
+export type MayoStride = {
+  /** Planted-paw advance, keyed by the 0-based index of the frame the step leads into. */
+  stance: Readonly<Record<number, number>>;
+  /** Advance for every other step (paws in the air): the mean stance advance for a gallop, 0 once she stands. */
+  airborne: number;
 };
 
 const sprite = (slot: MayoSlotId, feetY: string, loop: MayoSprite["loop"], scrub: MayoScrub): MayoSprite => ({
@@ -123,14 +144,27 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   // Digging: quick, repetitive paw strokes.
   // Painted in place on a crop of the island 4 v2 plate (camera, light and shadow from the scene).
   systems: { ...sprite("systems", "88.09%", "pingpong", { timeline: "--isle", range: "cover 50% cover 92%", rangeMobile: "cover 66% cover 97%", cycles: 4 }), strip: { avif: "/images/mundo-mayo/70-mayo-systems-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-systems-v2-tira.webp" } },
-  // Painted in place on a crop of the island 5 v2 plate (gallop seen from the scene camera).
-  // The strides match the ground she covers: in the strip a planted paw moves back ~5.5 % of
-  // the cell per frame (f0 to f2), so one 12-frame cycle covers ~0.66 cell. Her route
-  // (mayoAnchors.works) is 13.7 % of the plate width at a cell of 8.01 % on desktop
-  // (2.5 cycles) and 23.8 % at 16 % on phones (2.25 cycles), depth scale included. The
+  // Front three-quarter gallop painted in place on a crop of the island 5 v2 plate
+  // (works-v3: 786, 467, 134 px of 1672; two strides, f10/f11 reuse f4/f5), then the
+  // arrival strip (works-llegada: 694, 513, 134 px): f1 picks up a front-stance start of
+  // the gallop, f2 is its last planted step, she trots, brakes and f8 stands on the front
+  // stepping stone looking at the camera. Both cells are 8.014 % of the plate with the
+  // ground line at 78 %. Stance advances from the asset manifest (works-v3) and measured on
+  // the arrival strip (f1 to f2: 39 px of 640; the paw then stays planted, 228 to 231 px).
+  // `cycles` counts gallop cycles before the arrival (2 on desktop, 1.5 on phones, so the
+  // hand-over follows f12 or f6 into a front-stance start); the arrival adds 8 frames. The
   // range is the stretch of scroll during which she is between ~80 % and ~20 % of the
-  // viewport's height. The route steps once per frame.
-  works: { ...sprite("works", "78.13%", "cycle", { timeline: "--isle", range: "cover 52% cover 80%", rangeMobile: "cover 74% cover 89%", cycles: 2.5, cyclesMobile: 2.25 }), strip: { avif: "/images/mundo-mayo/70-mayo-works-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-works-v2-tira.webp" } },
+  // viewport's height.
+  works: {
+    ...sprite("works", "78%", "cycle", { timeline: "--isle", range: "cover 52% cover 80%", rangeMobile: "cover 74% cover 89%", cycles: 2, cyclesMobile: 1.5 }),
+    strip: { avif: "/images/mundo-mayo/70-mayo-works-v3-tira.avif", webp: "/images/mundo-mayo/70-mayo-works-v3-tira.webp" },
+    stride: { stance: { 1: 6.445312, 4: 7.03125, 7: 5.859375, 10: 7.03125 }, airborne: 6.591797 },
+    arrival: {
+      strip: { avif: "/images/mundo-mayo/70-mayo-works-llegada-tira.avif", webp: "/images/mundo-mayo/70-mayo-works-llegada-tira.webp" },
+      frames: 8,
+      stride: { stance: { 1: 6.09 }, airborne: 0 },
+    },
+  },
   // Resting by the fire: breathing and ears, barely.
   // Painted in place on a crop of the island 6 v2 plate (resting, facing the campfire).
   host: { ...sprite("host", "85.16%", "pingpong", { timeline: "--isle", range: "cover 62% cover 93%", rangeMobile: "cover 72% cover 98%", cycles: 2 }), strip: { avif: "/images/mundo-mayo/70-mayo-host-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-host-v2-tira.webp" } },
@@ -281,11 +315,11 @@ export type MayoAnchor = {
   /** The strips are painted facing left; `right` mirrors Mayo towards what she interacts with. */
   face?: "left" | "right";
   /**
-   * Scroll-driven run along a painted path, over the slot's scrub range: four
-   * points of her feet in % of the plate with her depth scale (1 at the
-   * anchor, smaller further back), so she follows the path's curve and shrinks
-   * as it recedes. The last point should be the anchor, where she rests
-   * without motion.
+   * Scroll-driven run along a painted path, over the slot's scrub range: the
+   * path's centre line as four points of her feet in % of the plate with her
+   * depth scale (1 at the anchor, smaller further back), so she follows its
+   * curve and shrinks as it recedes. The last point is the anchor, where she
+   * stops; where she starts follows from the strides (`mayoSprites[].stride`).
    */
   route?: MayoRoute;
   /** Route on the mobile plate, which frames the path differently. */
@@ -377,15 +411,15 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   },
   // Island 5: gallops down the painted path, from its right bend to the stepping stone at its
   // front left (the S-curve's middle run, which heads left and towards the camera); sunset
-  // light from the left. Cell = plate crop (top 513 px, side 134 px of 1672, ground line at
-  // y 65.64 %); shadow painted in. The route points sit on the path's centre line (read with a
-  // 2.5 % grid on the v2 plates) and are spaced so that, scaled by depth, each third of the run
-  // covers the same ground; the scale follows the stepping stones (4.3 % wide at y 55.5,
-  // 5.3 % at y 66 on desktop).
+  // light from the left; shadow painted in. The route points sit on the path's centre line
+  // (read with a 2.5 % grid on the v2 plates); the scale follows the stepping stones (4.3 %
+  // wide at y 55.5, 5.3 % at y 66 on desktop). The anchor is the arrival strip's ground
+  // reference on the front stepping stone (45.5 %, 65.6238 %; cell 8.014 %), where she stands
+  // at the end.
   works: {
     x: "45.5%",
-    y: "65.64%",
-    size: "8.01%",
+    y: "65.6238%",
+    size: "8.014%",
     xMobile: "41%",
     yMobile: "71.6%",
     sizeMobile: "16%",
@@ -394,7 +428,7 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
         [57, 57, 0.84],
         [53.33, 59.66, 0.886],
         [49.39, 62.07, 0.93],
-        [45.5, 65.64, 1],
+        [45.5, 65.6238, 1],
       ],
       aspect: 941 / 1672,
     },
