@@ -5074,8 +5074,8 @@ html[data-motion-tier="reduced"] .world {
   transition: transform var(--m-press) var(--ease-ui);
 }
 
-/* The label is placed with `translate` and moves with `transform`, so the
- * reduced tier can drop the motion and keep the placement. */
+/* The label is centred and moved by one `transform` in every state (the
+ * CSS minifier folds a separate `translate` into `transform`). */
 .progress__paw::after {
   content: attr(data-label);
   position: absolute;
@@ -5090,8 +5090,7 @@ html[data-motion-tier="reduced"] .world {
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
-  translate: 0 -50%;
-  transform: translateX(4px);
+  transform: translate(4px, -50%);
   transition:
     opacity var(--m-fast) var(--ease-ui),
     transform var(--m-fast) var(--ease-ui);
@@ -5099,14 +5098,14 @@ html[data-motion-tier="reduced"] .world {
 
 .progress__paw:focus-visible::after {
   opacity: 1;
-  transform: none;
+  transform: translate(0, -50%);
   transition-duration: var(--m-base);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .progress__paw:hover::after {
     opacity: 1;
-    transform: none;
+    transform: translate(0, -50%);
     transition-duration: var(--m-base);
     transition-delay: 350ms;
   }
@@ -5115,8 +5114,11 @@ html[data-motion-tier="reduced"] .world {
 @media (max-width: 48rem) {
   .progress__paw::after {
     inset: auto auto calc(100% + 0.6rem) 50%;
-    translate: -50% 0;
-    transform: translateY(4px);
+    transform: translate(-50%, 4px);
+  }
+
+  .progress__paw:is(:hover, :focus-visible)::after {
+    transform: translate(-50%, 0);
   }
 }
 
@@ -5137,15 +5139,33 @@ html[data-motion-tier="reduced"] .world {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .progress__paw::before,
-  .progress__paw::after {
+  .progress__paw::before {
     transform: none;
+  }
+
+  .progress__paw::after {
+    transform: translate(0, -50%);
   }
 }
 
-html[data-motion-tier="reduced"] .progress__paw::before,
-html[data-motion-tier="reduced"] .progress__paw::after {
+html[data-motion-tier="reduced"] .progress__paw::before {
   transform: none;
+}
+
+html[data-motion-tier="reduced"] .progress__paw::after {
+  transform: translate(0, -50%);
+}
+
+@media (max-width: 48rem) {
+  @media (prefers-reduced-motion: reduce) {
+    .progress__paw::after {
+      transform: translate(-50%, 0);
+    }
+  }
+
+  html[data-motion-tier="reduced"] .progress__paw::after {
+    transform: translate(-50%, 0);
+  }
 }
 
 /* WhatsApp float (phones) ---------------------------------------------- */
@@ -5881,9 +5901,67 @@ html[data-motion-tier="reduced"] .wa-float {
   background: color-mix(in oklch, var(--moss) 12%, var(--cream));
 }
 
-.dawn__whatsapp {
-  padding-block: 0.45rem;
-  padding-inline-start: 0.6rem;
+/* Icon only: a round ghost button as tall as the CTAs; its name shows as a
+ * tooltip above it after a short pause under the pointer, or at once on
+ * keyboard focus. */
+.btn--icon {
+  position: relative;
+  width: 3.3rem;
+  padding: 0;
+}
+
+.btn--icon .btn__glyph {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.btn--icon .btn__glyph svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.btn--icon[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  inset: auto auto calc(100% + 0.6rem) 50%;
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 4px);
+  transition:
+    opacity var(--m-fast) var(--ease-ui),
+    transform var(--m-fast) var(--ease-ui);
+}
+
+.btn--icon[data-tip]:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  transition-duration: var(--m-base);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn--icon[data-tip]:hover::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    transition-duration: var(--m-base);
+    transition-delay: 300ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--icon[data-tip]::after {
+    transform: translate(-50%, 0);
+  }
+}
+
+html[data-motion-tier="reduced"] .btn--icon[data-tip]::after {
+  transform: translate(-50%, 0);
 }
 
 .btn__glyph {
@@ -6203,21 +6281,11 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   box-shadow: var(--shadow-soft);
 }
 
-.guarantees__head {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.15rem;
-}
-
 .guarantees h3 {
   font-size: 1.05rem;
   white-space: nowrap;
 }
 
-.guarantees__toggle {
-  margin-inline-start: -0.4rem;
-}
 
 .guarantees__seals {
   display: flex;
@@ -6315,7 +6383,7 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   --gi-anim: gi-spin;
 }
 
-/* While the strip is on screen one icon plays every 2 s, in turn
+/* While the strip is on screen one icon plays every second, in turn
  * (GuaranteesStrip sets data-playing); at rest every icon is in its final
  * state (no script, reduced motion, paused). */
 @media (prefers-reduced-motion: no-preference) {
@@ -6387,12 +6455,6 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   .guarantees {
     grid-template-columns: 1fr;
     gap: 1rem;
-  }
-
-  .guarantees__head {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
   }
 
   .guarantees__seals {
@@ -8026,8 +8088,8 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
-/* Pause button for the guarantees icons and the works autoplay (one per
- * panel): a 32px disc inside a 44px target; pause bars or a play triangle. */
+/* Pause button for the works autoplay: a 32px disc inside a 44px target;
+ * pause bars or a play triangle. */
 .motion-toggle {
   display: grid;
   flex: none;
