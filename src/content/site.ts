@@ -52,8 +52,9 @@ export const siteContent = {
   },
   founder: {
     title: "Mayofy es la marca. Detrás estoy yo.",
-    lead: "Soy Juani. Hace 5 años construyo software: hoy lidero técnicamente un sistema en producción con unos 750 usuarios activos y un equipo de 4 desarrolladores.",
-    body: "Esa experiencia en APIs, integraciones, automatizaciones y operación en la nube es la que pongo en cada proyecto de Mayofy. Vas a hablar conmigo desde la reunión de diagnóstico hasta la publicación, sin capas comerciales ni un equipo ficticio.",
+    // Shortened on 2026-11-20 (island 6, option A of docs/plans/2026-11-20-propuestas.md).
+    lead: "Soy Juani. Hace 5 años construyo software y hoy lidero técnicamente un sistema con unos 750 usuarios activos.",
+    body: "Vas a hablar conmigo desde la reunión de diagnóstico hasta la publicación, sin capas comerciales.",
   },
   faq: [
     {

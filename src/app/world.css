@@ -6637,3 +6637,957 @@ html[data-motion-tier="reduced"] .works-index__shot {
     color: inherit;
   }
 }
+
+/* ======================================================================
+ * Islands 2, 4 and 6: the proposals Juani chose on 2026-11-20
+ * (docs/plans/2026-11-20-propuestas.md; problem-island.tsx and
+ * case-picker.tsx, systems-island.tsx, host-island.tsx). Every motion here
+ * is scrubbed by the scroll and reversible; the static state (no
+ * scroll-driven animations, reduced motion) is the finished one.
+ * ==================================================================== */
+
+/* Island 2: "Elegí tu caso" beside "your page" -------------------------- */
+
+/* Phones and tablets keep the layout of the other islands: copy and the
+ * case picker on top, the island (with the phone standing on its meadow)
+ * under them. Wide screens pin the stage while the questions fly. */
+.problem__content > :is(h2, .isle__body, .cases) {
+  max-width: 36rem;
+}
+
+.cases {
+  display: grid;
+  gap: 0.75rem;
+  margin-block-start: 0.5rem;
+}
+
+.cases__prompt {
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.cases__options {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.case {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: center;
+  min-height: 3.25rem;
+  padding: 0.5rem 1rem 0.5rem 0.75rem;
+  border: 1.5px solid color-mix(in oklch, var(--moss) 20%, transparent);
+  border-radius: 1rem;
+  background: color-mix(in oklch, var(--cream) 82%, transparent);
+  color: var(--ink);
+  font: 500 1rem/1.35 var(--font-world-sans);
+  text-align: start;
+  cursor: pointer;
+  transition:
+    translate var(--m-base) var(--ease-out),
+    border-color var(--m-base),
+    background-color var(--m-base),
+    box-shadow var(--m-base);
+}
+
+.case__rock {
+  width: 2.75rem;
+  height: auto;
+  filter: drop-shadow(0 4px 4px rgb(40 50 20 / 25%));
+}
+
+.case:hover {
+  translate: 0 var(--m-lift);
+  border-color: var(--moss);
+}
+
+.case:active {
+  scale: var(--m-press-scale);
+}
+
+.case[aria-pressed="true"] {
+  border-color: var(--moss);
+  background: var(--cream);
+  box-shadow: var(--m-shadow-card);
+}
+
+.case-result {
+  display: grid;
+  gap: 0.35rem;
+  justify-items: start;
+  padding: 1.1rem 1.25rem 1.25rem;
+  animation: case-result-in var(--m-panel) var(--ease-enter);
+}
+
+.case-result__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.case-result h3 {
+  font-size: 1.45rem;
+}
+
+.case-result__price {
+  color: var(--ink-soft);
+}
+
+.case-result__price strong {
+  color: var(--moss);
+  font-size: 1.2rem;
+}
+
+.case-result__why {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.case-result__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-block-start: 0.5rem;
+}
+
+@keyframes case-result-in {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+  }
+}
+
+/* The phone and the questions live in the plate, in % of it, like Mayo. */
+.problem__demo {
+  --phone-x: 54%;
+  --phone-y: 23.5%;
+  --phone-w: 12.5%;
+
+  position: absolute;
+  inset: 0;
+}
+
+.problem__phone {
+  position: absolute;
+  left: var(--phone-x);
+  top: var(--phone-y);
+  width: var(--phone-w);
+  aspect-ratio: 9 / 16;
+  padding: 3.5%;
+  border-radius: 14% / 8%;
+  background: var(--ink);
+  box-shadow: 0 1.5rem 2.5rem -1rem rgb(30 50 20 / 55%);
+  container-type: inline-size;
+}
+
+.problem__screen {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 11% / 6%;
+  background: var(--cream);
+}
+
+.problem__brand {
+  display: grid;
+  padding: 8cqi 7cqi 5cqi;
+  background: color-mix(in oklch, var(--leaf-light) 40%, var(--cream));
+  font-size: 5.2cqi;
+  color: var(--ink-soft);
+}
+
+.problem__brand b {
+  font-size: 7.2cqi;
+  color: var(--ink);
+}
+
+.problem__answers {
+  display: grid;
+  align-content: start;
+  gap: 3.5cqi;
+  margin: 0;
+  padding: 5cqi;
+  list-style: none;
+}
+
+.problem__answers li {
+  display: grid;
+  padding: 3.5cqi 4.5cqi;
+  border-radius: 4cqi;
+  background: var(--beige);
+  font-size: 5cqi;
+  line-height: 1.3;
+}
+
+.problem__answers b {
+  color: var(--moss);
+  font-size: 5.4cqi;
+}
+
+.problem__whatsapp {
+  margin: 0 5cqi 6cqi;
+  padding: 4cqi;
+  border-radius: 999px;
+  background: #1fa855;
+  color: #fff;
+  font-size: 5.4cqi;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* A question floats over the island, then lands on its row of the phone.
+ * Hidden in the static state: the page already answered it. */
+.problem__ask {
+  --x0: var(--x0-d);
+  --y0: var(--y0-d);
+  --x1: calc(var(--phone-x) + 1.5%);
+  --y1: calc(var(--phone-y) + 8% + var(--row) * 5.5%);
+
+  position: absolute;
+  left: var(--x1);
+  top: var(--y1);
+  padding: 0.5rem 0.85rem;
+  border-radius: 1rem 1rem 1rem 0.25rem;
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 0.75rem 1.5rem -0.75rem rgb(30 50 20 / 45%);
+  opacity: 0;
+}
+
+.problem__ask:nth-child(1) { --ask-range: cover 30% cover 40%; }
+.problem__ask:nth-child(2) { --ask-range: cover 36% cover 46%; }
+.problem__ask:nth-child(3) { --ask-range: cover 42% cover 52%; }
+.problem__ask:nth-child(4) { --ask-range: cover 48% cover 58%; }
+.problem__answers li:nth-child(1) { --answer-range: cover 38% cover 42%; }
+.problem__answers li:nth-child(2) { --answer-range: cover 44% cover 48%; }
+.problem__answers li:nth-child(3) { --answer-range: cover 50% cover 54%; }
+.problem__answers li:nth-child(4) { --answer-range: cover 56% cover 60%; }
+.problem__whatsapp { --answer-range: cover 60% cover 64%; }
+
+@media (max-width: 48rem) {
+  .problem__demo {
+    --phone-x: 58%;
+    --phone-y: 24%;
+    --phone-w: 38%;
+  }
+
+  .problem__ask {
+    --x0: var(--x0-m);
+    --y0: var(--y0-m);
+    --x1: calc(var(--phone-x) + 3%);
+    --y1: calc(var(--phone-y) + 7.5% + var(--row) * 4.6%);
+
+    padding: 0.4rem 0.7rem;
+    font-size: 0.75rem;
+  }
+
+  .problem__ask:nth-child(1) { --ask-range: cover 38% cover 45%; }
+  .problem__ask:nth-child(2) { --ask-range: cover 43% cover 50%; }
+  .problem__ask:nth-child(3) { --ask-range: cover 48% cover 55%; }
+  .problem__ask:nth-child(4) { --ask-range: cover 53% cover 60%; }
+  .problem__answers li:nth-child(1) { --answer-range: cover 44% cover 47%; }
+  .problem__answers li:nth-child(2) { --answer-range: cover 49% cover 52%; }
+  .problem__answers li:nth-child(3) { --answer-range: cover 54% cover 57%; }
+  .problem__answers li:nth-child(4) { --answer-range: cover 59% cover 62%; }
+  .problem__whatsapp { --answer-range: cover 62% cover 65%; }
+}
+
+/* Wide and tall enough: the stage is pinned for 2.3 screens while the
+ * questions land, the copy on the left and the island leaning right
+ * (`--problem-shift`, like the hero's tree) so the picker never covers it. */
+@media (min-width: 64rem) and (min-height: 40rem) {
+  .problem {
+    --plate-scale: 1;
+    --problem-shift: 26vw;
+
+    height: 230vh;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .problem__stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: clip;
+  }
+
+  .problem__content {
+    padding-block-start: max(6.5rem, 13svh);
+  }
+
+  .problem .plate__picture--island,
+  .problem .mayo--anchored,
+  .problem__demo {
+    translate: var(--problem-shift) 0;
+  }
+
+  .problem__ask:nth-child(1) { --ask-range: contain 8% contain 24%; }
+  .problem__ask:nth-child(2) { --ask-range: contain 26% contain 42%; }
+  .problem__ask:nth-child(3) { --ask-range: contain 44% contain 60%; }
+  .problem__ask:nth-child(4) { --ask-range: contain 62% contain 78%; }
+  .problem__answers li:nth-child(1) { --answer-range: contain 22% contain 28%; }
+  .problem__answers li:nth-child(2) { --answer-range: contain 40% contain 46%; }
+  .problem__answers li:nth-child(3) { --answer-range: contain 58% contain 64%; }
+  .problem__answers li:nth-child(4) { --answer-range: contain 76% contain 82%; }
+  .problem__whatsapp { --answer-range: contain 84% contain 90%; }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-motion-tier="reduced"]) .problem__ask {
+      animation: problem-ask linear both;
+      animation-timeline: --isle;
+      animation-range: var(--ask-range);
+    }
+
+    html:not([data-motion-tier="reduced"]) :is(.problem__answers li, .problem__whatsapp) {
+      animation: problem-answer linear both;
+      animation-timeline: --isle;
+      animation-range: var(--answer-range);
+    }
+  }
+}
+
+@keyframes problem-ask {
+  0% {
+    left: var(--x0);
+    top: var(--y0);
+    opacity: 1;
+    scale: 1;
+  }
+
+  70% {
+    opacity: 1;
+    scale: 0.9;
+  }
+
+  100% {
+    left: var(--x1);
+    top: var(--y1);
+    opacity: 0;
+    scale: 0.7;
+  }
+}
+
+@keyframes problem-answer {
+  from {
+    opacity: 0;
+    translate: 0 6px;
+  }
+}
+
+/* Island 4: the workshop, pinned while its four parts scroll past -------- */
+
+/* The stage covers the screen for the whole section (`margin-block-end`
+ * hands its height back), so the island never leaves while the offer is
+ * read. Each part names a view timeline; the section shares them
+ * (`timeline-scope`) with the halos and pins inside the scene. */
+.workshop {
+  --workshop-x: -19vw;
+  --workshop-y: -4svh;
+  /* The plate is a little taller than the screen at 16:10, so its own sky
+   * (not the section's) fills the top of the pinned stage. */
+  --plate-scale: 1.12;
+
+  min-height: 0;
+  padding: 0;
+  /* What shows under the stage when it is not pinned (phones, reduced motion). */
+  background: #fdeac1;
+  timeline-scope: --part-greenhouse, --part-pot, --part-toolbox, --part-gear;
+}
+
+.workshop__stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  margin-block-end: -100svh;
+  overflow: clip;
+}
+
+.workshop .plate__picture--island,
+.workshop .mayo--anchored,
+.workshop__halo,
+.workshop__pin {
+  translate: var(--workshop-x) var(--workshop-y);
+}
+
+.workshop__halo {
+  position: absolute;
+  left: var(--x-d);
+  top: var(--y-d);
+  width: 11%;
+  aspect-ratio: 1.5;
+  margin: -3.7% 0 0 -5.5%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(255 240 190 / 60%), rgb(255 225 150 / 22%) 55%, rgb(255 225 150 / 0));
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.workshop__pin {
+  position: absolute;
+  left: var(--x-d);
+  top: var(--y-d);
+  z-index: 3;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-pill);
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: var(--m-shadow-card);
+  transform: translate(-50%, calc(-100% - 0.6rem));
+}
+
+/* A short stem from the pin down to its object. */
+.workshop__pin::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 2px;
+  height: 0.6rem;
+  background: inherit;
+  translate: -50% 0;
+}
+
+.workshop__content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 28rem);
+  column-gap: 3rem;
+  padding-block: 7rem 25svh;
+}
+
+.workshop__intro {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 1rem;
+  max-width: 40rem;
+}
+
+.workshop__parts {
+  grid-column: 2;
+  display: grid;
+  gap: 45svh;
+  margin: 30svh 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.workshop__part {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: start;
+  padding: 1.5rem 1.6rem;
+}
+
+.workshop__part--greenhouse { view-timeline-name: --part-greenhouse; }
+.workshop__part--pot { view-timeline-name: --part-pot; }
+.workshop__part--toolbox { view-timeline-name: --part-toolbox; }
+.workshop__part--gear { view-timeline-name: --part-gear; }
+
+.workshop__object {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+.workshop__part h3 {
+  font-size: 1.45rem;
+}
+
+.workshop__items {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.workshop__items li {
+  display: flex;
+  gap: 0.6rem;
+  color: var(--ink-soft);
+}
+
+.workshop__items li::before {
+  content: "";
+  flex: none;
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-block-start: 0.6rem;
+  border-radius: 50%;
+  background: var(--leaf);
+}
+
+.workshop__items li:nth-child(1) { --item-from: 8%; }
+.workshop__items li:nth-child(2) { --item-from: 11%; }
+.workshop__items li:nth-child(3) { --item-from: 14%; }
+.workshop__items li:nth-child(4) { --item-from: 17%; }
+.workshop__items li:nth-child(5) { --item-from: 20%; }
+
+.workshop__link {
+  margin-block-start: 0.5rem;
+}
+
+.workshop__cta {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+  margin-block-start: 0.75rem;
+}
+
+.workshop__cta p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.workshop__soon {
+  grid-column: 2;
+  display: grid;
+  grid-template: none / minmax(0, 1fr);
+  gap: 0.75rem;
+  justify-items: start;
+  margin-block-start: 30svh;
+  padding: 1.25rem 1.4rem;
+}
+
+.workshop__soon .soon__label {
+  grid-area: auto;
+}
+
+.workshop__soon-copy {
+  color: var(--ink-soft);
+}
+
+.workshop__soon-copy strong {
+  color: var(--ink);
+}
+
+.workshop__tiers .soon__tiers {
+  margin-block-start: 0.5rem;
+}
+
+/* Each part lights its object and its pin while it crosses the reading
+ * zone, and its items step in from the right as it arrives. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-motion-tier="reduced"]) :is(.workshop__halo, .workshop__pin) {
+      animation: workshop-light linear both;
+      animation-range: cover 20% cover 80%;
+    }
+
+    html:not([data-motion-tier="reduced"]) .workshop__pin {
+      animation-name: workshop-pin;
+    }
+
+    html:not([data-motion-tier="reduced"]) .workshop__part {
+      animation: workshop-part linear both;
+    }
+
+    html:not([data-motion-tier="reduced"]) .workshop__items li {
+      animation: workshop-item linear both;
+      animation-range: cover var(--item-from) cover calc(var(--item-from) + 12%);
+    }
+
+    html:not([data-motion-tier="reduced"]) :is(.workshop__halo--greenhouse, .workshop__pin--greenhouse, .workshop__part--greenhouse, .workshop__part--greenhouse .workshop__items li) {
+      animation-timeline: --part-greenhouse;
+    }
+
+    html:not([data-motion-tier="reduced"]) :is(.workshop__halo--pot, .workshop__pin--pot, .workshop__part--pot, .workshop__part--pot .workshop__items li) {
+      animation-timeline: --part-pot;
+    }
+
+    html:not([data-motion-tier="reduced"]) :is(.workshop__halo--toolbox, .workshop__pin--toolbox, .workshop__part--toolbox, .workshop__part--toolbox .workshop__items li) {
+      animation-timeline: --part-toolbox;
+    }
+
+    html:not([data-motion-tier="reduced"]) :is(.workshop__halo--gear, .workshop__pin--gear, .workshop__part--gear, .workshop__part--gear .workshop__items li) {
+      animation-timeline: --part-gear;
+    }
+  }
+}
+
+@keyframes workshop-light {
+  0%,
+  100% {
+    opacity: 0;
+    scale: 0.8;
+  }
+
+  30%,
+  70% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes workshop-pin {
+  0%,
+  100% {
+    background-color: var(--cream);
+    color: var(--ink);
+    scale: 1;
+  }
+
+  30%,
+  70% {
+    background-color: var(--moss);
+    color: var(--cream);
+    scale: 1.08;
+  }
+}
+
+@keyframes workshop-part {
+  0% {
+    opacity: 0.3;
+  }
+
+  35%,
+  65% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes workshop-item {
+  from {
+    opacity: 0;
+    translate: 1rem 0;
+  }
+}
+
+/* Phones: the island holds the top of the screen (the plate grows by a
+ * third and rises), the parts arrive from the bottom and fade before they
+ * reach it; the pins become numbers that match the parts. Without
+ * scroll-driven animations or with reduced motion nothing is pinned: the
+ * island first, then every part, all visible. */
+@media (max-width: 48rem) {
+  .workshop {
+    --workshop-x: 0px;
+    --workshop-y: 0px;
+    --plate-scale: 1.3;
+  }
+
+  .workshop .plate {
+    bottom: auto;
+    top: calc(14rem - 100cqw * var(--plate-scale) * 1.7778 * 0.73);
+  }
+
+  .workshop .scene--plated .scene__sky {
+    background: linear-gradient(180deg, var(--sky-from) 0, var(--sky-plate) 30%, var(--sky-bottom) 62%, var(--sky-bottom) 100%);
+  }
+
+  .workshop__halo {
+    left: var(--x-m);
+    top: var(--y-m);
+    width: 17%;
+    margin: -5.7% 0 0 -8.5%;
+  }
+
+  .workshop__pin {
+    left: var(--x-m);
+    top: var(--y-m);
+    display: grid;
+    place-items: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 0;
+  }
+
+  .workshop__pin::before {
+    font-size: 0.8rem;
+  }
+
+  .workshop__pin--greenhouse::before { content: "1"; }
+  .workshop__pin--pot::before { content: "2"; }
+  .workshop__pin--toolbox::before { content: "3"; }
+  .workshop__pin--gear::before { content: "4"; }
+
+  .workshop__content {
+    grid-template-columns: minmax(0, 1fr);
+    padding-block: 21rem 20svh;
+  }
+
+  .workshop__parts,
+  .workshop__soon {
+    grid-column: 1;
+  }
+
+  .workshop__parts {
+    gap: 30svh;
+    margin-block-start: 12svh;
+  }
+
+  .workshop__soon {
+    margin-block-start: 20svh;
+  }
+
+  .workshop__part {
+    padding: 1.1rem 1.2rem;
+  }
+
+  .workshop__part h3 {
+    font-size: 1.25rem;
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      html:not([data-motion-tier="reduced"]) .workshop__part {
+        animation-name: workshop-part-phone;
+      }
+
+      /* The intro and the bot strip fade before they rise into the island. */
+      html:not([data-motion-tier="reduced"]) .workshop__intro {
+        animation: workshop-leave linear both;
+        animation-timeline: view();
+        animation-range: cover 52% cover 62%;
+      }
+
+      html:not([data-motion-tier="reduced"]) .workshop__soon {
+        animation: workshop-part-phone linear both;
+        animation-timeline: view();
+      }
+    }
+  }
+
+  /* No pin without scroll-driven animations or with reduced motion. */
+  @supports not (animation-timeline: view()) {
+    .workshop__stage {
+      position: relative;
+      height: 30rem;
+      margin-block-end: 0;
+    }
+
+    .workshop__content {
+      padding-block-start: 1rem;
+    }
+  }
+
+  html[data-motion-tier="reduced"] .workshop__stage {
+    position: relative;
+    height: 30rem;
+    margin-block-end: 0;
+  }
+
+  html[data-motion-tier="reduced"] .workshop__content {
+    padding-block-start: 1rem;
+  }
+
+  html[data-motion-tier="reduced"] .workshop__parts {
+    gap: 1rem;
+    margin-block-start: 1.5rem;
+  }
+
+  html[data-motion-tier="reduced"] .workshop__soon {
+    margin-block-start: 1rem;
+  }
+}
+
+@media (max-width: 48rem) and (prefers-reduced-motion: reduce) {
+  .workshop__stage {
+    position: relative;
+    height: 30rem;
+    margin-block-end: 0;
+  }
+
+  .workshop__content {
+    padding-block-start: 1rem;
+  }
+
+  .workshop__parts {
+    gap: 1rem;
+    margin-block-start: 1.5rem;
+  }
+
+  .workshop__soon {
+    margin-block-start: 1rem;
+  }
+}
+
+@keyframes workshop-part-phone {
+  0% {
+    opacity: 0;
+  }
+
+  20%,
+  36% {
+    opacity: 1;
+  }
+
+  46%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes workshop-leave {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Island 6: by the fire ------------------------------------------------- */
+
+/* The first screen is the introduction beside the island (the island
+ * cutout, Mayo and the fire's glow lean right by `--hearth-shift`, the far
+ * sky stays); the invitation, the agenda and the folded form follow on the
+ * dusk sky's last colour, which island 7 starts from. */
+.hearth {
+  min-height: 0;
+  padding: 0;
+  background: #1c3268;
+}
+
+.hearth__intro {
+  position: relative;
+  padding-block: 5.5rem calc(100% * var(--plate-h-m, 1.778) * var(--plate-clear-m, 0.41) + 2rem);
+}
+
+.hearth__copy {
+  position: relative;
+  z-index: 2;
+}
+
+.hearth__reach {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 1.5rem;
+  padding-block: 1rem 5rem;
+}
+
+.hearth__invite {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+  max-width: 28rem;
+}
+
+.hearth__invite h3 {
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.hearth__invite h3 em {
+  font-family: var(--font-world-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--mint);
+}
+
+.hearth__invite p,
+.hearth__form-intro {
+  color: var(--night-ink-soft);
+}
+
+.hearth__whatsapp svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: currentColor;
+}
+
+.hearth__reach .booking {
+  max-width: 51.5rem;
+}
+
+.hearth__form .contact-form {
+  padding: 0;
+  background: none;
+}
+
+.hearth__form-intro {
+  margin-block-end: 1rem;
+}
+
+.hearth__form .field {
+  gap: 0.3rem;
+  margin-block-end: 0.85rem;
+}
+
+.hearth__form .field :is(input, select, textarea) {
+  min-height: 2.75rem;
+  padding: 0.55rem 0.85rem;
+  font-size: 1rem;
+}
+
+.hearth__form .field textarea {
+  height: 6.5rem;
+}
+
+@media (min-width: 48.01rem) {
+  .hearth {
+    --hearth-shift: 26vw;
+  }
+
+  .hearth__intro {
+    display: grid;
+    align-items: center;
+    min-height: 100svh;
+    padding-block: 7rem 4rem;
+  }
+
+  .hearth__intro .host {
+    max-width: 34rem;
+  }
+
+  .hearth .plate__picture--island,
+  .hearth .mayo--anchored,
+  .hearth .scene-glow {
+    translate: var(--hearth-shift) 0;
+  }
+}
+
+@media (min-width: 64rem) {
+  .hearth__form .contact-form {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 1rem;
+    align-items: start;
+  }
+
+  .hearth__form .contact-form__row {
+    display: contents;
+  }
+
+  .hearth__form .field:has(textarea) {
+    grid-column: span 2;
+  }
+
+  .hearth__form .contact-form > :is(.contact-form__footer, .contact-form__feedback, .contact-form__privacy, .contact-form__fallback) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 88rem) {
+  .hearth__reach {
+    grid-template-columns: minmax(0, 1fr) 51.5rem;
+    column-gap: 3rem;
+    align-items: start;
+  }
+
+  .hearth__form {
+    grid-column: 1 / -1;
+  }
+}

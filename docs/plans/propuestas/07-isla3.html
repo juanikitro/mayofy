@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Isla 3 propuestas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_base.css">
+<style>
+  .opt { padding-top: 5.5rem; padding-bottom: 0; }
+  .i3-head { text-align: center; }
+  .i3-head h2 { max-width: 16ch; margin-inline: auto; }
+  /* Same framing as the site: the assembled island wide under the title. */
+  .i3-scene { position: relative; margin-top: -4rem; }
+  .i3-plate { width: min(100%, 92rem); margin-inline: auto; }
+
+  /* Pack cards (the destination), simplified from pack-details.tsx. */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; padding-block: 1rem 4rem; }
+  .card { padding: 1.5rem; transition: box-shadow 300ms, outline-color 300ms; outline: 3px solid transparent; outline-offset: 4px; }
+  .card h3 { font-size: 1.35rem; }
+  .card .from { margin-top: .6rem; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--moss); }
+  .card .price { font-size: 2.2rem; font-weight: 600; color: var(--moss); letter-spacing: -.02em; line-height: 1.05; }
+  .card p { margin-top: .5rem; color: var(--ink-soft); }
+  .card.is-target { outline-color: var(--moss); animation: card-ping 1.4s var(--ease-out) 1; }
+  @keyframes card-ping { 0% { outline-color: transparent; } 20% { outline-color: var(--moss); } }
+
+  /* ---------- A: one-line markers ---------- */
+  .marker {
+    position: absolute; left: var(--x); top: var(--y); translate: -50% -100%;
+    display: inline-flex; align-items: center; gap: .55rem; min-height: 2.75rem; padding: .55rem 1rem .55rem .85rem;
+    border-radius: 999px; background: var(--cream); color: var(--ink); text-decoration: none; white-space: nowrap;
+    font-weight: 600; font-size: 1.02rem; box-shadow: var(--shadow-card);
+    transition: translate 160ms var(--ease-out), background-color 160ms;
+  }
+  .marker::after { /* little stem down to the rock */
+    content: ""; position: absolute; left: 50%; top: 100%; width: 2px; height: .9rem; background: var(--cream); translate: -50% 0;
+  }
+  .marker .dot { width: .55rem; height: .55rem; border-radius: 50%; background: var(--leaf); }
+  .marker .price { color: var(--moss); }
+  .marker .arrow { color: var(--moss); transition: translate 160ms var(--ease-out); }
+  .marker:hover, .marker.is-hover { translate: -50% calc(-100% - 3px); }
+  .marker:hover .arrow, .marker.is-hover .arrow { translate: 0 3px; }
+
+  /* ---------- B: one bar under the island, platforms glow ---------- */
+  .glow {
+    position: absolute; left: var(--x); top: var(--y); width: 15%; aspect-ratio: 2.4; translate: -50% -50%; border-radius: 50%;
+    background: radial-gradient(closest-side, oklch(97% 0.08 95 / 85%), oklch(97% 0.08 95 / 0)); mix-blend-mode: soft-light;
+    opacity: 0; transition: opacity 240ms;
+  }
+  .glow.is-on { opacity: 1; }
+  .ring {
+    position: absolute; left: var(--x); top: var(--y); width: 11%; aspect-ratio: 3; translate: -50% -50%; border-radius: 50%;
+    border: 3px solid oklch(97% 0.05 95 / 90%); opacity: 0; transition: opacity 240ms;
+  }
+  .ring.is-on { opacity: 1; }
+  .bar {
+    position: relative; z-index: 3; margin: -10rem auto 0; width: min(100% - 2 * var(--gutter), 56rem);
+    display: grid; grid-template-columns: repeat(3, 1fr); padding: .4rem; border-radius: 1.4rem;
+    background: color-mix(in oklch, var(--cream) 92%, transparent); box-shadow: var(--shadow-card);
+  }
+  .bar a { display: grid; gap: .1rem; padding: .85rem 1.1rem; border-radius: 1.05rem; text-decoration: none; transition: background-color 160ms; }
+  .bar a + a { border-left: 1px solid oklch(24% 0.03 150 / 10%); }
+  .bar a:hover, .bar a.is-hover { background: var(--beige); border-color: transparent; }
+  .bar b { font-size: 1.05rem; }
+  .bar span { color: var(--ink-soft); font-size: .95rem; }
+  .bar span strong { color: var(--moss); }
+
+  /* ---------- C: wooden signs (stand-in for a painted asset) ---------- */
+  .sign { position: absolute; left: var(--x); top: var(--y); translate: -50% -100%; display: grid; justify-items: center; text-decoration: none; transition: translate 160ms var(--ease-out); }
+  .sign:hover, .sign.is-hover { translate: -50% calc(-100% - 3px); }
+  .sign b {
+    display: block; padding: .5rem 1rem .55rem; border-radius: .45rem; color: oklch(96% 0.03 80); font-size: 1rem; white-space: nowrap;
+    background: linear-gradient(oklch(58% 0.09 60), oklch(46% 0.08 52)); box-shadow: inset 0 2px 0 oklch(70% 0.08 70), inset 0 -3px 0 oklch(38% 0.07 50), 0 10px 18px -8px oklch(30% 0.06 50 / 70%);
+    text-shadow: 0 1px 0 oklch(35% 0.06 50);
+  }
+  .sign i { display: block; width: .5rem; height: 2.2rem; background: linear-gradient(90deg, oklch(44% 0.07 52), oklch(56% 0.08 60)); border-radius: 0 0 .2rem .2rem; }
+
+  @media (max-width: 48rem) {
+    .i3-scene { margin-top: 0; overflow: hidden; }
+    .i3-plate { width: 165%; margin-left: -32.5%; }
+    .marker { flex-direction: column; gap: 0; padding: .45rem .7rem; font-size: .82rem; line-height: 1.2; min-height: 2.75rem; }
+    .marker .dot { display: none; }
+    .marker .arrow { display: none; }
+    .cards { grid-template-columns: 1fr; }
+    .bar { grid-template-columns: 1fr; margin-top: -5rem; }
+    .bar a + a { border-left: 0; border-top: 1px solid oklch(24% 0.03 150 / 10%); }
+    .sign b { font-size: .78rem; padding: .35rem .6rem; }
+    .sign i { height: 1.4rem; }
+    .sign { left: var(--xm, var(--x)); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= A ================= -->
+<section class="opt sky-noon" data-opt="a" aria-labelledby="a-title">
+  <span class="opt-tag">Isla 3 · Opción A · Marcadores de una línea</span>
+  <header class="wrap i3-head"><h2 id="a-title">Encontramos lo que necesita <em>tu negocio</em>.</h2></header>
+  <div class="i3-scene">
+    <div class="plate i3-plate">
+      <img src="../../../public/images/mundo-mayo/10-isla3-armada-escritorio-isla.webp" alt="" aria-hidden="true">
+      <div class="mayo mayo--packs" data-still style="--x:62.5%;--y:57%;--s:8%;--f:0" aria-hidden="true"></div>
+      <a class="marker" href="#a-landing" style="--x:26.5%;--y:38.5%"><span class="dot"></span>Landing <span class="price">USD 85</span><span class="arrow" aria-hidden="true">↓</span></a>
+      <a class="marker is-hover" href="#a-web" style="--x:50%;--y:29.5%"><span class="dot"></span>Web + Gestión <span class="price">USD 150</span><span class="arrow" aria-hidden="true">↓</span></a>
+      <a class="marker" href="#a-sistema" style="--x:74%;--y:29%"><span class="dot"></span>Sistema a Medida <span class="price">USD 450</span><span class="arrow" aria-hidden="true">↓</span></a>
+    </div>
+  </div>
+  <div class="wrap cards">
+    <article class="card panel" id="a-landing"><h3>Landing</h3><p class="from">Desde</p><p class="price">USD 85</p><p>Plazo estimado: 1 a 2 semanas</p></article>
+    <article class="card panel is-target" id="a-web"><h3>Web + Gestión</h3><p class="from">Desde</p><p class="price">USD 150</p><p>Plazo estimado: 3 a 9 semanas</p></article>
+    <article class="card panel" id="a-sistema"><h3>Sistema a Medida</h3><p class="from">Desde</p><p class="price">USD 450</p><p>Plazo estimado: 1 a 6 meses</p></article>
+  </div>
+</section>
+
+<!-- ================= B ================= -->
+<section class="opt sky-noon" data-opt="b" aria-labelledby="b-title">
+  <span class="opt-tag">Isla 3 · Opción B · Una barra, la plataforma se ilumina</span>
+  <header class="wrap i3-head"><h2 id="b-title">Encontramos lo que necesita <em>tu negocio</em>.</h2></header>
+  <div class="i3-scene">
+    <div class="plate i3-plate" aria-hidden="true">
+      <img src="../../../public/images/mundo-mayo/10-isla3-armada-escritorio-isla.webp" alt="">
+      <span class="glow" data-for="landing" style="--x:26.5%;--y:46%"></span>
+      <span class="glow is-on" data-for="web" style="--x:50%;--y:42%"></span>
+      <span class="glow" data-for="sistema" style="--x:74%;--y:42%"></span>
+      <span class="ring" data-for="landing" style="--x:26.5%;--y:52%"></span>
+      <span class="ring is-on" data-for="web" style="--x:50%;--y:49.5%"></span>
+      <span class="ring" data-for="sistema" style="--x:74%;--y:51.5%"></span>
+      <div class="mayo mayo--packs" data-still style="--x:62.5%;--y:57%;--s:8%;--f:0"></div>
+    </div>
+  </div>
+  <nav class="bar" aria-label="Packs">
+    <a href="#b-landing" data-for="landing"><b>Landing</b><span>Desde <strong>USD 85</strong> · 1 a 2 semanas</span></a>
+    <a href="#b-web" data-for="web" class="is-hover"><b>Web + Gestión</b><span>Desde <strong>USD 150</strong> · 3 a 9 semanas</span></a>
+    <a href="#b-sistema" data-for="sistema"><b>Sistema a Medida</b><span>Desde <strong>USD 450</strong> · 1 a 6 meses</span></a>
+  </nav>
+  <div class="wrap cards" style="margin-top:3rem">
+    <article class="card panel" id="b-landing"><h3>Landing</h3><p class="from">Desde</p><p class="price">USD 85</p></article>
+    <article class="card panel" id="b-web"><h3>Web + Gestión</h3><p class="from">Desde</p><p class="price">USD 150</p></article>
+    <article class="card panel" id="b-sistema"><h3>Sistema a Medida</h3><p class="from">Desde</p><p class="price">USD 450</p></article>
+  </div>
+</section>
+
+<!-- ================= C ================= -->
+<section class="opt sky-noon" data-opt="c" aria-labelledby="c-title">
+  <span class="opt-tag">Isla 3 · Opción C · Carteles de madera (asset nuevo)</span>
+  <header class="wrap i3-head"><h2 id="c-title">Encontramos lo que necesita <em>tu negocio</em>.</h2></header>
+  <div class="i3-scene">
+    <div class="plate i3-plate">
+      <img src="../../../public/images/mundo-mayo/10-isla3-armada-escritorio-isla.webp" alt="" aria-hidden="true">
+      <div class="mayo mayo--packs" data-still style="--x:62.5%;--y:57%;--s:8%;--f:0" aria-hidden="true"></div>
+      <a class="sign" href="#c-landing" style="--x:33.5%;--y:52%;--xm:26.5%"><b>Landing</b><i aria-hidden="true"></i></a>
+      <a class="sign is-hover" href="#c-web" style="--x:56%;--y:50%;--xm:50%"><b>Web + Gestión</b><i aria-hidden="true"></i></a>
+      <a class="sign" href="#c-sistema" style="--x:81.5%;--y:51%;--xm:73%"><b>Sistema a Medida</b><i aria-hidden="true"></i></a>
+    </div>
+  </div>
+  <div class="wrap cards">
+    <article class="card panel" id="c-landing"><h3>Landing</h3><p class="from">Desde</p><p class="price">USD 85</p></article>
+    <article class="card panel" id="c-web"><h3>Web + Gestión</h3><p class="from">Desde</p><p class="price">USD 150</p></article>
+    <article class="card panel" id="c-sistema"><h3>Sistema a Medida</h3><p class="from">Desde</p><p class="price">USD 450</p></article>
+  </div>
+</section>
+
+<script src="_base.js"></script>
+<script>
+  // B: hovering or focusing a segment lights its platform.
+  document.querySelectorAll(".bar a").forEach((link) => {
+    const light = (on) => {
+      document.querySelectorAll(".bar a").forEach((a) => a.classList.toggle("is-hover", on && a === link));
+      document.querySelectorAll(".glow, .ring").forEach((g) => g.classList.toggle("is-on", on && g.dataset.for === link.dataset.for));
+    };
+    link.addEventListener("pointerenter", () => light(true));
+    link.addEventListener("focus", () => light(true));
+  });
+</script>
+</body>
+</html>

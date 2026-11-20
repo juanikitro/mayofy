@@ -1,0 +1,346 @@
+/*
+ * Shared base for the 2026-11-20 proposal mockups. Tokens copied from
+ * src/app/world.css (.world). Mockups only: nothing here ships.
+ */
+:root {
+  --sans: "Instrument Sans", "Segoe UI", sans-serif;
+  --serif: "Fraunces", Georgia, serif;
+  --moss: oklch(42% 0.11 150);
+  --leaf: oklch(55% 0.14 145);
+  --leaf-light: oklch(74% 0.13 140);
+  --leaf-deep: oklch(38% 0.1 150);
+  --mint: oklch(85.7% 0.1995 158.3);
+  --cream: oklch(96% 0.018 75);
+  --beige: oklch(92% 0.03 68);
+  --beige-deep: oklch(86% 0.045 62);
+  --ink: oklch(24% 0.03 150);
+  --ink-soft: oklch(40% 0.03 150);
+  --bark: oklch(45% 0.06 55);
+  --stone: oklch(62% 0.02 70);
+  --night: oklch(17% 0.04 265);
+  --night-ink: oklch(94% 0.012 160);
+  --night-ink-soft: oklch(78% 0.02 200);
+  --gutter: clamp(1rem, 4vw, 5rem);
+  --radius: 1.25rem;
+  --shadow-soft: 0 1.5rem 3rem -1.5rem oklch(30% 0.05 60 / 45%);
+  --shadow-card: 0 1.75rem 3rem -1.25rem oklch(30% 0.05 60 / 55%);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --plate-ratio: 1672 / 941;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--beige);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.45;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+.wrap {
+  width: min(100% - 2 * var(--gutter), 80rem);
+  margin-inline: auto;
+}
+
+h2 {
+  font-size: clamp(2.2rem, 4.4vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 1.7vw, 1.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+h2 em,
+h3 em,
+.serif {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--moss);
+}
+
+.dark h2 em,
+.dark h3 em,
+.dark .serif {
+  color: var(--mint);
+}
+
+.lead {
+  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+  color: var(--ink-soft);
+  max-width: 40rem;
+  line-height: 1.5;
+}
+
+.dark {
+  color: var(--night-ink);
+}
+
+.dark .lead {
+  color: var(--night-ink-soft);
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+/* Buttons and links: the site's pair (moss solid, quiet outline). */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.7rem 1.4rem;
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  font: 600 1rem/1.1 var(--sans);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 160ms;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn--moss {
+  background: var(--moss);
+  color: var(--cream);
+}
+
+.btn--moss:hover {
+  background: var(--leaf-deep);
+}
+
+.btn--quiet {
+  border-color: var(--moss);
+  color: var(--moss);
+  background: transparent;
+}
+
+.dark .btn--moss {
+  background: var(--mint);
+  color: var(--night);
+}
+
+.dark .btn--quiet {
+  border-color: var(--mint);
+  color: var(--mint);
+}
+
+.link {
+  font-weight: 600;
+  color: var(--moss);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.3em;
+}
+
+.dark .link {
+  color: var(--mint);
+}
+
+.panel {
+  background: color-mix(in oklch, var(--cream) 90%, transparent);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+
+:focus-visible {
+  outline: 3px solid var(--moss);
+  outline-offset: 3px;
+}
+
+.dark :focus-visible {
+  outline-color: var(--mint);
+}
+
+/* One option per section; the tag names it for Juani's review. */
+.opt {
+  position: relative;
+  min-height: 100vh;
+  overflow: clip;
+  padding-block: clamp(6rem, 12vh, 8rem) clamp(3rem, 8vh, 5rem);
+}
+
+.opt + .opt {
+  border-top: 4px dashed oklch(24% 0.03 150 / 25%);
+}
+
+.opt-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 60;
+  font: 600 0.72rem/1 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+}
+
+/* Skies by island, in the site's order (morning → night). */
+.sky-morning {
+  background: linear-gradient(#8fc3f5, #cfe3f5 55%, #f6e3cf);
+}
+
+.sky-noon {
+  background: linear-gradient(oklch(78% 0.12 238), oklch(90% 0.05 220));
+}
+
+.sky-beige {
+  background: var(--beige);
+}
+
+.sky-golden {
+  background: linear-gradient(#f2e2cf, #f3c7a6 60%, #f0a982);
+}
+
+.sky-sunset {
+  background: linear-gradient(#f6dcc0, #f0a6a0 45%, #a76fb8 85%, #7e5aa8);
+}
+
+.sky-dusk {
+  background: linear-gradient(#4f4386, #25306b 35%, #1b2350);
+}
+
+/* A painted plate (1672 x 941) whose children sit in plate percentages. */
+.plate {
+  position: relative;
+  aspect-ratio: var(--plate-ratio);
+}
+
+.plate > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.on-plate {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+}
+
+/* Mayo: a 12-frame painted strip (640 px cells), played with steps(). */
+.mayo {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s, 8.5%);
+  aspect-ratio: 1;
+  translate: -50% -86%;
+  background-size: 1200% 100%;
+  background-repeat: no-repeat;
+  animation: mayo-strip var(--speed, 1.1s) steps(12, jump-none) infinite;
+  pointer-events: none;
+}
+
+.mayo[data-still] {
+  animation: none;
+  background-position-x: calc(var(--f, 0) / 11 * 100%);
+}
+
+@keyframes mayo-strip {
+  from {
+    background-position-x: 0%;
+  }
+
+  to {
+    background-position-x: 100%;
+  }
+}
+
+.mayo--run {
+  background-image: url("../../../public/images/mundo-mayo/70-mayo-works-v3-tira.webp");
+}
+
+.mayo--rest {
+  background-image: url("../../../public/images/mundo-mayo/70-mayo-host-v2-tira.webp");
+  --speed: 3.6s;
+}
+
+.mayo--dig {
+  background-image: url("../../../public/images/mundo-mayo/70-mayo-systems-v2-tira.webp");
+}
+
+.mayo--play {
+  background-image: url("../../../public/images/mundo-mayo/70-mayo-problem-v2-tira.webp");
+  --speed: 1.4s;
+}
+
+.mayo--packs {
+  background-image: url("../../../public/images/mundo-mayo/70-mayo-packs-tira.webp");
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.reduced *,
+.reduced *::before,
+.reduced *::after {
+  animation: none !important;
+  transition: none !important;
+}

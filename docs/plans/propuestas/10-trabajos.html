@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trabajos propuestas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_base.css">
+<style>
+  .sky-sunset-top { background: linear-gradient(#f6dcc0, #f3bfa9 55%, #ee9f9f); }
+  /* Browser and phone frames around the real screenshots. */
+  .browser { border-radius: .9rem; background: var(--cream); box-shadow: var(--shadow-card); overflow: hidden; }
+  .browser .bar { height: 2rem; display: flex; align-items: center; gap: .4rem; padding-inline: .8rem; background: oklch(93% 0.02 70); }
+  .browser .bar i { width: .55rem; height: .55rem; border-radius: 50%; background: oklch(80% 0.03 60); }
+  .browser .bar span { margin-left: .6rem; font-size: .72rem; color: var(--ink-soft); padding: .2rem .7rem; border-radius: 999px; background: var(--cream); }
+  .browser img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+  .phone { border-radius: 1.6rem; background: var(--ink); padding: .4rem; box-shadow: var(--shadow-card); }
+  .phone img { border-radius: 1.25rem; width: 100%; aspect-ratio: 9 / 18; object-fit: cover; object-position: top; }
+  .meta { font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--moss); }
+  .links { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 1rem; }
+
+  /* ---------- A: index with a floating preview ---------- */
+  .a-grid { margin-top: 2.5rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4rem; align-items: center; }
+  .a-list { border-top: 1px solid oklch(24% 0.03 150 / 15%); }
+  .a-row { display: grid; grid-template-columns: 3rem 1fr auto; gap: 1rem; align-items: baseline; padding: 1.4rem 0; border-bottom: 1px solid oklch(24% 0.03 150 / 15%); text-decoration: none; transition: padding-left 220ms var(--ease-out), color 220ms; }
+  .a-row .n { font-family: var(--serif); font-style: italic; color: var(--moss); font-size: 1.3rem; }
+  .a-row h3 { font-size: clamp(1.4rem, 2.1vw, 1.9rem); }
+  .a-row p { color: var(--ink-soft); margin-top: .35rem; }
+  .a-row .go { color: var(--moss); font-size: 1.4rem; opacity: 0; translate: -6px 0; transition: opacity 200ms, translate 200ms var(--ease-out); }
+  .a-row.is-on { padding-left: .75rem; }
+  .a-row.is-on .go { opacity: 1; translate: 0 0; }
+  .a-row .thumb { display: none; }
+  .a-preview { position: relative; animation: bob 6s ease-in-out infinite; }
+  .a-preview .browser { transition: opacity 260ms; }
+  .a-preview .phone { position: absolute; width: 24%; right: -4%; bottom: -12%; }
+  .a-preview .stone { position: absolute; width: 60%; left: 20%; bottom: -26%; z-index: -1; filter: drop-shadow(0 30px 24px oklch(30% 0.06 40 / 35%)); }
+  @keyframes bob { 50% { translate: 0 -8px; } }
+  .a-note { margin-top: 1.5rem; color: var(--ink-soft); }
+
+  /* ---------- B: one featured case, two beside ---------- */
+  .b-feature { margin-top: 2.5rem; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 3rem; align-items: center; }
+  .b-feature h3 { font-size: clamp(1.8rem, 2.8vw, 2.5rem); margin-top: .5rem; }
+  .b-feature p { margin-top: .8rem; color: var(--ink-soft); }
+  .b-shot { position: relative; padding-bottom: 6%; }
+  .b-shot .phone { position: absolute; width: 22%; right: 3%; bottom: 0; }
+  .b-pair { margin-top: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .b-card { padding: 1rem; display: grid; gap: 1rem; text-decoration: none; transition: translate 200ms var(--ease-out); }
+  .b-card:hover { translate: 0 -2px; }
+  .b-card .browser { box-shadow: none; }
+  .b-card .browser img { transition: scale 300ms var(--ease-out); }
+  .b-card:hover .browser img { scale: 1.03; }
+  .b-card h3 { font-size: 1.25rem; padding-inline: .4rem; }
+  .b-card .meta { padding: 0 .4rem; }
+
+  /* ---------- C: one island per case ---------- */
+  .c-rows { margin-top: 2rem; display: grid; gap: 2rem; }
+  .c-row { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 3rem; align-items: center; }
+  .c-row:nth-child(even) { grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); }
+  .c-row:nth-child(even) .c-art { order: 2; }
+  .c-art { position: relative; padding-top: 1rem; animation: bob 7s ease-in-out infinite; }
+  .c-row:nth-child(2) .c-art { animation-delay: -2.3s; }
+  .c-row:nth-child(3) .c-art { animation-delay: -4.6s; }
+  .c-art .browser { position: relative; z-index: 2; width: 78%; margin-inline: auto; }
+  .c-base { position: relative; z-index: 1; margin-top: -9%; aspect-ratio: 2.54; overflow: hidden; }
+  .c-base img { position: absolute; width: 132.8%; max-width: none; left: -15.1%; top: -83%; }
+  .c-base .mayo { --x: 76%; --y: 34%; --s: 8%; }
+  .c-text h3 { font-size: clamp(1.5rem, 2.4vw, 2.1rem); margin-top: .5rem; }
+  .c-text p { margin-top: .7rem; color: var(--ink-soft); }
+
+  @media (max-width: 48rem) {
+    .a-grid { grid-template-columns: 1fr; gap: 0; }
+    .a-preview { display: none; }
+    .a-row { grid-template-columns: 2rem 1fr; }
+    .a-row .go { display: none; }
+    .a-row .thumb { display: block; grid-column: 1 / -1; margin-bottom: .75rem; border-radius: .8rem; overflow: hidden; box-shadow: var(--shadow-soft); }
+    .a-row .thumb img { aspect-ratio: 16 / 10; object-fit: cover; object-position: top; width: 100%; }
+    .a-row { grid-template-rows: auto auto; }
+    .b-feature { grid-template-columns: 1fr; gap: 1.5rem; }
+    .b-pair { grid-template-columns: 1fr; }
+    .c-row, .c-row:nth-child(even) { grid-template-columns: 1fr; gap: 1rem; }
+    .c-row:nth-child(even) .c-art { order: 0; }
+    .c-art .browser { width: 88%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= A ================= -->
+<section class="opt sky-sunset-top" data-opt="a" aria-labelledby="a-title">
+  <span class="opt-tag">Trabajos · Opción A · Índice con vista previa</span>
+  <div class="wrap">
+    <h2 id="a-title">Nuestra siembra, <em>tus resultados</em>.</h2>
+    <div class="a-grid">
+      <div>
+        <div class="a-list">
+          <a class="a-row" href="#" data-shot="shineapp" data-url="shineapp.lat">
+            <span class="thumb"><img src="img/shineapp-d.jpg" alt=""></span>
+            <span class="n">01</span><span><h3>Sistema de gestión para lavaderos</h3><p>Sistema a medida</p></span><span class="go" aria-hidden="true">→</span>
+          </a>
+          <a class="a-row is-on" href="#" data-shot="consignataria" data-url="gymg.com.ar">
+            <span class="thumb"><img src="img/consignataria-d.jpg" alt=""></span>
+            <span class="n">02</span><span><h3>Landing para una consignataria de hacienda</h3><p>Landing</p></span><span class="go" aria-hidden="true">→</span>
+          </a>
+          <a class="a-row" href="#" data-shot="portfolio" data-url="juanikitro.com">
+            <span class="thumb"><img src="img/portfolio-d.jpg" alt=""></span>
+            <span class="n">03</span><span><h3>Portfolio de un desarrollador</h3><p>Web personal</p></span><span class="go" aria-hidden="true">→</span>
+          </a>
+        </div>
+        <p class="a-note">Los casos completos se suman a medida que avanzan.</p>
+      </div>
+      <div class="a-preview" aria-hidden="true">
+        <img class="stone" src="../../../public/images/mundo-mayo/20-roca-suelta-2.webp" alt="">
+        <div class="browser"><div class="bar"><i></i><i></i><i></i><span id="a-url">gymg.com.ar</span></div><img id="a-shot" src="img/consignataria-d.jpg" alt=""></div>
+        <div class="phone"><img id="a-phone" src="img/consignataria-m.jpg" alt=""></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= B ================= -->
+<section class="opt sky-sunset-top" data-opt="b" aria-labelledby="b-title">
+  <span class="opt-tag">Trabajos · Opción B · Un caso destacado y dos más</span>
+  <div class="wrap">
+    <h2 id="b-title">Nuestra siembra, <em>tus resultados</em>.</h2>
+    <div class="b-feature">
+      <div>
+        <p class="meta">Landing</p>
+        <h3>Landing para una consignataria de hacienda</h3>
+        <p>Presencia propia para una consignataria familiar: qué hace, cómo trabaja y una vía directa de contacto.</p>
+        <div class="links"><a class="link" href="#">Ver el caso →</a><a class="link" href="#">Visitar sitio ↗</a></div>
+      </div>
+      <div class="b-shot">
+        <div class="browser"><div class="bar"><i></i><i></i><i></i><span>gymg.com.ar</span></div><img src="img/consignataria-d.jpg" alt="Inicio de la landing de la consignataria"></div>
+        <div class="phone"><img src="img/consignataria-m.jpg" alt=""></div>
+      </div>
+    </div>
+    <div class="b-pair">
+      <a class="b-card panel" href="#"><div class="browser"><div class="bar"><i></i><i></i><i></i><span>shineapp.lat</span></div><img src="img/shineapp-d.jpg" alt="Acceso de ShineApp"></div><p class="meta">Sistema a medida</p><h3>Sistema de gestión para lavaderos</h3></a>
+      <a class="b-card panel" href="#"><div class="browser"><div class="bar"><i></i><i></i><i></i><span>juanikitro.com</span></div><img src="img/portfolio-d.jpg" alt="Inicio del portfolio"></div><p class="meta">Web personal</p><h3>Portfolio de un desarrollador</h3></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= C ================= -->
+<section class="opt sky-sunset" data-opt="c" aria-labelledby="c-title">
+  <span class="opt-tag">Trabajos · Opción C · Una isla por caso</span>
+  <div class="wrap">
+    <h2 id="c-title">Nuestra siembra, <em>tus resultados</em>.</h2>
+    <div class="c-rows">
+      <article class="c-row">
+        <div class="c-art" aria-hidden="true">
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><span>gymg.com.ar</span></div><img src="img/consignataria-d.jpg" alt=""></div>
+          <div class="c-base"><img src="../../../public/images/mundo-mayo/10-isla3-base-isla.webp" alt=""></div>
+        </div>
+        <div class="c-text"><p class="meta">Landing</p><h3>Landing para una consignataria de hacienda</h3><p>Qué hace, cómo trabaja y una vía directa de contacto.</p><div class="links"><a class="link" href="#">Ver el caso →</a><a class="link" href="#">Visitar sitio ↗</a></div></div>
+      </article>
+      <article class="c-row">
+        <div class="c-art" aria-hidden="true">
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><span>shineapp.lat</span></div><img src="img/shineapp-d.jpg" alt=""></div>
+          <div class="c-base"><img src="../../../public/images/mundo-mayo/10-isla3-base-isla.webp" alt=""><div class="mayo mayo--run" style="--speed:.9s"></div></div>
+        </div>
+        <div class="c-text"><p class="meta">Sistema a medida</p><h3>Sistema de gestión para lavaderos</h3><p>Clientes, servicios y la operación del día a día, en un solo lugar.</p><div class="links"><a class="link" href="#">Ver el caso →</a><a class="link" href="#">Visitar sitio ↗</a></div></div>
+      </article>
+      <article class="c-row">
+        <div class="c-art" aria-hidden="true">
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><span>juanikitro.com</span></div><img src="img/portfolio-d.jpg" alt=""></div>
+          <div class="c-base"><img src="../../../public/images/mundo-mayo/10-isla3-base-isla.webp" alt=""></div>
+        </div>
+        <div class="c-text"><p class="meta">Web personal</p><h3>Portfolio de un desarrollador</h3><p>Trayectoria y casos técnicos explicados con claridad.</p><div class="links"><a class="link" href="#">Ver el caso →</a><a class="link" href="#">Visitar sitio ↗</a></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script src="_base.js"></script>
+<script>
+  // A: hovering or focusing a row swaps the floating preview (no timer, no carousel).
+  const shot = document.getElementById("a-shot"), phone = document.getElementById("a-phone"), url = document.getElementById("a-url");
+  document.querySelectorAll(".a-row").forEach((row) => {
+    const on = () => {
+      document.querySelectorAll(".a-row").forEach((r) => r.classList.toggle("is-on", r === row));
+      if (!shot) return;
+      shot.src = `img/${row.dataset.shot}-d.jpg`;
+      phone.src = `img/${row.dataset.shot}-m.jpg`;
+      url.textContent = row.dataset.url;
+    };
+    row.addEventListener("pointerenter", on);
+    row.addEventListener("focus", on);
+  });
+</script>
+</body>
+</html>
