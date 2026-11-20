@@ -3804,6 +3804,92 @@ html[data-motion-tier="reduced"] .fall__mayo {
   --plate-fade: 0.32;
 }
 
+/* Fall → island 2 (Juani, 20 November 2026: "difumina la transicion del
+ * cielo entre la caida libre de mayo y la isla 2"). On wide screens the
+ * island 2 plate is scaled up, so its faded top rows sit above the section
+ * and its own, lighter sky started flat under the fall's last blue. A veil in
+ * that blue (`--sky-from`, the fall's `--fall-bottom`) opens the section and
+ * lets go over its first ~22rem, above the plate and under the copy; the
+ * island starts well below it. */
+.isle--morning .scene--plated::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: min(40%, 22rem);
+  background: linear-gradient(
+    180deg,
+    var(--sky-from) 0,
+    color-mix(in oklch, var(--sky-from) 65%, transparent) 30%,
+    color-mix(in oklch, var(--sky-from) 20%, transparent) 65%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Island 3 → pack details ("Lo mismo entre la isla 3 y los detalles de los
+ * packs"). The plate hangs below the sticky stage, whose clip cut the roots
+ * and the sky in a straight line over the pack details' band. Once the
+ * stage unpins (`exit 0 %`), a veil in the scene's last colour (`--sky-bottom`,
+ * where that band starts) rises at its foot, so sky and roots dissolve into
+ * the band; while pinned the roots stay clear. Above the plate's layers and
+ * the platforms in the stage (z-index), only over its bottom ~16rem. */
+.rocks .scene--plated::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 6;
+  height: min(30%, 16rem);
+  background: linear-gradient(
+    0deg,
+    var(--sky-bottom) 0,
+    color-mix(in oklch, var(--sky-bottom) 65%, transparent) 30%,
+    color-mix(in oklch, var(--sky-bottom) 20%, transparent) 65%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+@supports (animation-timeline: view()) {
+  .rocks .scene--plated::after {
+    animation: rocks-foot-veil linear both;
+    animation-timeline: --rocks;
+    animation-range: exit 0% exit 10%;
+  }
+}
+
+@keyframes rocks-foot-veil {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Phones: the raised plate ends above the stage's foot, so its layers fade
+ * over their last rows instead of ending in a straight line under the roots.
+ * The background's own fade (`.rocks .plate__picture--background` in the
+ * phone rules of island 3) lost to the later `.scene--plated .plate__picture`
+ * mask of the same specificity; this restores it, and the painted assembled
+ * layer (unmasked at the top, so the platform tops stay crisp) fades the
+ * same way. */
+@media (max-width: 48rem) {
+  .rocks .scene--plated .plate__picture--background {
+    mask-image: linear-gradient(180deg, transparent 0, #000 calc(var(--plate-fade, 0.09) * 100%), #000 80%, transparent 100%);
+  }
+
+  .rocks .scene--plated .plate__picture--assembled {
+    mask-image: linear-gradient(180deg, #000 0, #000 80%, transparent 100%);
+  }
+}
+
+html[data-motion-tier="reduced"] .rocks .scene--plated::after {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rocks .scene--plated::after {
+    animation: none !important;
+  }
+}
+
 .scene--plated.scene--golden {
   --sky-from: oklch(92% 0.03 68);
   --sky-plate: #f19e79;
@@ -4459,9 +4545,14 @@ html[data-motion-tier="reduced"] .world {
   }
 }
 
-/* Skip link: slides down from above the viewport when it takes focus. */
+/* Skip link: shows at once when it takes focus (a focused control is never
+ * caught mid-way) and slides back up when focus leaves. */
 .world .skip-link {
   transition: transform var(--m-panel) var(--ease-enter);
+}
+
+.world .skip-link:focus {
+  transition-duration: 0s;
 }
 
 /* Pill navigation ------------------------------------------------------ */
@@ -5384,5 +5475,480 @@ html[data-motion-tier="reduced"] .wa-float {
     html:not([data-motion-tier="reduced"]) a:hover > .link-arrow--back {
       transform: translateX(calc(-1 * var(--m-nudge)));
     }
+  }
+}
+
+/* ======================================================================
+ * Micro-interactions, iteration 3 (2026-11-20): hero WhatsApp action,
+ * flip cards, work carousels. "Iteración 3" in
+ * docs/plans/2026-11-19-microinteracciones.md.
+ * ==================================================================== */
+
+/* Hero WhatsApp: a tertiary action ------------------------------------- */
+
+/* A third pill in the CTA row, at the same height: ghost ground, the
+ * WhatsApp glyph in a moss disc. Same motion as every button; the glyph
+ * grows 6% under the pointer. */
+.btn--ghost {
+  gap: 0.55rem;
+  padding-inline: 0.4rem 1.1rem;
+  color: var(--moss);
+  background: color-mix(in oklch, var(--cream) 38%, transparent);
+  border-color: color-mix(in oklch, var(--moss) 18%, transparent);
+}
+
+.btn--ghost:hover {
+  background: color-mix(in oklch, var(--cream) 78%, transparent);
+  border-color: color-mix(in oklch, var(--moss) 32%, transparent);
+}
+
+.btn--ghost:active {
+  background: color-mix(in oklch, var(--moss) 12%, var(--cream));
+}
+
+.dawn__whatsapp {
+  padding-block: 0.45rem;
+  padding-inline-start: 0.6rem;
+}
+
+.btn__glyph {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--moss);
+  color: var(--cream);
+  transition: transform var(--m-fast) var(--ease-ui);
+}
+
+.btn__glyph svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: currentColor;
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  html:not([data-motion-tier="reduced"]) .btn:hover > .btn__glyph {
+    transform: scale(1.06);
+    transition-duration: var(--m-base);
+  }
+}
+
+/* Flip cards (packs, maintenance) -------------------------------------- */
+
+/* The faces share one cell; the back sits on the front at its height and
+ * scrolls when longer. Turning is a 560ms rotation on the travel curve;
+ * under reduced motion the faces crossfade in place instead. */
+.flip {
+  position: relative;
+  perspective: 1800px;
+}
+
+.flip__faces {
+  position: relative;
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 560ms var(--ease-travel);
+}
+
+.flip[data-flipped] > .flip__faces {
+  transform: rotateY(180deg);
+}
+
+.flip__face {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip__face--front {
+  position: relative;
+}
+
+.flip__face--back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transform: rotateY(180deg);
+}
+
+/* The face turned away is also taken out of rendering: it disappears at
+ * mid-turn (when it is edge-on) and the incoming face appears at once, so
+ * nothing hidden is ever laid over the visible face. */
+.flip__face {
+  transition: visibility 0s linear 0s;
+}
+
+.flip__face[inert] {
+  visibility: hidden;
+  pointer-events: none;
+  transition-delay: 280ms;
+}
+
+.flip__title {
+  font-size: 1.35rem;
+}
+
+.flip__title:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 4px;
+}
+
+.flip__scroll {
+  flex: 1;
+  min-height: 0;
+  padding-block-end: 1.25rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  mask-image: linear-gradient(180deg, #000 calc(100% - 1.75rem), transparent);
+}
+
+.flip__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  align-self: end;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--moss);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color var(--m-fast) var(--ease-ui);
+}
+
+.flip__toggle--back {
+  align-self: flex-start;
+}
+
+.isle--dark .flip__toggle {
+  color: var(--mint);
+}
+
+.flip__toggle-icon {
+  display: inline-block;
+  transition: transform var(--m-fast) var(--ease-ui);
+}
+
+.flip__toggle-icon::before {
+  content: "\2192";
+}
+
+.flip__toggle--back .flip__toggle-icon::before {
+  content: "\2190";
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .flip__toggle:focus-visible .flip__toggle-icon {
+    transform: translateX(var(--m-nudge));
+  }
+
+  html:not([data-motion-tier="reduced"]) .flip__toggle--back:focus-visible .flip__toggle-icon {
+    transform: translateX(calc(-1 * var(--m-nudge)));
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    html:not([data-motion-tier="reduced"]) .flip__toggle:hover .flip__toggle-icon {
+      transform: translateX(var(--m-nudge));
+      transition-duration: var(--m-base);
+    }
+
+    html:not([data-motion-tier="reduced"]) .flip__toggle--back:hover .flip__toggle-icon {
+      transform: translateX(calc(-1 * var(--m-nudge)));
+    }
+  }
+
+  /* The back's rows arrive once the card is half turned. */
+  html:not([data-motion-tier="reduced"]) .flip[data-flipped] .flip__face--back .pack-list > li {
+    animation: row-in 260ms var(--ease-enter) both;
+    animation-delay: calc(240ms + min(var(--i, 0), 10) * 22ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip__faces,
+  .flip[data-flipped] > .flip__faces {
+    transform: none;
+    transition: none;
+  }
+
+  .flip__face--back {
+    transform: none;
+  }
+
+  .flip__face {
+    transition:
+      opacity 200ms linear,
+      visibility 0s linear 0s;
+  }
+
+  .flip__face[inert] {
+    transition-delay: 0s, 200ms;
+  }
+
+  .flip[data-flipped] .flip__face--front,
+  .flip:not([data-flipped]) .flip__face--back {
+    opacity: 0;
+  }
+}
+
+html[data-motion-tier="reduced"] :is(.flip__faces, .flip[data-flipped] > .flip__faces, .flip__face--back) {
+  transform: none;
+  transition: none;
+}
+
+html[data-motion-tier="reduced"] .flip__face {
+  transition:
+    opacity 200ms linear,
+    visibility 0s linear 0s;
+}
+
+html[data-motion-tier="reduced"] .flip__face[inert] {
+  transition-delay: 0s, 200ms;
+}
+
+html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .flip:not([data-flipped]) .flip__face--back) {
+  opacity: 0;
+}
+
+/* Pack cards: the card's ground, shadow and featured outline move from the
+ * article to its faces, and the front keeps the shared rows (subgrid). */
+.pack.flip {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.pack.pack--featured {
+  outline: none;
+}
+
+.pack > .flip__faces {
+  grid-row: 1 / -1;
+  grid-template-rows: subgrid;
+}
+
+.pack__front {
+  display: grid;
+  grid-row: 1 / -1;
+  grid-template-rows: subgrid;
+  row-gap: 1rem;
+}
+
+.pack__front > .flip__toggle {
+  grid-row: 5;
+}
+
+.pack .flip__face {
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: var(--cream);
+  box-shadow: var(--shadow-soft);
+  transition:
+    box-shadow var(--m-fast) var(--ease-ui),
+    opacity 200ms linear,
+    visibility 0s linear 0s;
+}
+
+.pack .flip__face[inert] {
+  transition-delay: 0s, 0s, 280ms;
+}
+
+.pack--featured .flip__face {
+  outline: 2px solid color-mix(in oklch, var(--moss) 40%, transparent);
+}
+
+@media (max-width: 48rem) {
+  .pack > .flip__faces,
+  .pack__front {
+    grid-row: auto;
+    grid-template-rows: none;
+  }
+
+  .pack__front > .flip__toggle {
+    grid-row: auto;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  html:not([data-motion-tier="reduced"]) .pack.flip:hover {
+    box-shadow: none;
+  }
+
+  html:not([data-motion-tier="reduced"]) .pack.flip:hover .flip__face {
+    box-shadow: var(--m-shadow-card);
+    transition-duration: 180ms, 200ms, 0s;
+  }
+}
+
+/* Maintenance: the panel's ground moves to its faces as well. */
+.upkeep.flip {
+  display: block;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.upkeep .flip__face {
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: var(--cream);
+}
+
+.isle--dark .upkeep .flip__face {
+  background: color-mix(in oklch, oklch(22% 0.04 265) 96%, transparent);
+  color: var(--night-ink);
+}
+
+.upkeep__front {
+  display: grid;
+  gap: 1.25rem;
+}
+
+/* Work carousels ------------------------------------------------------- */
+
+/* A native scroller with snap points: swipe, trackpad and arrow keys move it,
+ * arrows and dots step it, nothing moves by itself. The current dot
+ * stretches into a short bar (transform only). */
+.carousel {
+  display: grid;
+  gap: 0.25rem;
+  margin-block-end: 0.5rem;
+}
+
+.carousel__track {
+  display: flex;
+  aspect-ratio: 16 / 10;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: calc(var(--radius) - 0.45rem);
+}
+
+.carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel__slide {
+  position: relative;
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.carousel__slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel__placeholder {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.35rem;
+  height: 100%;
+  border: 1px dashed color-mix(in oklch, var(--bark) 28%, transparent);
+  border-radius: inherit;
+  background: linear-gradient(160deg, color-mix(in oklch, var(--cream) 70%, var(--sky-dawn-mid)), var(--beige-deep));
+}
+
+.carousel__slide:nth-child(3n + 2) .carousel__placeholder {
+  background: linear-gradient(160deg, color-mix(in oklch, var(--cream) 72%, var(--sky-noon-low)), color-mix(in oklch, var(--beige) 80%, var(--leaf-light)));
+}
+
+.carousel__slide:nth-child(3n + 3) .carousel__placeholder {
+  background: linear-gradient(160deg, color-mix(in oklch, var(--cream) 70%, var(--leaf-light)), color-mix(in oklch, var(--beige-deep) 85%, var(--sky-dawn-top)));
+}
+
+.carousel__placeholder-index {
+  font-family: var(--font-world-serif);
+  font-size: clamp(2.6rem, 2rem + 2vw, 3.4rem);
+  font-style: italic;
+  line-height: 1;
+  color: color-mix(in oklch, var(--moss) 45%, transparent);
+}
+
+.carousel__placeholder-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.carousel__dots {
+  display: flex;
+}
+
+.carousel__arrow,
+.carousel__dot {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--moss);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.carousel__arrow {
+  transition:
+    background-color var(--m-fast) var(--ease-ui),
+    opacity var(--m-fast) var(--ease-ui),
+    transform var(--m-press) var(--ease-ui);
+}
+
+.carousel__arrow:hover:not(:disabled) {
+  background: color-mix(in oklch, var(--moss) 10%, transparent);
+  transition-duration: var(--m-base);
+}
+
+.carousel__arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.carousel__dot::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklch, var(--moss) 30%, transparent);
+  transition:
+    background-color var(--m-fast) var(--ease-ui),
+    transform var(--m-panel) var(--ease-ui);
+}
+
+.carousel__dot:hover::before {
+  background: color-mix(in oklch, var(--moss) 55%, transparent);
+}
+
+.carousel__dot[aria-current="true"]::before {
+  background: var(--moss);
+  transform: scaleX(2.2);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .carousel__arrow:active:not(:disabled) {
+    transform: scale(0.9);
   }
 }

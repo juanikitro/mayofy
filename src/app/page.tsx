@@ -11,6 +11,7 @@ import {
 } from "@/components/world/islands";
 import { PackDetails } from "@/components/world/pack-details";
 import { RockIsland } from "@/components/world/rock-island";
+import { WhatsAppIcon } from "@/components/world/whatsapp-icon";
 import { WorldFooter } from "@/components/world/world-footer";
 import { WorldMotion } from "@/components/world/world-motion";
 import { siteContent } from "@/content/site";
@@ -58,12 +59,13 @@ export default function Home() {
               <a className="btn btn--quiet btn--lg" href="#packs">
                 {siteContent.hero.secondaryCta}
               </a>
-            </div>
-            <p className="dawn__alt">
-              <a href={heroWhatsAppHref} target="_blank" rel="noreferrer">
-                <span className="link-label">o escribinos por WhatsApp</span>
+              <a className="btn btn--ghost btn--lg dawn__whatsapp" href={heroWhatsAppHref} target="_blank" rel="noreferrer">
+                <span className="btn__glyph">
+                  <WhatsAppIcon />
+                </span>
+                Escribinos por WhatsApp
               </a>
-            </p>
+            </div>
           </div>
         </section>
 

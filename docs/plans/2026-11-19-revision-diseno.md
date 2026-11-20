@@ -114,3 +114,22 @@ Quedan abiertos, a propósito:
 
 - Probar en el teléfono de Juani (`http://192.168.1.30:3011`), sobre todo el desplazamiento táctil dentro de la agenda.
 - Montar las tiras repintadas y aplicar `ecbc139` a la carrera de la isla 5.
+
+## Uniones de cielo: caída → isla 2 e isla 3 → detalle de packs (20 de noviembre)
+
+Juani: "difumina la transicion del cielo entre la caida libre de mayo y la isla 2. Lo mismo entre la isla 3 y los detalles de los packs".
+
+| Unión | Causa | Corrección |
+| --- | --- | --- |
+| Caída → isla 2 (escritorio) | Desde 64rem la placa de la isla 2 está escalada (esta revisión, `dfb2114`): sus filas superiores fundidas quedan por encima de la sección y su cielo propio, más claro, arrancaba plano bajo el azul final de la caída. | Velo en el azul final de la caída (`--sky-from`, igual a `--fall-bottom`) al comienzo de la sección, que se suelta en ~22rem (`.isle--morning .scene--plated::after`), sobre la placa y debajo del texto; la isla empieza mucho más abajo. En celular la unión ya era continua y el velo no la cambia. |
+| Isla 3 → packs (escritorio) | La placa cuelga por debajo del escenario fijo, cuyo recorte cortaba raíces y cielo en línea recta sobre la franja del detalle de packs. | Velo en el último color del cielo (`--sky-bottom`, donde arranca esa franja) al pie del escenario (`.rocks .scene--plated::after`, ~16rem). Aparece recién cuando el escenario se suelta (`exit 0 %`–`10 %` de `--rocks`): mientras está fijo vale 0 y las raíces se ven limpias. Con movimiento reducido queda puesto. |
+| Isla 3 → packs (celular) | La placa elevada termina por encima del pie del escenario. El fundido inferior propio de su fondo (`.rocks .plate__picture--background` en las reglas de celular de la isla 3) perdía contra la máscara general `.scene--plated .plate__picture`, que tiene la misma especificidad y está más abajo en el archivo; la capa pintada armada no tiene máscara. | Se restituye el fundido del fondo con un selector más específico y la capa armada se funde igual en su último 20 % (la parte de arriba queda sin máscara, para que las tapas de las plataformas sigan nítidas). Más el mismo velo al pie del escenario. |
+
+No se tocaron el ensamble de rocas, las plataformas ni Mayo de la isla 3.
+
+**Verificado:**
+
+- Chromium a 1440 × 900 y 390 × 844, con la unión al 85, 60, 35 y 10 % del alto de la ventana: sin borde visible en ninguna posición.
+- El velo de la isla 3 vale 0 durante todo el tramo fijo (muestras al 10, 40, 70 y 98 %), 0,5 a 45 px de la salida y 1 a los 90 px.
+- Capturas en `docs/plans/uniones-cielo/antes|despues/` (`d-`/`m-`, `caida-isla2-` e `isla3-packs-` con el porcentaje).
+- Lint, typecheck y build limpios.
