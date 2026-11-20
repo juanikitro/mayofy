@@ -198,8 +198,12 @@ function shadowStyle(anchor: MayoAnchor) {
 function contactStyle(anchor: MayoAnchor) {
   if (!anchor.contact) return {};
   const { tint, layers } = anchor.contact;
+  // The box reaches one cell past hers on every side (world.css), so a long
+  // cast shadow fits; layers stay authored in % of her cell.
+  const at = (value: string) => `${((parseFloat(value) + 100) / 3).toFixed(3)}%`;
+  const radius = (value: string) => `${(parseFloat(value) / 3).toFixed(3)}%`;
   const ellipse = ({ x, y, w, h, opacity }: MayoContactLayer) =>
-    `radial-gradient(${w} ${h} at ${x} ${y}, rgb(${tint} / ${opacity}), rgb(${tint} / ${(opacity * 0.5).toFixed(3)}) 50%, rgb(${tint} / 0))`;
+    `radial-gradient(${radius(w)} ${radius(h)} at ${at(x)} ${at(y)}, rgb(${tint} / ${opacity}), rgb(${tint} / ${(opacity * 0.5).toFixed(3)}) 50%, rgb(${tint} / 0))`;
   return { "--mayo-contact": layers.map(ellipse).join(", ") };
 }
 

@@ -16,8 +16,8 @@ export type IslandCopy = {
 export const islandCopy = {
   problem: {
     title: ["Construyamos tu lugar en ", { em: "internet" }],
-    // 2026-11-20: the lead of option B (docs/plans/2026-11-20-propuestas.md); the case picker follows it.
-    body: "Cada pregunta que hoy respondés a mano, tu página la contesta antes. Y la consulta te llega por WhatsApp con el mensaje listo.",
+    // 2026-11-20: the questions now assemble a system proposal beside it (problem-island.tsx).
+    body: "Cada pregunta que hoy respondés a mano se convierte en una pieza de tu sistema.",
   },
   packs: {
     title: ["Encontramos lo que necesita ", { em: "tu negocio" }, "."],

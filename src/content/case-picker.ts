@@ -2,9 +2,10 @@
  * Island 2 (Juani, 20 November 2026: options A and B of
  * docs/plans/2026-11-20-propuestas.md, together). The visitor picks the
  * situation that sounds like theirs and gets the pack to start with (A),
- * beside a phone where the questions they answer by hand today land on
- * their own page (B). Pack names, prices and timelines come from
- * commercial-plans.ts; the copy here is the approved mockup copy.
+ * beside a system proposal that assembles itself as the questions they
+ * answer by hand today land on it (B; Juani, 20 November 2026: "que vayan
+ * entrando esas preguntas y se vaya construyendo una propuesta de sistema").
+ * Pack names, prices and timelines come from commercial-plans.ts.
  */
 import { commercialPlans } from "@/content/commercial-plans";
 
@@ -14,34 +15,34 @@ export type CaseOption = {
   planId: CasePlanId;
   /** The visitor's situation, in their words. */
   text: string;
-  /** Painted loose rock of the island 2 plate that marks the option. */
-  rock: string;
+  /** Painted plant that marks the option, from a sprout to a full bush (`34-isla2-planta-*`). */
+  plant: string;
 };
 
 export const casePicker = {
   prompt: "¿Qué te está pasando hoy? Elegí lo que más se parece y te mostramos por dónde empezar.",
   options: [
-    { planId: "landing", text: "Me encuentran, pero no tengo dónde mostrar lo que hago.", rock: "33-isla2-roca-02" },
-    { planId: "web-gestion", text: "Paso el día coordinando turnos por WhatsApp.", rock: "33-isla2-roca-05" },
-    { planId: "sistema", text: "Mi operación vive en planillas y ya no alcanza.", rock: "33-isla2-roca-04" },
+    { planId: "landing", text: "Me encuentran, pero no tengo dónde mostrar lo que hago.", plant: "34-isla2-planta-01" },
+    { planId: "web-gestion", text: "Paso el día coordinando turnos por WhatsApp.", plant: "34-isla2-planta-02" },
+    { planId: "sistema", text: "Mi operación vive en planillas y ya no alcanza.", plant: "34-isla2-planta-03" },
   ] satisfies readonly CaseOption[],
   resultEyebrow: "Te conviene empezar por",
   detailsCta: "Ver qué incluye",
   bookingCta: "Agendá tu diagnóstico",
   /**
-   * The phone demo (decorative): an example business whose page answers the
-   * questions before they are asked. Illustrative, not a client.
+   * The proposal that builds itself (decorative): the base system, then one
+   * module per question as it lands, and a closing line.
    */
-  demo: {
-    name: "Estudio Ámbar",
-    trade: "Estética y bienestar",
-    entries: [
-      { question: "¿Cuánto sale?", title: "Precios", answer: "Limpieza facial desde $18.000" },
-      { question: "¿Tenés turno el jueves?", title: "Turnos", answer: "Lunes a sábados, de 9 a 19" },
-      { question: "¿Dónde quedan?", title: "Dónde estamos", answer: "Palermo, a 2 cuadras del subte" },
-      { question: "¿Qué incluye el servicio?", title: "Qué incluye", answer: "Diagnóstico de piel y rutina para casa" },
+  proposal: {
+    eyebrow: "Tu propuesta",
+    base: { title: "Sistema de gestión", text: "Clientes, ventas y turnos en un solo panel." },
+    modules: [
+      { question: "¿Cuánto sale?", title: "Bot de WhatsApp", text: "Responde precios y consultas al instante." },
+      { question: "¿Tenés turno el jueves?", title: "Turnos online", text: "Tus clientes reservan solos." },
+      { question: "¿Te queda en stock?", title: "Control de stock", text: "Sabés qué hay y qué falta." },
+      { question: "¿Y si se corta internet?", title: "Disponibilidad offline", text: "Sigue funcionando sin conexión." },
     ],
-    whatsapp: "Escribinos por WhatsApp",
+    closing: "Un solo sistema, armado a tu medida.",
   },
 } as const;
 

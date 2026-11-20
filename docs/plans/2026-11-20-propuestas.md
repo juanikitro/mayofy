@@ -387,3 +387,57 @@ Rama `juanikitro/landing-propuestas`, al día con `juanikitro/landing-redesign` 
 - La demostración de la isla 2 en celular avanza mientras el celular cruza la pantalla; los rangos se midieron con el texto actual y conviene revisarlos si el selector crece.
 - El halo de la isla 4 es sutil a propósito (luz cálida sobre el objeto): si Juani lo quiere más marcado, se sube la opacidad de `.workshop__halo`.
 - No se probó en un teléfono real ni en Safari o Firefox (sin scroll-driven animations ven el estado quieto descrito arriba).
+
+---
+
+## Ajustes pedidos por Juani sobre las islas 2 y 4 y las sombras de Mayo (20 de noviembre de 2026, segunda ronda)
+
+Pedidos (textual):
+
+- (2) "En el hero, la sombra de mayo no acompaña la sombra del arbol. Lo mismo pasa en la isla 2."
+- (3) "En desktop en la isla 2, la construccion del sistema donde entran las preguntas esta rota, se ve mal el sistema y una pregunta esta detras y no se ve. Aparte no me gusta el ejemplo de estudio ambar, me gustaria mas que vayan entrando esas preguntas y se vaya construyendo una propuesta de sistema (ponele, sistema de gestion + bot de whatsapp + control de stock + disponibilidad offline y asi)"
+- (4) "En la isla 2 quiero que los items de Que te esta pasando hoy sean flores y plantas en lugar de rocas. Me gustaria que tengan un efecto como que salen apenitas de su caja, dando impresion 3D."
+- (6) "El efecto paralax de la isla 4 esta bugeado y se mete debajo de la seccion de nuestra siembra, tus resultados en vez de irse con el contenido de su seccion."
+
+### (2) La sombra de Mayo acompaña a las del árbol y las rocas
+
+- **Hero:** el sol bajo viene de la derecha y el árbol y el cartel proyectan sombras largas y suaves hacia la izquierda, un poco hacia la cámara. La del árbol mide ~1,1 veces su altura y es oliva sobre el pasto dorado (medida sobre la placa). Mayo no tenía sombra proyectada. Ahora tiene una de ~0,8 celda que sale de su asiento hacia la izquierda y se desvanece, más la oclusión bajo el asiento y la cola, en el tono de esa sombra (`40 52 12`).
+- **Isla 2:** las rocas están iluminadas por la derecha y apoyan en manchas verde oscuro a su izquierda y hacia abajo. La sombra de Mayo apuntaba a la derecha; ahora va abajo a la izquierda, desde las patas traseras hasta pasar las delanteras. La oclusión bajo las patas no cambia.
+- **Cómo:** capas de contacto por slot (`mayoAnchors.hero.contact` y `mayoAnchors.problem.contact` en `stage.ts`). La caja de contacto ahora mide tres celdas centradas en la de Mayo (`.mayo__contact { inset: -100% }`, y `MayoFigure` traduce las capas). Así una sombra larga entra sin cortarse y las capas siguen escritas en % de la celda; las islas 4 y 7 se ven igual que antes. La posición y el tamaño de Mayo no cambian.
+- **Capturas:** `implementacion/r2-sombra-{hero,problem}-{d,m}.jpg`.
+
+### (3) Una propuesta de sistema que se arma con las preguntas
+
+- **Arreglado:** el celular de "Estudio Ámbar" ya no existe. El marco quedaba oscuro y vacío hasta que llegaban las respuestas, y una pregunta quedaba detrás de él porque se pintaba antes en el DOM.
+- **Ahora:** una tarjeta "Tu propuesta" con la base (*Sistema de gestión*) y cuatro módulos colgados de un tallo, como un diagrama. Las preguntas flotan sobre la isla, a la izquierda de la tarjeta, y cada una vuela a su lugar y enciende su módulo en menta: "¿Cuánto sale?" → *Bot de WhatsApp*, "¿Tenés turno el jueves?" → *Turnos online*, "¿Te queda en stock?" → *Control de stock*, "¿Y si se corta internet?" → *Disponibilidad offline*. Al final aparece "Un solo sistema, armado a tu medida." Antes de llenarse, cada módulo se ve como un lugar punteado sobre el tallo: se nota que la propuesta se está construyendo.
+- **Nada tapado:** las preguntas van después de la tarjeta en el DOM y se pintan encima. La tarjeta queda a la derecha de Mayo y a la izquierda de la barra de huellas. Su texto se escala con la isla (unidades `cqi` sobre un marco que es el contenedor).
+- **Celular, tablet y pantallas bajas:** la misma propuesta va dentro del texto, antes de "¿Qué te está pasando hoy?". Cada módulo muestra la pregunta que lo trajo y entra al aparecer en pantalla. En el escritorio fijo esta copia queda solo para lectores de pantalla.
+- **Movimiento reducido o sin scroll-driven animations:** la propuesta aparece completa y las preguntas no flotan.
+- **Copy nuevo (a confirmar):** las cuatro preguntas, los nombres y las líneas de los módulos, "Clientes, ventas y turnos en un solo panel.", "Tu propuesta", "Un solo sistema, armado a tu medida." y la entrada de la isla, que pasa a "Cada pregunta que hoy respondés a mano se convierte en una pieza de tu sistema." (antes hablaba de "tu página" y del WhatsApp, que eran el ejemplo del celular).
+
+### (4) Plantas que salen de su caja
+
+- Cada situación se marca con una planta pintada que crece con el problema: un brote para la landing, una mata para Web + Gestión y un arbusto para el Sistema a Medida (`34-isla2-planta-01..03.webp`, recortadas de los primeros planos ya pintados de las islas 6, 1 y 2, ~15 KB cada una).
+- La planta está en una maceta hundida en la tarjeta. Su base desaparece en el borde de adelante (`clip-path` abierto arriba y a los costados) y sus hojas pasan por arriba del borde de la tarjeta, más cuanto más grande es. Tiene sombra propia; en hover o con foco sube 3 px y crece un 4 %. La maceta de la opción elegida toma un tono verde.
+- **Pendiente:** no hay flores pintadas en `public/images/mundo-mayo`. Para que también haya flores hay que encargar tres recortes en el estilo de las islas: luz de mañana desde la derecha, fondo transparente, ~1024 px, encuadre ajustado y base de pasto o tierra que se pueda esconder en la maceta:
+  1. un brote de dos o tres hojas con un botón cerrado;
+  2. una mata con flores pequeñas (margaritas o florcitas silvestres amarillas y blancas, como las del prado de la isla 2);
+  3. un arbusto florido más alto.
+
+  Se cambian en `case-picker.ts` (`plant`) sin tocar el CSS.
+- Se borraron las miniaturas de rocas (`33-isla2-roca-0{2,4,5}-icono.webp`).
+
+### (6) La isla 4 se va con su sección
+
+- **Causa:** el escenario fijo usaba `margin-bottom: -100svh` para devolver su altura. Para el posicionamiento sticky cuenta la caja con margen, así que el escenario podía quedar pegado hasta una pantalla después del final de la sección. Al soltarse colgaba debajo de ella y "Nuestra siembra" lo tapaba.
+- **Arreglo:** escenario y contenido comparten la misma celda de un grid (`grid-area: 1 / 1`; el escenario con `align-self: start`). El sticky queda limitado a la sección: al final, el borde de abajo del escenario coincide con el de la sección (medido: 720/720, 450/450, 180/180 px en escritorio y 675/675, 422/422, 169/169 en celular) y la isla sube con su contenido, al bajar y al subir. Sin escena fija (celular con movimiento reducido o sin scroll-driven animations) la sección vuelve a `display: block`.
+- **Capturas:** `implementacion/r2-isla4-salida-{d,m}-*.jpg`.
+
+### Verificación (segunda ronda)
+
+Chromium (Playwright) sobre `next dev`, a 1440 × 900 y 390 × 844, con `scrollTo({behavior: "instant"})`:
+
+- Secuencia de la isla 2 en `implementacion/r2-isla2-{d,m}-*.jpg`; las plantas y el foco de teclado en `r2-plantas-*`; movimiento reducido en `r2-reducido-isla2-*` (preguntas ocultas, módulos visibles).
+- Teclado: Tab y Enter eligen una situación (`aria-pressed`) con el anillo de foco visible.
+- Sin scroll horizontal y sin errores de consola.
+- `npm run lint`, `npm run typecheck` y `npm run build` limpios.

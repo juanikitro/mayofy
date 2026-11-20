@@ -5,9 +5,9 @@ import { useState } from "react";
 import { type CasePlanId, casePicker, planFor } from "@/content/case-picker";
 
 /**
- * Island 2, option A: three situations, each marked by one of the island's
- * loose rocks. Picking one recommends the pack to start with and links to
- * its full card (`#pack-<id>`, island 3) and to the booking. Nothing is
+ * Island 2, option A: three situations, each marked by a painted plant
+ * that grows with the size of the problem (a sprout, a plant, a bush).
+ * Picking one recommends the pack to start with and links to its full card (`#pack-<id>`, island 3) and to the booking. Nothing is
  * picked until the visitor chooses; the result is announced politely.
  */
 export function CasePicker() {
@@ -29,8 +29,11 @@ export function CasePicker() {
             aria-controls="cases-result"
             onClick={() => setPicked(option.planId)}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element -- tiny decorative cut-out */}
-            <img className="case__rock" src={`/images/mundo-mayo/${option.rock}-icono.webp`} alt="" width={48} height={36} loading="lazy" decoding="async" />
+            {/* The plant stands in a planter cut into the card and grows past its top edge. */}
+            <span className="case__planter" aria-hidden="true">
+              {/* eslint-disable-next-line @next/next/no-img-element -- small decorative cut-out */}
+              <img className="case__plant" src={`/images/mundo-mayo/${option.plant}.webp`} alt="" width={240} height={140} loading="lazy" decoding="async" />
+            </span>
             <span>{option.text}</span>
           </button>
         ))}
