@@ -128,3 +128,72 @@ Carpeta `docs/plans/microinteracciones/` (JPEG, 1440 × 900 salvo el 10, a 390 �
 - No se probó en un teléfono real ni en Safari/Firefox. Sin `animation-timeline` (Firefox estable, Safari < 26) la sombra del nav queda siempre visible y el texto de las islas aparece sin entrada: el contenido no depende de eso.
 - Los eventos `linkReady`/`linkFailed` de Cal.com se registran por la cola del cargador oficial; si Cal.com los dejara de emitir, el esqueleto se va solo a los 15 s.
 - La rama toca `world.css`, `islands.tsx` e `island-progress.tsx`, que otros agentes también editan; todo lo nuevo de CSS está al final del archivo para que el merge sea simple.
+
+## Iteración 2 (20 de noviembre de 2026): más microinteracciones en más lugares
+
+**Pedido de Juani:** "quiero pedirle al agente de microanimaciones y microinteracciones que implemente mas en mas lugares".
+**Base:** `juanikitro/landing-redesign` en `63228fd` (con esta rama, la revisión de diseño 2 y las rocas de la isla 3 ya integradas). Mismo sistema de movimiento: los mismos tokens, sólo `transform`/`opacity` (y `translate`), interrumpible, sin depender del hover en táctil y quieto con movimiento reducido. Todo el CSS nuevo está en el bloque "Micro-interactions, iteration 2" al final de `world.css`.
+
+### Qué se auditó
+
+Hero, caída entre nubes, islas 2 a 7, detalle de packs, tarjetas de trabajos, isla de Juani, formulario y Cal.com, FAQ, footer, nav y riel de huellas, 404, `/privacidad` y `/proyectos/[slug]`. Quedaron fuera, por pedido: los sprites, anclas y sombras de Mayo, el armado de rocas de la isla 3 y el viaje de Mayo en la isla 5. La caída entre nubes ya está guionada por el scroll y no admite más capas sin competir con ella.
+
+### Qué se agregó, por sección
+
+| Sección | Microinteracción | Archivos |
+| --- | --- | --- |
+| Toda la home (carga) | Secuencia de carga: después del texto del hero, la píldora baja 8 px (120 ms de demora) y el riel de huellas entra desde su borde (420 ms; desde abajo en celular). La página se arma en orden de lectura: primero las palabras, después las herramientas para moverse. | `world.css` |
+| Riel de huellas | Progreso del recorrido: las islas ya recorridas quedan con la huella en musgo al 72 % (`data-visited`), así el riel muestra cuánto falta y no sólo dónde estás. | `island-progress.tsx` |
+| Isla 2 (canales) e isla 4 (lo que construimos) | Las etiquetas se asientan 16 px una detrás de otra al cruzar el borde inferior. | `islands.tsx` |
+| Isla 5 (trabajos) | Las tarjetas de casos se asientan por columna; con el mouse en cualquier parte de la tarjeta, la flecha de "Ver el caso" ya se inclina hacia el caso. | `islands.tsx`, `world.css` |
+| Isla 5 ("Seis pasos") | Los seis pasos llegan en escalera, todos terminados a unos 200 px de haber entrado. | `islands.tsx` |
+| Detalle de packs y mantenimiento | Al abrir "Ver todo lo que incluye" o "¿Qué cambios incluye?", las filas entran una tras otra (4 px, 22 ms entre filas, tope en la décima). Al cerrar no se animan. | `pack-groups.tsx`, `world.css` |
+| FAQ | La respuesta llega 40 ms después de su panel, subiendo 4 px. | `world.css` |
+| Isla 6 (fogata) | La fogata pintada respira: un círculo de luz cálida (mezcla `screen`, sólo opacidad) con dos relojes de distinta duración (3,7 s y 1,9 s), para que el parpadeo no suene a metrónomo. Posición propia en la placa de celular. | `scene-glow.tsx` (nuevo), `islands.tsx`, `world.css` |
+| Isla 7 (farol) | El farol pintado respira igual, más suave (3,7 s y 2,9 s). | `islands.tsx`, `world.css` |
+| Formulario de contacto | Momento de éxito: al enviar, el borde del formulario se enciende en menta una vez (1,2 s) mientras se dibuja el tilde. Nada se mueve. | `world.css` |
+| `/proyectos/[slug]` | La portada entra como el hero (cada bloque 12 px, 60 ms entre sí); el índice lateral marca el capítulo visible con `aria-current="location"` y una barra de 2 px que crece desde el centro; "Volver a trabajos" inclina su flecha hacia atrás y subraya con la línea dibujada; las decisiones y el recorrido de conversión llegan en escalera; la flecha de "Visitar sitio" se inclina. | `page.tsx` del caso, `study-index.tsx` (nuevo), `world.css` |
+| 404 | El código, el título, el texto y los botones entran en secuencia al cargar. | `world.css` |
+| `/privacidad` | "Volver al inicio" con flecha hacia atrás y línea dibujada; la cabecera entra en secuencia. | `privacidad/page.tsx`, `world.css` |
+
+Helpers nuevos: `staggerStyle(index)` (`src/components/world/stagger.ts`) escribe `--i` para las escaleras; `useActiveIsland` (ya existente) también marca el capítulo del caso.
+
+### Qué se evaluó y no se hizo
+
+- **Resaltar los precios** (contadores o brillos): el skill prohíbe animar precios y un brillo pasaría por "shine sweep". Los precios ya tienen peso tipográfico.
+- **Estrellas que titilan en la isla 7**: el skill prohíbe el parpadeo al azar; las luciérnagas existentes ya dan vida a la noche.
+- **Paneles grandes que aparecen al hacer scroll** (ampliaciones, bot, mantenimiento, agenda): se sumarían a las listas que ya entran en escalera dentro de ellos; quedaron quietos.
+- **Reacción de imagen en las tarjetas de trabajos**: las tarjetas todavía no tienen imagen; la flecha que se inclina cumple ese papel hasta que lleguen las capturas.
+- **Puntos interactivos en las escenas**: las escenas son decorativas (`aria-hidden`); hacer clicables partes del arte agregaría metas táctiles sin función.
+
+### Accesibilidad
+
+- Movimiento reducido verificado: nav y riel sin entrada (opacidad 1), brillos quietos en 0,7, pasos y etiquetas visibles en reposo, filas de los detalles sin animación.
+- Teclado: el índice del caso se recorre con Tab y su anillo se ve; los enlaces de vuelta muestran la flecha inclinada también con foco.
+- Las escaleras usan `translate` y no `transform`, así las tarjetas conservan su elevación en hover.
+
+### Grabaciones nuevas
+
+| Interacción | Cuadros |
+| --- | --- |
+| Secuencia de carga (nav y riel) | `11-carga-100ms.jpg`, `11-carga-400ms.jpg`, `11-carga-700ms.jpg`, `11-carga-1100ms.jpg` |
+| Seis pasos en escalera | `12-pasos-a.jpg` a `12-pasos-d.jpg` |
+| Tarjetas de trabajos por columna | `13-trabajos-a.jpg` a `13-trabajos-c.jpg` |
+| Filas del detalle de un pack | `14-filas-70ms.jpg`, `14-filas-220ms.jpg`, `14-filas-final.jpg` |
+| Fogata que respira | `15-fogata-a.jpg`, `15-fogata-b.jpg` |
+| Éxito del formulario | `16-enviado-brillo.jpg` |
+| Caso: portada e índice | `17-caso-portada.jpg`, `17-caso-indice.jpg` |
+
+### Verificación
+
+- `npm run lint`, `npm run typecheck` y `npm run build` sin errores.
+- Playwright contra `next dev` en el puerto 3013, a 1440 × 900 y 390 × 844: opacidades de los pasos a mitad de la escalera y en reposo (todas en 1); tarjeta de trabajo con `translateY(-2px)` en hover y flecha en `translateX(3px)`; filas del detalle de 0,54/0,25/0 a 1; huellas `vvvc---` con Trabajos como actual; índice del caso con "Decisiones" marcado; flecha de vuelta en `translateX(-3px)`; 404 y privacidad terminan en opacidad 1. Sin scroll horizontal a 390. El envío del formulario se probó con `/api/contact` interceptado.
+- Consola: sin errores propios. Apareció una advertencia de hidratación por `caret-color: transparent` en los campos: la inyecta la captura de Playwright cuando dispara antes de que la página termine de hidratar; no está en el código.
+- Finish gate (build nuevo, kind `service`): 80 → 73 → **`GATE: OPEN 69 (rounds used up)`** (la iteración anterior cerró en 84). La segunda ronda bajó de 9 a 2 los `text-contrast` acortando la escalera (16 px entre ítems y 120 px de rango): el checker leía los ítems a mitad de camino. Waivers (`.taste-skill/waivers.json`, no versionado): dos etiquetas de la isla 4 leídas a mitad de la entrada, el beige detrás de la isla nocturna (cuerpo de `#contacto` y `em` del título) y la línea dibujada de "Ver experiencia en LinkedIn" leída como efecto.
+- FAIL abiertos propios: `scroll-linked` en la entrada del texto y las escaleras, pedida por el brief y prohibida por el skill. El resto son decisiones de concepto previas.
+
+### Límites
+
+- No se probó en un teléfono real ni en Safari/Firefox. Sin `animation-timeline` las escaleras y el texto aparecen sin entrada, en reposo.
+- Las posiciones de los brillos están medidas sobre las placas v2 actuales de las islas 6 y 7 (escritorio y celular); si se repintan esas placas hay que moverlos (`SceneGlow` en `islands.tsx`).
+- Quien se detenga justo cuando un ítem cruza el borde inferior lo verá a medio aparecer durante unos 200 px de scroll: es el costo de atar la entrada al scroll en vez de a un temporizador.

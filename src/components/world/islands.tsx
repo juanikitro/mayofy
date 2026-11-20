@@ -8,6 +8,8 @@ import { CalBooking } from "@/components/world/cal-booking";
 import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure } from "@/components/world/mayo-figure";
 import { PlateObjects } from "@/components/world/plate-objects";
+import { SceneGlow } from "@/components/world/scene-glow";
+import { staggerStyle } from "@/components/world/stagger";
 import { DetailGroups } from "@/components/world/pack-groups";
 import {
   comingSoon,
@@ -34,8 +36,10 @@ export function ProblemIsland() {
       </IslandScene>
       <div className="isle__content world-shell">
         <div className="isle__channels" aria-label="Canales de atención existente">
-          {siteContent.channels.map((channel) => (
-            <span key={channel}>{channel}</span>
+          {siteContent.channels.map((channel, index) => (
+            <span key={channel} style={staggerStyle(index)}>
+              {channel}
+            </span>
           ))}
         </div>
         <h2 id="problema-title">
@@ -60,8 +64,10 @@ export function SystemsIsland() {
         </h2>
         <p className="isle__body">{islandCopy.systems.body}</p>
         <ul className="isle__chips" aria-label="Qué construimos a medida">
-          {siteContent.systems.items.map((item) => (
-            <li key={item}>{item}</li>
+          {siteContent.systems.items.map((item, index) => (
+            <li key={item} style={staggerStyle(index)}>
+              {item}
+            </li>
           ))}
         </ul>
 
@@ -136,8 +142,8 @@ export function WorksIsland() {
         <p className="isle__body">{islandCopy.works.body}</p>
 
         <ul className="works" aria-label="Proyectos">
-          {(projects as readonly ProjectEntry[]).map((project) => (
-            <li className={`work${project.placeholder ? " work--placeholder" : ""}`} key={project.slug}>
+          {(projects as readonly ProjectEntry[]).map((project, index) => (
+            <li className={`work${project.placeholder ? " work--placeholder" : ""}`} key={project.slug} style={staggerStyle(index % 3)}>
               <p className="work__category">
                 {project.placeholder ? "Placeholder de contenido" : project.category}
               </p>
@@ -169,7 +175,7 @@ export function WorksIsland() {
           <p>{islandCopy.process.body}</p>
           <ol className="steps__steps">
             {siteContent.process.map((step, index) => (
-              <li key={step}>
+              <li key={step} style={staggerStyle(index)}>
                 <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                 <strong>{step}</strong>
               </li>
@@ -186,6 +192,8 @@ export function QuestionsIsland() {
   return (
     <section id="preguntas" className="isle isle--night isle--dark" data-island="7" style={plateSceneStyle(islandPlates.questions)} aria-labelledby="preguntas-title">
       <IslandScene variant="night" plate={islandPlates.questions}>
+        {/* The lantern painted on the left rock. */}
+        <SceneGlow kind="lantern" desktop={{ x: "36.5%", y: "45.6%", w: "7%" }} mobile={{ x: "26.9%", y: "70.5%", w: "16%" }} />
         <PlateObjects objects={plateObjects.questions!} />
         <MayoFigure slot="questions" className="isle__mayo isle__mayo--chase" />
       </IslandScene>
@@ -251,6 +259,8 @@ export function JuaniIsland() {
   return (
     <section id="contacto" className="isle isle--dusk isle--dark" data-island="6" style={plateSceneStyle(islandPlates.host)} aria-labelledby="contacto-title">
       <IslandScene variant="dusk" plate={islandPlates.host}>
+        {/* The campfire painted between Mayo and the bench. */}
+        <SceneGlow kind="fire" desktop={{ x: "55.2%", y: "55.4%", w: "15%" }} mobile={{ x: "53.8%", y: "71.6%", w: "32%" }} />
         <MayoFigure slot="host" className="isle__mayo isle__mayo--rest" />
       </IslandScene>
       <div className="isle__content world-shell">

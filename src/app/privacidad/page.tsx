@@ -24,7 +24,8 @@ export default function PrivacyPage() {
 
       <main id="contenido" className="reading world-shell">
         <Link className="study__back" href="/">
-          <span aria-hidden="true">←</span> Volver al inicio
+          <span className="link-arrow link-arrow--back" aria-hidden="true">←</span>{" "}
+          <span className="link-label">Volver al inicio</span>
         </Link>
         <h1>Política de privacidad</h1>
         <p className="reading__updated">Última actualización: {lastUpdated}</p>

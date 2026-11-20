@@ -36,6 +36,7 @@ function PawIcon() {
  */
 export function IslandProgress() {
   const active = useActiveIsland(islandIds) ?? "inicio";
+  const activeIndex = islandIds.indexOf(active as (typeof islandIds)[number]);
   const [pastHero, setPastHero] = useState(false);
 
   useEffect(() => {
@@ -58,6 +59,7 @@ export function IslandProgress() {
                 href={`#${island.id}`}
                 className="progress__paw"
                 aria-current={active === island.id ? "location" : undefined}
+                data-visited={island.number - 1 < activeIndex ? "true" : undefined}
                 aria-label={`Isla ${island.number}: ${island.label}`}
                 data-label={island.label}
               >
