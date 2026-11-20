@@ -351,3 +351,41 @@ Helpers nuevos: `staggerStyle(index)` (`src/components/world/stagger.ts`) escrib
 
 - No se probó en un teléfono real, en tablet táctil ni en Safari/Firefox.
 - Los dos botones de pausa y sus nombres son texto nuevo, no estaban en los mockups.
+
+## Iteración 6 (20 de noviembre de 2026): WhatsApp del hero como icono y garantías cada 1 s
+
+**Pedidos de Juani:**
+- (1) "en el hero, en lugar de "Escribinos por whatsapp" quiero el boton de whatsapp solo".
+- (4) "las microanimaciones constantes de la seccion "en todos los packs" no debe tener el boton de pausar o continuar y debe hacerse cada 1 segundo".
+
+**Base:** `juanikitro/landing-redesign` en `6f5857e`.
+
+### WhatsApp del hero
+
+- El tercer botón del hero es ahora **sólo el icono**: un botón redondo fantasma de 53 × 53 px (la misma altura que los dos CTA) con el glifo de WhatsApp en su disco musgo. Mismo enlace y mismo mensaje.
+- **Nombre accesible** "Escribinos por WhatsApp" (`aria-label`), que también aparece como **tooltip** sobre el botón: tras 300 ms con el mouse encima, o al instante con el foco de teclado. El tooltip sube 4 px al aparecer (quieto con movimiento reducido). En celular queda al lado de "Ver packs".
+- Corrección en el mismo cambio: el minificador de CSS de Next junta `translate` con `transform`, así que el `transform: none` del estado visible le quitaba el centrado a las etiquetas. Las etiquetas del riel de huellas (iteración 1) tenían el mismo defecto latente; ahora ambas se centran y se mueven con un solo `transform` en cada estado.
+
+### Garantías
+
+- Se quitó el botón de pausa.
+- Un icono juega **cada 1 s**, por turno (cada uno se repite cada 7 s). Sigue detenido fuera de pantalla, con la pestaña oculta y con movimiento reducido.
+- **Para el registro:** sin el botón, la franja deja de cumplir WCAG 2.2.2 (todo lo que se mueve solo por más de 5 s debe poder pausarse); se quitó a pedido de Juani. Quien tenga activado "reducir movimiento" en su sistema no ve la animación. El índice de trabajos conserva su botón de pausa.
+
+### Grabaciones
+
+| Interacción | Cuadros |
+| --- | --- |
+| WhatsApp del hero | `26-hero-whatsapp-icono.jpg`, `26-hero-whatsapp-icono-hover.jpg`, `26-hero-whatsapp-icono-foco.jpg`, `26-hero-whatsapp-icono-celular.jpg` |
+| Garantías cada 1 s | `27-garantias-1s-1.jpg`, `27-garantias-1s-2.jpg`, `27-garantias-1s-3.jpg` |
+
+### Verificación
+
+- `npm run lint`, `npm run typecheck` y `npm run build` sin errores; sin errores de consola.
+- Playwright a 1440 × 900 y 390 × 844: los tres botones del hero miden 53 px de alto y el de WhatsApp 53 × 53; nombre "Escribinos por WhatsApp" y el mismo `wa.me`; tooltip centrado con hover y con Tab (anillo de foco visible); etiquetas del riel centradas; los sellos avanzan uno por segundo, no hay botón, fuera de pantalla y con movimiento reducido no juega ninguno; sin scroll horizontal a 390.
+- Finish gate (build nuevo): **`GATE: FAIL 92 (round 1 of 3)`**. Desapareció `copy-actions` (ya no hay tres acciones con texto en el hero) y no apareció `loop-pause` en la franja. Lo que queda en mis secciones es lo ya conocido (`section-gaps` alrededor de la franja, el número real de WhatsApp en `phone-number`); el resto es de otras secciones.
+
+### Límites
+
+- No se probó en un teléfono real, en tablet táctil ni en Safari/Firefox.
+- En pantallas táctiles el tooltip no aparece (no hay hover); el nombre accesible sigue ahí para los lectores de pantalla.
