@@ -33,7 +33,8 @@ function PendingShot({ index }: { index: string }) {
  * preview (a crossfade), with a bar filling under its row to mark the time.
  * Hovering or focusing a project selects it and holds the count at zero
  * until the pointer or focus leaves the index, when it starts again. The
- * count stops off screen, in a hidden tab and with the pause button; under
+ * count stops off screen and in a hidden tab (no pause button, at the
+ * client's request); under
  * reduced motion and on phones (no preview there: each row carries its
  * screenshot) nothing advances by itself. On touch screens wide enough to
  * show the preview, the first tap shows it and the second opens the case.
@@ -45,11 +46,10 @@ export function WorksIndex({ projects }: { projects: readonly ProjectEntry[] }) 
   const [active, setActive] = useState(0);
   const [cycle, setCycle] = useState(0);
   const [hold, setHold] = useState(false);
-  const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(false);
   const [tabShown, setTabShown] = useState(true);
   const [allowed, setAllowed] = useState(false);
-  const running = allowed && visible && tabShown && !paused && !hold;
+  const running = allowed && visible && tabShown && !hold;
 
   useEffect(() => {
     const root = rootRef.current;
@@ -208,17 +208,6 @@ export function WorksIndex({ projects }: { projects: readonly ProjectEntry[] }) 
             ))}
           </div>
         </div>
-        {allowed ? (
-          <button
-            className="motion-toggle works-index__toggle"
-            type="button"
-            aria-pressed={paused}
-            aria-label="Pausar el recorrido de trabajos"
-            onClick={() => setPaused((value) => !value)}
-          >
-            <span className={`motion-toggle__glyph${paused ? " motion-toggle__glyph--play" : ""}`} aria-hidden="true" />
-          </button>
-        ) : null}
       </div>
     </div>
   );

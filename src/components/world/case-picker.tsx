@@ -22,8 +22,8 @@ function CaseArtwork({ art }: { art: CaseArt }) {
  * the selected card; the recommendation under them follows it. Hovering,
  * focusing or clicking a case selects it and holds the count at zero until
  * the pointer or focus leaves the list, when it starts again. The count
- * stops off screen, in a hidden tab and with the pause button; with reduced
- * motion nothing advances by itself. A choice made by the visitor is
+ * stops off screen and in a hidden tab (no pause button, at the client's
+ * request); with reduced motion nothing advances by itself. A choice made by the visitor is
  * announced; the automatic tour is not.
  */
 export function CasePicker() {
@@ -32,12 +32,11 @@ export function CasePicker() {
   const [active, setActive] = useState(0);
   const [cycle, setCycle] = useState(0);
   const [hold, setHold] = useState(false);
-  const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(false);
   const [tabShown, setTabShown] = useState(true);
   const [allowed, setAllowed] = useState(false);
   const [announced, setAnnounced] = useState("");
-  const running = allowed && visible && tabShown && !paused && !hold;
+  const running = allowed && visible && tabShown && !hold;
 
   useEffect(() => {
     const root = rootRef.current;
@@ -89,17 +88,11 @@ export function CasePicker() {
       data-autoplay={allowed ? "true" : undefined}
       data-running={running ? "true" : undefined}
       data-hold={hold ? "true" : undefined}
-      data-paused={paused ? "true" : undefined}
     >
       <div className="cases__head">
         <p className="cases__prompt" id="cases-prompt">
           {casePicker.prompt}
         </p>
-        {allowed ? (
-          <button className="motion-toggle cases__toggle" type="button" aria-pressed={paused} aria-label={casePicker.pauseLabel} onClick={() => setPaused((value) => !value)}>
-            <span className={`motion-toggle__glyph${paused ? " motion-toggle__glyph--play" : ""}`} aria-hidden="true" />
-          </button>
-        ) : null}
       </div>
       <div
         className="cases__options"
