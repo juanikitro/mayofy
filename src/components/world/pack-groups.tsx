@@ -1,3 +1,5 @@
+import { staggerStyle } from "@/components/world/stagger";
+
 export type DetailGroup = {
   title: string;
   items: readonly string[];
@@ -11,8 +13,10 @@ export function DetailGroups({ groups }: { groups: readonly DetailGroup[] }) {
         <section key={group.title} className="pack-group">
           <h4>{group.title}</h4>
           <ul className="pack-list">
-            {group.items.map((item) => (
-              <li key={item}>{item}</li>
+            {group.items.map((item, index) => (
+              <li key={item} style={staggerStyle(index)}>
+                {item}
+              </li>
             ))}
           </ul>
         </section>

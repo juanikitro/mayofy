@@ -4957,3 +4957,188 @@ html[data-motion-tier="reduced"] .wa-float {
 .progress__paw[data-visited] {
   color: color-mix(in oklch, var(--moss) 72%, transparent);
 }
+
+/* Staggered groups ----------------------------------------------------- */
+
+/* Chips, work cards, the six steps and the case-study lists settle 16px as
+ * they cross the bottom edge, each item 32px of scroll after the one before
+ * (`--i`, set by staggerStyle), all done within 180px of entering, so
+ * nothing is caught half-faded where someone reads. `translate` is used so
+ * the cards keep their hover lift (a `transform`). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-motion-tier="reduced"]) :is(.isle__channels > span, .isle__chips > li, .works > li, .steps__steps > li, .study__decisions > li, .study__journey > li) {
+      animation: item-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry calc(var(--i, 0) * 32px) entry calc(180px + var(--i, 0) * 32px);
+    }
+  }
+}
+
+@keyframes item-reveal {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+    animation-timing-function: var(--ease-enter);
+  }
+
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+/* Disclosure content --------------------------------------------------- */
+
+/* Opening a pack, maintenance or FAQ panel deals its rows in: each list row
+ * rises 4px 22ms after the one before (capped at the tenth), and an FAQ
+ * answer follows its panel by 40ms. Closing never animates the rows. */
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) details:not([data-collapsing="true"]) .pack-list > li {
+    animation: row-in 260ms var(--ease-enter) both;
+    animation-delay: calc(min(var(--i, 0), 10) * 22ms);
+  }
+
+  html:not([data-motion-tier="reduced"]) .questions__item:not([data-collapsing="true"]) .animated-details__inner > p {
+    animation: row-in 280ms var(--ease-enter) 40ms both;
+  }
+}
+
+@keyframes row-in {
+  from {
+    opacity: 0;
+    translate: 0 4px;
+  }
+}
+
+/* Work cards: hovering anywhere on a card already leans its "Ver el caso"
+ * arrow toward the case, so the card says where it leads. */
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  html:not([data-motion-tier="reduced"]) .work:hover .work__links > .work__link:first-child > .link-arrow {
+    transform: translateX(var(--m-nudge));
+    transition-duration: var(--m-base);
+  }
+}
+
+/* Contact success ------------------------------------------------------ */
+
+/* When a message is sent, the form's edge lights mint once (1.2 s) while
+ * the tick draws: the moment is marked without moving anything. */
+.contact-form {
+  position: relative;
+}
+
+.contact-form::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    0 0 0 2px var(--mint),
+    0 0 2rem color-mix(in oklch, var(--mint) 35%, transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .contact-form:has(.contact-form__feedback--success)::after {
+    animation: success-glow 1.2s var(--ease-ui) both;
+  }
+}
+
+@keyframes success-glow {
+  25% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+/* Ambient light over the painted plates -------------------------------- */
+
+/* The island 6 campfire and the island 7 lantern breathe: a warm pool of
+ * light (screen blend, opacity only) on two clocks of different length, so
+ * the flicker never reads as a metronome. Still under reduced motion. */
+.scene-glow {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  z-index: 1;
+  width: var(--w);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, oklch(82% 0.15 62 / 50%), oklch(72% 0.16 48 / 18%) 50%, transparent);
+  mix-blend-mode: screen;
+  opacity: 0.7;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.scene-glow::after {
+  content: "";
+  position: absolute;
+  inset: 32%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, oklch(92% 0.1 85 / 55%), transparent);
+}
+
+.scene-glow--lantern {
+  background: radial-gradient(closest-side, oklch(90% 0.11 88 / 45%), oklch(82% 0.11 78 / 14%) 50%, transparent);
+}
+
+@media (max-width: 48rem) {
+  .scene-glow {
+    left: var(--x-m, var(--x));
+    top: var(--y-m, var(--y));
+    width: var(--w-m, var(--w));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .scene-glow {
+    animation: glow-breathe 3.7s ease-in-out infinite alternate;
+  }
+
+  html:not([data-motion-tier="reduced"]) .scene-glow--fire::after {
+    animation: fire-flicker 1.9s ease-in-out infinite;
+  }
+
+  html:not([data-motion-tier="reduced"]) .scene-glow--lantern::after {
+    animation: glow-breathe 2.9s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes glow-breathe {
+  from {
+    opacity: 0.55;
+  }
+
+  to {
+    opacity: 0.85;
+  }
+}
+
+@keyframes fire-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  23% {
+    opacity: 0.7;
+  }
+
+  41% {
+    opacity: 0.95;
+  }
+
+  67% {
+    opacity: 0.75;
+  }
+
+  84% {
+    opacity: 0.9;
+  }
+}
