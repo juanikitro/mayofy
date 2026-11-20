@@ -309,3 +309,45 @@ Helpers nuevos: `staggerStyle(index)` (`src/components/world/stagger.ts`) escrib
 - No se probó en un teléfono real, en tablet táctil ni en Safari/Firefox.
 - La vista previa usa la primera imagen de `images`; si un proyecto suma más capturas, el índice no las recorre (podrían usarse en la página del caso).
 - Las clases viejas de las tarjetas de trabajos (`.works`, `.work*`) y del panel de garantías (`.promises`) quedaron sin uso en `world.css`; se pueden borrar cuando se integren las cuatro ramas.
+
+## Iteración 5 (20 de noviembre de 2026): cadencia en las garantías y recorrido automático de trabajos
+
+**Pedidos de Juani:**
+- (5) "La seccion de En todos los packs no debe tener ninguna pildora destacada (como tiene la primera) y las animaciones en hover no deben estar en el hover si no que deben ejecutarse cada 2 segundos."
+- (7) "En la seccion de Nuestra siembra, tus resultados, cada 5 segundos debe de pasar a mostrar el siguiente item aunque no se haga hover. Se debe reiniciar el conteo al hacer hover. Debe haber un loader que marque esos 5 segundos."
+
+**Base:** `juanikitro/landing-redesign` en `f937bd4`. Cambios sólo en `guarantees-strip.tsx`, `works-index.tsx` y sus bloques de `world.css`.
+
+### Garantías
+
+- Los siete sellos son iguales: se quitó el fondo y la negrita del primero (sigue primero en la lista).
+- **Cadencia:** mientras la franja está en pantalla, **un icono juega cada 2 s, por turno** (rayo, llave, reloj, lupa, pantallas, corazón, flechas, y vuelve a empezar). Se eligió uno por vez porque siete iconos moviéndose juntos cada 2 s competían con las tarjetas; así cada uno se repite cada 14 s y la franja se lee tranquila.
+- Se detiene fuera de pantalla (IntersectionObserver), con la pestaña oculta (`visibilitychange`), con movimiento reducido (no hay animación ni botón) y con un **botón de pausa** nuevo bajo el título "En todos los packs" (disco de 32 px en un área de 44 px, `aria-pressed`, nombre "Pausar las animaciones"). El botón no estaba en el pedido: lo exige WCAG 2.2.2 para todo lo que se mueve solo por más de 5 s, y el skill lo pide por panel.
+- Ya no hay animación en hover.
+
+### Trabajos
+
+- **Recorrido automático:** cada 5 s el siguiente proyecto toma la vista previa (vuelve al primero después del último), con el mismo fundido de siempre.
+- **Loader:** una barra musgo de 2 px se llena a lo largo del borde inferior de la fila activa en 5 s (`transform: scaleX`, lineal); al terminar avanza.
+- **Hover y foco:** pasar el mouse o enfocar con Tab una fila la selecciona y **reinicia el conteo**; mientras el puntero o el foco siguen en el índice, la barra queda en cero (no se cambia la imagen bajo la mano de quien la está mirando). Al salir, cuenta otra vez desde cero.
+- **Pausa:** la cuenta se detiene fuera de pantalla, con la pestaña oculta y con un **botón de pausa** nuevo debajo de la vista previa ("Pausar el recorrido de trabajos", `aria-pressed`, ▶ cuando está pausado). El vaivén de 6 s pasó a un envoltorio interno para que el botón quede quieto.
+- **Movimiento reducido y celular:** sin recorrido automático, sin barra ni botón. En celular no hay vista previa flotante (cada fila tiene su captura), así que avanzar solo no tendría qué mostrar.
+- **Accesibilidad:** el cambio de imagen no se anuncia (la vista previa es decorativa y los títulos ya son enlaces) y nunca mueve el foco.
+
+### Grabaciones
+
+| Interacción | Cuadros |
+| --- | --- |
+| Cadencia de las garantías (un icono por turno) | `24-garantias-cadencia-1.jpg`, `24-garantias-cadencia-2.jpg`, `24-garantias-cadencia-3.jpg` |
+| Recorrido de trabajos | `25-trabajos-autoplay-1s.jpg`, `25-trabajos-autoplay-4s.jpg`, `25-trabajos-autoplay-siguiente.jpg`, `25-trabajos-hover-pausado.jpg`, `25-trabajos-boton-pausa.jpg` |
+
+### Verificación
+
+- `npm run lint`, `npm run typecheck` y `npm run build` sin errores; sin errores de consola.
+- Playwright a 1440 × 900: los sellos juegan de a uno cada 2 s (`0, 1, 2, 3…`) y el botón los detiene (`aria-pressed="true"`, ninguno jugando); el índice pasa del 01 al 02 a los 5 s, la barra va por 0,47 a los 2,5 s, el hover sobre el 03 lo selecciona y deja la barra en 0 durante 6 s, al salir avanza solo, fuera de pantalla no avanza, y pausado no avanza. Con el foco de teclado en un título: la fila queda seleccionada, la cuenta en espera y el foco no se mueve. Con movimiento reducido: sin cadencia, sin recorrido y sin barras ni botones. A 390 × 844 la franja se apila con el botón a la derecha del título y el índice no avanza solo. Sin scroll horizontal.
+- Finish gate (build nuevo): **`GATE: FAIL 90 (round 1 of 3)`**. El total sube por secciones nuevas de otros agentes (por ejemplo el selector de casos); en las mías no aparecen fallas nuevas (ni `loop-pause` ni `hover`): quedan las dos ya conocidas, `section-gaps` entre la franja y la isla 4 y `split-pair` del índice. No corrí más rondas porque lo que queda abierto no es de esta tarea.
+
+### Límites
+
+- No se probó en un teléfono real, en tablet táctil ni en Safari/Firefox.
+- Los dos botones de pausa y sus nombres son texto nuevo, no estaban en los mockups.

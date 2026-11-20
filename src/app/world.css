@@ -6141,9 +6141,20 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   box-shadow: var(--shadow-soft);
 }
 
+.guarantees__head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+}
+
 .guarantees h3 {
   font-size: 1.05rem;
   white-space: nowrap;
+}
+
+.guarantees__toggle {
+  margin-inline-start: -0.4rem;
 }
 
 .guarantees__seals {
@@ -6165,14 +6176,6 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   border-radius: var(--radius-pill);
   background: var(--beige);
   font-size: 0.95rem;
-}
-
-.seal--lead {
-  --seal-badge: var(--moss);
-  --seal-ink: var(--cream);
-
-  background: color-mix(in oklch, var(--leaf-light) 35%, var(--cream));
-  font-weight: 600;
 }
 
 .seal__badge {
@@ -6250,19 +6253,12 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   --gi-anim: gi-spin;
 }
 
-/* When the strip comes into view each icon plays once, 90ms after the one
- * before; afterwards a seal replays its icon under the pointer. At rest every
- * icon is in its final state (no script, reduced motion). */
+/* While the strip is on screen one icon plays every 2 s, in turn
+ * (GuaranteesStrip sets data-playing); at rest every icon is in its final
+ * state (no script, reduced motion, paused). */
 @media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion-tier="reduced"]) .guarantees__seals[data-phase="revealing"] .gi__move {
-    animation: var(--gi-anim) 700ms var(--ease-enter) both;
-    animation-delay: calc(var(--i, 0) * 90ms);
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    html:not([data-motion-tier="reduced"]) .guarantees__seals:not([data-phase="revealing"]) .seal:hover .gi__move {
-      animation: var(--gi-anim) 600ms var(--ease-enter);
-    }
+  html:not([data-motion-tier="reduced"]) .seal[data-playing] .gi__move {
+    animation: var(--gi-anim) 700ms var(--ease-enter);
   }
 }
 
@@ -6329,6 +6325,12 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   .guarantees {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+
+  .guarantees__head {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .guarantees__seals {
@@ -6463,8 +6465,13 @@ html[data-motion-tier="reduced"] .works-index__go {
   padding-block-end: 6%;
 }
 
+/* The frames sway together; the pause button beside them stays still. */
+.works-index__float {
+  position: relative;
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion-tier="reduced"]) .works-index__preview {
+  html:not([data-motion-tier="reduced"]) .works-index__float {
     animation: preview-sway 6s ease-in-out infinite;
   }
 }
@@ -7600,4 +7607,93 @@ html[data-motion-tier="reduced"] .works-index__shot {
   .hearth__form {
     grid-column: 1 / -1;
   }
+}
+
+/* Pause button for the guarantees icons and the works autoplay (one per
+ * panel): a 32px disc inside a 44px target; pause bars or a play triangle. */
+.motion-toggle {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--moss);
+  cursor: pointer;
+}
+
+.motion-toggle::before {
+  content: "";
+  grid-area: 1 / 1;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: color-mix(in oklch, var(--moss) 10%, var(--cream));
+  transition:
+    background-color var(--m-fast) var(--ease-ui),
+    transform var(--m-press) var(--ease-ui);
+}
+
+.motion-toggle:hover::before {
+  background: color-mix(in oklch, var(--moss) 18%, var(--cream));
+  transition-duration: var(--m-base);
+}
+
+.motion-toggle__glyph {
+  grid-area: 1 / 1;
+  width: 0.6rem;
+  height: 0.7rem;
+  border-inline: 0.2rem solid currentColor;
+}
+
+.motion-toggle__glyph--play {
+  width: 0;
+  height: 0;
+  margin-inline-start: 0.15rem;
+  border-block: 0.35rem solid transparent;
+  border-inline: 0.55rem solid currentColor;
+  border-inline-end: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .motion-toggle:active::before {
+    transform: scale(0.9);
+  }
+}
+
+/* Works autoplay: a moss bar fills along the active row's bottom edge in
+ * 5 s; it pauses off screen, in a hidden tab or with the pause button, and
+ * rests at zero while the pointer or focus is on the index. */
+.works-index__progress {
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--moss);
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: works-progress 5s linear forwards;
+  animation-play-state: paused;
+}
+
+.works-index[data-running] .works-index__progress {
+  animation-play-state: running;
+}
+
+.works-index[data-hold] .works-index__progress {
+  animation: none;
+}
+
+@keyframes works-progress {
+  to {
+    transform: none;
+  }
+}
+
+.works-index__toggle {
+  position: absolute;
+  inset: auto auto -0.25rem 0;
 }
