@@ -8,75 +8,357 @@ import { commercialPlans } from "@/content/commercial-plans";
 import { islandCopy } from "@/content/islands";
 import {
   islandPlates,
+  landingOrder,
+  looseRocks,
+  mayoAnchors,
+  packsAssembledPlate,
+  packsMayoHops,
   PLATFORM_CANVAS,
+  platformPlacements,
   platforms,
+  rockFloats,
+  rockTiming,
+  type LooseRock,
+  type Platform,
   type PlatformPiece,
+  type PlatformPlacement,
   type PlatformShadow,
 } from "@/content/stage";
 
-type RockKind = PlatformPiece["kind"];
+/** Plate height over width: `top` is in % of the plate height, everything else in % of its width. */
+const RATIO = islandPlates.packs.desktop.height / islandPlates.packs.desktop.width;
 
-type ScatterStyle = { "--sx": string; "--sy": string; "--sr": string };
+/** Rise of each flight's apex above the higher of its two ends, in % of the plate height. */
+const APEX_LIFT = 9;
+
+/** Stacking inside the plate: back rocks under the island cutout (z 2), front rocks over Mayo (z 4). */
+const LAYER_Z = { back: 1, front: 5 } as const;
+
+type Box = { left: number; top: number; width: number; height: number };
+type Size = "d" | "m";
+
+const round = (value: number) => Math.round(value * 100) / 100;
+
+/** Extent of a platform's rocks on its 1254 design canvas. */
+function bounds(platform: Platform) {
+  const xs = platform.pieces.flatMap((piece) => [piece.x, piece.x + piece.w]);
+  const ys = platform.pieces.flatMap((piece) => [piece.y, piece.y + (piece.w * piece.height) / piece.width]);
+  return { minX: Math.min(...xs), maxX: Math.max(...xs), minY: Math.min(...ys), maxY: Math.max(...ys) };
+}
 
 /**
- * Scatter offsets per rock (where it floats before the scroll assembles it).
- * The rocks rise from below and the sides, never through the title above
- * the platforms. The assembled state is the default layout, so every
- * fallback tier shows the platforms already built without extra CSS.
+ * A rectangle of the design canvas placed on the plate: the platform's feet
+ * (bottom centre of its rocks) land on the placement point.
  */
-const scatter: Record<RockKind, ScatterStyle> = {
-  base: { "--sx": "-26vw", "--sy": "30vh", "--sr": "-28deg" },
-  left: { "--sx": "-34vw", "--sy": "14vh", "--sr": "48deg" },
-  right: { "--sx": "30vw", "--sy": "22vh", "--sr": "-54deg" },
-  top: { "--sx": "22vw", "--sy": "-12vh", "--sr": "76deg" },
-};
+function onPlate(platform: Platform, placement: PlatformPlacement, x: number, y: number, w: number, h: number): Box {
+  const { minX, maxX, maxY } = bounds(platform);
+  const unit = placement.canvas / PLATFORM_CANVAS;
+  return {
+    left: placement.x + (x - (minX + maxX) / 2) * unit,
+    top: placement.y + ((y - maxY) * unit) / RATIO,
+    width: w * unit,
+    height: (h * unit) / RATIO,
+  };
+}
 
-/** Highest point of a platform's rocks, as a share of the design canvas: its card rests there. */
-const rockTop = (index: number) => Math.min(...platforms[index].pieces.map((piece) => piece.y)) / PLATFORM_CANVAS;
+const boxVars = (box: Box, size: Size) => ({
+  [`--x-${size}`]: `${round(box.left)}%`,
+  [`--y-${size}`]: `${round(box.top)}%`,
+  [`--w-${size}`]: `${round(box.width)}%`,
+});
 
-const pct = (value: number) => `${(value / PLATFORM_CANVAS) * 100}%`;
+/** Phones see the plate scaled up around its centre: the floating rocks close in so they stay on screen. */
+const floatX = (x: number, size: Size) => (size === "d" ? x : 50 + (x - 50) * 0.5);
 
-function Rock({ piece }: { piece: PlatformPiece }) {
+/**
+ * Flight of one rock from where it floats to where it rests, as offsets from
+ * its resting place in % of the plate width (world.css multiplies them by
+ * `--pu`): the start and the apex, which rises above both ends so the rock
+ * arcs over the island's rim instead of passing through it.
+ */
+function flightVars(box: Box, kind: PlatformPiece["kind"], index: number, size: Size) {
+  const float = rockFloats[index][kind];
+  const restX = box.left + box.width / 2;
+  const restY = box.top + box.height / 2;
+  const startX = floatX(float.x, size) - restX;
+  const startY = (float.y - restY) * RATIO;
+  const apexY = (Math.min(float.y, restY) - APEX_LIFT - restY) * RATIO;
+  return {
+    [`--dx-${size}`]: round(startX),
+    [`--dy-${size}`]: round(startY),
+    [`--ax-${size}`]: round(startX * 0.3),
+    [`--ay-${size}`]: round(apexY),
+  };
+}
+
+/** Scroll range of one piece's flight on the `--rocks` cover range. */
+function flightRange(index: number, kind: PlatformPiece["kind"]) {
+  const start = rockTiming.start + index * rockTiming.stagger + landingOrder.indexOf(kind) * rockTiming.pieceStagger;
+  return { start, end: start + rockTiming.flight };
+}
+
+const cover = (start: number, end: number) => `cover ${round(start)}% cover ${round(end)}%`;
+
+/** A stable pseudo-random number in [0, 1) per serial and seed, so server and client agree. */
+const noise = (serial: number, seed: number) => Math.abs((Math.sin(serial * 12.9898 + seed * 78.233) * 43758.5453) % 1);
+
+/**
+ * Idle float of each rock, never in step with another (Juani: "mas ritmo y
+ * variedad previo al orden, que se muevan mas"): its own bob, sway, lateral
+ * drift and depth breathing (it grows and shrinks a little, as if coming
+ * closer and drifting away), each with its own period (seconds) and
+ * amplitude, and one rock in three tumbles slowly end over end. Negative
+ * delays start them mid-swing. `scale` shrinks the motion of far rocks.
+ */
+function idleVars(serial: number, scale = 1) {
+  const pick = (seed: number, min: number, max: number) => round(min + noise(serial, seed) * (max - min));
+  const tumbles = serial % 3 === 0;
+  return {
+    "--bob-dur": `${pick(1, 3.4, 6.8)}s`,
+    "--bob-amp": round(pick(2, 0.9, 2.2) * scale),
+    "--sway-dur": `${pick(3, 4.5, 8.5)}s`,
+    "--sway-amp": `${pick(4, 3, 9)}deg`,
+    "--drift-dur": `${pick(5, 6, 12)}s`,
+    "--drift-amp": round(pick(6, 1.2, 3) * scale),
+    "--breath-dur": `${pick(8, 5, 10)}s`,
+    "--breath-amp": round(pick(9, 0.04, 0.1) * scale),
+    "--tumble-dur": `${pick(10, 16, 34)}s`,
+    "--tumble-turn": tumbles ? `${noise(serial, 11) > 0.5 ? 360 : -360}deg` : "0deg",
+    "--idle-delay": `${-pick(7, 0, 9)}s`,
+  };
+}
+
+/** Island-3 centre the rocks swirl around before the order, in % of the plate. */
+const SWIRL_CENTRE = { x: 50, y: 48 };
+
+/**
+ * Where a rock is pushed along its swirl at the start of the section
+ * (`--pre` 0, world.css): a turn around the island plus a little outwards,
+ * in % of the plate width, so as the stage arrives the rocks circle in on
+ * the scroll and pass in front of and behind each other.
+ */
+function swirlVars(x: number, y: number, serial: number, size: Size) {
+  const ox = x - SWIRL_CENTRE.x;
+  const oy = (y - SWIRL_CENTRE.y) * RATIO;
+  const length = Math.hypot(ox, oy) || 1;
+  const turn = (5 + noise(serial, 12) * 5) * (serial % 2 === 0 ? 1 : -1) * (size === "d" ? 1 : 0.6);
+  const out = 2 * (size === "d" ? 1 : 0.6);
+  return {
+    [`--px-${size}`]: round((-oy / length) * turn + (ox / length) * out),
+    [`--py-${size}`]: round((ox / length) * turn + (oy / length) * out),
+  };
+}
+
+function Rock({ piece, index }: { piece: PlatformPiece; index: number }) {
+  const platform = platforms[index];
+  const height = (piece.w * piece.height) / piece.width;
+  const desktop = onPlate(platform, platformPlacements.desktop[index], piece.x, piece.y, piece.w, height);
+  const mobile = onPlate(platform, platformPlacements.mobile[index], piece.x, piece.y, piece.w, height);
+  const float = rockFloats[index][piece.kind];
+  const serial = index * 4 + landingOrder.indexOf(piece.kind);
+  const { start, end } = flightRange(index, piece.kind);
+  const style = {
+    ...boxVars(desktop, "d"),
+    ...boxVars(mobile, "m"),
+    ...flightVars(desktop, piece.kind, index, "d"),
+    ...flightVars(mobile, piece.kind, index, "m"),
+    ...idleVars(serial),
+    ...swirlVars(float.x, float.y, serial, "d"),
+    ...swirlVars(floatX(float.x, "m"), float.y, serial, "m"),
+    "--r0": `${float.rotate}deg`,
+    // Settles with a small tilt against its spin, then rocks back to rest.
+    "--wobble": `${float.rotate > 0 ? -3.5 : 3.5}deg`,
+    "--s0": float.scale,
+    "--z0": LAYER_Z[float.layer],
+    "--range": cover(start, end),
+    "--mask": `url("${piece.src}")`,
+  } as CSSProperties;
   return (
-    <img
-      className={`rock rock--${piece.kind}`}
-      src={piece.src}
-      alt=""
-      width={piece.width}
-      height={piece.height}
-      loading="lazy"
-      decoding="async"
-      style={{ ...scatter[piece.kind], left: pct(piece.x), top: pct(piece.y), width: pct(piece.w) } as CSSProperties}
-    />
+    <div className={`rock rock--${piece.kind} rock--${float.layer} rock--platform-${index + 1}`} style={style}>
+      {/* The body carries the idle float; its ::after grades the rock into the plate once it lands. */}
+      <div className="rock__body">
+        {/* Eager: its grading mask fetches the same file with the page anyway, and a late image would show the mask alone. */}
+        <img className="rock__img" src={piece.src} alt="" width={piece.width} height={piece.height} loading="eager" decoding="async" />
+      </div>
+    </div>
   );
 }
 
-function Shadow({ shadow }: { shadow: PlatformShadow }) {
+/**
+ * A loose rock that stays far away and never joins a platform: paler, softer
+ * and slower the further it is (`--depth`), drifting a little with the scroll
+ * (parallax, less when further) and on its own clock.
+ */
+function FarRock({ rock, serial }: { rock: LooseRock; serial: number }) {
+  const height = (rock.w * rock.height) / rock.width / RATIO;
+  const style = {
+    "--x-d": `${round(rock.x - rock.w / 2)}%`,
+    "--y-d": `${round(rock.y - height / 2)}%`,
+    "--w-d": `${rock.w}%`,
+    "--x-m": `${round(floatX(rock.x, "m") - rock.w / 2)}%`,
+    "--y-m": `${round(rock.y - height / 2)}%`,
+    "--w-m": `${rock.w}%`,
+    "--r0": `${rock.rotate}deg`,
+    "--depth": rock.depth,
+    "--far-dx": round((noise(serial, 13) - 0.5) * 6 * (1 - rock.depth * 0.6)),
+    "--far-dy": round((2 + noise(serial, 14) * 3) * (1 - rock.depth * 0.6)),
+    ...idleVars(serial + 40, 1 - rock.depth * 0.55),
+  } as CSSProperties;
   return (
-    <img
-      className="rock-shadow"
-      src={shadow.src}
-      alt=""
-      width={shadow.w}
-      height={shadow.h}
-      loading="lazy"
-      decoding="async"
-      style={{ left: pct(shadow.x), top: pct(shadow.y), width: pct(shadow.w) } as CSSProperties}
-    />
+    <div className="rock-far" style={style}>
+      <div className="rock__body">
+        <img className="rock__img" src={rock.src} alt="" width={rock.width} height={rock.height} loading="lazy" decoding="async" />
+      </div>
+    </div>
   );
 }
+
+/**
+ * Ragged top edge of grass as an SVG alpha mask, different per platform:
+ * clumps of overlapping blades of mixed width, height and lean over a solid
+ * sod band, softened a little so no blade reads as a cut-out spike.
+ */
+function tuftMask(seed: number) {
+  const blades = 220;
+  const shapes = Array.from({ length: blades }, (_, blade) => {
+    const serial = seed * 1000 + blade;
+    const x = noise(serial, 15) * 200;
+    // Only the outer tenth of the strip thins out, so the base's curved sides sink too.
+    const edge = Math.min(1, Math.min(x, 200 - x) / 20);
+    // Mostly short blades, so the gaps between them stay shallow, with a few tall ones.
+    const height = (blade % 7 === 0 ? 8 + noise(serial, 16) * 6 : 3 + noise(serial, 16) * 6) * (0.45 + 0.55 * edge);
+    const lean = (noise(serial, 17) - 0.5) * 7;
+    const half = 1.8 + noise(serial, 18) * 3;
+    return `M${round(x - half)} 27L${round(x + lean)} ${round(27 - height)}L${round(x + half)} 27Z`;
+  });
+  const svg =
+    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'>` +
+    `<filter id='s'><feGaussianBlur stdDeviation='0.7'/></filter>` +
+    `<path filter='url(#s)' d='${shapes.join("")}M0 25h200v15H0Z'/></svg>`;
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+}
+
+/**
+ * Grass in front of a platform's base: the plate's own meadow (the island
+ * cutout, aligned to the plate) cut to a strip of blades along the feet, so
+ * the bottom of the stack sinks into the grass. Over bare meadow it shows the
+ * very pixels beneath it, so it needs no animation.
+ */
+function GrassTufts({ index }: { index: number }) {
+  const platform = platforms[index];
+  const { minX, maxX } = bounds(platform);
+  const island = islandPlates.packs.layers.island;
+  const vars = (size: Size) => {
+    const placement = platformPlacements[size === "d" ? "desktop" : "mobile"][index];
+    const width = ((maxX - minX) * placement.canvas * 1.2) / PLATFORM_CANVAS;
+    const left = placement.x - width / 2;
+    const top = placement.y - GRASS_RISE;
+    return {
+      [`--x-${size}`]: `${round(left)}%`,
+      [`--y-${size}`]: `${round(top)}%`,
+      [`--w-${size}`]: `${round(width)}%`,
+      // Offsets of the meadow behind the strip, in % of the plate width.
+      [`--gx-${size}`]: round(left),
+      [`--gy-${size}`]: round(top * RATIO),
+    };
+  };
+  const style = {
+    ...vars("d"),
+    ...vars("m"),
+    "--tufts": tuftMask(index + 1),
+    backgroundImage: `image-set(url("${island.avif}") type("image/avif"), url("${island.webp}") type("image/webp"))`,
+  } as CSSProperties;
+  return <span className="rock-grass" style={style} />;
+}
+
+/** How far the grass strip reaches above a platform's feet, in % of the plate height (it is 7 % tall). */
+const GRASS_RISE = 5.2;
+
+/** The commissioned painted end state, crossfading in over the live stacks at the end (stage.ts). */
+function AssembledPlate() {
+  const { desktop, mobile } = packsAssembledPlate;
+  if (!desktop) return null;
+  return (
+    <picture className="plate__picture plate__picture--assembled">
+      {mobile ? <source media="(max-width: 48rem)" type="image/avif" srcSet={mobile.avif} /> : null}
+      <source type="image/avif" srcSet={desktop.avif} />
+      <img src={desktop.webp} alt="" width={desktop.width} height={desktop.height} loading="lazy" decoding="async" />
+    </picture>
+  );
+}
+
+/** A painted contact shadow between two pieces: it darkens as the piece that casts it lands. */
+function Shadow({ shadow, index }: { shadow: PlatformShadow; index: number }) {
+  const platform = platforms[index];
+  const { start, end } = flightRange(index, shadow.under);
+  const style = {
+    ...boxVars(onPlate(platform, platformPlacements.desktop[index], shadow.x, shadow.y, shadow.w, shadow.h), "d"),
+    ...boxVars(onPlate(platform, platformPlacements.mobile[index], shadow.x, shadow.y, shadow.w, shadow.h), "m"),
+    "--range": cover(start, end),
+  } as CSSProperties;
+  return <img className="rock-shadow" src={shadow.src} alt="" width={shadow.w} height={shadow.h} loading="lazy" decoding="async" style={style} />;
+}
+
+/**
+ * The platform's shadow on the grass under its base: wide and faint while
+ * the base is still high, tight and dark as it touches down (noon sun, so
+ * straight below).
+ */
+function GroundShadow({ index }: { index: number }) {
+  const platform = platforms[index];
+  const { minX, maxX } = bounds(platform);
+  const { start, end } = flightRange(index, "base");
+  const width = (size: Size) => {
+    const placement = platformPlacements[size === "d" ? "desktop" : "mobile"][index];
+    return `${round(((maxX - minX) * placement.canvas * 1.08) / PLATFORM_CANVAS)}%`;
+  };
+  const style = {
+    "--x-d": `${platformPlacements.desktop[index].x}%`,
+    "--y-d": `${platformPlacements.desktop[index].y}%`,
+    "--w-d": width("d"),
+    "--x-m": `${platformPlacements.mobile[index].x}%`,
+    "--y-m": `${platformPlacements.mobile[index].y}%`,
+    "--w-m": width("m"),
+    "--range": cover(start, end),
+  } as CSSProperties;
+  return <span className="rock-ground" style={style} />;
+}
+
+/** Highest point of a platform's rocks, in % of the plate height: its card rests there. */
+function cardVars(index: number) {
+  const platform = platforms[index];
+  const { minY, maxY } = bounds(platform);
+  const top = (placement: PlatformPlacement) => placement.y + ((minY - maxY) * placement.canvas) / PLATFORM_CANVAS / RATIO;
+  const { start } = flightRange(index, "top");
+  const landed = start + rockTiming.flight * rockTiming.landing;
+  return {
+    "--x-d": `${platformPlacements.desktop[index].x}%`,
+    "--top-d": `${round(top(platformPlacements.desktop[index]))}%`,
+    "--x-m": `${platformPlacements.mobile[index].x}%`,
+    "--top-m": `${round(top(platformPlacements.mobile[index]))}%`,
+    "--range": cover(landed, landed + 3.5),
+  } as CSSProperties;
+}
+
+/** Mayo's hop stops as `translate` offsets from her resting anchor, in her own widths. */
+function hopVars() {
+  const anchor = mayoAnchors.packs!;
+  const offset = (to: number, x: string, size: string) => `${round(((to - parseFloat(x)) / parseFloat(size)) * 100)}%`;
+  return Object.fromEntries(
+    packsMayoHops.desktop.flatMap((stop, hop) => [
+      [`--hop-${hop}-d`, offset(stop, anchor.x, anchor.size)],
+      [`--hop-${hop}-m`, offset(packsMayoHops.mobile[hop], anchor.xMobile ?? anchor.x, anchor.sizeMobile ?? anchor.size)],
+    ]),
+  ) as CSSProperties;
+}
+
+/** Back to front: the middle platform stands furthest back, so it is painted first. */
+const depthOrder = [1, 0, 2];
 
 export function RockIsland() {
   return (
-    <section id="packs" className="rocks" data-island="3" aria-labelledby="packs-title">
+    <section id="packs" className={packsAssembledPlate.desktop ? "rocks rocks--painted" : "rocks"} data-island="3" aria-labelledby="packs-title">
       <div className="rocks__stage">
-        <div className="scene scene--noon scene--plated" style={plateSceneStyle(islandPlates.packs)} aria-hidden="true">
-          <div className="scene__sky" />
-          <IslandPlate plate={islandPlates.packs}>
-            <MayoFigure slot="packs" className="rocks__mayo" />
-          </IslandPlate>
-        </div>
-
         <header className="rocks__intro">
           <h2 id="packs-title">
             <IslandTitle segments={islandCopy.packs.title} />
@@ -84,30 +366,47 @@ export function RockIsland() {
           <p>{islandCopy.packs.body}</p>
         </header>
 
-        <div className="platforms">
-          {commercialPlans.map((plan, index) => (
-            <div className={`platform platform--${index + 1}`} style={{ "--rock-top": rockTop(index) } as CSSProperties} key={plan.id}>
-              <div className="platform__rocks" aria-hidden="true">
+        <div className="scene scene--noon scene--plated" style={plateSceneStyle(islandPlates.packs)} aria-hidden="true">
+          <div className="scene__sky" />
+          <IslandPlate plate={islandPlates.packs}>
+            {looseRocks.map((rock, serial) => (
+              <FarRock key={serial} rock={rock} serial={serial} />
+            ))}
+            {depthOrder.map((index) => (
+              <Fragment key={index}>
                 {/* Manifest rule: each contact shadow sits under its emitter and over the receivers. */}
                 {platforms[index].pieces.map((piece) => (
                   <Fragment key={piece.kind}>
                     {platforms[index].shadows
                       .filter((shadow) => shadow.under === piece.kind)
                       .map((shadow) => (
-                        <Shadow key={shadow.src} shadow={shadow} />
+                        <Shadow key={shadow.src} shadow={shadow} index={index} />
                       ))}
-                    <Rock piece={piece} />
+                    <Rock piece={piece} index={index} />
                   </Fragment>
                 ))}
-              </div>
-              <a className="platform__card" href={`#pack-${plan.id}`}>
-                <span className="platform__name">{plan.name}</span>
-                <span className="platform__from">Desde</span>
-                <span className="platform__price">{plan.price}</span>
-                <span className="platform__timeline">{plan.timeline}</span>
-                <span className="platform__link">Ver qué incluye</span>
-              </a>
+                <GrassTufts index={index} />
+                {/* Over the grass too: the blades at the stack's feet stand in its shade. */}
+                <GroundShadow index={index} />
+              </Fragment>
+            ))}
+            <AssembledPlate />
+            <div className="rocks__mayo-path" style={hopVars()}>
+              <MayoFigure slot="packs" className="rocks__mayo" />
             </div>
+          </IslandPlate>
+        </div>
+
+        {/* The cards share the plate's frame, so each rests on top of its own platform. */}
+        <div className="platforms">
+          {commercialPlans.map((plan, index) => (
+            <a className={`platform__card platform__card--${index + 1}`} href={`#pack-${plan.id}`} style={cardVars(index)} key={plan.id}>
+              <span className="platform__name">{plan.name}</span>
+              <span className="platform__from">Desde</span>
+              <span className="platform__price">{plan.price}</span>
+              <span className="platform__timeline">{plan.timeline}</span>
+              <span className="platform__link">Ver qué incluye</span>
+            </a>
           ))}
         </div>
       </div>

@@ -599,7 +599,76 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 /* Island 3: rock assembly ---------------------------------------------- */
 
+/* The stage is pinned while the section scrolls (cover 29.4 % to 70.6 % of
+ * `--rocks` at 240vh). Rocks, contact shadows and Mayo live inside the plate,
+ * positioned in % of it (stage.ts), so they share the island's perspective;
+ * the cards sit in `.platforms`, a box with the plate's exact frame outside
+ * the decorative (aria-hidden) scene, each resting on its platform's top.
+ * The assembled state is the default layout: without scroll-driven
+ * animations and with reduced motion the platforms stand built, the cards
+ * show and Mayo waits by the third platform. */
+
+@property --gate {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --bob {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --sway {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --drift {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --breath {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --tumble {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+/* Swirl progress before the order (0 at the section's start, 1 when the
+ * flights begin) and grading of a landed rock (0 in the air, 1 at rest);
+ * both default to their resting value, the static tiers' state. */
+@property --pre {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
+@property --land {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
 .rocks {
+  /* The plate is dropped (a share of its own height, `translate` %) so the
+   * meadow sits low enough for the platforms and their cards to clear the
+   * title and the intro (about 20rem): 15 % on 16:10 screens, more on wider
+   * or shorter ones, where the plate is taller for the same screen height
+   * (the cards' tops sit at 85.7 % of the plate's height above its bottom,
+   * i.e. 48.25cqw). The hanging root tips and, on short screens, part of the
+   * underside leave the frame. */
+  --rocks-drop: max(15%, 20rem - 100cqh + 48.25cqw);
+
   position: relative;
   height: 240vh;
   view-timeline-name: --rocks;
@@ -612,6 +681,8 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   grid-template-rows: auto 1fr;
   height: 100svh;
   overflow: clip;
+  /* The cards' frame (`.platforms`) measures the stage as the scene does. */
+  container-type: size;
 }
 
 .rocks__intro {
@@ -632,71 +703,187 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   color: var(--ink-soft);
 }
 
-.platforms {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: end;
-  gap: 2vw;
-  width: min(100% - 2 * var(--gutter), 66rem);
-  margin: 0 auto;
-  padding-block-end: 14vh;
+.rocks .plate {
+  /* 1 % of the plate width: the unit of the flight, swirl and float offsets. */
+  --pu: calc(1cqw * var(--plate-scale, 1));
+
+  transform: translate(calc(-1 * var(--plate-x, 50%)), var(--rocks-drop));
 }
 
-.platform {
-  --rocks-max: 19rem;
-
-  position: relative;
-  display: grid;
-  justify-items: center;
-  padding-block-start: 9rem;
-  container-type: inline-size;
+/* Inside the plate: back rocks (z 1) float behind the island cutout (z 2);
+ * the platforms at rest and their shadows (z 3), Mayo (z 4), and the rocks
+ * floating in front of the island's underside (z 5) are drawn over it. */
+.rocks .plate__picture--island {
+  z-index: 2;
 }
 
-.platform--1 {
-  --platform-height: 7rem;
+.rocks__mayo-path {
+  --hop-0: var(--hop-0-d);
+  --hop-1: var(--hop-1-d);
+  --hop-2: var(--hop-2-d);
+  --hop-3: var(--hop-3-d);
+
+  display: contents;
 }
 
-.platform--2 {
-  --platform-height: 9.5rem;
+.rocks__mayo {
+  z-index: 4;
 }
 
-.platform--3 {
-  --platform-height: 12rem;
-}
+/* Plate-relative placement: `--*-d` on desktop, `--*-m` on phones. */
+.rock,
+.rock-far,
+.rock-grass,
+.rock-shadow,
+.rock-ground {
+  --x: var(--x-d);
+  --y: var(--y-d);
+  --w: var(--w-d);
 
-.platform__rocks {
-  position: relative;
-  width: 100%;
-  max-width: var(--rocks-max);
-  aspect-ratio: 1;
-  margin-block-start: 1rem;
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  pointer-events: none;
 }
 
 .rock {
-  position: absolute;
-  height: auto;
-  will-change: transform;
+  --dx: var(--dx-d);
+  --dy: var(--dy-d);
+  --ax: var(--ax-d);
+  --ay: var(--ay-d);
+  --px: var(--px-d);
+  --py: var(--py-d);
+  /* At rest the painted pieces are graded to the plate: its rocks are less
+   * saturated and darker than the pieces as delivered, a little warmer. */
+  --clear: blur(0) saturate(0.86) brightness(0.9) contrast(1.04) sepia(0.06);
+  --haze: var(--clear);
+
+  z-index: 3;
 }
 
-/* Each card rests on the highest rock of its own platform (`--rock-top`,
- * share of the square rock canvas, set from stage.ts) and overlaps it a
- * little, instead of all three hanging on one line above the platforms. */
-.platform__card {
+/* Depth cues while floating: far rocks paler and softer, near rocks a touch
+ * darker and out of focus; both resolve to the graded rock. The middle
+ * platform stands further back, so at rest it keeps a breath of haze. */
+.rock--back {
+  --haze: blur(1.1px) saturate(0.74) brightness(1) contrast(0.88) sepia(0);
+}
+
+.rock--front {
+  --haze: blur(1.4px) saturate(0.98) brightness(0.88) contrast(1.04) sepia(0.04);
+}
+
+.rock--platform-2 {
+  --clear: blur(0) saturate(0.82) brightness(0.92) contrast(1) sepia(0.05);
+}
+
+/* Idle float, scaled to nothing by `--gate` as the scroll gathers the rock:
+ * bob, lateral drift, the swirl that brings it in with the scroll (`--pre`),
+ * sway plus the slow tumble of one rock in three, and depth breathing. */
+.rock__body {
+  position: relative;
+  translate:
+    calc((var(--drift) * var(--drift-amp) + (1 - var(--pre)) * var(--px, 0)) * var(--gate) * var(--pu))
+    calc((var(--bob) * var(--bob-amp) + (1 - var(--pre)) * var(--py, 0)) * var(--gate) * var(--pu));
+  rotate: calc((var(--sway) * var(--sway-amp) + var(--tumble) * var(--tumble-turn, 0deg)) * var(--gate));
+  scale: calc(1 + var(--breath) * var(--breath-amp, 0) * var(--gate));
+}
+
+.rock__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Grading of a landed piece, cut to its own silhouette: a warm noon light
+ * on its top, ambient occlusion and green grass bounce at its bottom, where
+ * it touches the piece below or the ground. Fades in as it lands (`--land`). */
+.rock .rock__body::after {
+  content: "";
   position: absolute;
-  inset: auto auto calc(min(100cqw, var(--rocks-max)) * (1 - var(--rock-top, 0)) - 0.6rem) 50%;
-  z-index: 4;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgb(255 236 190 / 0.2) 0%, rgb(255 236 190 / 0) 34%),
+    linear-gradient(0deg, rgb(52 58 18 / 0.42) 0%, rgb(70 70 24 / 0.16) 22%, rgb(70 70 24 / 0) 42%);
+  mask-image: var(--mask);
+  mask-size: 100% 100%;
+  opacity: var(--land);
+  pointer-events: none;
+}
+
+.rock--base .rock__body::after {
+  background:
+    linear-gradient(180deg, rgb(255 236 190 / 0.18) 0%, rgb(255 236 190 / 0) 30%),
+    linear-gradient(0deg, rgb(34 48 8 / 0.85) 0%, rgb(44 58 12 / 0.55) 14%, rgb(60 70 20 / 0.16) 30%, rgb(70 70 24 / 0) 48%);
+}
+
+/* Far loose rocks: paler, softer and more transparent with depth, so the sky
+ * shows through them as it does through distance (atmospheric perspective). */
+.rock-far {
+  --gate: 1;
+
+  z-index: 1;
+  rotate: var(--r0);
+  opacity: calc(1 - var(--depth) * 0.42);
+  filter: blur(calc(0.5px + var(--depth) * 1.4px)) saturate(calc(0.85 - var(--depth) * 0.35)) brightness(calc(1 + var(--depth) * 0.12)) contrast(calc(0.95 - var(--depth) * 0.15));
+}
+
+/* The plate's meadow in front of each base, cut to a strip of blades. */
+.rock-grass {
+  --gx: var(--gx-d);
+  --gy: var(--gy-d);
+
+  z-index: 3;
+  height: 7%;
+  background-repeat: no-repeat;
+  background-size: calc(100 * var(--pu)) auto;
+  background-position: calc(var(--gx) * -1 * var(--pu)) calc(var(--gy) * -1 * var(--pu));
+  mask-image: var(--tufts);
+  mask-size: 100% 100%;
+}
+
+.rock-shadow {
+  height: auto;
+  z-index: 3;
+}
+
+/* Soft shadow of a whole platform on the grass, centred under its feet. */
+.rock-ground {
+  z-index: 3;
+  aspect-ratio: 5 / 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(30 38 12 / 0.46), rgb(30 38 12 / 0.2) 55%, rgb(30 38 12 / 0));
+  transform: translate(-47%, -62%);
+}
+
+/* The cards: a box with the plate's frame (bottom-anchored, full width, the
+ * plate's ratio and drop), each card's bottom on its platform's top rock. */
+.platforms {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  aspect-ratio: 1672 / 941;
+  transform: translateY(var(--rocks-drop));
+  pointer-events: none;
+}
+
+.platform__card {
+  --x: var(--x-d);
+  --top: var(--top-d);
+
+  position: absolute;
+  left: var(--x);
+  bottom: calc(100% - var(--top) - 0.5rem);
   display: grid;
   gap: 0.1rem;
-  width: 12rem;
-  max-width: 100%;
-  padding: 0.9rem 1.1rem 0.8rem;
+  width: 11rem;
+  padding: 0.85rem 1rem 0.75rem;
   border-radius: var(--radius);
   background: var(--cream);
   box-shadow: var(--shadow-soft);
   text-align: center;
   transform: translateX(-50%);
+  pointer-events: auto;
 }
 
 .platform__card:hover .platform__link,
@@ -746,21 +933,251 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   transition: text-decoration-color 200ms var(--ease-out);
 }
 
-/* Scroll-driven animation: default state is "assembled", so every fallback
- * (no support, reduced motion) shows the platforms built. */
+/* Flight of one rock over its own range (`--range`, stage.ts rockTiming),
+ * in three animations so each axis has its own physics. Horizontally it
+ * glides in with an ease-in-out; vertically it lifts off slowly, decelerates
+ * to the apex (above both ends, so it clears the island's rim), falls with
+ * gravity's ease-in, touches down at 84 % and gives one small rebound. Its
+ * spin and depth (scale, haze, blur) resolve to rest by the landing, with a
+ * small tilt against the spin that rocks back; it moves from its float layer
+ * to the platform layer at the apex, where it overlaps nothing. */
+@keyframes rock-fly-x {
+  0% {
+    transform: translateX(calc(var(--dx) * var(--pu)));
+    animation-timing-function: cubic-bezier(0.42, 0, 0.3, 1);
+  }
 
-@keyframes rock-settle {
+  50% {
+    transform: translateX(calc(var(--ax) * var(--pu)));
+    animation-timing-function: cubic-bezier(0.3, 0, 0.45, 1);
+  }
+
+  84%,
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes rock-fly-y {
+  0% {
+    translate: 0 calc(var(--dy) * var(--pu));
+    animation-timing-function: cubic-bezier(0.35, 0, 0.3, 1);
+  }
+
+  50% {
+    translate: 0 calc(var(--ay) * var(--pu));
+    animation-timing-function: cubic-bezier(0.55, 0, 0.9, 0.55);
+  }
+
+  84% {
+    translate: 0 0;
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.4, 1);
+  }
+
+  92% {
+    translate: 0 calc(-0.18 * var(--pu));
+    animation-timing-function: cubic-bezier(0.6, 0, 0.8, 0.4);
+  }
+
+  100% {
+    translate: 0 0;
+  }
+}
+
+@keyframes rock-turn {
+  0% {
+    --gate: 1;
+    --land: 0;
+
+    rotate: var(--r0);
+    scale: var(--s0);
+    z-index: var(--z0);
+    filter: var(--haze);
+    animation-timing-function: cubic-bezier(0.45, 0, 0.4, 1);
+  }
+
+  20% {
+    --gate: 0;
+  }
+
+  49% {
+    z-index: var(--z0);
+  }
+
+  50% {
+    z-index: 3;
+  }
+
+  60% {
+    filter: var(--clear);
+  }
+
+  80% {
+    --land: 0;
+  }
+
+  84% {
+    rotate: var(--wobble);
+    scale: 1;
+    animation-timing-function: cubic-bezier(0.3, 0, 0.5, 1);
+  }
+
+  93% {
+    rotate: calc(var(--wobble) * -0.35);
+    animation-timing-function: ease-in-out;
+  }
+
+  100% {
+    --gate: 0;
+    --land: 1;
+
+    rotate: 0deg;
+    scale: 1;
+    z-index: 3;
+    filter: var(--clear);
+  }
+}
+
+@keyframes rock-bob {
   from {
-    transform: translate(
-        calc(var(--sx) * var(--scatter, 1)),
-        calc(var(--sy) * var(--scatter, 1))
-      )
-      rotate(var(--sr));
-    opacity: 0.85;
+    --bob: -1;
   }
 
   to {
-    transform: none;
+    --bob: 1;
+  }
+}
+
+@keyframes rock-sway {
+  from {
+    --sway: -1;
+  }
+
+  to {
+    --sway: 1;
+  }
+}
+
+@keyframes rock-drift {
+  from {
+    --drift: -1;
+  }
+
+  to {
+    --drift: 1;
+  }
+}
+
+@keyframes rock-breath {
+  from {
+    --breath: -1;
+  }
+
+  to {
+    --breath: 1;
+  }
+}
+
+@keyframes rock-tumble {
+  to {
+    --tumble: 1;
+  }
+}
+
+/* The swirl: rocks come round the island as the section scrolls in. */
+@keyframes rock-pre {
+  from {
+    --pre: 0;
+  }
+
+  to {
+    --pre: 1;
+  }
+}
+
+/* Far rocks drift across the whole section, less the further they are. */
+@keyframes rock-far-drift {
+  from {
+    translate: calc(var(--far-dx) * var(--pu)) calc(var(--far-dy) * var(--pu));
+  }
+
+  to {
+    translate: calc(var(--far-dx) * -1 * var(--pu)) calc(var(--far-dy) * -1 * var(--pu));
+  }
+}
+
+@keyframes assembled-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* The painted end state (stage.ts packsAssembledPlate), over the live
+ * stacks and under Mayo, fading in once the last platform has settled. Its
+ * sky is transparent, so it needs no top fade. Once it is opaque the live
+ * pieces, their painted and ground shadows and the grass strips are hidden
+ * (`live-out`), so no live edge can peek past the painting and no shadow is
+ * doubled; scrolling back shows them again before the painting fades out.
+ * Static tiers (no scroll-driven animations, reduced motion) show the
+ * painting alone: it is the assembled state, better integrated. */
+.plate__picture--assembled {
+  z-index: 3;
+}
+
+.rocks .scene--plated .plate__picture--assembled {
+  mask-image: none;
+}
+
+.rocks--painted {
+  --live-out: cover 67.9% cover 68%;
+}
+
+.rocks--painted .rock,
+.rocks--painted .rock-shadow,
+.rocks--painted .rock-ground,
+.rocks--painted .rock-grass {
+  visibility: hidden;
+}
+
+@keyframes live-out {
+  from {
+    visibility: visible;
+  }
+
+  to {
+    visibility: hidden;
+  }
+}
+
+@keyframes rock-ground-in {
+  0% {
+    opacity: 0;
+    scale: 1.7;
+  }
+
+  50% {
+    opacity: 0.12;
+    scale: 1.45;
+  }
+
+  84%,
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes rock-shadow-in {
+  0%,
+  80% {
+    opacity: 0;
+  }
+
+  100% {
     opacity: 1;
   }
 }
@@ -768,12 +1185,37 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 @keyframes card-rise {
   from {
     opacity: 0;
-    transform: translate(-50%, 1.5rem);
+    transform: translate(-50%, 1rem);
   }
 
   to {
     opacity: 1;
     transform: translate(-50%, 0);
+  }
+}
+
+/* Mayo's three hops (stage.ts packsMayoHops) on her jump strip's range, one
+ * per strip cycle: she moves only while airborne, frames 3 to 8 of 12 of each
+ * cycle (k/3 + 2/36 to k/3 + 8/36 of the range), and stands still otherwise. */
+@keyframes rocks-mayo-hops {
+  0%,
+  5.56% {
+    translate: var(--hop-0) 0;
+  }
+
+  22.22%,
+  38.89% {
+    translate: var(--hop-1) 0;
+  }
+
+  55.56%,
+  72.22% {
+    translate: var(--hop-2) 0;
+  }
+
+  88.89%,
+  100% {
+    translate: var(--hop-3) 0;
   }
 }
 
@@ -799,38 +1241,89 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 }
 
-/* Fallback: no scroll-driven animations → platforms stay assembled and the
- * cards and Mayo on platform 3 are simply visible. */
-.platform__card,
-.rocks__mayo {
-  opacity: 1;
-}
-
 @supports (animation-timeline: view()) {
-  /* Ease-out over the scroll range: the rocks travel early and slow down as
-   * they settle, instead of arriving at full speed. */
   .rock {
-    animation: rock-settle var(--ease-out) both;
+    animation:
+      rock-fly-x linear both,
+      rock-fly-y linear both,
+      rock-turn linear both,
+      rock-pre cubic-bezier(0.3, 0, 0.4, 1) both;
+    /* A list in the shorthand resolves its durations to 0s, not to the range. */
+    animation-duration: auto;
     animation-timeline: --rocks;
-    animation-range: cover 28% cover 50%;
+    animation-range: var(--range), var(--range), var(--range), cover 4% cover 34%;
   }
 
-  .rock--left {
-    animation-range: cover 30% cover 52%;
+  .rock-far {
+    animation: rock-far-drift linear both;
+    animation-timeline: --rocks;
+    animation-range: cover 0% cover 100%;
   }
 
-  .rock--right {
-    animation-range: cover 32% cover 54%;
+  .plate__picture--assembled {
+    animation: assembled-in linear both;
+    animation-timeline: --rocks;
+    animation-range: cover 64% cover 68%;
   }
 
-  .rock--top {
-    animation-range: cover 35% cover 57%;
+  .rocks--painted .rock {
+    animation:
+      rock-fly-x linear both,
+      rock-fly-y linear both,
+      rock-turn linear both,
+      rock-pre cubic-bezier(0.3, 0, 0.4, 1) both,
+      live-out linear both;
+    animation-duration: auto;
+    animation-timeline: --rocks;
+    animation-range: var(--range), var(--range), var(--range), cover 4% cover 34%, var(--live-out);
+  }
+
+  .rocks--painted .rock-shadow {
+    animation:
+      rock-shadow-in linear both,
+      live-out linear both;
+    animation-duration: auto;
+    animation-timeline: --rocks;
+    animation-range: var(--range), var(--live-out);
+  }
+
+  .rocks--painted .rock-ground {
+    animation:
+      rock-ground-in linear both,
+      live-out linear both;
+    animation-duration: auto;
+    animation-timeline: --rocks;
+    animation-range: var(--range), var(--live-out);
+  }
+
+  .rocks--painted .rock-grass {
+    animation: live-out linear both;
+    animation-timeline: --rocks;
+    animation-range: var(--live-out);
+  }
+
+  .rock-ground {
+    animation: rock-ground-in linear both;
+    animation-timeline: --rocks;
+    animation-range: var(--range);
+  }
+
+  .rock-shadow {
+    animation: rock-shadow-in linear both;
+    animation-timeline: --rocks;
+    animation-range: var(--range);
   }
 
   .platform__card {
     animation: card-rise var(--ease-out) both;
     animation-timeline: --rocks;
-    animation-range: cover 54% cover 60%;
+    animation-range: var(--range);
+  }
+
+  .rocks__mayo {
+    animation: rocks-mayo-hops linear both;
+    animation-timeline: --rocks;
+    animation-range: var(--scrub-range);
   }
 
   .scene--dawn:not(.scene--plated) .scene__sky {
@@ -838,11 +1331,29 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     animation-timeline: --dawn;
     animation-range: exit 0% exit 100%;
   }
+
+  /* The idle float runs on the clock, only in the full motion tier: each
+   * rock bobs, sways and drifts on its own periods, so no two move together. */
+  html[data-motion-tier="full"] .rock__body {
+    animation:
+      rock-bob var(--bob-dur) ease-in-out infinite alternate,
+      rock-sway var(--sway-dur) ease-in-out infinite alternate,
+      rock-drift var(--drift-dur) ease-in-out infinite alternate,
+      rock-breath var(--breath-dur) ease-in-out infinite alternate,
+      rock-tumble var(--tumble-dur) linear infinite;
+    animation-delay: var(--idle-delay);
+  }
 }
 
 /* Static tier: reduced motion wins over everything, with or without JS. */
 @media (prefers-reduced-motion: reduce) {
   .rock,
+  .rock__body,
+  .rock-far,
+  .rock-grass,
+  .plate__picture--assembled,
+  .rock-ground,
+  .rock-shadow,
   .platform__card,
   .rocks__mayo,
   .scene__mayo,
@@ -852,11 +1363,124 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 }
 
 html[data-motion-tier="reduced"] .rock,
+html[data-motion-tier="reduced"] .rock__body,
+html[data-motion-tier="reduced"] .rock-far,
+html[data-motion-tier="reduced"] .rock-grass,
+html[data-motion-tier="reduced"] .plate__picture--assembled,
+html[data-motion-tier="reduced"] .rock-ground,
+html[data-motion-tier="reduced"] .rock-shadow,
 html[data-motion-tier="reduced"] .platform__card,
 html[data-motion-tier="reduced"] .rocks__mayo,
 html[data-motion-tier="reduced"] .scene__mayo,
 html[data-motion-tier="reduced"] .scene__sky {
   animation: none;
+}
+
+/* Phones: the same pinned assembly on a plate scaled up around its centre,
+ * so the meadow fills the width; the platforms close in under three compact
+ * cards side by side, and the floating rocks stay nearer the island and
+ * lose their blur (cheaper to paint). */
+@media (max-width: 48rem) {
+  .rocks {
+    --plate-scale: 1.9;
+    /* Raised a quarter of its height, less on short phones so the cards
+     * (their tops 97.7 % of the plate's height above its bottom, 104.5cqw)
+     * still clear the intro (15rem). */
+    --rocks-drop: max(-25%, 15rem - 100cqh + 104.5cqw);
+  }
+
+  .rocks .plate {
+    transform: translate(-50%, var(--rocks-drop));
+  }
+
+  /* The raised plate ends above the screen's bottom: its sky fades into the
+   * scene's sky instead of drawing an edge (the drift lifts it further). */
+  .rocks .plate__picture--background {
+    mask-image: linear-gradient(180deg, transparent 0, #000 calc(var(--plate-fade, 0.09) * 100%), #000 80%, transparent 100%);
+  }
+
+  .rocks__intro {
+    margin-block-start: 4.5rem;
+  }
+
+  .rocks__intro p {
+    margin-block-start: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .rock,
+  .rock-far,
+  .rock-grass,
+  .rock-shadow,
+  .rock-ground {
+    --x: var(--x-m);
+    --y: var(--y-m);
+    --w: var(--w-m);
+  }
+
+  .rock {
+    --dx: var(--dx-m);
+    --dy: var(--dy-m);
+    --ax: var(--ax-m);
+    --ay: var(--ay-m);
+    --px: var(--px-m);
+    --py: var(--py-m);
+  }
+
+  .rock--back,
+  .rock--front {
+    --haze: blur(0) saturate(0.8) brightness(0.96) contrast(0.95) sepia(0.03);
+  }
+
+  .rock-grass {
+    --gx: var(--gx-m);
+    --gy: var(--gy-m);
+  }
+
+  .rocks__mayo-path {
+    --hop-0: var(--hop-0-m);
+    --hop-1: var(--hop-1-m);
+    --hop-2: var(--hop-2-m);
+    --hop-3: var(--hop-3-m);
+  }
+
+  .platforms {
+    left: 50%;
+    width: calc(100% * var(--plate-scale));
+    transform: translate(-50%, var(--rocks-drop));
+  }
+
+  .platform__card {
+    --x: var(--x-m);
+    --top: var(--top-m);
+
+    width: 7.25rem;
+    padding: 0.6rem 0.4rem 0.55rem;
+    gap: 0;
+  }
+
+  .platform__name {
+    font-size: 0.82rem;
+    line-height: 1.2;
+  }
+
+  .platform__from {
+    margin-block-start: 0.2rem;
+    font-size: 0.6rem;
+  }
+
+  .platform__price {
+    font-size: 1.2rem;
+  }
+
+  .platform__timeline,
+  .platform__link {
+    font-size: 0.72rem;
+  }
+
+  .platform__link {
+    margin-block-start: 0.2rem;
+  }
 }
 
 /* Pack details ---------------------------------------------------------- */
@@ -1240,61 +1864,8 @@ html[data-motion-tier="reduced"] .scene__sky {
     inset: auto auto 14% 40%;
   }
 
-  .rocks {
-    height: auto;
-  }
-
   .scene__island--wide {
     display: none;
-  }
-
-  .rocks__stage {
-    position: static;
-    height: auto;
-    grid-template-rows: auto;
-    padding-block-end: 3rem;
-  }
-
-  .rocks__intro {
-    margin-block-start: 3.5rem;
-  }
-
-  .platforms {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    padding-block: 2rem 4rem;
-  }
-
-  .platform {
-    padding-block-start: 7.5rem;
-    view-timeline-name: --platform;
-  }
-
-  .platform {
-    --rocks-max: 14rem;
-  }
-
-  .platform__rocks {
-    --scatter: 0.45;
-  }
-
-  .rock,
-  .rock--left,
-  .rock--right,
-  .rock--top {
-    animation-timeline: --platform;
-    animation-range: entry 10% entry 95%;
-  }
-
-  .platform__card {
-    animation-timeline: --platform;
-    animation-range: entry 60% entry 100%;
-  }
-
-  /* Mobile: the platforms reveal one by one; Mayo simply sits on the meadow. */
-  .rocks__mayo {
-    animation: none;
-    opacity: 1;
   }
 
   .promises__list {
@@ -3076,50 +3647,7 @@ html[data-motion-tier="full"] .plate-object--glow {
   animation-delay: var(--float-delay, 0s);
 }
 
-/* Platform pieces (island 3): real rocks on the 1254 design canvas */
-
-.rock-shadow {
-  position: absolute;
-  height: auto;
-  opacity: 0;
-  pointer-events: none;
-}
-
-@supports (animation-timeline: view()) {
-  .rock-shadow {
-    animation: card-rise-opacity linear both;
-    animation-timeline: --rocks;
-    animation-range: cover 52% cover 58%;
-  }
-}
-
-@keyframes card-rise-opacity {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@supports not (animation-timeline: view()) {
-  .rock-shadow {
-    opacity: 1;
-  }
-}
-
-html[data-motion-tier="reduced"] .rock-shadow {
-  animation: none;
-  opacity: 1;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .rock-shadow {
-    animation: none !important;
-    opacity: 1;
-  }
-
   .plate-object--float,
   .plate-object--glow {
     animation: none !important;
@@ -3130,13 +3658,7 @@ html[data-motion-tier="reduced"] .rock-shadow {
   .dawn .plate {
     --plate-scale: 1;
   }
-
-  .rock-shadow {
-    animation-timeline: --platform;
-    animation-range: entry 85% entry 100%;
-  }
 }
-
 
 .plate__picture,
 .plate__picture img {
