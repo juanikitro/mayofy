@@ -29,4 +29,4 @@ Los títulos y entradas viven en `src/content/islands.ts` (segmentos con `{ em }
 - Hero: se quitaron la bajada "Estudio de desarrollo web y software a medida" y el párrafo "Diseñamos landings, webs con turnos y sistemas a medida..."; quedan la promesa y los botones.
 - Isla 2: se quitaron las etiquetas Instagram, Google Maps y Recomendaciones.
 - Isla 3: se quitó "Precios de referencia para saber por dónde arrancar...".
-- Los textos siguen en  por si se reutilizan (metadatos, otras páginas).
+- Los textos siguen en src/content por si se reutilizan (metadatos, otras páginas).
