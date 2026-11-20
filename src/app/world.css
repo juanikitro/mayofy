@@ -3061,17 +3061,20 @@ html[data-motion-tier="reduced"] .fall__mayo {
 /* Mayo between stones: one keyframe per painted frame, held until the next
  * (`step-end`); the box carries her feet and depth scale (mirrored when she
  * heads right), each strip its visible cell. The scale pivots on her feet,
- * which the anchoring `transform` puts on the box's top-left corner. At rest
- * she stands on the last stone in the arrival's last frame. */
+ * which the anchoring `transform` puts on the box's top-left corner. Three
+ * strips share the box: the gallop and the arrival for the longer legs, the
+ * hop for the short ones. At rest she stands on the last stone in the
+ * arrival's last frame (the hop's last is the same picture). */
 .mayo--stops {
   --stops: var(--stops-d);
   --stops-run: var(--stops-run-d);
   --stops-arrival: var(--stops-arrival-d);
+  --stops-hop: var(--stops-hop-d);
 
   transform-origin: 0 0;
 }
 
-.mayo--stops .mayo__sprite--run img {
+.mayo--stops :is(.mayo__sprite--run, .mayo__sprite--hop) img {
   opacity: 0;
 }
 
@@ -3084,6 +3087,7 @@ html[data-motion-tier="reduced"] .fall__mayo {
     --stops: var(--stops-m);
     --stops-run: var(--stops-run-m);
     --stops-arrival: var(--stops-arrival-m);
+    --stops-hop: var(--stops-hop-m);
   }
 
   .sendero__stage {
@@ -3190,6 +3194,12 @@ html[data-motion-tier="reduced"] .fall__mayo {
 
     .mayo--stops .mayo__sprite--arrival img {
       animation: var(--stops-arrival) step-end both;
+      animation-timeline: var(--scrub-timeline);
+      animation-range: var(--scrub-range);
+    }
+
+    .mayo--stops .mayo__sprite--hop img {
+      animation: var(--stops-hop) step-end both;
       animation-timeline: var(--scrub-timeline);
       animation-range: var(--scrub-range);
     }

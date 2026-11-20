@@ -290,3 +290,21 @@ Juani: "Sobre los seis pasos sin sorpresas: elijo la opcion A" (propuesta en `do
 
 - Las piedras están cerca entre sí (de 0,3 a 1,1 celdas); para esos tramos cortos se usan un salto de un solo cuadro (f6 del galope) y la llegada.
 - Una tira de salto corto, de 6 cuadros sin bucle, se leería mejor: agacharse, impulso, vuelo, apoyo en la piedra, asentarse, de pie. Pintada en tres cuartos al frente-izquierda sobre un recorte de `45-isla5-escritorio-v2` centrado en la piedra 3 (47,3 % / 62,8 %), lado 134 px de 1672 y línea de suelo al 78 % de la celda. El último cuadro debería coincidir con el f8 de `works-llegada`, para que el reposo sea el mismo.
+
+#### Salto corto entre piedras (20 de noviembre de 2026)
+
+Se montó la tira encargada `70-mayo-works-salto-tira` (manifiesto: sección works-salto; sólo AVIF y WebP). Son 6 cuadros sin bucle: f1 agacharse, f2 y f3 en el aire, f4 apoyo, f5 asentarse, f6 de pie. Recorte (724, 486, 134 px de 1672), patas en 47,3 % / 62,7545 % y línea de suelo al 78 %; f6 es idéntico píxel a píxel a la f8 de `works-llegada`.
+
+- Un tramo de menos de 0,6 celdas (`mayoSprites.works.hop.maxCells`) es un salto. En escritorio quedan así: piedras 1→2 (0,33 celdas), 3→4 (0,41), 4→5 (0,45) y 5→6 (0,57). Los tramos a la piedra 1 (0,77) y a la 3 (1,2) siguen siendo galope y llegada. En celular la escala de la placa cambia las medidas: el tramo a la piedra 6 vuelve a ser galope.
+- Todo el camino del tramo (bajada y escala incluidas) lo llevan los pasos hacia f2, f3 y f4, en tercios. f1 se agacha donde está; f4, f5 y f6 quedan plantadas sobre la piedra, así que no hay patinazo. El corrimiento del cuerpo dentro de la celda que mide el manifiesto es postura, no trayectoria.
+- Mira hacia donde va, espejada como el galope.
+- Como f6 es la misma imagen que la f8 de la llegada, un salto termina de pie igual que una carrera. El tramo siguiente arranca de esa pose sin salto visual, y el reposo (fin del tramo fijado y movimiento reducido) es el mismo.
+- La caja de Mayo lleva ahora tres tiras: galope, llegada y salto. `MayoFigure` escribe un keyframe por tira y por ancho (`mayo-stops-works-d|m-hop`); `world.css` suma la tercera animación en el bloque de los seis pasos.
+
+**Verificado (1440 × 900 y 390 × 844, muestreo cada 3 px de scroll):**
+
+- Secuencia en escritorio: galope→llegada (espejada), salto, galope→llegada, salto, salto espejado, salto espejado. En celular, igual salvo el último tramo, que es galope espejado.
+- Ningún cambio de posición sin cambio de cuadro, y ninguno durante f4, f5 o f6 del salto.
+- Al subir se rebobina. Sin errores de consola ni scroll horizontal; con movimiento reducido, Mayo en la piedra 6 en f8.
+- Lint, typecheck y build limpios.
+- Capturas de los saltos en `docs/plans/seis-pasos/saltos/` (escritorio tramos 2, 4 y 6; celular tramos 2 y 5, siete posiciones cada uno) y el tramo fijado completo en `docs/plans/seis-pasos/`.

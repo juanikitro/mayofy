@@ -4,7 +4,31 @@ import { getMayoSlot, mayoAnchors, mayoPoseSources, mayoSprites, type MayoAnchor
 
 const pct = (value: string) => Number.parseFloat(value);
 
-type Pose = { strip: "run" | "arrival"; frame: number; x: number; y: number; scale: number; mirror: boolean };
+type Pose = { strip: "run" | "arrival" | "hop"; frame: number; x: number; y: number; scale: number; mirror: boolean };
+
+/**
+ * A short leg as a hop: she crouches where she stands, the steps into the
+ * flight frames share the whole way (descent and depth included), and she
+ * lands, settles and stands on the stop without moving again, so her planted
+ * paws never slide. She faces the way she goes, like the gallop.
+ */
+function hopPoses(from: RoutePoint, to: RoutePoint, hop: NonNullable<MayoSprite["hop"]>): Pose[] {
+  const flight = new Set(hop.flight);
+  const share = 1 / hop.flight.length;
+  let travelled = 0;
+  return Array.from({ length: hop.frames }, (_, frame) => {
+    if (flight.has(frame)) travelled += share;
+    const t = Math.min(1, travelled);
+    return {
+      strip: "hop" as const,
+      frame,
+      x: from[0] + (to[0] - from[0]) * t,
+      y: from[1] + (to[1] - from[1]) * t,
+      scale: from[2] + (to[2] - from[2]) * t,
+      mirror: to[0] - from[0] > 0,
+    };
+  });
+}
 
 /**
  * Gallop frames (0-based) a leg may take before the arrival lands it: none,
@@ -42,6 +66,8 @@ function legPoses(from: RoutePoint, to: RoutePoint, aspect: number, size: number
   const direction = dx > 0 ? 1 : -1;
   const meanScale = (from[2] + to[2]) / 2;
   const cell = (advance: number) => (advance / 100) * size * meanScale;
+  // A leg shorter than `hop.maxCells` cells is a hop, not a run.
+  if (sprite.hop && Math.hypot(dx, dyWidths) < cell(100) * sprite.hop.maxCells) return hopPoses(from, to, sprite.hop);
   const steps = (gallop: readonly number[]) => {
     const frames = [
       ...gallop.map((frame) => ({ strip: "run" as const, frame })),
@@ -115,18 +141,23 @@ function stopsKeyframes(name: string, stops: MayoStops, x: string, y: string, si
   const round = (value: number) => Number(value.toFixed(3));
   const frameShift = (frames: number, frame: number) => `translateX(${round((-100 * frame) / frames)}%)`;
   const box: string[] = [];
-  const runStrip: string[] = [];
-  const arrivalStrip: string[] = [];
+  const strips = { run: [] as string[], arrival: [] as string[], hop: [] as string[] };
+  const frameCount = { run: sprite.frames, arrival: sprite.arrival!.frames, hop: sprite.hop?.frames ?? 1 };
   const add = (offset: number, pose: Pose) => {
     const at = `${round(offset)}%`;
     const scale = round(pose.scale);
     box.push(`${at}{translate:${round(((pose.x - pct(x)) / pct(size)) * 100)}% ${round((((pose.y - pct(y)) * stops.aspect) / pct(size)) * 100)}%;scale:${pose.mirror ? -scale : scale} ${scale}}`);
-    runStrip.push(`${at}{opacity:${pose.strip === "run" ? 1 : 0};transform:${frameShift(sprite.frames, pose.strip === "run" ? pose.frame : 0)}}`);
-    arrivalStrip.push(`${at}{opacity:${pose.strip === "arrival" ? 1 : 0};transform:${frameShift(sprite.arrival!.frames, pose.strip === "arrival" ? pose.frame : 0)}}`);
+    for (const strip of ["run", "arrival", "hop"] as const) {
+      const shown = pose.strip === strip;
+      strips[strip].push(`${at}{opacity:${shown ? 1 : 0};transform:${frameShift(frameCount[strip], shown ? pose.frame : 0)}}`);
+    }
   };
   timeline.forEach(({ offset, pose }) => add(offset, pose));
   add(100, timeline[timeline.length - 1].pose);
-  return `@keyframes ${name}{${box.join("")}}@keyframes ${name}-run{${runStrip.join("")}}@keyframes ${name}-arrival{${arrivalStrip.join("")}}`;
+  return (
+    `@keyframes ${name}{${box.join("")}}` +
+    (["run", "arrival", "hop"] as const).map((strip) => `@keyframes ${name}-${strip}{${strips[strip].join("")}}`).join("")
+  );
 }
 
 /** A slot's walk between stops as keyframes (desktop and mobile), named for world.css. */
@@ -145,6 +176,8 @@ function stopsStyle(slot: MayoSlotId, anchor: MayoAnchor, sprite: MayoSprite | u
       "--stops-run-m": `${mobile}-run`,
       "--stops-arrival-d": `${desktop}-arrival`,
       "--stops-arrival-m": `${mobile}-arrival`,
+      "--stops-hop-d": `${desktop}-hop`,
+      "--stops-hop-m": `${mobile}-hop`,
     },
   };
 }
@@ -280,6 +313,14 @@ export function MayoFigure({
               loading={loading}
               decoding="async"
             />
+          </picture>
+        </div>
+      ) : null}
+      {sprite?.hop ? (
+        <div className="mayo__sprite mayo__sprite--hop" style={{ "--frames": sprite.hop.frames } as CSSProperties}>
+          <picture>
+            <source type="image/avif" srcSet={sprite.hop.strip.avif} />
+            <img src={sprite.hop.strip.webp} alt="" width={sprite.cell * sprite.hop.frames} height={sprite.cell} loading={loading} decoding="async" />
           </picture>
         </div>
       ) : null}

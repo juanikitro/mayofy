@@ -101,6 +101,13 @@ export type MayoSprite = {
   arrival?: { strip: { avif: string; webp: string }; frames: number; stride: MayoStride };
   /** Share of each stop's slice of the range spent reaching it; she stands for the rest. */
   legShare?: number;
+  /**
+   * One-shot hop for legs shorter than `maxCells` cells (island 5: crouch,
+   * flight, land, settle, stand). Only the steps into the `flight` frames
+   * (0-based) carry her; she stays planted on the others. Its last frame is
+   * the arrival's rest pose, so a hop ends standing just as a run does.
+   */
+  hop?: { strip: { avif: string; webp: string }; frames: number; flight: readonly number[]; maxCells: number };
 };
 
 /**
@@ -167,6 +174,17 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
       strip: { avif: "/images/mundo-mayo/70-mayo-works-llegada-tira.avif", webp: "/images/mundo-mayo/70-mayo-works-llegada-tira.webp" },
       frames: 8,
       stride: { stance: { 1: 6.09 }, airborne: 0 },
+    },
+    // works-salto (724, 486, 134 px of 1672, feet 47.3 % / 62.7545 %, ground line 78 %): f1
+    // crouch, f2-f3 in the air, f4 lands, f5 settles, f6 stands (pixel-identical to the
+    // arrival's f8). Her body only shifts with her posture inside the cell (manifest), so the
+    // whole leg is carried by the steps into f2, f3 and f4; f1, f5 and f6 stay put. Legs
+    // under 0.6 cells hop: on desktop stones 1-2, 3-4, 4-5 and 5-6 (0.33 to 0.57 cells).
+    hop: {
+      strip: { avif: "/images/mundo-mayo/70-mayo-works-salto-tira.avif", webp: "/images/mundo-mayo/70-mayo-works-salto-tira.webp" },
+      frames: 6,
+      flight: [1, 2, 3],
+      maxCells: 0.6,
     },
   },
   // Resting by the fire: breathing and ears, barely.
