@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Isla 2 propuestas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_base.css">
+<style>
+  /* Island 2 plate, cropped to the island: it sits low and wide like on the site. */
+  .i2-plate { width: 100%; margin-top: -14%; }
+  .rock-tag {
+    position: absolute; left: var(--x); top: var(--y); translate: -50% -100%;
+    padding: .3rem .6rem; border-radius: 999px; background: var(--cream); color: var(--ink);
+    font-size: .78rem; font-weight: 600; white-space: nowrap; box-shadow: var(--shadow-soft);
+  }
+
+  /* ---------- A: selector ---------- */
+  .a-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3rem; align-items: start; }
+  .a-choices { display: grid; gap: .75rem; margin-top: 2rem; }
+  .a-choice {
+    display: grid; grid-template-columns: 2.25rem 1fr; gap: .9rem; align-items: center; text-align: left;
+    width: 100%; min-height: 4.25rem; padding: .9rem 1.1rem; border-radius: 1rem; cursor: pointer;
+    border: 1.5px solid oklch(42% 0.11 150 / 18%); background: color-mix(in oklch, var(--cream) 82%, transparent);
+    font: 500 1.05rem/1.35 var(--sans); color: var(--ink);
+    transition: transform 160ms var(--ease-out), border-color 160ms, background-color 160ms;
+  }
+  .a-choice:hover { transform: translateY(-2px); border-color: var(--moss); }
+  .a-choice[aria-pressed="true"] { background: var(--cream); border-color: var(--moss); box-shadow: var(--shadow-card); }
+  .a-choice img { width: 2.25rem; height: auto; }
+  .a-result { margin-top: 2rem; padding: 1.5rem; display: grid; gap: .6rem; animation: a-in 260ms var(--ease-out); }
+  .a-result .eyebrow { color: var(--ink-soft); }
+  .a-result h3 { font-size: 1.6rem; }
+  .a-result .price { font-size: 1.05rem; color: var(--ink-soft); }
+  .a-result .price strong { color: var(--moss); font-size: 1.35rem; }
+  .a-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: .5rem; }
+  @keyframes a-in { from { opacity: 0; translate: 0 8px; } }
+  .a-scene { position: relative; margin-top: 1.5rem; }
+  .a-scene .i2-plate { width: 180%; margin-left: -50%; margin-top: -30%; }
+
+  /* ---------- B: scroll demo, questions fly into the page ---------- */
+  .b-track { height: 260vh; padding: 0; }
+  .b-stage { position: sticky; top: 0; height: 100vh; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: center; gap: 2rem; }
+  .b-copy { padding-top: 4rem; }
+  .b-scene { position: relative; height: 100%; }
+  .b-scene .i2-plate { position: absolute; width: 165%; left: -40%; bottom: -20%; margin: 0; }
+  .b-phone {
+    position: absolute; right: 6%; top: 40%; translate: 0 -50%; width: min(14.5rem, 60%); aspect-ratio: 9 / 16;
+    border-radius: 2.2rem; background: var(--ink); padding: .6rem; box-shadow: var(--shadow-card); z-index: 3;
+    opacity: calc(.25 + var(--p) * 1.5); scale: calc(.92 + min(var(--p), .4) * .2);
+  }
+  .b-screen { height: 100%; border-radius: 1.7rem; background: var(--cream); overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; }
+  .b-screen header { padding: 1rem 1rem .6rem; background: color-mix(in oklch, var(--leaf-light) 40%, var(--cream)); }
+  .b-screen header b { display: block; font-size: 1rem; }
+  .b-screen header span { font-size: .75rem; color: var(--ink-soft); }
+  .b-answers { padding: .75rem; display: grid; gap: .5rem; align-content: start; }
+  .b-answer { padding: .55rem .7rem; border-radius: .7rem; background: var(--beige); font-size: .78rem; line-height: 1.3;
+    opacity: clamp(0, calc((var(--p) - var(--at)) * 8), 1); translate: 0 calc(clamp(0, calc((var(--at) + .12 - var(--p)) * 80), 10) * 1px); }
+  .b-answer b { display: block; font-size: .8rem; color: var(--moss); }
+  .b-wa { margin: .75rem; padding: .7rem; border-radius: 999px; background: #1fa855; color: white; text-align: center; font-weight: 600; font-size: .85rem;
+    opacity: clamp(0, calc((var(--p) - .82) * 8), 1); }
+  .b-q {
+    position: absolute; z-index: 4; padding: .55rem .85rem; border-radius: 1rem 1rem 1rem .25rem; background: white; color: var(--ink);
+    font-size: .9rem; font-weight: 500; box-shadow: var(--shadow-soft); white-space: nowrap;
+    left: calc(var(--x0) + (var(--x1) - var(--x0)) * min(1, max(0, (var(--p) - var(--at) + .18) * 5.5)));
+    top: calc(var(--y0) + (var(--y1) - var(--y0)) * min(1, max(0, (var(--p) - var(--at) + .18) * 5.5)));
+    opacity: calc(1 - min(1, max(0, (var(--p) - var(--at)) * 8)));
+  }
+
+  /* ---------- C: before / after ---------- */
+  .c-head { max-width: 46rem; }
+  .c-pairs { margin-top: 2.25rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; position: relative; z-index: 2; }
+  .c-col { padding: 1.5rem 1.6rem; }
+  .c-col h3 { font-size: 1.15rem; margin-bottom: 1rem; display: flex; align-items: center; gap: .6rem; }
+  .c-col li { padding: .8rem 0; border-top: 1px solid oklch(24% 0.03 150 / 12%); font-size: 1.02rem; display: grid; grid-template-columns: 1.4rem 1fr; gap: .5rem; }
+  .c-col--before { background: color-mix(in oklch, var(--beige) 72%, transparent); box-shadow: none; }
+  .c-col--before li { color: var(--ink-soft); }
+  .c-col--before li::before { content: "·"; font-weight: 700; color: var(--stone); font-size: 1.4rem; line-height: .8; }
+  .c-col--after li::before { content: "✓"; font-weight: 700; color: var(--moss); }
+  .c-cta { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; position: relative; z-index: 2; }
+  .c-scene { margin-top: -11rem; position: relative; z-index: 1; }
+  .c-scene .i2-plate { width: 100%; margin-top: -12%; }
+
+  @media (max-width: 48rem) {
+    .a-grid { grid-template-columns: 1fr; gap: 0; }
+    .a-choice { font-size: 1rem; }
+    .a-scene .i2-plate { width: 190%; margin-left: -45%; margin-top: -40%; }
+    .b-track { height: 240vh; }
+    .b-stage { grid-template-columns: 1fr; grid-template-rows: auto 1fr; align-items: start; gap: 0; }
+    .b-copy { padding-top: 5rem; }
+    .b-copy .lead { font-size: 1rem; }
+    .b-scene .i2-plate { width: 230%; left: -70%; bottom: -14%; }
+    .b-phone { width: 11.5rem; right: 50%; translate: 50% -46%; }
+    .b-q { font-size: .78rem; }
+    .c-pairs { grid-template-columns: 1fr; }
+    .c-scene { margin-top: -2rem; }
+    .c-scene .i2-plate { width: 200%; margin-left: -50%; margin-top: -36%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= A ================= -->
+<section class="opt sky-morning" data-opt="a" aria-labelledby="a-title">
+  <span class="opt-tag">Isla 2 · Opción A · Elegí tu caso</span>
+  <div class="wrap a-grid">
+    <div>
+      <h2 id="a-title">Construyamos tu lugar en <em>internet</em></h2>
+      <p class="lead" style="margin-top:1rem">¿Qué te está pasando hoy? Elegí lo que más se parece y te mostramos por dónde empezar.</p>
+      <div class="a-choices" role="group" aria-label="Tu caso">
+        <button class="a-choice" type="button" aria-pressed="false" data-pack="landing">
+          <img src="../../../public/images/mundo-mayo/33-isla2-roca-02.webp" alt="">Me encuentran, pero no tengo dónde mostrar lo que hago.
+        </button>
+        <button class="a-choice" type="button" aria-pressed="true" data-pack="web">
+          <img src="../../../public/images/mundo-mayo/33-isla2-roca-05.webp" alt="">Paso el día coordinando turnos por WhatsApp.
+        </button>
+        <button class="a-choice" type="button" aria-pressed="false" data-pack="sistema">
+          <img src="../../../public/images/mundo-mayo/33-isla2-roca-04.webp" alt="">Mi operación vive en planillas y ya no alcanza.
+        </button>
+      </div>
+    </div>
+    <div>
+      <div class="a-result panel" aria-live="polite" id="a-result"></div>
+      <div class="a-scene" aria-hidden="true">
+        <div class="plate i2-plate">
+          <img src="../../../public/images/mundo-mayo/30-isla2-escritorio-v2-isla.webp" alt="">
+          <div class="mayo mayo--play" style="--x:44.98%;--y:63%;--s:8.49%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= B ================= -->
+<section class="opt sky-morning b-track" data-opt="b" data-track aria-labelledby="b-title">
+  <span class="opt-tag">Isla 2 · Opción B · Las preguntas encuentran su lugar</span>
+  <div class="b-stage wrap">
+    <div class="b-copy">
+      <h2 id="b-title">Construyamos tu lugar en <em>internet</em></h2>
+      <p class="lead" style="margin-top:1rem">Cada pregunta que hoy respondés a mano, tu página la contesta antes. Y la consulta te llega por WhatsApp con el mensaje listo.</p>
+      <p style="margin-top:1.5rem"><a class="btn btn--moss" href="#">Ver los packs</a></p>
+    </div>
+    <div class="b-scene" aria-hidden="true">
+      <div class="plate i2-plate">
+        <img src="../../../public/images/mundo-mayo/30-isla2-escritorio-v2-isla.webp" alt="">
+        <div class="mayo mayo--play" style="--x:44.98%;--y:63%;--s:8.49%"></div>
+      </div>
+      <span class="b-q" style="--at:.2;--x0:2%;--y0:28%;--x1:62%;--y1:40%">¿Cuánto sale?</span>
+      <span class="b-q" style="--at:.38;--x0:30%;--y0:16%;--x1:62%;--y1:46%">¿Tenés turno el jueves?</span>
+      <span class="b-q" style="--at:.56;--x0:6%;--y0:52%;--x1:62%;--y1:52%">¿Dónde quedan?</span>
+      <span class="b-q" style="--at:.72;--x0:36%;--y0:62%;--x1:62%;--y1:58%">¿Qué incluye el servicio?</span>
+      <div class="b-phone">
+        <div class="b-screen">
+          <header><b>Estudio Ámbar</b><span>Estética y bienestar</span></header>
+          <div class="b-answers">
+            <p class="b-answer" style="--at:.2"><b>Precios</b>Limpieza facial desde $18.000</p>
+            <p class="b-answer" style="--at:.38"><b>Turnos</b>Lunes a sábados, de 9 a 19</p>
+            <p class="b-answer" style="--at:.56"><b>Dónde estamos</b>Palermo, a 2 cuadras del subte</p>
+            <p class="b-answer" style="--at:.72"><b>Qué incluye</b>Diagnóstico de piel y rutina para casa</p>
+          </div>
+          <p class="b-wa">Escribinos por WhatsApp</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= C ================= -->
+<section class="opt sky-morning" data-opt="c" aria-labelledby="c-title">
+  <span class="opt-tag">Isla 2 · Opción C · Sin página / Con tu página</span>
+  <div class="wrap">
+    <div class="c-head">
+      <h2 id="c-title">Construyamos tu lugar en <em>internet</em></h2>
+      <p class="lead" style="margin-top:1rem">La gente ya te busca. Esto cambia cuando tenés una página propia.</p>
+    </div>
+    <div class="c-pairs">
+      <div class="c-col c-col--before panel">
+        <h3>Hoy, sin página</h3>
+        <ul>
+          <li>Respondés las mismas preguntas una y otra vez.</li>
+          <li>La consulta queda perdida entre mensajes y comentarios.</li>
+          <li>Si no te recomiendan, no te encuentran.</li>
+        </ul>
+      </div>
+      <div class="c-col c-col--after panel">
+        <h3>Con tu página</h3>
+        <ul>
+          <li>Precios, servicios y horarios se leen antes de escribirte.</li>
+          <li>Te escriben por WhatsApp con el mensaje listo.</li>
+          <li>Google te muestra cuando te buscan en tu zona.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="c-cta">
+      <a class="btn btn--moss" href="#">Ver los packs</a>
+      <a class="link" href="#">Agendá tu diagnóstico gratis</a>
+    </div>
+  </div>
+  <div class="c-scene" aria-hidden="true">
+    <div class="plate i2-plate">
+      <img src="../../../public/images/mundo-mayo/30-isla2-escritorio-v2-isla.webp" alt="">
+      <div class="mayo mayo--play" style="--x:44.98%;--y:63%;--s:8.49%"></div>
+    </div>
+  </div>
+</section>
+
+<script src="_base.js"></script>
+<script>
+  // Option A: the chosen case recommends one pack (content from commercial-plans.ts).
+  const packs = {
+    landing: { name: "Landing", price: "USD 85", time: "1 a 2 semanas", why: "Una página propia para que quienes te encuentran entiendan qué ofrecés y te escriban por WhatsApp." },
+    web: { name: "Web + Gestión", price: "USD 150", time: "3 a 9 semanas", why: "Tu web más un sistema simple para que tus clientes saquen turno solos y vos gestiones todo desde un panel." },
+    sistema: { name: "Sistema a Medida", price: "USD 450", time: "1 a 6 meses", why: "Software pensado para tu operación cuando las planillas y las herramientas genéricas ya no alcanzan." },
+  };
+  const result = document.getElementById("a-result");
+  function show(key) {
+    const pack = packs[key];
+    if (!result || !pack) return;
+    result.innerHTML = `<p class="eyebrow">Te conviene empezar por</p><h3>${pack.name}</h3>
+      <p class="price">Desde <strong>${pack.price}</strong> · ${pack.time}</p><p>${pack.why}</p>
+      <div class="a-actions"><a class="btn btn--moss" href="#">Ver qué incluye</a><a class="btn btn--quiet" href="#">Agendá tu diagnóstico</a></div>`;
+    result.style.animation = "none"; void result.offsetWidth; result.style.animation = "";
+  }
+  document.querySelectorAll(".a-choice").forEach((button) => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll(".a-choice").forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
+      show(button.dataset.pack);
+    });
+  });
+  show("web");
+</script>
+</body>
+</html>

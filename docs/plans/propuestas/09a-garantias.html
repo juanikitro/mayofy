@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Garantías propuestas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_base.css">
+<style>
+  .opt { min-height: auto; padding-block: 5rem 5rem; }
+  /* The bottom of the three pack cards, for placement. */
+  .cards-tail { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .cards-tail div { height: 7rem; border-radius: 0 0 var(--radius) var(--radius); background: var(--cream); box-shadow: var(--shadow-soft); display: flex; align-items: end; padding: 1.25rem 1.5rem; }
+  .cards-tail span { color: var(--moss); font-weight: 600; text-decoration: underline; text-underline-offset: .3em; }
+  .payment { text-align: center; color: var(--ink-soft); font-size: .95rem; margin-top: 1.25rem; }
+  .check { flex: none; width: 1.5rem; height: 1.5rem; border-radius: 50%; display: grid; place-items: center; background: color-mix(in oklch, var(--leaf-light) 45%, var(--cream)); color: var(--moss); font-size: .8rem; font-weight: 700; }
+
+  /* ---------- A: three promises ---------- */
+  .a-title { margin-top: 4.5rem; font-size: clamp(1.8rem, 3vw, 2.6rem); }
+  .a-grid { margin-top: 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .a-col { padding: 1.75rem; }
+  .a-col h3 { font-size: 1.45rem; }
+  .a-col ul { margin-top: 1rem; display: grid; gap: .8rem; }
+  .a-col li { display: flex; gap: .7rem; align-items: start; color: var(--ink-soft); }
+
+  /* ---------- B: one strip under the cards ---------- */
+  .b-strip { margin-top: 1.25rem; padding: 1.25rem 1.5rem; display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: center; }
+  .b-strip h3 { font-size: 1.05rem; white-space: nowrap; }
+  .b-strip ul { display: flex; flex-wrap: wrap; gap: .5rem .6rem; }
+  .b-strip li { display: inline-flex; align-items: center; gap: .45rem; padding: .4rem .75rem .4rem .45rem; border-radius: 999px; background: var(--beige); font-size: .95rem; }
+  .b-strip li.lead-item { background: color-mix(in oklch, var(--leaf-light) 35%, var(--cream)); font-weight: 600; }
+  .b-strip .check { width: 1.3rem; height: 1.3rem; font-size: .7rem; }
+
+  /* ---------- C: the big promise ---------- */
+  .c-wrap { margin-top: 4.5rem; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 4rem; align-items: center; }
+  .c-big .eyebrow { margin-bottom: 1rem; }
+  .c-big p.statement { font-size: clamp(2rem, 3.6vw, 3.25rem); line-height: 1.05; letter-spacing: -.03em; font-weight: 600; text-wrap: balance; }
+  .c-big p.statement em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--moss); }
+  .c-big .note { margin-top: 1rem; color: var(--ink-soft); }
+  .c-list { padding: 1.75rem; display: grid; gap: 0; }
+  .c-list li { display: flex; gap: .75rem; align-items: center; padding: .85rem 0; border-top: 1px solid oklch(24% 0.03 150 / 10%); }
+  .c-list li:first-child { border-top: 0; }
+
+  @media (max-width: 48rem) {
+    .cards-tail { grid-template-columns: 1fr; }
+    .cards-tail div:not(:last-child) { display: none; }
+    .a-grid { grid-template-columns: 1fr; }
+    .b-strip { grid-template-columns: 1fr; gap: 1rem; }
+    .c-wrap { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= A ================= -->
+<section class="opt sky-beige" data-opt="a" aria-labelledby="a-title">
+  <span class="opt-tag">Garantías · Opción A · Tres promesas</span>
+  <div class="wrap">
+    <div class="cards-tail" aria-hidden="true"><div><span>Ver todo lo que incluye</span></div><div><span>Ver todo lo que incluye</span></div><div><span>Ver todo lo que incluye</span></div></div>
+    <p class="payment">Pago: 50% al inicio y 50% en la entrega. Precios en USD; podés pagar en pesos al cambio del día.</p>
+    <h2 class="a-title" id="a-title">Lo que garantizamos en <em>todos los packs</em></h2>
+    <div class="a-grid">
+      <div class="a-col panel">
+        <h3>Es tuyo</h3>
+        <ul>
+          <li><span class="check" aria-hidden="true">✓</span>El código y el dominio son tuyos.</li>
+          <li><span class="check" aria-hidden="true">✓</span>Rondas de revisión acordadas antes de empezar.</li>
+        </ul>
+      </div>
+      <div class="a-col panel">
+        <h3>Rápida y encontrable</h3>
+        <ul>
+          <li><span class="check" aria-hidden="true">✓</span>Carga rápida en el celular, medida con Core Web Vitals. Si no pasa, la corregimos sin costo.</li>
+          <li><span class="check" aria-hidden="true">✓</span>SEO técnico desde el primer día.</li>
+          <li><span class="check" aria-hidden="true">✓</span>Accesible y cómoda de usar en cualquier pantalla.</li>
+        </ul>
+      </div>
+      <div class="a-col panel">
+        <h3>No te dejamos solo</h3>
+        <ul>
+          <li><span class="check" aria-hidden="true">✓</span>Te respondemos en menos de 24 horas hábiles.</li>
+          <li><span class="check" aria-hidden="true">✓</span>Una semana de soporte después de publicar.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= B ================= -->
+<section class="opt sky-beige" data-opt="b" aria-labelledby="b-title">
+  <span class="opt-tag">Garantías · Opción B · Una franja pegada a los packs</span>
+  <div class="wrap">
+    <div class="cards-tail" aria-hidden="true"><div><span>Ver todo lo que incluye</span></div><div><span>Ver todo lo que incluye</span></div><div><span>Ver todo lo que incluye</span></div></div>
+    <div class="b-strip panel">
+      <h3 id="b-title">En todos los packs</h3>
+      <ul>
+        <li class="lead-item"><span class="check" aria-hidden="true">✓</span>Carga rápida en el celular o la corregimos gratis</li>
+        <li><span class="check" aria-hidden="true">✓</span>Código y dominio tuyos</li>
+        <li><span class="check" aria-hidden="true">✓</span>Respuesta en menos de 24 h hábiles</li>
+        <li><span class="check" aria-hidden="true">✓</span>SEO técnico desde el primer día</li>
+        <li><span class="check" aria-hidden="true">✓</span>Accesible en cualquier pantalla</li>
+        <li><span class="check" aria-hidden="true">✓</span>Una semana de soporte</li>
+        <li><span class="check" aria-hidden="true">✓</span>Rondas de revisión acordadas</li>
+      </ul>
+    </div>
+    <p class="payment">Pago: 50% al inicio y 50% en la entrega. Precios en USD; podés pagar en pesos al cambio del día.</p>
+  </div>
+</section>
+
+<!-- ================= C ================= -->
+<section class="opt sky-beige" data-opt="c" aria-labelledby="c-title">
+  <span class="opt-tag">Garantías · Opción C · La promesa grande</span>
+  <div class="wrap">
+    <div class="cards-tail" aria-hidden="true"><div><span>Ver todo lo que incluye</span></div><div><span>Ver todo lo que incluye</span></div><div><span>Ver todo lo que incluye</span></div></div>
+    <p class="payment">Pago: 50% al inicio y 50% en la entrega. Precios en USD; podés pagar en pesos al cambio del día.</p>
+    <div class="c-wrap">
+      <div class="c-big">
+        <h2 class="eyebrow" id="c-title">Lo que garantizamos en todos los packs</h2>
+        <p class="statement">Si tu web no carga rápido en el celular, <em>la corregimos sin costo</em>.</p>
+        <p class="note">Lo medimos con Core Web Vitals, el mismo criterio que usa Google.</p>
+      </div>
+      <ul class="c-list panel">
+        <li><span class="check" aria-hidden="true">✓</span>El código y el dominio son tuyos.</li>
+        <li><span class="check" aria-hidden="true">✓</span>Te respondemos en menos de 24 horas hábiles.</li>
+        <li><span class="check" aria-hidden="true">✓</span>SEO técnico desde el primer día.</li>
+        <li><span class="check" aria-hidden="true">✓</span>Accesible y cómoda de usar en cualquier pantalla.</li>
+        <li><span class="check" aria-hidden="true">✓</span>Una semana de soporte después de publicar.</li>
+        <li><span class="check" aria-hidden="true">✓</span>Rondas de revisión acordadas antes de empezar.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script src="_base.js"></script>
+</body>
+</html>

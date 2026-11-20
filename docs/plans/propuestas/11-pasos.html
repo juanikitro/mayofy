@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seis pasos propuestas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_base.css">
+<style>
+  .sky-sunset-mid { background: linear-gradient(#f3bfa9, #ee9f9f 45%, #c48ab8 90%); }
+  .num { font-family: var(--serif); font-style: italic; color: var(--moss); }
+
+  /* ---------- A: the path of six stones ---------- */
+  .a-track { height: 340vh; padding: 0; }
+  .a-stage { position: sticky; top: 0; height: 100vh; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 2rem; align-items: center; }
+  .a-copy h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); }
+  .a-copy .lead { margin-top: .8rem; font-size: 1.05rem; }
+  .a-steps { margin-top: 1.75rem; display: grid; gap: .25rem; }
+  .a-step { display: grid; grid-template-columns: 2.4rem 1fr; gap: .5rem; padding: .55rem .9rem; border-radius: .9rem; color: var(--ink-soft); transition: background-color 260ms, color 260ms; }
+  .a-step .num { font-size: 1.15rem; }
+  .a-step b { font-weight: 600; }
+  .a-step p { grid-column: 2; display: none; margin-top: .2rem; color: var(--ink-soft); font-size: .95rem; }
+  .a-step.is-done { color: var(--ink); }
+  .a-step.is-now { background: color-mix(in oklch, var(--cream) 88%, transparent); color: var(--ink); box-shadow: var(--shadow-soft); }
+  .a-step.is-now p { display: block; animation: rise 300ms var(--ease-out); }
+  @keyframes rise { from { opacity: 0; translate: 0 6px; } }
+  .a-scene { position: relative; }
+  .a-scene .plate { width: 190%; margin-left: -45%; margin-block: -34% -22%; }
+  .badge {
+    position: absolute; left: var(--x); top: var(--y); translate: -50% -50%; width: 2.2rem; height: 2.2rem; border-radius: 50%;
+    display: grid; place-items: center; font: 600 .9rem/1 var(--sans); background: oklch(96% 0.018 75 / 70%); color: var(--ink-soft);
+    border: 2px solid oklch(96% 0.018 75 / 90%); transition: background-color 260ms, color 260ms, scale 260ms var(--ease-out);
+  }
+  .badge.is-done { background: var(--leaf-light); color: var(--ink); }
+  .badge.is-now { background: var(--moss); color: var(--cream); border-color: var(--moss); scale: 1.18; }
+  .a-mayo { translate: -50% -74%; transition: left 700ms var(--ease-out), top 700ms var(--ease-out); }
+  .a-mayo.flip { scale: -1 1; }
+  .a-mayo:not(.is-running) { animation: none; background-position-x: 0%; }
+
+  /* ---------- B: a footprint trail down the page ---------- */
+  .b-track { padding-bottom: 0; }
+  .b-head { max-width: 44rem; }
+  .b-trail { position: relative; margin-top: 2rem; height: 135vh; }
+  .b-trail svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .b-trail .line-bg { fill: none; stroke: oklch(96% 0.018 75 / 45%); stroke-width: 4; stroke-dasharray: 2 12; stroke-linecap: round; }
+  .b-trail .line { fill: none; stroke: var(--moss); stroke-width: 5; stroke-linecap: round; }
+  .b-mark { position: absolute; top: var(--y); display: grid; grid-template-columns: 6.5rem 1fr; gap: 1.25rem; align-items: center; width: min(28rem, 44%); }
+  .b-mark.left { left: 0; }
+  .b-mark.right { right: 0; grid-template-columns: 1fr 6.5rem; text-align: right; }
+  .b-mark.right img { order: 2; }
+  .b-mark img { width: 100%; filter: drop-shadow(0 16px 12px oklch(30% 0.06 40 / 35%)); transition: translate 400ms var(--ease-out), opacity 400ms; }
+  .b-mark .num { font-size: 1.4rem; }
+  .b-mark h3 { font-size: 1.25rem; }
+  .b-mark p { margin-top: .3rem; color: var(--ink-soft); }
+  .b-mark:not(.is-reached) img { opacity: .55; translate: 0 6px; }
+  .b-end { position: relative; margin-top: -6vh; }
+  .b-end .plate { width: 70%; margin-inline: auto; margin-block: -14% -8%; }
+
+  /* ---------- C: six stones drop in, Mayo hops across once ---------- */
+  .c-head { display: flex; justify-content: space-between; align-items: end; gap: 2rem; }
+  .c-head .lead { max-width: 30rem; }
+  .c-row { position: relative; margin-top: 5rem; display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; }
+  .c-stone { position: relative; text-align: center; }
+  .c-stone img { width: 100%; filter: drop-shadow(0 18px 14px oklch(30% 0.06 40 / 35%));
+    opacity: clamp(0, calc((var(--t) - var(--i) * .08) * 8), 1);
+    translate: 0 calc(clamp(0, calc(1 - (var(--t) - var(--i) * .08) * 6), 1) * -60px); }
+  .c-stone .num { display: block; margin-top: .75rem; font-size: 1.3rem; }
+  .c-stone h3 { font-size: 1.05rem; margin-top: .2rem; }
+  .c-stone p { margin-top: .35rem; color: var(--ink-soft); font-size: .92rem; }
+  .c-mayo { --hop: clamp(0, calc((var(--t) - .5) * 2), 1); position: absolute; top: 0; width: 9%; aspect-ratio: 1; left: calc(var(--hop) * 83% - 1%);
+    translate: 0 calc(-62% - var(--arc, 0) * 40px); background-image: url("../../../public/images/mundo-mayo/70-mayo-works-v3-tira.webp"); background-size: 1200% 100%;
+    background-position-x: calc(var(--fr, 0) / 11 * 100%); scale: -1 1; pointer-events: none; }
+
+  @media (max-width: 48rem) {
+    .a-track { height: 360vh; }
+    .a-stage { grid-template-columns: 1fr; grid-template-rows: auto 1fr; gap: 0; align-content: start; padding-top: 4.5rem; }
+    .a-copy .lead { display: none; }
+    .a-steps .a-step:not(.is-now) { display: none; }
+    .a-steps { margin-top: 1rem; }
+    .a-dots { display: flex !important; }
+    .a-scene { order: -1; }
+    .a-scene .plate { width: 230%; margin-left: -88%; margin-block: -60% -48%; }
+    .b-mark, .b-mark.right { position: relative; top: auto; left: auto; right: auto; width: 100%; grid-template-columns: 5rem 1fr; text-align: left; margin-bottom: 2.5rem; }
+    .b-mark.right img { order: 0; }
+    .b-trail { height: auto; padding-left: .5rem; }
+    .b-trail svg { display: none; }
+    .b-end .plate { width: 180%; margin-left: -40%; }
+    .c-head { display: block; }
+    .c-row { grid-template-columns: 1fr 1fr; row-gap: 2rem; margin-top: 3rem; }
+    .c-mayo { display: none; }
+  }
+  .a-dots { display: none; gap: .4rem; margin-top: .8rem; }
+  .a-dots i { width: 1.6rem; height: .3rem; border-radius: 999px; background: oklch(96% 0.018 75 / 60%); }
+  .a-dots i.on { background: var(--moss); }
+</style>
+</head>
+<body>
+
+<!-- ================= A ================= -->
+<section class="opt sky-sunset-mid a-track" data-opt="a" data-track id="a" aria-labelledby="a-title">
+  <span class="opt-tag">Pasos · Opción A · El sendero de seis piedras</span>
+  <div class="wrap a-stage">
+    <div class="a-copy">
+      <h2 id="a-title">Seis pasos, sin <em>sorpresas</em>.</h2>
+      <p class="lead">Vas a saber en qué etapa está tu proyecto y qué falta para publicar.</p>
+      <ol class="a-steps" id="a-steps"></ol>
+      <div class="a-dots" id="a-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+    <div class="a-scene" aria-hidden="true">
+      <div class="plate" id="a-plate">
+        <img src="../../../public/images/mundo-mayo/45-isla5-escritorio-v2-isla.webp" alt="">
+        <div class="mayo mayo--run a-mayo" id="a-mayo" style="--s:8.014%;--speed:.9s"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= B ================= -->
+<section class="opt sky-sunset-mid b-track" data-opt="b" data-track id="b" aria-labelledby="b-title">
+  <span class="opt-tag">Pasos · Opción B · Huellas que llenan el camino</span>
+  <div class="wrap">
+    <div class="b-head">
+      <h2 id="b-title">Seis pasos, sin <em>sorpresas</em>.</h2>
+      <p class="lead" style="margin-top:1rem">Vas a saber en qué etapa está tu proyecto, por qué tomamos cada decisión y qué falta para publicar.</p>
+    </div>
+    <div class="b-trail" id="b-trail">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <path class="line-bg" d="M50 0 C 50 8, 30 8, 30 12 S 70 25, 70 30 S 30 42, 30 47 S 70 59, 70 64 S 30 76, 30 81 S 50 92, 50 100" vector-effect="non-scaling-stroke"/>
+        <path class="line" id="b-line" d="M50 0 C 50 8, 30 8, 30 12 S 70 25, 70 30 S 30 42, 30 47 S 70 59, 70 64 S 30 76, 30 81 S 50 92, 50 100" vector-effect="non-scaling-stroke"/>
+      </svg>
+    </div>
+  </div>
+  <div class="b-end" aria-hidden="true">
+    <div class="plate">
+      <img src="../../../public/images/mundo-mayo/45-isla5-escritorio-v2-isla.webp" alt="">
+      <div class="mayo mayo--run" data-still style="--x:52.2%;--y:72.5%;--s:8.014%;--f:0"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= C ================= -->
+<section class="opt sky-sunset-mid" style="min-height:auto" data-opt="c" data-track id="c" aria-labelledby="c-title">
+  <span class="opt-tag">Pasos · Opción C · Seis piedras que caen</span>
+  <div class="wrap">
+    <div class="c-head">
+      <h2 id="c-title">Seis pasos, sin <em>sorpresas</em>.</h2>
+      <p class="lead">Vas a saber en qué etapa está tu proyecto y qué falta para publicar. Y después no te dejamos solo.</p>
+    </div>
+    <ol class="c-row" id="c-row"><div class="c-mayo" id="c-mayo" aria-hidden="true"></div></ol>
+  </div>
+</section>
+
+<script src="_base.js"></script>
+<script>
+  // The six steps (siteContent.process) and a proposed one-line explanation each.
+  const steps = [
+    ["Reunión de diagnóstico gratis", "Charlamos 30 minutos sobre tu negocio y lo que necesitás."],
+    ["Propuesta con alcance y plazo", "Te mandamos por escrito qué incluye, cuánto sale y cuándo está."],
+    ["Diseño con identidad", "Lo ves diseñado, con tu marca y tu rubro, antes de construirlo."],
+    ["Construcción con avances visibles", "Seguís el avance mientras lo construimos, no recién al final."],
+    ["Publicación y medición", "Publicamos con tu dominio y dejamos medidas las visitas y consultas."],
+    ["Soporte después del lanzamiento", "Una semana de soporte incluida; después, mantenimiento si lo querés."],
+  ];
+  const n = (i) => String(i + 1).padStart(2, "0");
+
+  /* ---- A: stones of the island 5 path, back to front (plate %, measured). ---- */
+  const stones = [[56.2, 55.5], [55.8, 59.5], [47.4, 62.7], [44.8, 66.3], [47.8, 69.7], [52.2, 72.5]];
+  const list = document.getElementById("a-steps");
+  const plate = document.getElementById("a-plate");
+  const mayo = document.getElementById("a-mayo");
+  if (list) {
+    steps.forEach(([title, text], i) => {
+      list.insertAdjacentHTML("beforeend", `<li class="a-step"><span class="num">${n(i)}</span><b>${title}</b><p>${text}</p></li>`);
+      plate.insertAdjacentHTML("beforeend", `<span class="badge" style="--x:${stones[i][0] + 4.6}%;--y:${stones[i][1] - 0.4}%">${i + 1}</span>`);
+    });
+    let current = -1, timer;
+    const place = (i) => {
+      const [x, y] = stones[i];
+      const prevX = parseFloat(mayo.style.getPropertyValue("--x")) || x;
+      mayo.classList.toggle("flip", x > prevX + 0.1);
+      mayo.style.setProperty("--x", x + "%");
+      mayo.style.setProperty("--y", y + "%");
+      mayo.style.left = x + "%";
+      mayo.style.top = y + "%";
+    };
+    document.getElementById("a").addEventListener("progress", (e) => {
+      const i = window.__reduced ? 5 : Math.min(5, Math.floor(e.detail * 6.2));
+      if (i === current) return;
+      current = i;
+      list.querySelectorAll(".a-step").forEach((li, k) => {
+        li.classList.toggle("is-now", window.__reduced || k === i);
+        li.classList.toggle("is-done", k < i);
+      });
+      plate.querySelectorAll(".badge").forEach((b, k) => { b.classList.toggle("is-now", k === i); b.classList.toggle("is-done", k < i); });
+      document.querySelectorAll("#a-dots i").forEach((d, k) => d.classList.toggle("on", k <= i));
+      mayo.classList.add("is-running");
+      clearTimeout(timer);
+      timer = setTimeout(() => mayo.classList.remove("is-running"), 700);
+      place(i);
+    });
+    window.dispatchEvent(new Event("scroll"));
+  }
+
+  /* ---- B: the trail fills with the scroll; each marker wakes when reached. ---- */
+  const trail = document.getElementById("b-trail");
+  if (trail) {
+    const tops = [6, 22, 39, 56, 72, 88];
+    steps.forEach(([title, text], i) => {
+      const side = i % 2 ? "right" : "left";
+      trail.insertAdjacentHTML("beforeend", `<div class="b-mark ${side}" style="--y:${tops[i] - 6}%"><img src="../../../public/images/mundo-mayo/48-isla5-hito-0${i + 1}.webp" alt=""><div><span class="num">${n(i)}</span><h3>${title}</h3><p>${text}</p></div></div>`);
+    });
+    const line = document.getElementById("b-line");
+    const length = 1000;
+    line.setAttribute("pathLength", length);
+    line.style.strokeDasharray = length;
+    document.getElementById("b").addEventListener("progress", (e) => {
+      const p = window.__reduced ? 1 : Math.min(1, e.detail * 1.15);
+      line.style.strokeDashoffset = length * (1 - p);
+      trail.querySelectorAll(".b-mark").forEach((m, k) => m.classList.toggle("is-reached", p >= tops[k] / 100 - 0.02));
+    });
+    window.dispatchEvent(new Event("scroll"));
+  }
+
+  /* ---- C: a once-only entrance (3.2 s), then everything rests. ---- */
+  const row = document.getElementById("c-row");
+  if (row) {
+    steps.forEach(([title, text], i) => {
+      row.insertAdjacentHTML("beforeend", `<li class="c-stone" style="--i:${i}"><img src="../../../public/images/mundo-mayo/48-isla5-paso-0${i + 1}.webp" alt=""><span class="num">${n(i)}</span><h3>${title}</h3><p>${text}</p></li>`);
+    });
+    const section = document.getElementById("c");
+    const cmayo = document.getElementById("c-mayo");
+    const setT = (t) => {
+      section.style.setProperty("--t", t);
+      const hop = Math.min(1, Math.max(0, (t - 0.5) * 2)) * 5; // 0..5 stones
+      cmayo.style.setProperty("--arc", Math.sin((hop % 1) * Math.PI).toFixed(3));
+      cmayo.style.setProperty("--fr", Math.floor(hop * 12) % 12);
+    };
+    const query = new URLSearchParams(location.search);
+    if (query.has("p")) setT(parseFloat(query.get("p")));
+    else if (window.__reduced) setT(1);
+    else {
+      setT(0);
+      new IntersectionObserver((entries, obs) => {
+        if (!entries[0].isIntersecting) return;
+        obs.disconnect();
+        const start = performance.now();
+        const tick = (now) => { const t = Math.min(1, (now - start) / 3200); setT(t); if (t < 1) requestAnimationFrame(tick); };
+        requestAnimationFrame(tick);
+      }, { threshold: 0.4 }).observe(row);
+    }
+  }
+</script>
+</body>
+</html>

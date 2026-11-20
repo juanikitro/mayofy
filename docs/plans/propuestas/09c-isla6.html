@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Isla 6 propuestas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_base.css">
+<style>
+  .i6-plate { width: 100%; }
+  .fire {
+    position: absolute; left: 55.2%; top: 55.4%; width: 15%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%;
+    background: radial-gradient(closest-side, oklch(85% 0.16 70 / 55%), oklch(85% 0.16 70 / 0)); mix-blend-mode: screen;
+    animation: fire 2.8s ease-in-out infinite alternate;
+  }
+  @keyframes fire { to { opacity: .65; scale: 1.08; } }
+  .lead-strong { font-size: clamp(1.2rem, 1.7vw, 1.5rem); font-weight: 600; line-height: 1.35; color: var(--night-ink); max-width: 36rem; }
+  .muted { color: var(--night-ink-soft); }
+
+  /* A compact stand-in of the Cal.com inline embed. */
+  .cal { border-radius: 1rem; background: #111317; color: #e9eaee; padding: 1.25rem; display: grid; grid-template-columns: 1fr 1.6fr; gap: 1.25rem; font-size: .85rem; box-shadow: var(--shadow-card); }
+  .cal h4 { font-size: 1.05rem; margin: .4rem 0 .6rem; }
+  .cal .meta { color: #9ca0aa; display: grid; gap: .4rem; }
+  .cal .month { font-weight: 600; margin-bottom: .6rem; }
+  .cal .grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: .3rem; text-align: center; }
+  .cal .grid span { padding: .45rem 0; border-radius: .45rem; color: #7c808a; }
+  .cal .grid span.on { background: #2a2d35; color: #fff; font-weight: 600; }
+  .cal .grid span.sel { background: #fff; color: #111; font-weight: 700; }
+  .cal .grid b { font-size: .68rem; color: #9ca0aa; font-weight: 600; }
+
+  /* ---------- A: by the fire ---------- */
+  .a-first { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 1rem; align-items: center; min-height: calc(100vh - 12rem); }
+  .a-first .i6-plate { width: 185%; margin-left: -40%; margin-block: -24% -22%; }
+  .a-copy > * + * { margin-top: 1.25rem; }
+  .a-agenda { margin-top: 4rem; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 3rem; align-items: start; }
+  .a-agenda h3 { font-size: clamp(1.6rem, 2.4vw, 2.1rem); }
+  .a-agenda p { margin-top: 1rem; }
+  .a-agenda .alt { margin-top: 1.5rem; display: grid; gap: .75rem; justify-items: start; }
+
+  /* ---------- B: three facts ---------- */
+  .b-facts { margin-top: 2.5rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; max-width: 60rem; }
+  .b-fact { padding: 1.4rem 0 0; border-top: 1px solid oklch(94% 0.012 160 / 25%); }
+  .b-fact strong { display: block; font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--mint); font-size: clamp(3rem, 5.5vw, 4.75rem); line-height: 1; letter-spacing: -.02em; }
+  .b-fact span { display: block; margin-top: .5rem; color: var(--night-ink-soft); max-width: 16rem; }
+  .b-body { margin-top: 2rem; max-width: 40rem; }
+  .b-scene { margin-top: -10rem; }
+  .b-scene .i6-plate { width: 90%; margin-left: auto; margin-right: -6%; margin-top: -10%; }
+
+  /* ---------- C: the conversation first ---------- */
+  .c-grid { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 3rem; align-items: start; }
+  .c-who { display: flex; gap: 1rem; align-items: center; margin-top: 1.5rem; }
+  .c-who .avatar { width: 3.5rem; height: 3.5rem; border-radius: 50%; background: radial-gradient(circle at 35% 30%, oklch(70% 0.06 60), oklch(45% 0.05 50)); flex: none; }
+  .c-who p { color: var(--night-ink-soft); }
+  .c-who b { color: var(--night-ink); }
+  .c-facts { margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: .5rem; }
+  .c-facts span { padding: .4rem .75rem; border-radius: 999px; border: 1px solid oklch(94% 0.012 160 / 25%); font-size: .9rem; }
+  .c-cal-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 1rem; }
+  .c-cal-head h3 { font-size: 1.4rem; }
+  details.c-form { margin-top: 1rem; padding: 1rem 1.25rem; border-radius: 1rem; background: oklch(94% 0.012 160 / 8%); }
+  details.c-form summary { cursor: pointer; font-weight: 600; color: var(--mint); min-height: 2.75rem; display: flex; align-items: center; }
+  .c-scene .i6-plate { width: 80%; margin: -12% auto -6%; }
+
+  @media (max-width: 48rem) {
+    .a-first { grid-template-columns: 1fr; min-height: 0; }
+    .a-first .i6-plate { width: 200%; margin-left: -60%; margin-block: -40% -14%; }
+    .a-agenda { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; }
+    .cal { grid-template-columns: 1fr; }
+    .b-facts { grid-template-columns: 1fr; gap: .5rem; }
+    .b-fact { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: center; }
+    .b-fact strong { font-size: 2.6rem; }
+    .b-fact span { margin: 0; }
+    .b-scene { margin-top: 0; }
+    .b-scene .i6-plate { width: 200%; margin: -22% 0 -30% -55%; }
+    .c-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .c-scene .i6-plate { width: 200%; margin: -40% 0 -30% -50%; }
+  }
+</style>
+</head>
+<body>
+
+<template id="cal">
+  <div class="cal" aria-label="Agenda de Cal.com">
+    <div>
+      <p class="meta">Juan Ignacio Portilla Kitroser</p>
+      <h4>Reunión de diagnóstico</h4>
+      <div class="meta"><span>30 min</span><span>Cal Video</span><span>America/Argentina</span></div>
+    </div>
+    <div>
+      <p class="month">noviembre 2026</p>
+      <div class="grid">
+        <b>DOM</b><b>LUN</b><b>MAR</b><b>MIÉ</b><b>JUE</b><b>VIE</b><b>SÁB</b>
+        <span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span class="sel">20</span><span class="on">21</span>
+        <span>22</span><span class="on">23</span><span class="on">24</span><span class="on">25</span><span class="on">26</span><span class="on">27</span><span class="on">28</span>
+        <span>29</span><span class="on">30</span><span class="on">1</span><span class="on">2</span><span class="on">3</span><span class="on">4</span><span class="on">5</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!-- ================= A ================= -->
+<section class="opt sky-dusk dark" data-opt="a" aria-labelledby="a-title">
+  <span class="opt-tag">Isla 6 · Opción A · Junto al fuego</span>
+  <div class="wrap">
+    <div class="a-first">
+      <div class="a-copy">
+        <h2 id="a-title">Mayofy es la marca. Detrás <em>estoy yo</em>.</h2>
+        <p class="lead-strong">Soy Juani. Hace 5 años construyo software y hoy lidero técnicamente un sistema con unos 750 usuarios activos.</p>
+        <p class="muted">Vas a hablar conmigo desde la reunión de diagnóstico hasta la publicación, sin capas comerciales.</p>
+        <a class="link" href="#">Ver experiencia en LinkedIn</a>
+      </div>
+      <div class="plate i6-plate" aria-hidden="true">
+        <img src="../../../public/images/mundo-mayo/50-isla6-escritorio-v2-isla.webp" alt="">
+        <span class="fire"></span>
+        <div class="mayo mayo--rest" style="--x:44.98%;--y:61.1%;--s:8.49%"></div>
+      </div>
+    </div>
+    <div class="a-agenda">
+      <div>
+        <h3>Empecemos por una reunión de diagnóstico <em>gratis</em>.</h3>
+        <p class="muted">Contanos qué necesitás. Te respondemos en menos de 24 horas hábiles.</p>
+        <div class="alt">
+          <a class="btn btn--moss" href="#">Escribir por WhatsApp</a>
+          <a class="link" href="#">Prefiero completar un formulario</a>
+        </div>
+      </div>
+      <div data-cal></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= B ================= -->
+<section class="opt sky-dusk dark" data-opt="b" aria-labelledby="b-title">
+  <span class="opt-tag">Isla 6 · Opción B · Tres datos</span>
+  <div class="wrap">
+    <h2 id="b-title">Mayofy es la marca. Detrás <em>estoy yo</em>.</h2>
+    <div class="b-facts">
+      <p class="b-fact"><strong>5 años</strong><span>construyendo software</span></p>
+      <p class="b-fact"><strong>750</strong><span>usuarios activos en el sistema que lidero</span></p>
+      <p class="b-fact"><strong>4</strong><span>desarrolladores en ese equipo</span></p>
+    </div>
+    <p class="b-body muted">Soy Juani. Esa experiencia en APIs, integraciones y automatizaciones es la que pongo en cada proyecto. Vas a hablar conmigo de punta a punta. <a class="link" href="#">Ver LinkedIn</a></p>
+  </div>
+  <div class="b-scene" aria-hidden="true">
+    <div class="plate i6-plate">
+      <img src="../../../public/images/mundo-mayo/50-isla6-escritorio-v2-isla.webp" alt="">
+      <span class="fire"></span>
+      <div class="mayo mayo--rest" style="--x:44.98%;--y:61.1%;--s:8.49%"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= C ================= -->
+<section class="opt sky-dusk dark" data-opt="c" aria-labelledby="c-title">
+  <span class="opt-tag">Isla 6 · Opción C · Primero la charla</span>
+  <div class="wrap c-grid">
+    <div>
+      <h2 id="c-title">Mayofy es la marca. Detrás <em>estoy yo</em>.</h2>
+      <div class="c-who">
+        <span class="avatar" aria-hidden="true"></span>
+        <p><b>Juani</b><br>Desarrollador de software, a cargo de cada proyecto.</p>
+      </div>
+      <div class="c-facts"><span>5 años construyendo software</span><span>~750 usuarios activos</span><span>Equipo de 4 desarrolladores</span></div>
+      <p class="muted" style="margin-top:1.25rem">Vas a hablar conmigo desde la reunión de diagnóstico hasta la publicación.</p>
+    </div>
+    <div>
+      <div class="c-cal-head"><h3>Agendá una reunión de diagnóstico <em>gratis</em></h3></div>
+      <div data-cal></div>
+      <details class="c-form"><summary>¿Preferís escribir? Completá estos datos</summary><p class="muted">(El formulario actual, plegado.)</p></details>
+    </div>
+  </div>
+  <div class="c-scene" aria-hidden="true">
+    <div class="plate i6-plate">
+      <img src="../../../public/images/mundo-mayo/50-isla6-escritorio-v2-isla.webp" alt="">
+      <span class="fire"></span>
+      <div class="mayo mayo--rest" style="--x:44.98%;--y:61.1%;--s:8.49%"></div>
+    </div>
+  </div>
+</section>
+
+<script src="_base.js"></script>
+<script>
+  const tpl = document.getElementById("cal");
+  document.querySelectorAll("[data-cal]").forEach((slot) => slot.append(tpl.content.cloneNode(true)));
+</script>
+</body>
+</html>
