@@ -3804,6 +3804,92 @@ html[data-motion-tier="reduced"] .fall__mayo {
   --plate-fade: 0.32;
 }
 
+/* Fall → island 2 (Juani, 20 November 2026: "difumina la transicion del
+ * cielo entre la caida libre de mayo y la isla 2"). On wide screens the
+ * island 2 plate is scaled up, so its faded top rows sit above the section
+ * and its own, lighter sky started flat under the fall's last blue. A veil in
+ * that blue (`--sky-from`, the fall's `--fall-bottom`) opens the section and
+ * lets go over its first ~22rem, above the plate and under the copy; the
+ * island starts well below it. */
+.isle--morning .scene--plated::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: min(40%, 22rem);
+  background: linear-gradient(
+    180deg,
+    var(--sky-from) 0,
+    color-mix(in oklch, var(--sky-from) 65%, transparent) 30%,
+    color-mix(in oklch, var(--sky-from) 20%, transparent) 65%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Island 3 → pack details ("Lo mismo entre la isla 3 y los detalles de los
+ * packs"). The plate hangs below the sticky stage, whose clip cut the roots
+ * and the sky in a straight line over the pack details' band. Once the
+ * stage unpins (`exit 0 %`), a veil in the scene's last colour (`--sky-bottom`,
+ * where that band starts) rises at its foot, so sky and roots dissolve into
+ * the band; while pinned the roots stay clear. Above the plate's layers and
+ * the platforms in the stage (z-index), only over its bottom ~16rem. */
+.rocks .scene--plated::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 6;
+  height: min(30%, 16rem);
+  background: linear-gradient(
+    0deg,
+    var(--sky-bottom) 0,
+    color-mix(in oklch, var(--sky-bottom) 65%, transparent) 30%,
+    color-mix(in oklch, var(--sky-bottom) 20%, transparent) 65%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+@supports (animation-timeline: view()) {
+  .rocks .scene--plated::after {
+    animation: rocks-foot-veil linear both;
+    animation-timeline: --rocks;
+    animation-range: exit 0% exit 10%;
+  }
+}
+
+@keyframes rocks-foot-veil {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Phones: the raised plate ends above the stage's foot, so its layers fade
+ * over their last rows instead of ending in a straight line under the roots.
+ * The background's own fade (`.rocks .plate__picture--background` in the
+ * phone rules of island 3) lost to the later `.scene--plated .plate__picture`
+ * mask of the same specificity; this restores it, and the painted assembled
+ * layer (unmasked at the top, so the platform tops stay crisp) fades the
+ * same way. */
+@media (max-width: 48rem) {
+  .rocks .scene--plated .plate__picture--background {
+    mask-image: linear-gradient(180deg, transparent 0, #000 calc(var(--plate-fade, 0.09) * 100%), #000 80%, transparent 100%);
+  }
+
+  .rocks .scene--plated .plate__picture--assembled {
+    mask-image: linear-gradient(180deg, #000 0, #000 80%, transparent 100%);
+  }
+}
+
+html[data-motion-tier="reduced"] .rocks .scene--plated::after {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rocks .scene--plated::after {
+    animation: none !important;
+  }
+}
+
 .scene--plated.scene--golden {
   --sky-from: oklch(92% 0.03 68);
   --sky-plate: #f19e79;
