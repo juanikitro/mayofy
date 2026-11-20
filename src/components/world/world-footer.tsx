@@ -11,15 +11,17 @@ export function WorldFooter() {
         <p>{siteContent.hero.title}</p>
         <div className="world-footer__links">
           <a href={getWhatsAppHref()} target="_blank" rel="noreferrer">
-            WhatsApp
+            <span className="link-label">WhatsApp</span>
           </a>
           <a href={publicChannels.instagram} target="_blank" rel="noreferrer">
-            Instagram
+            <span className="link-label">Instagram</span>
           </a>
           <a href={publicChannels.linkedin} target="_blank" rel="noreferrer">
-            LinkedIn
+            <span className="link-label">LinkedIn</span>
           </a>
-          <Link href="/privacidad">Privacidad</Link>
+          <Link href="/privacidad">
+            <span className="link-label">Privacidad</span>
+          </Link>
         </div>
         <small>Mayofy · Webs y software a medida · Argentina y LATAM</small>
       </div>

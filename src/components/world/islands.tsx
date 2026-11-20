@@ -148,11 +148,13 @@ export function WorksIsland() {
               <p>{project.summary}</p>
               <div className="work__links">
                 <Link className="work__link" href={`/proyectos/${project.slug}`}>
-                  Ver el caso <span aria-hidden="true">→</span>
+                  <span className="link-label">Ver el caso</span>{" "}
+                  <span className="link-arrow" aria-hidden="true">→</span>
                 </Link>
                 {project.url ? (
                   <a className="work__link" href={project.url} target="_blank" rel="noreferrer">
-                    Visitar sitio <span aria-hidden="true">↗</span>
+                    <span className="link-label">Visitar sitio</span>{" "}
+                    <span className="link-arrow link-arrow--out" aria-hidden="true">↗</span>
                   </a>
                 ) : null}
               </div>
@@ -222,7 +224,7 @@ export function QuestionsIsland() {
               <a className="btn btn--quiet" href={getWhatsAppHref(maintenancePlan.whatsappMessage)} target="_blank" rel="noreferrer">
                 {maintenancePlan.cta}
               </a>
-              <AnimatedDetails className="pack-details" summary="¿Qué cambios incluye?">
+              <AnimatedDetails className="pack-details" summary={<span className="link-label">¿Qué cambios incluye?</span>}>
                 <DetailGroups groups={maintenancePlan.detailGroups} />
               </AnimatedDetails>
               <ol className="upkeep__footnotes" aria-label="Límites del mantenimiento">
@@ -259,7 +261,7 @@ export function JuaniIsland() {
           <p className="isle__lead">{siteContent.founder.lead}</p>
           <p className="isle__body">{siteContent.founder.body}</p>
           <a className="host-link" href={publicChannels.linkedin} target="_blank" rel="noreferrer">
-            Ver experiencia en LinkedIn
+            <span className="link-label">Ver experiencia en LinkedIn</span>
           </a>
         </div>
 
@@ -273,7 +275,7 @@ export function JuaniIsland() {
             </p>
             <CalBooking url={siteContent.scheduling.url} calLink={siteContent.scheduling.calLink} />
             <a className="host-link" href={heroWhatsAppHref} target="_blank" rel="noreferrer">
-              Prefiero escribir por WhatsApp
+              <span className="link-label">Prefiero escribir por WhatsApp</span>
             </a>
             <span>O completá estos datos y lo vemos por WhatsApp:</span>
           </div>

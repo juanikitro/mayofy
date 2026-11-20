@@ -1794,7 +1794,7 @@ html[data-motion-tier="reduced"] .scene__sky {
 .world-footer__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: 0 1.25rem;
 }
 
 .world-footer__links a {
@@ -4093,4 +4093,795 @@ html[data-motion-tier="reduced"] .plate__picture--background {
     animation: none;
     mask-image: linear-gradient(180deg, transparent 0, #000 calc(var(--plate-fade, 0.09) * 100%));
   }
+}
+
+/* ======================================================================
+ * Micro-interactions (docs/plans/2026-11-19-microinteracciones.md)
+ *
+ * One motion system for every UI element of the Mayo world. Rules:
+ * - Only transform and opacity move (colours, borders and shadows may
+ *   change); nothing animates width, height, margin or position.
+ * - Hover in 160 ms, hover out 120 ms, press 90 ms: out is always faster
+ *   than in, so the interface never lags behind the pointer.
+ * - Curves never overshoot: --ease-ui for state changes, --ease-enter for
+ *   things arriving, --ease-travel only for something crossing a distance.
+ * - Hover motion only for a fine pointer; keyboard focus shows the same
+ *   state anywhere. Touch gets the press, never a stuck hover.
+ * - prefers-reduced-motion and html[data-motion-tier="reduced"] turn every
+ *   duration to 0 and drop every transform: states change at once.
+ * ==================================================================== */
+
+.world {
+  --m-fast: 120ms;   /* hover out, a menu or label closing */
+  --m-base: 160ms;   /* hover in, colour and underline changes */
+  --m-press: 90ms;   /* pointer down */
+  --m-panel: 220ms;  /* a disclosure opening, a toast arriving */
+  --m-reveal: 520ms; /* copy arriving */
+  --m-enter: 700ms;  /* the hero lines arriving */
+  --ease-ui: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-travel: cubic-bezier(0.65, 0, 0.35, 1);
+  --m-lift: -2px;    /* a card rising under the pointer */
+  --m-step: -1px;    /* a button rising under the pointer */
+  --m-press-scale: 0.97;
+  --m-nudge: 3px;    /* an arrow leaning into its direction */
+  --m-rise: 12px;    /* copy arriving from below */
+  --m-shadow-btn:
+    0 1px 2px oklch(30% 0.05 60 / 12%),
+    0 10px 20px -10px oklch(30% 0.06 150 / 45%);
+  --m-shadow-card:
+    0 1px 2px oklch(30% 0.05 60 / 8%),
+    0 2rem 3.5rem -1.75rem oklch(30% 0.05 60 / 50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .world {
+    --m-fast: 0ms;
+    --m-base: 0ms;
+    --m-press: 0ms;
+    --m-panel: 0ms;
+    --m-reveal: 0ms;
+    --m-enter: 0ms;
+  }
+}
+
+html[data-motion-tier="reduced"] .world {
+  --m-fast: 0ms;
+  --m-base: 0ms;
+  --m-press: 0ms;
+  --m-panel: 0ms;
+  --m-reveal: 0ms;
+  --m-enter: 0ms;
+}
+
+/* Buttons: the tone deepens and the pill steps up 1px with a soft shadow;
+ * a press sinks it back and shrinks it 3%. */
+.btn {
+  transition:
+    background-color var(--m-fast) var(--ease-ui),
+    border-color var(--m-fast) var(--ease-ui),
+    color var(--m-fast) var(--ease-ui),
+    box-shadow var(--m-fast) var(--ease-ui),
+    transform var(--m-fast) var(--ease-ui);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  transition-duration: var(--m-base);
+}
+
+.btn:active {
+  transform: none;
+  transition-duration: var(--m-press);
+}
+
+.btn--moss:active {
+  background: oklch(34% 0.09 150);
+}
+
+.btn--quiet:active {
+  background: color-mix(in oklch, var(--moss) 12%, var(--cream));
+}
+
+.isle--dark .btn--moss:active {
+  background: oklch(80% 0.17 158);
+}
+
+.isle--dark .btn--quiet:active {
+  background: color-mix(in oklch, var(--mint) 20%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @media (hover: hover) and (pointer: fine) {
+    html:not([data-motion-tier="reduced"]) .btn:hover:not(:disabled) {
+      transform: translateY(var(--m-step));
+      box-shadow: var(--m-shadow-btn);
+    }
+  }
+
+  html:not([data-motion-tier="reduced"]) .btn:active:not(:disabled) {
+    transform: scale(var(--m-press-scale));
+    box-shadow: none;
+  }
+}
+
+/* Text links: the label rests on a faint hairline; on hover or focus a
+ * full-strength line draws from the left and leaves to the right. The
+ * arrow beside a label leans 3px into its direction. */
+:is(.host-link, .work__link, .booking__link, .dawn__alt a, .world-footer__links a, .contact-form__privacy a, .contact-form__fallback) {
+  text-decoration: none;
+}
+
+.link-label {
+  background-image:
+    linear-gradient(currentColor, currentColor),
+    linear-gradient(
+      color-mix(in oklch, currentColor 40%, transparent),
+      color-mix(in oklch, currentColor 40%, transparent)
+    );
+  background-repeat: no-repeat;
+  background-position:
+    right 0 bottom 0,
+    left 0 bottom 0;
+  background-size:
+    0% 1px,
+    100% 1px;
+  padding-block-end: 0.04em;
+  transition: background-size var(--m-fast) var(--ease-ui);
+}
+
+:is(a, button, summary):is(:hover, :focus-visible) > .link-label {
+  background-position:
+    left 0 bottom 0,
+    left 0 bottom 0;
+  background-size:
+    100% 1px,
+    100% 1px;
+  transition-duration: var(--m-base);
+}
+
+.link-arrow {
+  display: inline-block;
+  margin-inline-start: 0.3em;
+  transition: transform var(--m-fast) var(--ease-ui);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) a:focus-visible > .link-arrow {
+    transform: translateX(var(--m-nudge));
+    transition-duration: var(--m-base);
+  }
+
+  html:not([data-motion-tier="reduced"]) a:focus-visible > .link-arrow--out {
+    transform: translate(2px, -2px);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    html:not([data-motion-tier="reduced"]) a:hover > .link-arrow {
+      transform: translateX(var(--m-nudge));
+      transition-duration: var(--m-base);
+    }
+
+    html:not([data-motion-tier="reduced"]) a:hover > .link-arrow--out {
+      transform: translate(2px, -2px);
+    }
+  }
+}
+
+/* Skip link: slides down from above the viewport when it takes focus. */
+.world .skip-link {
+  transition: transform var(--m-panel) var(--ease-enter);
+}
+
+/* Pill navigation ------------------------------------------------------ */
+
+/* Scroll state: over the hero the pill sits flat on the sky; once the page
+ * has moved 160px its shadow fades in, so it reads as floating above the
+ * islands. The shadow lives on a pseudo-element and only its opacity is
+ * scrubbed (compositor only). Without scroll timelines it is always on. */
+.island-nav {
+  position: relative;
+  box-shadow: none;
+}
+
+.island-nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: var(--shadow-soft);
+  pointer-events: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-motion-tier="reduced"]) .island-nav::before {
+      animation: nav-lift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 160px;
+    }
+  }
+}
+
+@keyframes nav-lift {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* The link of the island in view keeps a still 2px moss bar under its word
+ * (no gliding indicator); hover is a faint tint. */
+.island-nav__link,
+.island-nav__brand {
+  transition:
+    color var(--m-fast) var(--ease-ui),
+    background-color var(--m-fast) var(--ease-ui),
+    box-shadow var(--m-fast) var(--ease-ui),
+    transform var(--m-press) var(--ease-ui);
+}
+
+.island-nav__link:hover,
+.island-nav__link:focus-visible {
+  transition-duration: var(--m-base);
+}
+
+.island-nav__link {
+  position: relative;
+}
+
+.island-nav__link::after {
+  content: "";
+  position: absolute;
+  inset: auto 0.75rem 0.3rem;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--moss);
+  opacity: 0;
+  transition: opacity var(--m-fast) var(--ease-ui);
+}
+
+.island-nav__link[aria-current="location"] {
+  color: var(--moss);
+}
+
+.island-nav__link[aria-current="location"]::after {
+  opacity: 1;
+  transition-duration: var(--m-panel);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) :is(.island-nav__link, .island-nav__brand):active {
+    transform: scale(var(--m-press-scale));
+  }
+}
+
+/* Paw rail ------------------------------------------------------------- */
+
+/* Hover grows a soft bubble behind the paw; the island in view is stamped
+ * solid and its paw settles from 0.8 to full size. A label names the island
+ * after a short pause on hover, or at once on keyboard focus. */
+.progress__paw {
+  position: relative;
+  isolation: isolate;
+  transition:
+    color var(--m-fast) var(--ease-ui),
+    background-color var(--m-panel) var(--ease-ui);
+}
+
+.progress__paw::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: color-mix(in oklch, var(--moss) 14%, transparent);
+  opacity: 0;
+  transform: scale(0.7);
+  transition:
+    opacity var(--m-fast) var(--ease-ui),
+    transform var(--m-panel) var(--ease-ui);
+}
+
+.progress__paw:hover {
+  color: var(--moss);
+  background: transparent;
+}
+
+.progress__paw:is(:hover, :focus-visible)::before {
+  opacity: 1;
+  transform: none;
+  transition-duration: var(--m-base), var(--m-panel);
+}
+
+.progress__paw[aria-current="location"],
+.progress__paw[aria-current="location"]:hover {
+  color: var(--cream);
+  background: var(--moss);
+}
+
+.progress__paw svg {
+  transition: transform var(--m-press) var(--ease-ui);
+}
+
+/* The label is placed with `translate` and moves with `transform`, so the
+ * reduced tier can drop the motion and keep the placement. */
+.progress__paw::after {
+  content: attr(data-label);
+  position: absolute;
+  inset: 50% calc(100% + 0.6rem) auto auto;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  translate: 0 -50%;
+  transform: translateX(4px);
+  transition:
+    opacity var(--m-fast) var(--ease-ui),
+    transform var(--m-fast) var(--ease-ui);
+}
+
+.progress__paw:focus-visible::after {
+  opacity: 1;
+  transform: none;
+  transition-duration: var(--m-base);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .progress__paw:hover::after {
+    opacity: 1;
+    transform: none;
+    transition-duration: var(--m-base);
+    transition-delay: 350ms;
+  }
+}
+
+@media (max-width: 48rem) {
+  .progress__paw::after {
+    inset: auto auto calc(100% + 0.6rem) 50%;
+    translate: -50% 0;
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .progress__paw[aria-current="location"] svg {
+    animation: paw-stamp 320ms var(--ease-enter);
+  }
+
+  html:not([data-motion-tier="reduced"]) .progress__paw:active svg {
+    transform: scale(0.85);
+  }
+}
+
+@keyframes paw-stamp {
+  from {
+    transform: scale(0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress__paw::before,
+  .progress__paw::after {
+    transform: none;
+  }
+}
+
+html[data-motion-tier="reduced"] .progress__paw::before,
+html[data-motion-tier="reduced"] .progress__paw::after {
+  transform: none;
+}
+
+/* WhatsApp float (phones) ---------------------------------------------- */
+
+/* It arrives once the hero is behind: up 8px and from 0.92 to full size.
+ * While hidden it takes no taps. */
+.wa-float {
+  pointer-events: none;
+  transform: translateY(0.5rem) scale(0.92);
+  transition:
+    opacity var(--m-panel) var(--ease-ui),
+    transform 320ms var(--ease-enter);
+}
+
+.wa-float--visible {
+  pointer-events: auto;
+}
+
+@media (max-width: 48rem) {
+  .wa-float--visible {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .wa-float--visible:active {
+    transform: scale(0.94);
+    transition-duration: var(--m-press);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-float {
+    transform: none;
+    transition-duration: 0ms;
+  }
+}
+
+html[data-motion-tier="reduced"] .wa-float {
+  transform: none;
+  transition-duration: 0ms;
+}
+
+/* Cards ---------------------------------------------------------------- */
+
+/* Pack and work cards hold links: under a fine pointer the card rises 2px
+ * and its shadow deepens (one elevation step, never a tilt or a scale). */
+.pack,
+.work {
+  transition:
+    transform var(--m-fast) var(--ease-ui),
+    box-shadow var(--m-fast) var(--ease-ui);
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  html:not([data-motion-tier="reduced"]) :is(.pack, .work:not(.work--placeholder)):hover {
+    transform: translateY(var(--m-lift));
+    box-shadow: var(--m-shadow-card);
+    transition-duration: 180ms;
+  }
+
+  html:not([data-motion-tier="reduced"]) .work--placeholder:hover {
+    transform: translateY(var(--m-lift));
+    transition-duration: 180ms;
+  }
+}
+
+/* Disclosures (pack details, maintenance, FAQ) -------------------------- */
+
+/* The plus is two bars: the upright one turns 90 degrees and lies on the
+ * other, so the plus becomes a minus as the panel opens (and back as it
+ * closes, following AnimatedDetails' data-collapsing). The panel's content
+ * settles 4px as it fades in. */
+:is(.pack-details, .questions__item) > summary {
+  --sum-pad: 0.5rem;
+  position: relative;
+  padding-inline-start: 1.5rem;
+  transition: color var(--m-fast) var(--ease-ui);
+}
+
+.questions__item > summary {
+  --sum-pad: 0.75rem;
+}
+
+:is(.pack-details, .questions__item) > summary::before,
+:is(.pack-details, .questions__item) > summary::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--sum-pad) + 0.5lh - 1px) auto auto 0.15rem;
+  width: 0.75rem;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+}
+
+/* Outranks the "+" / "2" glyphs of the open state set earlier. */
+:is(.pack-details, .questions__item)[open] > summary::before {
+  content: "";
+}
+
+.questions__item > summary::before,
+.questions__item > summary::after {
+  color: var(--mint);
+}
+
+:is(.pack-details, .questions__item) > summary::after {
+  transform: rotate(90deg);
+  transition: transform var(--m-panel) var(--ease-ui);
+}
+
+:is(.pack-details, .questions__item)[open]:not([data-collapsing="true"]) > summary::after {
+  transform: rotate(180deg);
+}
+
+.pack-details > summary:hover {
+  color: var(--leaf-deep);
+}
+
+.isle--dark .pack-details > summary:hover {
+  color: oklch(92% 0.15 158);
+}
+
+.animated-details__inner {
+  transition: transform var(--m-panel) var(--ease-ui);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) details[data-collapsing="true"] > .animated-details__content > .animated-details__inner {
+    transform: translateY(-0.25rem);
+  }
+}
+
+/* FAQ rows answer the pointer with a lighter ground; an open row keeps it. */
+.questions__item {
+  transition: background-color var(--m-fast) var(--ease-ui);
+}
+
+.questions__item:has(> summary:hover),
+.questions__item[open]:not([data-collapsing="true"]) {
+  background: color-mix(in oklch, oklch(27% 0.045 265) 92%, transparent);
+  transition-duration: var(--m-base);
+}
+
+.questions__item > summary:focus-visible {
+  outline-offset: 0.35rem;
+}
+
+/* Contact form --------------------------------------------------------- */
+
+/* Focus: the field's border turns mint with a soft 3px halo, drawn at once
+ * (a focus ring never animates), and its label lights up with it. */
+.field > span {
+  transition: color var(--m-fast) var(--ease-ui);
+}
+
+.field:focus-within > span {
+  color: var(--mint);
+  transition-duration: var(--m-base);
+}
+
+.field input,
+.field select,
+.field textarea {
+  transition:
+    border-color var(--m-fast) var(--ease-ui),
+    background-color var(--m-fast) var(--ease-ui);
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+  outline: none;
+  border-color: var(--mint);
+  background-color: oklch(22% 0.045 265);
+  box-shadow:
+    0 0 0 1px var(--mint),
+    0 0 0 4px color-mix(in oklch, var(--mint) 22%, transparent);
+}
+
+.field input:user-invalid:focus-visible,
+.field select:user-invalid:focus-visible,
+.field textarea:user-invalid:focus-visible {
+  border-color: oklch(76% 0.13 27);
+  box-shadow:
+    0 0 0 1px oklch(76% 0.13 27),
+    0 0 0 4px oklch(76% 0.13 27 / 22%);
+}
+
+/* Sending: a 14px ring turns inside the button; nothing else moves. */
+.btn__spinner {
+  flex: none;
+  width: 0.875rem;
+  height: 0.875rem;
+  border: 2px solid currentColor;
+  border-inline-end-color: transparent;
+  border-radius: 50%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .btn__spinner {
+    animation: spinner-turn 800ms linear infinite;
+  }
+}
+
+@keyframes spinner-turn {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* Each new message arrives 4px from below; success draws its tick. */
+.contact-form__message {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.contact-form__icon {
+  flex: none;
+  width: 1.05em;
+  height: 1.05em;
+  margin-block-start: 0.15em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .contact-form__feedback:not(.contact-form__feedback--idle) > .contact-form__message {
+    animation: message-in var(--m-panel) var(--ease-enter) both;
+  }
+
+  html:not([data-motion-tier="reduced"]) .contact-form__tick {
+    stroke-dasharray: 1;
+    animation: tick-draw 320ms var(--ease-ui) 120ms both;
+  }
+}
+
+@keyframes message-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@keyframes tick-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Cal.com: loading state ----------------------------------------------- */
+
+/* Until Cal.com reports the calendar ready, a skeleton of the month view
+ * holds the space (a slow breathing of its tiles), then fades away. */
+/* The fallback link and the footer links stand alone: 44px tap targets. */
+.booking__link,
+.world-footer__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+}
+
+.booking__frame {
+  position: relative;
+  width: 100%;
+}
+
+.booking__skeleton {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: min(100%, 28rem);
+  align-content: start;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: clamp(1rem, 3vw, 2rem);
+  border-radius: var(--radius);
+  background: var(--night-deep);
+  pointer-events: none;
+  transition: opacity var(--m-panel) var(--ease-ui);
+}
+
+.booking__frame[data-ready] > .booking__skeleton {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--m-panel) var(--ease-ui),
+    visibility 0s linear var(--m-panel);
+}
+
+.booking__skeleton-title {
+  width: min(12rem, 50%);
+  height: 0.9rem;
+  border-radius: var(--radius-pill);
+  background: oklch(26% 0.04 265);
+}
+
+.booking__skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.booking__skeleton-grid > span {
+  aspect-ratio: 1;
+  border-radius: 0.6rem;
+  background: oklch(22% 0.04 265);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .booking__frame:not([data-ready]) :is(.booking__skeleton-title, .booking__skeleton-grid) {
+    animation: skeleton-breathe 1.6s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes skeleton-breathe {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.55;
+  }
+}
+
+/* Copy entrance -------------------------------------------------------- */
+
+/* The hero arrives once on load: the descriptor with the first line, the
+ * two title lines 80ms apart, then the body, the buttons and the WhatsApp
+ * line fade up 12px, 60ms apart. All of it is over by about 1 s; links take
+ * clicks from the first frame. */
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) :is(.dawn__descriptor, .dawn__line) {
+    animation: copy-rise var(--m-enter) var(--ease-enter) both;
+  }
+
+  html:not([data-motion-tier="reduced"]) .dawn__line + .dawn__line {
+    animation-delay: 80ms;
+  }
+
+  html:not([data-motion-tier="reduced"]) :is(.dawn__body, .dawn__actions, .dawn__alt) {
+    animation: copy-rise var(--m-reveal) var(--ease-enter) 240ms both;
+  }
+
+  html:not([data-motion-tier="reduced"]) .dawn__actions {
+    animation-delay: 300ms;
+  }
+
+  html:not([data-motion-tier="reduced"]) .dawn__alt {
+    animation-delay: 360ms;
+  }
+}
+
+@keyframes copy-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--m-rise));
+  }
+}
+
+/* Island copy: each eyebrow, title and lead settles 12px as it comes up
+ * from the bottom edge, scrubbed by the scroll and finished before it
+ * reaches the reading zone (about the lower fifth of the screen), so text
+ * is never caught half-faded where someone reads. Above the fold, after an
+ * anchor jump or without scroll timelines it simply stands. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-motion-tier="reduced"]) .isle__content > :is(.isle__eyebrow, h2, .isle__lead, .isle__body),
+    html:not([data-motion-tier="reduced"]) .host > :is(h2, .isle__lead, .isle__body) {
+      animation: copy-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}
+
+@keyframes copy-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(var(--m-rise));
+    animation-timing-function: var(--ease-enter);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Focus rings follow the shape of round and pill controls instead of the
+ * generic 0.25rem corner. */
+.world .progress__paw:focus-visible {
+  border-radius: 50%;
+}
+
+.world :is(.btn, .island-nav__link, .wa-float):focus-visible {
+  border-radius: var(--radius-pill);
 }

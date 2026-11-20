@@ -50,7 +50,7 @@ export function PackDetails() {
               </p>
             ) : null}
 
-            <AnimatedDetails className="pack-details" summary="Ver todo lo que incluye">
+            <AnimatedDetails className="pack-details" summary={<span className="link-label">Ver todo lo que incluye</span>}>
               <DetailGroups groups={plan.detailGroups} />
               <p className="pack-details__note">{plan.note}</p>
             </AnimatedDetails>
