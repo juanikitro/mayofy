@@ -56,11 +56,17 @@ export default function Home() {
               <a className="btn btn--quiet btn--lg" href="#packs">
                 {siteContent.hero.secondaryCta}
               </a>
-              <a className="btn btn--ghost btn--lg dawn__whatsapp" href={heroWhatsAppHref} target="_blank" rel="noreferrer">
+              <a
+                className="btn btn--ghost btn--lg btn--icon dawn__whatsapp"
+                href={heroWhatsAppHref}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Escribinos por WhatsApp"
+                data-tip="Escribinos por WhatsApp"
+              >
                 <span className="btn__glyph">
                   <WhatsAppIcon />
                 </span>
-                Escribinos por WhatsApp
               </a>
             </div>
           </div>
