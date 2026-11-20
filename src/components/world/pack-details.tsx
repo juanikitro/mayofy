@@ -1,4 +1,4 @@
-import { AnimatedDetails } from "@/components/animated-details";
+import { FlipCard } from "@/components/world/flip-card";
 import { DetailGroups } from "@/components/world/pack-groups";
 import {
   commercialIntro,
@@ -18,43 +18,51 @@ export function PackDetails() {
     <div className="packs world-shell" id="packs-detalle">
       <div className="packs__grid">
         {commercialPlans.map((plan) => (
-          <article
+          <FlipCard
             className={`pack${plan.eyebrow ? " pack--featured" : ""}`}
             id={`pack-${plan.id}`}
             key={plan.id}
-          >
-            <header className="pack__header">
-              {plan.eyebrow ? <p className="pack__eyebrow">{plan.eyebrow}</p> : null}
-              <h3>{plan.name}</h3>
-              <p className="pack__from">Desde</p>
-              <p className="pack__price">{plan.price}</p>
-              <p className="pack__timeline">
-                Plazo estimado: <strong>{plan.timeline}</strong>
-              </p>
-              <p className="pack__description">{plan.description}</p>
-            </header>
+            frontClassName="pack__front"
+            backTitle={plan.name}
+            flipLabel="Ver todo lo que incluye"
+            unflipLabel="Volver"
+            front={
+              <>
+                <header className="pack__header">
+                  {plan.eyebrow ? <p className="pack__eyebrow">{plan.eyebrow}</p> : null}
+                  <h3>{plan.name}</h3>
+                  <p className="pack__from">Desde</p>
+                  <p className="pack__price">{plan.price}</p>
+                  <p className="pack__timeline">
+                    Plazo estimado: <strong>{plan.timeline}</strong>
+                  </p>
+                  <p className="pack__description">{plan.description}</p>
+                </header>
 
-            <div className="pack__ideal">
-              <p>Ideal para</p>
-              <span>{plan.idealFor}</span>
-            </div>
+                <div className="pack__ideal">
+                  <p>Ideal para</p>
+                  <span>{plan.idealFor}</span>
+                </div>
 
-            <a className="btn btn--moss pack__cta" href={getWhatsAppHref(plan.whatsappMessage)} target="_blank" rel="noreferrer">
-              {plan.cta}
-            </a>
+                <a className="btn btn--moss pack__cta" href={getWhatsAppHref(plan.whatsappMessage)} target="_blank" rel="noreferrer">
+                  {plan.cta}
+                </a>
 
-            {plan.footnote ? (
-              <p className="pack__footnote">
-                <span aria-hidden="true">(*) </span>
-                {plan.footnote}
-              </p>
-            ) : null}
-
-            <AnimatedDetails className="pack-details" summary={<span className="link-label">Ver todo lo que incluye</span>}>
-              <DetailGroups groups={plan.detailGroups} />
-              <p className="pack-details__note">{plan.note}</p>
-            </AnimatedDetails>
-          </article>
+                {plan.footnote ? (
+                  <p className="pack__footnote">
+                    <span aria-hidden="true">(*) </span>
+                    {plan.footnote}
+                  </p>
+                ) : null}
+              </>
+            }
+            back={
+              <>
+                <DetailGroups groups={plan.detailGroups} />
+                <p className="pack-details__note">{plan.note}</p>
+              </>
+            }
+          />
         ))}
       </div>
 

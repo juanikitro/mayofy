@@ -10,7 +10,9 @@ import { MayoFigure } from "@/components/world/mayo-figure";
 import { PlateObjects } from "@/components/world/plate-objects";
 import { SceneGlow } from "@/components/world/scene-glow";
 import { staggerStyle } from "@/components/world/stagger";
+import { WorkCarousel } from "@/components/world/work-carousel";
 import { DetailGroups } from "@/components/world/pack-groups";
+import { FlipCard } from "@/components/world/flip-card";
 import {
   comingSoon,
   extensions,
@@ -128,7 +130,6 @@ export function WorksIsland() {
         <MayoFigure slot="works" className="isle__mayo isle__mayo--run" />
       </IslandScene>
       <div className="isle__content world-shell">
-        <p className="isle__eyebrow">Trabajos seleccionados</p>
         <h2 id="trabajos-title">
           <IslandTitle segments={islandCopy.works.title} />
         </h2>
@@ -137,6 +138,7 @@ export function WorksIsland() {
         <ul className="works" aria-label="Proyectos">
           {(projects as readonly ProjectEntry[]).map((project, index) => (
             <li className={`work${project.placeholder ? " work--placeholder" : ""}`} key={project.slug} style={staggerStyle(index % 3)}>
+              <WorkCarousel images={project.images} title={project.title} index={project.index} />
               <p className="work__category">
                 {project.placeholder ? "Placeholder de contenido" : project.category}
               </p>
@@ -205,39 +207,46 @@ export function QuestionsIsland() {
             ))}
           </div>
 
-          <article className="upkeep panel">
-            <header className="upkeep__intro">
-              <h3>Mantenimiento mensual</h3>
-              <dl className="upkeep__prices">
-                {maintenancePlan.prices.map((tier) => (
-                  <div key={tier.label}>
-                    <dt>{tier.label}</dt>
-                    <dd className="upkeep__price">
-                      {tier.price}
-                      <span aria-hidden="true">{tier.asterisk ? " (**)" : " (*)"}</span>
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-              <p>{maintenancePlan.description}</p>
-            </header>
-            <div className="upkeep__content">
-              <a className="btn btn--quiet" href={getWhatsAppHref(maintenancePlan.whatsappMessage)} target="_blank" rel="noreferrer">
-                {maintenancePlan.cta}
-              </a>
-              <AnimatedDetails className="pack-details" summary={<span className="link-label">¿Qué cambios incluye?</span>}>
-                <DetailGroups groups={maintenancePlan.detailGroups} />
-              </AnimatedDetails>
-              <ol className="upkeep__footnotes" aria-label="Límites del mantenimiento">
-                {maintenancePlan.footnotes.map((footnote, index) => (
-                  <li key={footnote}>
-                    <span aria-hidden="true">{index === 0 ? "(*) " : "(**) "}</span>
-                    {footnote}
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </article>
+          <FlipCard
+            className="upkeep panel"
+            frontClassName="upkeep__front"
+            backTitle="Mantenimiento mensual"
+            flipLabel="¿Qué cambios incluye?"
+            unflipLabel="Volver"
+            front={
+              <>
+                <header className="upkeep__intro">
+                  <h3>Mantenimiento mensual</h3>
+                  <dl className="upkeep__prices">
+                    {maintenancePlan.prices.map((tier) => (
+                      <div key={tier.label}>
+                        <dt>{tier.label}</dt>
+                        <dd className="upkeep__price">
+                          {tier.price}
+                          <span aria-hidden="true">{tier.asterisk ? " (**)" : " (*)"}</span>
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <p>{maintenancePlan.description}</p>
+                </header>
+                <div className="upkeep__content">
+                  <a className="btn btn--quiet" href={getWhatsAppHref(maintenancePlan.whatsappMessage)} target="_blank" rel="noreferrer">
+                    {maintenancePlan.cta}
+                  </a>
+                  <ol className="upkeep__footnotes" aria-label="Límites del mantenimiento">
+                    {maintenancePlan.footnotes.map((footnote, index) => (
+                      <li key={footnote}>
+                        <span aria-hidden="true">{index === 0 ? "(*) " : "(**) "}</span>
+                        {footnote}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </>
+            }
+            back={<DetailGroups groups={maintenancePlan.detailGroups} />}
+          />
         </div>
       </div>
     </section>
