@@ -30,10 +30,15 @@ export function FlipCard({ className, id, frontClassName, front, back, backTitle
   const flipRef = useRef<HTMLButtonElement>(null);
   const turned = useRef(false);
 
+  // Focus moves on the next frame, once the incoming face is rendered again
+  // (the face turned away is `visibility: hidden` and cannot take focus).
   useEffect(() => {
     if (!turned.current) return;
-    if (flipped) titleRef.current?.focus({ preventScroll: true });
-    else flipRef.current?.focus({ preventScroll: true });
+    const frame = requestAnimationFrame(() => {
+      if (flipped) titleRef.current?.focus({ preventScroll: true });
+      else flipRef.current?.focus({ preventScroll: true });
+    });
+    return () => cancelAnimationFrame(frame);
   }, [flipped]);
 
   function turn(next: boolean) {

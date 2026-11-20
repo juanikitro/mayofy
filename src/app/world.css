@@ -5484,15 +5484,24 @@ html[data-motion-tier="reduced"] .wa-float {
   transform: rotateY(180deg);
 }
 
+/* The face turned away is also taken out of rendering: it disappears at
+ * mid-turn (when it is edge-on) and the incoming face appears at once, so
+ * nothing hidden is ever laid over the visible face. */
+.flip__face {
+  transition: visibility 0s linear 0s;
+}
+
 .flip__face[inert] {
+  visibility: hidden;
   pointer-events: none;
+  transition-delay: 280ms;
 }
 
 .flip__title {
   font-size: 1.35rem;
 }
 
-.flip__title:focus {
+.flip__title:focus:not(:focus-visible) {
   outline: none;
 }
 
@@ -5587,7 +5596,13 @@ html[data-motion-tier="reduced"] .wa-float {
   }
 
   .flip__face {
-    transition: opacity 200ms linear;
+    transition:
+      opacity 200ms linear,
+      visibility 0s linear 0s;
+  }
+
+  .flip__face[inert] {
+    transition-delay: 0s, 200ms;
   }
 
   .flip[data-flipped] .flip__face--front,
@@ -5602,7 +5617,13 @@ html[data-motion-tier="reduced"] :is(.flip__faces, .flip[data-flipped] > .flip__
 }
 
 html[data-motion-tier="reduced"] .flip__face {
-  transition: opacity 200ms linear;
+  transition:
+    opacity 200ms linear,
+    visibility 0s linear 0s;
+}
+
+html[data-motion-tier="reduced"] .flip__face[inert] {
+  transition-delay: 0s, 200ms;
 }
 
 html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .flip:not([data-flipped]) .flip__face--back) {
@@ -5644,7 +5665,12 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   box-shadow: var(--shadow-soft);
   transition:
     box-shadow var(--m-fast) var(--ease-ui),
-    opacity 200ms linear;
+    opacity 200ms linear,
+    visibility 0s linear 0s;
+}
+
+.pack .flip__face[inert] {
+  transition-delay: 0s, 0s, 280ms;
 }
 
 .pack--featured .flip__face {
@@ -5670,7 +5696,7 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
 
   html:not([data-motion-tier="reduced"]) .pack.flip:hover .flip__face {
     box-shadow: var(--m-shadow-card);
-    transition-duration: 180ms;
+    transition-duration: 180ms, 200ms, 0s;
   }
 }
 
