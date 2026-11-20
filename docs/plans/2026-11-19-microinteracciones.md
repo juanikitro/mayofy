@@ -197,3 +197,60 @@ Helpers nuevos: `staggerStyle(index)` (`src/components/world/stagger.ts`) escrib
 - No se probó en un teléfono real ni en Safari/Firefox. Sin `animation-timeline` las escaleras y el texto aparecen sin entrada, en reposo.
 - Las posiciones de los brillos están medidas sobre las placas v2 actuales de las islas 6 y 7 (escritorio y celular); si se repintan esas placas hay que moverlos (`SceneGlow` en `islands.tsx`).
 - Quien se detenga justo cuando un ítem cruza el borde inferior lo verá a medio aparecer durante unos 200 px de scroll: es el costo de atar la entrada al scroll en vez de a un temporizador.
+
+## Iteración 3 (20 de noviembre de 2026): WhatsApp del hero, tarjetas que se voltean y carruseles de trabajos
+
+**Pedidos de Juani:**
+- (3) "del hero, mejora el boton de "o escribinos por whatsapp"".
+- (8) "Para las cards donde esta la informacion completa de los packs, reemplaza el boton de "ver todo lo que incluye" para que en lugar de estirarse y mostrar en la misma card pero mas abajo lo que incluye, que se voltee la card, como si lo que incluye estaria en el reverso de la tarjeta".
+- (10, parte de implementación) "Coloca placeholders para que cada uno tenga una imagen o mas (carrusel dentro de la card). Ademas elimina "Trabajos seleccionados"".
+
+**Base:** `juanikitro/landing-redesign` en `d14d5ba`. Mismo sistema de movimiento. CSS nuevo en el bloque "Micro-interactions, iteration 3" al final de `world.css`.
+
+### WhatsApp del hero
+
+- El enlace subrayado debajo de los botones pasó a ser un **tercer botón en la misma fila**, a la misma altura (53 px): píldora fantasma (fondo crema translúcido, borde musgo suave) con el glifo de WhatsApp en un disco musgo. Usa el movimiento de todos los botones (sube 1 px, sombra, presión 0,97) y el glifo crece 6 % bajo el puntero. En celular baja a su propia línea, igual que los otros dos.
+- Mismo enlace y mismo mensaje (`getWhatsAppHref(siteContent.hero.primaryMessage)`). El texto pasó de "o escribinos por WhatsApp" a "Escribinos por WhatsApp": la "o" de enlace no tiene sentido dentro de un botón (se probó una "o" suelta delante de la píldora y quedaba colgada).
+- El glifo se extrajo a `src/components/world/whatsapp-icon.tsx` y lo comparten el hero y el botón flotante.
+
+### Tarjetas que se voltean (packs y mantenimiento)
+
+- Componente nuevo `src/components/world/flip-card.tsx` (`FlipCard`), usado por las tres tarjetas de packs (`pack-details.tsx`) y por la tarjeta de mantenimiento de la isla 7 (`islands.tsx`), que usaba el mismo desplegable. Las FAQ siguen con `AnimatedDetails`.
+- **Frente:** el contenido de siempre y, abajo, el botón "Ver todo lo que incluye →" (en mantenimiento, "¿Qué cambios incluye? →"). **Reverso:** el nombre del pack (o "Mantenimiento mensual") como título, lo que incluye y la nota, y el botón "← Volver" (único texto nuevo: hace falta para volver).
+- **Giro:** 560 ms sobre la curva de recorrido (`--ease-travel`), en 3D (`perspective` en la tarjeta, `rotateY(180deg)` en las caras). Las filas del reverso entran una tras otra cuando la tarjeta va por la mitad del giro.
+- **Misma altura:** el reverso se apoya sobre el frente con su misma altura y hace scroll cuando su contenido es más largo, con un desvanecido al pie que indica que sigue. Las tres tarjetas de packs mantienen sus filas compartidas (subgrid) y miden lo mismo (596 px a 1440).
+- **Accesibilidad:** botones reales con `aria-expanded` y `aria-controls`; la cara oculta es `inert` (ni teclado ni lector de pantalla la alcanzan) y además `visibility: hidden` desde la mitad del giro, así nunca queda texto oculto encimado. Al dar vuelta el foco pasa al título del reverso; al volver, al botón del frente. Si el reverso tiene scroll, Chrome deja enfocar la lista para desplazarla con el teclado.
+- **Movimiento reducido:** sin rotación; las caras se funden en 200 ms en el lugar.
+- **Celular:** se toca el botón; cada tarjeta va sola en su columna.
+- La sombra, el fondo y el borde de la destacada pasaron de la tarjeta a sus caras, para que giren con ellas; la elevación en hover se mantiene.
+
+### Carruseles en las tarjetas de trabajos
+
+- Se quitó el eyebrow "Trabajos seleccionados".
+- Componente nuevo `src/components/world/work-carousel.tsx` (`WorkCarousel`), arriba de cada tarjeta de "Nuestra siembra, tus resultados.", dentro de la estructura actual de la tarjeta.
+- **Datos:** cada proyecto de `src/content/projects.ts` tiene ahora `images: []` (`ProjectImage`: `src`, `alt`, `width`, `height`). Para cargar capturas: copiar los archivos a `public/images/proyectos/<slug>/` y listarlos en orden en `images` de ese proyecto. Con la lista vacía se muestran tres placeholders en el estilo del sitio (degradados de la paleta, número del proyecto en la serif itálica y "Captura pendiente", el mismo texto de la galería del caso). Con una sola imagen no aparecen controles.
+- **Cómo se mueve:** es un scroller horizontal nativo con puntos de anclaje (`scroll-snap`): swipe en táctil, trackpad, y flechas izquierda/derecha del teclado con el carrusel enfocado. Debajo, flechas y puntos de 44 px de área táctil; el punto actual se estira en una barrita (sólo `transform`). **Nunca avanza solo.** Con movimiento reducido los saltos son instantáneos.
+- **Accesibilidad:** región con `aria-roledescription="carrusel"` y nombre "Imágenes de <proyecto>"; cada diapositiva es un grupo "1 de 3"; las flechas se desactivan en los extremos.
+
+### Grabaciones
+
+| Interacción | Cuadros |
+| --- | --- |
+| WhatsApp del hero | `18-hero-whatsapp-reposo.jpg`, `18-hero-whatsapp-hover.jpg`, `18-hero-whatsapp-celular.jpg` |
+| Giro de un pack | `19-flip-0ms.jpg`, `19-flip-140ms.jpg`, `19-flip-280ms.jpg`, `19-flip-420ms.jpg`, `19-flip-700ms.jpg`; celular `19-flip-celular-reverso.jpg`; movimiento reducido `19-flip-reducido-90ms.jpg` |
+| Mantenimiento | `20-mantenimiento-frente.jpg`, `20-mantenimiento-reverso.jpg` |
+| Carrusel | `21-carrusel-1.jpg`, `21-carrusel-2.jpg`, `21-carrusel-3.jpg`, `21-carrusel-celular.jpg` |
+
+### Verificación
+
+- `npm run lint`, `npm run typecheck` y `npm run build` sin errores.
+- Playwright a 1440 × 900 y 390 × 844: los tres botones del hero miden 53 px (52 en celular, por redondeo); las tres tarjetas de packs miden 596 px; al girar, el frente queda `inert` y oculto y el foco pasa al título del reverso con mouse y con teclado (packs y mantenimiento), y vuelve al botón del frente; con movimiento reducido no hay rotación y las caras se funden (opacidad 0,35 → 1 a los 100 ms); el carrusel avanza con la flecha, con los puntos, con la tecla → y con un gesto horizontal de 220 px (ancla en la segunda diapositiva); sin scroll horizontal en la página a 390.
+- Error encontrado y corregido durante la prueba: el foco no llegaba al reverso al hacer clic en los packs porque la regla de hover estiraba también la transición de `visibility` a 180 ms; ahora esa duración se aplica sólo a la sombra.
+- Finish gate (build nuevo, kind `service`): 117 → 77 → **`GATE: OPEN 75 (rounds used up)`**. La primera ronda marcó 28 `collide`, 7 `stagger` y 3 `overlap-text` porque el reverso, oculto sólo con `backface-visibility`, seguía presente (espejado) debajo del frente; se resolvió con `visibility: hidden` en la cara oculta. También se corrigió que el enlace "Saltar al contenido" aparezca de inmediato al recibir foco (el checker lo encontraba a mitad del deslizamiento).
+- FAIL abiertos relacionados con este trabajo: `copy-actions` (tres acciones en el hero, el skill pide dos como máximo: el tercer botón es el pedido de Juani) y `button-styles` (la píldora fantasma cuenta como un estilo más). `hole` en `#trabajos` (un hueco de 792 × 432 px entre los pasos y la isla a 1440): la sección creció con los carruseles y ese espacio es el cielo sobre la isla 5, que no toqué (isla 5 y alturas de sección son de otros agentes). El resto son decisiones de concepto previas o del arte.
+
+### Límites
+
+- No se probó en un teléfono real ni en Safari/Firefox. `inert` requiere Safari 15.5+ y Firefox 112+.
+- Los placeholders son tres por proyecto; cuando lleguen las capturas, la cantidad la define la lista `images`.
+- El tercer botón del hero contradice la regla de dos acciones del skill; si se prefiere respetarla, la alternativa es volver al enlace de texto con el glifo, en su propia línea.
