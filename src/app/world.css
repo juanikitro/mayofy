@@ -6203,21 +6203,11 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   box-shadow: var(--shadow-soft);
 }
 
-.guarantees__head {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.15rem;
-}
-
 .guarantees h3 {
   font-size: 1.05rem;
   white-space: nowrap;
 }
 
-.guarantees__toggle {
-  margin-inline-start: -0.4rem;
-}
 
 .guarantees__seals {
   display: flex;
@@ -6315,7 +6305,7 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   --gi-anim: gi-spin;
 }
 
-/* While the strip is on screen one icon plays every 2 s, in turn
+/* While the strip is on screen one icon plays every second, in turn
  * (GuaranteesStrip sets data-playing); at rest every icon is in its final
  * state (no script, reduced motion, paused). */
 @media (prefers-reduced-motion: no-preference) {
@@ -6387,12 +6377,6 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   .guarantees {
     grid-template-columns: 1fr;
     gap: 1rem;
-  }
-
-  .guarantees__head {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
   }
 
   .guarantees__seals {
@@ -7923,8 +7907,8 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
-/* Pause button for the guarantees icons and the works autoplay (one per
- * panel): a 32px disc inside a 44px target; pause bars or a play triangle. */
+/* Pause button for the works autoplay: a 32px disc inside a 44px target;
+ * pause bars or a play triangle. */
 .motion-toggle {
   display: grid;
   flex: none;

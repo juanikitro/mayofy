@@ -70,23 +70,22 @@ const icons: Record<SealIcon, ReactNode> = {
 };
 
 /** One icon plays every this many milliseconds, in turn. */
-const cadence = 2000;
+const cadence = 1000;
 
 /**
  * The guarantees as one strip under the pack cards (option B of
  * docs/plans/2026-11-20-propuestas.md), the speed guarantee first and every
  * seal alike. While the strip is on screen, one icon plays its small motion
- * every 2 s, in turn, so the strip stays calm. It stops off screen, in a
- * hidden tab, under reduced motion and with the pause button.
+ * every second, in turn. It stops off screen, in a hidden tab and under
+ * reduced motion. (No pause button, at the client's request.)
  */
 export function GuaranteesStrip() {
   const listRef = useRef<HTMLUListElement>(null);
   const [visible, setVisible] = useState(false);
   const [tabShown, setTabShown] = useState(true);
   const [reduced, setReduced] = useState(false);
-  const [paused, setPaused] = useState(false);
   const [playing, setPlaying] = useState(-1);
-  const running = visible && tabShown && !reduced && !paused;
+  const running = visible && tabShown && !reduced;
 
   useEffect(() => {
     const list = listRef.current;
@@ -121,20 +120,7 @@ export function GuaranteesStrip() {
 
   return (
     <section className="guarantees" aria-labelledby="garantias-title">
-      <div className="guarantees__head">
-        <h3 id="garantias-title">{guarantees.stripTitle}</h3>
-        {reduced ? null : (
-          <button
-            className="motion-toggle guarantees__toggle"
-            type="button"
-            aria-pressed={paused}
-            aria-label="Pausar las animaciones"
-            onClick={() => setPaused((value) => !value)}
-          >
-            <span className={`motion-toggle__glyph${paused ? " motion-toggle__glyph--play" : ""}`} aria-hidden="true" />
-          </button>
-        )}
-      </div>
+      <h3 id="garantias-title">{guarantees.stripTitle}</h3>
       <ul className="guarantees__seals" ref={listRef}>
         {guarantees.seals.map((seal, index) => (
           <li className={`seal seal--${seal.icon}`} key={seal.icon} data-playing={running && index === playing ? "true" : undefined}>
