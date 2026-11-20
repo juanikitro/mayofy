@@ -1778,7 +1778,7 @@ html[data-motion-tier="reduced"] .scene__sky {
   padding-block: 3rem 2.5rem;
   color: var(--night-ink);
   /* Continues the night island's last row before settling on the footer ink. */
-  background: linear-gradient(180deg, #013567 0, var(--night) 7rem);
+  background: linear-gradient(180deg, #072a57 0, var(--night) 7rem);
 }
 
 .world-footer__layout {
@@ -1887,9 +1887,19 @@ html[data-motion-tier="reduced"] .scene__sky {
 .isle {
   position: relative;
   min-height: 100svh;
-  padding-block: 7rem calc(100% * var(--plate-h, 0.5628) * var(--plate-clear, 0.55) + 3rem);
+  padding-block: 7rem calc(100% * var(--plate-h, 0.5628) * var(--plate-clear, 0.55) * var(--plate-scale, 1) + 3rem);
   overflow: clip;
   color: var(--ink);
+}
+
+/* Island 2 holds only a short statement, so on wide screens its small island
+ * sat under a screen of empty sky. Its plate grows by a quarter and leans
+ * right (`anchorX` in stage.ts), so the island and its rocks fill the width
+ * under the copy and the section stays one screen tall. */
+@media (min-width: 64rem) {
+  .isle--morning {
+    --plate-scale: 1.25;
+  }
 }
 
 .isle--dark {
@@ -1931,23 +1941,44 @@ html[data-motion-tier="reduced"] .scene__sky {
     top: 6.5rem;
   }
 
-  /* Booking panel: Cal.com gets the whole width, where it shows the month
-   * and the free times side by side (about 570 px tall instead of 1940 px
-   * stacked in a column); the WhatsApp link sits beside the form. */
+  /* Booking panel: Cal.com shows the month and the free times side by side
+   * (about 530 px tall) from an 820 px wide frame and stacks them below
+   * that. Up to 88rem it takes the panel's width; the form follows in three
+   * columns instead of a tall column beside an empty one. */
   .reach {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
-      "title title"
-      "text text"
-      "booking booking"
-      "alt form-intro"
-      ". form";
+      "title"
+      "text"
+      "booking"
+      "alt"
+      "form-intro"
+      "form";
     column-gap: 3rem;
     align-items: start;
   }
 
   .reach > .reach__intro {
     display: contents;
+  }
+
+  .reach .contact-form {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 1rem;
+    align-items: start;
+  }
+
+  .reach .contact-form__row {
+    display: contents;
+  }
+
+  .reach .field:has(textarea) {
+    grid-column: span 2;
+  }
+
+  .reach .contact-form > :is(.contact-form__footer, .contact-form__feedback, .contact-form__privacy, .contact-form__fallback) {
+    grid-column: 1 / -1;
   }
 
   .reach__intro > h3 {
@@ -1960,6 +1991,7 @@ html[data-motion-tier="reduced"] .scene__sky {
 
   .reach__intro > .booking {
     grid-area: booking;
+    max-width: 51.5rem;
   }
 
   .reach__intro > .host-link {
@@ -1984,6 +2016,23 @@ html[data-motion-tier="reduced"] .scene__sky {
 
   .isle .works {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Wide screens: Cal.com keeps its compact 820 px frame (51.5rem) and the
+ * invitation, its text and the WhatsApp link come first on the panel's left
+ * line beside it, instead of the calendar stretching to 1040 px inside a
+ * 1230 px dark box. */
+@media (min-width: 88rem) {
+  .reach {
+    grid-template-columns: minmax(0, 1fr) 51.5rem;
+    grid-template-rows: auto auto 1fr auto auto;
+    grid-template-areas:
+      "title booking"
+      "text booking"
+      "alt booking"
+      "form-intro form-intro"
+      "form form";
   }
 }
 
@@ -2390,6 +2439,58 @@ html[data-motion-tier="full"] .campfire__flame-core {
   background: linear-gradient(180deg, var(--fall-top) 0%, transparent 30%);
 }
 
+/* While the stage still rises under the hero, the frames have already moved
+ * past frame 01 and its veil (02 is opaque from cover ~18 %), so a cooler
+ * lavender band met the hero's dawn as a stripe. The stage carries its own
+ * veil in the hero's last colour, above the frames and the back puffs and
+ * under Mayo, and lets it go by the time the stage pins (contain 0 %). */
+.fall__stage::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 0;
+  height: 45%;
+  background: linear-gradient(
+    180deg,
+    var(--fall-top) 0%,
+    var(--fall-top) 14%,
+    color-mix(in oklch, var(--fall-top) 55%, transparent) 40%,
+    color-mix(in oklch, var(--fall-top) 15%, transparent) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+@supports (animation-timeline: view()) {
+  .fall__stage::after {
+    animation: fall-veil linear both;
+    animation-timeline: --fall;
+    animation-range: cover 0% contain 0%;
+  }
+}
+
+@keyframes fall-veil {
+  0%,
+  60% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+/* The still fall keeps the veil, which joins its frame to the hero. */
+html[data-motion-tier="reduced"] .fall__stage::after {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fall__stage::after {
+    animation: none !important;
+  }
+}
+
 .fall__frame[data-position="last"]::after {
   background: linear-gradient(180deg, transparent 45%, var(--fall-bottom) 85%);
 }
@@ -2738,6 +2839,45 @@ html[data-motion-tier="reduced"] .fall__mayo {
   background: color-mix(in oklch, oklch(22% 0.04 265) 90%, transparent);
 }
 
+/* The form lies on the booking panel itself, not in a second dark card, and
+ * its fields keep the 44 px tap height without the 48 px boxes, large
+ * placeholder type and 9rem message box that made it outgrow the calendar. */
+.reach .contact-form {
+  padding: 0;
+  background: none;
+}
+
+.reach .field {
+  gap: 0.3rem;
+  margin-block-end: 0.85rem;
+}
+
+/* Fields carry their own bottom margin; a stacked row adds no gap of its own. */
+.reach .contact-form__row {
+  row-gap: 0;
+}
+
+.reach .field :is(input, select, textarea) {
+  min-height: 2.75rem;
+  padding: 0.55rem 0.85rem;
+  font-size: 1rem;
+}
+
+.reach .field select {
+  padding-inline-end: 2.5rem;
+}
+
+.reach .field textarea {
+  min-height: 2.75rem;
+  height: 6.5rem;
+}
+
+@media (max-width: 48rem) {
+  .reach {
+    padding: 1rem;
+  }
+}
+
 .reach__intro {
   display: grid;
   gap: 0.75rem;
@@ -2928,6 +3068,17 @@ html[data-motion-tier="reduced"] .fall__mayo {
 .booking__inline iframe {
   width: 100%;
   border: 0;
+}
+
+/* Phones: Cal.com stacks its details, the month and every free time of the
+ * chosen day in one column (about 1650 px, two screens). The frame stops at
+ * about one screen and scrolls inside, with the first times showing at its
+ * foot, so the form and the island still follow. */
+@media (max-width: 48rem) {
+  .booking__inline {
+    max-height: min(44rem, 82svh);
+    overflow-y: auto;
+  }
 }
 
 .booking__link {
@@ -3507,14 +3658,14 @@ html[data-motion-tier="reduced"] .fall__mayo {
  * of the first and last pixel rows of each plate (of its background layer
  * when the island has a parallax pair). */
 .scene--plated .scene__sky {
-  --plate-top: calc(100cqh - 100cqw * var(--plate-h, 0.5628));
+  --plate-top: calc(100cqh - 100cqw * var(--plate-h, 0.5628) * var(--plate-scale, 1));
 
   inset: 0;
   background: linear-gradient(
     180deg,
     var(--sky-from) 0,
     var(--sky-hold, var(--sky-from)) var(--sky-blend, 8rem),
-    var(--sky-plate) max(var(--sky-blend, 8rem) + 1px, var(--plate-top) + 100cqw * var(--plate-h, 0.5628) * var(--plate-fade, 0.09)),
+    var(--sky-plate) max(var(--sky-blend, 8rem) + 1px, var(--plate-top) + 100cqw * var(--plate-h, 0.5628) * var(--plate-scale, 1) * var(--plate-fade, 0.09)),
     var(--sky-bottom, var(--sky-plate)) 100%
   );
 }
@@ -3554,24 +3705,26 @@ html[data-motion-tier="reduced"] .fall__mayo {
   --sky-from: #fdeac1;
   --sky-hold: #f8d3b4;
   --sky-plate: #8d68b4;
-  --sky-bottom: #c47fa1;
+  /* The plate's faded foot settles on an early-dusk violet, so the turn to
+   * night spreads over the foot of this island and the top of the next. */
+  --sky-bottom: #6a5592;
 }
 
 /* Dusk and night fall within the first rows, before the light text starts. */
 .scene--plated.scene--dusk {
-  --sky-from: #c47fa1;
+  --sky-from: #6a5592;
   --sky-hold: #1b2c63;
-  --sky-blend: 6rem;
+  --sky-blend: 7rem;
   --sky-plate: #142a63;
-  --sky-bottom: #2d4b84;
+  --sky-bottom: #1c3268;
 }
 
 .scene--plated.scene--night {
-  --sky-from: #2d4b84;
+  --sky-from: #1c3268;
   --sky-hold: #04173b;
-  --sky-blend: 6rem;
+  --sky-blend: 7rem;
   --sky-plate: #011233;
-  --sky-bottom: #013567;
+  --sky-bottom: #072a57;
 }
 
 /* The plate's own top rows (`--plate-fade` of its height) fade into that
@@ -3835,21 +3988,21 @@ html[data-motion-tier="reduced"] .plate-object--chased {
   .scene--plated.scene--sunset {
     --sky-from: #fbe7be;
     --sky-plate: #805dad;
-    --sky-bottom: #b57aa2;
+    --sky-bottom: #634f8f;
   }
 
   .scene--plated.scene--dusk {
     --sky-blend: 4rem;
-    --sky-from: #b57aa2;
+    --sky-from: #634f8f;
     --sky-plate: #092063;
-    --sky-bottom: #304889;
+    --sky-bottom: #1d346c;
   }
 
   .scene--plated.scene--night {
     --sky-blend: 4rem;
-    --sky-from: #304889;
+    --sky-from: #1d346c;
     --sky-plate: #000e2e;
-    --sky-bottom: #003567;
+    --sky-bottom: #072a57;
   }
 }
 
@@ -3865,9 +4018,35 @@ html[data-motion-tier="reduced"] .plate-object--chased {
   }
 }
 
+/* Hero and islands 2, 4-7: the background sinks behind the island instead of
+ * rising past it, so the far sky moves slower than the island (it reads as
+ * depth), and it fades out over its last rows into the section's sky, which
+ * ends with the plate's bottom colour. Rising, it uncovered a flat band of
+ * that sky under a hard edge (the "visible sky transition" below the hero
+ * island and at the foot of the islands). */
+@keyframes plate-background-depth {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(var(--drift, 7%));
+  }
+}
+
+:is(.dawn, .isle) .plate--layered .plate__picture--background {
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0,
+    #000 calc(var(--plate-fade, 0.09) * 100%),
+    #000 calc(100% - var(--plate-fade-bottom, 14%)),
+    transparent 100%
+  );
+}
+
 @supports (animation-timeline: view()) {
   .dawn .plate__picture--background {
-    animation: plate-background-drift linear both;
+    animation: plate-background-depth linear both;
     animation-timeline: --dawn;
     animation-range: exit 0% exit 100%;
   }
@@ -3879,7 +4058,7 @@ html[data-motion-tier="reduced"] .plate-object--chased {
   }
 
   .isle .plate__picture--background {
-    animation: plate-background-drift linear both;
+    animation: plate-background-depth linear both;
     animation-timeline: --isle;
     animation-range: entry 0% exit 100%;
   }
@@ -3905,5 +4084,13 @@ html[data-motion-tier="reduced"] .plate__picture--background {
 @media (max-width: 48rem) {
   .plate--layered:not(.plate--layered-mobile) .plate__picture--island {
     display: none;
+  }
+
+  /* Without a mobile pair (the hero) the background layer shows the single
+   * mobile plate, island included: it holds still, so Mayo stays on her
+   * meadow, and keeps its painted roots unfaded. */
+  :is(.dawn, .isle) .plate--layered:not(.plate--layered-mobile) .plate__picture--background {
+    animation: none;
+    mask-image: linear-gradient(180deg, transparent 0, #000 calc(var(--plate-fade, 0.09) * 100%));
   }
 }
