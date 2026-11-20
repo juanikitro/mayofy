@@ -511,6 +511,24 @@ details[data-preparing-open="true"] > .animated-details__content {
   }
 }
 
+/* Islands 1, 2, 4, 6 and 7: Mayo loops in time, like in the fall, instead of
+ * following the scroll (Juani, 20 November 2026). Island 5 (her run across
+ * the path) and island 3 (her hops between the platforms) stay scrubbed. Not
+ * inside @supports: the loop only needs plain CSS animations. */
+.mayo--hero .mayo__sprite img,
+.mayo--problem .mayo__sprite img,
+.mayo--systems .mayo__sprite img,
+.mayo--host .mayo__sprite img,
+.mayo--questions .mayo__sprite img {
+  animation: mayo-sprite var(--loop-duration, 2s) steps(var(--frames, 12), jump-none) infinite alternate;
+}
+
+.mayo--hero { --loop-duration: 2.6s; }
+.mayo--problem { --loop-duration: 1.4s; }
+.mayo--systems { --loop-duration: 1.3s; }
+.mayo--host { --loop-duration: 3.2s; }
+.mayo--questions { --loop-duration: 2.2s; }
+
 /* The fall is the one place Mayo moves on her own (Juani, 19 November
  * 2026): her tumble loops in time while the clouds follow the scroll. */
 @supports (animation-timeline: view()) {
