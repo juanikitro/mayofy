@@ -315,3 +315,35 @@ Se montó la tira encargada `70-mayo-works-salto-tira` (manifiesto: sección wor
 - Al subir se rebobina. Sin errores de consola ni scroll horizontal; con movimiento reducido, Mayo en la piedra 6 en f8.
 - Lint, typecheck y build limpios.
 - Capturas de los saltos en `docs/plans/seis-pasos/saltos/` (escritorio tramos 2, 4 y 6; celular tramos 2 y 5, siete posiciones cada uno) y el tramo fijado completo en `docs/plans/seis-pasos/`.
+
+#### Pasos clickeables, números sobre Mayo y asentamiento (20 de noviembre de 2026)
+
+Juani:
+
+> "En la isla 5 se debe poder clickear en cada uno de los pasos para scrollear hacia alli. Ademas, los puntos (1,2,3,4,5,6) sobre la isla deben quedar tambien sobre mayo, mayo no debe pisarlos."
+
+> "la animacion de mayo debe ser mas fluida, por ejemplo: si me quedo en la mitad del scroll del punto 5 al 6, el scroll debe completarse automaticamente para que la animacion de mayo no quede a la mitad."
+
+- **Pasos clickeables.** Cada paso de la lista es un `<button>` (`.sendero__go`, toda la fila: número y título). También es botón cada segmento de la barra de celular, con `aria-label` "Paso N: …" y 44 px de alto.
+  - Al activarlos con clic, Enter o espacio, la página se desplaza suave al punto de reposo de ese paso: la mitad del tramo en el que Mayo ya está de pie sobre su piedra.
+  - El paso actual lleva `aria-current="step"`.
+  - Lo resuelve `SenderoController` (`src/components/world/sendero-controller.tsx`, cliente), y sólo mientras el escenario está fijado.
+  - La escena de la isla no recibe eventos (`pointer-events: none`): con 1,9 columnas de ancho tapaba los botones de la lista.
+- **Números.** Van por encima de Mayo (`z-index` 3 contra 2) y cada uno está ubicado a mano al costado de su piedra (`badges` en `six-steps.tsx`), nunca sobre una piedra.
+  - Se verificaron en los seis puntos de reposo y a ambos anchos: ninguno queda bajo sus patas.
+  - En escritorio ninguno le tapa el cuerpo. En celular, el 3 roza la caja de Mayo cuando está en la piedra 4, junto a su cabeza; a la vista no la tapa.
+- **Asentamiento (en lugar de `scroll-snap` CSS).** Con puntos de anclaje sólo dentro del escenario fijado, `mandatory` atraparía toda la página y `proximity` no completa un tramo a medias. Por eso se usa `scrollend`, o una pausa de 160 ms donde ese evento no existe.
+  - Si la lectura termina con Mayo entre dos piedras (en el primer `legShare` de un sexto), la página se desplaza suave hasta completar el tramo en el sentido en que venía. Si venía subiendo, vuelve a la piedra que dejó; en el primer tramo, al comienzo del escenario.
+  - Nunca actúa mientras el lector desplaza, ni con Mayo de pie, ni fuera del escenario fijado, así que entrar y salir de la sección queda libre.
+  - Con movimiento reducido no hay escenario fijado y no actúa.
+- **Verificado (1440 × 900 y 390 × 844).**
+  - Parar a mitad del tramo 5 bajando asienta en el reposo del paso 5 (progreso 0,7957 contra 0,7958 esperado).
+  - Parar a mitad del tramo 6 subiendo vuelve al paso 5.
+  - Parar con Mayo de pie no mueve la página.
+  - Tres ruedas desde el paso 2 asientan en el paso 3.
+  - Por encima y por debajo del escenario no se mueve nada.
+  - Clic en el paso 4: progreso 0,629 y `aria-current` en el 4. Enter en el paso 2 lleva al 2, con el anillo de foco visible; Tab recorre los pasos en orden. En celular, tocar el segmento 5 lleva al paso 5.
+  - Movimiento reducido: escenario sin fijar, sin `aria-current` y sin asentamiento.
+  - Sin scroll horizontal ni errores de consola. Lint, typecheck y build limpios.
+  - Capturas de los seis reposos en `docs/plans/seis-pasos/{d,m}-paso1..6.jpg`.
+- **Límite:** sin escenario fijado (movimiento reducido o navegadores sin animaciones por scroll), los botones de paso no hacen nada; todos los pasos están abiertos.

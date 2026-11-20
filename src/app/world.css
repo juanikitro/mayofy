@@ -558,13 +558,18 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 /* Hero: island 1 ------------------------------------------------------- */
 
+/* Balanced first fold (Juani, 20 November 2026: "pondria el texto + botones
+ * en el centro de la pantalla y moveria la isla hacia la derecha"): the copy
+ * and its buttons sit centred in the fold in a left column of about 45 % of
+ * the screen, and on wider screens the island fills the right half
+ * (`--hero-shift`, below). */
 .dawn {
   position: relative;
   display: grid;
-  align-items: start;
+  align-items: center;
   height: 100svh;
   min-height: 44rem;
-  padding-block: 6rem 2rem;
+  padding-block: 6rem 3rem;
   overflow: clip;
   view-timeline-name: --dawn;
 }
@@ -575,6 +580,12 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   max-width: 48rem;
   margin-inline-start: max(var(--gutter), calc((100% - var(--shell-max)) / 2));
   color: var(--ink);
+}
+
+@media (min-width: 48.01rem) {
+  .dawn__content {
+    max-width: min(38rem, 44vw);
+  }
 }
 
 .dawn h1 {
@@ -590,8 +601,9 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   color: var(--moss);
 }
 
+/* Sized to the column: "Sistemas que ordenan." fills it at 4rem on a 1440 screen. */
 .dawn h1 {
-  font-size: clamp(2.6rem, 1.4rem + 4.6vw, 4.75rem);
+  font-size: clamp(2.6rem, 4.4vw, 4rem);
   line-height: 0.98;
   letter-spacing: -0.03em;
 }
@@ -611,6 +623,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  margin-block-start: 1.75rem;
 }
 
 /* Island 3: rock assembly ---------------------------------------------- */
@@ -3001,6 +3014,44 @@ html[data-motion-tier="reduced"] .fall__mayo {
   font-weight: 600;
 }
 
+/* Each step is a button that scrolls to it (SenderoController): the whole
+ * row answers the pointer, the label keeps the list's look. */
+.sendero__go {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  align-items: baseline;
+  min-height: 2.75rem;
+  margin: -0.55rem -0.9rem 0;
+  padding: 0.55rem 0.9rem 0;
+  border: 0;
+  border-radius: 0.9rem;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: background-color 200ms var(--ease-out);
+}
+
+.sendero__go:hover {
+  background: color-mix(in oklch, var(--cream) 40%, transparent);
+}
+
+.sendero__go:hover strong {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.sendero__go:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 2px;
+}
+
+.sendero__go:active {
+  translate: 0 1px;
+}
+
 .sendero__step p {
   grid-column: 2;
   margin-block-start: 0.2rem;
@@ -3016,6 +3067,8 @@ html[data-motion-tier="reduced"] .fall__mayo {
  * pulled in so the island fills the column; the page clips its empty sides. */
 .sendero__scene {
   position: relative;
+  /* Decorative, and wider than its column: it reaches over the step buttons. */
+  pointer-events: none;
 }
 
 .sendero__plate {
@@ -3033,13 +3086,13 @@ html[data-motion-tier="reduced"] .fall__mayo {
   height: 100%;
 }
 
-/* A number beside each stone, on the path just in front of it, where Mayo
- * standing on the stone never covers it. */
+/* A number beside each stone (placed one by one in SixSteps, never on a
+ * stone she stands on), drawn above Mayo. */
 .sendero__badge {
   position: absolute;
-  left: calc(var(--x) + 2.9%);
-  top: calc(var(--y) + 2.1%);
-  z-index: 1;
+  left: var(--x);
+  top: var(--y);
+  z-index: 3;
   display: grid;
   place-items: center;
   width: 2.1rem;
@@ -3053,7 +3106,7 @@ html[data-motion-tier="reduced"] .fall__mayo {
   translate: -50% -50%;
 }
 
-/* She runs over the numbers, never under them. */
+/* Above the island, under the numbers. */
 .sendero__mayo {
   z-index: 2;
 }
@@ -3110,8 +3163,8 @@ html[data-motion-tier="reduced"] .fall__mayo {
   }
 
   .sendero__badge {
-    left: calc(var(--x-m) + 4.6%);
-    top: calc(var(--y-m) + 1.3%);
+    left: var(--x-m);
+    top: var(--y-m);
     width: 1.8rem;
     font-size: 0.75rem;
   }
@@ -3236,10 +3289,28 @@ html[data-motion-tier="reduced"] .fall__mayo {
         animation: none;
       }
 
+      /* Six segments, each a 44 px tall button that scrolls to its step. */
       .sendero__bar {
         display: flex;
-        gap: 0.4rem;
-        margin-block-start: 0.8rem;
+        gap: 0.15rem;
+        margin-block-start: 0.35rem;
+      }
+
+      .sendero__bar button {
+        display: grid;
+        place-items: center;
+        width: 1.85rem;
+        height: 2.75rem;
+        padding: 0;
+        border: 0;
+        background: none;
+        cursor: pointer;
+      }
+
+      .sendero__bar button:focus-visible {
+        outline: 2px solid var(--moss);
+        outline-offset: -2px;
+        border-radius: 0.5rem;
       }
 
       .sendero__bar i {
@@ -3252,7 +3323,7 @@ html[data-motion-tier="reduced"] .fall__mayo {
         animation-range: contain var(--from) contain 100%;
       }
 
-      .sendero__bar i:first-child {
+      .sendero__bar button:first-child i {
         animation-fill-mode: both;
       }
     }
@@ -4156,35 +4227,25 @@ html[data-motion-tier="reduced"] .mayo--stops {
   transform: translateX(calc(-1 * var(--plate-x, 50%)));
 }
 
-/* The hero plate is scaled up a little and shifted right so the island
- * clears the text column (bible analysis §2). */
-.dawn .plate {
-  --plate-scale: 1.14;
-}
-
 /* Desktop: the sky layer keeps covering the section while the island cutout
- * and Mayo move a further 12vw right, so the tree clears the text column
- * (the body ends at 34ch) at 1280 and 1440 px. */
+ * (at the plate's own scale, about 48 % of the screen wide) and Mayo move
+ * 22vw right, so the island fills the right half beside the copy column:
+ * 700 to 1380 px at 1440, clear of the paw rail. Mayo is placed in % of the
+ * plate plus the same shift, so she stays on her meadow. */
 @media (min-width: 48.01rem) {
   .dawn {
-    --hero-shift: 12vw;
+    --hero-shift: 22vw;
+    /* Lifted by 16 % of the plate so the meadow sits level with the copy's centre. */
+    --hero-lift: -16%;
   }
 
   .dawn .plate__picture--island {
-    translate: var(--hero-shift) 0;
+    translate: var(--hero-shift) var(--hero-lift);
   }
 
   .dawn .mayo--anchored {
     left: calc(var(--anchor-x) + var(--hero-shift));
-  }
-}
-
-/* Narrow desktops and tablets in landscape: the island is wider than the
- * room beside the text, so it moves further and lets its far rim pass
- * under the paw rail rather than its tree behind the buttons. */
-@media (min-width: 48.01rem) and (max-width: 75rem) {
-  .dawn {
-    --hero-shift: 20vw;
+    top: calc(var(--anchor-y) + var(--hero-lift));
   }
 }
 
