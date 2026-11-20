@@ -4903,3 +4903,57 @@ html[data-motion-tier="reduced"] .wa-float {
 .world :is(.btn, .island-nav__link, .wa-float):focus-visible {
   border-radius: var(--radius-pill);
 }
+
+/* ======================================================================
+ * Micro-interactions, iteration 2 (2026-11-20)
+ * Same tokens and rules as above; see the "Iteración 2" section of
+ * docs/plans/2026-11-19-microinteracciones.md.
+ * ==================================================================== */
+
+/* Page-load sequence --------------------------------------------------- */
+
+/* After the hero copy starts, the pill drops in 8px and the paw rail slides
+ * in from its edge, so the page assembles in reading order: words first,
+ * then the tools to move around. */
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .island-nav {
+    animation: nav-enter var(--m-reveal) var(--ease-enter) 120ms both;
+  }
+
+  html:not([data-motion-tier="reduced"]) .progress ol {
+    animation: rail-enter var(--m-reveal) var(--ease-enter) 420ms both;
+  }
+
+  @media (max-width: 48rem) {
+    html:not([data-motion-tier="reduced"]) .progress ol {
+      animation-name: rail-enter-up;
+    }
+  }
+}
+
+@keyframes nav-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes rail-enter {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+}
+
+@keyframes rail-enter-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* Paw rail: the islands already behind keep a deeper paw, so the rail reads
+ * as progress through the journey, not only as a position. */
+.progress__paw[data-visited] {
+  color: color-mix(in oklch, var(--moss) 72%, transparent);
+}
