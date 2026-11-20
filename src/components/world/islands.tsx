@@ -6,7 +6,6 @@ import { MayoFigure } from "@/components/world/mayo-figure";
 import { PlateObjects } from "@/components/world/plate-objects";
 import { SceneGlow } from "@/components/world/scene-glow";
 import { SixSteps } from "@/components/world/six-steps";
-import { staggerStyle } from "@/components/world/stagger";
 import { WorksIndex } from "@/components/world/works-index";
 import { DetailGroups } from "@/components/world/pack-groups";
 import { FlipCard } from "@/components/world/flip-card";
