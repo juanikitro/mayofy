@@ -6465,8 +6465,13 @@ html[data-motion-tier="reduced"] .works-index__go {
   padding-block-end: 6%;
 }
 
+/* The frames sway together; the pause button beside them stays still. */
+.works-index__float {
+  position: relative;
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion-tier="reduced"]) .works-index__preview {
+  html:not([data-motion-tier="reduced"]) .works-index__float {
     animation: preview-sway 6s ease-in-out infinite;
   }
 }

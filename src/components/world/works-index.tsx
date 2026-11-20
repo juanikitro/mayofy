@@ -171,40 +171,42 @@ export function WorksIndex({ projects }: { projects: readonly ProjectEntry[] }) 
       </div>
 
       <div className="works-index__preview">
-        <div className="works-index__browser" aria-hidden="true">
-          <div className="works-index__bar">
-            <i />
-            <i />
-            <i />
-            <span className="works-index__url">
-              {shown.map((project, index) => (
-                <span key={project.slug} data-active={index === active ? "true" : undefined}>
-                  {hostOf(project.url) ?? project.title}
-                </span>
-              ))}
-            </span>
+        <div className="works-index__float" aria-hidden="true">
+          <div className="works-index__browser">
+            <div className="works-index__bar">
+              <i />
+              <i />
+              <i />
+              <span className="works-index__url">
+                {shown.map((project, index) => (
+                  <span key={project.slug} data-active={index === active ? "true" : undefined}>
+                    {hostOf(project.url) ?? project.title}
+                  </span>
+                ))}
+              </span>
+            </div>
+            <div className="works-index__screen">
+              {shown.map((project, index) => {
+                const shot = project.images[0];
+                return (
+                  <span className="works-index__shot" key={project.slug} data-active={index === active ? "true" : undefined}>
+                    {shot ? <img src={shot.src} alt="" width={shot.width} height={shot.height} decoding="async" /> : <PendingShot index={project.index} />}
+                  </span>
+                );
+              })}
+            </div>
           </div>
-          <div className="works-index__screen">
-            {shown.map((project, index) => {
-              const shot = project.images[0];
-              return (
-                <span className="works-index__shot" key={project.slug} data-active={index === active ? "true" : undefined}>
-                  {shot ? <img src={shot.src} alt="" width={shot.width} height={shot.height} decoding="async" /> : <PendingShot index={project.index} />}
-                </span>
-              );
-            })}
+          <div className="works-index__phone">
+            {shown.map((project, index) => (
+              <span className="works-index__shot" key={project.slug} data-active={index === active ? "true" : undefined}>
+                {project.phoneImage ? (
+                  <img src={project.phoneImage.src} alt="" width={project.phoneImage.width} height={project.phoneImage.height} decoding="async" />
+                ) : (
+                  <PendingShot index={project.index} />
+                )}
+              </span>
+            ))}
           </div>
-        </div>
-        <div className="works-index__phone" aria-hidden="true">
-          {shown.map((project, index) => (
-            <span className="works-index__shot" key={project.slug} data-active={index === active ? "true" : undefined}>
-              {project.phoneImage ? (
-                <img src={project.phoneImage.src} alt="" width={project.phoneImage.width} height={project.phoneImage.height} decoding="async" />
-              ) : (
-                <PendingShot index={project.index} />
-              )}
-            </span>
-          ))}
         </div>
         {allowed ? (
           <button
