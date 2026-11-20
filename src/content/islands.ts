@@ -9,6 +9,8 @@ export type TitleSegment = string | { em: string };
 export type IslandCopy = {
   title: readonly TitleSegment[];
   body: string;
+  /** One line per item of a list the island walks through (the six steps). */
+  details?: readonly string[];
 };
 
 export const islandCopy = {
@@ -36,7 +38,17 @@ export const islandCopy = {
   },
   process: {
     title: ["Seis pasos, sin ", { em: "sorpresas" }, "."],
-    body: "Vas a saber en qué etapa está tu proyecto, por qué tomamos cada decisión y qué falta para publicar. Y después no te dejamos solo.",
+    // Lead and one line per step as approved with option A of the six steps
+    // (docs/plans/2026-11-20-propuestas.md, Juani 2026-11-20); in the order of siteContent.process.
+    body: "Vas a saber en qué etapa está tu proyecto y qué falta para publicar.",
+    details: [
+      "Charlamos 30 minutos sobre tu negocio y lo que necesitás.",
+      "Te mandamos por escrito qué incluye, cuánto sale y cuándo está.",
+      "Lo ves diseñado, con tu marca y tu rubro, antes de construirlo.",
+      "Seguís el avance mientras lo construimos, no recién al final.",
+      "Publicamos con tu dominio y dejamos medidas las visitas y consultas.",
+      "Una semana de soporte incluida; después, mantenimiento si lo querés.",
+    ],
   },
   questions: {
     title: ["Algunos detalles."],

@@ -2857,40 +2857,417 @@ html[data-motion-tier="reduced"] .fall__mayo {
   color: var(--mint);
 }
 
-.steps {
-  margin-block-start: 1.5rem;
+/* =========================================================================
+ * Six steps (island 5): el sendero de seis piedras
+ * Option A of docs/plans/2026-11-20-propuestas.md, chosen by Juani on
+ * 20 November 2026 (SixSteps in six-steps.tsx). Island 5 is the six steps'
+ * path: a pinned stage over ~3.4 screens of scroll (`--sendero`), the steps
+ * on the left and the island on the right (on phones the island on top and
+ * only the current step), one slice of the pin per step. Mayo reaches one
+ * stepping stone per step and stands on it (`.mayo--stops`, keyframes written
+ * by MayoFigure from `mayoAnchors.works.stops`). With reduced motion or
+ * without scroll-driven animations nothing pins: all six steps are open and
+ * Mayo stands on the last stone.
+ * ========================================================================= */
+
+/* The section keeps only its sunset sky (no plate at its foot): peach under
+ * the works, rose along the path, and at its very end the early-dusk violet
+ * island 6 starts from. */
+.isle.isle--sendero {
+  padding-block-end: 0;
 }
 
-.steps h3 {
-  font-size: 1.35rem;
+.scene--sendero .scene__sky {
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    #fdeac1 0,
+    #f8d3b4 8rem,
+    #f3bfa9 30%,
+    #ee9f9f 72%,
+    #d98ea2 calc(100% - 12rem),
+    var(--sendero-dusk, #6a5592) 100%
+  );
 }
 
-.steps > p {
-  margin-block: 0.5rem 1.25rem;
+@media (max-width: 48rem) {
+  .scene--sendero .scene__sky {
+    --sendero-dusk: #634f8f;
+  }
+}
+
+/* Unpinned (reduced motion), the path ends above the sky's last 12rem, where
+ * it turns to dusk; pinned, the stage keeps its content above it. */
+.sendero {
+  position: relative;
+  margin-block-start: 3rem;
+  padding-block-end: 12rem;
+}
+
+.sendero__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+.sendero__title {
+  font-size: clamp(2rem, 1.2rem + 2.4vw, 3.3rem);
+}
+
+/* The section's second title (an h3 under the works' h2) keeps the titles' serif italic. */
+.sendero__title em {
+  font-family: var(--font-world-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-variation-settings: "opsz" 120, "SOFT" 60;
+  letter-spacing: -0.01em;
+  color: var(--moss);
+}
+
+.sendero__lead {
+  max-width: 34rem;
+  margin-block-start: 0.75rem;
   color: var(--ink-soft);
 }
 
-.steps__steps {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
-  gap: 0.75rem;
-  list-style: none;
-  padding: 0;
-}
-
-.steps__steps li {
+.sendero__steps {
   display: grid;
   gap: 0.25rem;
-  padding: 0.9rem 1rem;
-  border-radius: calc(var(--radius) - 0.5rem);
-  background: var(--beige);
+  margin-block-start: 1.5rem;
+  padding: 0;
+  list-style: none;
 }
 
-.steps__steps span {
-  font-size: 0.75rem;
-  font-weight: 600;
+.sendero__step {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  column-gap: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 0.9rem;
+}
+
+.sendero__number {
+  font-family: var(--font-world-serif);
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.3;
   color: var(--moss);
 }
+
+.sendero__step strong {
+  font-weight: 600;
+}
+
+.sendero__step p {
+  grid-column: 2;
+  margin-block-start: 0.2rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.sendero__bar {
+  display: none;
+}
+
+/* The island cutout (no sky) over the section's sunset, 1.9 columns wide and
+ * pulled in so the island fills the column; the page clips its empty sides. */
+.sendero__scene {
+  position: relative;
+}
+
+.sendero__plate {
+  position: relative;
+  width: 190%;
+  margin: -34% 0 -8% -45%;
+  aspect-ratio: 1672 / 941;
+}
+
+.sendero__plate > picture,
+.sendero__plate > picture img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* A number beside each stone, on the path just in front of it, where Mayo
+ * standing on the stone never covers it. */
+.sendero__badge {
+  position: absolute;
+  left: calc(var(--x) + 2.9%);
+  top: calc(var(--y) + 2.1%);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  aspect-ratio: 1;
+  border: 2px solid oklch(96% 0.018 75 / 90%);
+  border-radius: 50%;
+  background: oklch(96% 0.018 75 / 72%);
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  translate: -50% -50%;
+}
+
+/* She runs over the numbers, never under them. */
+.sendero__mayo {
+  z-index: 2;
+}
+
+/* Mayo between stones: one keyframe per painted frame, held until the next
+ * (`step-end`); the box carries her feet and depth scale (mirrored when she
+ * heads right), each strip its visible cell. The scale pivots on her feet,
+ * which the anchoring `transform` puts on the box's top-left corner. At rest
+ * she stands on the last stone in the arrival's last frame. */
+.mayo--stops {
+  --stops: var(--stops-d);
+  --stops-run: var(--stops-run-d);
+  --stops-arrival: var(--stops-arrival-d);
+
+  transform-origin: 0 0;
+}
+
+.mayo--stops .mayo__sprite--run img {
+  opacity: 0;
+}
+
+.mayo--stops .mayo__sprite--arrival img {
+  transform: translateX(calc(-100% * (var(--frames) - 1) / var(--frames)));
+}
+
+@media (max-width: 48rem) {
+  .mayo--stops {
+    --stops: var(--stops-m);
+    --stops-run: var(--stops-run-m);
+    --stops-arrival: var(--stops-arrival-m);
+  }
+
+  .sendero__stage {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  /* Island first, full-bleed and close up: the mobile plate at 1.6 screen
+   * widths, centred on the path (x 51.5 %) and cropped to the island's height
+   * (60 to 94 % of the plate); the island's sides leave the screen. */
+  .sendero__scene {
+    order: -1;
+    margin-inline: calc(50% - 50vw);
+  }
+
+  .sendero__plate {
+    width: 160%;
+    margin: -168% 0 -16% -32.4%;
+    aspect-ratio: 864 / 1536;
+  }
+
+  .sendero__badge {
+    left: calc(var(--x-m) + 4.6%);
+    top: calc(var(--y-m) + 1.3%);
+    width: 1.8rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* The pinned path: only with motion and scroll-driven animations. Each step
+ * owns a sixth of the pin (`contain` range of `--sendero`); the first holds
+ * before the pin, the last after it. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .sendero {
+      height: 340vh;
+      padding-block-end: 0;
+      view-timeline-name: --sendero;
+    }
+
+    .sendero__stage {
+      position: sticky;
+      top: 0;
+      height: 100svh;
+    }
+
+    .sendero__step,
+    .sendero__badge,
+    .sendero__bar i {
+      --from: calc(var(--i) * 100% / 6);
+      --to: calc((var(--i) + 1) * 100% / 6);
+    }
+
+    .sendero__step:first-child,
+    .sendero__badge:first-of-type {
+      --now-fill: backwards;
+    }
+
+    .sendero__step:last-child,
+    .sendero__badge:nth-of-type(6) {
+      --now-fill: forwards;
+    }
+
+    .sendero__step {
+      color: var(--ink-soft);
+      animation-name: sendero-now, sendero-done;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: var(--now-fill, none), forwards;
+      animation-timeline: --sendero, --sendero;
+      animation-range: contain var(--from) contain var(--to), contain var(--to) contain 100%;
+    }
+
+    .sendero__step p {
+      max-height: 0;
+      margin-block-start: 0;
+      overflow: clip;
+      opacity: 0;
+      animation: sendero-open linear var(--now-fill, none);
+      animation-timeline: --sendero;
+      animation-range: contain var(--from) contain var(--to);
+    }
+
+    .sendero__badge {
+      animation-name: sendero-badge-now, sendero-badge-done;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: var(--now-fill, none), forwards;
+      animation-timeline: --sendero, --sendero;
+      animation-range: contain var(--from) contain var(--to), contain var(--to) contain 100%;
+    }
+
+    .mayo--stops {
+      animation: var(--stops) step-end both;
+      animation-timeline: var(--scrub-timeline);
+      animation-range: var(--scrub-range);
+    }
+
+    .mayo--stops .mayo__sprite--run img {
+      animation: var(--stops-run) step-end both;
+      animation-timeline: var(--scrub-timeline);
+      animation-range: var(--scrub-range);
+    }
+
+    .mayo--stops .mayo__sprite--arrival img {
+      animation: var(--stops-arrival) step-end both;
+      animation-timeline: var(--scrub-timeline);
+      animation-range: var(--scrub-range);
+    }
+
+    /* Phones: the island on top, then only the current step and a bar of six. */
+    @media (max-width: 48rem) {
+      .sendero {
+        height: 360vh;
+      }
+
+      .sendero__stage {
+        align-content: start;
+        padding-block-start: 4.5rem;
+      }
+
+      .sendero__lead {
+        display: none;
+      }
+
+      .sendero__steps {
+        grid-template-areas: "step";
+        margin-block-start: 0.75rem;
+      }
+
+      .sendero__step {
+        grid-area: step;
+        visibility: hidden;
+      }
+
+      .sendero__step p {
+        max-height: none;
+        margin-block-start: 0.2rem;
+        opacity: 1;
+        animation: none;
+      }
+
+      .sendero__bar {
+        display: flex;
+        gap: 0.4rem;
+        margin-block-start: 0.8rem;
+      }
+
+      .sendero__bar i {
+        width: 1.6rem;
+        height: 0.3rem;
+        border-radius: var(--radius-pill);
+        background: oklch(96% 0.018 75 / 60%);
+        animation: sendero-bar-on linear forwards;
+        animation-timeline: --sendero;
+        animation-range: contain var(--from) contain 100%;
+      }
+
+      .sendero__bar i:first-child {
+        animation-fill-mode: both;
+      }
+    }
+  }
+}
+
+@keyframes sendero-now {
+  from,
+  to {
+    visibility: visible;
+    background: color-mix(in oklch, var(--cream) 88%, transparent);
+    color: var(--ink);
+    box-shadow: var(--shadow-soft);
+  }
+}
+
+@keyframes sendero-done {
+  from,
+  to {
+    color: var(--ink);
+  }
+}
+
+@keyframes sendero-open {
+  from,
+  to {
+    max-height: 8rem;
+    margin-block-start: 0.2rem;
+    opacity: 1;
+  }
+}
+
+@keyframes sendero-badge-now {
+  from,
+  to {
+    border-color: var(--moss);
+    background: var(--moss);
+    color: var(--cream);
+    scale: 1.18;
+  }
+}
+
+@keyframes sendero-badge-done {
+  from,
+  to {
+    background: var(--leaf-light);
+  }
+}
+
+@keyframes sendero-bar-on {
+  from,
+  to {
+    background: var(--moss);
+  }
+}
+
+html[data-motion-tier="reduced"] .mayo--stops {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mayo--stops {
+    animation: none !important;
+  }
+}
+
+/* ======================= end of Six steps (island 5) ===================== */
 
 /* FAQ (island 6) */
 
@@ -4072,76 +4449,7 @@ html[data-motion-tier="full"] .plate-object--glow {
   transform: scaleX(-1);
 }
 
-/* Scroll-driven run along a painted path (island 5) on the same timeline and
- * range that step the strips, so her legs and her path stay in sync. MayoFigure
- * writes one keyframe per painted frame (`mayo-route-<slot>-d|m`), each held
- * until the next, with `translate` offsets from the anchor in Mayo's own
- * widths and a depth `scale`, so she moves on the compositor and only when a
- * frame changes. The scale pivots on her feet, which the anchoring
- * `transform` puts on the box's top-left corner.
- *
- * Two strips share the box: the gallop (`--run`) plays over the first part of
- * the range, the arrival (`--arrival`, brake and stand) over the rest, each
- * frame over the same share of scroll as its route step. Without
- * scroll-driven animations and with reduced motion she stands at the anchor
- * in the arrival's last frame. */
-.mayo--route {
-  --route-name: var(--route-name-d);
-  --run-range: var(--run-range-d);
-  --arrival-range: var(--arrival-range-d);
-
-  transform-origin: 0 0;
-}
-
-@media (max-width: 48rem) {
-  .mayo--route {
-    --route-name: var(--route-name-m);
-    --run-range: var(--run-range-m);
-    --arrival-range: var(--arrival-range-m);
-  }
-}
-
-.mayo__sprite--run {
-  --scrub-range: var(--run-range);
-
-  opacity: 0;
-}
-
-.mayo__sprite--arrival img {
-  transform: translateX(calc(-100% * (var(--frames) - 1) / var(--frames)));
-}
-
 @supports (animation-timeline: view()) {
-  .mayo--route {
-    animation: var(--route-name) both;
-    animation-timeline: var(--scrub-timeline);
-    animation-range: var(--scrub-range);
-  }
-
-  /* The gallop shows until the arrival takes over, then hides; the arrival
-   * the other way round (`step-start` flips on the hand-over). */
-  .mayo__sprite--run,
-  .mayo__sprite--arrival {
-    animation: var(--hand-over) step-start both;
-    animation-timeline: var(--scrub-timeline);
-    animation-range: var(--arrival-range);
-  }
-
-  .mayo__sprite--run {
-    --hand-over: mayo-hand-over-out;
-  }
-
-  .mayo__sprite--arrival {
-    --hand-over: mayo-hand-over-in;
-  }
-
-  .mayo__sprite--arrival img {
-    animation: mayo-sprite-once both;
-    animation-timing-function: steps(var(--frames), jump-none);
-    animation-timeline: var(--scrub-timeline);
-    animation-range: var(--arrival-range);
-  }
-
   /* The chased firefly keeps its idle float, added on top of the drift. Its
    * range is island 7's scrub range (`mayoSprites.questions` in stage.ts),
    * so it stays just ahead of Mayo. */
@@ -4165,37 +4473,6 @@ html[data-motion-tier="full"] .plate-object--glow {
   }
 }
 
-@keyframes mayo-hand-over-out {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes mayo-hand-over-in {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-/* The arrival's base frame is its last (the rest pose), so its scrub needs an explicit start. */
-@keyframes mayo-sprite-once {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(calc(-100% * (var(--frames) - 1) / var(--frames)));
-  }
-}
-
 @keyframes object-chase {
   from {
     translate: 0 0;
@@ -4206,18 +4483,11 @@ html[data-motion-tier="full"] .plate-object--glow {
   }
 }
 
-html[data-motion-tier="reduced"] .mayo--route,
-html[data-motion-tier="reduced"] .mayo__sprite--run,
-html[data-motion-tier="reduced"] .mayo__sprite--arrival,
-html[data-motion-tier="reduced"] .mayo__sprite--arrival img,
 html[data-motion-tier="reduced"] .plate-object--chased {
   animation: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mayo--route,
-  .mayo__sprite--run,
-  .mayo__sprite--arrival,
   .plate-object--chased {
     animation: none !important;
   }

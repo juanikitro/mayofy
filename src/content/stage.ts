@@ -68,7 +68,7 @@ export function mayoPoseSources(moment: string) {
  */
 export type MayoScrub = {
   /** Named view timeline of the section that holds Mayo (world.css). */
-  timeline: "--dawn" | "--fall" | "--rocks" | "--isle";
+  timeline: "--dawn" | "--fall" | "--rocks" | "--isle" | "--sendero";
   /** Range on that timeline, roughly while Mayo is on screen, as `animation-range`. */
   range: string;
   /** Range on phones (<= 48rem), where the sections are taller. */
@@ -90,7 +90,7 @@ export type MayoSprite = {
    * jumps to the first; `cycle` is for motions painted as a closed loop (run, chase). */
   loop: "pingpong" | "cycle";
   scrub: MayoScrub;
-  /** Ground covered between frames, for a strip that runs along a route (`mayoAnchors[].route`). */
+  /** Ground covered between frames, for a strip that runs between stops (`mayoAnchors[].stops`). */
   stride?: MayoStride;
   /**
    * One-shot strip that takes over from the run on its last frames (island 5:
@@ -99,6 +99,8 @@ export type MayoSprite = {
    * motion, no scroll-driven animations). Same cell and feet line as the run.
    */
   arrival?: { strip: { avif: string; webp: string }; frames: number; stride: MayoStride };
+  /** Share of each stop's slice of the range spent reaching it; she stands for the rest. */
+  legShare?: number;
 };
 
 /**
@@ -126,7 +128,7 @@ const sprite = (slot: MayoSlotId, feetY: string, loop: MayoSprite["loop"], scrub
  * Painted strips delivered so far (manifest docs/plans/mundo-mayo-assets.md).
  * Ranges were measured on the page as the share of each section's `cover`
  * range during which Mayo is on screen at 1440 x 900 and 390 x 844; the
- * island ranges also drive her route (`mayoAnchors[].route`). Island 7 is
+ * island ranges also drive her walk between stops (`mayoAnchors[].stops`). Island 7 is
  * the last section, so its range ends before the page stops scrolling.
  */
 export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
@@ -151,12 +153,13 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   // stepping stone looking at the camera. Both cells are 8.014 % of the plate with the
   // ground line at 78 %. Stance advances from the asset manifest (works-v3) and measured on
   // the arrival strip (f1 to f2: 39 px of 640; the paw then stays planted, 228 to 231 px).
-  // `cycles` counts gallop cycles before the arrival (2 on desktop, 1.5 on phones, so the
-  // hand-over follows f12 or f6 into a front-stance start); the arrival adds 8 frames. The
-  // range is the stretch of scroll during which she is between ~80 % and ~20 % of the
-  // viewport's height.
+  // Six steps (option A): the range is the pinned stretch of the six-stone path
+  // (`--sendero`, contain 0 % to 100 %), one slice per stone (mayoAnchors.works.stops); in
+  // each she reaches the stone in the first `legShare` of the slice and stands on it for the
+  // rest. `cycles` is not used: each leg takes the gallop frames that fit its length.
   works: {
-    ...sprite("works", "78%", "cycle", { timeline: "--isle", range: "cover 52% cover 80%", rangeMobile: "cover 74% cover 89%", cycles: 2, cyclesMobile: 1.5 }),
+    ...sprite("works", "78%", "cycle", { timeline: "--sendero", range: "contain 0% contain 100%", cycles: 1 }),
+    legShare: 0.55,
     strip: { avif: "/images/mundo-mayo/70-mayo-works-v3-tira.avif", webp: "/images/mundo-mayo/70-mayo-works-v3-tira.webp" },
     stride: { stance: { 1: 6.445312, 4: 7.03125, 7: 5.859375, 10: 7.03125 }, airborne: 6.591797 },
     arrival: {
@@ -299,8 +302,13 @@ export const cloudFall = {
 /** Feet position in % of the plate (x of its width, y of its height) and depth scale. */
 export type RoutePoint = readonly [x: number, y: number, scale: number];
 
-export type MayoRoute = {
-  points: readonly [RoutePoint, RoutePoint, RoutePoint, RoutePoint];
+/**
+ * Stops along a painted path: where she waits before the first step, then
+ * one stop per step (island 5: the six stepping stones). The last stop is the
+ * anchor, scale 1.
+ */
+export type MayoStops = {
+  points: readonly RoutePoint[];
   /** Plate height / width, to turn a y in % of the height into Mayo's widths. */
   aspect: number;
 };
@@ -315,15 +323,14 @@ export type MayoAnchor = {
   /** The strips are painted facing left; `right` mirrors Mayo towards what she interacts with. */
   face?: "left" | "right";
   /**
-   * Scroll-driven run along a painted path, over the slot's scrub range: the
-   * path's centre line as four points of her feet in % of the plate with her
-   * depth scale (1 at the anchor, smaller further back), so she follows its
-   * curve and shrinks as it recedes. The last point is the anchor, where she
-   * stops; where she starts follows from the strides (`mayoSprites[].stride`).
+   * Scroll-driven walk from stop to stop over the slot's scrub range, one
+   * equal slice of the range per stop: in each slice she runs (or leaps) to
+   * the next stop, brakes and stands on it (`mayoSprites[].stride`,
+   * `arrival`, `legShare`). Feet in % of the plate with a depth scale.
    */
-  route?: MayoRoute;
-  /** Route on the mobile plate, which frames the path differently. */
-  routeMobile?: MayoRoute;
+  stops?: MayoStops;
+  /** Stops on the mobile plate, which frames the path differently. */
+  stopsMobile?: MayoStops;
   /**
    * Contact shadow at the feet line (default on; `false` when airborne).
    * `lean` shifts it away from the island's key light, in % of Mayo's width
@@ -409,35 +416,42 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
       ],
     },
   },
-  // Island 5: gallops down the painted path, from its right bend to the stepping stone at its
-  // front left (the S-curve's middle run, which heads left and towards the camera); sunset
-  // light from the left; shadow painted in. The route points sit on the path's centre line
-  // (read with a 2.5 % grid on the v2 plates); the scale follows the stepping stones (4.3 %
-  // wide at y 55.5, 5.3 % at y 66 on desktop). The anchor is the arrival strip's ground
-  // reference on the front stepping stone (45.5 %, 65.6238 %; cell 8.014 %), where she stands
-  // at the end.
+  // Island 5, the six steps (option A, "el sendero de seis piedras"): she waits where the
+  // path enters the meadow, then reaches one stepping stone per step, back to front, and
+  // stands on it; sunset light from the left; shadow painted in. Stone centres read with a
+  // 1 % grid on the `-v2-isla` cutouts (desktop and mobile). The scale follows the stones'
+  // painted widths (desktop 3.8 % at the back to 4.9 % at the front) and is 1 on the last
+  // stone, the anchor: the painted cell is 8.014 % of the desktop plate at stone 4 (where the
+  // strips were painted, scale 0.94 here), so 8.535 % on stone 6; on the mobile plate the
+  // stones are 1.83 times wider and the path recedes more steeply.
   works: {
-    x: "45.5%",
-    y: "65.6238%",
-    size: "8.014%",
-    xMobile: "41%",
-    yMobile: "71.6%",
-    sizeMobile: "16%",
-    route: {
+    x: "52.3%",
+    y: "72.6%",
+    size: "8.535%",
+    xMobile: "55.2%",
+    yMobile: "75%",
+    sizeMobile: "16.2%",
+    stops: {
       points: [
-        [57, 57, 0.84],
-        [53.33, 59.66, 0.886],
-        [49.39, 62.07, 0.93],
-        [45.5, 65.6238, 1],
+        [51.8, 51.2, 0.73],
+        [56.1, 55.4, 0.78],
+        [55.9, 59.4, 0.835],
+        [47.3, 62.8, 0.875],
+        [44.8, 66.3, 0.94],
+        [47.9, 69.6, 0.94],
+        [52.3, 72.6, 1],
       ],
       aspect: 941 / 1672,
     },
-    routeMobile: {
+    stopsMobile: {
       points: [
-        [61.5, 66.6, 0.88],
-        [55, 68.3, 0.92],
-        [48.08, 69.87, 0.96],
-        [41, 71.6, 1],
+        [51.5, 63.2, 0.64],
+        [63.6, 66.5, 0.69],
+        [58.3, 68, 0.78],
+        [48, 69.3, 0.845],
+        [41, 71.2, 0.91],
+        [45.6, 73.3, 0.93],
+        [55.2, 75, 1],
       ],
       aspect: 1536 / 864,
     },

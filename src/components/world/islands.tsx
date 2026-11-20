@@ -9,6 +9,7 @@ import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure } from "@/components/world/mayo-figure";
 import { PlateObjects } from "@/components/world/plate-objects";
 import { SceneGlow } from "@/components/world/scene-glow";
+import { SixSteps } from "@/components/world/six-steps";
 import { staggerStyle } from "@/components/world/stagger";
 import { WorkCarousel } from "@/components/world/work-carousel";
 import { DetailGroups } from "@/components/world/pack-groups";
@@ -125,10 +126,11 @@ export function SystemsIsland() {
 /** Island 5: garden of works, sunset. Projects and the six-step steps. */
 export function WorksIsland() {
   return (
-    <section id="trabajos" className="isle isle--sunset" data-island="5" style={plateSceneStyle(islandPlates.works)} aria-labelledby="trabajos-title">
-      <IslandScene variant="sunset" plate={islandPlates.works}>
-        <MayoFigure slot="works" className="isle__mayo isle__mayo--run" />
-      </IslandScene>
+    <section id="trabajos" className="isle isle--sunset isle--sendero" data-island="5" aria-labelledby="trabajos-title">
+      {/* The island itself is the six steps' path (SixSteps): the section keeps only its sunset sky. */}
+      <div className="scene scene--sunset scene--sendero" aria-hidden="true">
+        <div className="scene__sky" />
+      </div>
       <div className="isle__content world-shell">
         <h2 id="trabajos-title">
           <IslandTitle segments={islandCopy.works.title} />
@@ -163,20 +165,7 @@ export function WorksIsland() {
           ))}
         </ul>
 
-        <div className="steps panel">
-          <h3>
-            <IslandTitle segments={islandCopy.process.title} />
-          </h3>
-          <p>{islandCopy.process.body}</p>
-          <ol className="steps__steps">
-            {siteContent.process.map((step, index) => (
-              <li key={step} style={staggerStyle(index)}>
-                <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                <strong>{step}</strong>
-              </li>
-            ))}
-          </ol>
-        </div>
+        <SixSteps />
       </div>
     </section>
   );

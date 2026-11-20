@@ -1,106 +1,150 @@
 import type { CSSProperties } from "react";
 
-import { getMayoSlot, mayoAnchors, mayoPoseSources, mayoSprites, type MayoAnchor, type MayoContactLayer, type MayoRoute, type MayoSlotId, type MayoSprite } from "@/content/stage";
+import { getMayoSlot, mayoAnchors, mayoPoseSources, mayoSprites, type MayoAnchor, type MayoContactLayer, type MayoSlotId, type MayoSprite, type MayoStops, type RoutePoint } from "@/content/stage";
 
 const pct = (value: string) => Number.parseFloat(value);
 
-/** y and depth scale of the route's line at x (linear between its points, extended past its ends). */
-function onRoute(route: MayoRoute, x: number) {
-  const points = route.points;
-  let index = 0;
-  while (index < points.length - 2 && x < points[index + 1][0]) index++;
-  const [x0, y0, s0] = points[index];
-  const [x1, y1, s1] = points[index + 1];
-  const t = (x - x0) / (x1 - x0);
-  return { y: y0 + (y1 - y0) * t, scale: s0 + (s1 - s0) * t };
-}
+type Pose = { strip: "run" | "arrival"; frame: number; x: number; y: number; scale: number; mirror: boolean };
 
 /**
- * Mayo's feet and scale on every painted frame of a route: the run's
- * `cycles` of frames and then the arrival's, laid out backwards from the
- * anchor, where the arrival's last frame stands. Each step advances by the
- * paw advance of the frame it leads into (`stride`), in cells scaled by
- * depth, so a planted paw never slides; during a stance step she keeps her
- * height and scale too, and the path's descent and depth are taken while her
- * paws are in the air. The step into the arrival is the run's next step, as if
- * it went on.
+ * Gallop frames (0-based) a leg may take before the arrival lands it: none,
+ * a single leap (the extended suspension), half a stride from the rear
+ * stance, then whole and half strides. Every option ends on a suspension
+ * (f6 or f12), so the arrival's f1 (a front-stance start) follows as the
+ * gallop's next frame would.
  */
-function routeFrames(route: MayoRoute, anchorX: number, size: number, sprite: MayoSprite, cycles: number) {
-  const runFrames = Math.round(cycles * sprite.frames);
-  const steps = [
-    ...Array.from({ length: runFrames }, (_, g) => ({ stride: sprite.stride!, index: g % sprite.frames })),
-    ...Array.from({ length: sprite.arrival?.frames ?? 0 }, (_, j) => ({ stride: sprite.arrival!.stride, index: j })),
-  ];
-  if (sprite.arrival) steps[runFrames] = { stride: sprite.stride!, index: runFrames % sprite.frames };
-  const isStance = (g: number) => steps[g].stride.stance[steps[g].index] !== undefined;
-  const xs = new Array<number>(steps.length);
-  xs[steps.length - 1] = anchorX;
-  for (let g = steps.length - 1; g > 0; g--) {
-    const { stride, index } = steps[g];
-    const advance = stride.stance[index] ?? stride.airborne;
-    xs[g - 1] = xs[g] + (advance / 100) * size * onRoute(route, xs[g]).scale;
+const legOptions: readonly (readonly number[])[] = [
+  [],
+  [5],
+  [3, 4, 5],
+  [0, 1, 2, 3, 4, 5],
+  [3, 4, 5, 6, 7, 8, 9, 10, 11],
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+  [3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 1, 2, 3, 4, 5],
+];
+const suspensions = new Set([2, 5, 8, 11]);
+
+/**
+ * One leg, from a stop to the next: the gallop frames that fit its length,
+ * then the arrival's frames, its last standing on the stop. During a stance
+ * step (a planted paw, `stride.stance`) she moves only sideways and exactly
+ * by the paw's painted advance, scaled by depth, so the paw never slides;
+ * every other step in the air shares the rest of the way, the path's descent
+ * included. Of the options that fit (stance never longer than the leg's
+ * sideways run), the one whose airborne steps come closest to the gallop's
+ * own wins. She faces the way she goes (the strips face left).
+ */
+function legPoses(from: RoutePoint, to: RoutePoint, aspect: number, size: number, sprite: MayoSprite): Pose[] {
+  const run = sprite.stride!;
+  const arrival = sprite.arrival!;
+  const dx = to[0] - from[0];
+  const dyWidths = (to[1] - from[1]) * aspect;
+  const direction = dx > 0 ? 1 : -1;
+  const meanScale = (from[2] + to[2]) / 2;
+  const cell = (advance: number) => (advance / 100) * size * meanScale;
+  const steps = (gallop: readonly number[]) => {
+    const frames = [
+      ...gallop.map((frame) => ({ strip: "run" as const, frame })),
+      ...Array.from({ length: arrival.frames }, (_, frame) => ({ strip: "arrival" as const, frame })),
+    ];
+    return frames.map((pose, k) => {
+      let kind: "stance" | "air" | "still" = "still";
+      let advance = 0;
+      if (pose.strip === "run") {
+        const previous = k > 0 ? gallop[k - 1] : undefined;
+        const stance = run.stance[pose.frame];
+        if (previous === undefined) kind = suspensions.has(pose.frame) ? "air" : "still";
+        else if (stance !== undefined && previous === pose.frame - 1) [kind, advance] = ["stance", stance];
+        else kind = "air";
+      } else if (pose.frame === 0) kind = "air";
+      else if (arrival.stride.stance[pose.frame] !== undefined) [kind, advance] = ["stance", arrival.stride.stance[pose.frame]];
+      return { ...pose, kind, advance };
+    });
+  };
+  let best: { gallop: readonly number[]; score: number } | undefined;
+  for (const gallop of legOptions) {
+    const list = steps(gallop);
+    const stanceX = list.reduce((sum, step) => sum + cell(step.advance), 0);
+    const airborne = list.filter((step) => step.kind === "air").length;
+    if (stanceX > Math.abs(dx) + 1e-6 || airborne === 0) continue;
+    const rest = Math.hypot(Math.abs(dx) - stanceX, dyWidths) / airborne;
+    const score = Math.abs(rest / cell(run.airborne) - 1);
+    if (!best || score < best.score) best = { gallop, score };
   }
-  const frames: { x: number; y: number; scale: number }[] = [];
-  xs.forEach((x, g) => {
-    frames.push(g > 0 && isStance(g) ? { ...frames[g - 1], x } : { x, ...onRoute(route, x) });
+  // A leg that runs almost straight down the path (shorter sideways than one
+  // planted step) has no option that fits: she leaps it, and only then does
+  // the landing's planted step shrink to the sideways run.
+  const list = steps(best?.gallop ?? [5]);
+  const stanceTotal = list.reduce((sum, step) => sum + cell(step.advance), 0);
+  const stanceScale = stanceTotal > Math.abs(dx) ? Math.abs(dx) / stanceTotal : 1;
+  const airborne = Math.max(1, list.filter((step) => step.kind === "air").length);
+  const airX = (dx - direction * stanceTotal * stanceScale) / airborne;
+  const airY = (to[1] - from[1]) / airborne;
+  const length = Math.hypot(dx, dyWidths) || 1;
+  let [x, y] = from;
+  return list.map((step) => {
+    if (step.kind === "stance") x += direction * cell(step.advance) * stanceScale;
+    if (step.kind === "air") [x, y] = [x + airX, y + airY];
+    const t = Math.min(1, Math.hypot(x - from[0], (y - from[1]) * aspect) / length);
+    return { strip: step.strip, frame: step.frame, x, y, scale: from[2] + (to[2] - from[2]) * t, mirror: direction > 0 };
   });
-  return { frames, runFrames };
 }
 
 /**
- * The route as keyframes, one per painted frame, each held until the next
- * (`step-end`), with `translate` offsets from the anchor in Mayo's own widths
- * (a percentage of `translate` is relative to the element; a y in % of the
- * plate's height becomes widths through the plate's aspect) and a depth
- * `scale`, so the run moves on the compositor and only when a frame changes.
+ * The walk as keyframes on the slot's range: before it she stands on the
+ * first stop; each later stop has an equal slice, whose first `legShare`
+ * plays the leg (one keyframe per painted frame, each held until the next by
+ * the animation's `step-end`) and whose rest holds her standing on the stop.
+ * Three animations share the offsets: the box (`translate` from the anchor in
+ * Mayo's own widths, a y in % of the plate's height turned into widths
+ * through the plate's aspect, and a depth `scale` that mirrors her when she
+ * heads right) and the two strips (the visible cell, or hidden).
  */
-function routeKeyframes(name: string, route: MayoRoute, x: string, y: string, size: string, sprite: MayoSprite, cycles: number) {
-  const { frames, runFrames } = routeFrames(route, pct(x), pct(size), sprite, cycles);
-  const round = (value: number) => Number(value.toFixed(4));
-  const rule = (offset: number, frame: (typeof frames)[number]) =>
-    `${round(offset)}%{translate:${round(((frame.x - pct(x)) / pct(size)) * 100)}% ${round((((frame.y - pct(y)) * route.aspect) / pct(size)) * 100)}%;scale:${round(frame.scale)};animation-timing-function:step-end}`;
-  const body = frames.map((frame, g) => rule((g / frames.length) * 100, frame)).join("") + rule(100, frames[frames.length - 1]);
-  return { css: `@keyframes ${name}{${body}}`, split: runFrames / frames.length };
+function stopsKeyframes(name: string, stops: MayoStops, x: string, y: string, size: string, sprite: MayoSprite) {
+  const points = stops.points;
+  const share = sprite.legShare ?? 0.5;
+  const slice = 100 / (points.length - 1);
+  const legs = points.slice(1).map((to, leg) => legPoses(points[leg], to, stops.aspect, pct(size), sprite));
+  const [x0, y0, s0] = points[0];
+  const timeline: { offset: number; pose: Pose }[] = [
+    { offset: 0, pose: { strip: "arrival", frame: sprite.arrival!.frames - 1, x: x0, y: y0, scale: s0, mirror: legs[0][0]?.mirror ?? false } },
+  ];
+  legs.forEach((poses, leg) => {
+    poses.forEach((pose, k) => timeline.push({ offset: leg * slice + ((k + 1) / poses.length) * share * slice, pose }));
+  });
+  const round = (value: number) => Number(value.toFixed(3));
+  const frameShift = (frames: number, frame: number) => `translateX(${round((-100 * frame) / frames)}%)`;
+  const box: string[] = [];
+  const runStrip: string[] = [];
+  const arrivalStrip: string[] = [];
+  const add = (offset: number, pose: Pose) => {
+    const at = `${round(offset)}%`;
+    const scale = round(pose.scale);
+    box.push(`${at}{translate:${round(((pose.x - pct(x)) / pct(size)) * 100)}% ${round((((pose.y - pct(y)) * stops.aspect) / pct(size)) * 100)}%;scale:${pose.mirror ? -scale : scale} ${scale}}`);
+    runStrip.push(`${at}{opacity:${pose.strip === "run" ? 1 : 0};transform:${frameShift(sprite.frames, pose.strip === "run" ? pose.frame : 0)}}`);
+    arrivalStrip.push(`${at}{opacity:${pose.strip === "arrival" ? 1 : 0};transform:${frameShift(sprite.arrival!.frames, pose.strip === "arrival" ? pose.frame : 0)}}`);
+  };
+  timeline.forEach(({ offset, pose }) => add(offset, pose));
+  add(100, timeline[timeline.length - 1].pose);
+  return `@keyframes ${name}{${box.join("")}}@keyframes ${name}-run{${runStrip.join("")}}@keyframes ${name}-arrival{${arrivalStrip.join("")}}`;
 }
 
-/** Splits a range such as "cover 52% cover 80%" at a fraction of its length. */
-function splitRange(range: string, fraction: number) {
-  const match = range.match(/^(\S+) ([\d.]+)% \1 ([\d.]+)%$/);
-  if (!match) throw new Error(`Cannot split the scrub range "${range}"`);
-  const [, name, from, to] = match;
-  const at = Number((Number(from) + (Number(to) - Number(from)) * fraction).toFixed(3));
-  return [`${name} ${from}% ${name} ${at}%`, `${name} ${at}% ${name} ${to}%`] as const;
-}
-
-/**
- * A route slot's keyframes (desktop and mobile) and the ranges of its two
- * strips: the run plays over the first part of the scrub range, the arrival
- * over the rest, each frame over the same share of scroll as its route step.
- */
-function routeStyle(slot: MayoSlotId, anchor: MayoAnchor, sprite: MayoSprite | undefined) {
-  if (!anchor.route || !sprite?.stride) return { css: "", style: {} };
-  const { range, rangeMobile = range, cycles, cyclesMobile = cycles } = sprite.scrub;
-  const desktop = routeKeyframes(`mayo-route-${slot}-d`, anchor.route, anchor.x, anchor.y, anchor.size, sprite, cycles);
-  const mobile = routeKeyframes(
-    `mayo-route-${slot}-m`,
-    anchor.routeMobile ?? anchor.route,
-    anchor.xMobile ?? anchor.x,
-    anchor.yMobile ?? anchor.y,
-    anchor.sizeMobile ?? anchor.size,
-    sprite,
-    cyclesMobile,
-  );
-  const [runD, arrivalD] = splitRange(range, desktop.split);
-  const [runM, arrivalM] = splitRange(rangeMobile, mobile.split);
+/** A slot's walk between stops as keyframes (desktop and mobile), named for world.css. */
+function stopsStyle(slot: MayoSlotId, anchor: MayoAnchor, sprite: MayoSprite | undefined) {
+  if (!anchor.stops || !sprite?.stride || !sprite.arrival) return { css: "", style: {} };
+  const desktop = `mayo-stops-${slot}-d`;
+  const mobile = `mayo-stops-${slot}-m`;
   return {
-    css: desktop.css + mobile.css,
+    css:
+      stopsKeyframes(desktop, anchor.stops, anchor.x, anchor.y, anchor.size, sprite) +
+      stopsKeyframes(mobile, anchor.stopsMobile ?? anchor.stops, anchor.xMobile ?? anchor.x, anchor.yMobile ?? anchor.y, anchor.sizeMobile ?? anchor.size, sprite),
     style: {
-      "--route-name-d": `mayo-route-${slot}-d`,
-      "--route-name-m": `mayo-route-${slot}-m`,
-      "--run-range-d": runD,
-      "--run-range-m": runM,
-      "--arrival-range-d": arrivalD,
-      "--arrival-range-m": arrivalM,
+      "--stops-d": desktop,
+      "--stops-m": mobile,
+      "--stops-run-d": `${desktop}-run`,
+      "--stops-run-m": `${mobile}-run`,
+      "--stops-arrival-d": `${desktop}-arrival`,
+      "--stops-arrival-m": `${mobile}-arrival`,
     },
   };
 }
@@ -166,7 +210,7 @@ export function MayoFigure({
   const sprite = mayoSprites[slot];
   const loading = eager ? "eager" : "lazy";
   const anchor = mayoAnchors[slot];
-  const route = anchor ? routeStyle(slot, anchor, sprite) : { css: "", style: {} };
+  const walk = anchor ? stopsStyle(slot, anchor, sprite) : { css: "", style: {} };
   const style = (
     anchor
       ? ({
@@ -178,7 +222,7 @@ export function MayoFigure({
           "--anchor-x-m": anchor.xMobile ?? anchor.x,
           "--anchor-y-m": anchor.yMobile ?? anchor.y,
           "--anchor-size-m": anchor.sizeMobile ?? anchor.size,
-          ...route.style,
+          ...walk.style,
           ...shadowStyle(anchor),
           ...contactStyle(anchor),
           ...scrubStyle(sprite),
@@ -194,7 +238,7 @@ export function MayoFigure({
         anchor ? "mayo--anchored" : "",
         anchor && anchor.shadow !== false ? "mayo--shadow" : "",
         anchor?.face === "right" ? "mayo--face-right" : "",
-        anchor?.route ? "mayo--route" : "",
+        anchor?.stops ? "mayo--stops" : "",
         className,
       ]
         .filter(Boolean)
@@ -203,7 +247,7 @@ export function MayoFigure({
       data-mayo-moment={moment}
       style={style}
     >
-      {route.css ? <style>{route.css}</style> : null}
+      {walk.css ? <style>{walk.css}</style> : null}
       {anchor?.contact ? <span className="mayo__contact" aria-hidden="true" /> : null}
       {sprite ? (
         <div
