@@ -5444,3 +5444,256 @@ html[data-motion-tier="reduced"] .wa-float {
     transition-duration: var(--m-base);
   }
 }
+
+/* Flip cards (packs, maintenance) -------------------------------------- */
+
+/* The faces share one cell; the back sits on the front at its height and
+ * scrolls when longer. Turning is a 560ms rotation on the travel curve;
+ * under reduced motion the faces crossfade in place instead. */
+.flip {
+  position: relative;
+  perspective: 1800px;
+}
+
+.flip__faces {
+  position: relative;
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 560ms var(--ease-travel);
+}
+
+.flip[data-flipped] > .flip__faces {
+  transform: rotateY(180deg);
+}
+
+.flip__face {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip__face--front {
+  position: relative;
+}
+
+.flip__face--back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transform: rotateY(180deg);
+}
+
+.flip__face[inert] {
+  pointer-events: none;
+}
+
+.flip__title {
+  font-size: 1.35rem;
+}
+
+.flip__title:focus {
+  outline: none;
+}
+
+.flip__title:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 4px;
+}
+
+.flip__scroll {
+  flex: 1;
+  min-height: 0;
+  padding-block-end: 1.25rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  mask-image: linear-gradient(180deg, #000 calc(100% - 1.75rem), transparent);
+}
+
+.flip__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  align-self: end;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--moss);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color var(--m-fast) var(--ease-ui);
+}
+
+.flip__toggle--back {
+  align-self: flex-start;
+}
+
+.isle--dark .flip__toggle {
+  color: var(--mint);
+}
+
+.flip__toggle-icon {
+  display: inline-block;
+  transition: transform var(--m-fast) var(--ease-ui);
+}
+
+.flip__toggle-icon::before {
+  content: "\2192";
+}
+
+.flip__toggle--back .flip__toggle-icon::before {
+  content: "\2190";
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .flip__toggle:focus-visible .flip__toggle-icon {
+    transform: translateX(var(--m-nudge));
+  }
+
+  html:not([data-motion-tier="reduced"]) .flip__toggle--back:focus-visible .flip__toggle-icon {
+    transform: translateX(calc(-1 * var(--m-nudge)));
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    html:not([data-motion-tier="reduced"]) .flip__toggle:hover .flip__toggle-icon {
+      transform: translateX(var(--m-nudge));
+      transition-duration: var(--m-base);
+    }
+
+    html:not([data-motion-tier="reduced"]) .flip__toggle--back:hover .flip__toggle-icon {
+      transform: translateX(calc(-1 * var(--m-nudge)));
+    }
+  }
+
+  /* The back's rows arrive once the card is half turned. */
+  html:not([data-motion-tier="reduced"]) .flip[data-flipped] .flip__face--back .pack-list > li {
+    animation: row-in 260ms var(--ease-enter) both;
+    animation-delay: calc(240ms + min(var(--i, 0), 10) * 22ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip__faces,
+  .flip[data-flipped] > .flip__faces {
+    transform: none;
+    transition: none;
+  }
+
+  .flip__face--back {
+    transform: none;
+  }
+
+  .flip__face {
+    transition: opacity 200ms linear;
+  }
+
+  .flip[data-flipped] .flip__face--front,
+  .flip:not([data-flipped]) .flip__face--back {
+    opacity: 0;
+  }
+}
+
+html[data-motion-tier="reduced"] :is(.flip__faces, .flip[data-flipped] > .flip__faces, .flip__face--back) {
+  transform: none;
+  transition: none;
+}
+
+html[data-motion-tier="reduced"] .flip__face {
+  transition: opacity 200ms linear;
+}
+
+html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .flip:not([data-flipped]) .flip__face--back) {
+  opacity: 0;
+}
+
+/* Pack cards: the card's ground, shadow and featured outline move from the
+ * article to its faces, and the front keeps the shared rows (subgrid). */
+.pack.flip {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.pack.pack--featured {
+  outline: none;
+}
+
+.pack > .flip__faces {
+  grid-row: 1 / -1;
+  grid-template-rows: subgrid;
+}
+
+.pack__front {
+  display: grid;
+  grid-row: 1 / -1;
+  grid-template-rows: subgrid;
+  row-gap: 1rem;
+}
+
+.pack__front > .flip__toggle {
+  grid-row: 5;
+}
+
+.pack .flip__face {
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: var(--cream);
+  box-shadow: var(--shadow-soft);
+  transition:
+    box-shadow var(--m-fast) var(--ease-ui),
+    opacity 200ms linear;
+}
+
+.pack--featured .flip__face {
+  outline: 2px solid color-mix(in oklch, var(--moss) 40%, transparent);
+}
+
+@media (max-width: 48rem) {
+  .pack > .flip__faces,
+  .pack__front {
+    grid-row: auto;
+    grid-template-rows: none;
+  }
+
+  .pack__front > .flip__toggle {
+    grid-row: auto;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  html:not([data-motion-tier="reduced"]) .pack.flip:hover {
+    box-shadow: none;
+  }
+
+  html:not([data-motion-tier="reduced"]) .pack.flip:hover .flip__face {
+    box-shadow: var(--m-shadow-card);
+    transition-duration: 180ms;
+  }
+}
+
+/* Maintenance: the panel's ground moves to its faces as well. */
+.upkeep.flip {
+  display: block;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.upkeep .flip__face {
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: var(--cream);
+}
+
+.isle--dark .upkeep .flip__face {
+  background: color-mix(in oklch, oklch(22% 0.04 265) 96%, transparent);
+  color: var(--night-ink);
+}
+
+.upkeep__front {
+  display: grid;
+  gap: 1.25rem;
+}
