@@ -677,6 +677,14 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   initial-value: 1;
 }
 
+/* How close a platform's base is to the grass: 0 far up, 1 touching down
+ * (its grass shadow grows with it); at rest by default, the static state. */
+@property --ground {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
 .rocks {
   /* The plate is dropped (a share of its own height, `translate` %) so the
    * meadow sits low enough for the platforms and their cards to clear the
@@ -746,6 +754,37 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 .rocks__mayo {
   z-index: 4;
+}
+
+/* Her shadow takes the platforms' painted shadow colour (a green-dark shade
+ * of the grass, not brown) and leans the same way, away from the high
+ * front-left sun (stage.ts mayoAnchors.packs). */
+.rocks__mayo::after {
+  left: 14%;
+  width: 72%;
+  height: 9%;
+  background: radial-gradient(closest-side, rgb(22 30 6 / var(--shadow-opacity, 0.3)), rgb(22 30 6 / calc(var(--shadow-opacity, 0.3) * 0.45)) 55%, rgb(22 30 6 / 0));
+}
+
+/* Her shadow stays on the grass while she hops: smaller and fainter at the
+ * top of each jump (frames 3 to 8 of each strip cycle), whole on landing. */
+@keyframes rocks-mayo-shadow {
+  0%,
+  16% {
+    scale: 1;
+    opacity: 1;
+  }
+
+  42% {
+    scale: 0.62;
+    opacity: 0.5;
+  }
+
+  67%,
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
 }
 
 /* Plate-relative placement: `--*-d` on desktop, `--*-m` on phones. */
@@ -850,12 +889,30 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 .rock-grass {
   --gx: var(--gx-d);
   --gy: var(--gy-d);
+  --sx: var(--sx-d);
+  --sy: var(--sy-d);
+  --sw: var(--sw-d);
+  --sh: var(--sh-d);
 
   z-index: 3;
   height: 7%;
+  /* The platform's grass shadow (as `.rock-ground` at rest) over the meadow. */
+  background-image:
+    radial-gradient(
+      closest-side,
+      rgb(22 30 6 / calc(0.68 * var(--ground))),
+      rgb(22 30 6 / calc(0.46 * var(--ground))) 50%,
+      rgb(22 30 6 / calc(0.22 * var(--ground))) 75%,
+      rgb(22 30 6 / 0)
+    ),
+    var(--meadow);
   background-repeat: no-repeat;
-  background-size: calc(100 * var(--pu)) auto;
-  background-position: calc(var(--gx) * -1 * var(--pu)) calc(var(--gy) * -1 * var(--pu));
+  background-size:
+    calc(var(--sw) * var(--pu)) calc(var(--sh) * var(--pu)),
+    calc(100 * var(--pu)) auto;
+  background-position:
+    calc(var(--sx) * var(--pu)) calc(var(--sy) * var(--pu)),
+    calc(var(--gx) * -1 * var(--pu)) calc(var(--gy) * -1 * var(--pu));
   mask-image: var(--tufts);
   mask-size: 100% 100%;
 }
@@ -865,13 +922,18 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   z-index: 3;
 }
 
-/* Soft shadow of a whole platform on the grass, centred under its feet. */
+/* A platform's shadow on the grass (stage.ts platformGroundShadows): a soft
+ * ellipse falling off like the painted one (about 45 % of the light left at
+ * its core). While the base comes down it starts wide and faint and tightens
+ * and darkens until touch-down (`--ground`). */
 .rock-ground {
+  --h: var(--h-d);
+
   z-index: 3;
-  aspect-ratio: 5 / 1;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgb(30 38 12 / 0.46), rgb(30 38 12 / 0.2) 55%, rgb(30 38 12 / 0));
-  transform: translate(-47%, -62%);
+  height: var(--h);
+  background: radial-gradient(closest-side, rgb(22 30 6 / 0.68), rgb(22 30 6 / 0.46) 50%, rgb(22 30 6 / 0.22) 75%, rgb(22 30 6 / 0));
+  opacity: var(--ground);
+  scale: calc(1.8 - 0.8 * var(--ground));
 }
 
 /* The cards: a box with the plate's frame (bottom-anchored, full width, the
@@ -1171,32 +1233,39 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 }
 
+/* The base's height over the grass along its flight (rock-fly-y): far up
+ * at the apex, touching down at 84 %. */
 @keyframes rock-ground-in {
   0% {
-    opacity: 0;
-    scale: 1.7;
+    --ground: 0;
   }
 
   50% {
-    opacity: 0.12;
-    scale: 1.45;
+    --ground: 0.2;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.9, 0.55);
+  }
+
+  84%,
+  100% {
+    --ground: 1;
+  }
+}
+
+/* A shadow between pieces grows in over the last stretch of the fall of the
+ * piece that completes it (the later of its caster and the pieces it falls
+ * on, rock-island.tsx shadowCompleter): wider and faint at first, its painted
+ * shape at touch-down (84 %), so it never hangs in the air. */
+@keyframes rock-shadow-in {
+  0%,
+  62% {
+    opacity: 0;
+    scale: 1.25;
   }
 
   84%,
   100% {
     opacity: 1;
     scale: 1;
-  }
-}
-
-@keyframes rock-shadow-in {
-  0%,
-  80% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
   }
 }
 
@@ -1314,10 +1383,19 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     animation-range: var(--range), var(--live-out);
   }
 
-  .rocks--painted .rock-grass {
-    animation: live-out linear both;
+  .rock-grass {
+    animation: rock-ground-in linear both;
     animation-timeline: --rocks;
-    animation-range: var(--live-out);
+    animation-range: var(--range);
+  }
+
+  .rocks--painted .rock-grass {
+    animation:
+      rock-ground-in linear both,
+      live-out linear both;
+    animation-duration: auto;
+    animation-timeline: --rocks;
+    animation-range: var(--range), var(--live-out);
   }
 
   .rock-ground {
@@ -1340,6 +1418,13 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
   .rocks__mayo {
     animation: rocks-mayo-hops linear both;
+    animation-timeline: --rocks;
+    animation-range: var(--scrub-range);
+  }
+
+  .rocks__mayo::after {
+    animation: rocks-mayo-shadow linear both;
+    animation-iteration-count: var(--cycles, 3);
     animation-timeline: --rocks;
     animation-range: var(--scrub-range);
   }
@@ -1374,6 +1459,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   .rock-shadow,
   .platform__card,
   .rocks__mayo,
+  .rocks__mayo::after,
   .scene__mayo,
   .scene__sky {
     animation: none !important;
@@ -1389,6 +1475,7 @@ html[data-motion-tier="reduced"] .rock-ground,
 html[data-motion-tier="reduced"] .rock-shadow,
 html[data-motion-tier="reduced"] .platform__card,
 html[data-motion-tier="reduced"] .rocks__mayo,
+html[data-motion-tier="reduced"] .rocks__mayo::after,
 html[data-motion-tier="reduced"] .scene__mayo,
 html[data-motion-tier="reduced"] .scene__sky {
   animation: none;
@@ -1453,6 +1540,14 @@ html[data-motion-tier="reduced"] .scene__sky {
   .rock-grass {
     --gx: var(--gx-m);
     --gy: var(--gy-m);
+    --sx: var(--sx-m);
+    --sy: var(--sy-m);
+    --sw: var(--sw-m);
+    --sh: var(--sh-m);
+  }
+
+  .rock-ground {
+    --h: var(--h-m);
   }
 
   .rocks__mayo-path {
