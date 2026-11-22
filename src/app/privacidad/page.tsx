@@ -4,12 +4,16 @@ import Link from "next/link";
 import { IslandNav } from "@/components/world/island-nav";
 import { WorldFooter } from "@/components/world/world-footer";
 import { publicChannels } from "@/content/site";
+import { shareMetadata } from "@/lib/share-metadata";
+
+const description =
+  "Cómo Mayofy trata los datos personales que recibe por su sitio, su formulario, su agenda y WhatsApp.";
 
 export const metadata: Metadata = {
   title: "Política de privacidad",
-  description:
-    "Cómo Mayofy trata los datos personales que recibe por su sitio, su formulario, su agenda y WhatsApp.",
+  description,
   alternates: { canonical: "/privacidad" },
+  ...shareMetadata({ title: "Política de privacidad — Mayofy", description, path: "/privacidad" }),
 };
 
 const lastUpdated = "16 de noviembre de 2026";

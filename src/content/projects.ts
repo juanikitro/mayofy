@@ -226,6 +226,9 @@ export const projects = [
 
 export const placeholderProjects = projects.filter((project) => project.placeholder);
 
+/** Real case studies: the only ones published, listed in the sitemap and indexed. */
+export const publishedProjects = projects.filter((project) => !project.placeholder);
+
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);
 }

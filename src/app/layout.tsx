@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Fraunces, Instrument_Sans } from "next/font/google";
 import { HashLinkHistory } from "@/components/hash-link-history";
+import { shareMetadata } from "@/lib/share-metadata";
 import { getSiteUrl } from "@/lib/site-url";
 import "./world.css";
 
@@ -25,41 +26,27 @@ const worldSerifFont = Fraunces({
 const googleAnalyticsId =
   process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ?? "G-F2DHJCS51K";
 
+const homeTitle = "Mayofy — webs que venden, sistemas que ordenan";
+const homeDescription =
+  "Landings, webs con turnos y sistemas a medida para negocios de servicios en Argentina y LATAM. Empezamos con una charla gratis.";
+
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
   title: {
-    default: "Mayofy — webs que venden, sistemas que ordenan",
+    default: homeTitle,
     template: "%s — Mayofy",
   },
-  description:
-    "Landings, webs con turnos y sistemas a medida para negocios de servicios en Argentina y LATAM. Empezamos con una charla gratis.",
+  description: homeDescription,
   applicationName: "Mayofy",
   authors: [{ name: "Mayofy" }],
   creator: "Mayofy",
   alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    locale: "es_AR",
-    siteName: "Mayofy",
-    title: "Mayofy — webs que venden, sistemas que ordenan",
-    description:
-      "Landings, webs con turnos y sistemas a medida para negocios de servicios. Charla gratis.",
-    images: [
-      {
-        url: "/images/hero-umbral-desktop.png",
-        width: 1816,
-        height: 866,
-        alt: "Mayofy: webs que venden, sistemas que ordenan",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Mayofy — webs que venden, sistemas que ordenan",
-    description:
-      "Landings, webs con turnos y sistemas a medida para negocios de servicios.",
-    images: ["/images/hero-umbral-desktop.png"],
-  },
+  ...shareMetadata({ title: homeTitle, description: homeDescription, path: "/" }),
+  // Search Console ownership through a meta tag, only when the token is set
+  // (a DNS TXT record on mayofy.dev is the preferred route, see the SEO plan).
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+    : {}),
 };
 
 export default function RootLayout({

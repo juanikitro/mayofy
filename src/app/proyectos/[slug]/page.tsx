@@ -6,8 +6,11 @@ import { IslandNav } from "@/components/world/island-nav";
 import { staggerStyle } from "@/components/world/stagger";
 import { StudyIndex } from "@/components/world/study-index";
 import { WorldFooter } from "@/components/world/world-footer";
-import { getProject, projects } from "@/content/projects";
+import { JsonLd } from "@/components/json-ld";
+import { getProject, projects, publishedProjects } from "@/content/projects";
 import { siteContent } from "@/content/site";
+import { shareMetadata } from "@/lib/share-metadata";
+import { projectStructuredData } from "@/lib/structured-data";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
 type ProjectPageProps = {
@@ -16,8 +19,14 @@ type ProjectPageProps = {
 
 export const dynamicParams = false;
 
+/*
+ * Placeholder case studies ("Nombre del proyecto 04") are only built in
+ * development, to preview the template; production never publishes them, so
+ * they cannot be indexed, shared or reached by a stray link (they 404).
+ */
 export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  const listed = process.env.NODE_ENV === "production" ? publishedProjects : projects;
+  return listed.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
@@ -25,11 +34,29 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   const project = getProject(slug);
   if (!project) return {};
 
+  const path = `/proyectos/${project.slug}`;
+  const capture = project.images[0];
   return {
     title: project.title,
     description: project.summary,
-    alternates: { canonical: `/proyectos/${project.slug}` },
+    alternates: { canonical: path },
     robots: { index: !project.placeholder, follow: !project.placeholder },
+    ...shareMetadata({
+      title: `${project.title} — Mayofy`,
+      description: project.summary,
+      path,
+      type: "article",
+      ...(capture
+        ? {
+            image: {
+              url: `/og/proyectos/${project.slug}.jpg`,
+              width: 1200,
+              height: 630,
+              alt: `${project.title}: ${capture.alt}`,
+            },
+          }
+        : {}),
+    }),
   };
 }
 
@@ -52,6 +79,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <div className="world">
+      {project.placeholder ? null : <JsonLd data={projectStructuredData(project)} />}
       <a className="skip-link" href="#contenido">
         Saltar al contenido
       </a>
