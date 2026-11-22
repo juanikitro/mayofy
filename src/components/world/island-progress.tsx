@@ -31,14 +31,42 @@ function PawIcon() {
 }
 
 /**
+ * What the reader fills in or picks from: the agenda and the contact form.
+ * While one of them is on screen the floating controls step aside, so they
+ * never sit on a field or a time slot (simulated user test, M5).
+ */
+const clearZoneSelector = "#agenda, .contact-form";
+
+/** How long the name of a newly reached island shows over its paw. */
+const announceMs = 2500;
+
+/**
  * Paw-print progress indicator (side on desktop, bottom on mobile) and the
  * mobile WhatsApp float that appears from island 2 on. Both are pure
- * enhancement: the islands are reachable by scrolling and by the nav.
+ * enhancement: the islands are reachable by scrolling and by the nav. The
+ * float hides on island 6, which has its own WhatsApp buttons, and both
+ * step aside over the agenda and the form. When the reader reaches a new
+ * island its paw shows the island's name for a moment, so the paws read as
+ * places and not as decoration.
  */
 export function IslandProgress() {
   const active = useActiveIsland(islandIds) ?? "inicio";
   const activeIndex = islandIds.indexOf(active as (typeof islandIds)[number]);
   const [pastHero, setPastHero] = useState(false);
+  const [inClearZone, setInClearZone] = useState(false);
+  const [lastActive, setLastActive] = useState(active);
+  const [announced, setAnnounced] = useState<string | null>(null);
+
+  if (active !== lastActive) {
+    setLastActive(active);
+    setAnnounced(active);
+  }
+
+  useEffect(() => {
+    if (!announced) return;
+    const timer = window.setTimeout(() => setAnnounced(null), announceMs);
+    return () => window.clearTimeout(timer);
+  }, [announced]);
 
   useEffect(() => {
     const hero = document.getElementById("inicio");
@@ -50,9 +78,26 @@ export function IslandProgress() {
     return () => heroObserver.disconnect();
   }, []);
 
+  useEffect(() => {
+    const zones = document.querySelectorAll(clearZoneSelector);
+    if (zones.length === 0 || !("IntersectionObserver" in window)) return;
+    const visible = new Set<Element>();
+    const zoneObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) visible.add(entry.target);
+        else visible.delete(entry.target);
+      }
+      setInClearZone(visible.size > 0);
+    });
+    zones.forEach((zone) => zoneObserver.observe(zone));
+    return () => zoneObserver.disconnect();
+  }, []);
+
+  const floatVisible = pastHero && active !== "contacto" && !inClearZone;
+
   return (
     <>
-      <nav className="progress" aria-label="Islas del recorrido">
+      <nav className="progress" aria-label="Islas del recorrido" data-clear={inClearZone ? "true" : undefined}>
         <ol>
           {islands.map((island) => (
             <li key={island.id}>
@@ -61,6 +106,7 @@ export function IslandProgress() {
                 className="progress__paw"
                 aria-current={active === island.id ? "location" : undefined}
                 data-visited={island.number - 1 < activeIndex ? "true" : undefined}
+                data-announce={announced === island.id ? "true" : undefined}
                 aria-label={`Isla ${island.number}: ${island.label}`}
                 data-label={island.label}
               >
@@ -71,13 +117,13 @@ export function IslandProgress() {
         </ol>
       </nav>
       <a
-        className={`wa-float${pastHero ? " wa-float--visible" : ""}`}
+        className={`wa-float${floatVisible ? " wa-float--visible" : ""}`}
         href={getWhatsAppHref(siteContent.hero.primaryMessage)}
         target="_blank"
         rel="noreferrer"
         aria-label="Escribir por WhatsApp"
-        tabIndex={pastHero ? 0 : -1}
-        aria-hidden={!pastHero}
+        tabIndex={floatVisible ? 0 : -1}
+        aria-hidden={!floatVisible}
       >
         <WhatsAppIcon />
       </a>

@@ -2,6 +2,7 @@
 import { Fragment, type CSSProperties } from "react";
 
 import { IslandPlate, plateSceneStyle } from "@/components/world/island-plate";
+import { PacksMayoClock } from "@/components/world/packs-mayo-clock";
 import { PlatformMarkers } from "@/components/world/platform-markers";
 import { IslandTitle } from "@/components/world/island-title";
 import { commercialPlans } from "@/content/commercial-plans";
@@ -18,6 +19,8 @@ import {
   platforms,
   rockFloats,
   rockTiming,
+  rocksStage,
+  stageCover,
   type LooseRock,
   type Platform,
   type PlatformPiece,
@@ -31,7 +34,7 @@ const RATIO = islandPlates.packs.desktop.height / islandPlates.packs.desktop.wid
 /** Rise of each flight's apex above the higher of its two ends, in % of the plate height. */
 const APEX_LIFT = 9;
 
-/** Stacking inside the plate: back rocks under the island cutout (z 2), front rocks over Mayo (z 4). */
+/** Stacking inside the plate: back rocks under the island cutout (z 2), front rocks over the platforms (z 3) and under Mayo (z 6). */
 const LAYER_Z = { back: 1, front: 5 } as const;
 
 type Box = { left: number; top: number; width: number; height: number };
@@ -91,13 +94,14 @@ function flightVars(box: Box, kind: PlatformPiece["kind"], index: number, size: 
   };
 }
 
-/** Scroll range of one piece's flight on the `--rocks` cover range. */
+/** One piece's flight, in vh of the stage's pinned scroll (rocksStage). */
 function flightRange(index: number, kind: PlatformPiece["kind"]) {
   const start = rockTiming.start + index * rockTiming.stagger + landingOrder.indexOf(kind) * rockTiming.pieceStagger;
   return { start, end: start + rockTiming.flight };
 }
 
-const cover = (start: number, end: number) => `cover ${round(start)}% cover ${round(end)}%`;
+/** A stretch of the pinned scroll (vh, rocksStage) as an `animation-range` on the `--rocks` timeline. */
+const cover = (start: number, end: number) => `cover ${stageCover(start)}% cover ${stageCover(end)}%`;
 
 /** A stable pseudo-random number in [0, 1) per serial and seed, so server and client agree. */
 const noise = (serial: number, seed: number) => Math.abs((Math.sin(serial * 12.9898 + seed * 78.233) * 43758.5453) % 1);
@@ -371,7 +375,7 @@ function markerVars(index: number) {
     "--top-d": `${round(top(platformPlacements.desktop[index]))}%`,
     "--x-m": `${platformPlacements.mobile[index].x}%`,
     "--top-m": `${round(top(platformPlacements.mobile[index]))}%`,
-    "--range": cover(landed, landed + 3.5),
+    "--range": cover(landed, landed + 12),
   } as CSSProperties;
 }
 
@@ -423,12 +427,41 @@ function PacksMayo() {
   );
 }
 
+/**
+ * The section's height and the island's scroll ranges that world.css uses
+ * directly, all from the pinned-scroll timing in stage.ts.
+ */
+function stageVars() {
+  const { hops, sentarse, crossfade } = packsMayo.timing;
+  return {
+    "--rocks-height": `${rocksStage.height}vh`,
+    "--range-swirl": `cover 4% cover ${stageCover(rockTiming.start)}%`,
+    "--range-crossfade": cover(crossfade[0], crossfade[1]),
+    // The live pieces hide once the painting is opaque.
+    "--live-out": cover(crossfade[1] - 0.5, crossfade[1]),
+    "--range-mira": `cover 0% cover ${stageCover(hops[0])}%`,
+    "--range-hops": cover(hops[0], hops[1]),
+    "--range-sentarse": cover(sentarse[0], sentarse[1]),
+    "--range-sentada-off": `cover 0% cover ${stageCover(sentarse[1])}%`,
+  } as CSSProperties;
+}
+
 /** Back to front: the middle platform stands furthest back, so it is painted first. */
 const depthOrder = [1, 0, 2];
 
 export function RockIsland() {
   return (
-    <section id="packs" className={packsAssembledPlate.desktop ? "rocks rocks--painted" : "rocks"} data-island="3" aria-labelledby="packs-title">
+    <section
+      id="packs"
+      className={packsAssembledPlate.desktop ? "rocks rocks--painted" : "rocks"}
+      data-island="3"
+      aria-labelledby="packs-title"
+      style={stageVars()}
+    >
+      {/* Mayo's key poses, where the page may settle (the guided scroll's rest points; outside the sticky stage). */}
+      {packsMayo.timing.rests.map((vh) => (
+        <span className="rocks__rest" data-scroll-rest aria-hidden="true" style={{ top: `${vh}vh` }} key={vh} />
+      ))}
       <div className="rocks__stage">
         <header className="rocks__intro">
           <h2 id="packs-title">
@@ -463,6 +496,12 @@ export function RockIsland() {
             <AssembledPlate />
             <PacksMayo />
           </IslandPlate>
+          <PacksMayoClock
+            miraRest={stageCover(packsMayo.timing.miraRest)}
+            miraEnd={stageCover(packsMayo.timing.hops[0])}
+            sentadaStart={stageCover(packsMayo.timing.sentarse[1])}
+            sentadaLoop={stageCover(packsMayo.timing.sentadaLoop)}
+          />
         </div>
 
         {/* The markers share the plate's frame, so each stands on top of its own platform. */}

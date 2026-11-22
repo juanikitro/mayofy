@@ -50,7 +50,7 @@ export const projects = [
     title: "Sistema de gestión para lavaderos",
     category: "Sistema a medida",
     summary:
-      "Plataforma para que lavaderos y negocios de detailing gestionen clientes, servicios y la operación del día a día.",
+      "Sistema para que lavaderos de autos manejen clientes, servicios y la agenda del día.",
     context:
       "Contexto del negocio, su oferta, su audiencia y la forma en que llegaban las consultas antes del proyecto.",
     challenge:
@@ -78,13 +78,13 @@ export const projects = [
       { src: "/images/proyectos/shineapp/panel.jpg", alt: "Panel de ShineApp con la agenda del día, los indicadores del período y la caja por categoría", width: 1440, height: 900 },
       { src: "/images/proyectos/shineapp/escritorio.jpg", alt: "Pantalla de acceso de ShineApp", width: 1440, height: 900 },
     ],
-    phoneImage: { src: "/images/proyectos/shineapp/celular.jpg", alt: "Pantalla de acceso de ShineApp en el celular", width: 390, height: 844 },
+    phoneImage: { src: "/images/proyectos/shineapp/celular.jpg", alt: "Indicadores del período en ShineApp, en el celular", width: 390, height: 844 },
     url: "https://shineapp.lat/",
   },
   {
     slug: "consignataria-hacienda",
     index: "02",
-    title: "Landing para una consignataria de hacienda",
+    title: "Página para una consignataria de hacienda",
     category: "Landing",
     summary:
       "Presencia propia para una consignataria familiar: qué hace, cómo trabaja y una vía directa de contacto.",
@@ -114,13 +114,13 @@ export const projects = [
     images: [
       { src: "/images/proyectos/consignataria-hacienda/escritorio.jpg", alt: "Inicio de la landing de la consignataria: hacienda pastando y la propuesta con sus botones de contacto", width: 1440, height: 900 },
     ],
-    phoneImage: { src: "/images/proyectos/consignataria-hacienda/celular.jpg", alt: "Inicio de la landing de la consignataria en el celular", width: 390, height: 844 },
+    phoneImage: { src: "/images/proyectos/consignataria-hacienda/celular.jpg", alt: "Cotizador de hacienda de la consignataria en el celular", width: 390, height: 844 },
     url: "https://gymg.com.ar/",
   },
   {
     slug: "portfolio-desarrollador",
     index: "03",
-    title: "Portfolio de un desarrollador",
+    title: "Web personal de un programador",
     category: "Web personal",
     summary:
       "Sitio de presentación profesional con trayectoria y casos técnicos explicados con claridad.",
@@ -150,7 +150,7 @@ export const projects = [
     images: [
       { src: "/images/proyectos/portfolio-desarrollador/escritorio.jpg", alt: "Inicio del portfolio en tema oscuro, con el titular y los proyectos SISOC y ShineApp", width: 1440, height: 900 },
     ],
-    phoneImage: { src: "/images/proyectos/portfolio-desarrollador/celular.jpg", alt: "Inicio del portfolio en el celular", width: 390, height: 844 },
+    phoneImage: { src: "/images/proyectos/portfolio-desarrollador/celular.jpg", alt: "Mapa de sistemas del portfolio en el celular", width: 390, height: 844 },
     url: "https://juanikitro.com/",
   },
   {

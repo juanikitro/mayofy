@@ -17,6 +17,8 @@ export type CaseOption = {
   text: string;
   /** Painted art that marks the option and grows out of its card. */
   art: CaseArt;
+  /** What can be done with the recommended pack, said for this situation (Juani, 22 November 2026); the pack cards keep their own description. */
+  pitch: string;
 };
 
 /**
@@ -28,26 +30,45 @@ export type CaseOption = {
 export type CaseArt = { src: string; frames?: number };
 
 export const casePicker = {
-  prompt: "¿Qué te está pasando hoy? Elegí lo que más se parece y te mostramos por dónde empezar.",
+  prompt: "¿Qué te está pasando hoy?",
   options: [
-    { planId: "landing", text: "Me encuentran, pero no tengo dónde mostrar lo que hago.", art: { src: "34-isla2-flor" } },
-    { planId: "web-gestion", text: "Paso el día coordinando turnos por WhatsApp.", art: { src: "34-isla2-brote" } },
-    { planId: "sistema", text: "Mi operación vive en planillas y ya no alcanza.", art: { src: "34-isla2-mariposa-tira", frames: 5 } },
+    {
+      planId: "landing",
+      text: "Me encuentran, pero no tengo dónde mostrar lo que hago.",
+      art: { src: "34-isla2-flor" },
+      pitch:
+        "Una página con tu estilo. Con lo que hacés, los precios y fotos de tus trabajos. El objetivo es llevar a quien te encuentra en internet, directo a contactarte. Ideal para explotar el estilo de tu negocio.",
+    },
+    {
+      planId: "web-gestion",
+      text: "Paso el día coordinando turnos por WhatsApp.",
+      art: { src: "34-isla2-brote" },
+      pitch:
+        "Lo necesario para empezar a controlar tu negocio. Ordenamos los turnos, los canales de mensaje, los avisos y todo lo que podamos coordinar y automatizar. Ideal para ordenar tu negocio.",
+    },
+    {
+      planId: "sistema",
+      text: "Mi negocio vive en Excel, WhatsApp y mi cerebro.",
+      art: { src: "34-isla2-mariposa-tira", frames: 5 },
+      pitch:
+        "Un sistema hecho a cómo trabaja tu negocio: pasamos tus Excel, tus chats y lo que tenés en la cabeza a un solo lugar, con clientes, stock, cobros y los números del mes. Ideal para soñar e inventar lo que haga falta.",
+    },
   ] satisfies readonly CaseOption[],
   resultEyebrow: "Te conviene empezar por",
   detailsCta: "Ver qué incluye",
-  bookingCta: "Agendá tu diagnóstico",
+  bookingCta: "Agendá una charla gratis",
   /**
    * The proposal that builds itself (decorative): the base system, then one
    * module per question as it lands, and a closing line.
    */
   proposal: {
-    eyebrow: "Tu propuesta",
-    base: { title: "Sistema de gestión", text: "Clientes, ventas y turnos en un solo panel." },
+    base: { title: "Tu solución digital", text: "Lo que tu negocio necesite." },
     modules: [
-      { question: "¿Cuánto sale?", title: "Bot de WhatsApp", text: "Responde precios y consultas al instante." },
+      { question: "¿Me pasás los precios?", title: "Bot de WhatsApp", text: "Responde precios y consultas al instante." },
       { question: "¿Tenés turno el jueves?", title: "Turnos online", text: "Tus clientes reservan solos." },
       { question: "¿Te queda en stock?", title: "Control de stock", text: "Sabés qué hay y qué falta." },
+      { question: "¿Cuánto te debo?", title: "Cuentas y cobros", text: "Sabés quién pagó y quién te debe." },
+      { question: "¿Cómo vino el mes?", title: "Tus números", text: "Ventas y ganancias del mes." },
       { question: "¿Y si se corta internet?", title: "Disponibilidad offline", text: "Sigue funcionando sin conexión." },
     ],
     closing: "Un solo sistema, armado a tu medida.",

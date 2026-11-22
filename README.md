@@ -17,10 +17,10 @@ La aplicación queda disponible en `http://localhost:3000`.
 - `NEXT_PUBLIC_WHATSAPP_NUMBER`: número completo con código de país, solo dígitos.
 - `NEXT_PUBLIC_SITE_URL`: origen canónico del sitio.
 - `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID`: permite reemplazar el ID de Google Analytics 4 predeterminado (`G-F2DHJCS51K`). Un valor vacío desactiva Analytics.
-- `CONTACT_FORM_ENDPOINT`: endpoint HTTPS que recibe el formulario como JSON, o una dirección de correo. Con un correo, el servidor envía la consulta por FormSubmit (`https://formsubmit.co/ajax/<correo>`) a esa casilla; la primera consulta dispara un correo de activación que hay que confirmar una vez.
+- `CONTACT_FORM_ENDPOINT`: opcional. Sin valor, las consultas van por FormSubmit a `jpkitro@gmail.com` (constante del servidor en `src/app/api/contact/route.ts`). Acepta otra dirección de correo, la URL de FormSubmit (`https://formsubmit.co/ajax/<correo>`) o cualquier endpoint HTTPS que reciba el formulario como JSON. Con FormSubmit, la primera consulta dispara un correo de activación que hay que confirmar una vez; ver `docs/plans/2026-11-22-contacto-agenda.md`.
 - `CONTACT_FORM_TOKEN`: bearer token opcional enviado únicamente desde el servidor.
 
-Si WhatsApp no está configurado, los CTA llevan a la sección de contacto. Si el endpoint del formulario falta, la interfaz muestra un error honesto y ofrece continuar por WhatsApp.
+Si WhatsApp no está configurado, los CTA llevan a la sección de contacto. Si el envío del formulario falla o tarda más de 55 s, la interfaz lo dice con honestidad y ofrece continuar por WhatsApp.
 
 ## Comandos
 

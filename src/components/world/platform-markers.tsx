@@ -24,7 +24,8 @@ export function PlatformMarkers({ markers }: { markers: readonly PlatformMarker[
     if (!card || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
     event.preventDefault();
     card.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
-    window.history.pushState(null, "", `#pack-${id}`);
+    // Keep the router's state on the entry, or Back after a case study would be ignored (HashLinkHistory).
+    window.history.pushState(window.history.state, "", `#pack-${id}`);
     card.setAttribute("tabindex", "-1");
     card.focus({ preventScroll: true });
     card.classList.remove("is-target");

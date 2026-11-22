@@ -8,20 +8,19 @@ export type TitleSegment = string | { em: string };
 
 export type IslandCopy = {
   title: readonly TitleSegment[];
-  body: string;
+  /** Optional: island 2 dropped its line on 22 November 2026. */
+  body?: string;
   /** One line per item of a list the island walks through (the six steps). */
   details?: readonly string[];
 };
 
 export const islandCopy = {
   problem: {
-    title: ["Construyamos tu lugar en ", { em: "internet" }],
-    // 2026-11-20: the questions now assemble a system proposal beside it (problem-island.tsx).
-    body: "Cada pregunta que hoy respondés a mano se convierte en una pieza de tu sistema.",
+    title: ["Construimos lo que ", { em: "necesitás" }, "."],
   },
   packs: {
-    title: ["Encontramos lo que necesita ", { em: "tu negocio" }, "."],
-    body: "Precios de referencia para saber por dónde arrancar. El alcance y la inversión final se definen después de una reunión de diagnóstico gratis.",
+    title: ["Elegí por dónde ", { em: "empezamos" }, "."],
+    body: "Precios de referencia para saber por dónde arrancar. El alcance y el precio final se definen después de una charla gratis.",
   },
   // Shortened on 2026-11-20 with option B of docs/plans/2026-11-20-propuestas.md.
   systems: {
@@ -29,8 +28,8 @@ export const islandCopy = {
     body: "Lo que tu operación necesita, sin convertir la tecnología en protagonista.",
   },
   works: {
-    title: ["Nuestra siembra, ", { em: "tus resultados" }, "."],
-    body: "Un sistema a medida, una landing y una web personal, funcionando. Los casos completos se suman a medida que avanzan.",
+    title: ["Trabajos que ya ", { em: "están andando" }, "."],
+    body: "Un sistema con agenda para lavaderos, una página para una consignataria y una web personal. Se suman más a medida que terminan.",
   },
   process: {
     title: ["Seis pasos, sin ", { em: "sorpresas" }, "."],
@@ -56,7 +55,7 @@ export const islandCopy = {
   },
   // Island 6, under the intro (option A of docs/plans/2026-11-20-propuestas.md).
   reach: {
-    title: ["Empecemos por una reunión de diagnóstico ", { em: "gratis" }, "."],
+    title: ["Empecemos por una charla ", { em: "gratis" }, "."],
     body: "Contanos qué necesitás. Te respondemos en menos de 24 horas hábiles.",
   },
 } as const satisfies Record<string, IslandCopy>;

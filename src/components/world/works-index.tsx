@@ -29,7 +29,7 @@ function PendingShot({ index }: { index: string }) {
 
 /**
  * Works as an index with a floating preview (option A of
- * docs/plans/2026-11-20-propuestas.md). Every 5 s the next project takes the
+ * docs/plans/2026-11-20-propuestas.md). Every 12 s the next project takes the
  * preview (a crossfade), with a bar filling under its row to mark the time.
  * Hovering or focusing a project selects it and holds the count at zero
  * until the pointer or focus leaves the index, when it starts again. The
@@ -72,7 +72,7 @@ export function WorksIndex({ projects }: { projects: readonly ProjectEntry[] }) 
     };
   }, []);
 
-  /** Selects a project and starts its 5 s count from zero. */
+  /** Selects a project and starts its 12 s count from zero. */
   function select(index: number) {
     setActive(index);
     setCycle((value) => value + 1);
