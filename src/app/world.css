@@ -7347,8 +7347,18 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
+/* Each question appears at its spot just before it flies, so only one
+ * floats at a time and none rest on top of another (Juani, 22 November 2026:
+ * "no quiero solapar mensajes quietos"). */
 @keyframes problem-ask {
   0% {
+    left: var(--x0);
+    top: var(--y0);
+    opacity: 0;
+    scale: 0.92;
+  }
+
+  18% {
     left: var(--x0);
     top: var(--y0);
     opacity: 1;

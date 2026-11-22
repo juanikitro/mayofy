@@ -17,6 +17,8 @@ export type CaseOption = {
   text: string;
   /** Painted art that marks the option and grows out of its card. */
   art: CaseArt;
+  /** What can be done with the recommended pack, said for this situation (Juani, 22 November 2026); the pack cards keep their own description. */
+  pitch: string;
 };
 
 /**
@@ -30,9 +32,27 @@ export type CaseArt = { src: string; frames?: number };
 export const casePicker = {
   prompt: "¿Qué te está pasando hoy?",
   options: [
-    { planId: "landing", text: "Me encuentran, pero no tengo dónde mostrar lo que hago.", art: { src: "34-isla2-flor" } },
-    { planId: "web-gestion", text: "Paso el día coordinando turnos por WhatsApp.", art: { src: "34-isla2-brote" } },
-    { planId: "sistema", text: "Mi negocio vive en Excel, WhatsApp y mi cerebro.", art: { src: "34-isla2-mariposa-tira", frames: 5 } },
+    {
+      planId: "landing",
+      text: "Me encuentran, pero no tengo dónde mostrar lo que hago.",
+      art: { src: "34-isla2-flor" },
+      pitch:
+        "Una página con tu estilo. Con lo que hacés, los precios y fotos de tus trabajos. El objetivo es llevar a quien te encuentra en internet, directo a contactarte. Ideal para explotar el estilo de tu negocio.",
+    },
+    {
+      planId: "web-gestion",
+      text: "Paso el día coordinando turnos por WhatsApp.",
+      art: { src: "34-isla2-brote" },
+      pitch:
+        "Lo necesario para empezar a controlar tu negocio. Ordenamos los turnos, los canales de mensaje, los avisos y todo lo que podamos coordinar y automatizar. Ideal para ordenar tu negocio.",
+    },
+    {
+      planId: "sistema",
+      text: "Mi negocio vive en Excel, WhatsApp y mi cerebro.",
+      art: { src: "34-isla2-mariposa-tira", frames: 5 },
+      pitch:
+        "Un sistema hecho a cómo trabaja tu negocio: pasamos tus Excel, tus chats y lo que tenés en la cabeza a un solo lugar, con clientes, stock, cobros y los números del mes. Ideal para soñar e inventar lo que haga falta.",
+    },
   ] satisfies readonly CaseOption[],
   resultEyebrow: "Te conviene empezar por",
   detailsCta: "Ver qué incluye",
@@ -42,7 +62,7 @@ export const casePicker = {
    * module per question as it lands, and a closing line.
    */
   proposal: {
-    base: { title: "Sistema de gestión", text: "Clientes, ventas y turnos en un solo panel." },
+    base: { title: "Tu solución digital", text: "Lo que tu negocio necesite." },
     modules: [
       { question: "¿Me pasás los precios?", title: "Bot de WhatsApp", text: "Responde precios y consultas al instante." },
       { question: "¿Tenés turno el jueves?", title: "Turnos online", text: "Tus clientes reservan solos." },
