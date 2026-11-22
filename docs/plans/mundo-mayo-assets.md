@@ -1739,3 +1739,11 @@ Bbox PNG: `(left,top,right,bottom)`, límites derecho/inferior exclusivos; inclu
 | 34-isla2-mariposa-tira.avif | case-picker-animation-strip | 2560x512 | Sí | 5 celdas; bboxes individuales anteriores; generación + key descritos |
 | 34-isla2-mariposa-tira.webp | case-picker-animation-strip | 2560x512 | Sí | 5 celdas; bboxes individuales anteriores; generación + key descritos |
 | 34-isla2-mariposa-preview.gif | QA preview | 512x512 | No | fondo crema, 8 pasos ping-pong |
+
+## Isla 6 v3 — avatar estático de Juani
+
+Juani aprobó la escena sentado en el banco, con sonrisa leve y mirando a Mayonesa, tras reducir su altura aparente para que la cabeza quede por debajo de la copa. El retrato de «Soy Juani» no cambia. Mayonesa conserva su tira y ancla originales; el perro del boceto de escritorio no se incorporó a los archivos finales.
+
+Referencias: placas v2 y hoja de estilo de Mayo del commit local e58b245 y tres fotos privadas aprobadas como referencia visual, no versionadas. Prompt base: pintar a Juani en el banco, con remera verde holgada, jean oscuro, argollas, sin barba ni anteojos; orientar la mirada hacia Mayo y combinar luz cálida del fogón con borde frío de crepúsculo. Prompt de revisión: reducir la silueta sentada sin agrandar el árbol. Para móvil se repintó la pose aprobada sobre la placa vertical, sin dibujar a Mayo.
+
+Se conservó el PNG v2 fuera de la región local del banco. El montaje usa una máscara suavizada de esa región y un descarte por color/diferencia del cielo regenerado para extender el alfa solo alrededor de la silueta. Se exportaron placa completa y recorte de parallax para escritorio (1672×941) y celular (864×1536): PNG maestro, AVIF 85 y WebP con pérdida 82. Se reutiliza el fondo v2. Las variantes de producción no incluyen las fotos de referencia.
