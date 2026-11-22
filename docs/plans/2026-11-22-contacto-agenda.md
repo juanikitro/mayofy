@@ -1,4 +1,4 @@
-# Isla 6: la agenda de Cal.com sin trampa de scroll y con la ropa de la isla
+# Isla 6: la agenda sin trampa de scroll, el formulario que llega y la foto de Juani
 
 Pedido de Juani, 22 de noviembre de 2026: "Despliega un agente dedicado a arreglar eso. si es posible, modifica la caja del cal.com para que sea mas acorde al reseto de la pagina".
 
@@ -66,3 +66,74 @@ Capturas en `docs/plans/contacto-agenda/`:
 - **"30 minutos por videollamada" está escrito en `site.ts`.** Si Juani cambia la duración o el lugar del evento en Cal.com, hay que actualizar ese texto.
 - **Las fuentes de adentro del iframe son las de Cal.com.** Las CSS variables no cambian la tipografía, y no se puede cargar la del sitio adentro de un iframe de otro dominio.
 - **Lo que no se pudo probar:** un Android y un iPhone reales (los toques son emulados por CDP) y un touchpad de precisión. El acomodo por secciones (`section-snap.tsx`) es de otro agente; con la isla 6 más alta se comportó como en cualquier sección alta (sin tirones hacia atrás en las mediciones).
+
+## El formulario llega a jpkitro@gmail.com
+
+Pedido de Juani, 22 de noviembre de 2026: "hagamos que el envio de formulario funcione a jpkitro@gmail.com. Tengo una cuenta de resend, pero me mantendria no tener que usarla. Debe llegar a jpkitro@gmail.com por ahora."
+
+Archivos: `src/app/api/contact/route.ts`, `src/components/contact-form.tsx` y `README.md`.
+
+### Por qué no llegaba (evidencia e hipótesis)
+
+1. **Causa probable principal (comprobada en el código, no en producción): la dirección de destino estaba mal armada.**
+   - Railway tiene `CONTACT_FORM_ENDPOINT=https://formsubmit.co/ajax/jpkitro@gmail.com`, en forma de URL (`odd/tasks/landing-followups.md`, L3).
+   - La ruta probaba primero si el valor era un correo, con un patrón laxo (`algo@algo.algo`), y esa URL lo cumple: `https://formsubmit.co/ajax/jpkitro` + `@` + `gmail.com`. Así que la envolvía otra vez y mandaba cada consulta a `https://formsubmit.co/ajax/https%3A%2F%2Fformsubmit.co%2Fajax%2Fjpkitro%40gmail.com`, una casilla que no existe.
+   - Se reprodujo con el mismo valor en local, contra un FormSubmit simulado. La versión de producción (`b1d4042`) tiene el mismo código.
+   - No se pudo ver qué responde FormSubmit a esa dirección, porque probarlo sería un envío real.
+2. **Falta de página de origen.** La ayuda de FormSubmit (https://formsubmit.co/help, "Why am I always getting an error 'Unable to submit form'?") explica que rechaza los envíos que no dicen de qué página vienen ("Make sure you open this page through a web server") y que se arregla con un campo `_url`. La consulta sale de nuestro servidor, sin `Referer` de navegador, y no mandaba `_url`.
+3. **Activación pendiente.** La prueba del 16/11 disparó el correo de activación, y Juani informó que no le llegó (`docs/plans/landing-iteration-backlog.md`, punto 1). Mientras FormSubmit no está activado, responde HTTP 200 con `success: "false"` y un mensaje que pide activar. Según su ayuda, guarda las consultas 30 días y las entrega cuando se activa.
+4. **Lentitud.** FormSubmit tardó de 25 a 60 s en las pruebas del 16/11, y la ruta cortaba a los 20 s. Eso daba error aunque FormSubmit tal vez entregara después.
+
+### Qué cambió
+
+- **Destino por defecto en el servidor:** sin `CONTACT_FORM_ENDPOINT`, las consultas van por FormSubmit a `jpkitro@gmail.com`. La dirección es una constante de la ruta (`DEFAULT_CONTACT_EMAIL`) y nunca llega al navegador. Sigue habiendo un override: `CONTACT_FORM_ENDPOINT` acepta un correo, la URL de FormSubmit o cualquier endpoint HTTPS. Se quitó la respuesta 503 de "formulario no configurado".
+- **URL antes que correo:** un valor que empieza con un esquema (`https://`) se trata siempre como URL. El valor que ya está en Railway funciona tal cual, y también funcionaría si se borra.
+- **Lo que FormSubmit necesita:**
+  - Encabezados `Origin` y `Referer`, y el campo `_url`, con la página de contacto. Se toman del `Origin` del navegador que envía y, si no hay, de `NEXT_PUBLIC_SITE_URL`.
+  - `_subject`: "Nueva consulta desde mayofy.dev: <nombre>".
+  - `_replyto`: el correo de la persona, cuando dejó un correo.
+  - `_template: "table"` y `_captcha: "false"`. Las opciones especiales están documentadas en https://formsubmit.co, y la forma AJAX en https://formsubmit.co/ajax-documentation.
+- **Un correo legible:** los campos van con nombres en castellano (Nombre, Negocio, Responder a, Qué necesita, Plazo, Presupuesto, Referencia, Mensaje), con el texto de la opción elegida y no su código, y sin las filas vacías. Un endpoint propio (no FormSubmit) recibe el mismo JSON de antes, sin cambios.
+- **Espera honesta:**
+  - La ruta espera hasta 55 s.
+  - En el formulario, a los 6 s, "Enviando tu consulta…" pasa a "Sigue enviándose. A veces tarda hasta un minuto: no cierres esta página."
+  - Si se cumplen los 55 s, la respuesta dice "El envío tardó demasiado y no sabemos si llegó. Escribinos por WhatsApp para confirmarlo." No dice que falló, porque no se sabe.
+- **Mensajes claros cuando FormSubmit dice que no:**
+  - Si pide activación: "El formulario todavía no está activado, así que tu consulta puede demorar en llegarnos. Escribinos por WhatsApp y lo vemos enseguida."
+  - Cualquier otro rechazo: "No pudimos enviar la consulta. Probá por WhatsApp."
+  - En los dos casos aparece el enlace "Continuar por WhatsApp".
+- **Diagnóstico en los logs de Railway:** cada falla deja una línea `[contact] …` con el motivo. Por ejemplo, `[contact] formsubmit.co did not deliver: This form needs Activation…`, un HTTP distinto de 200, o que pasaron los 55 s.
+- Se mantienen la validación, el límite de 12 KB, el campo trampa (`company`) y la espera mínima de 2,5 s. No había un límite por IP y no se agregó.
+
+### Cómo se verificó (sin envíos reales)
+
+En `next dev`, un módulo precargado (`NODE_OPTIONS=--import`) intercepta solo los `fetch` a `formsubmit.co`. Registra encabezados y cuerpo, y contesta lo que se le pida. Ninguna consulta salió a FormSubmit.
+
+| Caso | Resultado |
+|---|---|
+| Sin `CONTACT_FORM_ENDPOINT` | Va a `formsubmit.co/ajax/jpkitro%40gmail.com` con `Origin`, `Referer`, `_url`, `_subject`, `_replyto`, `_template` y `_captcha`. HTTP 200 `{ok: true}`. |
+| `CONTACT_FORM_ENDPOINT=https://formsubmit.co/ajax/jpkitro@gmail.com` (el valor de Railway) | Antes: `formsubmit.co/ajax/https%3A%2F%2F…`. Después: `formsubmit.co/ajax/jpkitro@gmail.com`. |
+| Endpoint propio (`https://hooks.example.test/contact`) | El mismo JSON de antes, sin encabezados de origen. |
+| Valor inválido | 503 "El formulario no está disponible. Escribinos por WhatsApp." y una línea en el log. |
+| FormSubmit pide activación | 502 con el mensaje de activación y el motivo en el log. |
+| FormSubmit "web server" / HTTP 500 | 502 con el mensaje general y el motivo en el log. |
+| FormSubmit no responde en 60 s | 504 a los 55,2 s, "no sabemos si llegó". |
+| Campo trampa lleno | 200 sin llamar a FormSubmit. |
+| Navegador, 390x844, FormSubmit simulado tarda 10 s | A los 2 s, "Enviando tu consulta…" con el botón deshabilitado. A los 7 s, el aviso de que puede tardar un minuto. A los 12 s, "Consulta enviada…". Los acentos y "¿" llegan bien en el cuerpo. |
+
+`eslint` y `tsc --noEmit` sin errores.
+
+### Qué va a pasar con el primer envío real (para hacerlo con Juani)
+
+1. Publicar esta rama. El valor de `CONTACT_FORM_ENDPOINT` en Railway puede quedar como está o borrarse: los dos llevan a jpkitro@gmail.com.
+2. Mandar una consulta de prueba desde https://mayofy.dev ("Prefiero completar un formulario" → "Prefiero que me contacten"). Puede tardar hasta un minuto.
+3. Si la casilla no está activada, la pantalla va a mostrar "El formulario todavía no está activado…", y FormSubmit le manda a jpkitro@gmail.com un correo de activación con un botón "Activate Form". **Juani tiene que abrirlo y tocar el botón.** Conviene buscarlo también en Spam y Promociones. Si encuentra un correo de activación viejo de FormSubmit (del 16/11), puede probar con ese.
+4. Después de activar, FormSubmit entrega la consulta de prueba guardada y las siguientes llegan directo, con asunto "Nueva consulta desde mayofy.dev: …". Responder a ese correo le contesta a la persona si dejó un correo.
+5. Si algo falla, el motivo exacto queda en los logs del servicio `web` de Railway, en las líneas que empiezan con `[contact]`.
+
+FormSubmit también ofrece reemplazar la dirección por un alias aleatorio, para no exponer el correo en la URL. No hace falta, porque la dirección vive solo en el servidor.
+
+### Límites del formulario
+
+- No se pudo confirmar en producción cuál de las causas pesaba más. La dirección mal armada es segura en el código; la activación y la lentitud dependen de FormSubmit.
+- FormSubmit es un servicio gratuito sin garantía de entrega ni de velocidad. Si falla seguido, la alternativa es Resend con su clave de API, que Juani prefirió no usar.
