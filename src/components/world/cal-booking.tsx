@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type CalApi = ((...args: unknown[]) => void) & {
   loaded?: boolean;
@@ -11,13 +11,15 @@ type CalApi = ((...args: unknown[]) => void) & {
 
 type WindowWithCal = Window & { Cal?: CalApi };
 
-type BookingStatus = "loading" | "ready" | "failed";
+type BookingStatus = "idle" | "loading" | "ready" | "failed";
 
 type BookingCopy = {
   url: string;
   calLink: string;
   heading: string;
   detail: string;
+  open: string;
+  opening: string;
   loading: string;
   failed: string;
   failedCta: string;
@@ -27,7 +29,13 @@ type BookingCopy = {
 const embedScript = "https://app.cal.com/embed/embed.js";
 const loaderFailedEvent = "mayofy:cal-loader-failed";
 
-/** After this long without Cal.com reporting ready, the frame offers the direct link. */
+/** Wide enough for Cal.com's compact month view; narrower screens open the agenda from a button. */
+const inlineQuery = "(min-width: 64rem)";
+
+/** The inline agenda starts loading when it is this close to the screen (1.5 screens). */
+const inlineRootMargin = "150% 0px 150% 0px";
+
+/** After this long without Cal.com reporting ready, the panel offers the direct link. */
 const readyTimeout = 15000;
 
 /** Bootstraps the Cal.com embed loader once (the official snippet, written out). */
@@ -58,10 +66,10 @@ function ensureCalLoader(): CalApi {
 
 /**
  * Cal.com's dark theme repainted with the island's own tokens, read from the
- * booking frame so the iframe and the panel around it share one surface.
+ * booking panel so the iframe and the panel around it share one surface.
  */
-function islandCalTheme(frame: HTMLElement): Record<string, string> {
-  const style = getComputedStyle(frame);
+function islandCalTheme(panel: HTMLElement): Record<string, string> {
+  const style = getComputedStyle(panel);
   const token = (name: string) => style.getPropertyValue(name).trim();
   const surface = token("--booking-surface");
   const ink = token("--night-ink");
@@ -93,100 +101,169 @@ function islandCalTheme(frame: HTMLElement): Record<string, string> {
   };
 }
 
-/**
- * Cal.com booking embedded inline (decision 16), dressed as part of the
- * dusk island: Cal.com's own event header (an English title, "30m", the
- * time zone picker) is hidden in favour of a Spanish heading in the site's
- * type, and the colours come from the site's tokens.
- *
- * The iframe grows to its content on every width and nothing inside it
- * scrolls on its own, so a flick or a wheel notch over the calendar always
- * moves the page (user test, finding A4). That decides the layout: the
- * column view lists the free times of two days at full length beside the
- * month, where the month view boxes them in a column that scrolls inside;
- * on a phone Cal.com stacks the month and the times in one column either
- * way. `useSlotsViewOnSmallScreen` stays off for the same reason: it opens
- * the times in a fixed overlay that scrolls inside the iframe. Cal.com's own
- * autoscroll is off too, so the page only moves when the reader moves it. Until Cal.com reports ready a still skeleton holds
- * the place with a visible "loading" line; if the loader or the link fails,
- * or nothing answers within 15 s, the frame offers the direct link instead
- * of an empty box.
- */
-export function CalBooking({ url, calLink, heading, detail, loading, failed, failedCta, fallback }: BookingCopy) {
-  const frameRef = useRef<HTMLDivElement>(null);
-  const hostRef = useRef<HTMLDivElement>(null);
-  const [status, setStatus] = useState<BookingStatus>("loading");
+/** Layout, theme and header shared by the inline agenda and the phone popup. */
+const embedConfig = { layout: "month_view", theme: "dark" };
 
-  useEffect(() => {
-    const frame = frameRef.current;
-    const host = hostRef.current;
-    if (!frame || !host) return;
+/**
+ * Cal.com booking (decision 16), dressed as part of the dusk island: Cal.com's
+ * own event header (an English title, "30m", the time zone picker) is hidden
+ * in favour of a Spanish heading in the site's type, and the colours come from
+ * the site's tokens.
+ *
+ * Wide screens (64rem and up) show the compact month view inline: the month
+ * beside a short column of the chosen day's times. That column scrolls only
+ * under the pointer and hands the wheel back to the page at its ends; the rest
+ * of the panel scrolls the page (Juani, 22 November 2026: "en desktop me
+ * gustaba la version anterior que era compacta"). Narrower screens keep the
+ * page short: one button opens Cal.com's own full-screen popup ("menos en
+ * mobile, que podria abrirse con un boton").
+ *
+ * Nothing loads with the page: the inline agenda boots when it comes within
+ * 1.5 screens, the popup when its button is tapped (about 1 MB of Cal.com
+ * code, fonts and requests stay off the first screen). The 15 s failure timer
+ * starts with that load; on a failed loader or link, or silence, the panel
+ * offers the direct link instead of an empty box.
+ */
+export function CalBooking({ url, calLink, heading, detail, open, opening, loading, failed, failedCta, fallback }: BookingCopy) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const hostRef = useRef<HTMLDivElement>(null);
+  const calRef = useRef<CalApi | null>(null);
+  const timerRef = useRef(0);
+  const [status, setStatus] = useState<BookingStatus>("idle");
+
+  const markReady = useCallback(() => {
+    window.clearTimeout(timerRef.current);
+    setStatus("ready");
+  }, []);
+  const markFailed = useCallback(() => {
+    setStatus((current) => (current === "ready" ? current : "failed"));
+  }, []);
+
+  /** Loads Cal.com once, wires its events and theme, and starts the failure timer. */
+  const bootCal = useCallback(() => {
+    if (calRef.current) return calRef.current;
+    const panel = panelRef.current;
     const cal = ensureCalLoader();
-    const markReady = () => setStatus("ready");
-    const markFailed = () => setStatus((current) => (current === "ready" ? current : "failed"));
-    const timer = window.setTimeout(markFailed, readyTimeout);
+    calRef.current = cal;
+    setStatus("loading");
+    timerRef.current = window.setTimeout(markFailed, readyTimeout);
     if (cal.failed) markFailed();
     window.addEventListener(loaderFailedEvent, markFailed);
     cal("on", { action: "linkReady", callback: markReady });
     cal("on", { action: "linkFailed", callback: markFailed });
-    cal("inline", {
-      elementOrSelector: host,
-      calLink,
-      config: {
-        layout: "column_view",
-        theme: "dark",
-      },
-    });
     cal("ui", {
-      theme: "dark",
-      layout: "column_view",
+      ...embedConfig,
       hideEventTypeDetails: true,
       disableAutoScroll: true,
-      cssVarsPerTheme: { dark: islandCalTheme(frame), light: islandCalTheme(frame) },
+      ...(panel ? { cssVarsPerTheme: { dark: islandCalTheme(panel), light: islandCalTheme(panel) } } : {}),
     });
-    return () => {
-      window.clearTimeout(timer);
-      window.removeEventListener(loaderFailedEvent, markFailed);
-      cal("off", { action: "linkReady", callback: markReady });
-      cal("off", { action: "linkFailed", callback: markFailed });
-      host.replaceChildren();
+    return cal;
+  }, [markFailed, markReady]);
+
+  // Wide screens: boot the inline agenda when it comes within 1.5 screens.
+  useEffect(() => {
+    const host = hostRef.current;
+    if (!host) return;
+    const wide = window.matchMedia(inlineQuery);
+    let observer: IntersectionObserver | null = null;
+    let mounted = false;
+
+    const mountInline = () => {
+      if (mounted) return;
+      mounted = true;
+      bootCal()("inline", { elementOrSelector: host, calLink, config: embedConfig });
     };
-  }, [calLink]);
+    const watch = () => {
+      observer?.disconnect();
+      if (!wide.matches || mounted) return;
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          observer?.disconnect();
+          mountInline();
+        },
+        { rootMargin: inlineRootMargin },
+      );
+      observer.observe(host);
+    };
+
+    watch();
+    wide.addEventListener("change", watch);
+    return () => {
+      wide.removeEventListener("change", watch);
+      observer?.disconnect();
+    };
+  }, [bootCal, calLink]);
+
+  useEffect(
+    () => () => {
+      window.clearTimeout(timerRef.current);
+      window.removeEventListener(loaderFailedEvent, markFailed);
+      const cal = calRef.current;
+      cal?.("off", { action: "linkReady", callback: markReady });
+      cal?.("off", { action: "linkFailed", callback: markFailed });
+      hostRef.current?.replaceChildren();
+    },
+    [markFailed, markReady],
+  );
+
+  /** Narrow screens: Cal.com's popup, loaded on the first tap. */
+  function openPopup() {
+    bootCal()("modal", { calLink, config: embedConfig });
+  }
+
+  const busy = status === "loading";
 
   return (
-    <div className="booking" id="agenda">
-      <div className="booking__panel">
+    <div className="booking" id="agenda" data-status={status}>
+      <div className="booking__panel" ref={panelRef}>
         <div className="booking__head">
           <p className="booking__heading">{heading}</p>
           <p className="booking__detail">{detail}</p>
         </div>
-        <div className="booking__frame" ref={frameRef} data-status={status}>
-          <div className="booking__inline" ref={hostRef} aria-label="Agenda de Cal.com" aria-busy={status === "loading"} />
+        <div className="booking__frame">
+          <div className="booking__inline" ref={hostRef} aria-label="Agenda de Cal.com" aria-busy={busy} />
           <div className="booking__skeleton" aria-hidden="true">
-            <span className="booking__skeleton-title" />
             <span className="booking__skeleton-grid">
               {Array.from({ length: 35 }, (_, index) => (
                 <span key={index} />
               ))}
             </span>
+            <span className="booking__skeleton-times">
+              {Array.from({ length: 7 }, (_, index) => (
+                <span key={index} />
+              ))}
+            </span>
           </div>
           <p className="booking__state" role="status">
-            {status === "loading" ? loading : null}
+            {busy ? loading : null}
           </p>
-          {status === "failed" ? (
-            <div className="booking__failed">
-              <p>{failed}</p>
-              <a className="btn btn--moss" href={url} target="_blank" rel="noreferrer">
-                {failedCta}
-              </a>
-            </div>
-          ) : null}
         </div>
+        <div className="booking__launch">
+          <button className="btn btn--moss btn--lg booking__open" type="button" onClick={openPopup} aria-busy={busy} disabled={busy}>
+            {busy ? (
+              <>
+                <span className="btn__spinner" aria-hidden="true" />
+                {opening}
+              </>
+            ) : (
+              open
+            )}
+          </button>
+        </div>
+        {status === "failed" ? (
+          <div className="booking__failed" role="alert">
+            <p>{failed}</p>
+            <a className="btn btn--moss" href={url} target="_blank" rel="noreferrer">
+              {failedCta}
+            </a>
+          </div>
+        ) : null}
+        <a className="booking__link" href={url} target="_blank" rel="noreferrer">
+          <span className="link-label">{fallback}</span>{" "}
+          <span className="link-arrow link-arrow--out" aria-hidden="true">↗</span>
+        </a>
       </div>
-      <a className="booking__link" href={url} target="_blank" rel="noreferrer">
-        <span className="link-label">{fallback}</span>{" "}
-        <span className="link-arrow link-arrow--out" aria-hidden="true">↗</span>
-      </a>
     </div>
   );
 }
