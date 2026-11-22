@@ -21,20 +21,31 @@ const websiteId = () => absolute("/#website");
 /*
  * Remote work reaches all of Argentina and Latin America; in person, the
  * partidos within about two hours of 25 de Mayo (Buenos Aires), the same
- * zones as the Google Business Profile (docs/plans/2026-11-22-perfil-google.md).
+ * 20 zones as the Google Business Profile (table "Las 20 zonas" in
+ * docs/plans/2026-11-22-perfil-google.md); keep both lists in step.
  * Titles and descriptions are never localised to the town (Juani, 2026-11-22).
  */
 const inPersonPartidos = [
-  "25 de Mayo",
-  "Saladillo",
-  "Alberti",
-  "Bragado",
-  "Chivilcoy",
-  "Roque Pérez",
-  "Lobos",
-  "Nueve de Julio",
-  "General Alvear",
+  "Veinticinco de Mayo",
+  "Luján",
+  "Junín",
   "Mercedes",
+  "Chivilcoy",
+  "Cañuelas",
+  "Chacabuco",
+  "Nueve de Julio",
+  "Bragado",
+  "Lobos",
+  "Salto",
+  "Saladillo",
+  "Las Flores",
+  "San Andrés de Giles",
+  "Monte",
+  "Carlos Casares",
+  "General Viamonte",
+  "Navarro",
+  "Carmen de Areco",
+  "Alberti",
 ];
 
 const areaServed = [
