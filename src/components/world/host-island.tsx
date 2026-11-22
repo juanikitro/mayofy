@@ -1,12 +1,10 @@
-import { AnimatedDetails } from "@/components/animated-details";
-import { ContactForm } from "@/components/contact-form";
 import { CalBooking } from "@/components/world/cal-booking";
+import { ContactAlternatives } from "@/components/world/contact-alternatives";
 import { plateSceneStyle } from "@/components/world/island-plate";
 import { IslandScene } from "@/components/world/island-scene";
 import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure } from "@/components/world/mayo-figure";
 import { SceneGlow } from "@/components/world/scene-glow";
-import { WhatsAppIcon } from "@/components/world/whatsapp-icon";
 import { islandCopy } from "@/content/islands";
 import { publicChannels, siteContent } from "@/content/site";
 import { islandPlates } from "@/content/stage";
@@ -24,12 +22,14 @@ function portraitSrcSet(format: "avif" | "webp") {
  * docs/plans/2026-11-20-propuestas.md, "Junto al fuego"). The first screen
  * is the introduction beside the island, where Mayo rests by the fire, with
  * Juani's portrait beside "Soy Juani" (a photo until his avatar exists); the
- * invitation, the agenda and WhatsApp follow under it, and the contact form
- * folds behind "Prefiero completar un formulario".
+ * invitation follows as one composed section: the heading and three steps
+ * beside the agenda (the one primary action), WhatsApp and the form as a pair
+ * of quieter buttons under it, and the form opening full width below.
  */
 export function JuaniIsland() {
   const whatsappHref = getWhatsAppHref();
   const heroWhatsAppHref = getWhatsAppHref(siteContent.hero.primaryMessage);
+  const scheduling = siteContent.scheduling;
 
   return (
     <section id="contacto" className="isle isle--dusk isle--dark hearth" data-island="6" style={plateSceneStyle(islandPlates.host)} aria-labelledby="contacto-title">
@@ -74,16 +74,31 @@ export function JuaniIsland() {
             <IslandTitle segments={islandCopy.reach.title} />
           </h3>
           <p>{islandCopy.reach.body}</p>
-          <a className="btn btn--moss hearth__whatsapp" href={heroWhatsAppHref} target="_blank" rel="noreferrer">
-            <WhatsAppIcon />
-            Escribir por WhatsApp
-          </a>
+          <ol className="hearth__steps">
+            {scheduling.steps.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ol>
         </div>
-        <CalBooking {...siteContent.scheduling} />
-        <AnimatedDetails className="pack-details hearth__form" summary={<span className="link-label">Prefiero completar un formulario</span>}>
-          <p className="hearth__form-intro">Completá estos datos y lo vemos por WhatsApp.</p>
-          <ContactForm whatsappHref={whatsappHref} />
-        </AnimatedDetails>
+        <CalBooking
+          url={scheduling.url}
+          calLink={scheduling.calLink}
+          heading={scheduling.heading}
+          detail={scheduling.detail}
+          open={scheduling.open}
+          opening={scheduling.opening}
+          loading={scheduling.loading}
+          failed={scheduling.failed}
+          failedCta={scheduling.failedCta}
+          fallback={scheduling.fallback}
+        />
+        <ContactAlternatives
+          label={scheduling.alternativesLabel}
+          formToggle={scheduling.formToggle}
+          formIntro={scheduling.formIntro}
+          whatsappHref={heroWhatsAppHref}
+          formWhatsappHref={whatsappHref}
+        />
       </div>
     </section>
   );

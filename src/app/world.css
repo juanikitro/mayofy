@@ -7975,69 +7975,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
   z-index: 2;
 }
 
-.hearth__reach {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  gap: 1.5rem;
-  padding-block: 1rem 5rem;
-}
-
-.hearth__invite {
-  display: grid;
-  gap: 0.75rem;
-  justify-items: start;
-  max-width: 28rem;
-}
-
-.hearth__invite h3 {
-  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-}
-
-.hearth__invite h3 em {
-  font-family: var(--font-world-serif);
-  font-style: italic;
-  font-weight: 400;
-  color: var(--mint);
-}
-
-.hearth__invite p,
-.hearth__form-intro {
-  color: var(--night-ink-soft);
-}
-
-.hearth__whatsapp svg {
-  width: 1.2rem;
-  height: 1.2rem;
-  fill: currentColor;
-}
-
-.hearth__form .contact-form {
-  padding: 0;
-  background: none;
-}
-
-.hearth__form-intro {
-  margin-block-end: 1rem;
-}
-
-.hearth__form .field {
-  gap: 0.3rem;
-  margin-block-end: 0.85rem;
-}
-
-.hearth__form .field :is(input, select, textarea) {
-  min-height: 2.75rem;
-  padding: 0.55rem 0.85rem;
-  font-size: 1rem;
-}
-
-.hearth__form .field textarea {
-  height: 6.5rem;
-}
-
 @media (min-width: 48.01rem) {
   .hearth {
     --hearth-shift: 26vw;
@@ -8061,40 +7998,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
-@media (min-width: 64rem) {
-  .hearth__form .contact-form {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    column-gap: 1rem;
-    align-items: start;
-  }
-
-  .hearth__form .contact-form__row {
-    display: contents;
-  }
-
-  .hearth__form .field:has(textarea) {
-    grid-column: span 2;
-  }
-
-  .hearth__form .contact-form > :is(.contact-form__footer, .contact-form__feedback, .contact-form__privacy, .contact-form__fallback) {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (min-width: 88rem) {
-  .hearth__reach {
-    grid-template-columns: minmax(0, 1fr) 51.5rem;
-    column-gap: 3rem;
-    align-items: start;
-  }
-
-  .hearth__form {
-    grid-column: 1 / -1;
-  }
-}
-
-/* Island 6: contact (Juani's portrait, Cal.com booking) ----------------- */
+/* Island 6: contact (portrait, invitation, Cal.com booking) ------------- */
 
 /* Juani's portrait sits beside "Soy Juani", framed like a photo kept by the
  * fire: the site's radius, a thin warm rim and a low firelight glow under
@@ -8134,27 +8038,260 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
+/* The invitation: one composed section */
+
+/* One grid for the whole invitation (Juani, 22 November 2026: "mejorar la
+ * estetica y simetria de la seccion"). On phones it is one column: the
+ * heading and its three steps, the agenda card, the quieter ways in, the
+ * form. From 80rem the heading sits beside the agenda with its top on the
+ * panel's top and the quieter ways in on the panel's bottom edge, and the
+ * form opens across both columns. The agenda is the one primary action. */
+.hearth__reach {
+  --booking-surface: oklch(21% 0.055 262);
+  --booking-line: color-mix(in oklch, var(--night-ink) 12%, transparent);
+
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-areas:
+    "invite"
+    "booking"
+    "alt"
+    "form";
+  row-gap: 2rem;
+  padding-block: 1rem 3.5rem;
+}
+
+.hearth__invite {
+  grid-area: invite;
+  display: grid;
+  gap: 0.85rem;
+  align-content: start;
+  justify-items: start;
+  max-width: 34rem;
+}
+
+.hearth__invite h3 {
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.hearth__invite h3 em {
+  font-family: var(--font-world-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--mint);
+}
+
+.hearth__invite > p {
+  margin: 0;
+  color: var(--night-ink-soft);
+}
+
+.hearth__steps {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0.4rem 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: hearth-step;
+}
+
+.hearth__steps li {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: baseline;
+  line-height: 1.45;
+  color: var(--night-ink);
+  counter-increment: hearth-step;
+}
+
+.hearth__steps li::before {
+  content: counter(hearth-step);
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid color-mix(in oklch, var(--mint) 50%, transparent);
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--mint);
+}
+
+/* The quieter ways in: two equal secondary buttons. */
+.hearth__alt {
+  grid-area: alt;
+  display: grid;
+  gap: 0.75rem;
+  align-content: end;
+  max-width: 34rem;
+}
+
+.hearth__alt-label {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--night-ink-soft);
+}
+
+.hearth__alt-actions {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.hearth__alt-actions .btn {
+  width: 100%;
+}
+
+.hearth__alt-actions svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: currentColor;
+}
+
+.hearth__form-toggle-mark {
+  position: relative;
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.hearth__form-toggle-mark::before,
+.hearth__form-toggle-mark::after {
+  content: "";
+  position: absolute;
+  inset: calc(50% - 1px) 0 auto;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  transition: rotate var(--m-panel) var(--ease-ui);
+}
+
+.hearth__form-toggle-mark::after {
+  rotate: 90deg;
+}
+
+.hearth__form-toggle[aria-expanded="true"] .hearth__form-toggle-mark::after {
+  rotate: 0deg;
+}
+
+@media (min-width: 30rem) {
+  .hearth__alt-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* The form opens as a panel of the same surface as the agenda. */
+.hearth__form {
+  grid-area: form;
+  display: grid;
+  grid-template-rows: 0fr;
+  margin-block-start: -2rem;
+  transition:
+    grid-template-rows var(--m-panel) var(--ease-ui),
+    margin-block-start var(--m-panel) var(--ease-ui);
+}
+
+.hearth__form[data-open] {
+  grid-template-rows: 1fr;
+  margin-block-start: 0;
+}
+
+.hearth__form-clip {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.hearth__form-panel {
+  padding: 1.35rem clamp(1rem, 2.5vw, 1.75rem) 1.5rem;
+  border: 1px solid var(--booking-line);
+  border-radius: var(--radius);
+  background: var(--booking-surface);
+}
+
+.hearth__form .contact-form {
+  padding: 0;
+  background: none;
+}
+
+.hearth__form-intro {
+  margin: 0 0 1rem;
+  color: var(--night-ink-soft);
+}
+
+.hearth__form .field {
+  gap: 0.3rem;
+  margin-block-end: 0.85rem;
+}
+
+.hearth__form .field :is(input, select, textarea) {
+  min-height: 2.75rem;
+  padding: 0.55rem 0.85rem;
+  font-size: 1rem;
+}
+
+.hearth__form .field textarea {
+  height: 6.5rem;
+}
+
+@media (min-width: 64rem) {
+  .hearth__form .contact-form {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 1rem;
+    align-items: start;
+  }
+
+  .hearth__form .contact-form__row {
+    display: contents;
+  }
+
+  .hearth__form .field:has(textarea) {
+    grid-column: span 2;
+  }
+
+  .hearth__form .contact-form > :is(.contact-form__footer, .contact-form__feedback, .contact-form__privacy, .contact-form__fallback) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 80rem) {
+  .hearth__reach {
+    grid-template-columns: minmax(16rem, 1fr) minmax(0, 51.5rem);
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "invite booking"
+      "alt booking"
+      "form form";
+    column-gap: 3rem;
+  }
+
+  /* Beside the agenda the column is narrow: the pair stacks. */
+  .hearth__alt-actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* Cal.com booking */
 
 /* The agenda is one panel of the dusk island: a Spanish heading in the
  * site's type over the real Cal.com calendar, painted with the same surface
  * (cal-booking.tsx hands `--booking-surface` and the night and mint tokens
- * to Cal.com's CSS variables). The iframe takes its content's height on
- * every width: nothing in here scrolls on its own, so a flick or a wheel
- * notch over the calendar moves the page (user test, finding A4). */
+ * to Cal.com's CSS variables). From 64rem it is Cal.com's compact month view
+ * inline; its column of times scrolls only under the pointer and hands the
+ * wheel back to the page at its ends. Narrower, a button opens Cal.com's
+ * popup, so the page stays short and nothing in it scrolls on its own. */
 .booking {
-  --booking-surface: oklch(21% 0.055 262);
-  --booking-line: color-mix(in oklch, var(--night-ink) 12%, transparent);
-
-  display: grid;
-  gap: 0.75rem;
-  justify-items: start;
+  grid-area: booking;
   width: 100%;
   max-width: 51.5rem;
   scroll-margin-top: 5.5rem;
 }
 
 .booking__panel {
+  display: grid;
   width: 100%;
   overflow: clip;
   border: 1px solid var(--booking-line);
@@ -8201,21 +8338,20 @@ html[data-motion-tier="reduced"] .works-index__shot {
   border: 0;
 }
 
-/* Loading: a still month skeleton holds the place with a visible line,
- * then fades away once Cal.com reports the calendar ready. */
-.booking__frame[data-status="loading"] .booking__inline {
-  min-height: 30rem;
+/* Before Cal.com is ready the panel keeps the compact month view's height,
+ * so nothing below it moves when the calendar arrives. */
+.booking:is([data-status="idle"], [data-status="loading"]) .booking__inline {
+  min-height: 35.5rem;
 }
 
 .booking__skeleton {
   position: absolute;
   inset: 0;
   display: grid;
-  grid-template-columns: min(100%, 26rem);
+  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
   align-content: start;
-  justify-content: center;
-  gap: 1.25rem;
-  padding: clamp(1rem, 3vw, 2rem);
+  gap: 2rem;
+  padding: 1.5rem clamp(1rem, 2.5vw, 1.5rem);
   background: var(--booking-surface);
   pointer-events: none;
   transition:
@@ -8223,16 +8359,9 @@ html[data-motion-tier="reduced"] .works-index__shot {
     visibility 0s linear var(--m-panel);
 }
 
-.booking__frame:not([data-status="loading"]) > .booking__skeleton {
+.booking:not([data-status="idle"], [data-status="loading"]) .booking__skeleton {
   opacity: 0;
   visibility: hidden;
-}
-
-.booking__skeleton-title {
-  width: min(12rem, 50%);
-  height: 0.9rem;
-  border-radius: var(--radius-pill);
-  background: color-mix(in oklch, var(--night-ink) 12%, var(--booking-surface));
 }
 
 .booking__skeleton-grid {
@@ -8241,10 +8370,24 @@ html[data-motion-tier="reduced"] .works-index__shot {
   gap: 0.5rem;
 }
 
-.booking__skeleton-grid > span {
-  aspect-ratio: 1;
+.booking__skeleton-times {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+}
+
+.booking__skeleton-grid > span,
+.booking__skeleton-times > span {
   border-radius: 0.6rem;
   background: color-mix(in oklch, var(--night-ink) 7%, var(--booking-surface));
+}
+
+.booking__skeleton-grid > span {
+  aspect-ratio: 1;
+}
+
+.booking__skeleton-times > span {
+  height: 2.4rem;
 }
 
 .booking__state {
@@ -8258,7 +8401,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion-tier="reduced"]) .booking__frame[data-status="loading"] :is(.booking__skeleton-title, .booking__skeleton-grid) {
+  html:not([data-motion-tier="reduced"]) .booking[data-status="loading"] :is(.booking__skeleton-grid, .booking__skeleton-times) {
     animation: skeleton-breathe 1.6s ease-in-out infinite alternate;
   }
 }
@@ -8273,8 +8416,29 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
+/* Phones and tablets: the agenda opens from one primary button. */
+.booking__launch {
+  padding: 1rem clamp(1rem, 2.5vw, 1.5rem) 0.25rem;
+}
+
+.booking__open {
+  width: 100%;
+}
+
+@media (max-width: 63.99rem) {
+  .booking__frame {
+    display: none;
+  }
+}
+
+@media (min-width: 64rem) {
+  .booking__launch {
+    display: none;
+  }
+}
+
 /* Failed or silent for 15 s: the direct link takes the calendar's place. */
-.booking__frame[data-status="failed"] .booking__inline {
+.booking[data-status="failed"] :is(.booking__frame, .booking__launch) {
   display: none;
 }
 
@@ -8282,7 +8446,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
   display: grid;
   gap: 1rem;
   justify-items: start;
-  padding: 1.25rem clamp(1rem, 2.5vw, 1.5rem) 1.5rem;
+  padding: 1.25rem clamp(1rem, 2.5vw, 1.5rem) 0.5rem;
 }
 
 .booking__failed p {
@@ -8291,19 +8455,21 @@ html[data-motion-tier="reduced"] .works-index__shot {
   color: var(--night-ink-soft);
 }
 
-.booking:has(.booking__frame[data-status="failed"]) > .booking__link {
-  display: none;
-}
-
-/* The fallback link stands alone: a 44px tap target. */
+/* The fallback link closes the panel: a 44px tap target. */
 .booking__link {
   display: inline-flex;
   align-items: center;
+  justify-self: start;
   min-height: 2.75rem;
+  margin: 0.25rem clamp(1rem, 2.5vw, 1.5rem) 0.5rem;
   font-size: 0.9rem;
   color: var(--mint);
   text-decoration: underline;
   text-underline-offset: 0.2em;
+}
+
+.booking[data-status="failed"] .booking__link {
+  display: none;
 }
 
 /* End of island 6: contact */
