@@ -137,3 +137,19 @@ FormSubmit también ofrece reemplazar la dirección por un alias aleatorio, para
 
 - No se pudo confirmar en producción cuál de las causas pesaba más. La dirección mal armada es segura en el código; la activación y la lentitud dependen de FormSubmit.
 - FormSubmit es un servicio gratuito sin garantía de entrega ni de velocidad. Si falla seguido, la alternativa es Resend con su clave de API, que Juani prefirió no usar.
+
+## La foto de Juani junto a "Soy Juani"
+
+Pedido de Juani, 22 de noviembre de 2026: "SObre mi foto, usa esta por ahora ( [photo] ) (el avatar lo voy a hacer mas adelante)".
+
+Archivos: `src/components/world/host-island.tsx`, `src/content/site.ts` (`founder.portraitAlt`), las imágenes de `public/images/juani/` y el bloque "Island 6: contact" de `world.css`.
+
+- **Dónde va:** en la primera pantalla de la isla 6, debajo de "Mayofy es la marca. Detrás estoy yo." y al lado de "Soy Juani. Hace 5 años…". Así la foto responde al título: detrás de la marca, una persona.
+- **Recorte:** de la foto de 800x800 se recortó un cuadrado de 580 px centrado en la cara, con el pelo entero y el cuello de la camisa. Se exportó en AVIF (calidad 62) y WebP (calidad 82) a 160, 240 y 320 px. Pesan entre 5,6 y 20 KB.
+- **Tamaños:** se muestra a 5rem en el celular y a 7rem desde tablet (`sizes`), con `srcset` para pantallas de 1x a 3x. El navegador elige: a 390 px con pantalla 2x carga la de 160 px. Lleva `loading="lazy"`, `width` y `height` fijos (no corre el texto al cargar) y el texto alternativo "Juan Ignacio Portilla Kitroser, fundador de Mayofy".
+- **Cómo se integra:** usa el radio del sitio, un borde fino cálido (el tono del fuego) y una sombra doble: la sombra oscura del atardecer y un resplandor bajo de fogata. El verde de las hojas del fondo de la foto ya combina con el musgo de la isla. No está inclinada ni se anima.
+- **Verificado** a 320, 390 y 1440 px: la imagen carga, no desborda a lo ancho y no hay errores en la consola (captura `a05`). `eslint`, `tsc --noEmit` y `next build` sin errores.
+- La foto entrante (`juani-foto-entrante.png`) se borró de la raíz del repositorio, donde nunca estuvo versionada.
+- **Límite:** es una foto provisoria. Cuando exista el avatar, basta con reemplazar los seis archivos de `public/images/juani/` con los mismos nombres o cambiar la ruta en `host-island.tsx`.
+
+Captura `a06`: el aviso "Sigue enviándose…" del formulario, a 390 px. Los scripts del simulador de FormSubmit (`fsmock.mjs`) y de las pruebas del formulario y de la foto están en `contacto-agenda/scripts/`.

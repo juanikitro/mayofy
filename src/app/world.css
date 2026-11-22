@@ -8084,7 +8084,47 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
-/* Island 6: Cal.com booking --------------------------------------------- */
+/* Island 6: contact (Juani's portrait, Cal.com booking) ----------------- */
+
+/* Juani's portrait sits beside "Soy Juani", framed like a photo kept by the
+ * fire: the site's radius, a thin warm rim and a low firelight glow under
+ * the dusk shadow. A photo for now; his avatar replaces it later. */
+.host__intro {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.host__portrait {
+  --portrait-size: 5rem;
+
+  display: block;
+  width: var(--portrait-size);
+  aspect-ratio: 1;
+  overflow: clip;
+  border: 2px solid oklch(82% 0.09 70 / 55%);
+  border-radius: var(--radius);
+  background: var(--leaf-deep);
+  box-shadow:
+    0 1.25rem 2.5rem -1.25rem oklch(8% 0.04 265 / 80%),
+    0 0.5rem 2.25rem -0.75rem oklch(72% 0.15 58 / 40%);
+}
+
+.host__portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 48.01rem) {
+  .host__portrait {
+    --portrait-size: 7rem;
+  }
+}
+
+/* Cal.com booking */
 
 /* The agenda is one panel of the dusk island: a Spanish heading in the
  * site's type over the real Cal.com calendar, painted with the same surface
@@ -8256,7 +8296,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
   text-underline-offset: 0.2em;
 }
 
-/* End of island 6: Cal.com booking */
+/* End of island 6: contact */
 
 /* Works autoplay: a moss bar fills along the active row's bottom edge in
  * 5 s; it pauses off screen or in a hidden tab, and

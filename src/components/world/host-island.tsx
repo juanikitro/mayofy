@@ -12,10 +12,18 @@ import { publicChannels, siteContent } from "@/content/site";
 import { islandPlates } from "@/content/stage";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
+/** Juani's portrait: 5rem on phones, 7rem from tablets up, at 1x to 3x. */
+const portraitSizes = "(min-width: 48.01rem) 7rem, 5rem";
+
+function portraitSrcSet(format: "avif" | "webp") {
+  return [160, 240, 320].map((size) => `/images/juani/juani-retrato-${size}.${format} ${size}w`).join(", ");
+}
+
 /**
  * Island 6: Juani's island, dusk (Juani, 20 November 2026: option A of
  * docs/plans/2026-11-20-propuestas.md, "Junto al fuego"). The first screen
- * is the introduction beside the island, where Mayo rests by the fire; the
+ * is the introduction beside the island, where Mayo rests by the fire, with
+ * Juani's portrait beside "Soy Juani" (a photo until his avatar exists); the
  * invitation, the agenda and WhatsApp follow under it, and the contact form
  * folds behind "Prefiero completar un formulario".
  */
@@ -36,7 +44,22 @@ export function JuaniIsland() {
             <h2 id="contacto-title">
               <IslandTitle segments={islandCopy.host.title} />
             </h2>
-            <p className="isle__lead">{siteContent.founder.lead}</p>
+            <div className="host__intro">
+              <picture className="host__portrait">
+                <source type="image/avif" srcSet={portraitSrcSet("avif")} sizes={portraitSizes} />
+                <img
+                  src="/images/juani/juani-retrato-240.webp"
+                  srcSet={portraitSrcSet("webp")}
+                  sizes={portraitSizes}
+                  width={240}
+                  height={240}
+                  alt={siteContent.founder.portraitAlt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+              <p className="isle__lead">{siteContent.founder.lead}</p>
+            </div>
             <p className="isle__body">{siteContent.founder.body}</p>
             <a className="host-link" href={publicChannels.linkedin} target="_blank" rel="noreferrer">
               <span className="link-label">Ver experiencia en LinkedIn</span>
