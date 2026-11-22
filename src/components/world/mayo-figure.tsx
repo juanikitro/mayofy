@@ -261,6 +261,8 @@ export function MayoFigure({
   const { moment, label, size } = getMayoSlot(slot);
   const sources = mayoPoseSources(moment);
   const sprite = mayoSprites[slot];
+  // Eager only skips lazy loading: the strip keeps the default priority so it
+  // never competes with the hero plate, which is the page's LCP image.
   const loading = eager ? "eager" : "lazy";
   const anchor = mayoAnchors[slot];
   const walk = anchor ? stopsStyle(slot, anchor, sprite) : { css: "", style: {} };
@@ -316,7 +318,6 @@ export function MayoFigure({
               height={sprite.cell}
               loading={loading}
               decoding="async"
-              fetchPriority={eager ? "high" : "auto"}
             />
           </picture>
         </div>
