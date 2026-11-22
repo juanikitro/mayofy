@@ -324,115 +324,6 @@ details[data-preparing-open="true"] > .animated-details__content {
   );
 }
 
-.scene__clouds {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.scene__cloud {
-  fill: color-mix(in oklch, var(--cream) 85%, transparent);
-}
-
-.scene__cloud--far {
-  fill: color-mix(in oklch, var(--cream) 60%, transparent);
-}
-
-.scene__cloud--low {
-  fill: color-mix(in oklch, var(--cream) 70%, var(--sky-dawn-low));
-}
-
-.scene__far {
-  position: absolute;
-  inset: auto 0 30%;
-  width: 100%;
-  height: 40%;
-  opacity: 0.5;
-}
-
-.scene__far-island {
-  fill: color-mix(in oklch, var(--leaf-deep) 55%, var(--sky-dawn-top));
-}
-
-.scene__far-island ellipse {
-  fill: color-mix(in oklch, var(--leaf) 60%, var(--sky-dawn-top));
-}
-
-.scene__far-island--small {
-  fill: color-mix(in oklch, var(--leaf-deep) 40%, var(--sky-dawn-top));
-}
-
-.scene__island {
-  position: absolute;
-  inset: auto -3% -3% auto;
-  width: min(80vw, 72rem);
-  height: auto;
-  aspect-ratio: 1200 / 520;
-}
-
-.scene__island--wide {
-  inset: auto 0 0;
-  width: 100%;
-  height: 46%;
-  aspect-ratio: auto;
-}
-
-.island__rock {
-  fill: var(--stone-deep);
-}
-
-.island__rock-shade {
-  fill: var(--bark);
-  opacity: 0.6;
-}
-
-.island__moss {
-  fill: var(--leaf-deep);
-}
-
-.island__meadow {
-  fill: var(--leaf);
-}
-
-.island__meadow-light {
-  fill: var(--leaf-light);
-  opacity: 0.75;
-}
-
-.island__trunk {
-  fill: var(--bark);
-}
-
-.island__canopy {
-  fill: var(--leaf-deep);
-}
-
-.island__canopy-light {
-  fill: var(--leaf);
-}
-
-.island__stones {
-  fill: var(--stone);
-}
-
-.island__flowers {
-  fill: var(--cream);
-}
-
-.scene__fore {
-  position: absolute;
-  inset: auto auto 0 0;
-  width: min(28rem, 46vw);
-  height: auto;
-  fill: var(--leaf-deep);
-  opacity: 0.92;
-}
-
-.scene__fore-light {
-  fill: var(--leaf);
-}
-
 /* Mayo ----------------------------------------------------------------- */
 
 /* Each slot is a square: the captured stills, loops and painted sprite
@@ -592,15 +483,6 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   color: var(--ink);
 }
 
-.dawn__descriptor {
-  margin-block-end: 1rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--moss);
-}
-
 /* Sized to the column: "Sistemas que ordenan." fills it at 4rem on a 1440 screen. */
 .dawn h1 {
   font-size: clamp(2.6rem, 4.4vw, 4rem);
@@ -610,13 +492,6 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 .dawn__line {
   display: block;
-}
-
-.dawn__body {
-  margin-block: 1.5rem 1.75rem;
-  max-width: 34ch;
-  font-size: clamp(1.05rem, 1rem + 0.35vw, 1.2rem);
-  color: var(--ink-soft);
 }
 
 .dawn__actions {
@@ -1383,18 +1258,6 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 }
 
-@keyframes mayo-arrive {
-  from {
-    opacity: 0;
-    transform: translateY(-3rem);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @keyframes sky-drift {
   from {
     transform: translateY(0);
@@ -1905,21 +1768,11 @@ html[data-motion-tier="reduced"] .scene__sky {
   text-align: center;
 }
 
-.soon,
-.promises,
-.upkeep,
-.addons {
+.upkeep {
   margin-block-start: 1.5rem;
   padding: 1.5rem;
   border-radius: var(--radius);
   background: var(--cream);
-}
-
-.soon {
-  display: grid;
-  gap: 1rem;
-  align-items: center;
-  grid-template-columns: auto 1fr auto;
 }
 
 .soon__label {
@@ -1932,18 +1785,9 @@ html[data-motion-tier="reduced"] .scene__sky {
   text-transform: uppercase;
 }
 
-.soon__copy h3,
-.promises h3,
-.upkeep h3,
-.addons h3 {
+.upkeep h3 {
   font-size: 1.35rem;
   margin-block-end: 0.4rem;
-}
-
-.promises__list {
-  margin-block-start: 1rem;
-  columns: 2;
-  column-gap: 2rem;
 }
 
 .upkeep {
@@ -1979,28 +1823,6 @@ html[data-motion-tier="reduced"] .scene__sky {
   gap: 0.4rem;
   padding-inline-start: 0;
   list-style: none;
-}
-
-.addons__grid {
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
-  margin-block: 1.25rem;
-}
-
-.addons__grid h4 {
-  margin-block-end: 0.5rem;
-  font-size: 1rem;
-}
-
-.addons__footer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-block-start: 1rem;
-  border-top: 1px solid var(--beige-deep);
 }
 
 /* Footer ---------------------------------------------------------------- */
@@ -2077,35 +1899,8 @@ html[data-motion-tier="reduced"] .scene__sky {
     font-size: clamp(2.35rem, 1.2rem + 7.5vw, 3rem);
   }
 
-  .scene__island {
-    inset: auto -12% -2% -12%;
-    width: 124%;
-  }
-
-  .scene__far {
-    inset-block-end: 30%;
-    height: 36%;
-  }
-
-  .scene__fore {
-    width: 48vw;
-  }
-
   .scene__mayo {
     inset: auto auto 14% 40%;
-  }
-
-  .scene__island--wide {
-    display: none;
-  }
-
-  .promises__list {
-    columns: 1;
-  }
-
-  .soon {
-    grid-template-columns: 1fr;
-    justify-items: start;
   }
 }
 
@@ -2147,14 +1942,13 @@ html[data-motion-tier="reduced"] .scene__sky {
   gap: 1rem;
 }
 
-.isle__content > :is(h2, .isle__eyebrow, .isle__lead, .isle__body, .isle__channels, .isle__chips, .host) {
+.isle__content > :is(h2, .isle__lead, .isle__body, .host) {
   max-width: 48rem;
 }
 
 @media (min-width: 64rem) {
   /* Two columns on wide screens: the long blocks of an island sit side by
    * side instead of stacking into a tower above the island. */
-  .isle__panels,
   .isle__split {
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
@@ -2162,79 +1956,9 @@ html[data-motion-tier="reduced"] .scene__sky {
     align-items: start;
   }
 
-  .isle__panels {
-    gap: 1.5rem;
-    align-items: stretch;
-  }
-
   .isle__split .upkeep {
     position: sticky;
     top: 6.5rem;
-  }
-
-  /* Booking panel: Cal.com shows the month and the free times side by side
-   * (about 530 px tall) from an 820 px wide frame and stacks them below
-   * that. Up to 88rem it takes the panel's width; the form follows in three
-   * columns instead of a tall column beside an empty one. */
-  .reach {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      "title"
-      "text"
-      "booking"
-      "alt"
-      "form-intro"
-      "form";
-    column-gap: 3rem;
-    align-items: start;
-  }
-
-  .reach > .reach__intro {
-    display: contents;
-  }
-
-  .reach .contact-form {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    column-gap: 1rem;
-    align-items: start;
-  }
-
-  .reach .contact-form__row {
-    display: contents;
-  }
-
-  .reach .field:has(textarea) {
-    grid-column: span 2;
-  }
-
-  .reach .contact-form > :is(.contact-form__footer, .contact-form__feedback, .contact-form__privacy, .contact-form__fallback) {
-    grid-column: 1 / -1;
-  }
-
-  .reach__intro > h3 {
-    grid-area: title;
-  }
-
-  .reach__intro > p {
-    grid-area: text;
-  }
-
-  .reach__intro > .booking {
-    grid-area: booking;
-    max-width: 51.5rem;
-  }
-
-  .reach__intro > .host-link {
-    grid-area: alt;
-  }
-
-  .reach__intro > span {
-    grid-area: form-intro;
-  }
-
-  .reach > .contact-form {
-    grid-area: form;
   }
 
   .isle__split .upkeep {
@@ -2250,40 +1974,11 @@ html[data-motion-tier="reduced"] .scene__sky {
   }
 }
 
-/* Wide screens: Cal.com keeps its compact 820 px frame (51.5rem) and the
- * invitation, its text and the WhatsApp link come first on the panel's left
- * line beside it, instead of the calendar stretching to 1040 px inside a
- * 1230 px dark box. */
-@media (min-width: 88rem) {
-  .reach {
-    grid-template-columns: minmax(0, 1fr) 51.5rem;
-    grid-template-rows: auto auto 1fr auto auto;
-    grid-template-areas:
-      "title booking"
-      "text booking"
-      "alt booking"
-      "form-intro form-intro"
-      "form form";
-  }
-}
-
 .isle h2 {
   font-size: clamp(2rem, 1.2rem + 3.4vw, 3.6rem);
 }
 
 .isle--dark h2 em {
-  color: var(--mint);
-}
-
-.isle__eyebrow {
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--moss);
-}
-
-.isle--dark .isle__eyebrow {
   color: var(--mint);
 }
 
@@ -2300,36 +1995,6 @@ html[data-motion-tier="reduced"] .scene__sky {
 
 .isle--dark .isle__body {
   color: var(--night-ink-soft);
-}
-
-.isle__channels {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.isle__channels span,
-.isle__chips li {
-  padding: 0.35rem 0.8rem;
-  border-radius: var(--radius-pill);
-  background: color-mix(in oklch, var(--cream) 80%, transparent);
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--moss);
-}
-
-.isle__chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  list-style: none;
-  padding: 0;
-}
-
-.isle__panels {
-  display: grid;
-  gap: 1.25rem;
-  margin-block-start: 1.5rem;
 }
 
 .panel {
@@ -2387,8 +2052,6 @@ html[data-motion-tier="reduced"] .scene__sky {
   outline-color: var(--mint);
 }
 
-.isle .soon,
-.isle .addons,
 .isle .upkeep {
   margin-block-start: 0;
 }
@@ -2415,187 +2078,6 @@ html[data-motion-tier="reduced"] .scene__sky {
   background: radial-gradient(ellipse at 50% 100%, oklch(24% 0.05 265), var(--night-deep) 70%);
 }
 
-.scene--dusk .island__rock,
-.scene--night .island__rock {
-  fill: oklch(28% 0.03 60);
-}
-
-.scene--dusk .island__moss,
-.scene--night .island__moss {
-  fill: oklch(28% 0.06 150);
-}
-
-.scene--dusk .island__meadow,
-.scene--night .island__meadow {
-  fill: oklch(34% 0.08 150);
-}
-
-.scene--dusk .island__meadow-light,
-.scene--night .island__meadow-light {
-  fill: oklch(40% 0.08 150);
-  opacity: 0.6;
-}
-
-.scene--sunset .island__meadow {
-  fill: oklch(48% 0.12 140);
-}
-
-.scene--sunset .island__meadow-light {
-  fill: oklch(62% 0.12 110);
-}
-
-.scene--golden .island__meadow-light {
-  fill: oklch(78% 0.13 110);
-}
-
-.scene__stars {
-  position: absolute;
-  inset: 0 0 auto;
-  width: 100%;
-  height: 60%;
-  fill: var(--night-ink);
-  opacity: 0.8;
-}
-
-.scene--dusk .scene__stars {
-  opacity: 0.35;
-}
-
-/* Ornaments */
-
-.ornament {
-  position: absolute;
-  inset: auto 0 0;
-  width: 100%;
-  height: 46%;
-}
-
-.ornament--rocks {
-  height: 30%;
-  inset-block-end: 6%;
-}
-
-.greenhouse__frame {
-  fill: none;
-  stroke: var(--bark);
-  stroke-width: 6;
-  stroke-linejoin: round;
-}
-
-.greenhouse__glass {
-  fill: color-mix(in oklch, var(--cream) 55%, oklch(85% 0.06 220));
-  opacity: 0.85;
-}
-
-.greenhouse__door {
-  fill: var(--bark);
-}
-
-.greenhouse__soil {
-  fill: var(--bark);
-}
-
-.greenhouse__gear {
-  fill: var(--stone-deep);
-}
-
-.greenhouse__box {
-  fill: oklch(55% 0.08 60);
-}
-
-.path__trail {
-  fill: none;
-  stroke: color-mix(in oklch, var(--cream) 70%, transparent);
-  stroke-width: 18;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.path__stone {
-  fill: var(--stone-deep);
-}
-
-.path__stone-top {
-  fill: var(--stone);
-}
-
-.firefly__halo {
-  fill: var(--mint);
-  opacity: 0.18;
-}
-
-.firefly__core {
-  fill: var(--mint);
-}
-
-.lantern__post {
-  fill: oklch(30% 0.03 60);
-}
-
-.lantern__body {
-  fill: oklch(45% 0.06 55);
-}
-
-.campfire__glow {
-  fill: oklch(75% 0.15 60);
-  opacity: 0.18;
-}
-
-.campfire__ring {
-  fill: oklch(28% 0.03 60);
-}
-
-.campfire__log {
-  fill: var(--bark);
-}
-
-.campfire__flame {
-  fill: oklch(72% 0.17 50);
-}
-
-.campfire__flame-core {
-  fill: oklch(88% 0.14 85);
-}
-
-.bench__log,
-.bench__leg {
-  fill: oklch(38% 0.05 55);
-}
-
-@keyframes firefly-pulse {
-  0%,
-  100% {
-    opacity: 0.4;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
-html[data-motion-tier="full"] .firefly {
-  animation: firefly-pulse 3.5s ease-in-out infinite;
-  animation-delay: var(--firefly-delay, 0s);
-}
-
-@keyframes flame-flicker {
-  0%,
-  100% {
-    transform: scale(1, 1);
-  }
-
-  50% {
-    transform: scale(0.96, 1.06);
-  }
-}
-
-html[data-motion-tier="full"] .campfire__flame,
-html[data-motion-tier="full"] .campfire__flame-core {
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-  animation: flame-flicker 1.6s ease-in-out infinite;
-}
-
 /* Mayo on each island (provisional positions until the plates arrive) */
 
 .isle__mayo {
@@ -2608,10 +2090,6 @@ html[data-motion-tier="full"] .campfire__flame-core {
 
 .isle__mayo--dig {
   inset: auto auto 13% 28%;
-}
-
-.isle__mayo--run {
-  inset: auto 16% 16% auto;
 }
 
 .isle__mayo--chase {
@@ -2901,10 +2379,7 @@ html[data-motion-tier="reduced"] .fall__mayo {
 @media (prefers-reduced-motion: reduce) {
   .fall__frame,
   .fall__puff,
-  .fall__mayo,
-  .firefly,
-  .campfire__flame,
-  .campfire__flame-core {
+  .fall__mayo {
     animation: none !important;
   }
 
@@ -2929,40 +2404,6 @@ html[data-motion-tier="reduced"] .fall__mayo {
   margin-block-start: 0.5rem;
 }
 
-.work {
-  display: grid;
-  gap: 0.5rem;
-  align-content: start;
-  padding: 1.25rem;
-  border-radius: var(--radius);
-  background: color-mix(in oklch, var(--cream) 92%, transparent);
-  box-shadow: var(--shadow-soft);
-}
-
-.work--placeholder {
-  background: color-mix(in oklch, var(--cream) 55%, transparent);
-  box-shadow: none;
-  outline: 1px dashed color-mix(in oklch, var(--bark) 40%, transparent);
-}
-
-.work h3 {
-  font-size: 1.35rem;
-}
-
-.work p {
-  font-size: 0.92rem;
-  color: var(--ink-soft);
-}
-
-.work__category {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--moss);
-}
-
-.work__link,
 .host-link {
   display: inline-flex;
   align-items: center;
@@ -3499,74 +2940,11 @@ html[data-motion-tier="reduced"] .mayo--stops {
   color: var(--night-ink-soft);
 }
 
-/* Island 7: host + reach */
+/* Island 7: host */
 
 .host {
   display: grid;
   gap: 1rem;
-}
-
-.reach {
-  display: grid;
-  gap: 1.5rem;
-  margin-block-start: 2rem;
-  padding: 1.5rem;
-  border-radius: var(--radius);
-  background: color-mix(in oklch, oklch(22% 0.04 265) 90%, transparent);
-}
-
-/* The form lies on the booking panel itself, not in a second dark card, and
- * its fields keep the 44 px tap height without the 48 px boxes, large
- * placeholder type and 9rem message box that made it outgrow the calendar. */
-.reach .contact-form {
-  padding: 0;
-  background: none;
-}
-
-.reach .field {
-  gap: 0.3rem;
-  margin-block-end: 0.85rem;
-}
-
-/* Fields carry their own bottom margin; a stacked row adds no gap of its own. */
-.reach .contact-form__row {
-  row-gap: 0;
-}
-
-.reach .field :is(input, select, textarea) {
-  min-height: 2.75rem;
-  padding: 0.55rem 0.85rem;
-  font-size: 1rem;
-}
-
-.reach .field select {
-  padding-inline-end: 2.5rem;
-}
-
-.reach .field textarea {
-  min-height: 2.75rem;
-  height: 6.5rem;
-}
-
-@media (max-width: 48rem) {
-  .reach {
-    padding: 1rem;
-  }
-}
-
-.reach__intro {
-  display: grid;
-  gap: 0.75rem;
-  justify-items: start;
-}
-
-.reach__intro h3 {
-  font-size: 1.35rem;
-}
-
-.reach__intro p,
-.reach__intro span {
-  color: var(--night-ink-soft);
 }
 
 .world .contact-form,
@@ -3656,10 +3034,6 @@ html[data-motion-tier="reduced"] .mayo--stops {
     gap: 0.75rem;
   }
 
-  .ornament {
-    height: 34%;
-  }
-
   .fall {
     height: 120vh;
     --fall-top: #b690b3;
@@ -3712,18 +3086,7 @@ html[data-motion-tier="reduced"] .mayo--stops {
   }
 }
 
-/* Booking (island 7) and hero alternative link */
-
-.dawn__alt {
-  margin-block-start: 0.9rem;
-  font-weight: 600;
-}
-
-.dawn__alt a {
-  color: var(--moss);
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-}
+/* Booking (island 7) */
 
 .booking {
   display: grid;
@@ -3766,24 +3129,8 @@ html[data-motion-tier="reduced"] .mayo--stops {
 
 /* Bot tiers (island 4) */
 
-.soon {
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-areas:
-    "label"
-    "copy"
-    "tiers"
-    "monthly"
-    "note"
-    "cta";
-  justify-items: start;
-}
-
 .soon__label {
   grid-area: label;
-}
-
-.soon__copy {
-  grid-area: copy;
 }
 
 .soon__tiers {
@@ -3832,10 +3179,6 @@ html[data-motion-tier="reduced"] .mayo--stops {
 
 .soon__note {
   grid-area: note;
-}
-
-.soon .btn {
-  grid-area: cta;
 }
 
 /* Contact form (island 6) ------------------------------------------------ */
@@ -4200,12 +3543,6 @@ html[data-motion-tier="reduced"] .mayo--stops {
   gap: 0.75rem;
 }
 
-.work__links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 1.25rem;
-}
-
 /* 404 -------------------------------------------------------------------- */
 
 .lost {
@@ -4485,10 +3822,6 @@ html[data-motion-tier="reduced"] .rocks .scene--plated::after {
   mask-image: linear-gradient(180deg, transparent 0, #000 calc(var(--plate-fade, 0.09) * 100%));
 }
 
-.scene--plated .scene__stars {
-  display: none;
-}
-
 /* Objects on a plate */
 
 /* Placement comes from stage.ts as custom properties; the mobile plate has
@@ -4575,11 +3908,6 @@ html[data-motion-tier="full"] .plate-object--glow {
 
 .plate__picture img {
   object-fit: fill;
-}
-
-/* Ornaments inside a plate scale with it */
-.plate .ornament {
-  height: 46%;
 }
 
 /* Mayo anchored to a plate: feet at (x, y), square = size of the plate width */
@@ -4934,7 +4262,7 @@ html[data-motion-tier="reduced"] .world {
 /* Text links: the label rests on a faint hairline; on hover or focus a
  * full-strength line draws from the left and leaves to the right. The
  * arrow beside a label leans 3px into its direction. */
-:is(.host-link, .work__link, .booking__link, .dawn__alt a, .world-footer__links a, .contact-form__privacy a, .contact-form__fallback) {
+:is(.host-link, .booking__link, .world-footer__links a, .contact-form__privacy a, .contact-form__fallback) {
   text-decoration: none;
 }
 
@@ -5276,24 +4604,18 @@ html[data-motion-tier="reduced"] .wa-float {
 
 /* Cards ---------------------------------------------------------------- */
 
-/* Pack and work cards hold links: under a fine pointer the card rises 2px
+/* Pack cards hold links: under a fine pointer the card rises 2px
  * and its shadow deepens (one elevation step, never a tilt or a scale). */
-.pack,
-.work {
+.pack {
   transition:
     transform var(--m-fast) var(--ease-ui),
     box-shadow var(--m-fast) var(--ease-ui);
 }
 
 @media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
-  html:not([data-motion-tier="reduced"]) :is(.pack, .work:not(.work--placeholder)):hover {
+  html:not([data-motion-tier="reduced"]) .pack:hover {
     transform: translateY(var(--m-lift));
     box-shadow: var(--m-shadow-card);
-    transition-duration: 180ms;
-  }
-
-  html:not([data-motion-tier="reduced"]) .work--placeholder:hover {
-    transform: translateY(var(--m-lift));
     transition-duration: 180ms;
   }
 }
@@ -5570,7 +4892,7 @@ html[data-motion-tier="reduced"] .wa-float {
  * line fade up 12px, 60ms apart. All of it is over by about 1 s; links take
  * clicks from the first frame. */
 @media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion-tier="reduced"]) :is(.dawn__descriptor, .dawn__line) {
+  html:not([data-motion-tier="reduced"]) .dawn__line {
     animation: copy-rise var(--m-enter) var(--ease-enter) both;
   }
 
@@ -5578,16 +4900,12 @@ html[data-motion-tier="reduced"] .wa-float {
     animation-delay: 80ms;
   }
 
-  html:not([data-motion-tier="reduced"]) :is(.dawn__body, .dawn__actions, .dawn__alt) {
+  html:not([data-motion-tier="reduced"]) .dawn__actions {
     animation: copy-rise var(--m-reveal) var(--ease-enter) 240ms both;
   }
 
   html:not([data-motion-tier="reduced"]) .dawn__actions {
     animation-delay: 300ms;
-  }
-
-  html:not([data-motion-tier="reduced"]) .dawn__alt {
-    animation-delay: 360ms;
   }
 }
 
@@ -5605,7 +4923,7 @@ html[data-motion-tier="reduced"] .wa-float {
  * anchor jump or without scroll timelines it simply stands. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    html:not([data-motion-tier="reduced"]) .isle__content > :is(.isle__eyebrow, h2, .isle__lead, .isle__body),
+    html:not([data-motion-tier="reduced"]) .isle__content > :is(h2, .isle__lead, .isle__body),
     html:not([data-motion-tier="reduced"]) .host > :is(h2, .isle__lead, .isle__body) {
       animation: copy-reveal linear both;
       animation-timeline: view();
@@ -5693,14 +5011,14 @@ html[data-motion-tier="reduced"] .wa-float {
 
 /* Staggered groups ----------------------------------------------------- */
 
-/* Chips, work cards, the six steps and the case-study lists settle 16px as
+/* The works index rows and the case-study lists settle 16px as
  * they cross the bottom edge, each item 16px of scroll after the one before
  * (`--i`, set by staggerStyle), all done within about 200px of entering, so
  * nothing is caught half-faded where someone reads. `translate` is used so
  * the cards keep their hover lift (a `transform`). */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    html:not([data-motion-tier="reduced"]) :is(.isle__channels > span, .isle__chips > li, .works-index__row, .steps__steps > li, .study__decisions > li, .study__journey > li) {
+    html:not([data-motion-tier="reduced"]) :is(.works-index__row, .study__decisions > li, .study__journey > li) {
       animation: item-reveal linear both;
       animation-timeline: view();
       animation-range: entry calc(var(--i, 0) * 16px) entry calc(120px + var(--i, 0) * 16px);
@@ -8352,10 +7670,6 @@ html[data-motion-tier="reduced"] :is(.progress, .progress[data-clear]) {
  * and the case result label, from 11.5-13.6px up to 12.8-15px. The scene
  * version on the pinned island keeps scaling with its frame, with a floor
  * so a laptop never shows it under 12.8-14px. */
-.proposal-frame--scene .proposal__eyebrow {
-  font-size: max(3.7cqi, 0.8rem);
-}
-
 .proposal-frame--scene :is(.proposal__base span, .proposal__module > span:last-child) {
   font-size: max(4.2cqi, 0.875rem);
 }
@@ -8364,7 +7678,6 @@ html[data-motion-tier="reduced"] :is(.progress, .progress[data-clear]) {
   font-size: max(5.1cqi, 0.95rem);
 }
 
-.proposal-frame--flow .proposal__eyebrow,
 .case-result__eyebrow {
   font-size: 0.8rem;
 }
