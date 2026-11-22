@@ -8221,3 +8221,167 @@ html[data-motion-tier="reduced"] .works-index__shot {
     transform: none;
   }
 }
+
+/* ======================================================================
+ * Minor findings of the simulated user test (2026-11-22)
+ * docs/plans/2026-11-22-hallazgos-menores.md. Island 4 on short laptop
+ * screens, the fixed UI out of the way of content and fields, tap targets
+ * and small text.
+ * ==================================================================== */
+
+/* Island 4 on short laptop screens (1366x768, 1280x720): the island art
+ * is sized by the width, so on a wide, short screen it rises into the lead
+ * and the pins sat on it (M6). The title scales with the height and the
+ * island rests a little lower, so the lead ends above every pin. */
+@media (min-width: 48.01rem) and (max-height: 50rem) {
+  .workshop {
+    --workshop-y: 0svh;
+  }
+
+  .workshop__intro {
+    top: 6rem;
+  }
+
+  .workshop__intro h2 {
+    font-size: min(clamp(2rem, 1.2rem + 3.4vw, 3.6rem), 6.2svh);
+  }
+}
+
+/* Paw rail: every paw is a 44px target (L3). The paw keeps its 32px disc,
+ * painted inside 6px of padding, so the rail grows as little as possible;
+ * the hover bubble shrinks to the same disc. */
+.progress ol {
+  gap: 0;
+  padding: 0.25rem;
+}
+
+.progress__paw {
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.375rem;
+}
+
+/* After the `background` shorthands of the states, which reset the clip. */
+.progress__paw,
+.progress__paw[aria-current="location"],
+.progress__paw[aria-current="location"]:hover {
+  background-clip: content-box;
+}
+
+.progress__paw::before {
+  inset: 0.375rem;
+}
+
+/* The pill's brand link is a 44px target too (it was 26px tall). */
+.island-nav__brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+}
+
+@media (max-width: 48rem) {
+  .progress ol {
+    padding: 0 0.25rem;
+  }
+
+  /* A newly reached island names itself over its paw for a moment
+   * (IslandProgress, M5: on a phone the paws had no words; on a laptop the
+   * name shows on hover). */
+  .progress__paw[data-announce]::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    transition-duration: var(--m-base);
+  }
+
+  /* Over the agenda and the form, and while a field has focus (the
+   * keyboard is up), the rail and the WhatsApp float step aside so they
+   * never cover a field or a time slot (M5). Hidden, they take no taps or
+   * focus. */
+  .progress {
+    transition:
+      opacity var(--m-panel) var(--ease-ui),
+      visibility 0s linear 0s;
+  }
+
+  .progress[data-clear],
+  html:has(:is(input, select, textarea):focus) .progress {
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity var(--m-panel) var(--ease-ui),
+      visibility 0s linear var(--m-panel);
+  }
+
+  html:has(:is(input, select, textarea):focus) .wa-float {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  /* A field the browser scrolls into view on focus stops clear of the pill
+   * and of the bottom of the screen. */
+  .contact-form :is(input, select, textarea) {
+    scroll-margin-block: 5.5rem 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress,
+  .progress[data-clear] {
+    transition-duration: 0s;
+  }
+}
+
+html[data-motion-tier="reduced"] :is(.progress, .progress[data-clear]) {
+  transition-duration: 0s;
+}
+
+/* The six steps' bar: each segment is a 44px square target (it was 30px
+ * wide); the dash inside keeps its size. */
+.sendero__bar button {
+  width: 2.75rem;
+}
+
+/* "Ver los dos niveles", "Ver todo lo que incluye" and the other
+ * expanders: a 44px tall summary (it was 40px). */
+.pack-details summary {
+  padding-block: 0.625rem;
+}
+
+/* Small text a reader of 54 reads slowly (L4): the proposal on island 2
+ * and the case result label, from 11.5-13.6px up to 12.8-15px. The scene
+ * version on the pinned island keeps scaling with its frame, with a floor
+ * so a laptop never shows it under 12.8-14px. */
+.proposal-frame--scene .proposal__eyebrow {
+  font-size: max(3.7cqi, 0.8rem);
+}
+
+.proposal-frame--scene :is(.proposal__base span, .proposal__module > span:last-child) {
+  font-size: max(4.2cqi, 0.875rem);
+}
+
+.proposal-frame--scene .proposal__module b {
+  font-size: max(5.1cqi, 0.95rem);
+}
+
+.proposal-frame--flow .proposal__eyebrow,
+.case-result__eyebrow {
+  font-size: 0.8rem;
+}
+
+.proposal-frame--flow .proposal__base span,
+.proposal-frame--flow .proposal__module > span:last-child {
+  font-size: 0.95rem;
+}
+
+.proposal-frame--flow .proposal__question {
+  font-size: 0.875rem;
+}
+
+/* Under every pack price: it can be paid in pesos and the monthly fee is
+ * optional (L2). */
+.pack__price-note {
+  margin-block-start: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
