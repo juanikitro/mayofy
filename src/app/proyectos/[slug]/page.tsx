@@ -36,14 +36,16 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
   const path = `/proyectos/${project.slug}`;
   const capture = project.images[0];
+  // The summary alone runs 85-105 characters; the tail fills the snippet Google shows.
+  const description = `${project.summary} Caso de Mayofy: qué necesitaba y cómo lo construimos.`;
   return {
     title: project.title,
-    description: project.summary,
+    description,
     alternates: { canonical: path },
     robots: { index: !project.placeholder, follow: !project.placeholder },
     ...shareMetadata({
       title: `${project.title} — Mayofy`,
-      description: project.summary,
+      description,
       path,
       type: "article",
       ...(capture

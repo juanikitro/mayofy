@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { Fraunces, Instrument_Sans } from "next/font/google";
+import { GoogleAnalytics } from "@/components/google-analytics";
 import { HashLinkHistory } from "@/components/hash-link-history";
 import { shareMetadata } from "@/lib/share-metadata";
 import { getSiteUrl } from "@/lib/site-url";
@@ -26,9 +26,12 @@ const worldSerifFont = Fraunces({
 const googleAnalyticsId =
   process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ?? "G-F2DHJCS51K";
 
-const homeTitle = "Mayofy — webs que venden, sistemas que ordenan";
+// Search title and description carry the searches Juani wants to win
+// (docs/plans/2026-11-22-seo-rendimiento.md); share cards keep the slogan.
+const homeTitle = "Mayofy — Páginas web con turnos online y sistemas a medida";
 const homeDescription =
-  "Landings, webs con turnos y sistemas a medida para negocios de servicios en Argentina y LATAM. Empezamos con una charla gratis.";
+  "Diseño de páginas web para negocios de servicios: landing pages, webs con turnos online y sistemas a medida en Argentina y LATAM. Charla gratis para empezar.";
+const shareTitle = "Mayofy — webs que venden, sistemas que ordenan";
 
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
@@ -41,7 +44,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Mayofy" }],
   creator: "Mayofy",
   alternates: { canonical: "/" },
-  ...shareMetadata({ title: homeTitle, description: homeDescription, path: "/" }),
+  ...shareMetadata({ title: shareTitle, description: homeDescription, path: "/" }),
   // Search Console ownership through a meta tag, only when the token is set
   // (a DNS TXT record on mayofy.dev is the preferred route, see the SEO plan).
   ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION

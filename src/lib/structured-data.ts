@@ -18,6 +18,11 @@ function absolute(path: string) {
 const organizationId = () => absolute("/#organization");
 const websiteId = () => absolute("/#website");
 
+const areaServed = [
+  { "@type": "Country", name: "Argentina" },
+  { "@type": "Place", name: "Latinoamérica" },
+];
+
 /** "USD 85" → 85; the packs are "desde" prices, so they become a minimum. */
 function minimumPrice(price: string) {
   const amount = Number(price.replace(/[^\d.]/g, ""));
@@ -33,12 +38,20 @@ function organization(): JsonLdNode {
     logo: absolute("/icon.png"),
     description: siteContent.descriptor,
     email: publicChannels.email,
-    areaServed: [
-      { "@type": "Country", name: "Argentina" },
-      { "@type": "Place", name: "Latinoamérica" },
-    ],
+    // All of Argentina and Latin America, never the founder's town (Juani, 2026-11-22).
+    areaServed,
     knowsLanguage: "es",
-    sameAs: [publicChannels.instagram, publicChannels.linkedin],
+    sameAs: [publicChannels.instagram],
+    founder: {
+      "@type": "Person",
+      "@id": absolute("/#juani"),
+      name: "Juan Ignacio Portilla Kitroser",
+      alternateName: "Juani",
+      jobTitle: "Fundador y desarrollador",
+      url: publicChannels.linkedin,
+      sameAs: [publicChannels.linkedin],
+      worksFor: { "@id": organizationId() },
+    },
   };
 }
 
@@ -63,7 +76,7 @@ function services(): JsonLdNode[] {
       description: plan.description,
       serviceType: "Desarrollo web y software a medida",
       provider: { "@id": organizationId() },
-      areaServed: { "@type": "Country", name: "Argentina" },
+      areaServed,
       ...(price
         ? {
             offers: {

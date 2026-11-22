@@ -7,7 +7,7 @@ import { publicChannels } from "@/content/site";
 import { shareMetadata } from "@/lib/share-metadata";
 
 const description =
-  "Cómo Mayofy trata los datos personales que recibe por su sitio, su formulario, su agenda y WhatsApp.";
+  "Cómo Mayofy trata los datos personales que recibe por su sitio, su formulario de contacto, su agenda y WhatsApp, y cómo pedir que los corrijan o borren.";
 
 export const metadata: Metadata = {
   title: "Política de privacidad",
