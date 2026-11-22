@@ -28,11 +28,11 @@ export type CaseOption = {
 export type CaseArt = { src: string; frames?: number };
 
 export const casePicker = {
-  prompt: "¿Qué te está pasando hoy? Elegí lo que más se parece y te mostramos por dónde empezar.",
+  prompt: "¿Qué te está pasando hoy?",
   options: [
     { planId: "landing", text: "Me encuentran, pero no tengo dónde mostrar lo que hago.", art: { src: "34-isla2-flor" } },
     { planId: "web-gestion", text: "Paso el día coordinando turnos por WhatsApp.", art: { src: "34-isla2-brote" } },
-    { planId: "sistema", text: "Mi operación vive en planillas y ya no alcanza.", art: { src: "34-isla2-mariposa-tira", frames: 5 } },
+    { planId: "sistema", text: "Mi negocio vive en Excel, WhatsApp y mi cerebro.", art: { src: "34-isla2-mariposa-tira", frames: 5 } },
   ] satisfies readonly CaseOption[],
   resultEyebrow: "Te conviene empezar por",
   detailsCta: "Ver qué incluye",
@@ -42,7 +42,6 @@ export const casePicker = {
    * module per question as it lands, and a closing line.
    */
   proposal: {
-    eyebrow: "Tu propuesta",
     base: { title: "Sistema de gestión", text: "Clientes, ventas y turnos en un solo panel." },
     modules: [
       { question: "¿Cuánto sale?", title: "Bot de WhatsApp", text: "Responde precios y consultas al instante." },

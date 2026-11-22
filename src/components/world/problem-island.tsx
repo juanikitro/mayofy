@@ -34,7 +34,6 @@ function Proposal({ inScene }: { inScene: boolean }) {
       className={`proposal-frame ${inScene ? "proposal-frame--scene" : "proposal-frame--flow"}`}
     >
       <div className="proposal">
-        <p className="proposal__eyebrow">{proposal.eyebrow}</p>
         <p className="proposal__base">
           <b>{proposal.base.title}</b>
           <span>{proposal.base.text}</span>
@@ -111,7 +110,6 @@ export function ProblemIsland() {
           <h2 id="problema-title">
             <IslandTitle segments={islandCopy.problem.title} />
           </h2>
-          <p className="isle__body">{islandCopy.problem.body}</p>
           <Proposal inScene={false} />
           <CasePicker />
         </div>

@@ -7118,14 +7118,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
   margin-block: 0.25rem 0.75rem;
 }
 
-.proposal__eyebrow {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--moss);
-}
-
 .proposal__base {
   display: grid;
   gap: 0.15rem;
@@ -7359,10 +7351,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
   .proposal-frame--scene .proposal {
     --p-gap: 2.4cqi;
     --p-pad: 4.6cqi 5cqi 5cqi;
-  }
-
-  .proposal-frame--scene .proposal__eyebrow {
-    font-size: 3.7cqi;
   }
 
   .proposal-frame--scene .proposal__base {
@@ -8199,7 +8187,8 @@ html[data-motion-tier="reduced"] .works-index__shot {
 }
 
 /* Works autoplay: a moss bar fills along the active row's bottom edge in
- * 5 s; it pauses off screen or in a hidden tab, and
+ * 12 s (like the island 2 cases, time for a slow reader; Juani, 22 November
+ * 2026); it pauses off screen or in a hidden tab, and
  * rests at zero while the pointer or focus is on the index. */
 .works-index__progress {
   position: absolute;
@@ -8209,7 +8198,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
   background: var(--moss);
   transform: scaleX(0);
   transform-origin: left center;
-  animation: works-progress 5s linear forwards;
+  animation: works-progress 12s linear forwards;
   animation-play-state: paused;
 }
 

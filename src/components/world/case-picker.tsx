@@ -141,7 +141,7 @@ export function CasePicker() {
               <p className="case-result__eyebrow">{casePicker.resultEyebrow}</p>
               <h3>{plan.name}</h3>
               <p className="case-result__price">
-                Desde <strong>{plan.price}</strong> · {plan.timeline}
+                Desde <strong>{plan.price}</strong> · Plazo: {plan.timeline}
               </p>
               <p className="case-result__why">{plan.description}</p>
               <div className="case-result__actions">

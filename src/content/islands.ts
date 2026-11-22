@@ -8,16 +8,15 @@ export type TitleSegment = string | { em: string };
 
 export type IslandCopy = {
   title: readonly TitleSegment[];
-  body: string;
+  /** Optional: island 2 dropped its line on 22 November 2026. */
+  body?: string;
   /** One line per item of a list the island walks through (the six steps). */
   details?: readonly string[];
 };
 
 export const islandCopy = {
   problem: {
-    title: ["Construyamos tu lugar en ", { em: "internet" }],
-    // 2026-11-20: the questions now assemble a system proposal beside it (problem-island.tsx).
-    body: "Cada pregunta que hoy respondés a mano se convierte en una pieza de tu sistema.",
+    title: ["Construimos lo que ", { em: "necesitás" }, "."],
   },
   packs: {
     title: ["Encontramos lo que necesita ", { em: "tu negocio" }, "."],
