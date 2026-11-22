@@ -36,7 +36,7 @@ export const casePicker = {
   ] satisfies readonly CaseOption[],
   resultEyebrow: "Te conviene empezar por",
   detailsCta: "Ver qué incluye",
-  bookingCta: "Agendá tu diagnóstico",
+  bookingCta: "Agendá una charla gratis",
   /**
    * The proposal that builds itself (decorative): the base system, then one
    * module per question as it lands, and a closing line.
