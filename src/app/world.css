@@ -8380,3 +8380,10 @@ html[data-motion-tier="reduced"] :is(.progress, .progress[data-clear]) {
   font-size: 0.875rem;
 }
 
+/* Under every pack price: it can be paid in pesos and the monthly fee is
+ * optional (L2). */
+.pack__price-note {
+  margin-block-start: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}

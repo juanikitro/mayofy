@@ -51,7 +51,7 @@ export default function PrivacyPage() {
             </li>
             <li>Los que nos enviás al escribirnos por WhatsApp o por correo.</li>
             <li>
-              Los que cargás al reservar la reunión de diagnóstico en Cal.com:
+              Los que cargás al reservar la charla en Cal.com:
               nombre, correo y lo que quieras contarnos.
             </li>
             <li>

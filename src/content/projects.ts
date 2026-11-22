@@ -50,7 +50,7 @@ export const projects = [
     title: "Sistema de gestión para lavaderos",
     category: "Sistema a medida",
     summary:
-      "Plataforma para que lavaderos y negocios de detailing gestionen clientes, servicios y la operación del día a día.",
+      "Sistema para que lavaderos de autos manejen clientes, servicios y la agenda del día.",
     context:
       "Contexto del negocio, su oferta, su audiencia y la forma en que llegaban las consultas antes del proyecto.",
     challenge:
@@ -84,7 +84,7 @@ export const projects = [
   {
     slug: "consignataria-hacienda",
     index: "02",
-    title: "Landing para una consignataria de hacienda",
+    title: "Página para una consignataria de hacienda",
     category: "Landing",
     summary:
       "Presencia propia para una consignataria familiar: qué hace, cómo trabaja y una vía directa de contacto.",
@@ -120,7 +120,7 @@ export const projects = [
   {
     slug: "portfolio-desarrollador",
     index: "03",
-    title: "Portfolio de un desarrollador",
+    title: "Web personal de un programador",
     category: "Web personal",
     summary:
       "Sitio de presentación profesional con trayectoria y casos técnicos explicados con claridad.",

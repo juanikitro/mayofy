@@ -1,6 +1,8 @@
 export const commercialIntro = {
-  title: "Tres packs. Desde una landing hasta tu propio sistema.",
-  body: "Precios de referencia para que sepas por dónde arrancar. El alcance, el plazo y la inversión final se definen después de una reunión de diagnóstico gratis.",
+  title: "Tres packs. De una página simple a tu propio sistema.",
+  body: "Precios de referencia para que sepas por dónde arrancar. El alcance, el plazo y el precio final se definen después de una charla gratis.",
+  /** Under every pack price, so the currency and the monthly fee do not surprise (user test, L2). */
+  priceNote: "Se puede pagar en pesos. El mantenimiento mensual es opcional.",
   payment:
     "Pago: 50% al inicio y 50% en la entrega. Precios en USD; podés pagar en pesos al cambio del día.",
 } as const;
@@ -42,8 +44,8 @@ export const commercialPlans = [
     ],
     footnote:
       "¿Necesitás varias páginas? La web institucional arranca desde USD 95 y se entrega en 3 a 4 semanas.",
-    note: "El dominio, el hosting y los servicios externos se abonan por separado.",
-    cta: "Quiero mi landing",
+    note: "La dirección web, el alojamiento y otros servicios se pagan aparte.",
+    cta: "Quiero mi página",
     whatsappMessage: "Hola, quiero consultar por el pack Landing de Mayofy.",
   },
   {
@@ -74,7 +76,7 @@ export const commercialPlans = [
           "Varias sedes, profesionales o agendas.",
           "Pagos online o cobro de señas.",
           "Recordatorios automáticos por WhatsApp.",
-          "Usuarios con distintos roles y permisos.",
+          "Un acceso distinto para cada empleado.",
         ],
       },
     ],
@@ -99,8 +101,8 @@ export const commercialPlans = [
         items: [
           "Relevamiento de tus procesos y de lo que hoy se hace a mano.",
           "Diseño del sistema y de sus datos pensado para tu caso.",
-          "Usuarios con roles y permisos.",
-          "Paneles con la información que necesitás para decidir.",
+          "Cada uno ve lo que le toca.",
+          "Pantallas con la información que necesitás para decidir.",
           "Integración con lo que ya usás: facturación, planillas o pagos.",
           "Entregas por etapas para que lo uses antes de terminarlo todo.",
           "Documentación y capacitación para tu equipo.",
@@ -108,7 +110,7 @@ export const commercialPlans = [
       },
     ],
     footnote: undefined,
-    note: "El alcance y la inversión final se definen después de la reunión de diagnóstico.",
+    note: "El alcance y el precio final se definen después de la primera charla.",
     cta: "Quiero un sistema a medida",
     whatsappMessage: "Hola, quiero consultar por un Sistema a Medida de Mayofy.",
   },
@@ -135,7 +137,7 @@ export const comingSoon = {
         "Todo lo anterior, los dos canales y conexión con Web + Gestión o un sistema: reservar turnos, consultar estados o datos.",
     },
   ],
-  monthly: "USD 30 por mes por hosting, monitoreo y ajustes menores.",
+  monthly: "USD 30 por mes: alojamiento, control y ajustes menores.",
   note: "Las tarifas de WhatsApp Business (Meta cobra por conversación) y el uso de IA, si se usa, se trasladan aparte.",
   cta: "Quiero que me avisen",
   whatsappMessage:
@@ -148,21 +150,21 @@ export const guarantees = {
   stripTitle: "En todos los packs",
   seals: [
     { icon: "speed", label: "Carga rápida en el celular o la corregimos gratis" },
-    { icon: "ownership", label: "Código y dominio tuyos" },
+    { icon: "ownership", label: "Todo queda a tu nombre" },
     { icon: "reply", label: "Respuesta en menos de 24 h hábiles" },
-    { icon: "seo", label: "SEO técnico desde el primer día" },
+    { icon: "seo", label: "Lista para aparecer en Google" },
     { icon: "screens", label: "Accesible en cualquier pantalla" },
     { icon: "support", label: "Una semana de soporte" },
-    { icon: "revisions", label: "Rondas de revisión acordadas" },
+    { icon: "revisions", label: "Vueltas de cambios pactadas" },
   ],
   items: [
-    "El código y el dominio son tuyos.",
+    "La web y su dirección son tuyas.",
     "Te respondemos en menos de 24 horas hábiles.",
-    "Carga rápida en el celular, medida con Core Web Vitals. Si no pasa, la corregimos sin costo.",
-    "SEO técnico desde el primer día.",
+    "Carga rápida en el celular, medida con la prueba de Google. Si no pasa, la corregimos gratis.",
+    "Lista para aparecer en Google desde el primer día.",
     "Accesible y cómoda de usar en cualquier pantalla.",
     "Una semana de soporte después de publicar.",
-    "Rondas de revisión acordadas antes de empezar.",
+    "Las vueltas de cambios se pactan antes de empezar.",
   ],
 } as const;
 
@@ -218,10 +220,10 @@ export const extensions = {
     {
       title: "Conseguí más consultas",
       items: [
-        "Landings para campañas específicas.",
+        "Páginas para una promoción puntual.",
         "Páginas adicionales por servicio o zona.",
-        "Meta Pixel y Google Ads.",
-        "Google Business Profile y SEO local.",
+        "Medir tus anuncios en redes y Google.",
+        "Aparecer en Google Maps de tu zona.",
         "Versiones en otros idiomas.",
       ],
     },
@@ -229,7 +231,7 @@ export const extensions = {
       title: "Simplificá el contacto",
       items: [
         "Formularios avanzados.",
-        "Cotizadores interactivos.",
+        "Presupuestos al instante.",
         "Pago de señas.",
         "Catálogos de productos o servicios.",
       ],
@@ -237,9 +239,9 @@ export const extensions = {
     {
       title: "Automatizá el seguimiento",
       items: [
-        "Envío de contactos a Google Sheets.",
-        "Integración con CRM.",
-        "Notificaciones por correo.",
+        "Consultas guardadas en una planilla.",
+        "Lista de clientes ordenada.",
+        "Avisos por correo.",
         "Respuestas automáticas.",
         "Clasificación y seguimiento de consultas.",
       ],

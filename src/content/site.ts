@@ -4,8 +4,8 @@ export const siteContent = {
   hero: {
     title: "Webs que venden. Sistemas que ordenan.",
     titleLines: ["Webs que venden.", "Sistemas que ordenan."],
-    body: "Diseñamos landings, webs con turnos y sistemas a medida para negocios de servicios. Empezamos con una reunión de diagnóstico gratis para entender qué necesitás.",
-    primaryCta: "Agendá tu diagnóstico gratis",
+    body: "Diseñamos landings, webs con turnos y sistemas a medida para negocios de servicios. Empezamos con una charla gratis para entender qué necesitás.",
+    primaryCta: "Agendá una charla gratis",
     primaryMessage: "Hola Juani, quiero trabajar con Mayofy...",
     secondaryCta: "Ver packs",
   },
@@ -32,7 +32,7 @@ export const siteContent = {
     },
   ],
   process: [
-    "Reunión de diagnóstico gratis",
+    "Charla gratis de 30 minutos",
     "Propuesta con alcance y plazo",
     "Diseño con identidad",
     "Construcción con avances visibles",
@@ -44,8 +44,8 @@ export const siteContent = {
     body: "Construimos el software que tu operación necesita, con la misma exigencia de diseño que una web y sin convertir la tecnología en protagonista.",
     items: [
       "Turnos y reservas",
-      "Paneles de gestión",
-      "Usuarios con roles y permisos",
+      "Un panel con todo",
+      "Cada uno ve lo que le toca",
       "Integraciones con lo que ya usás",
       "Automatizaciones",
     ],
@@ -54,20 +54,20 @@ export const siteContent = {
     title: "Mayofy es la marca. Detrás estoy yo.",
     // Shortened on 2026-11-20 (island 6, option A of docs/plans/2026-11-20-propuestas.md).
     lead: "Soy Juani. Hace 5 años construyo software y hoy lidero técnicamente un sistema con unos 750 usuarios activos.",
-    body: "Vas a hablar conmigo desde la reunión de diagnóstico hasta la publicación, sin capas comerciales.",
+    body: "Vas a hablar conmigo desde la primera charla hasta la publicación, sin capas comerciales.",
   },
   faq: [
     {
       question: "¿Cuánto tarda un proyecto?",
-      answer: "Depende de lo que construyamos. Como referencia: una landing, de 1 a 2 semanas; una web con turnos y panel de gestión, de 3 a 9 semanas; un sistema a medida, de 1 a 6 meses. El plazo exacto queda escrito en la propuesta.",
+      answer: "Depende de lo que construyamos. Como referencia: el pack Landing, de 1 a 2 semanas; una web con turnos y panel, de 3 a 9 semanas; un sistema a medida, de 1 a 6 meses. El plazo exacto queda escrito en la propuesta.",
     },
     {
       question: "¿Cuánto cuesta?",
-      answer: "Los packs arrancan desde USD 85 (Landing), USD 150 (Web + Gestión) y USD 450 (Sistema a Medida). Son precios base: después de la reunión de diagnóstico te mandamos una propuesta con el alcance y la inversión final.",
+      answer: "Los packs arrancan desde USD 85 (Landing), USD 150 (Web + Gestión) y USD 450 (Sistema a Medida). Son precios base: después de la charla te mandamos una propuesta con el alcance y la inversión final.",
     },
     {
-      question: "¿Qué pasa en la reunión de diagnóstico?",
-      answer: "Es una charla gratuita y sin compromiso para entender tu negocio, cómo te encuentran hoy y qué necesitás resolver. Con eso preparamos una propuesta con alcance, plazo e inversión.",
+      question: "¿Qué pasa en la charla gratis?",
+      answer: "Es una videollamada de 30 minutos, sin compromiso, para entender tu negocio, cómo te encuentran hoy y qué necesitás resolver. Con eso preparamos una propuesta con alcance, plazo e inversión.",
     },
     {
       question: "¿Cómo se paga?",
@@ -78,12 +78,12 @@ export const siteContent = {
       answer: "Next.js, React y TypeScript para webs e interfaces; Python, Django y PostgreSQL para sistemas; Docker y servicios en la nube para publicar y operar. Elegimos lo que mejor resuelve tu caso, no lo que está de moda.",
     },
     {
-      question: "¿Se encargan del hosting y el dominio?",
-      answer: "Sí. Te ayudamos a registrar el dominio a tu nombre y dejamos todo publicado y configurado. El costo del dominio y del hosting se paga aparte, y tanto el dominio como el código son tuyos.",
+      question: "¿Se ocupan del dominio y el alojamiento?",
+      answer: "Sí. Te ayudamos a registrar el dominio a tu nombre y dejamos todo publicado y configurado. El dominio (tu dirección, como tunegocio.com) y el alojamiento se pagan aparte, y los dos quedan a tu nombre, igual que el código.",
     },
     {
       question: "¿Ofrecen mantenimiento?",
-      answer: "Sí. Cuesta USD 50 por mes para una landing y USD 25 por mes para Web + Gestión y Sistema a Medida. Incluye hasta 5 cambios menores o 90 minutos de trabajo por mes.",
+      answer: "Sí. Cuesta USD 50 por mes para el pack Landing y USD 25 por mes para Web + Gestión y Sistema a Medida. Incluye hasta 5 cambios menores o 90 minutos de trabajo por mes.",
     },
     {
       question: "¿Puedo traer mi propio diseño?",

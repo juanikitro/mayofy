@@ -30,6 +30,7 @@ export function PackDetails() {
                   <h3>{plan.name}</h3>
                   <p className="pack__from">Desde</p>
                   <p className="pack__price">{plan.price}</p>
+                  <p className="pack__price-note">{commercialIntro.priceNote}</p>
                   <p className="pack__timeline">
                     Plazo estimado: <strong>{plan.timeline}</strong>
                   </p>
