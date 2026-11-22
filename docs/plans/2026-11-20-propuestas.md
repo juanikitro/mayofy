@@ -16,7 +16,7 @@ python -m http.server 8765        # desde la raíz del repo
 
 Cada archivo tiene las opciones A, B y C una debajo de otra. `?opt=a` muestra solo una; `?p=0.5` congela el progreso de scroll de las opciones animadas; `?reduced` muestra el estado con movimiento reducido.
 
-- Capturas por opción: `docs/plans/propuestas/capturas/<pedido>-<opción>-<1440|390>.png`.
+- Capturas por opción: `docs/plans/propuestas/capturas/<pedido>-<opción>-<1440|390>.webp`.
 - Secuencias de cuadros de las opciones con movimiento: `docs/plans/propuestas/capturas/secuencias/`.
 - Estado actual (diagnóstico): `docs/plans/propuestas/antes/` (`d-` 1440 × 900, `m-` 390 × 844).
 - Capturas de los tres sitios publicados (para los mockups de trabajos): `docs/plans/propuestas/img/`.
@@ -51,7 +51,7 @@ Cada archivo tiene las opciones A, B y C una debajo de otra. `?opt=a` muestra so
 
 ### Opciones
 
-**A · Elegí tu caso** (`05-isla2.html?opt=a`, `capturas/05-a-1440.png`, `05-a-390.png`)
+**A · Elegí tu caso** (`05-isla2.html?opt=a`, `capturas/05-a-1440.webp`, `05-a-390.webp`)
 
 - **Qué es:** tres botones con una situación cada uno ("Me encuentran, pero no tengo dónde mostrar lo que hago", "Paso el día coordinando turnos por WhatsApp", "Mi operación vive en planillas y ya no alcanza"). Al elegir uno aparece una tarjeta con el pack que conviene, su precio y plazo, "Ver qué incluye" (va a la tarjeta completa) y "Agendá tu diagnóstico".
 - **Por qué es mejor:** convierte una sección decorativa en un paso útil: el visitante se reconoce y llega a la isla 3 sabiendo qué mirar. Las situaciones salen del "Ideal para" de cada pack, no son inventadas.
@@ -72,7 +72,7 @@ Cada archivo tiene las opciones A, B y C una debajo de otra. `?opt=a` muestra so
 - **Copy:** entrada nueva ("Cada pregunta que hoy respondés a mano, tu página la contesta antes…"). El negocio del celular ("Estudio Ámbar", precios y barrio) es un ejemplo ilustrativo y habría que marcarlo como tal o reemplazarlo por un cliente real.
 - **Esfuerzo:** M–L. **Riesgos:** alarga la página y suma otra escena fijada; Juani sacó las etiquetas de canales y esto trae de vuelta elementos flotando.
 
-**C · Sin página / Con tu página** (`?opt=c`, `capturas/05-c-1440.png`, `05-c-390.png`)
+**C · Sin página / Con tu página** (`?opt=c`, `capturas/05-c-1440.webp`, `05-c-390.webp`)
 
 - **Qué es:** dos columnas de tres renglones: "Hoy, sin página" (respondés lo mismo una y otra vez, la consulta se pierde, si no te recomiendan no te encuentran) y "Con tu página" (precios y horarios a la vista, WhatsApp con el mensaje listo, Google te muestra en tu zona). Debajo, "Ver los packs" y "Agendá tu diagnóstico gratis".
 - **Por qué es mejor:** informativa y estática, se lee en cinco segundos y no agrega interacción. Cada beneficio sale de lo que ya incluye el pack Landing.
@@ -99,7 +99,7 @@ Cada archivo tiene las opciones A, B y C una debajo de otra. `?opt=a` muestra so
 
 ### Opciones
 
-**A · Marcadores de una línea** (`07-isla3.html?opt=a`, `capturas/07-a-1440.png`, `07-a-390.png`)
+**A · Marcadores de una línea** (`07-isla3.html?opt=a`, `capturas/07-a-1440.webp`, `07-a-390.webp`)
 
 - **Qué es:** sobre cada plataforma, una píldora de una línea con un tallito hacia la roca: "Landing USD 85 ↓". Es un enlace a `#pack-<id>`; al llegar, la tarjeta se marca con un anillo durante 1,4 s.
 - **Por qué es mejor:** de cinco renglones a uno; deja ver las rocas ensambladas y conserva el dato que más pesa para decidir (el precio). El plazo vive en la tarjeta.
@@ -108,14 +108,14 @@ Cada archivo tiene las opciones A, B y C una debajo de otra. `?opt=a` muestra so
 - **Celular:** dos renglones cortos (nombre arriba, precio abajo) sin flecha, 44 px de alto.
 - **Esfuerzo:** S. **Riesgo:** ninguno relevante.
 
-**B · Una barra y la plataforma se ilumina** (`?opt=b`, `capturas/07-b-1440.png`, `07-b-390.png`)
+**B · Una barra y la plataforma se ilumina** (`?opt=b`, `capturas/07-b-1440.webp`, `07-b-390.webp`)
 
 - **Qué es:** sin nada sobre las rocas. Una barra de tres segmentos al pie de la isla (nombre, precio y plazo); al pasar o enfocar un segmento, su plataforma se ilumina con un halo.
 - **Por qué es mejor:** la escena queda limpia del todo y la barra es un único componente claro.
 - **Celular:** la barra se apila en tres renglones bajo la isla.
 - **Esfuerzo:** S–M. **Riesgo:** en celular no hay hover, así que el vínculo barra–plataforma se pierde; la barra se parece a una navegación de pestañas.
 
-**C · Carteles de madera** (`?opt=c`, `capturas/07-c-1440.png`, `07-c-390.png`)
+**C · Carteles de madera** (`?opt=c`, `capturas/07-c-1440.webp`, `07-c-390.webp`)
 
 - **Qué es:** un cartel de madera clavado al pie de cada plataforma con el nombre del pack, pintado en el estilo de las islas. El mockup usa un cartel en CSS como sustituto.
 - **Por qué es mejor:** es lo más integrado al mundo (como el cartel del hero).
@@ -141,9 +141,9 @@ Cada archivo tiene las opciones A, B y C una debajo de otra. `?opt=a` muestra so
 
 ### Opciones
 
-**A · Tres promesas** (`09a-garantias.html?opt=a`, `capturas/09a-a-*.png`): las siete garantías agrupadas en "Es tuyo", "Rápida y encontrable" y "No te dejamos solo", en tres paneles. Ordena, pero ocupa más alto que hoy (en celular, tres paneles apilados). **Copy:** agrega los tres títulos de grupo; las garantías quedan textuales. **Esfuerzo:** S.
+**A · Tres promesas** (`09a-garantias.html?opt=a`, `capturas/09a-a-*.webp`): las siete garantías agrupadas en "Es tuyo", "Rápida y encontrable" y "No te dejamos solo", en tres paneles. Ordena, pero ocupa más alto que hoy (en celular, tres paneles apilados). **Copy:** agrega los tres títulos de grupo; las garantías quedan textuales. **Esfuerzo:** S.
 
-**B · Una franja pegada a los packs** (`?opt=b`, `capturas/09a-b-*.png`)
+**B · Una franja pegada a los packs** (`?opt=b`, `capturas/09a-b-*.webp`)
 
 - **Qué es:** una franja "En todos los packs" justo debajo de las tres tarjetas (antes de la línea de pago) con siete sellos cortos; el primero, resaltado: "Carga rápida en el celular o la corregimos gratis".
 - **Por qué es mejor:** se lee como parte de la oferta, ocupa una sola fila en escritorio y pone primero la garantía que baja el riesgo de comprar.
@@ -151,7 +151,7 @@ Cada archivo tiene las opciones A, B y C una debajo de otra. `?opt=a` muestra so
 - **Copy:** acorta cada garantía a un sello ("Código y dominio tuyos", "Respuesta en menos de 24 h hábiles"…). El texto completo puede quedar en `commercial-plans.ts` y en la FAQ.
 - **Esfuerzo:** S. **Riesgo:** se pierde la mención a Core Web Vitals en la franja (puede ir en un `title` o en la FAQ).
 
-**C · La promesa grande** (`?opt=c`, `capturas/09a-c-*.png`): la garantía de velocidad como frase grande ("Si tu web no carga rápido en el celular, *la corregimos sin costo*.", con "Lo medimos con Core Web Vitals, el mismo criterio que usa Google.") y las otras seis en una lista al lado. Es la más persuasiva, pero agrega casi una pantalla a una zona de packs que ya es larga. **Esfuerzo:** S.
+**C · La promesa grande** (`?opt=c`, `capturas/09a-c-*.webp`): la garantía de velocidad como frase grande ("Si tu web no carga rápido en el celular, *la corregimos sin costo*.", con "Lo medimos con Core Web Vitals, el mismo criterio que usa Google.") y las otras seis en una lista al lado. Es la más persuasiva, pero agrega casi una pantalla a una zona de packs que ya es larga. **Esfuerzo:** S.
 
 ### Recomendación
 
@@ -178,7 +178,7 @@ Las tres usan el mismo mapeo de objetos: **invernadero** = sistema a medida; **m
 
 **Copy común:** título más corto, "Sistemas y automatizaciones *a medida*.", y entrada acortada ("Lo que tu operación necesita, sin convertir la tecnología en protagonista."). Las etiquetas desaparecen (sus ítems pasan al invernadero). Los ítems de automatizaciones se acortan un poco ("Contactos a Google Sheets", "Avisos por correo"). Si Juani prefiere conservar su título, las opciones funcionan igual, pero el título actual ocupa tres renglones en escritorio.
 
-**A · El taller como mapa** (`09b-isla4.html?opt=a`, `capturas/09b-a-1440.png`, `09b-a-390.png`)
+**A · El taller como mapa** (`09b-isla4.html?opt=a`, `capturas/09b-a-1440.webp`, `09b-a-390.webp`)
 
 - **Qué es:** la isla grande a la derecha con cuatro marcadores sobre sus objetos ("Sistema a medida", "Más consultas", "Seguimiento automático", "Contacto simple"). El que se elige abre su contenido en un panel a la izquierda (abre "Sistema a medida" por defecto). El bot va en una franja al pie.
 - **Por qué es mejor:** toda la sección entra en **una pantalla** en escritorio (hoy son ~1,9) y la isla pasa a ser la interfaz, no un adorno al final.
@@ -195,7 +195,7 @@ Las tres usan el mismo mapeo de objetos: **invernadero** = sistema a medida; **m
 - **Celular:** la isla fija arriba (42 % del alto) y los bloques pasan debajo.
 - **Esfuerzo:** M. **Riesgo:** sigue siendo larga (~3,5 pantallas de scroll en escritorio), justo lo que Juani marcó.
 
-**C · Cuatro tarjetas, cada una con su objeto** (`?opt=c`, `capturas/09b-c-1440.png`, `09b-c-390.png`)
+**C · Cuatro tarjetas, cada una con su objeto** (`?opt=c`, `capturas/09b-c-1440.webp`, `09b-c-390.webp`)
 
 - **Qué es:** primera pantalla con título e isla (Mayo escarbando) y debajo cuatro tarjetas cortas, cada una coronada por el recorte pintado de su objeto (`43-isla4-*.webp`), con hasta cuatro ítems. Al pie, la franja del bot y "Consultar por una automatización".
 - **Por qué es mejor:** todo visible, ordenado y corto (~1 pantalla en escritorio, ~2,3 en celular); reutiliza recortes que ya existen.
@@ -223,7 +223,7 @@ Las tres usan el mismo mapeo de objetos: **invernadero** = sistema a medida; **m
 
 **Copy común:** la entrada se acorta a "Soy Juani. Hace 5 años construyo software y hoy lidero técnicamente un sistema con unos 750 usuarios activos." y el segundo párrafo a "Vas a hablar conmigo desde la reunión de diagnóstico hasta la publicación, sin capas comerciales." (se saca "Esa experiencia en APIs, integraciones…").
 
-**A · Junto al fuego** (`09c-isla6.html?opt=a`, `capturas/09c-a-1440.png`, `09c-a-390.png`)
+**A · Junto al fuego** (`09c-isla6.html?opt=a`, `capturas/09c-a-1440.webp`, `09c-a-390.webp`)
 
 - **Qué es:** la primera pantalla es la presentación: texto a la izquierda y la isla grande a la derecha, con el fogón encendido y Mayo echada junto al banco. Debajo, la invitación ("Empecemos por una reunión de diagnóstico *gratis*"), WhatsApp como botón y la agenda al lado; el formulario pasa a un enlace "Prefiero completar un formulario" que lo despliega.
 - **Por qué es mejor:** la isla cumple su papel narrativo (Mayo llegó a echarse junto a Juani) en la pantalla donde se habla de Juani, y la mitad vacía desaparece.
@@ -232,9 +232,9 @@ Las tres usan el mismo mapeo de objetos: **invernadero** = sistema a medida; **m
 - **Celular:** texto, isla, invitación, agenda.
 - **Esfuerzo:** M (reordenar y plegar el formulario; la agenda ya está medida en `2026-11-19-revision-diseno.md`).
 
-**B · Tres datos** (`?opt=b`, `capturas/09c-b-1440.png`, `09c-b-390.png`): los tres datos como cifras grandes en Fraunces menta ("5 años", "750", "4") con su aclaración, y un solo párrafo corto. Es la que mejor comunica experiencia, pero deja la isla otra vez abajo. **Esfuerzo:** S.
+**B · Tres datos** (`?opt=b`, `capturas/09c-b-1440.webp`, `09c-b-390.webp`): los tres datos como cifras grandes en Fraunces menta ("5 años", "750", "4") con su aclaración, y un solo párrafo corto. Es la que mejor comunica experiencia, pero deja la isla otra vez abajo. **Esfuerzo:** S.
 
-**C · Primero la charla** (`?opt=c`, `capturas/09c-c-1440.png`, `09c-c-390.png`): presentación breve (avatar, una línea y los datos como etiquetas) a la izquierda y la agenda a la derecha **en la primera pantalla**; el formulario plegado en "¿Preferís escribir?". Es la más orientada a convertir, pero achica la presentación de Juani. **Copy:** agrega la línea "Desarrollador de software, a cargo de cada proyecto." (a validar). **Esfuerzo:** S–M.
+**C · Primero la charla** (`?opt=c`, `capturas/09c-c-1440.webp`, `09c-c-390.webp`): presentación breve (avatar, una línea y los datos como etiquetas) a la izquierda y la agenda a la derecha **en la primera pantalla**; el formulario plegado en "¿Preferís escribir?". Es la más orientada a convertir, pero achica la presentación de Juani. **Copy:** agrega la línea "Desarrollador de software, a cargo de cada proyecto." (a validar). **Esfuerzo:** S–M.
 
 ### Recomendación
 
@@ -258,7 +258,7 @@ Los mockups usan capturas reales de los tres sitios publicados (`img/`). La de S
 
 ### Opciones
 
-**A · Índice con vista previa** (`10-trabajos.html?opt=a`, `capturas/10-a-1440.png`, `10-a-390.png`, secuencia de hover `capturas/secuencias/10-a-1440-hover.jpg`)
+**A · Índice con vista previa** (`10-trabajos.html?opt=a`, `capturas/10-a-1440.webp`, `10-a-390.webp`, secuencia de hover `capturas/secuencias/10-a-1440-hover.jpg`)
 
 - **Qué es:** una lista con los títulos grandes (número en Fraunces, título y categoría) y, a la derecha, una ventana de navegador con la captura del proyecto (más su versión de celular) flotando sobre una roca pintada. Pasar o enfocar un título cambia la vista previa. Clic: "Ver el caso".
 - **Por qué es mejor:** entra en una pantalla, los títulos se leen de un vistazo, la imagen es grande y escala a más proyectos sin cambiar el diseño. Los marcadores 04–06 se esconden hasta tener contenido ("Los casos completos se suman a medida que avanzan.").
@@ -267,9 +267,9 @@ Los mockups usan capturas reales de los tres sitios publicados (`img/`). La de S
 - **Celular:** sin hover, cada fila lleva su captura arriba del título.
 - **Esfuerzo:** M. **Riesgo:** en pantallas táctiles grandes (tablet) la vista previa se elige con el primer toque; conviene que el primer toque la muestre y el segundo abra el caso, o que la fila entera sea el enlace.
 
-**B · Un caso destacado y dos más** (`?opt=b`, `capturas/10-b-*.png`): la consignataria grande (navegador y celular superpuestos, texto y enlaces) y abajo dos tarjetas con su captura; hover: la tarjeta sube 2 px y la imagen hace zoom 1,03. Clara y simple, pero obliga a elegir un caso estrella. **Esfuerzo:** S–M.
+**B · Un caso destacado y dos más** (`?opt=b`, `capturas/10-b-*.webp`): la consignataria grande (navegador y celular superpuestos, texto y enlaces) y abajo dos tarjetas con su captura; hover: la tarjeta sube 2 px y la imagen hace zoom 1,03. Clara y simple, pero obliga a elegir un caso estrella. **Esfuerzo:** S–M.
 
-**C · Una isla por caso** (`?opt=c`, `capturas/10-c-*.png`): cada proyecto "plantado" en su propia islita flotante (la base vacía de la isla 3, `10-isla3-base-isla.webp`), en zigzag sobre el atardecer, con vaivén desfasado y Mayo corriendo en una. Es la más fiel al mundo, pero ocupa ~2,5 pantallas y repite la base tres veces. **Esfuerzo:** M–L.
+**C · Una isla por caso** (`?opt=c`, `capturas/10-c-*.webp`): cada proyecto "plantado" en su propia islita flotante (la base vacía de la isla 3, `10-isla3-base-isla.webp`), en zigzag sobre el atardecer, con vaivén desfasado y Mayo corriendo en una. Es la más fiel al mundo, pero ocupa ~2,5 pantallas y repite la base tres veces. **Esfuerzo:** M–L.
 
 ### Recomendación
 
@@ -301,7 +301,7 @@ Los mockups usan capturas reales de los tres sitios publicados (`img/`). La de S
 
 La entrada se acorta a "Vas a saber en qué etapa está tu proyecto y qué falta para publicar."
 
-**A · El sendero de seis piedras** (`11-pasos.html?opt=a`, secuencias `capturas/secuencias/11-a-1440.jpg` y `11-a-390.jpg`, reducido `capturas/11-a-1440-reducido.png`)
+**A · El sendero de seis piedras** (`11-pasos.html?opt=a`, secuencias `capturas/secuencias/11-a-1440.jpg` y `11-a-390.jpg`, reducido `capturas/11-a-1440-reducido.webp`)
 
 - **Qué es:** sección fijada de ~3,4 pantallas de scroll. A la izquierda, la lista de los seis pasos; a la derecha, la isla 5 grande con un número sobre cada piedra del sendero. Con el scroll, Mayo salta a la piedra siguiente, el número se enciende y en la lista se abre ese paso con su explicación; los pasos ya recorridos quedan marcados.
 - **Por qué es mejor:** une el contenido con el arte que ya existe y le da sentido a la carrera de Mayo; cada paso tiene su momento y su explicación sin agregar cajas.
