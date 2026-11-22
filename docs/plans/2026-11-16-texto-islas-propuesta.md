@@ -77,3 +77,14 @@ Se va "Disponibilidad offline": es abstracta para alguien que no es técnico y n
 | Sistema a Medida | Pasamos tus planillas, tus chats y lo que tenés en la cabeza a un sistema propio: clientes, stock, cobros y números en un solo lugar. |
 
 Hoy la isla 2 muestra la misma descripción que las tarjetas de packs (`commercial-plans.ts`). Si se aprueba, conviene que sea un texto propio de la isla 2, así las tarjetas de packs no cambian.
+
+## Cambios del 22 de noviembre, segunda tanda (aplicados)
+
+- **Tarjeta base de la animación:**
+  - "Sistema de gestión" → "Tu solución digital";
+  - "Clientes, ventas y turnos en un solo panel." → "Lo que tu negocio necesite.".
+- **Piezas de la animación (seis):** "¿Me pasás los precios?" → Bot de WhatsApp, turnos, stock, "¿Cuánto te debo?" → Cuentas y cobros, "¿Cómo vino el mes?" → Tus números, y modo sin conexión.
+- **Preguntas flotantes:** cada pregunta aparece justo antes de volar a su pieza, así nunca hay dos quietas encimadas ("no quiero solapar mensajes quietos").
+- **Título de la isla 3:** "Encontramos lo que necesita *tu negocio*." → "Elegí por dónde *empezamos*.".
+- **Recomendación de la isla 2:** cada situación tiene ahora su propio texto (campo `pitch` en `case-picker.ts`), con el texto exacto de Juani. Las tarjetas de packs conservan su descripción.
+- **Packs:** la definición de los packs se rehace en una sesión aparte con Juani (`docs/plans/2026-11-22-packs.md`). El texto de "Web + Gestión" puede cambiar según lo que salga de ahí.
