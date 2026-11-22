@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Fraunces, Instrument_Sans } from "next/font/google";
+import { HashLinkHistory } from "@/components/hash-link-history";
 import { getSiteUrl } from "@/lib/site-url";
 import "./world.css";
 
@@ -71,7 +72,10 @@ export default function RootLayout({
       lang="es-AR"
       className={`${worldSansFont.variable} ${worldSerifFont.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <HashLinkHistory />
+      </body>
       {googleAnalyticsId ? <GoogleAnalytics gaId={googleAnalyticsId} /> : null}
     </html>
   );

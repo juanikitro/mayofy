@@ -7015,9 +7015,12 @@ html[data-motion-tier="reduced"] .works-index__shot {
     visibility 0s var(--m-fast);
 }
 
-/* The selected case counts its 5 s with a moss bar along its foot, like the
+/* The selected case counts its 12 s with a moss bar along its foot, like the
  * works index; it pauses off screen or in a hidden tab, and rests at zero
- * while the pointer or focus is on the list. */
+ * while the pointer or focus is on the list. 12 s, not the works index's 5 s:
+ * the recommendation under the cases carries a price and a paragraph, and a
+ * slow reader watching the island needs time to finish it (user test,
+ * 20 November 2026: it changed from USD 150 to USD 450 mid-sentence). */
 .case__progress {
   position: absolute;
   inset: auto 0.9rem -1.5px;
@@ -7026,7 +7029,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
   background: var(--moss);
   transform: scaleX(0);
   transform-origin: left center;
-  animation: works-progress 5s linear forwards;
+  animation: works-progress 12s linear forwards;
   animation-play-state: paused;
 }
 

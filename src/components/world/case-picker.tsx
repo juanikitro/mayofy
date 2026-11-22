@@ -18,7 +18,7 @@ function CaseArtwork({ art }: { art: CaseArt }) {
  * Island 2, option A: three situations, each marked by a painted piece of
  * the island (a flower, a small plant, a butterfly) that grows out of its
  * card. The first is selected from the start and, like the works index,
- * the selection moves to the next one every 5 s, with a bar filling along
+ * the selection moves to the next one every 12 s (time for a slow reader), with a bar filling along
  * the selected card; the recommendation under them follows it. Hovering,
  * focusing or clicking a case selects it and holds the count at zero until
  * the pointer or focus leaves the list, when it starts again. The count
@@ -56,7 +56,7 @@ export function CasePicker() {
     };
   }, []);
 
-  /** Selects a case and starts its 5 s count from zero. */
+  /** Selects a case and starts its 12 s count from zero. */
   function select(index: number) {
     setActive(index);
     setCycle((value) => value + 1);

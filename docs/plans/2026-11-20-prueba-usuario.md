@@ -265,3 +265,11 @@ Clips comprimidos (H.264, de 9 a 30 s cada uno) en `docs/plans/prueba-usuario/`:
 Capturas en la misma carpeta: de `c01` a `c15`, nombradas por lo que muestran.
 
 Los videos completos de cada pasada (WebM, unos 250 MB) y los registros JSON con cada entrada y cada movimiento del sitio quedaron fuera del repositorio, en `C:\Users\Juanito\AppData\Local\Temp\claude\C--Users-Juanito-orca-workspaces-mayofy-landing-landing-prueba-usuario\bfbf730d-0d7d-4ac6-9cd5-5a67ad1e32bf\scratchpad\out`, junto con los scripts de Playwright en la carpeta de arriba (`lib.cjs`, `phoneA.cjs`, `phoneB.cjs`, `laptop.cjs`, `pins.cjs`, `cal.cjs`, `back.cjs`, `rec.cjs` y `tp.cjs`). Es una carpeta temporal: si hace falta conservarlos, hay que copiarlos.
+
+## Arreglos del coordinador (22/11)
+
+- **A2, "Atrás" roto.** Causa confirmada en `node_modules/next/dist/client/components/app-router.js`: el App Router ignora un `popstate` cuya entrada no trae su estado (`if (!event.state) return`). Un `<a href="#...">` nativo crea justamente esa entrada sin estado, y `platform-markers.tsx` hacía `pushState(null, ...)`.
+  - **Arreglo:** `src/components/hash-link-history.tsx`, montado en `src/app/layout.tsx`, toma los enlaces `#` de la misma página. Hace scroll al destino con el `scroll-behavior` propio de la página (suave, o instantáneo con movimiento reducido), mueve el foco ahí y agrega la entrada al historial conservando el estado del router. `platform-markers.tsx` ahora conserva `history.state`.
+  - **Verificado (1440 y 390):** "Ver packs" → caso de ShineApp → Atrás vuelve a la landing en `#packs`, a la misma altura. Un segundo Atrás vuelve a `/`. Sin errores de consola.
+- **A3, la recomendación cambia mientras se lee.** La rotación de la isla 2 pasó de 5 a 12 s (`.case__progress` en `world.css`). Así alcanza para leer el precio y el párrafo mirando la isla. La barra de progreso, la pausa con el puntero o el foco, la pausa fuera de pantalla y la ausencia de rotación con movimiento reducido no cambian. Verificado a 390: el primer caso sigue elegido a los 6 s y cambia a los 13 s.
+- El resto de los hallazgos quedó a cargo de tres agentes: el scroll (A1, M1), la caja de Cal.com (A4) y los hallazgos menores.
