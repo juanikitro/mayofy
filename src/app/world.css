@@ -8223,3 +8223,29 @@ html[data-motion-tier="reduced"] .works-index__shot {
     transform: none;
   }
 }
+
+/* ======================================================================
+ * Minor findings of the simulated user test (2026-11-22)
+ * docs/plans/2026-11-22-hallazgos-menores.md. Island 4 on short laptop
+ * screens, the fixed UI out of the way of content and fields, tap targets
+ * and small text.
+ * ==================================================================== */
+
+/* Island 4 on short laptop screens (1366x768, 1280x720): the island art
+ * is sized by the width, so on a wide, short screen it rises into the lead
+ * and the pins sat on it (M6). The title scales with the height and the
+ * island rests a little lower, so the lead ends above every pin. */
+@media (min-width: 48.01rem) and (max-height: 50rem) {
+  .workshop {
+    --workshop-y: 0svh;
+  }
+
+  .workshop__intro {
+    top: 6rem;
+  }
+
+  .workshop__intro h2 {
+    font-size: min(clamp(2rem, 1.2rem + 3.4vw, 3.6rem), 6.2svh);
+  }
+}
+
