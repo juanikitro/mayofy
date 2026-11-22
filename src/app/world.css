@@ -503,8 +503,9 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 /* Island 3: rock assembly ---------------------------------------------- */
 
-/* The stage is pinned while the section scrolls (cover 29.4 % to 70.6 % of
- * `--rocks` at 240vh). Rocks, contact shadows and Mayo live inside the plate,
+/* The stage is pinned while the section scrolls (`--rocks-height`, 320vh,
+ * so 220vh of pinned scroll; stage.ts rocksStage, which also sets every scroll
+ * range below as a custom property on the section). Rocks, contact shadows and Mayo live inside the plate,
  * positioned in % of it (stage.ts), so they share the island's perspective;
  * the one-line markers sit in `.platforms`, a box with the plate's exact
  * frame outside the decorative (aria-hidden) scene, each standing on its
@@ -583,7 +584,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   --rocks-drop: max(15%, 20rem - 100cqh + 48.25cqw);
 
   position: relative;
-  height: 240vh;
+  height: var(--rocks-height, 320vh);
   view-timeline-name: --rocks;
 }
 
@@ -624,8 +625,8 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 }
 
 /* Inside the plate: back rocks (z 1) float behind the island cutout (z 2);
- * the platforms at rest and their shadows (z 3), Mayo (z 4), and the rocks
- * floating in front of the island's underside (z 5) are drawn over it. */
+ * the platforms at rest and their shadows (z 3), the rocks floating in front
+ * of the island's underside (z 5) and Mayo (z 6) are drawn over it. */
 .rocks .plate__picture--island {
   z-index: 2;
 }
@@ -646,7 +647,10 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   position: absolute;
   left: var(--x);
   top: var(--y);
-  z-index: 4;
+  /* Over everything on the plate, the rocks flying in front of the island
+   * included: she stands on the front of the meadow and must never be lost
+   * behind a passing rock. */
+  z-index: 6;
   width: var(--w);
   aspect-ratio: 1;
   pointer-events: none;
@@ -712,10 +716,15 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 }
 
-/* Seated, she breathes on her own clock (the painted ping-pong of 22 steps
- * of 120 ms), also where the assembly cannot animate. */
-.packs-mayo__strip--sentada img {
-  animation: mayo-sprite 1.32s steps(12, jump-none) infinite alternate;
+/* Mayo's key poses, where the guided scroll may settle (data-scroll-rest,
+ * stage.ts packsMayo.timing.rests), at their place in the section's scroll,
+ * outside the sticky stage. */
+.rocks__rest {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
 }
 
 /* Plate-relative placement: `--*-d` on desktop, `--*-m` on phones. */
@@ -1189,10 +1198,6 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   mask-image: none;
 }
 
-.rocks--painted {
-  --live-out: cover 67.9% cover 68%;
-}
-
 .rocks--painted .rock,
 .rocks--painted .rock-shadow,
 .rocks--painted .rock-ground,
@@ -1278,7 +1283,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     /* A list in the shorthand resolves its durations to 0s, not to the range. */
     animation-duration: auto;
     animation-timeline: --rocks;
-    animation-range: var(--range), var(--range), var(--range), cover 4% cover 34%;
+    animation-range: var(--range), var(--range), var(--range), var(--range-swirl);
   }
 
   .rock-far {
@@ -1290,7 +1295,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   .plate__picture--assembled {
     animation: assembled-in linear both;
     animation-timeline: --rocks;
-    animation-range: cover 64% cover 68%;
+    animation-range: var(--range-crossfade);
   }
 
   .rocks--painted .rock {
@@ -1302,7 +1307,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
       live-out linear both;
     animation-duration: auto;
     animation-timeline: --rocks;
-    animation-range: var(--range), var(--range), var(--range), cover 4% cover 34%, var(--live-out);
+    animation-range: var(--range), var(--range), var(--range), var(--range-swirl), var(--live-out);
   }
 
   .rocks--painted .rock-shadow {
@@ -1356,32 +1361,29 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     animation-range: var(--range);
   }
 
-  /* Mayo's choreography on the `--rocks` cover range (tops land at 44.7,
-   * 52.7 and 60.7 %, rockTiming): she watches the floating rocks (a loop in
-   * time, 22 steps of 110 ms) until 43.85 %; hops (two scrubbed cycles,
-   * 43.85-59.85 %) right after the first and the second platform land;
-   * sits down (6 frames, 61.5-64.5 %) as the third lands; then stays
-   * seated. Each window takes over on the same painted frame as the last. */
+  /* Mayo's choreography (stage.ts packsMayo.timing, in vh of pinned
+   * scroll; the platform tops land at 52.9, 90.9 and 128.9): she watches the
+   * floating rocks until 52; hops in two scrubbed cycles of 40 (52-132),
+   * airborne right after the first and the second platform land; sits down
+   * (6 frames, 132-160) once the third has landed; then stays seated. Her
+   * watching and seated loops run on their own clock (packs-mayo-clock.tsx),
+   * which brings them to the frame each hand-over shares. */
   .packs-mayo {
     animation: packs-mayo-hops linear both;
     animation-timeline: --rocks;
-    animation-range: cover 43.85% cover 59.85%;
+    animation-range: var(--range-hops);
   }
 
   .packs-mayo__strip--mira {
     animation: packs-mayo-on linear none;
     animation-timeline: --rocks;
-    animation-range: cover 0% cover 43.85%;
-  }
-
-  .packs-mayo__strip--mira img {
-    animation: mayo-sprite 1.21s steps(12, jump-none) infinite alternate;
+    animation-range: var(--range-mira);
   }
 
   .packs-mayo__strip--salto {
     animation: packs-mayo-on linear none;
     animation-timeline: --rocks;
-    animation-range: cover 43.85% cover 61.5%;
+    animation-range: var(--range-hops);
   }
 
   .packs-mayo__strip--salto img {
@@ -1389,26 +1391,26 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     animation-timing-function: steps(12, jump-none);
     animation-iteration-count: 2;
     animation-timeline: --rocks;
-    animation-range: cover 43.85% cover 59.85%;
+    animation-range: var(--range-hops);
   }
 
   .packs-mayo__strip--sentarse {
     animation: packs-mayo-on linear none;
     animation-timeline: --rocks;
-    animation-range: cover 61.5% cover 64.5%;
+    animation-range: var(--range-sentarse);
   }
 
   .packs-mayo__strip--sentarse img {
     animation: mayo-sprite linear both;
     animation-timing-function: steps(6, jump-none);
     animation-timeline: --rocks;
-    animation-range: cover 61.5% cover 64.5%;
+    animation-range: var(--range-sentarse);
   }
 
   .packs-mayo__strip--sentada {
     animation: packs-mayo-off linear none;
     animation-timeline: --rocks;
-    animation-range: cover 0% cover 64.5%;
+    animation-range: var(--range-sentada-off);
   }
 
   .scene--dawn:not(.scene--plated) .scene__sky {
@@ -1476,11 +1478,12 @@ html[data-motion-tier="reduced"] .scene__sky {
 @media (max-width: 48rem) {
   .rocks {
     --plate-scale: 1.9;
-    /* Raised a quarter of its height, less on short phones so what stands on
-     * the platforms still clears the intro (15rem); measured for the former
-     * cards (their tops 97.7 % of the plate's height above its bottom,
-     * 104.5cqw), which the shorter markers clear with room to spare. */
-    --rocks-drop: max(-25%, 15rem - 100cqh + 104.5cqw);
+    /* Raised up to 40 % of its height (the intro is the title alone), so the
+     * island sits mid-screen, clear of the bottom bar; less on short phones so
+     * what stands on the platforms still clears the intro (15rem; measured
+     * for the former cards, their tops 97.7 % of the plate's height above its
+     * bottom, 104.5cqw, which the shorter markers clear with room to spare). */
+    --rocks-drop: max(-40%, 15rem - 100cqh + 104.5cqw);
   }
 
   .rocks .plate {
@@ -3087,45 +3090,6 @@ html[data-motion-tier="reduced"] .mayo--stops {
 }
 
 /* Booking (island 7) */
-
-.booking {
-  display: grid;
-  gap: 0.75rem;
-  justify-items: start;
-  width: 100%;
-  scroll-margin-top: 5rem;
-}
-
-.booking__inline {
-  width: 100%;
-  min-height: 32rem;
-  overflow: hidden;
-  border-radius: var(--radius);
-  background: var(--night-deep);
-}
-
-.booking__inline iframe {
-  width: 100%;
-  border: 0;
-}
-
-/* Phones: Cal.com stacks its details, the month and every free time of the
- * chosen day in one column (about 1650 px, two screens). The frame stops at
- * about one screen and scrolls inside, with the first times showing at its
- * foot, so the form and the island still follow. */
-@media (max-width: 48rem) {
-  .booking__inline {
-    max-height: min(44rem, 82svh);
-    overflow-y: auto;
-  }
-}
-
-.booking__link {
-  font-size: 0.9rem;
-  color: var(--mint);
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-}
 
 /* Bot tiers (island 4) */
 
@@ -4810,79 +4774,11 @@ html[data-motion-tier="reduced"] .wa-float {
   }
 }
 
-/* Cal.com: loading state ----------------------------------------------- */
-
-/* Until Cal.com reports the calendar ready, a skeleton of the month view
- * holds the space (a slow breathing of its tiles), then fades away. */
-/* The fallback link and the footer links stand alone: 44px tap targets. */
-.booking__link,
+/* The footer links stand alone: 44px tap targets. */
 .world-footer__links a {
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
-}
-
-.booking__frame {
-  position: relative;
-  width: 100%;
-}
-
-.booking__skeleton {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: min(100%, 28rem);
-  align-content: start;
-  justify-content: center;
-  gap: 1.25rem;
-  padding: clamp(1rem, 3vw, 2rem);
-  border-radius: var(--radius);
-  background: var(--night-deep);
-  pointer-events: none;
-  transition: opacity var(--m-panel) var(--ease-ui);
-}
-
-.booking__frame[data-ready] > .booking__skeleton {
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity var(--m-panel) var(--ease-ui),
-    visibility 0s linear var(--m-panel);
-}
-
-.booking__skeleton-title {
-  width: min(12rem, 50%);
-  height: 0.9rem;
-  border-radius: var(--radius-pill);
-  background: oklch(26% 0.04 265);
-}
-
-.booking__skeleton-grid {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 0.5rem;
-}
-
-.booking__skeleton-grid > span {
-  aspect-ratio: 1;
-  border-radius: 0.6rem;
-  background: oklch(22% 0.04 265);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion-tier="reduced"]) .booking__frame:not([data-ready]) :is(.booking__skeleton-title, .booking__skeleton-grid) {
-    animation: skeleton-breathe 1.6s ease-in-out infinite alternate;
-  }
-}
-
-@keyframes skeleton-breathe {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0.55;
-  }
 }
 
 /* Copy entrance -------------------------------------------------------- */
@@ -6769,8 +6665,18 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
+/* Each question appears at its spot just before it flies, so only one
+ * floats at a time and none rest on top of another (Juani, 22 November 2026:
+ * "no quiero solapar mensajes quietos"). */
 @keyframes problem-ask {
   0% {
+    left: var(--x0);
+    top: var(--y0);
+    opacity: 0;
+    scale: 0.92;
+  }
+
+  18% {
     left: var(--x0);
     top: var(--y0);
     opacity: 1;
@@ -7426,10 +7332,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
   fill: currentColor;
 }
 
-.hearth__reach .booking {
-  max-width: 51.5rem;
-}
-
 .hearth__form .contact-form {
   padding: 0;
   background: none;
@@ -7509,6 +7411,220 @@ html[data-motion-tier="reduced"] .works-index__shot {
     grid-column: 1 / -1;
   }
 }
+
+/* Island 6: contact (Juani's portrait, Cal.com booking) ----------------- */
+
+/* Juani's portrait sits beside "Soy Juani", framed like a photo kept by the
+ * fire: the site's radius, a thin warm rim and a low firelight glow under
+ * the dusk shadow. A photo for now; his avatar replaces it later. */
+.host__intro {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.host__portrait {
+  --portrait-size: 5rem;
+
+  display: block;
+  width: var(--portrait-size);
+  aspect-ratio: 1;
+  overflow: clip;
+  border: 2px solid oklch(82% 0.09 70 / 55%);
+  border-radius: var(--radius);
+  background: var(--leaf-deep);
+  box-shadow:
+    0 1.25rem 2.5rem -1.25rem oklch(8% 0.04 265 / 80%),
+    0 0.5rem 2.25rem -0.75rem oklch(72% 0.15 58 / 40%);
+}
+
+.host__portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 48.01rem) {
+  .host__portrait {
+    --portrait-size: 7rem;
+  }
+}
+
+/* Cal.com booking */
+
+/* The agenda is one panel of the dusk island: a Spanish heading in the
+ * site's type over the real Cal.com calendar, painted with the same surface
+ * (cal-booking.tsx hands `--booking-surface` and the night and mint tokens
+ * to Cal.com's CSS variables). The iframe takes its content's height on
+ * every width: nothing in here scrolls on its own, so a flick or a wheel
+ * notch over the calendar moves the page (user test, finding A4). */
+.booking {
+  --booking-surface: oklch(21% 0.055 262);
+  --booking-line: color-mix(in oklch, var(--night-ink) 12%, transparent);
+
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+  width: 100%;
+  max-width: 51.5rem;
+  scroll-margin-top: 5.5rem;
+}
+
+.booking__panel {
+  width: 100%;
+  overflow: clip;
+  border: 1px solid var(--booking-line);
+  border-radius: var(--radius);
+  background: var(--booking-surface);
+  box-shadow:
+    0 1.75rem 3.5rem -1.75rem oklch(8% 0.04 265 / 75%),
+    inset 0 1px 0 color-mix(in oklch, var(--night-ink) 7%, transparent);
+}
+
+.booking__head {
+  display: grid;
+  gap: 0.3rem;
+  padding: 1.15rem clamp(1rem, 2.5vw, 1.5rem) 0.25rem;
+}
+
+.booking__heading {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--night-ink);
+}
+
+.booking__detail {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--night-ink-soft);
+}
+
+.booking__frame {
+  position: relative;
+  width: 100%;
+}
+
+.booking__inline {
+  width: 100%;
+}
+
+.booking__inline iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+}
+
+/* Loading: a still month skeleton holds the place with a visible line,
+ * then fades away once Cal.com reports the calendar ready. */
+.booking__frame[data-status="loading"] .booking__inline {
+  min-height: 30rem;
+}
+
+.booking__skeleton {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: min(100%, 26rem);
+  align-content: start;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: clamp(1rem, 3vw, 2rem);
+  background: var(--booking-surface);
+  pointer-events: none;
+  transition:
+    opacity var(--m-panel) var(--ease-ui),
+    visibility 0s linear var(--m-panel);
+}
+
+.booking__frame:not([data-status="loading"]) > .booking__skeleton {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.booking__skeleton-title {
+  width: min(12rem, 50%);
+  height: 0.9rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklch, var(--night-ink) 12%, var(--booking-surface));
+}
+
+.booking__skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.booking__skeleton-grid > span {
+  aspect-ratio: 1;
+  border-radius: 0.6rem;
+  background: color-mix(in oklch, var(--night-ink) 7%, var(--booking-surface));
+}
+
+.booking__state {
+  position: absolute;
+  inset: auto 0 1.5rem;
+  margin: 0;
+  font-size: 0.95rem;
+  text-align: center;
+  color: var(--night-ink-soft);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .booking__frame[data-status="loading"] :is(.booking__skeleton-title, .booking__skeleton-grid) {
+    animation: skeleton-breathe 1.6s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes skeleton-breathe {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.55;
+  }
+}
+
+/* Failed or silent for 15 s: the direct link takes the calendar's place. */
+.booking__frame[data-status="failed"] .booking__inline {
+  display: none;
+}
+
+.booking__failed {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+  padding: 1.25rem clamp(1rem, 2.5vw, 1.5rem) 1.5rem;
+}
+
+.booking__failed p {
+  max-width: 32rem;
+  margin: 0;
+  color: var(--night-ink-soft);
+}
+
+.booking:has(.booking__frame[data-status="failed"]) > .booking__link {
+  display: none;
+}
+
+/* The fallback link stands alone: a 44px tap target. */
+.booking__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-size: 0.9rem;
+  color: var(--mint);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* End of island 6: contact */
 
 /* Works autoplay: a moss bar fills along the active row's bottom edge in
  * 12 s (like the island 2 cases, time for a slow reader; Juani, 22 November

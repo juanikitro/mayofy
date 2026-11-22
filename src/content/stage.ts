@@ -728,13 +728,27 @@ export const rockFloats: readonly Record<PlatformPiece["kind"], RockFloat>[] = [
 ];
 
 /**
- * Scroll timing of the assembly on the `--rocks` cover range (the stage is
- * pinned from 29.4 % to 70.6 % of it at 240vh): the rocks float until
- * `start`; each platform then gathers `stagger` after the previous one, its
- * pieces `pieceStagger` apart in landing order (base, left, right, top), each
- * flight lasting `flight`. Mayo's three hops are timed from these numbers.
+ * Island 3's pinned stage (Juani, 22 November 2026: "mejorar la visualizacion
+ * de la animacion de mayo"): the section is `height` vh tall, so the stage
+ * stays pinned for `height - 100` vh of scroll. Every moment of the island is
+ * timed in vh of that pinned scroll (0 when the stage pins, 220 when it lets
+ * go) and turned into the `--rocks` cover range by `stageCover`, so the
+ * timing holds whatever the section's height.
  */
-export const rockTiming = { start: 34, stagger: 8, pieceStagger: 1.6, flight: 7, landing: 0.84 } as const;
+export const rocksStage = { height: 320 } as const;
+
+/** A moment `vh` into the pinned scroll (negative: before the stage pins) as a share of the `--rocks` cover range, in %. */
+export const stageCover = (vh: number) => Math.round(((100 + vh) / (rocksStage.height + 100)) * 10000) / 100;
+
+/**
+ * Scroll timing of the assembly, in vh of pinned scroll (rocksStage): the
+ * rocks float until `start`; each platform then gathers `stagger` after the
+ * previous one, its pieces `pieceStagger` apart in landing order (base,
+ * left, right, top), each flight lasting `flight` and touching down at
+ * `landing` of it. Platform tops land at 52.9, 90.9 and 128.9 vh; Mayo's
+ * moments (packsMayo.timing) follow them.
+ */
+export const rockTiming = { start: 15, stagger: 38, pieceStagger: 5.5, flight: 25.5, landing: 0.84 } as const;
 
 /** Landing order of a platform's pieces: what holds comes before what rests on it. */
 export const landingOrder: readonly PlatformPiece["kind"][] = ["base", "left", "right", "top"];
@@ -757,7 +771,9 @@ export const landingOrder: readonly PlatformPiece["kind"][] = ["base", "left", "
  * phones 38.4-46.5 %), hops a little when the first is done, leaps in front
  * of the second to the gap before the third when the second is done (the
  * sitting crop's centre on desktop), and sits there as the third lands.
- * Phones place the same strips in their own composition.
+ * Phones place the same strips in their own composition, a little larger
+ * than on desktop (9 % of the plate against 8.014 %) so she reads on a
+ * small screen.
  */
 export const packsMayo = {
   strips: {
@@ -769,8 +785,24 @@ export const packsMayo = {
   cell: 640,
   feetY: 87.969,
   y: 56.952,
-  size: { desktop: 8.014, mobile: 8.5 },
+  size: { desktop: 8.014, mobile: 9 },
   stops: { desktop: [38.995, 40.5, 62.5], mobile: [42, 43, 59] },
+  /**
+   * Her moments in vh of pinned scroll (rocksStage), each long enough to be
+   * watched with a wheel or a flick (a wheel notch is about 11 vh on a
+   * 900 px screen): two hop cycles of 40 vh from `hops` (each airborne for
+   * 20 vh, right after the first and the second platform land), sitting down
+   * over 28 vh as the third has landed, then seated. Her watching loop eases
+   * back to its first frame from `miraRest` so it hands over to the hop on
+   * the same painted frame, and the seated loop only starts at `sentadaLoop`,
+   * so it shows its first frame while it takes over from the sitting down.
+   * Both stretches are 18 vh, more than a wheel notch (100 px is 11 to 13 vh
+   * on 900 to 768 px screens), so a notch cannot skip them
+   * (packs-mayo-clock.tsx).
+   * `rests` are the poses the page may settle on (after the small hop, after
+   * the leap, seated with the painted plate in).
+   */
+  timing: { hops: [52, 132], sentarse: [132, 160], miraRest: 34, sentadaLoop: 178, crossfade: [164, 182], rests: [80, 120, 184] },
 } as const;
 
 /**

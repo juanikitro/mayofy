@@ -13,6 +13,11 @@ import { getWhatsAppHref } from "@/lib/whatsapp";
 
 type SubmissionState = "idle" | "submitting" | "success" | "error";
 
+/** After this long without an answer the form says the send can take a minute. */
+const slowNoteDelay = 6000;
+/** The route gives up on the mail service at 55 s; this only guards a lost connection. */
+const clientTimeout = 70000;
+
 type ContactFormProps = {
   whatsappHref: string;
 };
@@ -107,6 +112,10 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
 
     setSubmissionState("submitting");
     setFeedback("Enviando tu consulta…");
+    // The mail service can take up to a minute: say so instead of a silent spinner.
+    const slowNote = window.setTimeout(() => {
+      setFeedback("Sigue enviándose. A veces tarda hasta un minuto: no cierres esta página.");
+    }, slowNoteDelay);
 
     const payload = {
       ...details,
@@ -119,14 +128,15 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(clientTimeout),
       });
-      const result = (await response.json()) as {
+      const result = (await response.json().catch(() => ({}))) as {
         ok?: boolean;
         message?: string;
       };
 
       if (!response.ok || !result.ok) {
-        throw new Error(result.message || "No pudimos enviar la consulta.");
+        throw new Error(result.message || "No pudimos enviar la consulta. Probá por WhatsApp.");
       }
 
       setSubmissionState("success");
@@ -136,10 +146,14 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
     } catch (error) {
       setSubmissionState("error");
       setFeedback(
-        error instanceof Error
-          ? error.message
-          : "No pudimos enviar la consulta. Probá por WhatsApp.",
+        error instanceof Error && error.name === "TimeoutError"
+          ? "El envío tardó demasiado y no sabemos si llegó. Escribinos por WhatsApp para confirmarlo."
+          : error instanceof Error && error.name !== "TypeError"
+            ? error.message
+            : "No pudimos enviar la consulta. Probá por WhatsApp.",
       );
+    } finally {
+      window.clearTimeout(slowNote);
     }
   }
 

@@ -12,6 +12,12 @@ export const siteContent = {
   scheduling: {
     url: "https://cal.com/juan-ignacio-portilla-kitroser-svfbs3/mayofy-first-meeting",
     calLink: "juan-ignacio-portilla-kitroser-svfbs3/mayofy-first-meeting",
+    heading: "Elegí un día y un horario",
+    detail: "Son 30 minutos por videollamada. Los horarios se muestran en tu hora local.",
+    loading: "Cargando la agenda…",
+    failed: "La agenda no cargó. Podés abrirla en Cal.com o escribirnos por WhatsApp.",
+    failedCta: "Abrir la agenda en Cal.com",
+    fallback: "Si la agenda no carga, abrila en Cal.com",
   },
   channels: ["Instagram", "Google Maps", "Recomendaciones"],
   offerPath: [
@@ -55,6 +61,8 @@ export const siteContent = {
     // Shortened on 2026-11-20 (island 6, option A of docs/plans/2026-11-20-propuestas.md).
     lead: "Soy Juani. Hace 5 años construyo software y hoy lidero técnicamente un sistema con unos 750 usuarios activos.",
     body: "Vas a hablar conmigo desde la primera charla hasta la publicación, sin capas comerciales.",
+    // A photo for now; Juani's avatar replaces it later (2026-11-22).
+    portraitAlt: "Juan Ignacio Portilla Kitroser, fundador de Mayofy",
   },
   faq: [
     {
