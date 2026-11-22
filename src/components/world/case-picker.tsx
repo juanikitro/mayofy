@@ -143,7 +143,7 @@ export function CasePicker() {
               <p className="case-result__price">
                 Desde <strong>{plan.price}</strong> · Plazo: {plan.timeline}
               </p>
-              <p className="case-result__why">{plan.description}</p>
+              <p className="case-result__why">{option.pitch}</p>
               <div className="case-result__actions">
                 <a className="btn btn--moss" href={`#pack-${plan.id}`}>
                   {casePicker.detailsCta}

@@ -19,7 +19,7 @@ export const islandCopy = {
     title: ["Construimos lo que ", { em: "necesitás" }, "."],
   },
   packs: {
-    title: ["Encontramos lo que necesita ", { em: "tu negocio" }, "."],
+    title: ["Elegí por dónde ", { em: "empezamos" }, "."],
     body: "Precios de referencia para saber por dónde arrancar. El alcance y el precio final se definen después de una charla gratis.",
   },
   // Shortened on 2026-11-20 with option B of docs/plans/2026-11-20-propuestas.md.

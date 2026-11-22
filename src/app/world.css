@@ -628,8 +628,9 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 /* Island 3: rock assembly ---------------------------------------------- */
 
-/* The stage is pinned while the section scrolls (cover 29.4 % to 70.6 % of
- * `--rocks` at 240vh). Rocks, contact shadows and Mayo live inside the plate,
+/* The stage is pinned while the section scrolls (`--rocks-height`, 320vh,
+ * so 220vh of pinned scroll; stage.ts rocksStage, which also sets every scroll
+ * range below as a custom property on the section). Rocks, contact shadows and Mayo live inside the plate,
  * positioned in % of it (stage.ts), so they share the island's perspective;
  * the one-line markers sit in `.platforms`, a box with the plate's exact
  * frame outside the decorative (aria-hidden) scene, each standing on its
@@ -708,7 +709,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   --rocks-drop: max(15%, 20rem - 100cqh + 48.25cqw);
 
   position: relative;
-  height: 240vh;
+  height: var(--rocks-height, 320vh);
   view-timeline-name: --rocks;
 }
 
@@ -749,8 +750,8 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 }
 
 /* Inside the plate: back rocks (z 1) float behind the island cutout (z 2);
- * the platforms at rest and their shadows (z 3), Mayo (z 4), and the rocks
- * floating in front of the island's underside (z 5) are drawn over it. */
+ * the platforms at rest and their shadows (z 3), the rocks floating in front
+ * of the island's underside (z 5) and Mayo (z 6) are drawn over it. */
 .rocks .plate__picture--island {
   z-index: 2;
 }
@@ -771,7 +772,10 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   position: absolute;
   left: var(--x);
   top: var(--y);
-  z-index: 4;
+  /* Over everything on the plate, the rocks flying in front of the island
+   * included: she stands on the front of the meadow and must never be lost
+   * behind a passing rock. */
+  z-index: 6;
   width: var(--w);
   aspect-ratio: 1;
   pointer-events: none;
@@ -837,10 +841,15 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 }
 
-/* Seated, she breathes on her own clock (the painted ping-pong of 22 steps
- * of 120 ms), also where the assembly cannot animate. */
-.packs-mayo__strip--sentada img {
-  animation: mayo-sprite 1.32s steps(12, jump-none) infinite alternate;
+/* Mayo's key poses, where the guided scroll may settle (data-scroll-rest,
+ * stage.ts packsMayo.timing.rests), at their place in the section's scroll,
+ * outside the sticky stage. */
+.rocks__rest {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
 }
 
 /* Plate-relative placement: `--*-d` on desktop, `--*-m` on phones. */
@@ -1314,10 +1323,6 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   mask-image: none;
 }
 
-.rocks--painted {
-  --live-out: cover 67.9% cover 68%;
-}
-
 .rocks--painted .rock,
 .rocks--painted .rock-shadow,
 .rocks--painted .rock-ground,
@@ -1415,7 +1420,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     /* A list in the shorthand resolves its durations to 0s, not to the range. */
     animation-duration: auto;
     animation-timeline: --rocks;
-    animation-range: var(--range), var(--range), var(--range), cover 4% cover 34%;
+    animation-range: var(--range), var(--range), var(--range), var(--range-swirl);
   }
 
   .rock-far {
@@ -1427,7 +1432,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   .plate__picture--assembled {
     animation: assembled-in linear both;
     animation-timeline: --rocks;
-    animation-range: cover 64% cover 68%;
+    animation-range: var(--range-crossfade);
   }
 
   .rocks--painted .rock {
@@ -1439,7 +1444,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
       live-out linear both;
     animation-duration: auto;
     animation-timeline: --rocks;
-    animation-range: var(--range), var(--range), var(--range), cover 4% cover 34%, var(--live-out);
+    animation-range: var(--range), var(--range), var(--range), var(--range-swirl), var(--live-out);
   }
 
   .rocks--painted .rock-shadow {
@@ -1493,32 +1498,29 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     animation-range: var(--range);
   }
 
-  /* Mayo's choreography on the `--rocks` cover range (tops land at 44.7,
-   * 52.7 and 60.7 %, rockTiming): she watches the floating rocks (a loop in
-   * time, 22 steps of 110 ms) until 43.85 %; hops (two scrubbed cycles,
-   * 43.85-59.85 %) right after the first and the second platform land;
-   * sits down (6 frames, 61.5-64.5 %) as the third lands; then stays
-   * seated. Each window takes over on the same painted frame as the last. */
+  /* Mayo's choreography (stage.ts packsMayo.timing, in vh of pinned
+   * scroll; the platform tops land at 52.9, 90.9 and 128.9): she watches the
+   * floating rocks until 52; hops in two scrubbed cycles of 40 (52-132),
+   * airborne right after the first and the second platform land; sits down
+   * (6 frames, 132-160) once the third has landed; then stays seated. Her
+   * watching and seated loops run on their own clock (packs-mayo-clock.tsx),
+   * which brings them to the frame each hand-over shares. */
   .packs-mayo {
     animation: packs-mayo-hops linear both;
     animation-timeline: --rocks;
-    animation-range: cover 43.85% cover 59.85%;
+    animation-range: var(--range-hops);
   }
 
   .packs-mayo__strip--mira {
     animation: packs-mayo-on linear none;
     animation-timeline: --rocks;
-    animation-range: cover 0% cover 43.85%;
-  }
-
-  .packs-mayo__strip--mira img {
-    animation: mayo-sprite 1.21s steps(12, jump-none) infinite alternate;
+    animation-range: var(--range-mira);
   }
 
   .packs-mayo__strip--salto {
     animation: packs-mayo-on linear none;
     animation-timeline: --rocks;
-    animation-range: cover 43.85% cover 61.5%;
+    animation-range: var(--range-hops);
   }
 
   .packs-mayo__strip--salto img {
@@ -1526,26 +1528,26 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     animation-timing-function: steps(12, jump-none);
     animation-iteration-count: 2;
     animation-timeline: --rocks;
-    animation-range: cover 43.85% cover 59.85%;
+    animation-range: var(--range-hops);
   }
 
   .packs-mayo__strip--sentarse {
     animation: packs-mayo-on linear none;
     animation-timeline: --rocks;
-    animation-range: cover 61.5% cover 64.5%;
+    animation-range: var(--range-sentarse);
   }
 
   .packs-mayo__strip--sentarse img {
     animation: mayo-sprite linear both;
     animation-timing-function: steps(6, jump-none);
     animation-timeline: --rocks;
-    animation-range: cover 61.5% cover 64.5%;
+    animation-range: var(--range-sentarse);
   }
 
   .packs-mayo__strip--sentada {
     animation: packs-mayo-off linear none;
     animation-timeline: --rocks;
-    animation-range: cover 0% cover 64.5%;
+    animation-range: var(--range-sentada-off);
   }
 
   .scene--dawn:not(.scene--plated) .scene__sky {
@@ -1613,11 +1615,12 @@ html[data-motion-tier="reduced"] .scene__sky {
 @media (max-width: 48rem) {
   .rocks {
     --plate-scale: 1.9;
-    /* Raised a quarter of its height, less on short phones so what stands on
-     * the platforms still clears the intro (15rem); measured for the former
-     * cards (their tops 97.7 % of the plate's height above its bottom,
-     * 104.5cqw), which the shorter markers clear with room to spare. */
-    --rocks-drop: max(-25%, 15rem - 100cqh + 104.5cqw);
+    /* Raised up to 40 % of its height (the intro is the title alone), so the
+     * island sits mid-screen, clear of the bottom bar; less on short phones so
+     * what stands on the platforms still clears the intro (15rem; measured
+     * for the former cards, their tops 97.7 % of the plate's height above its
+     * bottom, 104.5cqw, which the shorter markers clear with room to spare). */
+    --rocks-drop: max(-40%, 15rem - 100cqh + 104.5cqw);
   }
 
   .rocks .plate {
@@ -7344,8 +7347,18 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
+/* Each question appears at its spot just before it flies, so only one
+ * floats at a time and none rest on top of another (Juani, 22 November 2026:
+ * "no quiero solapar mensajes quietos"). */
 @keyframes problem-ask {
   0% {
+    left: var(--x0);
+    top: var(--y0);
+    opacity: 0;
+    scale: 0.92;
+  }
+
+  18% {
     left: var(--x0);
     top: var(--y0);
     opacity: 1;
