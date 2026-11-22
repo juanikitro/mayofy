@@ -224,8 +224,6 @@ export const projects = [
   },
 ] as const satisfies readonly ProjectEntry[];
 
-export const placeholderProjects = projects.filter((project) => project.placeholder);
-
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);
 }

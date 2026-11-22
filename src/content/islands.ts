@@ -59,8 +59,3 @@ export const islandCopy = {
     body: "Contanos qué necesitás. Te respondemos en menos de 24 horas hábiles.",
   },
 } as const satisfies Record<string, IslandCopy>;
-
-/** Plain-text version of a title, for aria labels and metadata. */
-export function titleText(title: readonly TitleSegment[]) {
-  return title.map((segment) => (typeof segment === "string" ? segment : segment.em)).join("");
-}
