@@ -44,9 +44,11 @@ export const casePicker = {
   proposal: {
     base: { title: "Sistema de gestión", text: "Clientes, ventas y turnos en un solo panel." },
     modules: [
-      { question: "¿Cuánto sale?", title: "Bot de WhatsApp", text: "Responde precios y consultas al instante." },
+      { question: "¿Me pasás los precios?", title: "Bot de WhatsApp", text: "Responde precios y consultas al instante." },
       { question: "¿Tenés turno el jueves?", title: "Turnos online", text: "Tus clientes reservan solos." },
       { question: "¿Te queda en stock?", title: "Control de stock", text: "Sabés qué hay y qué falta." },
+      { question: "¿Cuánto te debo?", title: "Cuentas y cobros", text: "Sabés quién pagó y quién te debe." },
+      { question: "¿Cómo vino el mes?", title: "Tus números", text: "Ventas y ganancias del mes." },
       { question: "¿Y si se corta internet?", title: "Disponibilidad offline", text: "Sigue funcionando sin conexión." },
     ],
     closing: "Un solo sistema, armado a tu medida.",

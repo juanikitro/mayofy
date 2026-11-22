@@ -78,7 +78,7 @@ export const projects = [
       { src: "/images/proyectos/shineapp/panel.jpg", alt: "Panel de ShineApp con la agenda del día, los indicadores del período y la caja por categoría", width: 1440, height: 900 },
       { src: "/images/proyectos/shineapp/escritorio.jpg", alt: "Pantalla de acceso de ShineApp", width: 1440, height: 900 },
     ],
-    phoneImage: { src: "/images/proyectos/shineapp/celular.jpg", alt: "Panel de ShineApp en el celular", width: 390, height: 844 },
+    phoneImage: { src: "/images/proyectos/shineapp/celular.jpg", alt: "Indicadores del período en ShineApp, en el celular", width: 390, height: 844 },
     url: "https://shineapp.lat/",
   },
   {

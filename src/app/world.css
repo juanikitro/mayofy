@@ -7366,8 +7366,9 @@ html[data-motion-tier="reduced"] .works-index__shot {
     font-size: 4.2cqi;
   }
 
+  /* Six modules (22 November 2026): tighter rows keep the card above the island's meadow. */
   .proposal-frame--scene .proposal__modules {
-    gap: 2.2cqi;
+    gap: 1.4cqi;
     padding-inline-start: 6cqi;
   }
 
@@ -7377,7 +7378,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 
   .proposal-frame--scene .proposal__module {
-    padding: 2.4cqi 3.4cqi;
+    padding: 1.7cqi 3.4cqi;
     border-radius: 3cqi;
   }
 
@@ -7406,14 +7407,19 @@ html[data-motion-tier="reduced"] .works-index__shot {
     font-size: 4.3cqi;
   }
 
-  .problem__ask:nth-child(2) { --ask-range: contain 8% contain 24%; }
-  .problem__ask:nth-child(3) { --ask-range: contain 26% contain 42%; }
-  .problem__ask:nth-child(4) { --ask-range: contain 44% contain 60%; }
-  .problem__ask:nth-child(5) { --ask-range: contain 62% contain 78%; }
-  .proposal-frame--scene .proposal__module:nth-child(1) { --answer-range: contain 22% contain 30%; }
-  .proposal-frame--scene .proposal__module:nth-child(2) { --answer-range: contain 40% contain 48%; }
-  .proposal-frame--scene .proposal__module:nth-child(3) { --answer-range: contain 58% contain 66%; }
-  .proposal-frame--scene .proposal__module:nth-child(4) { --answer-range: contain 76% contain 84%; }
+  /* Six questions, one every 12.5 % of the pin; each module lands as its question ends. */
+  .problem__ask:nth-child(2) { --ask-range: contain 6% contain 17%; }
+  .problem__ask:nth-child(3) { --ask-range: contain 18.5% contain 29.5%; }
+  .problem__ask:nth-child(4) { --ask-range: contain 31% contain 42%; }
+  .problem__ask:nth-child(5) { --ask-range: contain 43.5% contain 54.5%; }
+  .problem__ask:nth-child(6) { --ask-range: contain 56% contain 67%; }
+  .problem__ask:nth-child(7) { --ask-range: contain 68.5% contain 79.5%; }
+  .proposal-frame--scene .proposal__module:nth-child(1) { --answer-range: contain 15% contain 21%; }
+  .proposal-frame--scene .proposal__module:nth-child(2) { --answer-range: contain 27.5% contain 33.5%; }
+  .proposal-frame--scene .proposal__module:nth-child(3) { --answer-range: contain 40% contain 46%; }
+  .proposal-frame--scene .proposal__module:nth-child(4) { --answer-range: contain 52.5% contain 58.5%; }
+  .proposal-frame--scene .proposal__module:nth-child(5) { --answer-range: contain 65% contain 71%; }
+  .proposal-frame--scene .proposal__module:nth-child(6) { --answer-range: contain 77.5% contain 83.5%; }
   .proposal-frame--scene .proposal__closing { --answer-range: contain 86% contain 92%; }
 
   @supports (animation-timeline: view()) {
