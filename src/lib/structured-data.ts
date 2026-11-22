@@ -18,9 +18,33 @@ function absolute(path: string) {
 const organizationId = () => absolute("/#organization");
 const websiteId = () => absolute("/#website");
 
+/*
+ * Remote work reaches all of Argentina and Latin America; in person, the
+ * partidos within about two hours of 25 de Mayo (Buenos Aires), the same
+ * zones as the Google Business Profile (docs/plans/2026-11-22-perfil-google.md).
+ * Titles and descriptions are never localised to the town (Juani, 2026-11-22).
+ */
+const inPersonPartidos = [
+  "25 de Mayo",
+  "Saladillo",
+  "Alberti",
+  "Bragado",
+  "Chivilcoy",
+  "Roque Pérez",
+  "Lobos",
+  "Nueve de Julio",
+  "General Alvear",
+  "Mercedes",
+];
+
 const areaServed = [
   { "@type": "Country", name: "Argentina" },
   { "@type": "Place", name: "Latinoamérica" },
+  ...inPersonPartidos.map((name) => ({
+    "@type": "AdministrativeArea",
+    name: `Partido de ${name}`,
+    containedInPlace: { "@type": "AdministrativeArea", name: "Provincia de Buenos Aires" },
+  })),
 ];
 
 /** "USD 85" → 85; the packs are "desde" prices, so they become a minimum. */
@@ -41,6 +65,8 @@ function organization(): JsonLdNode {
     // All of Argentina and Latin America, never the founder's town (Juani, 2026-11-22).
     areaServed,
     knowsLanguage: "es",
+    // TODO(Juani): add the public Google Business Profile URL here once the
+    // profile is verified (step 22 of docs/plans/2026-11-22-perfil-google.md).
     sameAs: [publicChannels.instagram],
     founder: {
       "@type": "Person",
