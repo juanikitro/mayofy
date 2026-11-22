@@ -30,3 +30,50 @@ Los títulos y entradas viven en `src/content/islands.ts` (segmentos con `{ em }
 - Isla 2: se quitaron las etiquetas Instagram, Google Maps y Recomendaciones.
 - Isla 3: se quitó "Precios de referencia para saber por dónde arrancar...".
 - Los textos siguen en src/content por si se reutilizan (metadatos, otras páginas).
+
+## Cambios del 22 de noviembre (pedido de Juani)
+
+### Aplicados
+
+- **Título de la isla 2:** "Construyamos tu lugar en *internet*" pasó a "Construimos lo que *necesitás*." Ojo: queda parecido al título de la isla 3, "Encontramos lo que necesita *tu negocio*".
+- **Textos eliminados de la isla 2:**
+  - la bajada "Cada pregunta que hoy respondés a mano se convierte en una pieza de tu sistema.";
+  - "Elegí lo que más se parece y te mostramos por dónde empezar." (queda solo "¿Qué te está pasando hoy?");
+  - "Tu propuesta" en la tarjeta del sistema de gestión.
+- **Tercer caso:** "Mi operación vive en planillas y ya no alcanza." pasó a "Mi negocio vive en Excel, WhatsApp y mi cerebro."
+- **"Te conviene empezar por":** el plazo ahora dice "Plazo: 1 a 2 semanas", y así en cada pack.
+
+### Propuesta A: mensajes para la animación del sistema de gestión
+
+La animación tiene lugar para cuatro piezas. Cada una nace de una pregunta que hoy se responde a mano, y todas se apoyan en lo que los packs ofrecen de verdad.
+
+**Recomendadas:**
+
+| Pregunta del cliente | Pieza | Qué hace |
+|---|---|---|
+| ¿Hay lugar el sábado? | Turnos online | Tus clientes eligen día y hora solos. |
+| ¿Me pasás los precios? | Respuestas por WhatsApp | Contesta precios y horarios aunque estés ocupado. |
+| ¿Cuánto te debo? | Cuentas y cobros | Sabés quién pagó y quién te debe. |
+| ¿Cómo vino el mes? | Tus números | Ventas y ganancias del mes, de un vistazo. |
+
+**De reserva**, según el rubro:
+
+| Pregunta del cliente | Pieza | Qué hace |
+|---|---|---|
+| ¿Te queda en stock? | Stock | Sabés qué hay y qué falta antes de vender. |
+| ¿Quién atendió a este cliente? | Equipo | Cada uno ve y hace solo lo suyo. |
+
+**Tarjeta base:** "Sistema de gestión: Clientes, turnos y cobros en un solo lugar."
+**Cierre:** se mantiene "Un solo sistema, armado a tu medida."
+
+Se va "Disponibilidad offline": es abstracta para alguien que no es técnico y no es lo que la convence.
+
+### Propuesta B: qué se puede hacer con cada servicio (recomendación de la isla 2)
+
+| Pack | Texto propuesto |
+|---|---|
+| Landing | Una página con tu negocio, tus servicios y un botón de WhatsApp, para que quien te busca en Google o Instagram te escriba directo. |
+| Web + Gestión | Tu página más una agenda online: tus clientes sacan turno solos, a cualquier hora, y vos ves todo desde un panel. |
+| Sistema a Medida | Pasamos tus planillas, tus chats y lo que tenés en la cabeza a un sistema propio: clientes, stock, cobros y números en un solo lugar. |
+
+Hoy la isla 2 muestra la misma descripción que las tarjetas de packs (`commercial-plans.ts`). Si se aprueba, conviene que sea un texto propio de la isla 2, así las tarjetas de packs no cambian.
