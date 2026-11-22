@@ -56,7 +56,7 @@ export function JuaniIsland() {
             Escribir por WhatsApp
           </a>
         </div>
-        <CalBooking url={siteContent.scheduling.url} calLink={siteContent.scheduling.calLink} />
+        <CalBooking {...siteContent.scheduling} />
         <AnimatedDetails className="pack-details hearth__form" summary={<span className="link-label">Prefiero completar un formulario</span>}>
           <p className="hearth__form-intro">Completá estos datos y lo vemos por WhatsApp.</p>
           <ContactForm whatsappHref={whatsappHref} />
