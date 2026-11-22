@@ -1,5 +1,7 @@
 # Isla 6: la agenda sin trampa de scroll, el formulario que llega y la foto de Juani
 
+> Actualización del 22/11: la **segunda ronda** (al final de este documento) reemplaza la vista de columnas por la vista de mes compacta en escritorio y un botón que abre Cal.com en el celular, compone la sección y carga Cal.com recién cuando hace falta.
+
 Pedido de Juani, 22 de noviembre de 2026: "Despliega un agente dedicado a arreglar eso. si es posible, modifica la caja del cal.com para que sea mas acorde al reseto de la pagina".
 
 "Eso" es el hallazgo **A4** de la prueba de usuario simulada (`docs/plans/2026-11-20-prueba-usuario.md`): en el celular, el calendario atrapaba el dedo, y la caja de Cal.com se veía como un widget pegado.
@@ -153,3 +155,86 @@ Archivos: `src/components/world/host-island.tsx`, `src/content/site.ts` (`founde
 - **Límite:** es una foto provisoria. Cuando exista el avatar, basta con reemplazar los seis archivos de `public/images/juani/` con los mismos nombres o cambiar la ruta en `host-island.tsx`.
 
 Captura `a06`: el aviso "Sigue enviándose…" del formulario, a 390 px. Los scripts del simulador de FormSubmit (`fsmock.mjs`) y de las pruebas del formulario y de la foto están en `contacto-agenda/scripts/`.
+
+## Segunda ronda: la sección compuesta, la agenda compacta y el botón en el celular
+
+Pedido de Juani, 22 de noviembre de 2026:
+
+> "sobre la caja de cal.com: Quiero que despliegues un agente para para mejorar la estetica y simetria de la seccion, como los botones para abrir el formulario y eso. Ademas, no me gusta lo larga que queda la lista de horarios (en desktop me gustaba la version anterior que era compacta), menos en mobile, que podria abrirse con un boton. utiliza /design-taste-frontend"
+>
+> "A la foto dal lado de "soy juani", alejala un poco"
+
+Archivos: `src/components/world/cal-booking.tsx`, `src/components/world/contact-alternatives.tsx` (nuevo), `src/components/world/host-island.tsx`, `src/content/site.ts` (`scheduling`) y el bloque "Island 6: contact" de `world.css`. Esta ronda reemplaza la vista de columnas de la primera.
+
+### Qué estaba mal
+
+- En escritorio, la columna izquierda era un título corto con mucho vacío debajo, al lado de una agenda de 1.184 px de alto (captura de Juani; `b01` a la izquierda).
+- En el celular, la agenda medía 1.495 px: casi dos pantallas de horarios.
+- El botón verde de WhatsApp competía con la agenda como acción principal, y "Prefiero completar un formulario" era un enlace suelto debajo de todo.
+- La agenda se cargaba con la página, en la primera pantalla: cerca de 1 MB de código de Cal.com, una fuente de 146 KB y llamadas a su API (medición del agente de SEO).
+
+### Qué cambió
+
+1. **Una sola sección compuesta, con una acción principal.**
+   - **En el celular**, una columna: el título, el texto y tres pasos ("Elegís un día y un horario." / "Te llega la confirmación por correo, con el enlace a la videollamada." / "Charlamos 30 minutos sobre tu negocio."); después la tarjeta de la agenda; después "¿Preferís escribirnos?", con dos botones secundarios iguales (WhatsApp y "Completar un formulario"); y por último el formulario.
+   - **Desde 1.280 px**, el título y los pasos quedan a la izquierda, con el borde de arriba alineado con el del panel de la agenda. El par de botones queda abajo, alineado con el borde de abajo del panel. Así los dos bordes coinciden y el vacío queda en el medio, como aire, no como un hueco.
+   - El formulario se abre como un panel de la misma superficie que la agenda, a todo el ancho, debajo de las dos columnas.
+   - La única acción llena (menta) es la de la agenda. WhatsApp y el formulario pasan a botones con contorno. El botón flotante de WhatsApp sigue en toda la página.
+2. **Agenda compacta en escritorio (desde 1.024 px).** Vuelve la vista de mes de Cal.com (`month_view`): el mes al lado de una columna corta de horarios. El panel mide 700 px y entra entero en 1366x768.
+   - La columna de horarios scrollea solo con el puntero encima, y en sus extremos le devuelve la rueda a la página.
+   - Medido con muescas de 100 px cada 250 ms: sobre los horarios, las primeras 7 muescas recorren la lista (lo que le falta del día) y desde la octava la página baja 100 px por muesca. Sobre el mes y sobre la columna izquierda, la página se mueve desde la primera muesca. Igual a 1366x768 y a 1440x900.
+   - Las primeras 7 muescas sobre la lista no mueven la página: es el precio de la versión compacta que pidió Juani, acotado a esa columna.
+3. **En el celular y la tablet (menos de 1.024 px), la agenda se abre con un botón.** La tarjeta muestra "Elegí un día y un horario", "Los horarios se muestran en tu hora local.", el botón "Ver días y horarios" y el enlace de respaldo. El botón abre la ventana de Cal.com a pantalla completa (`Cal("modal")`), con los mismos colores. Mientras está abierta, la página de atrás no se mueve. Al cerrarla (con la ×), la página vuelve a scrollear normal: un deslizamiento después de cerrar movió 824 px. La tarjeta es HTML común, sin scroll propio, y los deslizamientos que empiezan sobre ella mueven la página en los dos sentidos.
+4. **Cal.com ya no carga con la página.**
+   - **En escritorio** arranca cuando la agenda está a 1,5 pantallas de entrar (`IntersectionObserver` con `rootMargin: 150%`). Medido: cero pedidos a Cal.com con la agenda a 2,5 pantallas o más del borde de arriba, y empieza a cargar entre 2,5 y 2 pantallas.
+   - **En el celular** carga recién al tocar el botón: cero pedidos aunque la tarjeta esté en pantalla, y unos 435 KB al abrir la ventana.
+   - Mientras carga en escritorio, queda el esqueleto (mes y horarios) con "Cargando la agenda…", con la misma altura que el calendario, así que nada se corre.
+   - El temporizador de 15 s para mostrar el error arranca cuando empieza la carga, no al abrir la página.
+   - Si el script no carga, si Cal.com avisa error o si pasan 15 s, aparece "La agenda no cargó…" con el botón "Abrir la agenda en Cal.com", en escritorio y en el celular.
+5. **El modo (en línea o botón) lo decide el CSS** (`64rem`), y el código usa la misma media query para saber qué cargar. Así no hay un parpadeo entre la tarjeta y el calendario al hidratar.
+6. **El enlace de respaldo** ("Si la agenda no carga, abrila en Cal.com") pasó al pie del panel, para que el borde de abajo de la agenda sea el del panel.
+
+### Idioma y formato de 24 h (punto 4 del pedido)
+
+- **Idioma:** Cal.com muestra la agenda en el idioma del navegador de quien la mira. Por eso Juani la vio en inglés ("November", "MON", "Mon 23rd") y en esta prueba, con el navegador en español, sale en español.
+  - Se probaron, en un navegador en inglés, los parámetros `lng=es`, `locale=es` y `ui.locale=es`: ninguno cambia nada.
+  - Lo que lo fija es una opción del tipo de evento en la cuenta de Cal.com. La API de Cal.com la documenta como `interfaceLanguage` ("Set preferred language for the booking interface", https://cal.com/docs/api-reference/v2/event-types/create-an-event-type), con las opciones `es` y `es-419`.
+  - **Juani tiene que entrar al evento "Mayofy First Meeting" en Cal.com y, en la configuración avanzada, elegir Español en el idioma de la interfaz.** En la misma pantalla puede cambiar el título del evento.
+- **24 horas:** no hay ningún parámetro del embed que lo fije (`timeFormat=24` tampoco cambia nada). La agenda trae el selector "12 h / 24h" a la vista y recuerda lo que elige cada visitante. No se encontró una opción del evento que lo fije para todos.
+
+### Cómo se verificó
+
+Playwright con Chromium headless contra `next dev`. Los scripts de esta ronda están en `contacto-agenda/scripts/`: `wheel2.cjs`, `lazy.cjs`, `checks2.cjs`, `fail2.cjs` y `cardflick.cjs`.
+
+- **Anchos** 320, 390, 768, 1024, 1280, 1366 y 1440: sin desborde horizontal.
+  - En escritorio, el panel y la columna izquierda comparten el borde de arriba y el de abajo (por ejemplo, a 1366: arriba 14.083 los dos, abajo 14.783 los dos).
+  - Los bordes laterales son 16 px en el celular y 80 px en escritorio.
+  - El iframe mide 814 px a 1.280 y 822 px desde 1.366, siempre en la vista compacta.
+- **Teclado:** desde el botón de WhatsApp, Tab va al botón del formulario. Con el formulario cerrado, Tab lo saltea (`inert`). Enter lo abre (`aria-expanded="true"`), y Tab entra al primer campo.
+- **Toques:** los botones miden de 44 a 53 px de alto.
+- **Movimiento reducido** (`prefers-reduced-motion`): el formulario se abre sin animación y el esqueleto no respira.
+- **Estados de falla:** script bloqueado en escritorio y en el celular → error al instante. Iframe bloqueado → "Cargando la agenda…" y, a los 15 s, el error. Script demorado 8 s → esqueleto con la línea de carga (captura `b05`).
+- **Consola:** cero errores en todos los anchos.
+- `eslint`, `tsc --noEmit` y `next build` sin errores.
+- En una corrida a 1.024 px, la agenda quedó sin cargar. No se repitió en tres corridas seguidas: probablemente fue una recarga del servidor de desarrollo, que coincidió con el cambio de las imágenes.
+- No se reservó ningún turno ni se envió el formulario.
+
+Capturas en `docs/plans/contacto-agenda/`:
+
+- `b01`: escritorio, antes y después.
+- `b02`: escritorio a 1366.
+- `b03`: celular antes, la tarjeta nueva y la ventana de Cal.com.
+- `b04`: el formulario abierto.
+- `b05`: carga y error.
+- `b06` y `b07`: la foto.
+
+### La foto, un poco más lejos
+
+Se volvió a recortar desde la foto original de 800x800, recuperada de los adjuntos de Orca porque no estaba en git. El recorte pasó de 580 a 720 px de lado: se ve más de los hombros y de las hojas alrededor, con la cara todavía centrada (`b06` y `b07`). Se mantienen los mismos seis archivos y tamaños (160, 240 y 320 px, en AVIF y WebP), de 6 a 26 KB.
+
+### Límites de esta ronda
+
+- En escritorio, la lista de horarios scrollea adentro antes de devolverle la rueda a la página: hasta 7 muescas con un día completo.
+- Al cerrar la ventana de Cal.com en el celular, el foco lo maneja Cal.com y no vuelve al botón "Ver días y horarios".
+- El idioma y el formato de horas dependen de la cuenta de Cal.com o del navegador (ver arriba).
+- El acomodo por secciones (`section-snap.tsx`) es de otro agente. En las mediciones sobre el mes, después de la tercera muesca, se ve el acomodo terminando de llevar la página.

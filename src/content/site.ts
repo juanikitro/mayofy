@@ -13,11 +13,22 @@ export const siteContent = {
     url: "https://cal.com/juan-ignacio-portilla-kitroser-svfbs3/mayofy-first-meeting",
     calLink: "juan-ignacio-portilla-kitroser-svfbs3/mayofy-first-meeting",
     heading: "Elegí un día y un horario",
-    detail: "Son 30 minutos por videollamada. Los horarios se muestran en tu hora local.",
+    detail: "Los horarios se muestran en tu hora local.",
+    // Phones and tablets open the agenda in Cal.com's popup from this button.
+    open: "Ver días y horarios",
+    opening: "Abriendo la agenda…",
     loading: "Cargando la agenda…",
     failed: "La agenda no cargó. Podés abrirla en Cal.com o escribirnos por WhatsApp.",
     failedCta: "Abrir la agenda en Cal.com",
     fallback: "Si la agenda no carga, abrila en Cal.com",
+    steps: [
+      "Elegís un día y un horario.",
+      "Te llega la confirmación por correo, con el enlace a la videollamada.",
+      "Charlamos 30 minutos sobre tu negocio.",
+    ],
+    alternativesLabel: "¿Preferís escribirnos?",
+    formToggle: "Completar un formulario",
+    formIntro: "Completá estos datos y lo vemos por WhatsApp.",
   },
   channels: ["Instagram", "Google Maps", "Recomendaciones"],
   offerPath: [
