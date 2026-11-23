@@ -4,7 +4,7 @@ Pedido de Juani, 23 de noviembre de 2026: "quiero que levantes una sesion que me
 
 Rama `juanikitro/landing-guia-juani` (desde `juanikitro/landing-redesign`, `00a2858`). Solo cambia este documento. Juani hace cada paso con sus cuentas; la sesión guía y revisa lo que muestra. Nadie más entra a sus cuentas ni toca el DNS.
 
-**Producción sigue en `b1d4042`.** La versión nueva (sitemap con los casos, datos estructurados, tarjetas para compartir, formulario arreglado) está en `juanikitro/landing-redesign` y se publica solo cuando Juani se lo pide al coordinador. Lo marcado **[después de publicar]** espera a eso.
+**La versión nueva ya está publicada** (master `89f798a`, 23/11/2026; antes producción estaba en `b1d4042`). Lo marcado **[después de publicar]** ya se puede hacer.
 
 Fuentes: `docs/plans/2026-11-22-seo-rendimiento.md` ("Lo que tiene que hacer Juani"), `docs/plans/2026-11-22-perfil-google.md` ("Lista única para Juani"), `docs/plans/2026-11-22-contacto-agenda.md` (idioma de Cal.com y primer envío del formulario).
 
@@ -98,3 +98,4 @@ En el sitio de cada cliente cambiar `cliente` por su nombre (`shineapp`, `gymg`,
 ## Registro
 
 - 2026-11-23: guía creada a partir de los tres documentos de origen. Nada hecho todavía.
+- 2026-11-23: el coordinador publicó la versión nueva (master `89f798a`; sitemap.xml, og/home.jpg y los casos responden 200). Los pasos marcados "después de publicar" quedan habilitados.
