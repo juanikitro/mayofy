@@ -35,7 +35,7 @@ El DNS de mayofy.dev está en Vercel, pero Vercel no recibe datos de las visitas
    - Al apagarla, el sitio pone `window['ga-disable-<id>'] = true`, que es el interruptor oficial de Google, y borra las cookies `_ga*`.
    - Si la persona la vuelve a encender, GA carga en ese momento.
 3. **Responsable de los datos:** Juan Ignacio Portilla Kitroser, monotributista, CUIT 20-44535030-4 (dígito verificador comprobado), con domicilio en 25 de Mayo, provincia de Buenos Aires. Aparece en `/privacidad`, en `/terminos` y en el pie de todas las páginas (`src/content/legal.ts`).
-4. **Correo para pedidos de datos:** por ahora `jpkitro@gmail.com`, leído de `publicChannels.email`. El coordinador lo cambia a `hola@mayofy.dev` cuando el agente de correo confirme que envía y recibe.
+4. **Correo para pedidos de datos:** `hola@mayofy.dev`, leído de `publicChannels.email`. El coordinador lo cambió cuando el agente de correo confirmó que la casilla envía y recibe; antes era `jpkitro@gmail.com`.
 5. **Plazos de guarda (Juani, 2026-11-23):**
    - Consultas que no terminan en trabajo: 3 meses.
    - Clientes, propuesta, facturas y comprobantes de pago: 5 años después de terminado el trabajo (prueba ante reclamos, art. 2560 del CCyC). Las facturas electrónicas además quedan en ARCA.
@@ -82,6 +82,14 @@ Juani no tiene abogado ni contador (2026-11-23), así que estos puntos quedan co
 - Si corresponde el "botón de arrepentimiento" (Res. SCI 424/2020). Mayofy no vende con checkout web, pero cierra contratos a distancia.
 - La cláusula de cancelación y la jurisdicción frente a clientes que sean consumidores (arts. 36 y 37 de la Ley 24.240).
 - La exclusión de responsabilidad por servicios de terceros, que frente a consumidores puede considerarse abusiva.
+
+## Revisión de Gentle AI (2026-11-23)
+
+Juani aprobó una revisión de cuatro enfoques sobre la rama, que incluye el trabajo de otros agentes que entró con los merges. Salió **aprobada**, sin correcciones obligatorias. Sus avisos del área legal:
+
+- Se corrigió un comentario viejo sobre el correo (ya es `hola@mayofy.dev`).
+- El enlace de Data Fiscal queda en `http://` a propósito: es la URL que emite ARCA, y `qr.afip.gob.ar` no respondió por https al probarlo.
+- Falta un test automático del bloqueo de Analytics: el repo no tiene un framework de tests, y sumar uno es una dependencia nueva que hay que aprobar. Hoy queda cubierto por la prueba manual con Playwright.
 
 ## Verificación
 

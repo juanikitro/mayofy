@@ -13,9 +13,11 @@ export const legalEntity = {
   /**
    * ARCA's Data Fiscal page (F. 960/D), decoded from the QR of the form Juani
    * generated on 23 November 2026; it opens the public record of this CUIT.
+   * Plain http on purpose: it is the URL ARCA issues, and qr.afip.gob.ar did
+   * not answer over https when checked.
    */
   dataFiscalUrl: "http://qr.afip.gob.ar/?qr=4wtmhXFACizt8znuUknxHw,,",
-  /** Data requests and legal notices; switches to hola@mayofy.dev once that mailbox works. */
+  /** Data requests and legal notices: the site's public address (hola@mayofy.dev since 23 November 2026). */
   email: publicChannels.email,
 } as const;
 
