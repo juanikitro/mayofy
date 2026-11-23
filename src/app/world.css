@@ -6872,6 +6872,42 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
+/* Island 4 between tablets and 1365 px wide (2026-11-23,
+ * docs/plans/2026-11-19-revision-diseno.md, "Isla 4 entre 1024 y 1365 px").
+ * The island is sized by the width and the parts' column kept its 28rem, so
+ * below 1366 px the column took a growing share of the screen and covered
+ * the toolbox, its "Contacto simple" pin and the edge of "Sistema a medida"
+ * (100 % of the toolbox at 1024). Here the plate drops to the screen's own
+ * width (a smaller scale would show its sky's edges) and leans 3vw further
+ * left, Mayo shrinks with it, and the column narrows with the screen so it
+ * starts right of the toolbox's pin: 337 px at 1024, 28rem again from 1260.
+ * The title keeps clear of the narrower column. */
+@media (min-width: 48.01rem) and (max-width: 85.3rem) {
+  .workshop {
+    --plate-scale: 1;
+    --workshop-x: -22vw;
+    --workshop-col: clamp(20rem, 47vw - 9rem, 28rem);
+  }
+
+  /* 1 / 1.12: Mayo keeps her size against the island. */
+  .workshop .mayo--anchored {
+    width: calc(var(--anchor-size) * 0.893);
+  }
+
+  .workshop__content {
+    grid-template-columns: minmax(0, 1fr) minmax(0, var(--workshop-col));
+    column-gap: 2rem;
+  }
+
+  .workshop__intro > * {
+    max-width: min(40rem, 100% - var(--workshop-col) - 3rem);
+  }
+
+  .workshop__part {
+    padding: 1.25rem 1.35rem;
+  }
+}
+
 /* Island 6: by the fire ------------------------------------------------- */
 
 /* The first screen is the introduction beside the island (the island
