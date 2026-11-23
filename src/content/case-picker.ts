@@ -40,7 +40,7 @@ export const casePicker = {
         "Una página con tu estilo. Con lo que hacés, los precios y fotos de tus trabajos. El objetivo es llevar a quien te encuentra en internet, directo a contactarte. Ideal para explotar el estilo de tu negocio.",
     },
     {
-      planId: "web-gestion",
+      planId: "gestion",
       text: "Paso el día coordinando turnos por WhatsApp.",
       art: { src: "34-isla2-brote" },
       pitch:

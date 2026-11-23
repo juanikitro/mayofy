@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     template: "%s — Mayofy",
   },
   description:
-    "Landings, webs con turnos y sistemas a medida para negocios de servicios en Argentina y LATAM. Empezamos con una charla gratis.",
+    "Landings, sistemas para ordenar tus turnos o tu stock, y software a medida para negocios de servicios en Argentina y LATAM. Empezamos con una charla gratis.",
   applicationName: "Mayofy",
   authors: [{ name: "Mayofy" }],
   creator: "Mayofy",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     siteName: "Mayofy",
     title: "Mayofy — webs que venden, sistemas que ordenan",
     description:
-      "Landings, webs con turnos y sistemas a medida para negocios de servicios. Charla gratis.",
+      "Landings, sistemas para ordenar tus turnos o tu stock, y software a medida para negocios de servicios. Charla gratis.",
     images: [
       {
         url: "/images/hero-umbral-desktop.png",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mayofy — webs que venden, sistemas que ordenan",
     description:
-      "Landings, webs con turnos y sistemas a medida para negocios de servicios.",
+      "Landings, sistemas para ordenar tus turnos o tu stock, y software a medida para negocios de servicios.",
     images: ["/images/hero-umbral-desktop.png"],
   },
 };

@@ -4,7 +4,7 @@ export const siteContent = {
   hero: {
     title: "Webs que venden. Sistemas que ordenan.",
     titleLines: ["Webs que venden.", "Sistemas que ordenan."],
-    body: "Diseñamos landings, webs con turnos y sistemas a medida para negocios de servicios. Empezamos con una charla gratis para entender qué necesitás.",
+    body: "Diseñamos landings, sistemas para ordenar tus turnos o tu stock, y software a medida para negocios de servicios. Empezamos con una charla gratis para entender qué necesitás.",
     primaryCta: "Agendá una charla gratis",
     primaryMessage: "Hola Juani, quiero trabajar con Mayofy...",
     secondaryCta: "Ver packs",
@@ -67,11 +67,11 @@ export const siteContent = {
   faq: [
     {
       question: "¿Cuánto tarda un proyecto?",
-      answer: "Depende de lo que construyamos. Como referencia: el pack Landing, de 1 a 2 semanas; una web con turnos y panel, de 3 a 9 semanas; un sistema a medida, de 1 a 6 meses. El plazo exacto queda escrito en la propuesta.",
+      answer: "Depende de lo que construyamos. Como referencia: el pack Landing, de 1 a 2 semanas; el pack Gestión, de 3 a 6 semanas; un sistema a medida, de 1 a 6 meses. El plazo exacto queda escrito en la propuesta.",
     },
     {
       question: "¿Cuánto cuesta?",
-      answer: "Los packs arrancan desde USD 85 (Landing), USD 150 (Web + Gestión) y USD 450 (Sistema a Medida). Son precios base: después de la charla te mandamos una propuesta con el alcance y la inversión final.",
+      answer: "Los packs arrancan desde USD 85 (Landing), USD 150 (Gestión) y USD 450 (Sistema a Medida). Son precios base: después de la charla te mandamos una propuesta con el alcance y la inversión final.",
     },
     {
       question: "¿Qué pasa en la charla gratis?",
@@ -91,7 +91,7 @@ export const siteContent = {
     },
     {
       question: "¿Ofrecen mantenimiento?",
-      answer: "Sí. Cuesta USD 50 por mes para el pack Landing y USD 25 por mes para Web + Gestión y Sistema a Medida. Incluye hasta 5 cambios menores o 90 minutos de trabajo por mes.",
+      answer: "Sí. Cuesta USD 25 por mes para el pack Landing y USD 50 por mes para Gestión y Sistema a Medida, con copias de seguridad de tus datos. Incluye hasta 5 cambios menores o 90 minutos de trabajo por mes.",
     },
     {
       question: "¿Puedo traer mi propio diseño?",
