@@ -169,8 +169,9 @@ export default function PrivacyPage() {
           <ul>
             <li>Consultas que no terminan en un trabajo: {retention.inquiries}.</li>
             <li>
-              Clientes: {retention.clients}, por las obligaciones fiscales y para responder cualquier
-              reclamo.
+              Clientes: la propuesta, las facturas y los comprobantes de pago, {retention.clientRecords},
+              por las obligaciones fiscales y para responder cualquier reclamo. Los chats, los
+              materiales, los accesos y los archivos del proyecto, {retention.clientProject}.
             </li>
             <li>Estadísticas de Google Analytics: {retention.analytics}.</li>
           </ul>

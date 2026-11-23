@@ -16,8 +16,11 @@ export const legalEntity = {
 
 /** How long each kind of data is kept; the policy and the plan doc read them from here. */
 export const retention = {
-  inquiries: "12 meses desde el último contacto",
-  clients: "mientras dure el trabajo y 5 años más",
+  inquiries: "3 meses desde el último contacto",
+  /** Proposal, invoices and payment receipts: the proof for any claim (art. 2560 CCyC). */
+  clientRecords: "5 años después de terminado el trabajo",
+  /** Chats, materials, access details and project files. */
+  clientProject: "1 año después de terminado el trabajo",
   analytics: "14 meses",
 } as const;
 

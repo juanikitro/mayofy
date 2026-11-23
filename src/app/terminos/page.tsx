@@ -154,7 +154,9 @@ export default function TermsPage() {
           </p>
           <p>
             Se paga mes a mes, sin permanencia mínima. Lo podés dar de baja cuando quieras avisándonos
-            antes de que empiece el mes siguiente.
+            antes de que empiece el mes siguiente. Revisamos el precio y las condiciones del
+            mantenimiento una vez al año y te avisamos con 30 días de anticipación; si no te sirven,
+            lo das de baja sin costo.
           </p>
         </section>
 

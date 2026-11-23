@@ -36,19 +36,20 @@ El DNS de mayofy.dev está en Vercel, pero Vercel no recibe datos de las visitas
    - Si la persona la vuelve a encender, GA carga en ese momento.
 3. **Responsable de los datos:** Juan Ignacio Portilla Kitroser, monotributista, CUIT 20-44535030-4 (dígito verificador comprobado), con domicilio en 25 de Mayo, provincia de Buenos Aires. Aparece en `/privacidad`, en `/terminos` y en el pie de todas las páginas (`src/content/legal.ts`).
 4. **Correo para pedidos de datos:** por ahora `jpkitro@gmail.com`, leído de `publicChannels.email`. El coordinador lo cambia a `hola@mayofy.dev` cuando el agente de correo confirme que envía y recibe.
-5. **Plazos de guarda (propuestos, falta que Juani confirme):**
-   - Consultas que no terminan en trabajo: 12 meses.
-   - Clientes: mientras dure el trabajo y 5 años más (art. 2560 del CCyC).
+5. **Plazos de guarda (Juani, 2026-11-23):**
+   - Consultas que no terminan en trabajo: 3 meses.
+   - Clientes, propuesta, facturas y comprobantes de pago: 5 años después de terminado el trabajo (prueba ante reclamos, art. 2560 del CCyC). Las facturas electrónicas además quedan en ARCA.
+   - Clientes, chats, materiales, accesos y archivos del proyecto: 1 año después de terminado el trabajo.
    - GA4: 14 meses.
 
-   Están en `retention` de `src/content/legal.ts`.
+   Están en `retention` de `src/content/legal.ts`. **Para el contador:** confirmar el plazo de conservación fiscal vigente; la Ley 27.799 habría bajado la prescripción de 5 a 3 años desde el 2 de enero de 2026 (sin verificar en el texto oficial).
 6. **Términos y condiciones (`/terminos`).**
    - Leen los precios, el pago y el mantenimiento de `src/content/commercial-plans.ts`, así que nunca contradicen a los packs.
    - Incluyen una cláusula de encargado de tratamiento (art. 25 de la Ley 25.326) para los sistemas que guardan datos de los clientes de Juani.
    - **Puntos propuestos que faltan confirmar con Juani:**
      - Arrepentimiento de 10 días para consumidores (art. 34 de la Ley 24.240).
      - Cancelación posterior: el anticipo cubre lo hecho.
-     - Mantenimiento sin permanencia.
+     - Mantenimiento sin permanencia. Revisión anual del precio y las condiciones con 30 días de aviso y baja sin costo (Juani, 2026-11-23: "si").
      - Jurisdicción en el Departamento Judicial de Mercedes, salvo para consumidores.
    - **Pendiente del agente comercial:** la flexibilidad de pago (tipo de cambio, medios y cuotas). Hoy el sitio muestra el 50/50 de `commercialIntro.payment`, y el párrafo se completa cuando el coordinador pase el resultado.
 
@@ -63,7 +64,7 @@ El DNS de mayofy.dev está en Vercel, pero Vercel no recibe datos de las visitas
    - Es gratis y se hace por TAD con clave fiscal nivel 2.
    - Ver la pregunta pendiente más abajo.
 3. **Retención en GA4:** Administrar → Recopilación y modificación de datos → Retención de datos → 14 meses.
-4. **Limpieza periódica:** borrar de Gmail, de WhatsApp y de Cal.com las consultas de más de 12 meses que no terminaron en trabajo.
+4. **Limpieza periódica:** borrar de Gmail, de WhatsApp y de Cal.com las consultas de más de 3 meses que no terminaron en trabajo.
 
 ## Para revisar con un abogado
 
