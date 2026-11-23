@@ -1,7 +1,6 @@
 import { CloudFall } from "@/components/world/cloud-fall";
 import { HeroIsland } from "@/components/world/hero-island";
 import { IslandNav } from "@/components/world/island-nav";
-import { IslandProgress } from "@/components/world/island-progress";
 import { JuaniIsland } from "@/components/world/host-island";
 import { QuestionsIsland, WorksIsland } from "@/components/world/islands";
 import { PackDetails } from "@/components/world/pack-details";
@@ -9,6 +8,7 @@ import { ProblemIsland } from "@/components/world/problem-island";
 import { RockIsland } from "@/components/world/rock-island";
 import { SectionSnap } from "@/components/world/section-snap";
 import { SystemsIsland } from "@/components/world/systems-island";
+import { WhatsAppFloat } from "@/components/world/whatsapp-float";
 import { WhatsAppIcon } from "@/components/world/whatsapp-icon";
 import { WorldFooter } from "@/components/world/world-footer";
 import { WorldMotion } from "@/components/world/world-motion";
@@ -32,7 +32,6 @@ export default function Home() {
       </a>
 
       <IslandNav />
-      <IslandProgress />
 
       <main id="contenido">
         <section id="inicio" className="dawn" data-island="1" aria-labelledby="dawn-title">
@@ -84,6 +83,8 @@ export default function Home() {
       </main>
 
       <WorldFooter />
+
+      <WhatsAppFloat />
 
       <WorldMotion />
       <SectionSnap />
