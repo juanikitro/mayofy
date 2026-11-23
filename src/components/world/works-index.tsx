@@ -190,7 +190,7 @@ export function WorksIndex({ projects }: { projects: readonly ProjectEntry[] }) 
                 const shot = project.images[0];
                 return (
                   <span className="works-index__shot" key={project.slug} data-active={index === active ? "true" : undefined}>
-                    {shot ? <img src={shot.src} alt="" width={shot.width} height={shot.height} decoding="async" /> : <PendingShot index={project.index} />}
+                    {shot ? <img src={shot.src} alt="" width={shot.width} height={shot.height} loading="lazy" decoding="async" /> : <PendingShot index={project.index} />}
                   </span>
                 );
               })}
@@ -200,7 +200,7 @@ export function WorksIndex({ projects }: { projects: readonly ProjectEntry[] }) 
             {shown.map((project, index) => (
               <span className="works-index__shot" key={project.slug} data-active={index === active ? "true" : undefined}>
                 {project.phoneImage ? (
-                  <img src={project.phoneImage.src} alt="" width={project.phoneImage.width} height={project.phoneImage.height} decoding="async" />
+                  <img src={project.phoneImage.src} alt="" width={project.phoneImage.width} height={project.phoneImage.height} loading="lazy" decoding="async" />
                 ) : (
                   <PendingShot index={project.index} />
                 )}
