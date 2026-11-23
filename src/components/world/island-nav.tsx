@@ -109,14 +109,74 @@ function Chevron() {
 }
 
 /**
+ * The current island's name in the phone pill. When it changes, the box
+ * eases to the new name's measured width (so the pill resizes smoothly,
+ * like the desktop chip) while the old name slides out and the new one in:
+ * up when the reader moved down the story, down when they went back. A
+ * width transition retargets from wherever it is, so quick changes never
+ * jump. Under reduced motion the motion tokens are 0: the change is
+ * instant.
+ */
+function WhereLabel({ label, index }: { label: string; index: number }) {
+  const boxRef = useRef<HTMLSpanElement>(null);
+  const measureRef = useRef<HTMLSpanElement>(null);
+  const [shown, setShown] = useState({ label, index });
+  const [leaving, setLeaving] = useState<{ label: string; up: boolean } | null>(null);
+
+  if (label !== shown.label) {
+    setLeaving({ label: shown.label, up: index >= shown.index });
+    setShown({ label, index });
+  }
+
+  useLayoutEffect(() => {
+    const box = boxRef.current;
+    const measure = measureRef.current;
+    if (!box || !measure) return;
+    const place = () => box.style.setProperty("--label-w", `${measure.offsetWidth}px`);
+    place();
+    // The first width is set without a transition, so the pill never grows
+    // from nothing on load.
+    const frame = window.requestAnimationFrame(() => box.setAttribute("data-ready", ""));
+    const resize = new ResizeObserver(place);
+    resize.observe(measure);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      resize.disconnect();
+    };
+  }, [shown.label]);
+
+  return (
+    <span className="island-nav__where-label" ref={boxRef} data-dir={leaving?.up === false ? "down" : "up"}>
+      <span className="island-nav__where-measure" ref={measureRef} aria-hidden="true">
+        {shown.label}
+      </span>
+      {leaving ? (
+        <span
+          key={`out-${leaving.label}`}
+          className="island-nav__where-text"
+          data-leaving=""
+          aria-hidden="true"
+          onAnimationEnd={() => setLeaving(null)}
+        >
+          {leaving.label}
+        </span>
+      ) : null}
+      <span key={shown.label} className="island-nav__where-text">
+        {shown.label}
+      </span>
+    </span>
+  );
+}
+
+/**
  * Floating pill navigation (decision 15, round 11). It carries what the paw
  * rail used to: where the reader is in the story and a jump to every island.
  *
  * - Wide screens: Mayofy, the six islands and "Agendá". A soft moss chip
  *   glides behind the island in view and a hairline along the pill's lower
  *   edge fills as the page goes by.
- * - Phones and tablets: Mayofy, a button with the current island's number
- *   and name, and "Agendá". The button opens the full list of islands under
+ * - Phones and tablets: Mayofy, a button with the current island's name
+ *   and "Agendá". The button opens the full list of islands under
  *   the pill; Escape, a tap outside, leaving it with Tab or choosing an
  *   island closes it, and Escape returns focus to the button.
  */
@@ -229,12 +289,7 @@ export function IslandNav() {
           onClick={() => setOpen((value) => !value)}
         >
           <span className="island-nav__sr">Secciones. {current ? "Estás en: " : ""}</span>
-          {current ? (
-            <span className="island-nav__step" aria-hidden="true">
-              {activeIndex + 1}
-            </span>
-          ) : null}
-          <span className="island-nav__where-label">{current ? current.short : "Secciones"}</span>
+          <WhereLabel label={current ? current.short : "Secciones"} index={activeIndex} />
           <Chevron />
         </button>
 
