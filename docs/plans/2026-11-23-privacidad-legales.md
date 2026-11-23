@@ -62,7 +62,7 @@ El DNS de mayofy.dev está en Vercel, pero Vercel no recibe datos de las visitas
 2. **Registro de la base en la AAIP (Registro Nacional de Bases de Datos):** Juani decidió no registrarla por ahora (2026-11-23: "no").
    - **Riesgo que asume:** la AAIP pide inscribir las bases privadas que no son de uso exclusivamente personal, y una base sin inscribir puede ser sancionada (art. 21 de la Ley 25.326).
    - **Si cambia de idea:** es gratis, se hace por TAD con clave fiscal nivel 2, y el número de inscripción se agrega a la política.
-3. **Retención en GA4 (14 meses):** Juani pidió que la configure el agente de analytics; se le pasó al coordinador el 2026-11-23. Ruta: Administrar → Recopilación y modificación de datos → Retención de datos.
+3. **Retención en GA4 (14 meses): hecho.** El agente de analytics la configuró el 2026-11-23 por la Admin API y la verificó: retención de eventos en 14 meses (la de usuarios ya estaba en 14).
 4. **Limpieza periódica:** borrar de Gmail, de WhatsApp y de Cal.com las consultas de más de 3 meses que no terminaron en trabajo.
 
 ## Para revisar con un abogado
