@@ -46,10 +46,10 @@ El DNS de mayofy.dev está en Vercel, pero Vercel no recibe datos de las visitas
 6. **Términos y condiciones (`/terminos`).**
    - Leen los precios, el pago y el mantenimiento de `src/content/commercial-plans.ts`, así que nunca contradicen a los packs.
    - Incluyen una cláusula de encargado de tratamiento (art. 25 de la Ley 25.326) para los sistemas que guardan datos de los clientes de Juani.
-   - **Puntos propuestos que faltan confirmar con Juani:**
+   - **Puntos confirmados por Juani:**
      - Arrepentimiento de 10 días para consumidores (art. 34 de la Ley 24.240) y cancelación posterior en la que el anticipo cubre lo hecho; si cancela Mayofy, devuelve lo no trabajado (Juani, 2026-11-23: "si").
      - Mantenimiento sin permanencia. Revisión anual del precio y las condiciones con 30 días de aviso y baja sin costo (Juani, 2026-11-23: "si").
-     - Jurisdicción en el Departamento Judicial de Mercedes, salvo para consumidores.
+     - Jurisdicción en el Departamento Judicial de Mercedes, salvo para consumidores (Juani, 2026-11-23: "si").
    - **Pendiente del agente comercial:** la flexibilidad de pago (tipo de cambio, medios y cuotas). Hoy el sitio muestra el 50/50 de `commercialIntro.payment`, y el párrafo se completa cuando el coordinador pase el resultado.
 
 ## Lo que Juani tiene que hacer fuera del código
