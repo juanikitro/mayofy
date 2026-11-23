@@ -264,10 +264,10 @@ export const islandPlates = {
     clear: { desktop: 0.55, mobile: 0.5 },
   },
   host: {
-    desktop: desktopPlate("50-isla6-escritorio-v2"),
-    mobile: mobilePlate("50-isla6-celular-v2"),
-    layers: { background: desktopPlate("50-isla6-escritorio-v2-fondo"), island: desktopPlate("50-isla6-escritorio-v2-isla") },
-    mobileLayers: { background: mobilePlate("50-isla6-celular-v2-fondo"), island: mobilePlate("50-isla6-celular-v2-isla") },
+    desktop: desktopPlate("50-isla6-escritorio-v3"),
+    mobile: mobilePlate("50-isla6-celular-v3"),
+    layers: { background: desktopPlate("50-isla6-escritorio-v2-fondo"), island: desktopPlate("50-isla6-escritorio-v3-isla") },
+    mobileLayers: { background: mobilePlate("50-isla6-celular-v2-fondo"), island: mobilePlate("50-isla6-celular-v3-isla") },
     // The tree from 30.6 % of the desktop cutout; bench and campfire from 59 % on mobile.
     clear: { desktop: 0.7, mobile: 0.41 },
   },

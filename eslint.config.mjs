@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Throwaway Playwright scripts kept as evidence next to the plans; not app code.
+    "docs/**",
   ]),
 ]);
 
