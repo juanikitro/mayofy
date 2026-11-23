@@ -122,5 +122,5 @@ export const siteContent = {
 export const publicChannels = {
   instagram: "https://www.instagram.com/mayofy.web/",
   linkedin: "https://www.linkedin.com/in/juanikitro/",
-  email: "jpkitro@gmail.com",
+  email: "hola@mayofy.dev",
 } as const;
