@@ -30,7 +30,7 @@ const googleAnalyticsId =
 // (docs/plans/2026-11-22-seo-rendimiento.md); share cards keep the slogan.
 const homeTitle = "Mayofy — Páginas web con turnos online y sistemas a medida";
 const homeDescription =
-  "Diseño de páginas web para negocios de servicios: landing pages, webs con turnos online y sistemas a medida en Argentina y LATAM. Charla gratis para empezar.";
+  "Diseño de páginas web para negocios de servicios: landing pages, sistemas de gestión con turnos online y sistemas a medida en Argentina y LATAM. Charla gratis para empezar.";
 const shareTitle = "Mayofy — webs que venden, sistemas que ordenan";
 
 export const metadata: Metadata = {

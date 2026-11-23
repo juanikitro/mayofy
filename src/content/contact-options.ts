@@ -6,7 +6,7 @@ export type ContactOption = {
 export const contactOptions = {
   pack: [
     { value: "landing", label: "Landing" },
-    { value: "web-gestion", label: "Web + Gestión (turnos, reservas, clientes)" },
+    { value: "gestion", label: "Gestión (turnos, stock, pedidos o tienda)" },
     { value: "sistema", label: "Sistema a Medida" },
     { value: "automatizacion", label: "Automatización suelta" },
     { value: "bot", label: "Bot de WhatsApp o Telegram (próximamente)" },
