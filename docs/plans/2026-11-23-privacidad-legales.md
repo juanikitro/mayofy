@@ -54,17 +54,20 @@ El DNS de mayofy.dev está en Vercel, pero Vercel no recibe datos de las visitas
 
 ## Lo que Juani tiene que hacer fuera del código
 
-1. **QR de Data Fiscal (F. 960/D).**
-   - Lo exige ARCA a quien presta servicios y tiene web: va en la página principal.
-   - Se genera con clave fiscal en el servicio "Formulario 960" cargando la URL `https://mayofy.dev`.
-   - Después hay que pasar el código HTML que da ARCA para ponerlo en el pie.
+1. **QR de Data Fiscal (F. 960/D): hecho.**
+   - Juani generó el formulario el 2026-11-23.
+   - El QR apunta a `http://qr.afip.gob.ar/?qr=4wtmhXFACizt8znuUknxHw,,`, que lleva a la ficha de ARCA de su CUIT (`c=20445350304`).
+   - El pie de todas las páginas muestra la insignia "Data Fiscal" con ese enlace. La imagen es la oficial de ARCA (`DATAWEB.jpg`), copiada en `public/legal/data-fiscal.jpg` para que la visita no pida nada a un tercero.
+   - Si Juani cambia de categoría o de actividad, hay que regenerar el F. 960 y actualizar `dataFiscalUrl` en `src/content/legal.ts`.
 2. **Registro de la base en la AAIP (Registro Nacional de Bases de Datos):** Juani decidió no registrarla por ahora (2026-11-23: "no").
    - **Riesgo que asume:** la AAIP pide inscribir las bases privadas que no son de uso exclusivamente personal, y una base sin inscribir puede ser sancionada (art. 21 de la Ley 25.326).
    - **Si cambia de idea:** es gratis, se hace por TAD con clave fiscal nivel 2, y el número de inscripción se agrega a la política.
-3. **Retención en GA4:** Administrar → Recopilación y modificación de datos → Retención de datos → 14 meses.
+3. **Retención en GA4 (14 meses):** Juani pidió que la configure el agente de analytics; se le pasó al coordinador el 2026-11-23. Ruta: Administrar → Recopilación y modificación de datos → Retención de datos.
 4. **Limpieza periódica:** borrar de Gmail, de WhatsApp y de Cal.com las consultas de más de 3 meses que no terminaron en trabajo.
 
 ## Para revisar con un abogado
+
+Juani no tiene abogado ni contador (2026-11-23), así que estos puntos quedan como riesgos asumidos y documentados. Conviene consultarlos si el volumen de clientes crece o aparece un reclamo.
 
 - La base para transferir datos a EE. UU. Hoy se usa el consentimiento informado (art. 12 de la Ley 25.326); EE. UU. no figura entre los países adecuados de la Disposición 60/2016.
 - Si el formulario necesita una casilla de consentimiento expreso (art. 5) o alcanza con el aviso.

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { legalEntity } from "@/content/legal";
@@ -30,11 +31,22 @@ export function WorldFooter() {
             <span className="link-label">Términos</span>
           </Link>
         </div>
-        <small>
-          Mayofy · Webs y software a medida · Argentina y LATAM
-          <br />
-          {legalEntity.name} · CUIT {legalEntity.cuit}
-        </small>
+        <div className="world-footer__legal">
+          <small>
+            Mayofy · Webs y software a medida · Argentina y LATAM
+            <br />
+            {legalEntity.name} · <span className="world-footer__nowrap">CUIT {legalEntity.cuit}</span>
+          </small>
+          {/* ARCA requires the Data Fiscal badge on the site of anyone who sells services online. */}
+          <a
+            className="world-footer__data-fiscal"
+            href={legalEntity.dataFiscalUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Image src="/legal/data-fiscal.jpg" alt="Data Fiscal de ARCA" width={40} height={55} />
+          </a>
+        </div>
       </div>
     </footer>
   );
