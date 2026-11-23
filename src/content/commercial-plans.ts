@@ -93,7 +93,7 @@ export const commercialPlans = [
     price: "USD 450",
     timeline: "1 a 6 meses",
     description:
-      "Software pensado para tu operación cuando las planillas y las herramientas genéricas ya no alcanzan.",
+      "Un sistema hecho a cómo trabaja tu negocio, que junta en un solo lugar lo que hoy está repartido: turnos, stock, cobros, equipos y los números del mes.",
     idealFor:
       "Negocios que necesitan integrar múltiples soluciones: turnos, stock, cobros y equipos con distintos roles, todo en un solo sistema.",
     detailGroups: [
