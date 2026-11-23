@@ -5,7 +5,9 @@ export default function robots(): MetadataRoute.Robots {
   const siteUrl = getSiteUrl();
 
   return {
-    rules: [{ userAgent: "*", allow: "/" }],
+    // The contact endpoint only answers form posts; nothing there to index.
+    rules: [{ userAgent: "*", allow: "/", disallow: "/api/" }],
     sitemap: new URL("/sitemap.xml", siteUrl).toString(),
+    host: siteUrl.origin,
   };
 }

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { Fraunces, Instrument_Sans } from "next/font/google";
+import { GoogleAnalytics } from "@/components/google-analytics";
 import { HashLinkHistory } from "@/components/hash-link-history";
+import { shareMetadata } from "@/lib/share-metadata";
 import { getSiteUrl } from "@/lib/site-url";
 import "./world.css";
 
@@ -25,41 +26,30 @@ const worldSerifFont = Fraunces({
 const googleAnalyticsId =
   process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ?? "G-F2DHJCS51K";
 
+// Search title and description carry the searches Juani wants to win
+// (docs/plans/2026-11-22-seo-rendimiento.md); share cards keep the slogan.
+const homeTitle = "Mayofy — Páginas web con turnos online y sistemas a medida";
+const homeDescription =
+  "Diseño de páginas web para negocios de servicios: landing pages, webs con turnos online y sistemas a medida en Argentina y LATAM. Charla gratis para empezar.";
+const shareTitle = "Mayofy — webs que venden, sistemas que ordenan";
+
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
   title: {
-    default: "Mayofy — webs que venden, sistemas que ordenan",
+    default: homeTitle,
     template: "%s — Mayofy",
   },
-  description:
-    "Landings, webs con turnos y sistemas a medida para negocios de servicios en Argentina y LATAM. Empezamos con una charla gratis.",
+  description: homeDescription,
   applicationName: "Mayofy",
   authors: [{ name: "Mayofy" }],
   creator: "Mayofy",
   alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    locale: "es_AR",
-    siteName: "Mayofy",
-    title: "Mayofy — webs que venden, sistemas que ordenan",
-    description:
-      "Landings, webs con turnos y sistemas a medida para negocios de servicios. Charla gratis.",
-    images: [
-      {
-        url: "/images/hero-umbral-desktop.png",
-        width: 1816,
-        height: 866,
-        alt: "Mayofy: webs que venden, sistemas que ordenan",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Mayofy — webs que venden, sistemas que ordenan",
-    description:
-      "Landings, webs con turnos y sistemas a medida para negocios de servicios.",
-    images: ["/images/hero-umbral-desktop.png"],
-  },
+  ...shareMetadata({ title: shareTitle, description: homeDescription, path: "/" }),
+  // Search Console ownership through a meta tag, only when the token is set
+  // (a DNS TXT record on mayofy.dev is the preferred route, see the SEO plan).
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+    : {}),
 };
 
 export default function RootLayout({
@@ -75,8 +65,8 @@ export default function RootLayout({
       <body>
         {children}
         <HashLinkHistory />
+        {googleAnalyticsId ? <GoogleAnalytics gaId={googleAnalyticsId} /> : null}
       </body>
-      {googleAnalyticsId ? <GoogleAnalytics gaId={googleAnalyticsId} /> : null}
     </html>
   );
 }

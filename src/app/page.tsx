@@ -12,7 +12,9 @@ import { SystemsIsland } from "@/components/world/systems-island";
 import { WhatsAppIcon } from "@/components/world/whatsapp-icon";
 import { WorldFooter } from "@/components/world/world-footer";
 import { WorldMotion } from "@/components/world/world-motion";
+import { JsonLd } from "@/components/json-ld";
 import { siteContent } from "@/content/site";
+import { homeStructuredData } from "@/lib/structured-data";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
 /** Splits "Webs que venden." into ["Webs que", "venden", "."] for the serif keyword. */
@@ -27,6 +29,7 @@ export default function Home() {
 
   return (
     <div className="world">
+      <JsonLd data={homeStructuredData()} />
       <a className="skip-link" href="#contenido">
         Saltar al contenido
       </a>
