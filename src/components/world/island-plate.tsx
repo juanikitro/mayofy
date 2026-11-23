@@ -2,6 +2,9 @@ import type { CSSProperties, ReactNode } from "react";
 
 import type { PlateSpec } from "@/content/stage";
 
+/** A transparent 1 x 1 GIF, for a picture source that must not download anything. */
+const BLANK_PIXEL = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
+
 /**
  * Height of the plate as a fraction of its width (desktop and mobile) and the
  * share of it the island art takes, set on the section (or the scene) so the
@@ -69,9 +72,13 @@ export function IslandPlate({
           />
         </picture>
         <picture className="plate__picture plate__picture--island">
-          {mobileLayers ? (
-            <source media="(max-width: 48rem)" type="image/avif" srcSet={mobileLayers.island.avif} />
-          ) : null}
+          {/* Without a mobile pair the cutout is hidden on phones (world.css), yet an eager
+              <img> still downloads it: a blank pixel there keeps the desktop file off phones. */}
+          <source
+            media="(max-width: 48rem)"
+            type={mobileLayers ? "image/avif" : undefined}
+            srcSet={mobileLayers ? mobileLayers.island.avif : BLANK_PIXEL}
+          />
           <source type="image/avif" srcSet={plate.layers.island.avif} />
           <img
             src={plate.layers.island.webp}

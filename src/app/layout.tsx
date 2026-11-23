@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Fraunces, Instrument_Sans } from "next/font/google";
+import { Instrument_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { HashLinkHistory } from "@/components/hash-link-history";
 import { shareMetadata } from "@/lib/share-metadata";
@@ -14,13 +15,18 @@ const worldSansFont = Instrument_Sans({
   display: "swap",
 });
 
-const worldSerifFont = Fraunces({
+// Fraunces italic pinned to weight 400, the only one the serif uses (146 ->
+// 71 KB preloaded); optical size and SOFT stay whole. Built by
+// scripts/subset-fraunces.py from Google's Latin file. Its metric-matched
+// fallback keeps next/font/google's numbers (world.css "Fraunces Fallback").
+const worldSerifFont = localFont({
+  src: "./fonts/fraunces-italic-latin.woff2",
   variable: "--font-fraunces",
-  subsets: ["latin"],
-  style: ["italic"],
-  weight: "variable",
-  axes: ["opsz", "SOFT"],
+  style: "italic",
+  weight: "400",
   display: "swap",
+  adjustFontFallback: false,
+  fallback: ["Fraunces Fallback"],
 });
 
 const googleAnalyticsId =

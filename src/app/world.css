@@ -8090,3 +8090,60 @@ html[data-motion-tier="reduced"] :is(.island-nav__sheet, .island-nav[data-open] 
     padding-inline: 0.8rem;
   }
 }
+
+/* ======================================================================
+ * Loading (docs/plans/2026-11-23-rendimiento-celular.md)
+ *
+ * Art far below the fold stays out of the first load until the reader nears
+ * its island or the page has loaded (NearGate sets `data-near`). Hidden, a
+ * lazy <img> is not fetched and neither is a CSS mask or background. Endless
+ * main-thread animations pause while their island is off screen
+ * (`data-onscreen`). Only with scripting: without JavaScript everything
+ * loads with the page and always moves, as before.
+ * ====================================================================== */
+
+/* The serif's fallback while Fraunces loads, sized to match it: the numbers
+ * next/font/google generated before the font became a local file
+ * (layout.tsx), so the swap moves nothing it did not move before. */
+@font-face {
+  font-family: "Fraunces Fallback";
+  src: local("Times New Roman");
+  ascent-override: 84.71%;
+  descent-override: 22.09%;
+  line-gap-override: 0%;
+  size-adjust: 115.45%;
+}
+
+@media (scripting: enabled) {
+  /* Island 3: the twelve rock pieces (their grading masks reuse the files)
+   * and the grass strips cut from the island plate. */
+  .rocks:not([data-near]) :is(.rock, .rock-grass) {
+    display: none;
+  }
+
+  /* The rocks' endless idle float animates registered custom properties,
+   * restyled on the main thread every frame: it pauses off screen. */
+  .rocks:not([data-onscreen]) .rock__body {
+    animation-play-state: paused;
+  }
+
+  /* The fall and island 2: their lazy images (clouds, Mayo's strips, the
+   * plate) sit within the browser's lazy-load distance, so they were
+   * requested with the hero, before the first paint. Hidden until the first
+   * IntersectionObserver callback (the fall, right below the hero) or until
+   * the reader nears island 2, they follow the hero instead. Every one of
+   * them is absolutely placed in a box sized without it: nothing moves. */
+  :is(.fall, .problem):not([data-near]) img[loading="lazy"] {
+    display: none;
+  }
+
+  /* Island 2: the butterfly's strip is a CSS background (147 KB) that loaded
+   * with the hero; its flutter repaints the background, so it pauses too. */
+  .problem:not([data-near]) .case__plant--strip {
+    background-image: none;
+  }
+
+  .problem:not([data-onscreen]) .case__plant--strip {
+    animation-play-state: paused;
+  }
+}

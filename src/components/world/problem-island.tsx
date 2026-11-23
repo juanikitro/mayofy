@@ -5,6 +5,7 @@ import { plateSceneStyle } from "@/components/world/island-plate";
 import { IslandScene } from "@/components/world/island-scene";
 import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure } from "@/components/world/mayo-figure";
+import { NearGate } from "@/components/world/near-gate";
 import { casePicker } from "@/content/case-picker";
 import { islandCopy } from "@/content/islands";
 import { islandPlates } from "@/content/stage";
@@ -83,6 +84,9 @@ export function ProblemIsland() {
       style={plateSceneStyle(islandPlates.problem)}
       aria-labelledby="problema-title"
     >
+      {/* Its art (the butterfly's CSS background strip included) loads as the reader comes within a
+          screen of the island or, after the page has loaded, once the fall's art is in. */}
+      <NearGate ahead={1} />
       <div className="problem__stage">
         <IslandScene variant="morning" plate={islandPlates.problem}>
           <MayoFigure slot="problem" className="isle__mayo isle__mayo--play" />

@@ -132,6 +132,8 @@ Lectura honesta:
 | 9 | **Limpieza:** `public/images/hero-umbral-*.png` (4,8 MB) ya no se usan; conviene borrarlos dentro de unas semanas, cuando las redes ya no tengan en caché la tarjeta vieja. `@next/third-parties` quedó sin uso (sacarlo es un cambio de dependencias). | Bajo | Bajo | Limpieza |
 | 10 | **JavaScript heredado** (13 KB de polyfills que Lighthouse marca) y HTML de 340 KB (71 KB comprimido) por el payload de React. | Bajo | Medio | — |
 
+Seguimiento (23 de noviembre de 2026): los puntos 1, 2 y 4 se resolvieron en `docs/plans/2026-11-23-rendimiento-celular.md` (rocas al acercarse, tiras de Mayo para celular, Fraunces fijada en peso 400); el 3 sigue abierto ahí, con más datos.
+
 ## Páginas programáticas (descartado)
 
 La propuesta era armar páginas por rubro ("páginas web para peluquerías", "para gimnasios", "para lavaderos"), solo donde hubiera un caso real o contenido propio del rubro, y nunca páginas por ciudad (sin presencia local son páginas puerta, que Google penaliza). Juani respondió "no armemos paginas por rubro", así que no se hace.
