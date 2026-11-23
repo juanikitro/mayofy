@@ -8003,4 +8003,14 @@ html[data-motion-tier="reduced"] :is(.progress, .progress[data-clear]) {
   .rocks:not([data-onscreen]) .rock__body {
     animation-play-state: paused;
   }
+
+  /* Island 2: the butterfly's strip is a CSS background (147 KB) that loaded
+   * with the hero; its flutter repaints the background, so it pauses too. */
+  .problem:not([data-near]) .case__plant--strip {
+    background-image: none;
+  }
+
+  .problem:not([data-onscreen]) .case__plant--strip {
+    animation-play-state: paused;
+  }
 }
