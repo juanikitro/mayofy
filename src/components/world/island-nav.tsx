@@ -201,6 +201,8 @@ export function IslandNav() {
           if (open && !event.currentTarget.contains(event.relatedTarget as Node | null)) setOpen(false);
         }}
       >
+        <span className="island-nav__glass" aria-hidden="true" />
+
         <NavLink onHome={onHome} id="inicio" className="island-nav__brand" onClick={close}>
           Mayofy
         </NavLink>
