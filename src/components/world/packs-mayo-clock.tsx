@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 /** Share of the homing stretch (from its start) by which a loop must be home, whatever the time it had. */
-const HOME_BY = 0.25;
+const HOME_BY = 0.8;
 
 /** Strip loops: ms per painted frame (the illustrator's ping-pongs: 22 steps of 110 and 120 ms). */
 const MIRA_STEP = 110;
@@ -27,13 +27,12 @@ type Loop = {
  * que salta el cuadro"). So, by the position on the `--rocks` range (cover %):
  *
  * - Watching plays until `miraRest`, then steps back to its first frame at
- *   twice its pace and holds it, so when the hop takes over at `miraEnd` its
+ *   its usual pace and holds it, so when the hop takes over at `miraEnd` its
  *   first frame (the same painting) follows; from `miraEnd` on, hidden, it
  *   holds its first frame, ready for a scroll back. However fast the reader
  *   scrolls, the frame is also pulled home by the position: it reaches the
- *   first frame within the first quarter of that stretch, so even a wheel
- *   notch that jumps most of the stretch shows the first frame before the
- *   hand-over.
+ *   first frame before the end of that stretch without forcing a sharp
+ *   rewind early on. A single scroll jump may still skip intermediate frames.
  * - Seated holds its first frame (the last of sitting down) until
  *   `sentadaLoop`, a little after it takes over at `sentadaStart`, and only
  *   then breathes; scrolling back it steps home to its first frame before
@@ -91,7 +90,7 @@ export function PacksMayoClock({
       }
       if (mode === "home") loop.home ??= { at, frame: loop.frame };
       else loop.home = null;
-      const step = mode === "home" ? loop.step / 2 : loop.step;
+      const step = loop.step;
       loop.elapsed += delta;
       while (loop.elapsed >= step) {
         loop.elapsed -= step;
@@ -105,7 +104,8 @@ export function PacksMayoClock({
       }
       if (loop.home) {
         const pull = Math.max(0, Math.min(1, (left - (1 - HOME_BY)) / HOME_BY));
-        loop.frame = Math.min(loop.frame, Math.floor(loop.home.frame * pull));
+        const eased = pull * pull * (3 - 2 * pull);
+        loop.frame = Math.min(loop.frame, Math.round(loop.home.frame * eased));
       }
     };
     const share = (value: number, from: number, to: number) => (value - to) / (from - to);

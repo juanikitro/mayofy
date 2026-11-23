@@ -145,7 +145,7 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   fall: sprite("fall", "88%", "pingpong", { timeline: "--fall", range: "cover 20% cover 80%", cycles: 3 }),
   // Play bow among the rocks.
   // Painted in place on a crop of the island 2 v2 plate (play bow among the rocks).
-  problem: { ...sprite("problem", "87.91%", "pingpong", { timeline: "--isle", range: "cover 30% cover 85%", rangeMobile: "cover 35% cover 88%", cycles: 3 }), strip: { avif: "/images/mundo-mayo/70-mayo-problem-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-problem-v2-tira.webp" } },
+  problem: { ...sprite("problem", "87.91%", "pingpong", { timeline: "--isle", range: "cover 30% cover 85%", rangeMobile: "cover 35% cover 88%", cycles: 2 }), strip: { avif: "/images/mundo-mayo/70-mayo-problem-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-problem-v2-tira.webp" } },
   // Island 3 mounts its own four painted strips (packsMayo below, rock-island.tsx).
   // Digging: quick, repetitive paw strokes.
   // Painted in place on a crop of the island 4 v2 plate (camera, light and shadow from the scene).
@@ -186,10 +186,10 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   },
   // Resting by the fire: breathing and ears, barely.
   // Painted in place on a crop of the island 6 v2 plate (resting, facing the campfire).
-  host: { ...sprite("host", "85.16%", "pingpong", { timeline: "--isle", range: "cover 62% cover 93%", rangeMobile: "cover 72% cover 98%", cycles: 2 }), strip: { avif: "/images/mundo-mayo/70-mayo-host-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-host-v2-tira.webp" } },
+  host: { ...sprite("host", "85.16%", "pingpong", { timeline: "--isle", range: "cover 62% cover 93%", rangeMobile: "cover 72% cover 98%", cycles: 1 }), strip: { avif: "/images/mundo-mayo/70-mayo-host-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-host-v2-tira.webp" } },
   // Trotting after a firefly.
   // Painted in place on a crop of the island 7 v2 plate: seated, following a firefly with her head.
-  questions: { ...sprite("questions", "88.27%", "pingpong", { timeline: "--isle", range: "cover 47% cover 70%", rangeMobile: "cover 57% cover 77%", cycles: 2 }), strip: { avif: "/images/mundo-mayo/70-mayo-questions-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-questions-v2-tira.webp" } },
+  questions: { ...sprite("questions", "88.27%", "pingpong", { timeline: "--isle", range: "cover 47% cover 70%", rangeMobile: "cover 57% cover 77%", cycles: 1 }), strip: { avif: "/images/mundo-mayo/70-mayo-questions-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-questions-v2-tira.webp" } },
 };
 
 /* ---------------------------------------------------------------- plates */

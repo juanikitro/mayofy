@@ -401,7 +401,7 @@ function packsMayoVars() {
       ...Object.fromEntries(stops.map((stop, hop) => [`--hop-${hop}-${size}`, `${round(((stop - end) / width) * 100)}%`])),
     };
   };
-  return { ...vars("d"), ...vars("m") } as CSSProperties;
+  return { ...vars("d"), ...vars("m"), "--feet-y": `${packsMayo.feetY}%` } as CSSProperties;
 }
 
 /**

@@ -609,6 +609,19 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   pointer-events: none;
 }
 
+/* Mayo integration: keep the ground contact independent of strip visibility. */
+.packs-mayo::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: var(--feet-y);
+  width: 57%;
+  height: 14%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse, rgb(35 25 18 / 64%), rgb(35 25 18 / 24%) 49%, transparent 72%);
+}
+/* End Mayo integration. */
+
 .packs-mayo__strip {
   position: absolute;
   inset: 0;
