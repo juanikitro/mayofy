@@ -7986,13 +7986,21 @@ html[data-motion-tier="reduced"] :is(.progress, .progress[data-clear]) {
  *
  * Art far below the fold stays out of the first load until the reader nears
  * its island or the page has loaded (NearGate sets `data-near`). Hidden, a
- * lazy <img> is not fetched and neither is a CSS mask or background. Only
- * with scripting: without JavaScript everything loads with the page.
+ * lazy <img> is not fetched and neither is a CSS mask or background. Endless
+ * main-thread animations pause while their island is off screen
+ * (`data-onscreen`). Only with scripting: without JavaScript everything
+ * loads with the page and always moves, as before.
  * ====================================================================== */
 @media (scripting: enabled) {
   /* Island 3: the twelve rock pieces (their grading masks reuse the files)
    * and the grass strips cut from the island plate. */
   .rocks:not([data-near]) :is(.rock, .rock-grass) {
     display: none;
+  }
+
+  /* The rocks' endless idle float animates registered custom properties,
+   * restyled on the main thread every frame: it pauses off screen. */
+  .rocks:not([data-onscreen]) .rock__body {
+    animation-play-state: paused;
   }
 }
