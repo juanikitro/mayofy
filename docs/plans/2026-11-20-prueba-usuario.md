@@ -273,3 +273,14 @@ Los videos completos de cada pasada (WebM, unos 250 MB) y los registros JSON con
   - **Verificado (1440 y 390):** "Ver packs" → caso de ShineApp → Atrás vuelve a la landing en `#packs`, a la misma altura. Un segundo Atrás vuelve a `/`. Sin errores de consola.
 - **A3, la recomendación cambia mientras se lee.** La rotación de la isla 2 pasó de 5 a 12 s (`.case__progress` en `world.css`). Así alcanza para leer el precio y el párrafo mirando la isla. La barra de progreso, la pausa con el puntero o el foco, la pausa fuera de pantalla y la ausencia de rotación con movimiento reducido no cambian. Verificado a 390: el primer caso sigue elegido a los 6 s y cambia a los 13 s.
 - El resto de los hallazgos quedó a cargo de tres agentes: el scroll (A1, M1), la caja de Cal.com (A4) y los hallazgos menores.
+
+## Arreglo del scroll (22 y 23/11)
+
+B1, A1, M1 y M2 tenían la misma raíz: el acomodo reaccionaba a cada `scrollend`, podía volver hacia atrás y no frenaba el envión del dedo. Ahora la página se acomoda recién cuando termina el gesto, solo hacia donde iba quien lee. Con el dedo o el touchpad solo completa lo que ya está a más de la mitad, y el envión de un dedo se frena en el próximo punto de descanso, piedra o tarjeta. Los principios, el detalle y las mediciones de antes y después están en `2026-11-20-scroll-por-secciones.md`.
+
+- **B1:** de 28-30 gestos de touchpad sin avance sobre 30, a 0.
+- **A1:** de 17-19 entradas de rueda sin avance sobre 49, a 0.
+- **M1:** el deslizamiento corto después de elegir el caso ya no se lleva la recomendación (0 de 5).
+- **M2:** 0 pasos y 0 tarjetas salteadas en el celular, también con 4G lento y CPU x4.
+
+Videos en `docs/plans/scroll-premium/`. Falta probarlo en hardware real (ver "Límites" en ese documento).
