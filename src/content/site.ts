@@ -90,7 +90,7 @@ export const siteContent = {
     },
     {
       question: "¿Cómo se paga?",
-      answer: "50% al inicio y 50% en la entrega. Los precios están en USD y podés pagar en pesos al cambio del día.",
+      answer: "Landing y Gestión, 50% al empezar y 50% en la entrega. Sistema a Medida, 30% al empezar y el resto por etapas. Podés pagar por transferencia, Mercado Pago (también en cuotas con tarjeta, con su recargo), efectivo o USDT. Los precios están en USD; si pagás en pesos, se toma el dólar blue del día del pago. Desde fuera de Argentina pagás en dólares, por transferencia, USDT o Wise.",
     },
     {
       question: "¿Qué tecnologías usan?",
@@ -122,5 +122,5 @@ export const siteContent = {
 export const publicChannels = {
   instagram: "https://www.instagram.com/mayofy.web/",
   linkedin: "https://www.linkedin.com/in/juanikitro/",
-  email: "jpkitro@gmail.com",
+  email: "hola@mayofy.dev",
 } as const;

@@ -8241,3 +8241,81 @@ html[data-motion-tier="reduced"] :is(.island-nav__sheet, .island-nav[data-open] 
   border-radius: 0.25rem;
 }
 /* End legal pages ------------------------------------------------------- */
+
+/* ======================================================================
+ * Commercial round (2026-11-23, docs/plans/2026-11-23-comercial.md)
+ * - The peso reference under each pack price: smaller than the USD price
+ *   (USD stays the base), one line, tabular figures so the three cards
+ *   read alike. Absent when no blue rate is available.
+ * - "Cómo se paga" under the guarantees strip: a short heading and four
+ *   lines, centred like the old one-line note it replaces, kept to a
+ *   readable measure.
+ * ====================================================================== */
+.pack__pesos {
+  margin-block-start: 0.45rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.pack__pesos strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.pack__pesos + .pack__price-note {
+  margin-block-start: 0.15rem;
+}
+
+.case-result__pesos {
+  font-variant-numeric: tabular-nums;
+}
+
+/* With the peso amount the line runs longer: it breaks before the timeline,
+ * never inside "1 a 2 semanas". */
+.case-result__timeline {
+  white-space: nowrap;
+}
+
+.packs__payment {
+  max-width: 44rem;
+  margin-inline: auto;
+}
+
+.packs__payment h3 {
+  margin-block-end: 0.6rem;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.packs__payment ul {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Centred lines of four sentences read poorly on a phone: they line up on
+ * the left there, each after a small leaf mark like the pack lists. */
+@media (max-width: 40rem) {
+  .packs__payment ul {
+    text-align: start;
+  }
+
+  .packs__payment li {
+    position: relative;
+    padding-inline-start: 1rem;
+  }
+
+  .packs__payment li::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0.1rem;
+    inset-block-start: 0.55em;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--leaf);
+  }
+}

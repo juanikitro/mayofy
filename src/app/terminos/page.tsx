@@ -74,7 +74,11 @@ export default function TermsPage() {
 
         <section aria-labelledby="terminos-pago">
           <h2 id="terminos-pago">Pagos</h2>
-          <p>{commercialIntro.payment}</p>
+          <ul>
+            {commercialIntro.payment.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
           <p>
             Te entregamos factura por cada pago. El dominio, el alojamiento y los servicios de terceros
             que use tu proyecto (por ejemplo, los mensajes de WhatsApp que cobra Meta) se pagan aparte
