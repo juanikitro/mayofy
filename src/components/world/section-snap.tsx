@@ -2,7 +2,14 @@
 
 import { useEffect } from "react";
 
-import { addMomentumStops, guideScrollTo, motionAllowed, onGestureEnd, type Gesture } from "@/components/world/guided-scroll";
+import {
+  addMomentumStops,
+  easeOutQuad,
+  guideScrollTo,
+  motionAllowed,
+  onGestureEnd,
+  type Gesture,
+} from "@/components/world/guided-scroll";
 
 /**
  * Soft full-page scroll between the sections of the world (Juani, 20 November
@@ -66,6 +73,10 @@ export function SectionSnap() {
         return [{ from: top, to: top + trackElement.offsetHeight - window.innerHeight }];
       });
 
+    /** Rest points sections declare on their own scenes' key poses (`data-scroll-rest`). */
+    const scenePoses = () =>
+      [...main.querySelectorAll("[data-scroll-rest]")].map((marker) => Math.round(pageTop(marker)));
+
     const restPoints = (owned: { from: number; to: number }[]) => {
       const height = window.innerHeight;
       const points: number[] = [];
@@ -77,7 +88,7 @@ export function SectionSnap() {
       }
       for (const pin of owned) points.push(pin.from, pin.to);
       // A section's own rest points: the page rests with the marker at the top of the screen.
-      for (const marker of main.querySelectorAll("[data-scroll-rest]")) points.push(pageTop(marker));
+      points.push(...scenePoses());
       points.push(maxScroll());
       const limit = maxScroll();
       return [...new Set(points.map((point) => Math.round(Math.min(limit, Math.max(0, point)))))].sort((a, b) => a - b);
@@ -107,8 +118,12 @@ export function SectionSnap() {
       if (!motionAllowed()) return;
       const target = settleTarget(gesture);
       if (target === null) return;
+      // Calm and slowing down into the rest point. A scene's own pose comes at the scene's reading
+      // pace, slower than a seam between sections, so the movement just before it (island 3's hops) reads.
       const distance = Math.abs(target - gesture.to) / window.innerHeight;
-      void guideScrollTo(target, Math.min(900, 380 + distance * 520));
+      const pose = scenePoses().some((point) => Math.abs(point - target) <= 1);
+      const duration = pose ? Math.min(1600, 450 + distance * 1300) : Math.min(1100, 400 + distance * 700);
+      void guideScrollTo(target, duration, easeOutQuad);
     });
     // Inside a pin its own controller sets the stops.
     const stopMomentum = addMomentumStops(() => {

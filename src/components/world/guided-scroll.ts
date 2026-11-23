@@ -19,7 +19,9 @@
  * Shared by SectionSnap, SenderoController (six steps) and WorkshopController (island 4).
  */
 
-const easeInOutSine = (t: number) => -(Math.cos(Math.PI * t) - 1) / 2;
+export const easeInOutSine = (t: number) => -(Math.cos(Math.PI * t) - 1) / 2;
+/** Slows down into the target, where a scene's pose waits (island 3's hops end just before their rest points). */
+export const easeOutQuad = (t: number) => 1 - (1 - t) * (1 - t);
 
 let active: { stop: () => void } | null = null;
 
@@ -28,7 +30,7 @@ export function isGuiding() {
 }
 
 /** Scrolls the window to `top` over `duration` ms; resolves when done or interrupted. */
-export function guideScrollTo(top: number, duration: number) {
+export function guideScrollTo(top: number, duration: number, ease = easeInOutSine) {
   active?.stop();
   const from = window.scrollY;
   const distance = top - from;
@@ -48,7 +50,9 @@ export function guideScrollTo(top: number, duration: number) {
     const handle = { stop: () => stop(false) };
     const step = (now: number) => {
       const t = Math.min(1, (now - start) / duration);
-      window.scrollTo({ top: Math.round(from + distance * easeInOutSine(t)), behavior: "instant" });
+      const next = Math.round(from + distance * ease(t));
+      // Only ever toward the target: if the page drifted ahead (the tail of a fling), never pull it back.
+      if ((next - window.scrollY) * distance > 0) window.scrollTo({ top: next, behavior: "instant" });
       if (t < 1) frame = requestAnimationFrame(step);
       else stop(true);
     };
