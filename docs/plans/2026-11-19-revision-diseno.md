@@ -175,3 +175,4 @@ Juani:
   - Sin scroll horizontal ni errores de consola. Lint, typecheck y build limpios.
   - Capturas: antes en `docs/plans/isla4-guiada/antes-{d,m}-0..5.jpg`, después en `despues-{d,m}-0..4.jpg`, `despues-m-reducido.jpg` y `despues-1024.jpg`.
 - **Límite:** a 1024 px la tarjeta centrada tapa la caja de herramientas pintada. Ya pasaba antes, porque la columna de tarjetas se apoya sobre la isla a ese ancho.
+- **Actualización del 22/11 (`2026-11-20-scroll-por-secciones.md`, "Principios"):** el centrado ahora actúa cuando termina el gesto de quien lee. Con rueda o teclas sigue a la tarjeta siguiente, igual que antes. Con el dedo o el touchpad solo completa si esa tarjeta ya está a menos de media separación de su lugar. El envión de un dedo se frena en la tarjeta siguiente, así un deslizamiento ya no saltea una (pasaba de la 02 a la 04).

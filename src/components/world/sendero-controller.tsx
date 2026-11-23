@@ -2,7 +2,14 @@
 
 import { useEffect } from "react";
 
-import { framesDuration, guideScrollTo, onScrollRest } from "@/components/world/guided-scroll";
+import {
+  addMomentumStops,
+  framesDuration,
+  guideScrollTo,
+  motionAllowed,
+  onGestureEnd,
+  type Gesture,
+} from "@/components/world/guided-scroll";
 
 /** Painted frames a second for a guided leg: about the pace her strips were drawn for. */
 const FPS = 10;
@@ -17,11 +24,15 @@ const FPS = 10;
  *   stone (after the first `legShare` of the step's sixth of the pin).
  * - The current step's buttons carry `aria-current="step"`.
  * - Settle (Juani, 20 November 2026: "si me quedo en la mitad del scroll del
- *   punto 5 al 6, el scroll debe completarse"): when a scroll ends while Mayo
- *   is between two stones, the page finishes the leg in the direction of
- *   travel, or goes back to the stone she left. It acts only after the scroll
- *   has ended, never while the reader scrolls, and never outside the pin, so
- *   entering and leaving the section stay free.
+ *   punto 5 al 6, el scroll debe completarse"): when a gesture by the reader
+ *   ends while Mayo is between two stones, the page finishes the leg in the
+ *   gesture's direction: on to the next stone going down, back to the stone
+ *   she left going up. It acts only once the gesture is over
+ *   (guided-scroll.ts, `onGestureEnd`), never while the reader scrolls, and
+ *   never outside the pin, so entering and leaving the section stay free.
+ * - A touch fling stops on the next stone (`addMomentumStops`), so one flick
+ *   never skips a step (the simulated user test, 20 November: a flick went
+ *   from step 4 to 6).
  * - Both scrolls are guided (guided-scroll.ts), not the browser's fast smooth
  *   scroll ("mayo hace la animacion super apurada"): they last as long as the
  *   painted frames they cross need at about `FPS`, and any input stops them.
@@ -40,7 +51,6 @@ export function SenderoController({
     const buttons = [...track.querySelectorAll<HTMLButtonElement>("button[data-step]")];
     const steps = new Set(buttons.map((button) => button.dataset.step)).size;
     if (!steps) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const phone = window.matchMedia("(max-width: 48rem)");
     const pinned = () => getComputedStyle(stage).position === "sticky";
     const geometry = () => {
@@ -65,7 +75,7 @@ export function SenderoController({
     const scrollToProgress = (value: number, longest: number) => {
       const { top, length } = geometry();
       const target = Math.round(top + value * length);
-      if (reduced.matches) {
+      if (!motionAllowed()) {
         window.scrollTo({ top: target, behavior: "instant" });
         return;
       }
@@ -83,18 +93,21 @@ export function SenderoController({
       }
     };
 
-    let restingY = window.scrollY;
-    const settle = () => {
-      const travel = window.scrollY - restingY;
-      restingY = window.scrollY;
-      if (!pinned()) return;
+    const settle = ({ direction }: Gesture) => {
+      if (!pinned() || !motionAllowed()) return;
       const p = progress();
       if (p <= 0 || p >= 1) return;
       const step = Math.min(steps - 1, Math.floor(p * steps));
       const within = p * steps - step;
       // Standing on her stone: nothing to finish.
       if (within >= legShare) return;
-      scrollToProgress(travel >= 0 ? restOf(step) : step === 0 ? 0 : restOf(step - 1), 1400);
+      scrollToProgress(direction > 0 ? restOf(step) : step === 0 ? 0 : restOf(step - 1), 1400);
+    };
+    /** Each stone's rest point, in page pixels, while the path is pinned. */
+    const stones = () => {
+      if (!pinned() || !motionAllowed()) return [];
+      const { top, length } = geometry();
+      return Array.from({ length: steps }, (_, step) => Math.round(top + restOf(step) * length));
     };
 
     let frame = 0;
@@ -111,22 +124,18 @@ export function SenderoController({
       // A jump over several stones gets more time than a settle, still bounded.
       scrollToProgress(restOf(Number(button.dataset.step)), 3200);
     };
-    // A guided scroll ends without the reader: measure the next travel from where it stopped.
-    const stopRest = onScrollRest(settle);
-    const onGuidedEnd = () => {
-      restingY = window.scrollY;
-    };
+    const stopGestures = onGestureEnd(settle);
+    const stopMomentum = addMomentumStops(stones);
 
     markCurrent();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("scrollend", onGuidedEnd);
     window.addEventListener("resize", markCurrent);
     track.addEventListener("click", onClick);
     return () => {
       cancelAnimationFrame(frame);
-      stopRest();
+      stopGestures();
+      stopMomentum();
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("scrollend", onGuidedEnd);
       window.removeEventListener("resize", markCurrent);
       track.removeEventListener("click", onClick);
     };

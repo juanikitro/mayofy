@@ -1,0 +1,35 @@
+// Keyboard open on a middle island, and the pill on another route.
+const { chromium } = require('C:/Users/Juanito/AppData/Local/npm-cache/_npx/e41f203b7505f1fb/node_modules/playwright-core');
+const EXE = 'C:/Users/Juanito/AppData/Local/ms-playwright/chromium-1248/chrome-win64/chrome.exe';
+(async () => {
+  const browser = await chromium.launch({ headless: true, executablePath: EXE });
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  const page = await ctx.newPage();
+  const errors = [];
+  page.on('console', (msg) => { if (msg.type() === 'error') errors.push(msg.text()); });
+  await page.goto('http://localhost:3018/', { waitUntil: 'domcontentloaded', timeout: 180000 });
+  await page.waitForTimeout(4000);
+  await page.evaluate(() => document.getElementById('sistemas').scrollIntoView({ behavior: 'instant' }));
+  await page.waitForTimeout(1500);
+  await page.focus('.island-nav__where');
+  await page.keyboard.press('Enter');
+  await page.waitForTimeout(400);
+  console.log('focus on open:', await page.evaluate(() => document.activeElement.textContent));
+  await page.screenshot({ path: 't/sheet-390-sistemas-kb.png' });
+  await page.keyboard.press('Escape');
+  await page.goto('http://localhost:3018/privacidad', { waitUntil: 'domcontentloaded', timeout: 180000 });
+  await page.waitForTimeout(3000);
+  await page.screenshot({ path: 't/privacidad-390.png' });
+  await page.click('.island-nav__where');
+  await page.waitForTimeout(400);
+  await page.screenshot({ path: 't/privacidad-390-sheet.png' });
+  await page.click('.island-nav__item[href="/#packs"]');
+  await page.waitForTimeout(5000);
+  console.log('from privacidad:', await page.evaluate(() => [location.pathname + location.hash, document.querySelector('.island-nav__where-label').textContent]));
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('http://localhost:3018/privacidad', { waitUntil: 'domcontentloaded', timeout: 180000 });
+  await page.waitForTimeout(3000);
+  await page.screenshot({ path: 't/privacidad-1440.png' });
+  console.log('errors', JSON.stringify(errors));
+  await browser.close();
+})();

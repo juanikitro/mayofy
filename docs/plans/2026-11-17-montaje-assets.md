@@ -367,3 +367,4 @@ Juani:
   - Una rueda durante el asentamiento lo corta, y después vuelve a la piedra que dejó.
   - `aria-current` termina en el paso pedido. Sin errores de consola. Lint, typecheck y build limpios.
 - **Límite:** el clic del 1 al 6 sigue un poco más rápido que el ritmo pintado (14 a 18 cuadros por segundo). Alargarlo más haría esperar más de 3 s después de un clic.
+- **Actualización del 22/11 (`2026-11-20-scroll-por-secciones.md`, "Principios"):** el asentamiento ahora espera a que termine el gesto de quien lee, no cada `scrollend`. La dirección sale de la entrada misma, así que una rueda que corta el asentamiento ya no lo devuelve a la piedra que dejó: sigue hacia donde iba. Además, el envión de un dedo se frena en la piedra siguiente, y un deslizamiento ya no saltea un paso.
