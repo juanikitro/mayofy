@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 
 import { MayoFigure } from "@/components/world/mayo-figure";
+import { NearGate } from "@/components/world/near-gate";
 import { cloudFall } from "@/content/stage";
 
 /** Share of the `--fall` cover range where the frames crossfade. */
@@ -37,6 +38,8 @@ export function CloudFall() {
   const count = cloudFall.frames.length;
   return (
     <section className="fall" aria-label="Transición: Mayo cae entre las nubes">
+      {/* Its art waits for the first paint (the hero's), then loads at once: the section is right below. */}
+      <NearGate />
       <div className="fall__stage" aria-hidden="true">
         {cloudFall.frames.map((frame, index) => {
           const position = index === 0 ? "first" : index === count - 1 ? "last" : "middle";
