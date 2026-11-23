@@ -7991,6 +7991,18 @@ html[data-motion-tier="reduced"] :is(.progress, .progress[data-clear]) {
  * (`data-onscreen`). Only with scripting: without JavaScript everything
  * loads with the page and always moves, as before.
  * ====================================================================== */
+/* The serif's fallback while Fraunces loads, sized to match it: the numbers
+ * next/font/google generated before the font became a local file
+ * (layout.tsx), so the swap moves nothing it did not move before. */
+@font-face {
+  font-family: "Fraunces Fallback";
+  src: local("Times New Roman");
+  ascent-override: 84.71%;
+  descent-override: 22.09%;
+  line-gap-override: 0%;
+  size-adjust: 115.45%;
+}
+
 @media (scripting: enabled) {
   /* Island 3: the twelve rock pieces (their grading masks reuse the files)
    * and the grass strips cut from the island plate. */
