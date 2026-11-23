@@ -19,6 +19,9 @@ export function WorldFooter() {
           <a href={publicChannels.linkedin} target="_blank" rel="noreferrer">
             <span className="link-label">LinkedIn</span>
           </a>
+          <a href={`mailto:${publicChannels.email}`}>
+            <span className="link-label">{publicChannels.email}</span>
+          </a>
           <Link href="/privacidad">
             <span className="link-label">Privacidad</span>
           </Link>

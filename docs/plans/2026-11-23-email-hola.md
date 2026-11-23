@@ -74,13 +74,14 @@ Aprobado por Juani el 2026-11-23 ("si"):
 - **Cambiado en el sitio:**
   - `publicChannels.email` en `src/content/site.ts` pasó a `hola@mayofy.dev`. Ese valor lo leen los dos enlaces de `/privacidad` y la línea "Email" de `/llms.txt`.
   - `public/.well-known/security.txt` → `Contact: mailto:hola@mayofy.dev`.
-  - El pie del sitio no muestra un correo, así que no hubo nada que cambiar. Agregarlo sería un cambio de componente y pasa por el coordinador.
+  - El pie (`src/components/world/world-footer.tsx`) suma un enlace `mailto:` entre LinkedIn y Privacidad. Lo pidió Juani: "agregá el correo al pie del sitio". El texto visible es la dirección misma, para que se pueda leer y copiar, y sale de `publicChannels.email`. No hizo falta CSS nuevo: el contenedor ya envuelve los enlaces y les da 44 px de alto táctil.
 - **Sin cambio, a propósito:** el formulario sigue entregando por FormSubmit a `jpkitro@gmail.com` (`DEFAULT_CONTACT_EMAIL` en `src/app/api/contact/route.ts` y `CONTACT_FORM_ENDPOINT` en Railway). Esa dirección nunca llega al navegador. Pasarla a hola@ obligaría a reactivar FormSubmit y sumaría ImprovMX como intermediario, sin ninguna ganancia.
 - **A cargo de Juani:** cambiar el email del perfil de Cal.com, que es el que ven quienes reservan.
 - **No hace falta:** el Perfil de Empresa de Google no muestra un email público. Agregar hola@ como usuario en Search Console es opcional.
 - **Verificado localmente** (`next start`):
   - `/privacidad` a 1440×900 y 390×844: los dos `mailto:hola@mayofy.dev`, sin restos de la dirección anterior, sin desborde horizontal, el foco de teclado llega al enlace y la consola no tiene errores.
   - `/llms.txt` y `/.well-known/security.txt` sirven la dirección nueva.
+  - Pie a 390×844: el correo pasa a la segunda fila junto a Privacidad (131×44 px). A 1440×900 queda en una sola fila. En los dos tamaños no hay desborde horizontal, el foco de teclado muestra el contorno menta y la consola no tiene errores.
   - Lint, typecheck y build pasan.
 
 ## Cómo deshacer
