@@ -7760,10 +7760,10 @@ html[data-motion-tier="reduced"] .works-index__shot {
 
 .island-nav__where {
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.4rem;
   min-width: 0;
   min-height: 2.75rem;
-  padding: 0 0.6rem 0 0.35rem;
+  padding: 0 0.6rem 0 0.95rem;
   border: 0;
   border-radius: var(--radius-pill);
   background: color-mix(in oklch, var(--moss) 9%, transparent);
@@ -7782,7 +7782,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
   transition-duration: var(--m-base);
 }
 
-.island-nav__step,
 .island-nav__item-step {
   display: inline-grid;
   flex: none;
@@ -7797,20 +7796,80 @@ html[data-motion-tier="reduced"] .works-index__shot {
   line-height: 1;
 }
 
-.island-nav__step {
-  color: var(--cream);
-  background: var(--moss);
+/* The island's name: a clipping box as wide as the measured name. On a
+ * change the box eases to the new width (the pill re-centres with it) and
+ * the names swap inside it, the old one sliding out as the new one slides
+ * in, up when the reader moved on and down when they went back. Only this
+ * small box changes width, inside the fixed header. */
+.island-nav__where-label {
+  position: relative;
+  display: block;
+  flex: 0 1 auto;
+  width: var(--label-w, auto);
+  min-width: 0;
+  height: 1.35em;
+  overflow: hidden;
+  line-height: 1.35;
 }
 
-.island-nav__where-label {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.island-nav__where-label[data-ready] {
+  transition: width var(--m-reveal) var(--ease-travel);
+}
+
+.island-nav__where-measure {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: max-content;
+  white-space: nowrap;
+  visibility: hidden;
+}
+
+.island-nav__where-text {
+  display: block;
   white-space: nowrap;
 }
 
-.island-nav__where:not(:has(.island-nav__step)) {
-  padding-inline-start: 0.85rem;
+.island-nav__where-text[data-leaving] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .island-nav__where-text[data-leaving] {
+    position: absolute;
+    inset: 0 auto auto 0;
+    display: block;
+    animation: nav-label-out var(--m-reveal) var(--ease-travel) both;
+  }
+
+  html:not([data-motion-tier="reduced"]) .island-nav__where-label:has([data-leaving]) .island-nav__where-text:not([data-leaving]) {
+    animation: nav-label-in var(--m-reveal) var(--ease-travel) both;
+  }
+
+  /* Going back: the same two moves played backwards (the curve is
+   * symmetric), so the new name drops in from above and the old one sinks. */
+  html:not([data-motion-tier="reduced"]) .island-nav__where-label[data-dir="down"] .island-nav__where-text[data-leaving] {
+    animation-name: nav-label-in;
+    animation-direction: reverse;
+  }
+
+  html:not([data-motion-tier="reduced"]) .island-nav__where-label[data-dir="down"]:has([data-leaving]) .island-nav__where-text:not([data-leaving]) {
+    animation-name: nav-label-out;
+    animation-direction: reverse;
+  }
+}
+
+@keyframes nav-label-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.9em);
+  }
+}
+
+@keyframes nav-label-out {
+  to {
+    opacity: 0;
+    transform: translateY(-0.9em);
+  }
 }
 
 .island-nav__chevron {
@@ -8032,13 +8091,7 @@ html[data-motion-tier="reduced"] :is(.island-nav__sheet, .island-nav[data-open] 
 
   .island-nav__where {
     gap: 0.3rem;
-    padding-inline-end: 0.4rem;
-    font-size: 0.86rem;
-  }
-
-  .island-nav__step {
-    width: 1.75rem;
-    height: 1.75rem;
+    padding-inline: 0.8rem 0.45rem;
   }
 
   .island-nav__cta {

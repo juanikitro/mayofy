@@ -2,6 +2,7 @@
 const { chromium } = require('C:/Users/Juanito/AppData/Local/npm-cache/_npx/e41f203b7505f1fb/node_modules/playwright-core');
 const EXE = 'C:/Users/Juanito/AppData/Local/ms-playwright/chromium-1248/chrome-win64/chrome.exe';
 const ORDER = ['inicio', 'problema', 'packs', 'sistemas', 'trabajos', 'contacto', 'preguntas'];
+const SHORT = { inicio: 'Inicio', problema: 'Qué hacemos', packs: 'Packs', sistemas: 'Sistemas', trabajos: 'Trabajos', contacto: 'Quién soy', preguntas: 'Preguntas' };
 const ANCHORS = ['inicio', 'problema', 'packs', 'packs-detalle', 'sistemas', 'trabajos', 'contacto', 'preguntas'];
 (async () => {
   const [out, size, mode] = process.argv.slice(2);
@@ -28,14 +29,14 @@ const ANCHORS = ['inicio', 'problema', 'packs', 'packs-detalle', 'sistemas', 'tr
       if (el && el.getBoundingClientRect().top <= line) inView = id === 'packs-detalle' ? 'packs' : id;
     }
     const cur = document.querySelector('.island-nav__link[aria-current]');
-    const where = document.querySelector('.island-nav__where-label').textContent;
+    const where = [...document.querySelectorAll('.island-nav__where-text')].filter((t) => !t.hasAttribute('data-leaving')).map((t) => t.textContent).join('|');
     const step = document.querySelector('.island-nav__step')?.textContent ?? null;
     const nav = document.querySelector('.island-nav').getBoundingClientRect();
     const story = document.querySelector('.island-nav').style.getPropertyValue('--story');
     return { y: Math.round(scrollY), inView, cur: cur ? cur.getAttribute('href') : null, where, step, navBottom: Math.round(nav.bottom), navW: Math.round(nav.width), story, overflow: document.documentElement.scrollWidth - innerWidth };
   }, ANCHORS);
-  const want = (s) => compact ? String(ORDER.indexOf(s.inView) + 1) : (s.inView === 'inicio' ? null : '#' + s.inView);
-  const got = (s) => compact ? s.step : s.cur;
+  const want = (s) => compact ? SHORT[s.inView] : (s.inView === 'inicio' ? null : '#' + s.inView);
+  const got = (s) => compact ? s.where : s.cur;
 
   // 1. Real wheel scroll through the whole page.
   const log = [];

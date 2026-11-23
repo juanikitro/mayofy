@@ -33,7 +33,7 @@ Un solo componente, `src/components/world/island-nav.tsx`, y un solo bloque de C
 
 **Celular y tablet (menos de 56 rem):**
 
-- `Mayofy · [4 Sistemas ▾] · Agendá`. El botón del medio muestra el número y el nombre de la isla actual.
+- `Mayofy · [Sistemas ▾] · Agendá`. El botón del medio muestra el nombre de la isla actual (sin número desde el 23/11; ver "Ronda 2").
 - Al tocarlo se abre, debajo de la píldora y con su mismo ancho, **la lista del recorrido**: "El recorrido · 4 de 7", las siete islas numeradas, las ya pasadas con el número en verde y la actual marcada con "Estás acá". Tocar una isla la cierra y lleva ahí.
 - Se cierra con Escape (el foco vuelve al botón), tocando afuera, saliendo con Tab o eligiendo una isla. Las flechas arriba y abajo, Inicio y Fin recorren la lista.
 - La misma línea de progreso en el borde de la píldora.
@@ -76,7 +76,7 @@ Con el servidor de desarrollo propio (puerto 3018) y Chromium de Playwright, sob
 
 En 1440x900, 1366x768, 1024x768, 390x844 y 360x800 (los dos últimos como celular, con toque), `recorrido.cjs` hace:
 
-1. **Recorrido real con la rueda**, de a 300 px con pausas, de arriba hasta el final. En cada paso compara la isla que cruzó la línea de lectura con la que marca la píldora (enlace con `aria-current` o número del botón). Resultado en los cinco tamaños: pasa por las siete islas en orden, la marca sigue a la lectura sin desfases entre muestras estables, la línea de progreso termina en 1 y no hay desborde horizontal en ningún momento.
+1. **Recorrido real con la rueda**, de a 300 px con pausas, de arriba hasta el final. En cada paso compara la isla que cruzó la línea de lectura con la que marca la píldora (enlace con `aria-current` o nombre del botón). Resultado en los cinco tamaños: pasa por las siete islas en orden, la marca sigue a la lectura sin desfases entre muestras estables, la línea de progreso termina en 1 y no hay desborde horizontal en ningún momento.
 2. **Saltos** a las seis islas desde la píldora (en celular, abriendo la lista y tocando cada isla). En todos: la dirección cambia a `#id`, se llega a esa isla, la píldora la marca, la lista se cierra sola y el título de la isla queda debajo de la píldora, nunca tapado.
 3. **Atrás** dos veces después de los saltos: vuelve a `#contacto` y después a `#trabajos`, sin salir de la página.
 4. **Teclado** (celular): Enter abre la lista (`aria-expanded="true"`) con el foco en una isla, la flecha abajo pasa a la siguiente, Escape la cierra y devuelve el foco al botón; tocar afuera la cierra; salir con Tab la cierra. En escritorio el orden de Tab es: saltar al contenido, Mayofy, las seis islas, Agendá y después el contenido; el anillo de foco se ve en todos.
@@ -94,7 +94,37 @@ Además:
 
 - Navegador emulado: Chromium de escritorio en modo headless, con emulación de celular. No se probó en un iPhone ni en un Android reales, ni con un lector de pantalla real (sí se revisaron los nombres accesibles, `aria-current`, `aria-expanded` e `inert`).
 - La píldora de escritorio es más ancha que antes (unos 770 px con las seis islas). Entre 900 y 1024 px entra con margen; por debajo de 56 rem cambia al botón con la lista.
-- La ficha que se desliza anima su ancho además de su posición (un solo elemento posicionado, no reacomoda nada más). Es la única excepción a la regla del sitio de no animar anchos.
+- La ficha que se desliza (escritorio) y la caja del nombre (celular) animan su ancho: son cajas chicas dentro del encabezado fijo y no reacomodan el contenido de la página. Son las únicas excepciones a la regla del sitio de no animar anchos.
 - La píldora no se esconde sobre el formulario: arriba de la pantalla no tapa campos, y los campos ya se detienen debajo de ella al recibir foco (`scroll-margin`). Lo que se aparta sobre el formulario y la agenda es el botón de WhatsApp, como antes.
 - El margen lateral de 5 rem del inicio queda como estaba (ver "Qué se sacó"). Si algún día se quiere aprovechar el ancho que dejaba la barra, hay que revisar isla por isla.
 - Los nombres ("Qué hacemos", "Quién soy y agenda", etc.) son una propuesta en lenguaje simple; Juani puede cambiarlos en `src/components/world/island-nav.tsx`.
+
+## Ronda 2 (23/11/2026): animación en el celular y sin número
+
+> "me gusta el nuevo navbar. quiero hacer los siguientes cambios: En mobile, añadir una animacion al redimensionamiento del navbar cuando se cambia de seccion (animacion similar a en desktop). Tambien le quitaria la numeracion en el navbar (no la quitaria del listado)" (Juani, 23/11/2026)
+
+**Qué cambió:**
+
+- **Sin número en la píldora del celular.** El botón muestra solo el nombre ("Packs ▾"). La lista "El recorrido" conserva los números, el "4 de 7" y las islas pasadas en verde. Al sacar el círculo hay más lugar: a 360 px "Qué hacemos" entra con aire (píldora de 299 px en un espacio de 328).
+- **La píldora cambia de tamaño con suavidad.** Antes, al pasar de "Qué hacemos" a "Packs", la píldora saltaba de golpe 54 px. Ahora el nombre vive en una caja (`WhereLabel`, en `island-nav.tsx`) que mide el nombre nuevo y pasa a ese ancho en 520 ms con la misma curva que la ficha de escritorio (`--m-reveal`, `--ease-travel`); la píldora, centrada, se acomoda con ella. Mientras tanto el nombre viejo sale hacia arriba desvaneciéndose y el nuevo entra desde abajo, como un cuentakilómetros. Si se vuelve a una isla anterior, el movimiento es al revés: el nuevo baja desde arriba.
+- **Interrumpible:** si la isla cambia de nuevo a mitad de camino, la transición de ancho sigue desde donde está hacia el ancho nuevo, sin saltos.
+- **Al cargar no hay animación:** el primer ancho se pone sin transición, así la píldora no "crece desde cero".
+- **Movimiento reducido:** el cambio es instantáneo (los tokens de movimiento valen 0 y el nombre viejo ni se dibuja).
+- El nombre accesible del botón no cambia ("Secciones. Estás en: Packs"); el nombre que sale y la caja de medida están ocultos para lectores de pantalla.
+
+**Cuadros de la animación** (a 1/5 de velocidad, un cuadro cada 66 ms reales; script `docs/plans/navegacion/scripts/cuadros-redimension.cjs`):
+
+| Momento | 0 | 66 ms | 132 ms | 198 ms | 264 ms | 330 ms | 396 ms | 462 ms |
+|---|---|---|---|---|---|---|---|---|
+| Ancho de la píldora, "Qué hacemos" → "Packs" (390) | 324 | 323 | 317 | 301 | 280 | 272 | 270 | 270 |
+| Ancho de la píldora, "Packs" → "Qué hacemos" (390) | 270 | 271 | 275 | 287 | 308 | 319 | 323 | 324 |
+
+![Cuadros: bajando de Qué hacemos a Packs (390)](navegacion/c13_390_cuadros_redimension_bajando.jpg)
+![Cuadros: subiendo de Packs a Qué hacemos (390)](navegacion/c14_390_cuadros_redimension_subiendo.jpg)
+![Cuadros: de Sistemas a Trabajos (360)](navegacion/c15_360_cuadros_redimension.jpg)
+![La lista conserva los números (390)](navegacion/c16_390_lista_conserva_numeros.jpg)
+
+**Verificación (390x844 y 360x800, como celular, con toque):** la pasada completa de `recorrido.cjs` (ahora compara el nombre del botón con la isla que se está leyendo) recorrió las siete islas con la rueda sin desfases, los seis saltos desde la lista llegaron a su isla con el título visible, Atrás volvió a `#contacto` y `#trabajos`, el teclado abre, recorre y cierra la lista devolviendo el foco, no hay desborde horizontal, todos los objetivos miden 44 px o más y no hubo errores de consola. Con movimiento reducido (390) la misma pasada también pasó y las transiciones duran 0 s. `npm run lint`, `npm run typecheck` y `next build`: sin errores. Escritorio no cambia (el botón y su caja solo existen debajo de 56 rem).
+
+**Límite:** con la lista abierta, si la isla cambia (por ejemplo, al desplazarse con la lista abierta), la lista acompaña el nuevo ancho de la píldora; con nombres cortos ("Packs") la lista mide 2 px más que la píldora por su ancho mínimo de 17 rem.
+
