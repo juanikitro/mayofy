@@ -8221,4 +8221,23 @@ html[data-motion-tier="reduced"] :is(.island-nav__sheet, .island-nav[data-open] 
   outline: 3px solid var(--moss);
   outline-offset: 3px;
 }
+.world-footer__legal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.world-footer__nowrap {
+  white-space: nowrap;
+}
+
+.world-footer__data-fiscal {
+  flex: none;
+  line-height: 0;
+}
+
+.world-footer__data-fiscal img {
+  border-radius: 0.25rem;
+}
 /* End legal pages ------------------------------------------------------- */

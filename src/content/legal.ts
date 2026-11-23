@@ -10,6 +10,11 @@ export const legalEntity = {
   cuit: "20-44535030-4",
   taxStatus: "Monotributista",
   locality: "25 de Mayo, provincia de Buenos Aires, Argentina",
+  /**
+   * ARCA's Data Fiscal page (F. 960/D), decoded from the QR of the form Juani
+   * generated on 23 November 2026; it opens the public record of this CUIT.
+   */
+  dataFiscalUrl: "http://qr.afip.gob.ar/?qr=4wtmhXFACizt8znuUknxHw,,",
   /** Data requests and legal notices; switches to hola@mayofy.dev once that mailbox works. */
   email: publicChannels.email,
 } as const;
