@@ -63,7 +63,6 @@ No se tocaron los workers de otros proyectos (ShineApp, SistemaDeSalud, ai-job-s
 | `landing-casos`, `landing-guia-juani` | activas por pedido |
 | `landing-orden-repo` (esta), `landing-comercial`, `landing-email`, `landing-analytics`, `landing-legales`, `landing-isla4-1024`, `landing-integracion-mayo`, `landing-scroll-premium` | agente vivo de esta ronda |
 | `landing-navegacion`, `landing-rendimiento-celular` | ya mergeadas, pero su agente figura vivo; Orca libera la terminal solo y después se pueden borrar |
-| `landing-microinteracciones`, `landing-isla3-rocas`, `landing-design-review-2` | mergeadas y con el proceso salido, pero su worker nunca reportó el final (sigue "en curso"). Por la regla de esta ronda se dejan; si Juani confirma que terminaron, se borran igual que las de arriba |
 | `mayo-islas-ilustradas`, `mayo-islas-ilustradas-b`, `mayo-paint-b`, `mayo-world-assets` | **no mergeadas** (ver abajo) |
 
 El repo `MAYOFY/mayo-3d` es otro repositorio y no se tocó; solo se cerró la terminal de su worker terminado.
@@ -102,10 +101,14 @@ Recomendación: si Juani no piensa volver a pintar con esas ramas, archivarlas c
   6. `git branch -d juanikitro/landing-<tema>` (con `-d`, nunca `-D`).
 - Las ramas remotas no se borran sin pedido explícito de Juani.
 
+## Segunda pasada (mismo día)
+
+El coordinador confirmó que `landing-microinteracciones`, `landing-isla3-rocas` y `landing-design-review-2` habían terminado (trabajo mergeado, workers detenidos). Se comprobó de nuevo que tenían 0 commits sin mergear y que no había archivos sin versionar fuera de `.atl/` y `.taste-skill/` (copiada al respaldo). Después se liberaron sus terminales, se borraron las worktrees con Orca y las ramas con `git branch -d` (`e105ee4`, `25f600c`, `78c95d6`). Quedan 19 worktrees registradas.
+
 ## Pendientes
 
-- `landing-seo-rendimiento`: Orca borró todo su contenido, pero Windows no deja borrar la carpeta vacía ("está siendo utilizado en otro proceso"); algún programa tiene esa carpeta abierta como directorio actual. No se encontró cuál (no hay `handle.exe` instalado) y no se cerraron procesos ajenos. Para terminar: cerrar el programa o reiniciar Orca y correr `orca worktree rm --worktree "id:4eec20e9-86b5-4684-9ece-7092b01c57c0::C:/Users/Juanito/orca/workspaces/mayofy-landing/landing-seo-rendimiento" --force --json` y después `git branch -d juanikitro/landing-seo-rendimiento` (está mergeada).
-- Las 4 ramas de assets sin mergear y las 3 worktrees "en curso" sin reporte esperan decisión de Juani.
+- `landing-seo-rendimiento`: Orca borró todo su contenido, pero Windows no deja borrar la carpeta vacía ("está siendo utilizado en otro proceso"). No es un servidor de desarrollo: ningún `node` de esa worktree escucha en los puertos 3010 a 3019. Leyendo el directorio actual de cada proceso, la carpeta la tiene tomada el servidor de memoria Engram (`engram serve`, puerto 7437), que arrancó el hook de inicio de sesión del agente de SEO a las 12:10 y quedó con esa carpeta como directorio de trabajo. Ese servidor es compartido por todos los agentes, así que no se cerró. Se libera solo cuando Engram se reinicia (por ejemplo al reiniciar la PC o cerrar todas las sesiones). Para terminar, después correr `orca worktree rm --worktree "id:4eec20e9-86b5-4684-9ece-7092b01c57c0::C:/Users/Juanito/orca/workspaces/mayofy-landing/landing-seo-rendimiento" --force --json` y después `git branch -d juanikitro/landing-seo-rendimiento` (está mergeada).
+- Las 4 ramas de assets sin mergear esperan decisión de Juani.
 
 ## Verificación
 
