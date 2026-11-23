@@ -9,6 +9,7 @@ import {
   contactOptions,
   formatContactMessage,
 } from "@/content/contact-options";
+import { track } from "@/lib/analytics";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
 type SubmissionState = "idle" | "submitting" | "success" | "error";
@@ -96,6 +97,8 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
     const details = readDetails(form);
 
     if (submitter?.getAttribute("value") === "whatsapp") {
+      track("contact_form_submit", { channel: "whatsapp" });
+      track("whatsapp_click", { placement: "contact_form" });
       // window.open returns null with "noopener", so an anchor click is the
       // reliable way to open WhatsApp in a new tab and keep mayofy.dev open.
       const anchor = document.createElement("a");
@@ -105,11 +108,13 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
       document.body.appendChild(anchor);
       anchor.click();
       anchor.remove();
+      track("contact_form_success", { channel: "whatsapp" });
       setSubmissionState("success");
       setFeedback("Abrimos WhatsApp con tu consulta lista para enviar.");
       return;
     }
 
+    track("contact_form_submit", { channel: "callback" });
     setSubmissionState("submitting");
     setFeedback("Enviando tu consulta…");
     // The mail service can take up to a minute: say so instead of a silent spinner.
@@ -139,11 +144,15 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
         throw new Error(result.message || "No pudimos enviar la consulta. Probá por WhatsApp.");
       }
 
+      track("contact_form_success", { channel: "callback" });
       setSubmissionState("success");
       setFeedback("Consulta enviada. Te respondemos en menos de 24 horas hábiles.");
       formRef.current?.reset();
       startedAt.current = Date.now();
     } catch (error) {
+      track("contact_form_error", {
+        reason: error instanceof Error && error.name === "TimeoutError" ? "timeout" : error instanceof Error && error.name !== "TypeError" ? "rejected" : "network",
+      });
       setSubmissionState("error");
       setFeedback(
         error instanceof Error && error.name === "TimeoutError"
