@@ -2,6 +2,7 @@
 import { Fragment, type CSSProperties } from "react";
 
 import { IslandPlate, plateSceneStyle } from "@/components/world/island-plate";
+import { NearGate } from "@/components/world/near-gate";
 import { PacksMayoClock } from "@/components/world/packs-mayo-clock";
 import { PlatformMarkers } from "@/components/world/platform-markers";
 import { IslandTitle } from "@/components/world/island-title";
@@ -181,8 +182,8 @@ function Rock({ piece, index }: { piece: PlatformPiece; index: number }) {
     <div className={`rock rock--${piece.kind} rock--${float.layer} rock--platform-${index + 1}`} style={style}>
       {/* The body carries the idle float; its ::after grades the rock into the plate once it lands. */}
       <div className="rock__body">
-        {/* Eager: its grading mask fetches the same file with the page anyway, and a late image would show the mask alone. */}
-        <img className="rock__img" src={piece.src} alt="" width={piece.width} height={piece.height} loading="eager" decoding="async" />
+        {/* Lazy, and hidden with its grading mask (same file) until the reader nears the island (NearGate, world.css). */}
+        <img className="rock__img" src={piece.src} alt="" width={piece.width} height={piece.height} loading="lazy" decoding="async" />
       </div>
     </div>
   );
@@ -458,6 +459,8 @@ export function RockIsland() {
       aria-labelledby="packs-title"
       style={stageVars()}
     >
+      {/* The rock pieces and grass strips load as the reader nears the island or once the page has loaded. */}
+      <NearGate />
       {/* Mayo's key poses, where the page may settle (the guided scroll's rest points; outside the sticky stage). */}
       {packsMayo.timing.rests.map((vh) => (
         <span className="rocks__rest" data-scroll-rest aria-hidden="true" style={{ top: `${vh}vh` }} key={vh} />

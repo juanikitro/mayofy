@@ -7980,3 +7980,19 @@ html[data-motion-tier="reduced"] :is(.progress, .progress[data-clear]) {
   font-size: 0.9rem;
   color: var(--ink-soft);
 }
+
+/* ======================================================================
+ * Loading (docs/plans/2026-11-23-rendimiento-celular.md)
+ *
+ * Art far below the fold stays out of the first load until the reader nears
+ * its island or the page has loaded (NearGate sets `data-near`). Hidden, a
+ * lazy <img> is not fetched and neither is a CSS mask or background. Only
+ * with scripting: without JavaScript everything loads with the page.
+ * ====================================================================== */
+@media (scripting: enabled) {
+  /* Island 3: the twelve rock pieces (their grading masks reuse the files)
+   * and the grass strips cut from the island plate. */
+  .rocks:not([data-near]) :is(.rock, .rock-grass) {
+    display: none;
+  }
+}
