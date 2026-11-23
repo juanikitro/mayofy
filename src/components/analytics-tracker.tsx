@@ -30,6 +30,7 @@ function placementOf(element: Element, pathname: string) {
   if (area) return area.id;
   if (pathname.startsWith("/proyectos/")) return "case_study";
   if (pathname === "/privacidad") return "privacy";
+  if (pathname === "/terminos") return "terms";
   return pathname === "/" ? "home" : "other";
 }
 
