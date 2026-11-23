@@ -84,8 +84,9 @@ export function ProblemIsland() {
       style={plateSceneStyle(islandPlates.problem)}
       aria-labelledby="problema-title"
     >
-      {/* The butterfly strip (a CSS background) loads as the reader nears the island or once the page has loaded. */}
-      <NearGate />
+      {/* Its art (the butterfly's CSS background strip included) loads as the reader comes within a
+          screen of the island or, after the page has loaded, once the fall's art is in. */}
+      <NearGate ahead={1} />
       <div className="problem__stage">
         <IslandScene variant="morning" plate={islandPlates.problem}>
           <MayoFigure slot="problem" className="isle__mayo isle__mayo--play" />
