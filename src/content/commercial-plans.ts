@@ -3,8 +3,23 @@ export const commercialIntro = {
   body: "Precios de referencia para que sepas por dónde arrancar. El alcance, el plazo y el precio final se definen después de una charla gratis.",
   /** Under every pack price, so the currency and the monthly fee do not surprise (user test, L2). */
   priceNote: "Se puede pagar en pesos. El mantenimiento mensual es opcional.",
-  payment:
-    "Pago: 50% al inicio y 50% en la entrega. Precios en USD; podés pagar en pesos al cambio del día.",
+  /**
+   * With the day's blue rate the peso amount itself answers "can I pay in
+   * pesos?", so only the monthly-fee half of the note stays
+   * (docs/plans/2026-11-23-comercial.md).
+   */
+  pesoRateLabel: "al dólar blue de hoy",
+  priceNoteWithPesos: "El mantenimiento mensual es opcional.",
+  /** How to pay, under the guarantees strip (Juani, 2026-11-23). */
+  payment: {
+    title: "Cómo se paga",
+    items: [
+      "Landing y Gestión: 50% al empezar y 50% en la entrega. Sistema a Medida: 30% al empezar y el resto por etapas, a medida que lo usás.",
+      "Por transferencia, Mercado Pago (también en cuotas con tarjeta, con su recargo), efectivo o USDT.",
+      "Los precios están en USD. Si pagás en pesos, se toma el dólar blue del día del pago.",
+      "¿Estás fuera de Argentina? Pagás en dólares, por transferencia o USDT. También por Wise, si lo coordinamos antes.",
+    ],
+  },
 } as const;
 
 export const commercialPlans = [
