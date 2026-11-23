@@ -45,12 +45,11 @@ export function getMayoSlot(id: MayoSlotId) {
   return slot;
 }
 
-/** Public paths of the captured images for a moment. */
+/** Public paths of the captured still for a moment. */
 export function mayoPoseSources(moment: string) {
   const base = `/mayo/poses/mayo-pose-${moment}`;
   return {
     still: { avif: `${base}.avif`, webp: `${base}.webp` },
-    loop: { avif: `${base}-loop.avif`, webp: `${base}-loop.webp` },
   };
 }
 

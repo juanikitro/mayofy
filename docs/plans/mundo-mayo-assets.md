@@ -8,6 +8,10 @@ Lote C: 20 frames entregados (10 por orientación) y4 nubes aisladas aprobadas p
 Confirmado por Juani: isla6=fogón al crepúsculo; isla7=luciérnagas de noche. La discrepancia histórica quedó resuelta.
 Sin cambios en src/, dependencias del proyecto, push, merge ni deploy.
 
+## Limpieza (22 de noviembre de 2026)
+
+Los archivos que el sitio ya no usa (placas sin `-v2`, capas de cielo y primer plano, objetos sueltos ya pintados en las placas, tiras de Mayo reemplazadas y los loops de las poses capturadas) se quitaron de `public/`; la lista y la evidencia están en [2026-11-22-limpieza.md](2026-11-22-limpieza.md). Las copias que usan los mockups de propuestas viven en `docs/plans/propuestas/img/mundo-mayo/`. `contact-shadows.json` y `optimization-report.json` se movieron a [mundo-mayo-assets/](mundo-mayo-assets/). Las tablas de abajo quedan como registro histórico de lo entregado.
+
 ## Archivos procesados
 Raíz: public/images/mundo-mayo/. Anclas sugeridas respecto del PNG recortado, izquierda/arriba; ajustar junto al terreno en montaje real. Las piezas apiladas usan las posiciones de ensamble siguientes, no un ancla de suelo individual.
 

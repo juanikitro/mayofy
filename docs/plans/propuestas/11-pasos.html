@@ -209,7 +209,7 @@
     const tops = [6, 22, 39, 56, 72, 88];
     steps.forEach(([title, text], i) => {
       const side = i % 2 ? "right" : "left";
-      trail.insertAdjacentHTML("beforeend", `<div class="b-mark ${side}" style="--y:${tops[i] - 6}%"><img src="../../../public/images/mundo-mayo/48-isla5-hito-0${i + 1}.webp" alt=""><div><span class="num">${n(i)}</span><h3>${title}</h3><p>${text}</p></div></div>`);
+      trail.insertAdjacentHTML("beforeend", `<div class="b-mark ${side}" style="--y:${tops[i] - 6}%"><img src="img/mundo-mayo/48-isla5-hito-0${i + 1}.webp" alt=""><div><span class="num">${n(i)}</span><h3>${title}</h3><p>${text}</p></div></div>`);
     });
     const line = document.getElementById("b-line");
     const length = 1000;
@@ -227,7 +227,7 @@
   const row = document.getElementById("c-row");
   if (row) {
     steps.forEach(([title, text], i) => {
-      row.insertAdjacentHTML("beforeend", `<li class="c-stone" style="--i:${i}"><img src="../../../public/images/mundo-mayo/48-isla5-paso-0${i + 1}.webp" alt=""><span class="num">${n(i)}</span><h3>${title}</h3><p>${text}</p></li>`);
+      row.insertAdjacentHTML("beforeend", `<li class="c-stone" style="--i:${i}"><img src="img/mundo-mayo/48-isla5-paso-0${i + 1}.webp" alt=""><span class="num">${n(i)}</span><h3>${title}</h3><p>${text}</p></li>`);
     });
     const section = document.getElementById("c");
     const cmayo = document.getElementById("c-mayo");
