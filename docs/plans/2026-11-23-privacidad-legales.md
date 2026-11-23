@@ -50,7 +50,15 @@ El DNS de mayofy.dev está en Vercel, pero Vercel no recibe datos de las visitas
      - Arrepentimiento de 10 días para consumidores (art. 34 de la Ley 24.240) y cancelación posterior en la que el anticipo cubre lo hecho; si cancela Mayofy, devuelve lo no trabajado (Juani, 2026-11-23: "si").
      - Mantenimiento sin permanencia. Revisión anual del precio y las condiciones con 30 días de aviso y baja sin costo (Juani, 2026-11-23: "si").
      - Jurisdicción en el Departamento Judicial de Mercedes, salvo para consumidores (Juani, 2026-11-23: "si").
-   - **Pendiente del agente comercial:** la flexibilidad de pago (tipo de cambio, medios y cuotas). Hoy el sitio muestra el 50/50 de `commercialIntro.payment`, y el párrafo se completa cuando el coordinador pase el resultado.
+   - **Condiciones de venta del agente comercial (aprobadas por Juani el 2026-11-23, `docs/plans/2026-11-23-comercial.md`):** se sumaron las 11 a `/terminos`.
+     - **Pagos:** la sección lee la lista `commercialIntro.payment.items`: 50/50 en Landing y Gestión, 30 % y etapas en Sistema a Medida; transferencia, Mercado Pago, efectivo o USDT; USD, Wise fuera de Argentina. Suma que el pago en pesos va al dólar blue venta del día de cada pago y que el monto en pesos de la web es una referencia.
+     - **Propuesta:** vale 15 días.
+     - **Plazos:** son estimados y corren desde que llega el material. Un proyecto con 30 días sin respuesta queda en pausa.
+     - **Vueltas de cambios:** Landing, 1 antes de publicar; Gestión, 2; Sistema a Medida, 1 por etapa.
+     - **Publicación:** se publica con el saldo pagado.
+     - **Propiedad:** incluye las cuentas. El portfolio solo con permiso.
+     - **Mantenimiento:** se paga por adelantado y se da de baja con 15 días de aviso. Reemplaza el "antes del mes siguiente"; la revisión anual con 30 días de aviso sigue.
+     - **Cancelación:** el anticipo no se devuelve y el cliente se queda con lo entregado. Se mantiene el arrepentimiento de 10 días para consumidores, porque lo exige el art. 34 de la Ley 24.240 y no se puede renunciar.
 
 ## Lo que Juani tiene que hacer fuera del código
 
