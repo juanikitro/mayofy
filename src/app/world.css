@@ -8183,3 +8183,42 @@ html[data-motion-tier="reduced"] :is(.island-nav__sheet, .island-nav[data-open] 
     animation-play-state: paused;
   }
 }
+
+/* Legal pages (/privacidad, /terminos) ---------------------------------- */
+/* Owned by the privacy/legal round: docs/plans/2026-11-23-privacidad-legales.md */
+
+.reading ol {
+  display: grid;
+  gap: 0.4rem;
+  padding-inline-start: 1.4em;
+}
+
+.reading ol li::marker {
+  font-weight: 600;
+  color: var(--moss);
+}
+
+.analytics-choice {
+  display: grid;
+  justify-items: start;
+  gap: 0.75rem;
+  margin-block-start: 0.4rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid color-mix(in oklch, var(--moss) 25%, transparent);
+  border-radius: 1rem;
+  background: color-mix(in oklch, var(--cream) 60%, transparent);
+}
+
+.analytics-choice__status {
+  font-weight: 600;
+}
+
+.analytics-choice .btn:disabled {
+  opacity: 0.6;
+}
+
+.analytics-choice .btn:focus-visible {
+  outline: 3px solid var(--moss);
+  outline-offset: 3px;
+}
+/* End legal pages ------------------------------------------------------- */

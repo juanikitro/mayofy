@@ -3,7 +3,8 @@
 import { useEffect } from "react";
 
 import { afterLoadIdle } from "@/lib/after-load";
-import { markAnalyticsReady } from "@/lib/analytics";
+import { markAnalyticsReady, setAnalyticsConsent } from "@/lib/analytics";
+import { analyticsAllowed, analyticsConsentEvent, applyGaDisableFlag } from "@/lib/analytics-consent";
 
 type WindowWithGtag = Window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void };
 
@@ -44,12 +45,20 @@ function debugMode() {
  * timeout, which never fires in a background tab or a headless browser, so
  * some visits (and every lab measurement) would never load GA at all
  * (`afterLoadIdle` caps the wait).
+ *
+ * Nothing loads, and no event is sent, while the visitor has turned measuring
+ * off on /privacidad or the browser sends Global Privacy Control
+ * (`analytics-consent.ts`); turning it back on loads GA then.
  */
 export function GoogleAnalytics({ gaId }: { gaId: string }) {
   useEffect(() => {
     const w = window as WindowWithGtag;
+    setAnalyticsConsent(analyticsAllowed);
+    applyGaDisableFlag();
+    let pageLoaded = false;
     const inject = () => {
-      if (w.gtag) return;
+      pageLoaded = true;
+      if (w.gtag || !analyticsAllowed()) return;
       w.dataLayer = w.dataLayer ?? [];
       w.gtag = function gtag() {
         // gtag.js reads the `arguments` object itself, not an array.
@@ -68,7 +77,15 @@ export function GoogleAnalytics({ gaId }: { gaId: string }) {
       document.head.appendChild(script);
     };
 
-    return afterLoadIdle(inject, idleTimeout);
+    const onConsentChange = () => {
+      if (pageLoaded) inject();
+    };
+    window.addEventListener(analyticsConsentEvent, onConsentChange);
+    const cancel = afterLoadIdle(inject, idleTimeout);
+    return () => {
+      cancel();
+      window.removeEventListener(analyticsConsentEvent, onConsentChange);
+    };
   }, [gaId]);
 
   return null;
