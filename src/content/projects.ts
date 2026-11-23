@@ -224,8 +224,6 @@ export const projects = [
   },
 ] as const satisfies readonly ProjectEntry[];
 
-export const placeholderProjects = projects.filter((project) => project.placeholder);
-
 /** Real case studies: the only ones published, listed in the sitemap and indexed. */
 export const publishedProjects = projects.filter((project) => !project.placeholder);
 
