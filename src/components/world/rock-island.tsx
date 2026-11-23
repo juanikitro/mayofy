@@ -6,6 +6,7 @@ import { NearGate } from "@/components/world/near-gate";
 import { PacksMayoClock } from "@/components/world/packs-mayo-clock";
 import { PlatformMarkers } from "@/components/world/platform-markers";
 import { IslandTitle } from "@/components/world/island-title";
+import { StripSources } from "@/components/world/mayo-figure";
 import { commercialPlans } from "@/content/commercial-plans";
 import { islandCopy } from "@/content/islands";
 import {
@@ -418,7 +419,7 @@ function PacksMayo() {
         return (
           <div className={`packs-mayo__strip packs-mayo__strip--${name}`} style={{ "--frames": strip.frames } as CSSProperties} key={name}>
             <picture>
-              <source type="image/avif" srcSet={strip.avif} />
+              <StripSources avif={strip.avif} />
               <img src={strip.webp} alt="" width={packsMayo.cell * strip.frames} height={packsMayo.cell} loading="lazy" decoding="async" />
             </picture>
           </div>

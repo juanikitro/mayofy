@@ -1,8 +1,20 @@
 import type { CSSProperties } from "react";
 
+import { PHONE_STRIP_MEDIA, phoneStrip } from "@/content/phone-strips";
 import { getMayoSlot, mayoAnchors, mayoPoseSources, mayoSprites, type MayoAnchor, type MayoContactLayer, type MayoSlotId, type MayoSprite, type MayoStops, type RoutePoint } from "@/content/stage";
 
 const pct = (value: string) => Number.parseFloat(value);
+
+/** A strip's AVIF sources: its phone copy on small screens, when it has one. */
+export function StripSources({ avif }: { avif: string }) {
+  const phone = phoneStrip(avif);
+  return (
+    <>
+      {phone ? <source media={PHONE_STRIP_MEDIA} type="image/avif" srcSet={phone} /> : null}
+      <source type="image/avif" srcSet={avif} />
+    </>
+  );
+}
 
 type Pose = { strip: "run" | "arrival" | "hop"; frame: number; x: number; y: number; scale: number; mirror: boolean };
 
@@ -310,7 +322,7 @@ export function MayoFigure({
           style={{ "--frames": sprite.frames, "--loop": sprite.loop === "cycle" ? "normal" : "alternate" } as CSSProperties}
         >
           <picture>
-            <source type="image/avif" srcSet={sprite.strip.avif} />
+            <StripSources avif={sprite.strip.avif} />
             <img
               src={sprite.strip.webp}
               alt={label}
@@ -325,7 +337,7 @@ export function MayoFigure({
       {sprite?.arrival ? (
         <div className="mayo__sprite mayo__sprite--arrival" style={{ "--frames": sprite.arrival.frames } as CSSProperties}>
           <picture>
-            <source type="image/avif" srcSet={sprite.arrival.strip.avif} />
+            <StripSources avif={sprite.arrival.strip.avif} />
             <img
               src={sprite.arrival.strip.webp}
               alt=""
@@ -340,7 +352,7 @@ export function MayoFigure({
       {sprite?.hop ? (
         <div className="mayo__sprite mayo__sprite--hop" style={{ "--frames": sprite.hop.frames } as CSSProperties}>
           <picture>
-            <source type="image/avif" srcSet={sprite.hop.strip.avif} />
+            <StripSources avif={sprite.hop.strip.avif} />
             <img src={sprite.hop.strip.webp} alt="" width={sprite.cell * sprite.hop.frames} height={sprite.cell} loading={loading} decoding="async" />
           </picture>
         </div>
