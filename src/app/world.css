@@ -140,11 +140,11 @@ details[data-preparing-open="true"] > .animated-details__content {
   line-height: 1.5;
 }
 
-/* On the home page the paw progress rail sits on the right edge (up to
- * ~3.8rem in): the gutter clears it so content keeps equal left and right
- * edges without running under the rail. */
+/* The home page keeps the 5rem desktop gutter its islands were composed
+ * with (it first cleared the paw rail, removed on 2026-11-22), so every
+ * island keeps equal left and right edges. */
 @media (min-width: 48.01rem) {
-  .world:has(.progress) {
+  .world:has(#inicio) {
     --gutter: 5rem;
   }
 }
@@ -242,54 +242,7 @@ details[data-preparing-open="true"] > .animated-details__content {
   transform: translateY(1px);
 }
 
-/* Floating pill navigation ------------------------------------------- */
-
-.island-nav-wrap {
-  position: fixed;
-  inset: 0.75rem 0 auto;
-  z-index: 50;
-  display: flex;
-  justify-content: center;
-  padding-inline: var(--gutter);
-  pointer-events: none;
-}
-
-.island-nav {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.35rem 0.35rem 0.35rem 1rem;
-  border-radius: var(--radius-pill);
-  background: color-mix(in oklch, var(--cream) 82%, transparent);
-  box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(12px);
-  pointer-events: auto;
-}
-
-.island-nav__brand {
-  font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: -0.02em;
-  color: var(--moss);
-  padding-inline-end: 0.5rem;
-}
-
-.island-nav__link {
-  padding: 0.5rem 0.75rem;
-  border-radius: var(--radius-pill);
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--ink-soft);
-}
-
-.island-nav__link:hover {
-  color: var(--moss);
-  background: color-mix(in oklch, var(--moss) 10%, transparent);
-}
-
-.island-nav__cta {
-  margin-inline-start: 0.25rem;
-}
+/* Floating pill navigation: see "Pill navigation (round 11)" below. */
 
 /* Scenes --------------------------------------------------------------- */
 
@@ -1880,15 +1833,6 @@ html[data-motion-tier="reduced"] .scene__sky {
     --gutter: 1rem;
   }
 
-  .island-nav__link {
-    display: none;
-  }
-
-  .island-nav__cta {
-    font-size: 0.85rem;
-    padding-inline: 1rem;
-  }
-
   /* The bottom padding is the island's share of the mobile plate (art from
    * 67.5 %), so the island and Mayo end inside the first screen at 390 x 844
    * instead of below it. */
@@ -2959,53 +2903,11 @@ html[data-motion-tier="reduced"] .mayo--stops {
   font-family: var(--font-world-sans);
 }
 
-/* Navigation extras */
-
-.progress {
-  position: fixed;
-  inset: 50% 1rem auto auto;
-  z-index: 40;
-  transform: translateY(-50%);
-}
-
-.progress ol {
-  display: grid;
-  gap: 0.35rem;
-  list-style: none;
-  padding: 0.4rem;
-  border-radius: var(--radius-pill);
-  background: color-mix(in oklch, var(--cream) 80%, transparent);
-  backdrop-filter: blur(10px);
-  box-shadow: var(--shadow-soft);
-}
-
-.progress__paw {
-  display: grid;
-  place-items: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  color: color-mix(in oklch, var(--ink-soft) 55%, transparent);
-  transition:
-    color 200ms var(--ease-out),
-    background-color 200ms var(--ease-out);
-}
-
-.progress__paw svg {
-  width: 1rem;
-  height: 1rem;
-  fill: currentColor;
-}
-
-.progress__paw:hover,
-.progress__paw[aria-current="location"] {
-  color: var(--cream);
-  background: var(--moss);
-}
+/* WhatsApp float (phones) */
 
 .wa-float {
   position: fixed;
-  inset: auto 1rem 4.5rem auto;
+  inset: auto 1rem calc(1rem + env(safe-area-inset-bottom, 0px)) auto;
   z-index: 40;
   display: none;
   place-items: center;
@@ -3059,20 +2961,6 @@ html[data-motion-tier="reduced"] .mayo--stops {
 
   .fall__puff--4 {
     width: 70vw;
-  }
-
-  .progress {
-    inset: auto 0 0;
-    transform: none;
-    display: flex;
-    justify-content: center;
-    padding-block-end: 0.5rem;
-    pointer-events: none;
-  }
-
-  .progress ol {
-    grid-auto-flow: column;
-    pointer-events: auto;
   }
 
   .wa-float {
@@ -3596,7 +3484,7 @@ html[data-motion-tier="reduced"] .mayo--stops {
 /* Desktop: the sky layer keeps covering the section while the island cutout
  * (at the plate's own scale, about 48 % of the screen wide) and Mayo move
  * 22vw right, so the island fills the right half beside the copy column:
- * 700 to 1380 px at 1440, clear of the paw rail. Mayo is placed in % of the
+ * 700 to 1380 px at 1440. Mayo is placed in % of the
  * plate plus the same shift, so she stays on her meadow. */
 @media (min-width: 48.01rem) {
   .dawn {
@@ -4296,235 +4184,6 @@ html[data-motion-tier="reduced"] .world {
   transition-duration: 0s;
 }
 
-/* Pill navigation ------------------------------------------------------ */
-
-/* Scroll state: over the hero the pill sits flat on the sky; once the page
- * has moved 160px its shadow fades in, so it reads as floating above the
- * islands. The shadow lives on a pseudo-element and only its opacity is
- * scrubbed (compositor only). Without scroll timelines it is always on. */
-.island-nav {
-  position: relative;
-  box-shadow: none;
-}
-
-.island-nav::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  box-shadow: var(--shadow-soft);
-  pointer-events: none;
-}
-
-@supports (animation-timeline: scroll()) {
-  @media (prefers-reduced-motion: no-preference) {
-    html:not([data-motion-tier="reduced"]) .island-nav::before {
-      animation: nav-lift linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 160px;
-    }
-  }
-}
-
-@keyframes nav-lift {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-/* The link of the island in view keeps a still 2px moss bar under its word
- * (no gliding indicator); hover is a faint tint. */
-.island-nav__link,
-.island-nav__brand {
-  transition:
-    color var(--m-fast) var(--ease-ui),
-    background-color var(--m-fast) var(--ease-ui),
-    box-shadow var(--m-fast) var(--ease-ui),
-    transform var(--m-press) var(--ease-ui);
-}
-
-.island-nav__link:hover,
-.island-nav__link:focus-visible {
-  transition-duration: var(--m-base);
-}
-
-.island-nav__link {
-  position: relative;
-}
-
-.island-nav__link::after {
-  content: "";
-  position: absolute;
-  inset: auto 0.75rem 0.3rem;
-  height: 2px;
-  border-radius: 1px;
-  background: var(--moss);
-  opacity: 0;
-  transition: opacity var(--m-fast) var(--ease-ui);
-}
-
-.island-nav__link[aria-current="location"] {
-  color: var(--moss);
-}
-
-.island-nav__link[aria-current="location"]::after {
-  opacity: 1;
-  transition-duration: var(--m-panel);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion-tier="reduced"]) :is(.island-nav__link, .island-nav__brand):active {
-    transform: scale(var(--m-press-scale));
-  }
-}
-
-/* Paw rail ------------------------------------------------------------- */
-
-/* Hover grows a soft bubble behind the paw; the island in view is stamped
- * solid and its paw settles from 0.8 to full size. A label names the island
- * after a short pause on hover, or at once on keyboard focus. */
-.progress__paw {
-  position: relative;
-  isolation: isolate;
-  transition:
-    color var(--m-fast) var(--ease-ui),
-    background-color var(--m-panel) var(--ease-ui);
-}
-
-.progress__paw::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  background: color-mix(in oklch, var(--moss) 14%, transparent);
-  opacity: 0;
-  transform: scale(0.7);
-  transition:
-    opacity var(--m-fast) var(--ease-ui),
-    transform var(--m-panel) var(--ease-ui);
-}
-
-.progress__paw:hover {
-  color: var(--moss);
-  background: transparent;
-}
-
-.progress__paw:is(:hover, :focus-visible)::before {
-  opacity: 1;
-  transform: none;
-  transition-duration: var(--m-base), var(--m-panel);
-}
-
-.progress__paw[aria-current="location"],
-.progress__paw[aria-current="location"]:hover {
-  color: var(--cream);
-  background: var(--moss);
-}
-
-.progress__paw svg {
-  transition: transform var(--m-press) var(--ease-ui);
-}
-
-/* The label is centred and moved by one `transform` in every state (the
- * CSS minifier folds a separate `translate` into `transform`). */
-.progress__paw::after {
-  content: attr(data-label);
-  position: absolute;
-  inset: 50% calc(100% + 0.6rem) auto auto;
-  padding: 0.3rem 0.65rem;
-  border-radius: var(--radius-pill);
-  background: var(--ink);
-  color: var(--cream);
-  font-size: 0.78rem;
-  font-weight: 600;
-  line-height: 1.2;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  transform: translate(4px, -50%);
-  transition:
-    opacity var(--m-fast) var(--ease-ui),
-    transform var(--m-fast) var(--ease-ui);
-}
-
-.progress__paw:focus-visible::after {
-  opacity: 1;
-  transform: translate(0, -50%);
-  transition-duration: var(--m-base);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .progress__paw:hover::after {
-    opacity: 1;
-    transform: translate(0, -50%);
-    transition-duration: var(--m-base);
-    transition-delay: 350ms;
-  }
-}
-
-@media (max-width: 48rem) {
-  .progress__paw::after {
-    inset: auto auto calc(100% + 0.6rem) 50%;
-    transform: translate(-50%, 4px);
-  }
-
-  .progress__paw:is(:hover, :focus-visible)::after {
-    transform: translate(-50%, 0);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion-tier="reduced"]) .progress__paw[aria-current="location"] svg {
-    animation: paw-stamp 320ms var(--ease-enter);
-  }
-
-  html:not([data-motion-tier="reduced"]) .progress__paw:active svg {
-    transform: scale(0.85);
-  }
-}
-
-@keyframes paw-stamp {
-  from {
-    transform: scale(0.6);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .progress__paw::before {
-    transform: none;
-  }
-
-  .progress__paw::after {
-    transform: translate(0, -50%);
-  }
-}
-
-html[data-motion-tier="reduced"] .progress__paw::before {
-  transform: none;
-}
-
-html[data-motion-tier="reduced"] .progress__paw::after {
-  transform: translate(0, -50%);
-}
-
-@media (max-width: 48rem) {
-  @media (prefers-reduced-motion: reduce) {
-    .progress__paw::after {
-      transform: translate(-50%, 0);
-    }
-  }
-
-  html[data-motion-tier="reduced"] .progress__paw::after {
-    transform: translate(-50%, 0);
-  }
-}
-
 /* WhatsApp float (phones) ---------------------------------------------- */
 
 /* It arrives once the hero is behind: up 8px and from 0.92 to full size.
@@ -4843,11 +4502,7 @@ html[data-motion-tier="reduced"] .wa-float {
 
 /* Focus rings follow the shape of round and pill controls instead of the
  * generic 0.25rem corner. */
-.world .progress__paw:focus-visible {
-  border-radius: 50%;
-}
-
-.world :is(.btn, .island-nav__link, .wa-float):focus-visible {
+.world :is(.btn, .wa-float):focus-visible {
   border-radius: var(--radius-pill);
 }
 
@@ -4858,52 +4513,6 @@ html[data-motion-tier="reduced"] .wa-float {
  * ==================================================================== */
 
 /* Page-load sequence --------------------------------------------------- */
-
-/* After the hero copy starts, the pill drops in 8px and the paw rail slides
- * in from its edge, so the page assembles in reading order: words first,
- * then the tools to move around. */
-@media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion-tier="reduced"]) .island-nav {
-    animation: nav-enter var(--m-reveal) var(--ease-enter) 120ms both;
-  }
-
-  html:not([data-motion-tier="reduced"]) .progress ol {
-    animation: rail-enter var(--m-reveal) var(--ease-enter) 420ms both;
-  }
-
-  @media (max-width: 48rem) {
-    html:not([data-motion-tier="reduced"]) .progress ol {
-      animation-name: rail-enter-up;
-    }
-  }
-}
-
-@keyframes nav-enter {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes rail-enter {
-  from {
-    opacity: 0;
-    transform: translateX(8px);
-  }
-}
-
-@keyframes rail-enter-up {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-}
-
-/* Paw rail: the islands already behind keep a deeper paw, so the rail reads
- * as progress through the journey, not only as a position. */
-.progress__paw[data-visited] {
-  color: color-mix(in oklch, var(--moss) 72%, transparent);
-}
 
 /* Staggered groups ----------------------------------------------------- */
 
@@ -5886,7 +5495,7 @@ html[data-motion-tier="reduced"] .works-index__go {
 }
 
 /* The phone overlaps the browser's corner and stays inside the content
- * edge (the paw rail lives just outside it). */
+ * edge. */
 .works-index__browser {
   width: 92%;
   overflow: hidden;
@@ -6552,7 +6161,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
     white-space: nowrap;
   }
 
-  /* Right of Mayo (her tail ends near 47 %) and left of the paw rail. The
+  /* Right of Mayo (her tail ends near 47 %), inside the right edge. The
    * frame is the size container, so the card's cqi sizes read its width. */
   .proposal-frame--scene {
     position: absolute;
@@ -7847,71 +7456,9 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
-/* Paw rail: every paw is a 44px target (L3). The paw keeps its 32px disc,
- * painted inside 6px of padding, so the rail grows as little as possible;
- * the hover bubble shrinks to the same disc. */
-.progress ol {
-  gap: 0;
-  padding: 0.25rem;
-}
-
-.progress__paw {
-  width: 2.75rem;
-  height: 2.75rem;
-  padding: 0.375rem;
-}
-
-/* After the `background` shorthands of the states, which reset the clip. */
-.progress__paw,
-.progress__paw[aria-current="location"],
-.progress__paw[aria-current="location"]:hover {
-  background-clip: content-box;
-}
-
-.progress__paw::before {
-  inset: 0.375rem;
-}
-
-/* The pill's brand link is a 44px target too (it was 26px tall). */
-.island-nav__brand {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.75rem;
-}
-
 @media (max-width: 48rem) {
-  .progress ol {
-    padding: 0 0.25rem;
-  }
-
-  /* A newly reached island names itself over its paw for a moment
-   * (IslandProgress, M5: on a phone the paws had no words; on a laptop the
-   * name shows on hover). */
-  .progress__paw[data-announce]::after {
-    opacity: 1;
-    transform: translate(-50%, 0);
-    transition-duration: var(--m-base);
-  }
-
-  /* Over the agenda and the form, and while a field has focus (the
-   * keyboard is up), the rail and the WhatsApp float step aside so they
-   * never cover a field or a time slot (M5). Hidden, they take no taps or
-   * focus. */
-  .progress {
-    transition:
-      opacity var(--m-panel) var(--ease-ui),
-      visibility 0s linear 0s;
-  }
-
-  .progress[data-clear],
-  html:has(:is(input, select, textarea):focus) .progress {
-    opacity: 0;
-    visibility: hidden;
-    transition:
-      opacity var(--m-panel) var(--ease-ui),
-      visibility 0s linear var(--m-panel);
-  }
-
+  /* While a field has focus (the keyboard is up) the WhatsApp float steps
+   * aside so it never covers a field (M5). */
   html:has(:is(input, select, textarea):focus) .wa-float {
     opacity: 0;
     visibility: hidden;
@@ -7923,17 +7470,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
   .contact-form :is(input, select, textarea) {
     scroll-margin-block: 5.5rem 1.5rem;
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .progress,
-  .progress[data-clear] {
-    transition-duration: 0s;
-  }
-}
-
-html[data-motion-tier="reduced"] :is(.progress, .progress[data-clear]) {
-  transition-duration: 0s;
 }
 
 /* The six steps' bar: each segment is a 44px square target (it was 30px
@@ -7979,4 +7515,586 @@ html[data-motion-tier="reduced"] :is(.progress, .progress[data-clear]) {
   margin-block-start: 0.4rem;
   font-size: 0.9rem;
   color: var(--ink-soft);
+}
+
+/* ======================================================================
+ * Pill navigation (round 11, 2026-11-22)
+ * The paw rail is gone; the pill carries where the reader is in the story
+ * and a jump to every island (IslandNav, docs/plans/2026-11-22-navegacion.md).
+ * - Wide screens (56rem and up): Mayofy, the six islands and "Agendá". A
+ *   moss chip glides behind the island in view (transform and width of
+ *   one absolutely placed chip: nothing else reflows) and a hairline along
+ *   the pill's lower rim fills with the page (`--story`, set per frame).
+ * - Narrower screens: Mayofy, a button with the current island's number
+ *   and name, and "Agendá"; the button opens the list of islands under the
+ *   pill.
+ * Every target is 44px tall. Under reduced motion the motion tokens are 0
+ * and the transforms drop: states change at once.
+ * ==================================================================== */
+
+.island-nav-wrap {
+  position: fixed;
+  inset: 0.75rem 0 auto;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding-inline: var(--gutter);
+  pointer-events: none;
+}
+
+.island-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  max-width: 100%;
+  padding: 0.3rem;
+  padding-inline-start: 1.1rem;
+  border-radius: var(--radius-pill);
+  isolation: isolate;
+  pointer-events: auto;
+}
+
+/* The glass is its own layer, not the nav's background: a backdrop filter
+ * on the nav would make it the backdrop root of the section list, whose
+ * own blur would then see nothing behind it. */
+.island-nav__glass {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  /* Relative colour keeps the cream's hue; mixing with `transparent` in
+   * oklch drops it (hue none) and the glass turned lavender. */
+  background: color-mix(in oklch, var(--cream) 84%, transparent);
+  background: oklch(from var(--cream) l c h / 84%);
+  box-shadow:
+    inset 0 1px 0 oklch(100% 0 0 / 55%),
+    0 0 0 1px oklch(30% 0.04 60 / 6%);
+  backdrop-filter: blur(14px) saturate(1.15);
+  pointer-events: none;
+}
+
+/* Over the hero the pill sits flat on the sky; once the page has moved
+ * 160px its shadow fades in, so it reads as floating above the islands
+ * (only the pseudo-element's opacity is scrubbed). */
+.island-nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: var(--shadow-soft);
+  pointer-events: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-motion-tier="reduced"]) .island-nav::before {
+      animation: nav-lift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 160px;
+    }
+  }
+}
+
+@keyframes nav-lift {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* After the hero copy starts, the pill drops in 8px. */
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .island-nav {
+    animation: nav-enter var(--m-reveal) var(--ease-enter) 120ms both;
+  }
+}
+
+@keyframes nav-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.island-nav__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.island-nav__brand {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  min-height: 2.75rem;
+  padding-inline-end: 0.7rem;
+  margin-inline-end: 0.15rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+  color: var(--moss);
+  border-radius: var(--radius-pill);
+  transition: transform var(--m-press) var(--ease-ui);
+}
+
+/* Island links and the gliding chip ------------------------------------ */
+
+.island-nav__track {
+  position: relative;
+  display: flex;
+}
+
+.island-nav__links {
+  display: flex;
+  list-style: none;
+}
+
+.island-nav__link {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding-inline: 0.8rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.93rem;
+  white-space: nowrap;
+  color: var(--ink-soft);
+  transition:
+    color var(--m-fast) var(--ease-ui),
+    background-color var(--m-fast) var(--ease-ui),
+    transform var(--m-press) var(--ease-ui);
+}
+
+.island-nav__link:hover {
+  color: var(--moss);
+  background: color-mix(in oklch, var(--moss) 7%, transparent);
+  transition-duration: var(--m-base);
+}
+
+.island-nav__link[aria-current="location"] {
+  color: var(--leaf-deep);
+  background: transparent;
+}
+
+.island-nav__glow {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--glow-w, 0);
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklch, var(--moss) 13%, var(--cream));
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklch, var(--moss) 16%, transparent),
+    0 1px 2px oklch(30% 0.05 150 / 10%);
+  opacity: 0;
+  transform: translateX(var(--glow-x, 0));
+  transition:
+    opacity var(--m-base) var(--ease-ui),
+    transform var(--m-reveal) var(--ease-travel),
+    width var(--m-reveal) var(--ease-travel);
+  pointer-events: none;
+}
+
+.island-nav__glow[data-on] {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) :is(.island-nav__link, .island-nav__brand):active {
+    transform: scale(var(--m-press-scale));
+  }
+}
+
+.island-nav__cta {
+  flex: none;
+  margin-inline-start: 0.25rem;
+}
+
+/* Story line: a hairline on the pill's lower rim, filled to how far down
+ * the page the reader is. The rim's curve clips it at both ends. */
+.island-nav__story {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.island-nav:not([data-story]) .island-nav__story {
+  display: none;
+}
+
+.island-nav__story::before,
+.island-nav__story::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+}
+
+.island-nav__story::before {
+  background: oklch(30% 0.04 60 / 7%);
+}
+
+.island-nav__story::after {
+  background: linear-gradient(90deg, var(--leaf), var(--moss));
+  transform: scaleX(var(--story, 0));
+  transform-origin: left center;
+}
+
+/* The current-island button and its list (narrow screens) -------------- */
+
+.island-nav__where,
+.island-nav__sheet {
+  display: none;
+}
+
+.island-nav__where {
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0 0.6rem 0 0.95rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklch, var(--moss) 9%, transparent);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition:
+    background-color var(--m-fast) var(--ease-ui),
+    transform var(--m-press) var(--ease-ui);
+}
+
+.island-nav__where:hover,
+.island-nav[data-open] .island-nav__where {
+  background: color-mix(in oklch, var(--moss) 15%, transparent);
+  transition-duration: var(--m-base);
+}
+
+.island-nav__item-step {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-family: var(--font-world-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* The island's name: a clipping box as wide as the measured name. On a
+ * change the box eases to the new width (the pill re-centres with it) and
+ * the names swap inside it, the old one sliding out as the new one slides
+ * in, up when the reader moved on and down when they went back. Only this
+ * small box changes width, inside the fixed header. */
+.island-nav__where-label {
+  position: relative;
+  display: block;
+  flex: 0 1 auto;
+  width: var(--label-w, auto);
+  min-width: 0;
+  height: 1.35em;
+  overflow: hidden;
+  line-height: 1.35;
+}
+
+.island-nav__where-label[data-ready] {
+  transition: width var(--m-reveal) var(--ease-travel);
+}
+
+.island-nav__where-measure {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: max-content;
+  white-space: nowrap;
+  visibility: hidden;
+}
+
+.island-nav__where-text {
+  display: block;
+  white-space: nowrap;
+}
+
+.island-nav__where-text[data-leaving] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .island-nav__where-text[data-leaving] {
+    position: absolute;
+    inset: 0 auto auto 0;
+    display: block;
+    animation: nav-label-out var(--m-reveal) var(--ease-travel) both;
+  }
+
+  html:not([data-motion-tier="reduced"]) .island-nav__where-label:has([data-leaving]) .island-nav__where-text:not([data-leaving]) {
+    animation: nav-label-in var(--m-reveal) var(--ease-travel) both;
+  }
+
+  /* Going back: the same two moves played backwards (the curve is
+   * symmetric), so the new name drops in from above and the old one sinks. */
+  html:not([data-motion-tier="reduced"]) .island-nav__where-label[data-dir="down"] .island-nav__where-text[data-leaving] {
+    animation-name: nav-label-in;
+    animation-direction: reverse;
+  }
+
+  html:not([data-motion-tier="reduced"]) .island-nav__where-label[data-dir="down"]:has([data-leaving]) .island-nav__where-text:not([data-leaving]) {
+    animation-name: nav-label-out;
+    animation-direction: reverse;
+  }
+}
+
+@keyframes nav-label-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.9em);
+  }
+}
+
+@keyframes nav-label-out {
+  to {
+    opacity: 0;
+    transform: translateY(-0.9em);
+  }
+}
+
+.island-nav__chevron {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform var(--m-panel) var(--ease-ui);
+}
+
+.island-nav[data-open] .island-nav__chevron {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .island-nav__where:active {
+    transform: scale(var(--m-press-scale));
+  }
+}
+
+/* The list drops from under the pill, as wide as the pill. Closed, it is
+ * hidden and inert: no taps, no focus. */
+.island-nav__sheet {
+  position: absolute;
+  inset: calc(100% + 0.5rem) 0 auto;
+  min-width: 17rem;
+  max-height: calc(100svh - 6rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.4rem;
+  border-radius: var(--radius);
+  background: var(--cream);
+  box-shadow:
+    inset 0 1px 0 oklch(100% 0 0 / 60%),
+    0 0 0 1px oklch(30% 0.04 60 / 7%),
+    var(--shadow-soft);
+  transform-origin: top center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(0.98);
+  transition:
+    opacity var(--m-fast) var(--ease-ui),
+    transform var(--m-fast) var(--ease-ui),
+    visibility 0s linear var(--m-fast);
+}
+
+.island-nav[data-open] .island-nav__sheet {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity var(--m-panel) var(--ease-enter),
+    transform var(--m-panel) var(--ease-enter),
+    visibility 0s linear 0s;
+}
+
+.island-nav__sheet-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.55rem 0.75rem 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.island-nav__sheet-count {
+  color: var(--moss);
+}
+
+.island-nav__items {
+  display: grid;
+  gap: 0.125rem;
+  list-style: none;
+}
+
+.island-nav__item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3rem;
+  padding: 0.3rem 0.75rem 0.3rem 0.4rem;
+  border-radius: calc(var(--radius) - 0.4rem);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--ink);
+  transition:
+    background-color var(--m-fast) var(--ease-ui),
+    color var(--m-fast) var(--ease-ui);
+}
+
+.island-nav__item:hover,
+.island-nav__item:focus-visible {
+  background: color-mix(in oklch, var(--moss) 8%, transparent);
+  transition-duration: var(--m-base);
+}
+
+.island-nav__item[aria-current="location"] {
+  color: var(--leaf-deep);
+  background: color-mix(in oklch, var(--moss) 12%, transparent);
+}
+
+.island-nav__item-step {
+  color: var(--ink-soft);
+  box-shadow: inset 0 0 0 1.5px oklch(30% 0.04 60 / 16%);
+}
+
+.island-nav__item-step[data-passed] {
+  color: var(--moss);
+  background: color-mix(in oklch, var(--moss) 13%, transparent);
+  box-shadow: none;
+}
+
+.island-nav__item[aria-current="location"] .island-nav__item-step {
+  color: var(--cream);
+  background: var(--moss);
+  box-shadow: none;
+}
+
+.island-nav__item-label {
+  flex: 1;
+}
+
+.island-nav__here {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--moss);
+}
+
+/* Opening, the islands settle 4px one after another (20ms apart). */
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .island-nav[data-open] .island-nav__items > li {
+    animation: nav-item-in var(--m-panel) var(--ease-enter) both;
+    animation-delay: calc(var(--i, 0) * 20ms);
+  }
+}
+
+@keyframes nav-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .island-nav__sheet,
+  .island-nav[data-open] .island-nav__sheet {
+    transform: none;
+  }
+
+  .island-nav__chevron {
+    transition: none;
+  }
+}
+
+html[data-motion-tier="reduced"] :is(.island-nav__sheet, .island-nav[data-open] .island-nav__sheet) {
+  transform: none;
+}
+
+/* Focus rings follow the pill shapes and stay inside the pill. */
+.world :is(.island-nav__brand, .island-nav__link, .island-nav__where):focus-visible {
+  outline-offset: -3px;
+  border-radius: var(--radius-pill);
+}
+
+.world .island-nav__item:focus-visible {
+  outline-offset: -2px;
+  border-radius: calc(var(--radius) - 0.4rem);
+}
+
+/* Narrow screens: the button and its list replace the island links. */
+@media (max-width: 55.99rem) {
+  .island-nav__track {
+    display: none;
+  }
+
+  .island-nav__where {
+    display: inline-flex;
+  }
+
+  .island-nav__sheet {
+    display: block;
+  }
+}
+
+@media (max-width: 48rem) {
+  .island-nav {
+    padding-inline-start: 0.9rem;
+  }
+
+  .island-nav__brand {
+    padding-inline-end: 0.35rem;
+    font-size: 1.02rem;
+  }
+
+  .island-nav__cta {
+    padding-inline: 1rem;
+    font-size: 0.88rem;
+  }
+}
+
+/* Small phones (360px): tighter spacing so the longest island name
+ * ("Qué hacemos") fits whole beside Mayofy and "Agendá". */
+@media (max-width: 24rem) {
+  .island-nav {
+    gap: 0.125rem;
+    padding-inline-start: 0.75rem;
+  }
+
+  .island-nav__brand {
+    padding-inline-end: 0.2rem;
+    font-size: 0.96rem;
+  }
+
+  .island-nav__where {
+    gap: 0.3rem;
+    padding-inline: 0.8rem 0.45rem;
+  }
+
+  .island-nav__cta {
+    padding-inline: 0.8rem;
+  }
 }

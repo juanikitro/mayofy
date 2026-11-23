@@ -36,7 +36,7 @@ export const commercialPlans = [
       {
         title: "No incluye",
         items: [
-          "Formularios especiales, turnos o reservas.",
+          "Turnos, reservas o un sistema para gestionar tu negocio (eso es el pack Gestión).",
           "La creación completa de tu marca o logo.",
           "Secciones o páginas adicionales a las acordadas.",
         ],
@@ -49,41 +49,42 @@ export const commercialPlans = [
     whatsappMessage: "Hola, quiero consultar por el pack Landing de Mayofy.",
   },
   {
-    id: "web-gestion",
-    name: "Web + Gestión",
-    eyebrow: "Web y sistema en uno",
+    id: "gestion",
+    name: "Gestión",
+    eyebrow: "Para ordenar tu negocio",
     price: "USD 150",
-    timeline: "3 a 9 semanas",
+    timeline: "3 a 6 semanas",
     description:
-      "Tu web más un sistema simple para que tus clientes saquen turno o reserven solos y vos gestiones todo desde un panel propio.",
+      "Un sistema para ordenar tu negocio: los turnos, el stock, los pedidos o tu tienda online. Lo manejás desde un panel propio.",
     idealFor:
-      "Consultorios, gimnasios, estudios, academias y centros de estética que necesitan más que una vidriera.",
+      "Consultorios, peluquerías, centros de estética, gimnasios, academias y comercios que pierden horas coordinando por WhatsApp o anotando en un cuaderno.",
     detailGroups: [
       {
         title: "Incluye en el precio base",
         items: [
-          "Todo lo del pack Landing.",
-          "Turnos o reservas online para una agenda.",
-          "Un panel para ver y gestionar reservas y clientes.",
+          "Un sistema para ordenar tu negocio: turnos, stock, pedidos o tienda online.",
+          "Un panel para verlo y manejarlo todo desde el celular o la compu.",
+          "Un enlace para que tus clientes reserven, compren o pidan solos; lo mandás por WhatsApp o lo ponés en Instagram.",
+          "Avisos automáticos por correo para vos y tus clientes, como el recordatorio del turno.",
+          "Un botón para mandar avisos por WhatsApp con el mensaje ya escrito.",
           "Acceso para una persona administradora.",
-          "Aviso por correo de cada reserva nueva.",
-          "Carga inicial de tus servicios y horarios.",
+          "Carga inicial de tus datos: servicios, horarios, productos o tu lista de clientes.",
+          "Una charla para enseñarte a usarlo.",
         ],
       },
       {
         title: "Se cotiza aparte",
         items: [
-          "Varias sedes, profesionales o agendas.",
-          "Pagos online o cobro de señas.",
-          "Recordatorios automáticos por WhatsApp.",
-          "Un acceso distinto para cada empleado.",
+          "Varias sedes o un acceso distinto para cada empleado.",
+          "Cobro de señas o pagos online.",
+          "Avisos por WhatsApp 100% automáticos (Meta cobra cada mensaje aparte).",
         ],
       },
     ],
-    footnote: undefined,
-    note: "El precio base cubre una agenda y un panel simple. Si tu operación necesita más, lo definimos en la propuesta antes de empezar.",
-    cta: "Quiero web con turnos",
-    whatsappMessage: "Hola, quiero consultar por el pack Web + Gestión de Mayofy.",
+    footnote: "¿También querés una página para mostrar tu negocio? Sumá el pack Landing.",
+    note: "El precio final depende de lo que necesite tu negocio. Si es algo grande, sube y se acerca al de un Sistema a Medida. Queda escrito en la propuesta, antes de empezar.",
+    cta: "Quiero ordenar mi negocio",
+    whatsappMessage: "Hola, quiero consultar por el pack Gestión de Mayofy.",
   },
   {
     id: "sistema",
@@ -94,7 +95,7 @@ export const commercialPlans = [
     description:
       "Software pensado para tu operación cuando las planillas y las herramientas genéricas ya no alcanzan.",
     idealFor:
-      "Negocios con procesos propios: gestión interna, stock, clientes, cobranzas o equipos con distintos roles.",
+      "Negocios que necesitan integrar múltiples soluciones: turnos, stock, cobros y equipos con distintos roles, todo en un solo sistema.",
     detailGroups: [
       {
         title: "Incluye",
@@ -106,6 +107,7 @@ export const commercialPlans = [
           "Integración con lo que ya usás: facturación, planillas o pagos.",
           "Entregas por etapas para que lo uses antes de terminarlo todo.",
           "Documentación y capacitación para tu equipo.",
+          "Si ya tenés Gestión, el sistema crece desde ahí, sin empezar de cero.",
         ],
       },
     ],
@@ -134,7 +136,7 @@ export const comingSoon = {
       price: "USD 250",
       timeline: "4 a 6 semanas",
       includes:
-        "Todo lo anterior, los dos canales y conexión con Web + Gestión o un sistema: reservar turnos, consultar estados o datos.",
+        "Todo lo anterior, los dos canales y conexión con Gestión o un Sistema a Medida: reservar turnos, consultar estados o datos.",
     },
   ],
   monthly: "USD 30 por mes: alojamiento, control y ajustes menores.",
@@ -170,14 +172,14 @@ export const guarantees = {
 
 export const maintenancePlan = {
   prices: [
-    { label: "Landing", price: "USD 50 por mes", asterisk: false },
-    { label: "Web + Gestión y Sistema a Medida", price: "USD 25 por mes", asterisk: true },
+    { label: "Landing", price: "USD 25 por mes", asterisk: false },
+    { label: "Gestión y Sistema a Medida", price: "USD 50 por mes", asterisk: true },
   ],
   description:
     "Mantenemos tu web o tu sistema actualizado, funcionando y acompañando los cambios de tu negocio.",
   footnotes: [
     "Cada mes incluye hasta 5 cambios menores o 90 minutos de trabajo, lo que ocurra primero. Los cambios no usados no se acumulan para el mes siguiente.",
-    "Precio promocional para clientes de Web + Gestión y Sistema a Medida, con los mismos límites mensuales.",
+    "En Gestión y Sistema a Medida incluye copias de seguridad de tus datos, con los mismos límites mensuales.",
   ],
   cta: "Quiero mantenimiento mensual",
   whatsappMessage: "Hola, quiero consultar por el mantenimiento mensual de Mayofy.",
