@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Sans } from "next/font/google";
 import localFont from "next/font/local";
+import { AnalyticsTracker } from "@/components/analytics-tracker";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { HashLinkHistory } from "@/components/hash-link-history";
 import { shareMetadata } from "@/lib/share-metadata";
@@ -71,7 +72,12 @@ export default function RootLayout({
       <body>
         {children}
         <HashLinkHistory />
-        {googleAnalyticsId ? <GoogleAnalytics gaId={googleAnalyticsId} /> : null}
+        {googleAnalyticsId ? (
+          <>
+            <GoogleAnalytics gaId={googleAnalyticsId} />
+            <AnalyticsTracker />
+          </>
+        ) : null}
       </body>
     </html>
   );

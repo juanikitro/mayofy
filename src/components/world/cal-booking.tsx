@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { track } from "@/lib/analytics";
+
 type CalApi = ((...args: unknown[]) => void) & {
   loaded?: boolean;
   failed?: boolean;
@@ -101,6 +103,22 @@ function islandCalTheme(panel: HTMLElement): Record<string, string> {
   };
 }
 
+/*
+ * Funnel events from Cal.com's embed (docs/plans/2026-11-23-analytics.md).
+ * Cal.com fires no public event when a day or a time is picked; both change
+ * its internal route (`__routeChanged`, observed 23 November 2026), so the
+ * first one is reported as the visitor starting to book.
+ */
+let bookingStarted = false;
+const calMode = () => (window.matchMedia(inlineQuery).matches ? "inline" : "popup");
+const onBookerViewed = () => track("booking_view", { mode: calMode() });
+const onRouteChanged = () => {
+  if (bookingStarted) return;
+  bookingStarted = true;
+  track("booking_started", { mode: calMode() });
+};
+const onBookingSuccessful = () => track("booking_complete", { mode: calMode() });
+
 /** Layout, theme and header shared by the inline agenda and the phone popup. */
 const embedConfig = { layout: "month_view", theme: "dark" };
 
@@ -151,6 +169,9 @@ export function CalBooking({ url, calLink, heading, detail, open, opening, loadi
     window.addEventListener(loaderFailedEvent, markFailed);
     cal("on", { action: "linkReady", callback: markReady });
     cal("on", { action: "linkFailed", callback: markFailed });
+    cal("on", { action: "bookerViewed", callback: onBookerViewed });
+    cal("on", { action: "__routeChanged", callback: onRouteChanged });
+    cal("on", { action: "bookingSuccessfulV2", callback: onBookingSuccessful });
     cal("ui", {
       ...embedConfig,
       hideEventTypeDetails: true,
@@ -202,6 +223,9 @@ export function CalBooking({ url, calLink, heading, detail, open, opening, loadi
       const cal = calRef.current;
       cal?.("off", { action: "linkReady", callback: markReady });
       cal?.("off", { action: "linkFailed", callback: markFailed });
+      cal?.("off", { action: "bookerViewed", callback: onBookerViewed });
+      cal?.("off", { action: "__routeChanged", callback: onRouteChanged });
+      cal?.("off", { action: "bookingSuccessfulV2", callback: onBookingSuccessful });
       hostRef.current?.replaceChildren();
     },
     [markFailed, markReady],
@@ -209,6 +233,7 @@ export function CalBooking({ url, calLink, heading, detail, open, opening, loadi
 
   /** Narrow screens: Cal.com's popup, loaded on the first tap. */
   function openPopup() {
+    track("booking_open", { placement: "agenda" });
     bootCal()("modal", { calLink, config: embedConfig });
   }
 
