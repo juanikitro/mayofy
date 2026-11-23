@@ -58,10 +58,9 @@ El DNS de mayofy.dev está en Vercel, pero Vercel no recibe datos de las visitas
    - Lo exige ARCA a quien presta servicios y tiene web: va en la página principal.
    - Se genera con clave fiscal en el servicio "Formulario 960" cargando la URL `https://mayofy.dev`.
    - Después hay que pasar el código HTML que da ARCA para ponerlo en el pie.
-2. **Registro de la base en la AAIP (Registro Nacional de Bases de Datos).**
-   - La AAIP pide inscribir las bases privadas que no son de uso exclusivamente personal; la base de consultas y clientes no lo es.
-   - Es gratis y se hace por TAD con clave fiscal nivel 2.
-   - Ver la pregunta pendiente más abajo.
+2. **Registro de la base en la AAIP (Registro Nacional de Bases de Datos):** Juani decidió no registrarla por ahora (2026-11-23: "no").
+   - **Riesgo que asume:** la AAIP pide inscribir las bases privadas que no son de uso exclusivamente personal, y una base sin inscribir puede ser sancionada (art. 21 de la Ley 25.326).
+   - **Si cambia de idea:** es gratis, se hace por TAD con clave fiscal nivel 2, y el número de inscripción se agrega a la política.
 3. **Retención en GA4:** Administrar → Recopilación y modificación de datos → Retención de datos → 14 meses.
 4. **Limpieza periódica:** borrar de Gmail, de WhatsApp y de Cal.com las consultas de más de 3 meses que no terminaron en trabajo.
 
