@@ -65,8 +65,8 @@ export default function RootLayout({
       <body>
         {children}
         <HashLinkHistory />
+        {googleAnalyticsId ? <GoogleAnalytics gaId={googleAnalyticsId} /> : null}
       </body>
-      {googleAnalyticsId ? <GoogleAnalytics gaId={googleAnalyticsId} /> : null}
     </html>
   );
 }
