@@ -25,7 +25,7 @@ export const islandCopy = {
   // Shortened on 2026-11-20 with option B of docs/plans/2026-11-20-propuestas.md.
   systems: {
     title: ["Sistemas y automatizaciones ", { em: "a medida" }, "."],
-    body: "Lo que tu operación necesita, sin convertir la tecnología en protagonista.",
+    body: "Un sistema completo o una sola tarea que hoy hacés a mano. Lo armamos para cómo trabajás vos.",
   },
   works: {
     title: ["Trabajos que ya ", { em: "están andando" }, "."],

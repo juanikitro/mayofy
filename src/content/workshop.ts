@@ -2,38 +2,71 @@
  * Island 4 (Juani, 20 November 2026: option B of
  * docs/plans/2026-11-20-propuestas.md). The island stays in view while the
  * scroll goes through what the workshop builds, one painted object at a
- * time. Items come from site.ts (custom systems) and commercial-plans.ts
- * (loose automations); only the object names are new copy (approved mockup).
+ * time.
  */
-import { extensions } from "@/content/commercial-plans";
-import { siteContent } from "@/content/site";
-
 /** Painted objects of the island 4 plate, in % of the desktop and mobile cutouts. */
 export type WorkshopObject = "greenhouse" | "pot" | "toolbox" | "gear";
 
 export type WorkshopPart = {
   object: WorkshopObject;
-  /** Eyebrow naming the object, so the text points at the island. */
-  objectName: string;
   /** Short label pinned over the object on the island. */
   pin: string;
   title: string;
   items: readonly string[];
 };
 
-const [leads, contact, followUp] = extensions.categories;
-
+/**
+ * Island 4 copy rewritten on 23 November 2026 (Juani: the earlier wording
+ * "parecen muy de IA"; the object eyebrows such as "El invernadero" are gone).
+ * Plain words for a small-business owner; the items say what each thing does.
+ */
 export const workshopParts: readonly WorkshopPart[] = [
   {
     object: "greenhouse",
-    objectName: "El invernadero",
     pin: "Sistema a medida",
-    title: "Un sistema a medida",
-    items: siteContent.systems.items.slice(0, 4),
+    title: "Tu propio sistema",
+    items: [
+      "Turnos y reservas online",
+      "Clientes, ventas y cobros en un solo panel",
+      "Cada persona del equipo ve lo suyo",
+      "Conectado con lo que ya usás: planillas, facturación o pagos",
+    ],
   },
-  { object: "pot", objectName: "La maceta", pin: "Más consultas", title: leads.title, items: leads.items },
-  { object: "toolbox", objectName: "La caja de herramientas", pin: "Contacto simple", title: contact.title, items: contact.items },
-  { object: "gear", objectName: "El engranaje", pin: "Seguimiento automático", title: followUp.title, items: followUp.items },
+  {
+    object: "pot",
+    pin: "Más consultas",
+    title: "Que te encuentren más",
+    items: [
+      "Una página para cada promoción",
+      "Una página por servicio o por zona",
+      "Saber qué anuncios te traen clientes",
+      "Aparecer en Google Maps de tu zona",
+      "Tu página en otros idiomas",
+    ],
+  },
+  {
+    object: "toolbox",
+    pin: "Contacto simple",
+    title: "Que te escriban más fácil",
+    items: [
+      "Formularios que piden solo lo necesario",
+      "Presupuestos que se calculan solos",
+      "Cobro de señas online",
+      "Un catálogo de lo que vendés o hacés",
+    ],
+  },
+  {
+    object: "gear",
+    pin: "Seguimiento automático",
+    title: "Que no se te escape ninguna consulta",
+    items: [
+      "Cada consulta queda guardada en una planilla",
+      "Tu lista de clientes, ordenada",
+      "Un aviso por mail cuando entra algo nuevo",
+      "Respuestas automáticas",
+      "Saber en qué quedó cada consulta",
+    ],
+  },
 ];
 
 /**

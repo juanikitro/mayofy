@@ -6498,14 +6498,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
 .workshop__part--toolbox { view-timeline-name: --part-toolbox; }
 .workshop__part--gear { view-timeline-name: --part-gear; }
 
-.workshop__object {
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--moss);
-}
-
 .workshop__part h3 {
   font-size: 1.45rem;
 }

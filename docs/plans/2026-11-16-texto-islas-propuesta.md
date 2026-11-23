@@ -88,3 +88,33 @@ Hoy la isla 2 muestra la misma descripción que las tarjetas de packs (`commerci
 - **Título de la isla 3:** "Encontramos lo que necesita *tu negocio*." → "Elegí por dónde *empezamos*.".
 - **Recomendación de la isla 2:** cada situación tiene ahora su propio texto (campo `pitch` en `case-picker.ts`), con el texto exacto de Juani. Las tarjetas de packs conservan su descripción.
 - **Packs:** la definición de los packs se rehace en una sesión aparte con Juani (`docs/plans/2026-11-22-packs.md`). El texto de "Web + Gestión" puede cambiar según lo que salga de ahí.
+
+## Isla 4, 23 de noviembre (aplicado)
+
+Pedido de Juani: "Cambiaria los copies de la seccion 'Sistemas y automatizaciones a medida' ya que parecen muy de IA. Le quitaria lo que dice 'El invernadero', 'La maceta' y eso."
+
+- **Etiquetas de objeto:** "01 · El invernadero", "02 · La maceta" y las demás se quitaron. Quedan los carteles cortos sobre la isla.
+- **Bajada:** "Lo que tu operación necesita, sin convertir la tecnología en protagonista." → "Un sistema completo o una sola tarea que hoy hacés a mano. Lo armamos para cómo trabajás vos."
+- **Tarjetas:** el texto ahora está en `src/content/workshop.ts`, propio de la isla 4. Las tarjetas de packs no cambian.
+  - **"Un sistema a medida" → "Tu propio sistema"**
+    - Turnos y reservas online.
+    - Clientes, ventas y cobros en un solo panel.
+    - Cada persona del equipo ve lo suyo.
+    - Conectado con lo que ya usás: planillas, facturación o pagos.
+  - **"Conseguí más consultas" → "Que te encuentren más"**
+    - Una página para cada promoción.
+    - Una página por servicio o por zona.
+    - Saber qué anuncios te traen clientes.
+    - Aparecer en Google Maps de tu zona.
+    - Tu página en otros idiomas.
+  - **"Simplificá el contacto" → "Que te escriban más fácil"**
+    - Formularios que piden solo lo necesario.
+    - Presupuestos que se calculan solos.
+    - Cobro de señas online.
+    - Un catálogo de lo que vendés o hacés.
+  - **"Automatizá el seguimiento" → "Que no se te escape ninguna consulta"**
+    - Cada consulta queda guardada en una planilla.
+    - Tu lista de clientes, ordenada.
+    - Un aviso por mail cuando entra algo nuevo.
+    - Respuestas automáticas.
+    - Saber en qué quedó cada consulta.

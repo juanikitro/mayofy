@@ -55,11 +55,8 @@ export function SystemsIsland() {
 
       <div className="world-shell workshop__content">
         <ol className="workshop__parts">
-          {workshopParts.map((part, index) => (
+          {workshopParts.map((part) => (
             <li className={`workshop__part workshop__part--${part.object} panel`} key={part.object}>
-              <p className="workshop__object">
-                {String(index + 1).padStart(2, "0")} · {part.objectName}
-              </p>
               <h3>{part.title}</h3>
               <ul className="workshop__items">
                 {part.items.map((item) => (
