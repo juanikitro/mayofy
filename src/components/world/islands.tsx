@@ -33,8 +33,6 @@ export function WorksIsland() {
         <h2 id="trabajos-title">
           <IslandTitle segments={islandCopy.works.title} />
         </h2>
-        <p className="isle__body">{islandCopy.works.body}</p>
-
         <WorksIndex projects={projects as readonly ProjectEntry[]} />
 
         <SixSteps />

@@ -40,7 +40,6 @@ function Proposal({ inScene }: { inScene: boolean }) {
       <div className="proposal">
         <p className="proposal__base">
           <b>{proposal.base.title}</b>
-          <span>{proposal.base.text}</span>
         </p>
         <ol className="proposal__modules">
           {proposal.modules.map((module, index) => (

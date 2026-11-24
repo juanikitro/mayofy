@@ -429,11 +429,15 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
         // the low chest, then the cast down-left towards the camera like the rocks'. Radii are
         // generous on purpose: at ~120 px on screen anything under ~5 % hides behind her body
         // (Juani, 2026-11-24: "mejora la sombra de este frame").
-        { kind: "ao", x: "27%", y: "84.5%", w: "9%", h: "5.5%", opacity: 1 },
-        { kind: "ao", x: "49%", y: "89%", w: "10.5%", h: "5.5%", opacity: 1 },
-        { kind: "ao", x: "71.5%", y: "88.8%", w: "10%", h: "5.5%", opacity: 1 },
-        { kind: "cast", x: "52%", y: "89%", w: "38%", h: "10%", opacity: 0.85 },
-        { kind: "cast", x: "32%", y: "93%", w: "42%", h: "12%", opacity: 0.7 },
+        // Juani, 2026-11-24, later: the tall round layers read as an extra circle beside her and left
+        // her body without a shadow ("hazla parecida a la de la isla 1"). Like island 1, every layer
+        // is now flat and long: one shadow under the whole body from the hind paw to the front paws,
+        // darker at each paw, and a faint cast down-left like the rocks'.
+        { kind: "cast", x: "50%", y: "87.2%", w: "32%", h: "4.6%", opacity: 0.85 },
+        { kind: "cast", x: "41%", y: "89.8%", w: "38%", h: "5.2%", opacity: 0.45 },
+        { kind: "ao", x: "27.5%", y: "84.4%", w: "7.5%", h: "2.3%", opacity: 0.95 },
+        { kind: "ao", x: "49.5%", y: "88.8%", w: "8.5%", h: "2.4%", opacity: 1 },
+        { kind: "ao", x: "71.5%", y: "88.7%", w: "8.5%", h: "2.4%", opacity: 1 },
       ],
     },
   },

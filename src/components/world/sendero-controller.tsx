@@ -22,7 +22,10 @@ const FPS = 10;
  * - Each step (and each segment of the phone bar) is a button that scrolls to
  *   its step's rest point: the middle of the stretch where Mayo stands on its
  *   stone (after the first `legShare` of the step's sixth of the pin).
- * - The current step's buttons carry `aria-current="step"`.
+ * - The current step's buttons carry `aria-current="step"`. Its number
+ *   carries the number it rolls in from (`data-from`, absent when the path
+ *   starts) and the way it rolls (`data-dir`, "down" or "up"), read by
+ *   world.css (Juani, 24 November 2026: "añade una animacion de cambio").
  * - Settle (Juani, 20 November 2026: "si me quedo en la mitad del scroll del
  *   punto 5 al 6, el scroll debe completarse"): when a gesture by the reader
  *   ends while Mayo is between two stones, the page finishes the leg in the
@@ -86,11 +89,17 @@ export function SenderoController({
     const markCurrent = () => {
       const step = pinned() ? Math.min(steps - 1, Math.max(0, Math.floor(progress() * steps))) : -1;
       if (step === current) return;
+      const previous = current;
       current = step;
       for (const button of buttons) {
         if (step >= 0 && Number(button.dataset.step) === step) button.setAttribute("aria-current", "step");
         else button.removeAttribute("aria-current");
       }
+      const number = step >= 0 ? track.querySelector<HTMLElement>(`.sendero__go[data-step="${step}"] .sendero__number`) : null;
+      if (!number) return;
+      if (previous >= 0) number.dataset.from = String(previous + 1).padStart(2, "0");
+      else delete number.dataset.from;
+      number.dataset.dir = previous > step ? "up" : "down";
     };
 
     const settle = ({ direction }: Gesture) => {

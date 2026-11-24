@@ -2512,12 +2512,6 @@ html[data-motion-tier="reduced"] .fall__mayo {
   color: var(--moss);
 }
 
-.sendero__lead {
-  max-width: 34rem;
-  margin-block-start: 0.75rem;
-  color: var(--ink-soft);
-}
-
 .sendero__steps {
   display: grid;
   gap: 0.25rem;
@@ -2535,11 +2529,27 @@ html[data-motion-tier="reduced"] .fall__mayo {
 }
 
 .sendero__number {
+  position: relative;
   font-family: var(--font-world-serif);
   font-size: 1.15rem;
   font-style: italic;
   line-height: 1.3;
   color: var(--moss);
+}
+
+/* The number rolls when its step becomes the current one (the pinned path,
+ * below): the digits it replaces leave one way, its own arrive from the
+ * other. Both sit in the same box; only translate and opacity move. */
+.sendero__digits {
+  display: inline-block;
+}
+
+.sendero__number::before {
+  content: attr(data-from);
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .sendero__step strong {
@@ -2566,13 +2576,11 @@ html[data-motion-tier="reduced"] .fall__mayo {
   transition: background-color 200ms var(--ease-out);
 }
 
+/* Hover: a soft cream wash and the label at full ink, never an underline
+ * (Juani, 24 November 2026: "del hover de los elementos quitales el subrayado"). */
 .sendero__go:hover {
   background: color-mix(in oklch, var(--cream) 40%, transparent);
-}
-
-.sendero__go:hover strong {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+  color: var(--ink);
 }
 
 .sendero__go:focus-visible {
@@ -2756,6 +2764,25 @@ html[data-motion-tier="reduced"] .fall__mayo {
       animation-range: contain var(--from) contain var(--to);
     }
 
+    /* The current step's number rolls in from the one before: up going
+     * down the path, down going back (`data-dir`, SenderoController). Not
+     * in the reduced motion tier. */
+    .sendero__number {
+      --number-shift: 0.7em;
+    }
+
+    .sendero__number[data-dir="up"] {
+      --number-shift: -0.7em;
+    }
+
+    html:not([data-motion-tier="reduced"]) .sendero__go[aria-current] .sendero__digits {
+      animation: sendero-number-in var(--m-reveal, 520ms) var(--ease-enter, ease-out) both;
+    }
+
+    html:not([data-motion-tier="reduced"]) .sendero__go[aria-current] .sendero__number[data-from]::before {
+      animation: sendero-number-out 320ms var(--ease-ui, ease-out) both;
+    }
+
     .sendero__badge {
       animation-name: sendero-badge-now, sendero-badge-done;
       animation-duration: auto;
@@ -2800,10 +2827,6 @@ html[data-motion-tier="reduced"] .fall__mayo {
         padding-block-start: 4.5rem;
       }
 
-      .sendero__lead {
-        display: none;
-      }
-
       .sendero__steps {
         grid-template-areas: "step";
         margin-block-start: 0.75rem;
@@ -2819,6 +2842,20 @@ html[data-motion-tier="reduced"] .fall__mayo {
         margin-block-start: 0.2rem;
         opacity: 1;
         animation: none;
+      }
+
+      /* The number lives in the card's "Paso 3 de 6" label here: it rises
+       * in (or drops in, going back) as the step changes. */
+      .sendero__step::before {
+        --number-shift: 0.6em;
+      }
+
+      .sendero__step:has(.sendero__number[data-dir="up"])::before {
+        --number-shift: -0.6em;
+      }
+
+      html:not([data-motion-tier="reduced"]) .sendero__step:has(.sendero__go[aria-current])::before {
+        animation: sendero-number-in var(--m-reveal, 520ms) var(--ease-enter, ease-out) both;
       }
 
       /* The six step buttons: a vertical rail, in "Mobile packs carousel,
@@ -2850,6 +2887,30 @@ html[data-motion-tier="reduced"] .fall__mayo {
     max-height: 8rem;
     margin-block-start: 0.2rem;
     opacity: 1;
+  }
+}
+
+@keyframes sendero-number-in {
+  from {
+    opacity: 0;
+    translate: 0 var(--number-shift);
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes sendero-number-out {
+  from {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  to {
+    opacity: 0;
+    translate: 0 calc(-1 * var(--number-shift));
   }
 }
 
@@ -6568,11 +6629,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
   font-size: 1.1rem;
 }
 
-.proposal__base span {
-  font-size: 0.85rem;
-  opacity: 0.85;
-}
-
 .proposal__modules {
   position: relative;
   display: grid;
@@ -6797,10 +6853,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
 
   .proposal-frame--scene .proposal__base b {
     font-size: 6cqi;
-  }
-
-  .proposal-frame--scene .proposal__base span {
-    font-size: 4.2cqi;
   }
 
   /* Six modules (22 November 2026): tighter rows keep the card above the island's meadow. */
@@ -7544,22 +7596,48 @@ html[data-motion-tier="reduced"] .works-index__shot {
   z-index: 2;
 }
 
-.hearth__copy .isle__body {
-  position: relative;
-  isolation: isolate;
+/* The lead in regular weight (Juani, 24 November 2026: "quita la negrita"):
+ * it still reads first through its size and the brightest ink. */
+.hearth__copy .isle__lead {
+  font-weight: 400;
   color: var(--night-ink);
 }
 
-/* Feather only the sky behind the paragraph, not the whole painted scene. */
-.hearth__copy .isle__body::before {
-  position: absolute;
-  z-index: -1;
-  inset: -0.125rem;
-  border-radius: 0.25rem;
-  background: rgb(12 18 28 / 38%);
-  box-shadow: 0 0 0.85rem 0.55rem rgb(12 18 28 / 38%);
-  pointer-events: none;
-  content: "";
+.hearth__copy .isle__body {
+  color: var(--night-ink);
+}
+
+/* Contrast without a box behind the paragraph (Juani, 24 November 2026:
+ * "quita la sombra oscura"): on wide screens the dusk sky deepens towards
+ * the copy column, one wide feathered wash in the sky's own navy with no
+ * edge to see, so the light ink keeps 4.5:1 over the brighter teal band and
+ * the clouds. It fades out before the island's painting. */
+@media (min-width: 48.01rem) {
+  .hearth__copy .host {
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* On narrower desktops the island comes closer: the paragraph wraps
+   * before it reaches the island's rim (1024 px: 3.55:1 over the grass). */
+  .hearth__copy .isle__body {
+    max-width: min(52ch, 38vw);
+  }
+
+  .hearth__copy .host::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -40% -22% -60% -30%;
+    background: radial-gradient(
+      closest-side,
+      rgb(20 32 82 / 64%) 0%,
+      rgb(20 32 82 / 56%) 45%,
+      rgb(20 32 82 / 26%) 75%,
+      rgb(20 32 82 / 0%) 100%
+    );
+    pointer-events: none;
+  }
 }
 
 @media (min-width: 48.01rem) {
@@ -8163,7 +8241,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
  * and the case result label, from 11.5-13.6px up to 12.8-15px. The scene
  * version on the pinned island keeps scaling with its frame, with a floor
  * so a laptop never shows it under 12.8-14px. */
-.proposal-frame--scene :is(.proposal__base span, .proposal__module > span:last-child) {
+.proposal-frame--scene .proposal__module > span:last-child {
   font-size: max(4.2cqi, 0.875rem);
 }
 
@@ -8175,7 +8253,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
   font-size: 0.8rem;
 }
 
-.proposal-frame--flow .proposal__base span,
 .proposal-frame--flow .proposal__module > span:last-child {
   font-size: 0.95rem;
 }
