@@ -20,10 +20,23 @@ Las tiras de escritorio (`*-tira.avif`/`.webp`, 12 cuadros de 640 px) y las de c
 - Isla 7 (`questions-v2`): Mayo, sentada, levanta la cabeza hacia la luciérnaga. Se rehízo la capa de contacto para la nueva silueta.
 - Ritmo del bucle: isla 2 de 1,4 s a 2 s e isla 7 de 2,2 s a 2,6 s (`world.css`).
 
+**Tercera entrega (luz principal en las islas 6 y 7)**
+
+Las tiras repintadas tenían la interacción correcta, pero la luz cálida no llegaba a Mayo. Se agregó por código sobre las tiras, sin tocar la silueta ni el canal alfa, con `integracion-mayo/relight.js` (`sharp`):
+
+- **Borde de luz:** se aclaran con modo pantalla los píxeles de la silueta que quedan expuestos hacia la fuente, medidos a 5, 12 y 22 px hacia la luz y apenas hacia arriba, y difuminados 3 px.
+- **Lavado cálido:** un tinte multiplicado que crece hacia el lado de la fuente.
+- Isla 6: fogata desde la derecha, `255,150,60`, borde 0,9 y lavado 0,35.
+- Isla 7: farol desde la izquierda, `255,170,90`, borde 0,8 y lavado 0,3.
+- Las tiras de celular (256 y 224 px) se regeneraron desde la tira de escritorio ya iluminada.
+
+Para repetirlo: `node docs/plans/integracion-mayo/relight.js <repo> host-v2 1 255,150,60 0.9 0.35 --write`. Hay que partir de la tira sin iluminar, porque aplicarlo dos veces acumula el efecto.
+
 ## Evidencia
 
 - `integracion-mayo/isla-{2,3,6,7}.jpg`: cuatro cuadros por isla. Arriba, la tira anterior; abajo, la nueva.
-- `integracion-mayo/en-escena.jpg`: Mayo en su placa a 1440x900, en tres puntos del scroll por isla (filas 2, 3, 6 y 7).
+- `integracion-mayo/en-escena.jpg`: Mayo en su placa a 1440x900, en tres puntos del scroll por isla (filas 2, 3, 6 y 7), antes de la luz cálida.
+- `integracion-mayo/luz-6-7.jpg`: islas 6 (arriba) y 7 (abajo). A la izquierda, sin luz cálida; en el centro y a la derecha, con luz cálida en dos puntos del scroll.
 
 ## Verificación (24/11/2026)
 
@@ -35,7 +48,7 @@ Las tiras de escritorio (`*-tira.avif`/`.webp`, 12 cuadros de 640 px) y las de c
 
 ## Limitaciones
 
-- **Luz principal en las islas 6 y 7.** La interacción y la sombra quedaron bien, pero la luz cálida de la fogata (isla 6, desde la derecha) y del farol (isla 7, desde la izquierda) casi no llega a Mayo: se ve iluminada con luz fría y pareja. Hace falta repintar con un borde de luz cálido del lado de la fuente. El escenario no tiene un mecanismo CSS de luz direccional, así que el arreglo correcto es pintado. Esta sesión no tenía herramienta para generar imágenes.
+- **Luz principal en las islas 6 y 7.** Es un retoque por código, no una pintura: el borde cálido sigue la silueta, pero no modela volumen como lo haría una pasada pintada. Si Juani quiere una luz más dramática, conviene repintar con una herramienta de imagen.
 - Isla 6: Juani queda fuera del encuadre de Mayo, que mira al fuego y no a él.
 - No se probó un trackpad real ni un teléfono físico: el gesto táctil fue sintético.
 - Sombra de contacto: se ve en los cuatro casos, pero es tenue en las islas 2 y 3 (escritorio).
