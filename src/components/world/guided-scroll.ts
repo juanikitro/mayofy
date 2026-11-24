@@ -21,7 +21,7 @@
  */
 
 export const easeInOutSine = (t: number) => -(Math.cos(Math.PI * t) - 1) / 2;
-/** Slows down into the target, where a scene's pose waits (island 3's hops end just before their rest points). */
+/** Slows down into the target, where a section or a scene's pose waits. */
 export const easeOutQuad = (t: number) => 1 - (1 - t) * (1 - t);
 
 let active: { stop: () => void } | null = null;
