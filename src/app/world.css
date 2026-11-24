@@ -3220,7 +3220,7 @@ html[data-motion-tier="reduced"] .mayo--stops {
   padding-inline-start: 1.2em;
 }
 
-.reading a:not(.study__back) {
+.reading a {
   color: var(--moss);
   text-decoration: underline;
   text-underline-offset: 0.2em;
@@ -3228,25 +3228,14 @@ html[data-motion-tier="reduced"] .mayo--stops {
 
 /* Case studies (/proyectos/[slug]) --------------------------------------- */
 
-.study__back {
-  width: fit-content;
-  font-weight: 600;
-  color: var(--moss);
-}
+/* Template: docs/plans/2026-11-23-casos.md. The cover is the dawn sky with
+ * two painted clouds and a floating rock from the landing; the real product
+ * sits big in a browser frame on it. Below, the page reads top to bottom on
+ * the beige ground: facts, the starting point, the screens (a cream band),
+ * decisions, the result (a moss band) and the next step. */
 
-.study__cover {
-  padding-block: 7rem 3rem;
-  background: linear-gradient(180deg, var(--sky-dawn-top) 0%, var(--sky-dawn-mid) 50%, var(--beige) 100%);
-}
-
-.study__cover-layout {
-  display: grid;
-  gap: 1rem;
-  justify-items: start;
-  max-width: 48rem;
-}
-
-.study__category {
+.caso-eyebrow,
+.caso-study p.caso-eyebrow {
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -3254,35 +3243,165 @@ html[data-motion-tier="reduced"] .mayo--stops {
   color: var(--moss);
 }
 
-.study__cover h1 {
-  font-size: clamp(2.2rem, 1.3rem + 3.6vw, 4rem);
+.caso-back {
+  width: fit-content;
+  font-weight: 600;
+  color: var(--moss);
 }
 
-.study__summary {
-  max-width: 52ch;
-  font-size: 1.1rem;
+.caso-cover {
+  position: relative;
+  overflow: clip;
+  padding-block: 6.75rem 3.5rem;
+  background: linear-gradient(
+    180deg,
+    var(--sky-dawn-top) 0%,
+    var(--sky-dawn-mid) 34%,
+    var(--sky-dawn-low) 58%,
+    var(--beige) 100%
+  );
+}
+
+.caso-cover__decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.caso-cover__cloud {
+  position: absolute;
+  display: block;
+}
+
+.caso-cover__cloud img,
+.caso-cover__rock img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.caso-cover__cloud--a {
+  top: 6.5rem;
+  right: max(1rem, 6vw);
+  width: clamp(9rem, 19vw, 17rem);
+}
+
+.caso-cover__cloud--b {
+  top: 21rem;
+  right: max(-4rem, 30vw - 24rem);
+  width: clamp(7rem, 13vw, 12rem);
+  opacity: 0.85;
+}
+
+.caso-cover__text {
+  position: relative;
+  display: grid;
+  gap: 1.1rem;
+  justify-items: start;
+}
+
+.caso-cover__text h1 {
+  max-width: 17ch;
+  font-size: clamp(2.4rem, 1.4rem + 3.4vw, 4.25rem);
+}
+
+.caso-cover__intro {
+  max-width: 56ch;
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
   color: var(--ink-soft);
 }
 
-.study__facts {
-  padding-block: 2rem;
+.caso-cover__stage {
+  position: relative;
+  margin-block-start: clamp(2.5rem, 5vw, 4rem);
 }
 
-.study__facts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
-  gap: 1rem;
+.caso-cover__shot {
+  position: relative;
+  max-width: 76rem;
+  margin-inline: auto;
 }
 
-.study__facts-grid > div {
-  display: grid;
-  gap: 0.25rem;
-  padding: 1rem 1.25rem;
-  border-radius: var(--radius);
+.caso-cover__rock {
+  position: absolute;
+  z-index: 1;
+  left: max(-1.5rem, 50% - 41rem);
+  bottom: -2.5rem;
+  display: block;
+  width: clamp(5.5rem, 11vw, 10rem);
+  filter: drop-shadow(0 1.5rem 1.25rem oklch(30% 0.05 60 / 30%));
+}
+
+/* Frames ----------------------------------------------------------------- */
+
+.caso-frame--browser {
+  overflow: hidden;
+  border-radius: 0.9rem;
   background: var(--cream);
+  box-shadow:
+    0 2.5rem 5rem -2rem oklch(30% 0.06 40 / 45%),
+    0 0 0 1px oklch(24% 0.03 150 / 10%);
 }
 
-.study__facts-grid dt {
+.caso-frame__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 2.25rem;
+  padding-inline: 1rem;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.caso-frame__bar i {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: var(--beige-deep);
+}
+
+.caso-frame__bar span {
+  margin-inline-start: 0.6rem;
+}
+
+.caso-frame__picture,
+.caso-frame__picture img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.caso-frame--phone {
+  width: 100%;
+  max-width: 17rem;
+  overflow: hidden;
+  border: 0.45rem solid var(--ink);
+  border-radius: 2rem;
+  background: var(--ink);
+  box-shadow: 0 2rem 3.5rem -1.5rem oklch(30% 0.06 40 / 50%);
+}
+
+/* Facts ------------------------------------------------------------------ */
+
+.caso-facts {
+  padding-block: 3.5rem 1rem;
+}
+
+.caso-facts dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 0 2rem;
+}
+
+.caso-facts dl > div {
+  display: grid;
+  gap: 0.35rem;
+  align-content: start;
+  padding-block: 1.1rem;
+  border-top: 1px solid color-mix(in oklch, var(--ink) 16%, transparent);
+}
+
+.caso-facts dt {
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -3290,109 +3409,437 @@ html[data-motion-tier="reduced"] .mayo--stops {
   color: var(--moss);
 }
 
-.study__story {
-  display: grid;
-  grid-template-columns: 12rem minmax(0, 1fr);
-  gap: 2.5rem;
-  padding-block: 2rem 3rem;
+.caso-facts dd {
+  font-weight: 500;
+  color: var(--ink);
 }
 
-.study__index {
-  position: sticky;
-  top: 6rem;
+/* Starting point --------------------------------------------------------- */
+
+.caso-before {
   display: grid;
-  gap: 0.4rem;
-  align-self: start;
-  font-size: 0.9rem;
-  font-weight: 600;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+  padding-block: 4rem 6rem;
+}
+
+.caso-before--solo {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.caso-before__copy {
+  display: grid;
+  gap: 1rem;
+}
+
+.caso-study :is(.caso-before, .caso-build, .caso-decisions, .caso-result, .caso-next__offer) h2 {
+  font-size: clamp(1.9rem, 1.2rem + 2.2vw, 3rem);
+}
+
+.caso-before p {
+  max-width: 52ch;
+  font-size: 1.1rem;
   color: var(--ink-soft);
 }
 
-.study__index a:hover {
+.caso-changes {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.05rem;
+}
+
+.caso-changes th {
+  padding-block: 0 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-align: start;
+  text-transform: uppercase;
+  color: var(--stone-deep);
+}
+
+.caso-changes th:last-child {
   color: var(--moss);
 }
 
-.study__chapters {
-  display: grid;
-  gap: 2.5rem;
-  max-width: 60ch;
+.caso-changes td {
+  padding: 1rem 1.25rem 1rem 0;
+  border-top: 1px solid color-mix(in oklch, var(--ink) 16%, transparent);
+  vertical-align: top;
 }
 
-.study__chapters h2 {
-  margin-block-end: 0.6rem;
-  font-size: 1.5rem;
+.caso-changes td:first-child {
+  width: 42%;
+  color: var(--stone-deep);
 }
 
-.study__chapters p,
-.study__chapters li p {
-  color: var(--ink-soft);
+.caso-changes td:last-child {
+  font-weight: 600;
+  color: var(--ink);
 }
 
-.study__decisions,
-.study__journey {
-  display: grid;
-  gap: 0.75rem;
-  list-style: none;
-  padding: 0;
+.caso-changes td:last-child::before {
+  content: "";
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-inline-end: 0.6rem;
+  border-radius: 50%;
+  background: var(--leaf);
+  vertical-align: 0.1em;
 }
 
-.study__decisions li,
-.study__journey li {
-  display: grid;
-  grid-template-columns: 2rem minmax(0, 1fr);
-  gap: 0.5rem;
-  align-items: baseline;
-  padding: 0.9rem 1rem;
-  border-radius: calc(var(--radius) - 0.5rem);
+/* Screens ---------------------------------------------------------------- */
+
+.caso-build {
+  padding-block: 6rem 7rem;
   background: var(--cream);
 }
 
-.study__decisions span,
-.study__journey span {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--moss);
+.caso-build__head {
+  display: grid;
+  gap: 0.75rem;
+  margin-block-end: clamp(3rem, 6vw, 5rem);
 }
 
-.study__gallery {
+.caso-build__list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
-  gap: 1rem;
-  list-style: none;
-  padding: 0;
+  gap: clamp(4rem, 9vw, 8rem);
 }
 
-.study__gallery li {
+.caso-feature {
   display: grid;
-  place-content: center;
-  gap: 0.25rem;
-  aspect-ratio: 4 / 3;
-  border-radius: var(--radius);
-  background: var(--beige-deep);
-  text-align: center;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+.caso-feature:nth-child(even) {
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+}
+
+.caso-feature:nth-child(even) .caso-feature__shot {
+  order: 2;
+}
+
+.caso-feature--phone,
+.caso-feature--phone:nth-child(even) {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.caso-feature--phone .caso-feature__shot {
+  display: grid;
+  place-items: center;
+  padding-block: 1.5rem;
+  background: radial-gradient(closest-side, color-mix(in oklch, var(--leaf-light) 32%, transparent), transparent);
+}
+
+.caso-feature__copy {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.caso-feature__copy h3 {
+  font-size: clamp(1.45rem, 1.1rem + 1.1vw, 2.1rem);
+}
+
+.caso-feature__copy p {
+  max-width: 44ch;
+  font-size: 1.1rem;
   color: var(--ink-soft);
-  outline: 1px dashed color-mix(in oklch, var(--bark) 40%, transparent);
 }
 
-.study__gallery span {
-  font-weight: 600;
+/* Decisions -------------------------------------------------------------- */
+
+.caso-decisions {
+  display: grid;
+  gap: 0.75rem;
+  padding-block: 6rem;
 }
 
-.study__next {
+.caso-decisions ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 2.5rem;
+  margin-block-start: 2.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.caso-decisions li {
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+  padding-block-start: 1.25rem;
+  border-top: 2px solid var(--moss);
+}
+
+.caso-decisions h3 {
+  font-size: 1.3rem;
+}
+
+.caso-decisions p {
+  color: var(--ink-soft);
+}
+
+/* Result ----------------------------------------------------------------- */
+
+.caso-result {
+  padding-block: 6rem;
+  color: var(--cream);
+  background: var(--moss);
+}
+
+.caso-result__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: end;
+}
+
+.caso-result__copy {
   display: grid;
   gap: 1rem;
   justify-items: start;
-  padding-block: 2rem 5rem;
 }
 
-.study__next h2 {
-  font-size: 1.6rem;
+.caso-study .caso-result p.caso-eyebrow {
+  color: var(--mint);
 }
 
-.study__actions {
+.caso-result h2 {
+  max-width: 22ch;
+}
+
+.caso-result p {
+  max-width: 60ch;
+  font-size: 1.15rem;
+  color: color-mix(in oklch, var(--cream) 86%, transparent);
+}
+
+.caso-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem clamp(2rem, 6vw, 5rem);
+  margin-block-start: 1rem;
+}
+
+.caso-stats > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.2rem;
+}
+
+.caso-stats dd {
+  font-size: clamp(2.4rem, 1.6rem + 2.6vw, 3.6rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--cream);
+}
+
+.caso-stats dt {
+  max-width: 18ch;
+  color: color-mix(in oklch, var(--cream) 80%, transparent);
+}
+
+.caso-quote {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding-inline-start: 1.5rem;
+  border-inline-start: 2px solid var(--mint);
+}
+
+.caso-quote blockquote {
+  margin: 0;
+}
+
+.caso-quote blockquote p {
+  max-width: none;
+  font-family: var(--font-world-serif);
+  font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2.3rem);
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--cream);
+}
+
+.caso-quote figcaption {
+  color: color-mix(in oklch, var(--cream) 80%, transparent);
+}
+
+/* Next step and other cases ---------------------------------------------- */
+
+.caso-next__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: start;
+  padding-block: 6rem;
+}
+
+.caso-next__offer {
+  display: grid;
+  gap: 1.1rem;
+  justify-items: start;
+}
+
+.caso-next__offer p {
+  max-width: 48ch;
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+}
+
+.caso-next__offer p a {
+  font-weight: 600;
+  color: var(--moss);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.caso-next__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  margin-block-start: 0.5rem;
+}
+
+.caso-study .caso-others h2 {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+.caso-others ul {
+  display: grid;
+  gap: 0.85rem;
+  margin-block-start: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.caso-others a {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: center;
+  padding: 0.7rem;
+  border-radius: var(--radius);
+  background: var(--cream);
+  transition:
+    transform 200ms var(--ease-out),
+    box-shadow 200ms var(--ease-out);
+}
+
+.caso-others__thumb {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  border-radius: 0.6rem;
+}
+
+.caso-others__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 400ms var(--ease-out);
+}
+
+.caso-others__text {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.caso-others small {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--moss);
+}
+
+.caso-others strong {
+  font-size: 1.05rem;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .caso-others a:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .caso-others a:hover .caso-others__thumb img {
+    transform: scale(1.03);
+  }
+}
+
+/* Cover entrance: the capture rises into place, the cloud drifts in and the
+ * rock settles from a short float, once, on load. Nothing moves after that. */
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .caso-cover__shot {
+    animation: case-shot-rise 900ms var(--ease-out) 180ms both;
+  }
+
+  html:not([data-motion-tier="reduced"]) .caso-cover__rock {
+    animation: case-rock-settle 2.6s var(--ease-out) 300ms both;
+  }
+
+  html:not([data-motion-tier="reduced"]) .caso-cover__cloud--a {
+    animation: case-cloud-drift 2.6s var(--ease-out) both;
+  }
+}
+
+@keyframes case-shot-rise {
+  from {
+    opacity: 0;
+    translate: 0 2.5rem;
+  }
+
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+@keyframes case-rock-settle {
+  0% {
+    opacity: 0;
+    translate: 0 -1.75rem;
+    rotate: -5deg;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  60% {
+    translate: 0 0.35rem;
+    rotate: 1deg;
+  }
+
+  100% {
+    translate: none;
+    rotate: none;
+  }
+}
+
+@keyframes case-cloud-drift {
+  from {
+    opacity: 0;
+    translate: 2.5rem 0;
+  }
+
+  to {
+    opacity: 1;
+    translate: none;
+  }
 }
 
 /* 404 -------------------------------------------------------------------- */
@@ -3430,15 +3877,58 @@ html[data-motion-tier="reduced"] .mayo--stops {
     grid-template-columns: 1fr;
   }
 
-  .study__story {
-    grid-template-columns: 1fr;
+  .caso-cover {
+    padding-block: 6.5rem 2.5rem;
   }
 
-  .study__index {
-    position: static;
-    grid-auto-flow: column;
-    flex-wrap: wrap;
-    gap: 0.75rem;
+  .caso-cover__cloud--a {
+    top: 4.75rem;
+    right: -2.5rem;
+    width: 8rem;
+    opacity: 0.8;
+  }
+
+  .caso-cover__cloud--b {
+    display: none;
+  }
+
+  .caso-cover__rock {
+    left: -0.5rem;
+    bottom: -2rem;
+    width: 4.5rem;
+  }
+
+  .caso-before,
+  .caso-result__inner,
+  .caso-feature,
+  .caso-feature:nth-child(even),
+  .caso-feature--phone,
+  .caso-feature--phone:nth-child(even),
+  .caso-next__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .caso-feature:nth-child(even) .caso-feature__shot {
+    order: 0;
+  }
+
+  .caso-frame--phone {
+    max-width: 15rem;
+  }
+
+  .caso-before,
+  .caso-decisions,
+  .caso-next__inner {
+    padding-block: 3.5rem;
+  }
+
+  .caso-build,
+  .caso-result {
+    padding-block: 4rem;
+  }
+
+  .caso-others a {
+    grid-template-columns: 6.5rem minmax(0, 1fr);
   }
 }
 
@@ -4516,14 +5006,14 @@ html[data-motion-tier="reduced"] .wa-float {
 
 /* Staggered groups ----------------------------------------------------- */
 
-/* The works index rows and the case-study lists settle 16px as
+/* The works index rows settle 16px as
  * they cross the bottom edge, each item 16px of scroll after the one before
  * (`--i`, set by staggerStyle), all done within about 200px of entering, so
  * nothing is caught half-faded where someone reads. `translate` is used so
  * the cards keep their hover lift (a `transform`). */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    html:not([data-motion-tier="reduced"]) :is(.works-index__row, .study__decisions > li, .study__journey > li) {
+    html:not([data-motion-tier="reduced"]) .works-index__row {
       animation: item-reveal linear both;
       animation-timeline: view();
       animation-range: entry calc(var(--i, 0) * 16px) entry calc(120px + var(--i, 0) * 16px);
@@ -4695,52 +5185,25 @@ html[data-motion-tier="reduced"] .wa-float {
 /* The cover of a case, the 404 and the privacy page arrive like the hero:
  * each block fades up 12px, 60ms after the one before. */
 @media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion-tier="reduced"]) :is(.study__cover-layout, .lost, .reading) > :nth-child(-n + 5) {
+  html:not([data-motion-tier="reduced"]) :is(.caso-cover__text, .lost, .reading) > :nth-child(-n + 5) {
     animation: copy-rise var(--m-reveal) var(--ease-enter) both;
   }
 
-  html:not([data-motion-tier="reduced"]) :is(.study__cover-layout, .lost, .reading) > :nth-child(2) {
+  html:not([data-motion-tier="reduced"]) :is(.caso-cover__text, .lost, .reading) > :nth-child(2) {
     animation-delay: 60ms;
   }
 
-  html:not([data-motion-tier="reduced"]) :is(.study__cover-layout, .lost, .reading) > :nth-child(3) {
+  html:not([data-motion-tier="reduced"]) :is(.caso-cover__text, .lost, .reading) > :nth-child(3) {
     animation-delay: 120ms;
   }
 
-  html:not([data-motion-tier="reduced"]) :is(.study__cover-layout, .lost, .reading) > :nth-child(4) {
+  html:not([data-motion-tier="reduced"]) :is(.caso-cover__text, .lost, .reading) > :nth-child(4) {
     animation-delay: 180ms;
   }
 
-  html:not([data-motion-tier="reduced"]) :is(.study__cover-layout, .lost, .reading) > :nth-child(5) {
+  html:not([data-motion-tier="reduced"]) :is(.caso-cover__text, .lost, .reading) > :nth-child(5) {
     animation-delay: 240ms;
   }
-}
-
-/* The case index marks the chapter in view with a 2px bar that grows from
- * its middle; hovering a chapter tints it. */
-.study__index a {
-  position: relative;
-  padding-inline-start: 0.85rem;
-  transition: color var(--m-fast) var(--ease-ui);
-}
-
-.study__index a::before {
-  content: "";
-  position: absolute;
-  inset: 0.2em auto 0.2em 0;
-  width: 2px;
-  border-radius: 1px;
-  background: var(--moss);
-  transform: scaleY(0);
-  transition: transform var(--m-panel) var(--ease-ui);
-}
-
-.study__index a[aria-current="location"] {
-  color: var(--moss);
-}
-
-.study__index a[aria-current="location"]::before {
-  transform: none;
 }
 
 /* Back links lean their arrow back; a button's arrow uses the button gap. */
