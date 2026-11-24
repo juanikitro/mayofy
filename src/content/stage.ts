@@ -424,9 +424,9 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
     contact: {
       tint: "26 46 10",
       layers: [
-        { kind: "cast", x: "45%", y: "86%", w: "36%", h: "7%", opacity: 0.48 },
-        { kind: "ao", x: "66%", y: "88%", w: "23%", h: "3%", opacity: 0.62 },
-        { kind: "ao", x: "24%", y: "82%", w: "9%", h: "2.6%", opacity: 0.62 },
+        { kind: "cast", x: "50%", y: "87%", w: "48%", h: "9%", opacity: 0.66 },
+        { kind: "ao", x: "60%", y: "88.5%", w: "34%", h: "3.6%", opacity: 0.86 },
+        { kind: "ao", x: "33%", y: "87%", w: "11%", h: "3%", opacity: 0.82 },
       ],
     },
   },
@@ -797,9 +797,12 @@ export const packsMayo = {
   /**
    * Her moments in vh of pinned scroll (rocksStage), each long enough to be
    * watched with a wheel or a flick (a wheel notch is about 11 vh on a
-   * 900 px screen): two hop cycles of 40 vh from `hops` (each airborne for
-   * 20 vh, right after the first and the second platform land), sitting down
-   * over 28 vh as the third has landed, then seated. Her watching loop eases
+   * 900 px screen): `hops` bounds two hop cycles, a small hop of 40 vh right
+   * after the first platform lands and the long leap (2.7 of her widths) of
+   * 60 vh after the second, airborne for 30 vh and landing as the third
+   * platform does (Juani, 23 November 2026: "la animacion es incomoda"; at
+   * 40 vh it crossed the screen in two wheel notches); sitting down over
+   * 28 vh, then seated. Her watching loop eases
    * back to its first frame from `miraRest` so it hands over to the hop on
    * the same painted frame, and the seated loop only starts at `sentadaLoop`,
    * so it shows its first frame while it takes over from the sitting down.
@@ -809,7 +812,7 @@ export const packsMayo = {
    * `rests` are the poses the page may settle on (after the small hop, after
    * the leap, seated with the painted plate in).
    */
-  timing: { hops: [52, 132], sentarse: [132, 160], miraRest: 34, sentadaLoop: 178, crossfade: [164, 182], rests: [80, 120, 184] },
+  timing: { hops: [52, 92, 152], sentarse: [152, 180], miraRest: 34, sentadaLoop: 198, crossfade: [184, 202], rests: [80, 140, 204] },
 } as const;
 
 /**

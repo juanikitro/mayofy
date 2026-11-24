@@ -20,35 +20,42 @@ Las tiras de escritorio (`*-tira.avif`/`.webp`, 12 cuadros de 640 px) y las de c
 - Isla 7 (`questions-v2`): Mayo, sentada, levanta la cabeza hacia la luciérnaga. Se rehízo la capa de contacto para la nueva silueta.
 - Ritmo del bucle: isla 2 de 1,4 s a 2 s e isla 7 de 2,2 s a 2,6 s (`world.css`).
 
-**Tercera entrega (luz principal en las islas 6 y 7)**
+**Tercera entrega (pedido de Juani del 24/11/2026: sombra tenue, segundo salto de la isla 3, isla 6 y luz de las islas 6 y 7)**
 
-Las tiras repintadas tenían la interacción correcta, pero la luz cálida no llegaba a Mayo. Se agregó por código sobre las tiras, sin tocar la silueta ni el canal alfa, con `integracion-mayo/relight.js` (`sharp`):
-
-- **Borde de luz:** se aclaran con modo pantalla los píxeles de la silueta que quedan expuestos hacia la fuente, medidos a 5, 12 y 22 px hacia la luz y apenas hacia arriba, y difuminados 3 px.
-- **Lavado cálido:** un tinte multiplicado que crece hacia el lado de la fuente.
-- Isla 6: fogata desde la derecha, `255,150,60`, borde 0,9 y lavado 0,35.
-- Isla 7: farol desde la izquierda, `255,170,90`, borde 0,8 y lavado 0,3.
-- Las tiras de celular (256 y 224 px) se regeneraron desde la tira de escritorio ya iluminada.
-
-Para repetirlo: `node docs/plans/integracion-mayo/relight.js <repo> host-v2 1 255,150,60 0.9 0.35 --write`. Hay que partir de la tira sin iluminar, porque aplicarlo dos veces acumula el efecto.
+- **Luz en las islas 6 y 7.** La luz cálida se agrega por código sobre las tiras, sin tocar la silueta ni el canal alfa, con `integracion-mayo/relight.js` (`sharp`):
+  - Borde de luz: se aclaran con modo pantalla los píxeles de la silueta expuestos hacia la fuente, medidos a 5, 12 y 22 px hacia la luz y apenas hacia arriba, y difuminados 3 px.
+  - Lavado cálido: un tinte multiplicado que crece hacia el lado de la fuente.
+  - Isla 6: fogata desde la derecha, `255,140,50`, borde 1 y lavado 0,5.
+  - Isla 7: farol desde la izquierda, `255,165,80`, borde 1 y lavado 0,42.
+  - Una primera pasada (borde 0,8-0,9 y lavado 0,3-0,35) quedó demasiado sutil, así que se rehízo con más intensidad partiendo de las tiras sin iluminar.
+  - Las tiras de celular (256 y 224 px) se regeneran desde la de escritorio ya iluminada.
+  - Para repetirlo: `node docs/plans/integracion-mayo/relight.js <repo> host-v2 1 255,140,50 1 0.5 --write`. Hay que partir de la tira sin iluminar (commit 5673265), porque aplicarlo dos veces acumula el efecto.
+- **Isla 6, la mirada hacia Juani.** Mayo ya giraba la cabeza de quien lee (cuadros 1-3) hacia el fuego (4-7) y después hacia Juani (10-12), pero el bucle en el tiempo la barría sin pausa en 3,2 s y la mirada a Juani duraba un instante. Ahora el bucle (`mayo-host-gaze`, 5 s ida y vuelta) se detiene: mira hacia afuera un momento, sostiene el fuego unos 1,3 s y sostiene a Juani unos 2,5 s. En la placa, Juani la mira desde el banco, así que la escena se lee como un intercambio de miradas.
+- **Segundo salto de la isla 3.** El salto largo recorre 2,7 anchos de Mayo y antes ocupaba 40 vh, igual que el salto chico, con 20 vh en el aire. Con la rueda cruzaba unos 300 px en dos pasos. Ahora cada salto tiene su propio tramo (`timing.hops: [52, 92, 152]`, animaciones `packs-mayo-hop` y `packs-mayo-leap`):
+  - Salto chico: 40 vh.
+  - Salto largo: 60 vh, de los cuales 30 en el aire. Aterriza a la par de la tercera plataforma (128,9 vh).
+  - Se corre todo lo posterior 20 vh: sentarse en 152-180, bucle sentado desde 198, fundido de la placa en 184-202 y descansos `data-scroll-rest` en 80, 140 y 204 vh.
+  - La sección sigue midiendo 320 vh (220 vh de scroll fijado) y no se tocó el código del scroll guiado.
+- **Sombra de contacto más marcada.** Isla 2: la proyectada sube a 0,66 y la oclusión bajo las patas a 0,86 y 0,82, y se reubicó bajo las patas de la reverencia. Isla 3: el contacto (`.packs-mayo::before`) pasa del marrón al verde sombra del pasto, con un núcleo denso bajo las patas dentro de un charco más suave.
 
 ## Evidencia
 
-- `integracion-mayo/isla-{2,3,6,7}.jpg`: cuatro cuadros por isla. Arriba, la tira anterior; abajo, la nueva.
-- `integracion-mayo/en-escena.jpg`: Mayo en su placa a 1440x900, en tres puntos del scroll por isla (filas 2, 3, 6 y 7), antes de la luz cálida.
-- `integracion-mayo/luz-6-7.jpg`: islas 6 (arriba) y 7 (abajo). A la izquierda, sin luz cálida; en el centro y a la derecha, con luz cálida en dos puntos del scroll.
+- `integracion-mayo/isla-{2,3,6,7}.jpg`: cuatro cuadros por isla. Arriba, la tira anterior; abajo, la nueva (en la 6 y la 7, con la luz final).
+- `integracion-mayo/en-escena.jpg`: Mayo en su placa a 1440x900, en tres puntos del scroll por isla (filas 2, 3, 6 y 7), antes de la tercera entrega.
+- `integracion-mayo/luz-6-7.jpg`: la primera pasada de luz, que quedó demasiado sutil.
+- `integracion-mayo/ajustes-finales.jpg`: estado final. Arriba, la sombra en las islas 2 y 3; abajo, la isla 6 (Mayo mira a Juani con la luz del fuego) y la isla 7.
 
 ## Verificación (24/11/2026)
 
 - Lint, typecheck y `next build` (Turbopack, con `node_modules` propio) pasan.
-- 1440x900 con rueda (100 px por paso): en las islas 2, 6 y 7 el cuadro cambia cada uno o dos pasos, sin saltos ni pausas largas. En la isla 3 se lee la secuencia mirar, saltar, aterrizar y sentarse. El segundo salto cubre unos 300 px de pantalla en dos pasos de rueda: es rápido, pero se lee como un solo gesto.
-- 390x844 táctil (gestos sintéticos de CDP): el scroll funciona, sin errores de consola ni desborde horizontal. Las tiras `-cel` cargan.
-- Movimiento reducido: todas las animaciones de Mayo quedan en `none`.
+- Isla 3 a 1440x900 con rueda (100 px por paso): el salto largo ahora ocupa tres pasos, a unos 105 px de pantalla cada uno; antes eran dos pasos, de 150 a 175 px cada uno. Se lee la secuencia mirar, salto chico, salto largo, aterrizar y sentarse.
+- Isla 3 a 390x844, recorriendo la sección: el salto chico ocurre entre 60 y 80 vh y el largo entre 100 y 140 vh.
+- Islas 2, 6 y 7 se animan en el tiempo, no con el scroll (decisión de Juani del 20/11). La isla 6 se midió durante 10 s: sostiene a Juani y al fuego como se describe arriba.
+- 390x844: las tiras `-cel` de las islas 2, 6 y 7 cargan. Sin errores de consola ni desborde horizontal.
+- Movimiento reducido: ninguna animación de Mayo queda activa.
 - Cero errores de consola en escritorio y celular.
 
 ## Limitaciones
 
-- **Luz principal en las islas 6 y 7.** Es un retoque por código, no una pintura: el borde cálido sigue la silueta, pero no modela volumen como lo haría una pasada pintada. Si Juani quiere una luz más dramática, conviene repintar con una herramienta de imagen.
-- Isla 6: Juani queda fuera del encuadre de Mayo, que mira al fuego y no a él.
-- No se probó un trackpad real ni un teléfono físico: el gesto táctil fue sintético.
-- Sombra de contacto: se ve en los cuatro casos, pero es tenue en las islas 2 y 3 (escritorio).
+- La luz de las islas 6 y 7 es un retoque por código, no una pintura: el borde cálido sigue la silueta, pero no modela volumen como lo haría una pasada pintada.
+- No se probó un trackpad real ni un teléfono físico. Los gestos táctiles sintéticos de CDP no desplazaron la página, así que el recorrido en celular se midió con desplazamientos programáticos.
