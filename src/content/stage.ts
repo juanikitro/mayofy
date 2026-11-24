@@ -145,7 +145,7 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   fall: sprite("fall", "88%", "pingpong", { timeline: "--fall", range: "cover 20% cover 80%", cycles: 3 }),
   // Play bow among the rocks.
   // Painted in place on a crop of the island 2 v2 plate (play bow among the rocks).
-  problem: { ...sprite("problem", "87.91%", "pingpong", { timeline: "--isle", range: "cover 30% cover 85%", rangeMobile: "cover 35% cover 88%", cycles: 3 }), strip: { avif: "/images/mundo-mayo/70-mayo-problem-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-problem-v2-tira.webp" } },
+  problem: { ...sprite("problem", "87.91%", "pingpong", { timeline: "--isle", range: "cover 30% cover 85%", rangeMobile: "cover 35% cover 88%", cycles: 2 }), strip: { avif: "/images/mundo-mayo/70-mayo-problem-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-problem-v2-tira.webp" } },
   // Island 3 mounts its own four painted strips (packsMayo below, rock-island.tsx).
   // Digging: quick, repetitive paw strokes.
   // Painted in place on a crop of the island 4 v2 plate (camera, light and shadow from the scene).
@@ -186,10 +186,10 @@ export const mayoSprites: Partial<Record<MayoSlotId, MayoSprite>> = {
   },
   // Resting by the fire: breathing and ears, barely.
   // Painted in place on a crop of the island 6 v2 plate (resting, facing the campfire).
-  host: { ...sprite("host", "85.16%", "pingpong", { timeline: "--isle", range: "cover 62% cover 93%", rangeMobile: "cover 72% cover 98%", cycles: 2 }), strip: { avif: "/images/mundo-mayo/70-mayo-host-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-host-v2-tira.webp" } },
+  host: { ...sprite("host", "85.16%", "pingpong", { timeline: "--isle", range: "cover 62% cover 93%", rangeMobile: "cover 72% cover 98%", cycles: 1 }), strip: { avif: "/images/mundo-mayo/70-mayo-host-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-host-v2-tira.webp" } },
   // Trotting after a firefly.
   // Painted in place on a crop of the island 7 v2 plate: seated, following a firefly with her head.
-  questions: { ...sprite("questions", "88.27%", "pingpong", { timeline: "--isle", range: "cover 47% cover 70%", rangeMobile: "cover 57% cover 77%", cycles: 2 }), strip: { avif: "/images/mundo-mayo/70-mayo-questions-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-questions-v2-tira.webp" } },
+  questions: { ...sprite("questions", "88.27%", "pingpong", { timeline: "--isle", range: "cover 47% cover 70%", rangeMobile: "cover 57% cover 77%", cycles: 1 }), strip: { avif: "/images/mundo-mayo/70-mayo-questions-v2-tira.avif", webp: "/images/mundo-mayo/70-mayo-questions-v2-tira.webp" } },
 };
 
 /* ---------------------------------------------------------------- plates */
@@ -424,11 +424,9 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
     contact: {
       tint: "26 46 10",
       layers: [
-        { kind: "cast", x: "58%", y: "80%", w: "22%", h: "7%", opacity: 0.45 },
-        { kind: "cast", x: "26%", y: "90.5%", w: "34%", h: "8%", opacity: 0.5 },
-        { kind: "ao", x: "26%", y: "88%", w: "9%", h: "2.6%", opacity: 0.65 },
-        { kind: "ao", x: "46%", y: "89.5%", w: "9%", h: "2.6%", opacity: 0.65 },
-        { kind: "ao", x: "74%", y: "73%", w: "7%", h: "2%", opacity: 0.6 },
+        { kind: "cast", x: "50%", y: "87%", w: "48%", h: "9%", opacity: 0.66 },
+        { kind: "ao", x: "60%", y: "88.5%", w: "34%", h: "3.6%", opacity: 0.86 },
+        { kind: "ao", x: "33%", y: "87%", w: "11%", h: "3%", opacity: 0.82 },
       ],
     },
   },
@@ -501,7 +499,16 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   },
   // Island 6: resting on the grass facing the campfire (fire at 55 %, 59.5 %; mobile 53 %, 75 %), which lights her from the right.
   // Cell = plate crop (left 681 px, side 142 px of 1672); she faces the fire as painted; shadow painted in.
-  host: { x: "44.98%", y: "61.1%", size: "8.49%", xMobile: "36%", yMobile: "74.5%", sizeMobile: "17%", shadow: false },
+  host: {
+    x: "44.98%", y: "61.1%", size: "8.49%", xMobile: "36%", yMobile: "74.5%", sizeMobile: "17%", shadow: false,
+    contact: {
+      tint: "31 24 13",
+      layers: [
+        { kind: "cast", x: "41%", y: "85.5%", w: "66%", h: "9%", opacity: 0.42 },
+        { kind: "ao", x: "54%", y: "85%", w: "59%", h: "4%", opacity: 0.62 },
+      ],
+    },
+  },
   // Island 7: trots after a firefly on the meadow behind the front lip (rim 41 %, lip 49.5 %), right of the lantern (36.6 %, 48 %), which lights her from the left.
   // Cell = plate crop (left 711 px, top 354 px, side 100 px of 1672); light and shadow painted in.
   questions: {
@@ -790,9 +797,12 @@ export const packsMayo = {
   /**
    * Her moments in vh of pinned scroll (rocksStage), each long enough to be
    * watched with a wheel or a flick (a wheel notch is about 11 vh on a
-   * 900 px screen): two hop cycles of 40 vh from `hops` (each airborne for
-   * 20 vh, right after the first and the second platform land), sitting down
-   * over 28 vh as the third has landed, then seated. Her watching loop eases
+   * 900 px screen): `hops` bounds two hop cycles, a small hop of 40 vh right
+   * after the first platform lands and the long leap (2.7 of her widths) of
+   * 60 vh after the second, airborne for 30 vh and landing as the third
+   * platform does (Juani, 23 November 2026: "la animacion es incomoda"; at
+   * 40 vh it crossed the screen in two wheel notches); sitting down over
+   * 28 vh, then seated. Her watching loop eases
    * back to its first frame from `miraRest` so it hands over to the hop on
    * the same painted frame, and the seated loop only starts at `sentadaLoop`,
    * so it shows its first frame while it takes over from the sitting down.
@@ -802,7 +812,7 @@ export const packsMayo = {
    * `rests` are the poses the page may settle on (after the small hop, after
    * the leap, seated with the painted plate in).
    */
-  timing: { hops: [52, 132], sentarse: [132, 160], miraRest: 34, sentadaLoop: 178, crossfade: [164, 182], rests: [80, 120, 184] },
+  timing: { hops: [52, 92, 152], sentarse: [152, 180], miraRest: 34, sentadaLoop: 198, crossfade: [184, 202], rests: [80, 140, 204] },
 } as const;
 
 /**

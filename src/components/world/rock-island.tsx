@@ -387,7 +387,7 @@ type PacksStrip = keyof typeof packsMayo.strips;
  * Mayo's cell and stops: the cell stands where she ends (seated by the third
  * platform), the feet line on the painted feet; the earlier stops are
  * `translate` offsets from there, in her own widths (world.css
- * `packs-mayo-hops`).
+ * `packs-mayo-hop`, `packs-mayo-leap`).
  */
 function packsMayoVars() {
   const vars = (size: Size) => {
@@ -401,7 +401,7 @@ function packsMayoVars() {
       ...Object.fromEntries(stops.map((stop, hop) => [`--hop-${hop}-${size}`, `${round(((stop - end) / width) * 100)}%`])),
     };
   };
-  return { ...vars("d"), ...vars("m") } as CSSProperties;
+  return { ...vars("d"), ...vars("m"), "--feet-y": `${packsMayo.feetY}%` } as CSSProperties;
 }
 
 /**
@@ -442,7 +442,9 @@ function stageVars() {
     // The live pieces hide once the painting is opaque.
     "--live-out": cover(crossfade[1] - 0.5, crossfade[1]),
     "--range-mira": `cover 0% cover ${stageCover(hops[0])}%`,
-    "--range-hops": cover(hops[0], hops[1]),
+    "--range-hops": cover(hops[0], hops[2]),
+    "--range-hop": cover(hops[0], hops[1]),
+    "--range-leap": cover(hops[1], hops[2]),
     "--range-sentarse": cover(sentarse[0], sentarse[1]),
     "--range-sentada-off": `cover 0% cover ${stageCover(sentarse[1])}%`,
   } as CSSProperties;

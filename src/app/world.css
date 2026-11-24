@@ -366,10 +366,35 @@ details[data-preparing-open="true"] > .animated-details__content {
 }
 
 .mayo--hero { --loop-duration: 2.6s; }
-.mayo--problem { --loop-duration: 1.4s; }
+.mayo--problem { --loop-duration: 2s; }
 .mayo--systems { --loop-duration: 1.3s; }
-.mayo--host { --loop-duration: 3.2s; }
-.mayo--questions { --loop-duration: 2.2s; }
+.mayo--host { --loop-duration: 5s; }
+.mayo--questions { --loop-duration: 2.6s; }
+
+/* Island 6: her gaze rests instead of sweeping. The strip turns from the
+ * reader (frames 1-3) to the fire (4-7) and lifts her head to Juani on his
+ * bench (10-12); she glances out briefly, holds the fire, then holds Juani,
+ * and the loop plays back the same way. */
+.mayo--host .mayo__sprite img {
+  animation-name: mayo-host-gaze;
+  animation-timing-function: step-end;
+}
+
+@keyframes mayo-host-gaze {
+  0% { transform: translateX(0%); }
+  10% { transform: translateX(calc(-100% / 12)); }
+  14% { transform: translateX(calc(-200% / 12)); }
+  18% { transform: translateX(calc(-300% / 12)); }
+  22% { transform: translateX(calc(-400% / 12)); }
+  26% { transform: translateX(calc(-500% / 12)); }
+  30% { transform: translateX(calc(-600% / 12)); }
+  56% { transform: translateX(calc(-700% / 12)); }
+  60% { transform: translateX(calc(-800% / 12)); }
+  64% { transform: translateX(calc(-900% / 12)); }
+  68% { transform: translateX(calc(-1000% / 12)); }
+  72%,
+  100% { transform: translateX(calc(-1100% / 12)); }
+}
 
 /* The fall is the one place Mayo moves on her own (Juani, 19 November
  * 2026): her tumble loops in time while the clouds follow the scroll. */
@@ -586,7 +611,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 /* Mayo on island 3, painted in place (stage.ts packsMayo): four strip
  * windows in one cell, which stands where she ends (seated by the third
- * platform); `packs-mayo-hops` moves the cell between her stops. Her light
+ * platform); `packs-mayo-hop` and `packs-mayo-leap` move the cell between her stops. Her light
  * and shadow are painted in. Without motion only the seated window shows, on
  * its first frame: the assembled state. */
 .packs-mayo {
@@ -608,6 +633,22 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   aspect-ratio: 1;
   pointer-events: none;
 }
+
+/* Mayo integration: keep the ground contact independent of strip visibility. */
+.packs-mayo::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: var(--feet-y);
+  width: 66%;
+  height: 15%;
+  transform: translate(-50%, -50%);
+  /* The meadow's own shadow green: a dense core under the paws in a softer pool. */
+  background:
+    radial-gradient(ellipse 42% 32% at 50% 52%, rgb(22 40 8 / 72%), rgb(22 40 8 / 0%)),
+    radial-gradient(ellipse, rgb(26 46 10 / 62%), rgb(26 46 10 / 26%) 49%, transparent 72%);
+}
+/* End Mayo integration. */
 
 .packs-mayo__strip {
   position: absolute;
@@ -649,21 +690,28 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 }
 
-/* Her two hops on the hop strip's range (two strip cycles): she moves only
- * while airborne, frames 3 to 8 of 12 of each cycle (k/2 + 2/24 to
- * k/2 + 8/24 of the range), and stands still otherwise. */
-@keyframes packs-mayo-hops {
+/* Her small hop and her leap, one hop strip cycle each on its own range
+ * (--range-hop, --range-leap): she moves only while airborne, frames 3 to 8
+ * of 12 (2/12 to 8/12 of the cycle), and stands still otherwise. */
+@keyframes packs-mayo-hop {
   0%,
-  8.33% {
+  16.67% {
     translate: var(--hop-0) 0;
   }
 
-  33.33%,
-  58.33% {
+  66.67%,
+  100% {
+    translate: var(--hop-1) 0;
+  }
+}
+
+@keyframes packs-mayo-leap {
+  0%,
+  16.67% {
     translate: var(--hop-1) 0;
   }
 
-  83.33%,
+  66.67%,
   100% {
     translate: var(--hop-2) 0;
   }
@@ -1316,15 +1364,18 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
   /* Mayo's choreography (stage.ts packsMayo.timing, in vh of pinned
    * scroll; the platform tops land at 52.9, 90.9 and 128.9): she watches the
-   * floating rocks until 52; hops in two scrubbed cycles of 40 (52-132),
-   * airborne right after the first and the second platform land; sits down
-   * (6 frames, 132-160) once the third has landed; then stays seated. Her
-   * watching and seated loops run on their own clock (packs-mayo-clock.tsx),
-   * which brings them to the frame each hand-over shares. */
+   * floating rocks until 52; a small hop over 40 (52-92) right after the
+   * first platform lands and the long leap over 60 (92-152), landing as the
+   * third platform does; sits down (6 frames, 152-180); then stays seated.
+   * The leap's own range keeps its 2.7 widths of travel readable with a
+   * wheel. Each later animation wins while active; `forwards` keeps the leap
+   * out of the way before it starts. Her watching and seated loops run on
+   * their own clock (packs-mayo-clock.tsx), which brings them to the frame
+   * each hand-over shares. */
   .packs-mayo {
-    animation: packs-mayo-hops linear both;
-    animation-timeline: --rocks;
-    animation-range: var(--range-hops);
+    animation: packs-mayo-hop linear both, packs-mayo-leap linear forwards;
+    animation-timeline: --rocks, --rocks;
+    animation-range: var(--range-hop), var(--range-leap);
   }
 
   .packs-mayo__strip--mira {
@@ -1340,11 +1391,10 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 
   .packs-mayo__strip--salto img {
-    animation: mayo-sprite linear both;
+    animation: mayo-sprite linear both, mayo-sprite linear forwards;
     animation-timing-function: steps(12, jump-none);
-    animation-iteration-count: 2;
-    animation-timeline: --rocks;
-    animation-range: var(--range-hops);
+    animation-timeline: --rocks, --rocks;
+    animation-range: var(--range-hop), var(--range-leap);
   }
 
   .packs-mayo__strip--sentarse {
