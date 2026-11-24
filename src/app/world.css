@@ -2514,12 +2514,6 @@ html[data-motion-tier="reduced"] .fall__mayo {
   color: var(--moss);
 }
 
-.sendero__lead {
-  max-width: 34rem;
-  margin-block-start: 0.75rem;
-  color: var(--ink-soft);
-}
-
 .sendero__steps {
   display: grid;
   gap: 0.25rem;
@@ -2537,11 +2531,27 @@ html[data-motion-tier="reduced"] .fall__mayo {
 }
 
 .sendero__number {
+  position: relative;
   font-family: var(--font-world-serif);
   font-size: 1.15rem;
   font-style: italic;
   line-height: 1.3;
   color: var(--moss);
+}
+
+/* The number rolls when its step becomes the current one (the pinned path,
+ * below): the digits it replaces leave one way, its own arrive from the
+ * other. Both sit in the same box; only translate and opacity move. */
+.sendero__digits {
+  display: inline-block;
+}
+
+.sendero__number::before {
+  content: attr(data-from);
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .sendero__step strong {
@@ -2568,13 +2578,11 @@ html[data-motion-tier="reduced"] .fall__mayo {
   transition: background-color 200ms var(--ease-out);
 }
 
+/* Hover: a soft cream wash and the label at full ink, never an underline
+ * (Juani, 24 November 2026: "del hover de los elementos quitales el subrayado"). */
 .sendero__go:hover {
   background: color-mix(in oklch, var(--cream) 40%, transparent);
-}
-
-.sendero__go:hover strong {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+  color: var(--ink);
 }
 
 .sendero__go:focus-visible {
@@ -2758,6 +2766,25 @@ html[data-motion-tier="reduced"] .fall__mayo {
       animation-range: contain var(--from) contain var(--to);
     }
 
+    /* The current step's number rolls in from the one before: up going
+     * down the path, down going back (`data-dir`, SenderoController). Not
+     * in the reduced motion tier. */
+    .sendero__number {
+      --number-shift: 0.7em;
+    }
+
+    .sendero__number[data-dir="up"] {
+      --number-shift: -0.7em;
+    }
+
+    html:not([data-motion-tier="reduced"]) .sendero__go[aria-current] .sendero__digits {
+      animation: sendero-number-in var(--m-reveal, 520ms) var(--ease-enter, ease-out) both;
+    }
+
+    html:not([data-motion-tier="reduced"]) .sendero__go[aria-current] .sendero__number[data-from]::before {
+      animation: sendero-number-out 320ms var(--ease-ui, ease-out) both;
+    }
+
     .sendero__badge {
       animation-name: sendero-badge-now, sendero-badge-done;
       animation-duration: auto;
@@ -2802,10 +2829,6 @@ html[data-motion-tier="reduced"] .fall__mayo {
         padding-block-start: 4.5rem;
       }
 
-      .sendero__lead {
-        display: none;
-      }
-
       .sendero__steps {
         grid-template-areas: "step";
         margin-block-start: 0.75rem;
@@ -2821,6 +2844,20 @@ html[data-motion-tier="reduced"] .fall__mayo {
         margin-block-start: 0.2rem;
         opacity: 1;
         animation: none;
+      }
+
+      /* The number lives in the card's "Paso 3 de 6" label here: it rises
+       * in (or drops in, going back) as the step changes. */
+      .sendero__step::before {
+        --number-shift: 0.6em;
+      }
+
+      .sendero__step:has(.sendero__number[data-dir="up"])::before {
+        --number-shift: -0.6em;
+      }
+
+      html:not([data-motion-tier="reduced"]) .sendero__step:has(.sendero__go[aria-current])::before {
+        animation: sendero-number-in var(--m-reveal, 520ms) var(--ease-enter, ease-out) both;
       }
 
       /* The six step buttons: a vertical rail, in "Mobile packs carousel,
@@ -2852,6 +2889,30 @@ html[data-motion-tier="reduced"] .fall__mayo {
     max-height: 8rem;
     margin-block-start: 0.2rem;
     opacity: 1;
+  }
+}
+
+@keyframes sendero-number-in {
+  from {
+    opacity: 0;
+    translate: 0 var(--number-shift);
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes sendero-number-out {
+  from {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  to {
+    opacity: 0;
+    translate: 0 calc(-1 * var(--number-shift));
   }
 }
 

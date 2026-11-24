@@ -34,7 +34,8 @@ const badges: readonly { desktop: readonly [number, number]; mobile: readonly [n
  * finished (SenderoController). With reduced motion, or without scroll-driven
  * animations, all six steps are open and Mayo stands on the last stone. The
  * list stays a plain <ol> with every step in the DOM: only the highlight
- * changes.
+ * changes. When the current step changes, its number rolls in from the one
+ * before (`data-from`, `data-dir` set by SenderoController).
  */
 export function SixSteps() {
   const steps = siteContent.process;
@@ -48,13 +49,12 @@ export function SixSteps() {
           <h3 id="pasos-title" className="sendero__title">
             <IslandTitle segments={islandCopy.process.title} />
           </h3>
-          <p className="sendero__lead">{islandCopy.process.body}</p>
           <ol className="sendero__steps" aria-labelledby="pasos-title">
             {steps.map((step, index) => (
               <li key={step} className="sendero__step" style={{ "--i": index } as CSSProperties}>
                 <button type="button" className="sendero__go" data-step={index}>
                   <span className="sendero__number" aria-hidden="true">
-                    {String(index + 1).padStart(2, "0")}
+                    <span className="sendero__digits">{String(index + 1).padStart(2, "0")}</span>
                   </span>
                   <strong>{step}</strong>
                 </button>

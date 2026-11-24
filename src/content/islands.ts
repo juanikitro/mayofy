@@ -33,14 +33,14 @@ export const islandCopy = {
   },
   process: {
     title: ["Seis pasos, sin ", { em: "sorpresas" }, "."],
-    // Lead and one line per step as approved with option A of the six steps
+    // One line per step as approved with option A of the six steps
     // (docs/plans/2026-11-20-propuestas.md, Juani 2026-11-20); in the order of siteContent.process.
-    body: "Vas a saber en qué etapa está tu proyecto y qué falta para publicar.",
+    // Juani, 24 November 2026: no lead, a new first line and "Hacés seguimiento" in the fourth.
     details: [
-      "Charlamos 30 minutos sobre tu negocio y lo que necesitás.",
+      "Nos contás cómo trabajás hoy y qué querés resolver primero.",
       "Te mandamos por escrito qué incluye, cuánto sale y cuándo está.",
       "Lo ves diseñado, con tu marca y tu rubro, antes de construirlo.",
-      "Seguís el avance mientras lo construimos, no recién al final.",
+      "Hacés seguimiento mientras lo construimos, no recién al final.",
       "Publicamos con tu dominio y dejamos medidas las visitas y consultas.",
       "Una semana de soporte incluida; después, mantenimiento si lo querés.",
     ],
