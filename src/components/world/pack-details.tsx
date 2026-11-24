@@ -1,8 +1,8 @@
 import { CardLight } from "@/components/world/card-light";
 import { FlipCard } from "@/components/world/flip-card";
-import { DetailGroups } from "@/components/world/pack-groups";
 import { GuaranteesStrip } from "@/components/world/guarantees-strip";
 import { PackCarousel } from "@/components/world/pack-carousel";
+import { PackTabs } from "@/components/world/pack-tabs";
 import { Toggletip } from "@/components/world/toggletip";
 import { commercialIntro, commercialPlans } from "@/content/commercial-plans";
 import { getPesoPrices } from "@/lib/peso-prices";
@@ -76,7 +76,8 @@ export async function PackDetails() {
             </a>
           </>
         }
-        back={<DetailGroups groups={plan.detailGroups} />}
+        back={<PackTabs groups={plan.detailGroups} />}
+        resetBack
       />
     );
   }

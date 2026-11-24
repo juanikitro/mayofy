@@ -902,11 +902,14 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   scale: calc(1.8 - 0.8 * var(--ground));
 }
 
-/* The markers: a box with the plate's frame (bottom-anchored, full width,
- * the plate's ratio and drop), each marker standing on its platform's top
- * rock on a short stem (Juani, 20 November 2026, option A). One line on
- * desktop ("Landing  USD 85  ↓"), name over price on phones; each leads to its
- * full pack card below (platform-markers.tsx). */
+/* Wooden signs (Juani, 24 November 2026: "Marcadores de precio, elijo el
+ * cartel de madera"). The markers share the plate's frame (bottom-anchored,
+ * full width, the plate's ratio and drop), each a small painted plank on a
+ * stake planted in its platform's top rock: name and price lettered on the
+ * plank, the arrow kept; one line on desktop, name over price on phones.
+ * Each leads to its full pack card below (platform-markers.tsx). The wood
+ * takes the plates' light: warm, from the high front left, so the top and
+ * left edges catch it and the bottom and right fall into shade. */
 .platforms {
   position: absolute;
   inset: auto 0 0;
@@ -919,76 +922,110 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 .platform__marker {
   --x: var(--x-d);
   --top: var(--top-d);
-  --stem: 0.9rem;
+  --stem: 1rem;
+  --wood: oklch(51% 0.085 57);
+  --wood-deep: oklch(37% 0.07 48);
+  --wood-lit: oklch(72% 0.09 70);
 
   position: absolute;
   left: var(--x);
   bottom: calc(100% - var(--top) + var(--stem));
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
+  display: flex;
   min-height: 2.75rem;
-  padding: 0.55rem 1rem 0.55rem 0.85rem;
-  border-radius: 999px;
-  background: var(--cream);
-  box-shadow: var(--shadow-soft);
-  color: var(--ink);
+  border-radius: 0.5rem;
+  color: oklch(96% 0.025 85);
   font-size: 1.02rem;
-  font-weight: 600;
+  font-weight: 700;
   white-space: nowrap;
   text-decoration: none;
   translate: -50% 0;
   pointer-events: auto;
-  transition: translate 160ms var(--ease-out);
+  transition: translate 260ms var(--ease-out);
 }
 
-/* The stem down to the rock it names. */
-.platform__marker::after {
+/* The stake: behind the plank from its nail, down into the rock. */
+.platform__marker::before {
   content: "";
   position: absolute;
   left: 50%;
-  top: 100%;
-  width: 2px;
-  height: var(--stem);
-  background: var(--cream);
+  top: 0.45rem;
+  z-index: -1;
+  width: 0.42rem;
+  height: calc(100% - 0.45rem + var(--stem) + 0.2rem);
+  border-radius: 0.12rem 0.12rem 0.22rem 0.22rem;
+  background: linear-gradient(90deg, var(--wood-lit), var(--wood) 45%, var(--wood-deep));
+  box-shadow: 0.1rem 0.1rem 0.2rem oklch(25% 0.05 55 / 35%);
   translate: -50% 0;
 }
 
-.platform__marker:hover {
-  translate: -50% -3px;
+/* The plank hangs on a nail at its top centre, where it sways from. */
+.platform__marker-plank {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  padding: 0.7rem 1rem 0.45rem;
+  border-radius: 0.4rem 0.55rem 0.45rem 0.35rem;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 60' preserveAspectRatio='none'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.005 0.42' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 0 0.04 0 0 0 2.1 -0.85'/%3E%3C/filter%3E%3Crect width='240' height='60' filter='url(%23g)'/%3E%3C/svg%3E") 0 0 / 100% 100%,
+    linear-gradient(180deg, var(--wood-lit), var(--wood) 28%, var(--wood) 72%, var(--wood-deep));
+  box-shadow:
+    inset 0 1px 0 oklch(88% 0.08 78 / 70%),
+    inset 1px 0 0 oklch(82% 0.08 75 / 40%),
+    inset 0 -2px 0 oklch(28% 0.06 46 / 55%),
+    inset -1px 0 0 oklch(28% 0.06 46 / 35%),
+    0 0.4rem 0.6rem -0.25rem oklch(25% 0.05 55 / 50%);
+  text-shadow: 0 1px 0 oklch(26% 0.06 46 / 70%);
+  transform-origin: 50% 0.4rem;
 }
 
+/* Each plank shows another stretch of the same grain. */
+.platform__marker--2 .platform__marker-plank {
+  background-position: 40% 0, 0 0;
+  background-size: 180% 100%, auto;
+}
+
+.platform__marker--3 .platform__marker-plank {
+  background-position: 85% 0, 0 0;
+  background-size: 160% 120%, auto;
+}
+
+/* The nail. */
+.platform__marker-plank::before {
+  content: "";
+  position: absolute;
+  top: 0.22rem;
+  left: 50%;
+  width: 0.34rem;
+  height: 0.34rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, oklch(88% 0.02 85), oklch(42% 0.02 60) 75%);
+  box-shadow: 0 1px 1px oklch(20% 0.04 50 / 50%);
+  translate: -50% 0;
+}
+
+.platform__marker-price,
+.platform__marker-arrow {
+  color: oklch(89% 0.1 88);
+  font-variant-numeric: tabular-nums;
+}
+
+.platform__marker-arrow {
+  transition: translate 160ms var(--ease-out);
+}
+
+/* The ring sits apart from the wood: cream, then moss. */
 .platform__marker:focus-visible {
   outline: 3px solid var(--moss);
   outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--cream);
 }
 
 /* A marker reached with Tab before its platform has assembled shows at once:
  * keyboard focus never lands on something invisible. */
 .platform__marker:focus-visible {
   opacity: 1 !important;
-}
-
-.platform__marker-dot {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 50%;
-  background: var(--leaf);
-}
-
-.platform__marker-price {
-  color: var(--moss);
-  font-variant-numeric: tabular-nums;
-}
-
-.platform__marker-arrow {
-  color: var(--moss);
-  transition: translate 160ms var(--ease-out);
-}
-
-.platform__marker:hover .platform__marker-arrow,
-.platform__marker:focus-visible .platform__marker-arrow {
-  translate: 0 3px;
 }
 
 /* Spoken, not shown: where the marker leads. */
@@ -999,6 +1036,105 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
+}
+
+/* The rock under a sign: a copy of the painted plate clipped to its stack
+ * (LiftPlates, stage.ts platformLiftOutlines), fading out over its feet.
+ * Hidden at rest; hovered or focused, it rises 4px with its sign. */
+.rocks .plate__picture--lift {
+  z-index: 3;
+  clip-path: var(--lift-d);
+  mask-image: linear-gradient(180deg, #000 calc(var(--lift-foot-d) - 2.5%), transparent var(--lift-foot-d));
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    translate 260ms var(--ease-out),
+    visibility 0s linear 260ms;
+}
+
+@media (max-width: 48rem) {
+  .rocks .plate__picture--lift {
+    clip-path: var(--lift-m);
+    mask-image: linear-gradient(180deg, #000 calc(var(--lift-foot-m) - 2.5%), transparent var(--lift-foot-m));
+  }
+}
+
+/* Hover (pointer devices) or keyboard focus: the plank sways like a hanging
+ * sign, a damped pendulum around its nail (two swings, then still), and the
+ * sign and its rock rise 4px; the rock only once the platforms stand built
+ * (or without the play). None of it with reduced motion. */
+@keyframes sign-sway {
+  0% {
+    rotate: 0deg;
+  }
+
+  16% {
+    rotate: 4.5deg;
+  }
+
+  38% {
+    rotate: -2.8deg;
+  }
+
+  58% {
+    rotate: 1.4deg;
+  }
+
+  78% {
+    rotate: -0.5deg;
+  }
+
+  100% {
+    rotate: 0deg;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .platform__marker:focus-visible {
+    translate: -50% -4px;
+  }
+
+  html:not([data-motion-tier="reduced"]) .platform__marker:focus-visible .platform__marker-plank {
+    animation: sign-sway 1.5s cubic-bezier(0.37, 0, 0.63, 1) both;
+  }
+
+  html:not([data-motion-tier="reduced"]) .platform__marker:focus-visible .platform__marker-arrow {
+    translate: 0 3px;
+  }
+
+  html:not([data-motion-tier="reduced"]) .rocks:is([data-play="built"], :not([data-play])) .rocks__stage:has(.platform__marker--1:focus-visible) .plate__picture--lift-1,
+  html:not([data-motion-tier="reduced"]) .rocks:is([data-play="built"], :not([data-play])) .rocks__stage:has(.platform__marker--2:focus-visible) .plate__picture--lift-2,
+  html:not([data-motion-tier="reduced"]) .rocks:is([data-play="built"], :not([data-play])) .rocks__stage:has(.platform__marker--3:focus-visible) .plate__picture--lift-3 {
+    visibility: visible;
+    translate: 0 -4px;
+    transition:
+      translate 320ms var(--ease-out),
+      visibility 0s;
+  }
+
+  @media (hover: hover) {
+    html:not([data-motion-tier="reduced"]) .platform__marker:hover {
+      translate: -50% -4px;
+    }
+
+    html:not([data-motion-tier="reduced"]) .platform__marker:hover .platform__marker-plank {
+      animation: sign-sway 1.5s cubic-bezier(0.37, 0, 0.63, 1) both;
+    }
+
+    html:not([data-motion-tier="reduced"]) .platform__marker:hover .platform__marker-arrow {
+      translate: 0 3px;
+    }
+
+    html:not([data-motion-tier="reduced"]) .rocks:is([data-play="built"], :not([data-play])) .rocks__stage:has(.platform__marker--1:hover) .plate__picture--lift-1,
+    html:not([data-motion-tier="reduced"]) .rocks:is([data-play="built"], :not([data-play])) .rocks__stage:has(.platform__marker--2:hover) .plate__picture--lift-2,
+    html:not([data-motion-tier="reduced"]) .rocks:is([data-play="built"], :not([data-play])) .rocks__stage:has(.platform__marker--3:hover) .plate__picture--lift-3 {
+      visibility: visible;
+      translate: 0 -4px;
+      transition:
+        translate 320ms var(--ease-out),
+        visibility 0s;
+    }
+  }
 }
 
 /* The pack card a marker leads to rings for a moment on arrival (also when
@@ -1591,24 +1727,27 @@ html[data-motion-tier="reduced"] .scene__sky {
     transform: translate(-50%, var(--rocks-drop));
   }
 
-  /* Name over price, no dot or arrow, 44 px tall; a long name may wrap. */
+  /* Name over price, no arrow, 44 px tall; a long name wraps, so the
+   * third sign keeps clear of the screen's edge at 360 px. */
   .platform__marker {
     --x: var(--x-m);
     --top: var(--top-m);
-    --stem: 0.6rem;
+    --stem: 0.7rem;
 
-    flex-direction: column;
-    gap: 0;
-    max-width: 7.6rem;
-    padding: 0.45rem 0.7rem;
-    border-radius: 1.2rem;
+    max-width: 6.6rem;
     font-size: 0.82rem;
     line-height: 1.2;
     text-align: center;
     white-space: normal;
   }
 
-  .platform__marker-dot,
+  .platform__marker-plank {
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    padding: 0.62rem 0.6rem 0.4rem;
+  }
+
   .platform__marker-arrow {
     display: none;
   }
@@ -9191,40 +9330,119 @@ html[data-motion-tier="reduced"] .packs__grid > * {
   transition: none;
 }
 
-/* Pack details never scroll inside the card (Juani, 24 November 2026:
- * "dentro de cada detalle de cada pack, hay un scroll vertical que te come
- * el dedo"): the back's lists keep their full height, so a vertical swipe on
- * a turned card always moves the page. */
+/* Pack card backs: tabs, always one open (PackTabs; Juani, 24 November 2026:
+ * "Sobre la card que crece, añadamos tabs al dorso, siempre una abierta").
+ * The back lies exactly on the front, desktop and phone, and the open tab
+ * fits it, so a turned card neither grows over the guarantees strip nor
+ * changes the carousel's height, and nothing scrolls inside it (Juani,
+ * earlier the same day: "hay un scroll vertical que te come el dedo"). */
+.pack .flip__face--back {
+  overflow: hidden;
+}
+
 .pack .flip__scroll {
-  flex: none;
+  display: flex;
+  min-height: 0;
   padding-block-end: 0;
-  overflow: visible;
+  overflow: hidden;
   overscroll-behavior: auto;
   mask-image: none;
 }
 
-/* From tablet up the three cards share their rows (subgrid), so a turned
- * card grows downward over what follows instead of stretching the other
- * two; it rises above it while turned. */
-.pack .flip__face--back {
-  inset: 0 0 auto;
-  min-height: 100%;
+.pack-tabs {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-height: 0;
 }
 
-.pack[data-flipped] {
-  z-index: 4;
+/* A segmented row the width of the card; it never scrolls on its own, so a
+ * sideways swipe on it moves the phone carousel. */
+.pack-tabs__list {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-radius: var(--radius-pill);
+  background: var(--beige);
 }
 
-/* On phones each card stands alone: a turned card takes its back's height
- * and the front lies under it, out of the flow. */
+.pack-tabs__tab {
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0.25rem 0.4rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.15;
+  cursor: pointer;
+  transition:
+    background-color var(--m-base) var(--ease-ui),
+    color var(--m-base) var(--ease-ui),
+    box-shadow var(--m-base) var(--ease-ui);
+}
+
+.pack-tabs__tab[aria-selected="true"] {
+  background: var(--cream);
+  color: var(--moss);
+  box-shadow: 0 1px 2px oklch(30% 0.05 60 / 16%);
+}
+
+@media (hover: hover) {
+  .pack-tabs__tab:not([aria-selected="true"]):hover {
+    background: color-mix(in oklch, var(--cream) 55%, transparent);
+    color: var(--ink);
+  }
+}
+
+.pack-tabs__tab:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 2px;
+}
+
+.pack-tabs__panel {
+  min-height: 0;
+  border-radius: 0.5rem;
+}
+
+/* Phones: three one-line labels across a narrow card. */
 @media (max-width: 48rem) {
-  .pack[data-flipped] .flip__face--back {
-    position: relative;
+  .pack .flip__face--back {
+    padding-inline: 1rem;
   }
 
-  .pack[data-flipped] .flip__face--front {
-    position: absolute;
-    inset: 0;
+  .pack-tabs__list {
+    gap: 0.15rem;
+    padding: 0.2rem;
+  }
+
+  .pack-tabs__tab {
+    padding-inline: 0.2rem;
+    font-size: 0.8rem;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+}
+
+.pack-tabs__panel:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 4px;
+}
+
+.pack-tabs__panel[hidden] {
+  display: none;
+}
+
+/* Another tab's rows arrive at once, without waiting for a turn. */
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .flip[data-flipped] .pack-tabs[data-touched] .pack-list > li {
+    animation-delay: calc(min(var(--i, 0), 10) * 22ms);
   }
 }
 

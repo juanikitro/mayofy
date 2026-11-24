@@ -5,7 +5,7 @@ export type DetailGroup = {
   items: readonly string[];
 };
 
-/** Shared "Incluye / No incluye" lists used by packs and maintenance. */
+/** "Incluye / No incluye" lists on the maintenance card's back (the pack cards show the same groups as tabs, PackTabs). */
 export function DetailGroups({ groups }: { groups: readonly DetailGroup[] }) {
   return (
     <div className="pack-groups">
