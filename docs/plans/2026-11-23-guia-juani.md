@@ -26,23 +26,26 @@ Leyenda: `[ ]` pendiente, `[x]` hecho y comprobado, `[~]` empezado o esperando a
 - [x] `https://mayofy.dev/` importado desde Search Console (rol Administrator). Bing recibió acceso de solo lectura a Search Console; se puede quitar en la cuenta de Google, en "Terceros con acceso".
 - [x] Sitemap `https://mayofy.dev/sitemap.xml` enviado en Bing (no venía en la importación porque se había enviado minutos antes): estado "Processing".
 
-### 3. Perfil de Empresa en Google (unos 45 minutos, más hasta 5 días hábiles de verificación)
+### 3. Perfil de Empresa en Google (creado el 24/11/2026, falta verificar)
 
 Sigue la "Lista única para Juani" de `docs/plans/2026-11-22-perfil-google.md`.
 
-- [ ] Antes: revisar en Google Maps las 6 zonas con ⚠ y decidir el horario real.
-- [ ] Crear: nombre `Mayofy`, categoría "Diseñador de sitios web", sin local que se visite, las 20 zonas, teléfono, web con UTM, dirección solo para verificar.
-- [ ] Verificar con el método que ofrezca Google (video si lo pide).
-- [ ] Completar: descripción, categoría "Empresa de software", servicios, horario, atributos, enlaces (Cal.com, WhatsApp, Instagram, LinkedIn).
-- [ ] Fotos de `docs/plans/perfil-google/`: logo, portada y 4 fotos.
-- [ ] Publicación de la semana 1 lista.
+- [x] Horario (Juani, 24/11): "mi horario es de 9hs a 19hs". Se cargó de lunes a sábado (los días que ya ofrecía Cal.com) y domingo cerrado.
+- [x] Creado con jpkitro@gmail.com: nombre `Mayofy`, categoría "Website designer" (Diseñador de sitios web), sin local que se visite, las 20 zonas de la tabla (sin reemplazos: no se midieron en Maps las 6 con ⚠), teléfono `02345 45-5007`, web con UTM, chat de WhatsApp `https://wa.me/542345455007`.
+- [x] Dirección para verificar: la de Juani en 25 de Mayo (oculta al público; no se copia en este documento). Google exigió el código postal completo: se cargó `B6660AAA`, el mismo del otro perfil de la cuenta. Supuesto: solo importa si Google manda una postal.
+- [x] Descripción (637 caracteres), categoría adicional "Software company" y horario lunes a sábado 9 a 19, guardados.
+- [ ] **Verificación por video (solo Juani, desde el celular).** Google ofreció un único método: un video continuo con (1) la calle o un lugar conocido de la zona, (2) el nombre Mayofy impreso o en pantalla y (3) acceso a una herramienta del negocio (por ejemplo, el panel de Cal.com o de Vercel con mayofy.dev). Sin caras ni documentos sensibles; de 1 a 2 minutos. La revisión tarda hasta 5 días hábiles.
+- [ ] Redes (Instagram, LinkedIn): el editor no abre con el perfil sin verificar; cargar después.
+- [ ] Servicios, atributos, fotos y la primera publicación.
 - [ ] Pasar la URL pública del perfil al coordinador (va en `sameAs`, `src/lib/structured-data.ts`).
+- Nota: la cuenta tiene otro perfil sin verificar, "Zona Marcial 25 de Mayo", que no es de Mayofy y no se tocó.
 
-URL del perfil: _pendiente_.
+URL del perfil: _pendiente de verificación_ (id interno 7328409250559941765).
 
 ### 4. Cal.com
 
 - [x] Evento "Mayofy First Meeting" → Appearance → "Interface language" activado en **Español Latinoamericano** (en Cal.com 7 la opción ya no está en "Avanzado"). La vista previa pasó a "noviembre", "LUN", "Horarios disponibles".
+- [x] Disponibilidad (Juani, 24/11: "los horarios de cal.com deben ser esos mismos"): pasó de lunes a sábado 7 a 19 a lunes a sábado **9 a 19**.
 - [ ] Título del evento (hoy "Mayofy First Meeting", en inglés): esperar la decisión de Juani. Sugerido: `Charla inicial con Mayofy`. Cambiar solo el título, no el slug `mayofy-first-meeting`, que usa el sitio. Si cambia la duración o el lugar, avisar: `src/content/site.ts` dice "30 minutos por videollamada".
 - Formato de 24 h: sigue sin opción por evento; el selector "12h / 24h" queda a la vista del visitante.
 
@@ -102,3 +105,4 @@ En el sitio de cada cliente cambiar `cliente` por su nombre (`shineapp`, `gymg`,
 - 2026-11-23: el coordinador publicó la versión nueva (master `89f798a`; sitemap.xml, og/home.jpg y los casos responden 200). Los pasos marcados "después de publicar" quedan habilitados.
 - 2026-11-24: Juani pidió ejecutar los pasos con el MCP de Chrome. Se instaló Chrome DevTools MCP (`--autoConnect`) a pedido suyo; la sesión opera su Chrome con sus sesiones iniciadas, sin manejar contraseñas. Search Console terminado (ver sección 1).
 - 2026-11-24: Bing, Cal.com (idioma), FormSubmit, vistas previas y Analytics hechos desde el Chrome de Juani (secciones 2, 4, 5 y 6). Quedan: Perfil de Google (necesita horario, dirección y la verificación de Juani), título del evento de Cal.com, enlaces en perfiles y WhatsApp desde el celular.
+- 2026-11-24: Juani pasó horario y dirección. Cal.com quedó lunes a sábado 9 a 19. Perfil de Google creado y completado en lo básico; falta el video de verificación, que solo puede grabar Juani.
