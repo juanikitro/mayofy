@@ -276,14 +276,12 @@ export function CalBooking({ url, calLink, heading, detail, open, opening, loadi
             )}
           </button>
         </div>
-        {status === "failed" ? (
-          <div className="booking__failed" role="alert">
-            <p>{failed}</p>
-            <a className="btn btn--moss" href={url} target="_blank" rel="noreferrer">
-              {failedCta}
-            </a>
-          </div>
-        ) : null}
+        <div className="booking__failed" role={status === "failed" ? "alert" : undefined} aria-hidden={status !== "failed"}>
+          <p>{failed}</p>
+          <a className="btn btn--moss" href={url} target="_blank" rel="noreferrer">
+            {failedCta}
+          </a>
+        </div>
         <a className="booking__link" href={url} target="_blank" rel="noreferrer">
           <span className="link-label">{fallback}</span>{" "}
           <span className="link-arrow link-arrow--out" aria-hidden="true">↗</span>

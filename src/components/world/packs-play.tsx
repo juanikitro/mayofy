@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-import { motionAllowed, POPOVER_OPEN } from "@/components/world/guided-scroll";
+import { motionAllowed } from "@/components/world/guided-scroll";
 
 /** Share of the homing stretch (from its start) by which a loop must be home, whatever the time it had. */
 const HOME_BY = 0.8;
@@ -12,23 +12,10 @@ const MIRA_STEP = 110;
 const SENTADA_STEP = 120;
 const FRAMES = 12;
 
-/** Longest wait for the island's art before a play; past it the page lets go and shows the play's end (ms). */
+/** Longest wait for the island's art once it is shown; past it the island shows the play's end (ms). */
 const LOAD_WAIT = 2000;
-/** Input quiet for this long (ms) ends a gesture: the next input is a new one. */
-const QUIET = 250;
-/** The page this close (px) to the section's top rests on it: the section fills the screen. */
-const SETTLED = 2;
-/** The short glide that brings the page onto the section's top (ms). */
-const GLIDE = 260;
-
-/** Scroll keys: their way and how far they move the page (px, or screens). Home and End are jumps, left alone. */
-const scrollKeys: Record<string, { direction: 1 | -1; px?: number; screens?: number }> = {
-  ArrowDown: { direction: 1, px: 40 },
-  ArrowUp: { direction: -1, px: 40 },
-  PageDown: { direction: 1, screens: 0.875 },
-  PageUp: { direction: -1, screens: 0.875 },
-  " ": { direction: 1, screens: 0.875 },
-};
+/** Share of the section (one screen tall) on screen that shows the island and starts the play. */
+const SHOWN = 0.6;
 
 /** The CSS animations of the assembly (world.css); the rocks' endless idle float and the far rocks' scroll drift are not part of it. */
 const PLAY_ANIMATIONS = new Set([
@@ -49,8 +36,8 @@ const PLAY_ANIMATIONS = new Set([
   "packs-mayo-run-frames",
 ]);
 
-/** Rocks loose, assembling, built, coming apart. */
-type State = "loose" | "in" | "built" | "out";
+/** Rocks loose, assembling, built. */
+type State = "loose" | "in" | "built";
 
 type Loop = {
   img: HTMLImageElement;
@@ -93,51 +80,37 @@ function whenLoaded(images: HTMLImageElement[]) {
 }
 
 /**
- * Island 3's three states (Juani, 24 November 2026: "piedras desarmadas,
- * piedras armandose, piedras armadas. Entonces empiezo en el 1, empiezo a
- * scrollear y no me deja continuar hasta terminar la animacion hasta llegar
- * al 3. luego si subo las piedras deben desarmarse"):
- *
- * 1. Loose: the section arrives and the page rests on it (a scroll that
- *    would carry past its top stops there instead), the rocks floating and
- *    Mayo watching. The gesture that brought the page here never starts the
- *    play: only a new one does.
- * 2. Assembling: the reader's next scroll down (wheel, touch, keys) plays the
- *    whole assembly, about 3.9 s (stage.ts), while the page waits: every
- *    scroll input is swallowed, not queued, and the scrollbar is held.
- * 3. Built: the reader's next gesture carries on down as usual.
- *
- * Coming back up into the built island, the page rests on it the same way
- * and the next scroll up plays the assembly backwards (Mayo turned round
- * while she runs and hops back, so she faces the way she goes) before the
- * page is free to go on up. Off screen, the island takes the state of the
- * side it was left on (loose below the reader, built above), so in-page
- * links and jumps never meet the gate, and a link followed during a play
- * lets the page go at once.
+ * Island 3's play (Juani, 24 November 2026: "Una vez se muestra la isla 3
+ * debe de empezar la animacion. indistinta del scroll"): the rocks wait loose,
+ * floating, with Mayo watching, until the island is shown (SHOWN of the
+ * section on screen). Then the whole assembly plays once, about 3.9 s
+ * (stage.ts), on its own clock, to its end: whatever the reader does with
+ * the scroll meanwhile neither holds the page nor touches the play, and a
+ * reader who scrolls away finds the island assembled on the way back. It
+ * plays once per page view and never comes apart.
  *
  * The CSS animations (world.css, delays and durations from stage.ts) are
- * held and played here with the Web Animations API, all on one clock, so a
- * play is the exact reverse of the other. Before a play the art must be in
- * and Mayo's strips decoded (a strip decoded only when first shown left
- * her cell empty for a few frames), within LOAD_WAIT; past it the page shows
- * the play's end and lets go, so the reader is never trapped.
+ * held and played here with the Web Animations API, all on one clock. Before
+ * the play the art must be in and Mayo's strips decoded (a strip decoded
+ * only when first shown left her cell empty for a few frames), within
+ * LOAD_WAIT; past it the island shows the play's end, never a rock that
+ * pops in mid-flight.
  *
  * It is also the clock of Mayo's two loops (watching, seated), which play on
  * their own time but hand over to and from the played strips on the same
  * painted frame (Juani, 22 November 2026: "la cabeza de mayo que salta el
  * cuadro"): watching steps home to its first frame before the hop takes
  * over, and seated holds its first frame until a little after it takes over
- * from sitting down (and steps home before it hands back, coming apart).
+ * from sitting down.
  *
  * Nothing of this with reduced motion: world.css then shows the built
- * island and the page scrolls freely. Without JavaScript the island stands
- * built and both strips rest on their first frame.
+ * island. Without JavaScript the island stands built and both strips rest
+ * on their first frame.
  */
 export function PacksPlay({
   length,
   miraRest,
   miraEnd,
-  runEnd,
   sentadaStart,
   sentadaLoop,
 }: {
@@ -145,22 +118,18 @@ export function PacksPlay({
   length: number;
   miraRest: number;
   miraEnd: number;
-  /** When she has run to her last stop (the end of the hops). */
-  runEnd: number;
   sentadaStart: number;
   sentadaLoop: number;
 }) {
   useEffect(() => {
     const section = document.getElementById("packs");
-    const mayo = section?.querySelector<HTMLElement>(".packs-mayo");
     const miraImg = section?.querySelector<HTMLImageElement>(".packs-mayo__strip--mira img");
     const sentadaImg = section?.querySelector<HTMLImageElement>(".packs-mayo__strip--sentada img");
-    if (!section || !mayo || !miraImg || !sentadaImg) return;
+    if (!section || !miraImg || !sentadaImg) return;
 
     // world.css gates the animations on the same query; where it does not apply the island stands built and only the seated loop plays.
     const timed = window.matchMedia("(scripting: enabled)").matches;
     const reducedQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const gated = () => timed && motionAllowed();
 
     // Mayo's loops ------------------------------------------------------
 
@@ -208,22 +177,21 @@ export function PacksPlay({
     // The play ------------------------------------------------------------
 
     let state: State = "loose";
-    /** The play running: where it started (ms of the assembly), its way (1 assembling, -1 coming apart) and when, on the page's clock. */
-    let play: { from: number; rate: 1 | -1; start: number } | null = null;
+    /** The play running: when it started, on the page's clock. */
+    let play: { start: number } | null = null;
     let disposed = false;
     let endTimer = 0;
 
     /** Where the assembly is (ms) at `now`, on the page's clock. */
     const position = (now: number) => {
-      if (play) return Math.max(0, Math.min(length, play.from + play.rate * (now - play.start)));
-      // Built, or waiting to come apart: the end of the assembly.
-      return state === "built" || state === "out" ? length : 0;
+      if (play) return Math.max(0, Math.min(length, now - play.start));
+      return state === "built" ? length : 0;
     };
 
     /**
      * The assembly's animations. Kept once seen: a finished one that fills
-     * nothing (Mayo's strip windows) drops out of `getAnimations()`, yet the
-     * play back must still run it. One CSS cancelled (reduced motion) is idle
+     * nothing (Mayo's strip windows) drops out of `getAnimations()`, yet holding
+     * the island must still reach it. One CSS cancelled (reduced motion) is idle
      * and left out; its replacement is picked up again.
      */
     const known = new Set<CSSAnimation>();
@@ -238,16 +206,14 @@ export function PacksPlay({
     const holdAt = (at: number) => {
       for (const animation of animations()) {
         animation.pause();
-        animation.playbackRate = 1;
         animation.currentTime = at;
       }
     };
-    /** Every animation of the assembly playing from `from` ms, all on the same start on the page's clock. */
-    const runFrom = (from: number, rate: 1 | -1, now: number) => {
+    /** Every animation of the assembly playing from its start, all on the same start on the page's clock. */
+    const runFrom = (now: number) => {
       for (const animation of animations()) {
         animation.pause();
-        animation.playbackRate = rate;
-        animation.startTime = now - from / rate;
+        animation.startTime = now;
       }
     };
     const setState = (next: State) => {
@@ -255,241 +221,49 @@ export function PacksPlay({
       section.dataset.play = next;
     };
 
-    let decoded = false;
-    /** The art the play shows, loaded, and Mayo's strips decoded. */
-    const artReady = async () => {
-      await whenNear(section);
-      await whenLoaded([...section.querySelectorAll<HTMLImageElement>(".rock__img, .packs-mayo img, .plate__picture--assembled img")]);
-      if (decoded) return;
-      await Promise.all([...section.querySelectorAll<HTMLImageElement>(".packs-mayo img")].map((img) => img.decode().catch(() => undefined)));
-      decoded = true;
-    };
+    let art: Promise<void> | null = null;
+    /** The art the play shows, loaded, and Mayo's strips decoded (asked once). */
+    const artReady = () =>
+      (art ??= (async () => {
+        await whenNear(section);
+        await whenLoaded([...section.querySelectorAll<HTMLImageElement>(".rock__img, .packs-mayo img, .plate__picture--assembled img")]);
+        await Promise.all([...section.querySelectorAll<HTMLImageElement>(".packs-mayo img")].map((img) => img.decode().catch(() => undefined)));
+      })());
 
-    // The gate --------------------------------------------------------------
+    // When it plays --------------------------------------------------------
 
-    /** Where the page is held while a play runs, or null while it is free. */
-    let lockY: number | null = null;
-    /** A glide or a play holds the page: every scroll input is swallowed. */
-    let busy = false;
-    /** The rest of the gesture that brought the page here, or that was going on when a play ended, is swallowed. */
-    let holding = false;
-    let lastInput = 0;
     let onScreen = false;
+    let shown = false;
+    let played = false;
 
-    const sectionTop = () => Math.round(section.getBoundingClientRect().top + window.scrollY);
-
-    /** A short eased scroll onto `to`, which no input interrupts (all of it is swallowed meanwhile). */
-    const glideTo = (to: number) =>
-      new Promise<void>((resolve) => {
-        busy = true;
-        const from = window.scrollY;
-        const started = performance.now();
-        const step = (now: number) => {
-          const t = Math.min(1, (now - started) / GLIDE);
-          window.scrollTo({ top: Math.round(from + (to - from) * (1 - (1 - t) * (1 - t))), behavior: "instant" });
-          if (t < 1 && !disposed) window.requestAnimationFrame(step);
-          else resolve();
-        };
-        window.requestAnimationFrame(step);
-      });
-
-    /** Ends the play (or the wait for it) on `target`, holds every animation there and lets the page go. */
-    const finish = (target: "loose" | "built") => {
+    /** Ends the play (or the wait for it) on the assembled island and holds every animation there. */
+    const finish = () => {
       window.clearTimeout(endTimer);
       play = null;
-      holdAt(target === "built" ? length : 0);
-      setState(target);
-      mayo.style.scale = "";
-      busy = false;
-      lockY = null;
-      holding = true;
-      // Focus that Tab moved out of the island meanwhile gets its place on screen back.
-      const focused = document.activeElement;
-      if (onScreen && focused instanceof HTMLElement && focused !== document.body && !section.contains(focused)) focused.scrollIntoView({ block: "nearest" });
+      holdAt(length);
+      setState("built");
     };
 
-    const start = async (target: "loose" | "built") => {
-      busy = true;
-      lockY = sectionTop();
-      setState(target === "built" ? "in" : "out");
-      const ready = await Promise.race([artReady().then(() => true), wait(LOAD_WAIT).then(() => false)]);
-      if (disposed || lockY === null) {
-        // A link was followed meanwhile: the island simply takes the play's end.
-        if (!disposed && !play) finish(target);
+    /** The whole assembly, once per page view, on its own clock: what the reader does with the scroll meanwhile never touches it. */
+    const start = async () => {
+      if (played) return;
+      played = true;
+      if (!motionAllowed()) {
+        finish();
         return;
       }
+      const ready = await Promise.race([artReady().then(() => true), wait(LOAD_WAIT).then(() => false)]);
+      if (disposed) return;
       if (!ready) {
-        finish(target);
+        finish();
         return;
       }
       const now = Number(document.timeline.currentTime);
-      const rate = target === "built" ? 1 : -1;
-      const from = rate > 0 ? 0 : length;
-      play = { from, rate, start: now };
-      runFrom(from, rate, now);
-      // Mayo's clock ends the play in the frame that reaches its end (see tick); this is the fallback.
-      endTimer = window.setTimeout(() => finish(target), length + 200);
-    };
-
-    /** Lets the page go during a play (a link or a button was followed); the play finishes on its own. */
-    const release = () => {
-      lockY = null;
-      busy = false;
-      holding = false;
-    };
-
-    /**
-     * Stops a finger's scroll on the island's top, the way guided-scroll.ts
-     * stops a fling: the page's overflow blocked for a moment (what ends a
-     * touch scroll in mobile browsers), only where the scrollbar takes no
-     * room, so the layout cannot shift. It stays blocked until the finger
-     * lifts: the rest of that touch is swallowed.
-     */
-    let caught = 0;
-    const freeOverflow = () => {
-      window.clearTimeout(caught);
-      caught = 0;
-      document.documentElement.style.overflowY = "";
-    };
-    const catchOn = (top: number) => {
-      holding = true;
-      if (window.innerWidth !== document.documentElement.clientWidth) return;
-      document.documentElement.style.overflowY = "hidden";
-      window.clearTimeout(caught);
-      // Whatever happens to the touch, the page is never left blocked.
-      caught = window.setTimeout(freeOverflow, 2500);
-      if (Math.abs(window.scrollY - top) > SETTLED) window.scrollTo({ top, behavior: "instant" });
-    };
-
-    /** Swallows an input the browser still lets the page cancel. */
-    const swallow = (event: Event) => {
-      if (event.cancelable) event.preventDefault();
-    };
-
-    /**
-     * One scroll input of the reader: `direction` down (1) or up (-1), about
-     * `step` px; `fresh` when it surely starts a new gesture (a new touch).
-     */
-    const intent = (event: Event, direction: 1 | -1, step: number, fresh: boolean) => {
-      const now = performance.now();
-      const quiet = now - lastInput >= QUIET;
-      lastInput = now;
-      if (busy) {
-        swallow(event);
-        return;
-      }
-      // Released by a link: the page is free while the play finishes. An open popover (PaymentTip) keeps the page where it is too.
-      if (play || !gated() || document.documentElement.hasAttribute(POPOVER_OPEN)) return;
-      // A finger already scrolling the page (its moves can no longer be cancelled) is only ever stopped on the island.
-      const dragging = !event.cancelable;
-      if (holding) {
-        if (!quiet && !fresh) {
-          swallow(event);
-          // A finger still dragging the page after it was stopped on the island: stopped again.
-          if (dragging && caught) catchOn(sectionTop());
-          return;
-        }
-        holding = false;
-      }
-      const target = direction > 0 ? (state === "loose" ? "built" : null) : state === "built" ? "loose" : null;
-      if (!target) return;
-      const top = sectionTop();
-      const offset = window.scrollY - top;
-      if (dragging) {
-        const past = offset * direction;
-        if ((past >= 0 && past <= window.innerHeight / 2) || -past <= step) catchOn(top);
-        return;
-      }
-      if (Math.abs(offset) <= SETTLED) {
-        swallow(event);
-        void start(target);
-        return;
-      }
-      if (offset * direction < 0) {
-        // On the way to the island: a step that would carry past its top stops on it instead.
-        if (Math.abs(offset) <= step) {
-          swallow(event);
-          holding = true;
-          void glideTo(top).then(() => {
-            busy = false;
-          });
-        }
-        return;
-      }
-      // A little past its top (a finger carried the page on): back onto it, and play.
-      if (Math.abs(offset) <= window.innerHeight / 2) {
-        swallow(event);
-        void glideTo(top).then(() => start(target));
-      }
-    };
-
-    const onWheel = (event: WheelEvent) => {
-      if (event.ctrlKey || event.deltaY === 0) return;
-      const px = event.deltaMode === 1 ? event.deltaY * 40 : event.deltaMode === 2 ? event.deltaY * window.innerHeight : event.deltaY;
-      intent(event, px > 0 ? 1 : -1, Math.abs(px), false);
-    };
-    const onKey = (event: KeyboardEvent) => {
-      const key = scrollKeys[event.key];
-      if (!key || event.ctrlKey || event.metaKey || event.altKey) return;
-      if ((event.target as HTMLElement | null)?.closest("input, textarea, select, button, [contenteditable='true']")) return;
-      const direction = event.key === " " && event.shiftKey ? -1 : key.direction;
-      intent(event, direction, key.px ?? window.innerHeight * (key.screens ?? 0), false);
-    };
-    let touch: { y: number; fresh: boolean } | null = null;
-    const onTouchStart = (event: TouchEvent) => {
-      touch = event.touches.length === 1 ? { y: event.touches[0].clientY, fresh: true } : null;
-    };
-    const onTouchEnd = () => {
-      if (caught) {
-        window.clearTimeout(caught);
-        caught = window.setTimeout(freeOverflow, 120);
-      }
-    };
-    const onTouchMove = (event: TouchEvent) => {
-      if (busy) {
-        swallow(event);
-        return;
-      }
-      if (!touch || event.touches.length !== 1) return;
-      const y = event.touches[0].clientY;
-      // A finger moving up scrolls the page down.
-      const moved = touch.y - y;
-      if (Math.abs(moved) < 3) return;
-      intent(event, moved > 0 ? 1 : -1, Math.abs(moved), touch.fresh);
-      touch.fresh = false;
-      touch.y = y;
-    };
-    // The scrollbar, autoscroll or a focus scroll while the page is held: back onto the island.
-    const onScroll = () => {
-      if (lockY !== null && Math.abs(window.scrollY - lockY) > 1) window.scrollTo({ top: lockY, behavior: "instant" });
-    };
-    const onClick = (event: MouseEvent) => {
-      if ((busy || play) && (event.target as Element | null)?.closest("a[href], button")) release();
-    };
-    // Tab onto a marker while the rocks are loose: the island settles and assembles, the focus stays on it.
-    const onFocus = (event: FocusEvent) => {
-      if (!gated() || busy || play || state !== "loose") return;
-      if (!(event.target as Element | null)?.closest(".platform__marker")) return;
-      void glideTo(sectionTop()).then(() => start("built"));
-    };
-
-    const inputs: [string, EventListener, AddEventListenerOptions][] = [
-      ["wheel", onWheel as EventListener, { capture: true, passive: false }],
-      ["keydown", onKey as EventListener, { capture: true }],
-      ["touchstart", onTouchStart as EventListener, { capture: true, passive: true }],
-      ["touchmove", onTouchMove as EventListener, { capture: true, passive: false }],
-      ["touchend", onTouchEnd, { capture: true, passive: true }],
-      ["touchcancel", onTouchEnd, { capture: true, passive: true }],
-    ];
-    let listening = false;
-    /** The input listeners (some of which can block scrolling) only while the island is on screen. */
-    const listen = (on: boolean) => {
-      if (on === listening) return;
-      listening = on;
-      for (const [type, listener, options] of inputs) {
-        if (on) window.addEventListener(type, listener, options);
-        else window.removeEventListener(type, listener, options);
-      }
+      play = { start: now };
+      setState("in");
+      runFrom(now);
+      // Mayo's clock ends the play in the frame that reaches its end (see tick); this is the fallback, also off screen.
+      endTimer = window.setTimeout(finish, length + 200);
     };
 
     // Mayo's clock --------------------------------------------------------
@@ -500,23 +274,15 @@ export function PacksPlay({
     const tick = (now: number) => {
       const delta = last ? Math.min(now - last, 100) : 0;
       last = now;
-      if (timed && play) {
-        // The play ends in the frame that reaches its end, before it paints: played back, the strip
-        // windows that fill nothing switch off at its very start, which would show the wrong one.
-        const end = play.rate > 0 ? length : 0;
-        if ((position(now) - end) * play.rate >= 0) finish(play.rate > 0 ? "built" : "loose");
-      }
+      // The play ends in the frame that reaches its end, before it paints.
+      if (timed && play && position(now) >= length) finish();
       if (timed) {
         const at = position(now);
-        const way = play?.rate ?? 0;
-        const miraMode = at >= miraEnd ? "hold" : way > 0 && at >= miraRest ? "home" : "play";
+        const miraMode = at >= miraEnd ? "hold" : play && at >= miraRest ? "home" : "play";
         advance(mira, delta, miraMode, share(at, miraRest, miraEnd));
         if (at < sentadaStart) advance(sentada, delta, "hold");
-        else if (way > 0 && at < sentadaLoop) advance(sentada, delta, "home", share(at, sentadaLoop, sentadaStart));
-        else if (way < 0) advance(sentada, delta, "home", share(at, length, sentadaStart));
+        else if (play && at < sentadaLoop) advance(sentada, delta, "home", share(at, sentadaLoop, sentadaStart));
         else advance(sentada, delta, "play");
-        // Running back she faces the way she goes, turned round while she stands.
-        mayo.style.scale = way < 0 && at > miraEnd && at < runEnd ? "-1 1" : "";
       } else {
         advance(sentada, delta, "play");
       }
@@ -547,26 +313,29 @@ export function PacksPlay({
     holdAt(0);
     setState("loose");
 
-    // Off screen the island takes the state of the side it was left on; a play still running finishes there.
-    const observer = new IntersectionObserver(([entry]) => {
-      onScreen = entry.isIntersecting;
-      listen(onScreen && timed);
-      if (!onScreen) {
-        const side = entry.boundingClientRect.top > 0 ? "loose" : "built";
-        if (play || busy || state !== side) finish(side);
-        holding = false;
-      }
-      update();
-    }, { rootMargin: "-1px 0px" });
+    // Shown once SHOWN of the section is on screen (it is one screen tall); the loops run only while any of it is.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        onScreen = entry.isIntersecting;
+        if (!shown && timed && onScreen && entry.intersectionRatio >= SHOWN - 0.01) {
+          shown = true;
+          void start();
+        }
+        update();
+      },
+      { threshold: [0, SHOWN] },
+    );
     observer.observe(section);
 
     /**
-     * Once NearGate opens the island, its art loads at once: lazy, a rock
-     * floating outside the clipped stage would only load as it flew in.
+     * Once NearGate opens the island, its art loads at once (lazy, a rock
+     * floating outside the clipped stage would only load as it flew in), and
+     * Mayo's strips start decoding, so the play rarely waits once shown.
      */
     const loadArt = () => {
       if (!section.hasAttribute("data-near")) return;
       for (const img of section.querySelectorAll<HTMLImageElement>(".rock__img, .rock-shadow, .packs-mayo img, .plate__picture--assembled img")) img.loading = "eager";
+      if (timed) void artReady();
     };
     loadArt();
     // Rock pieces enter the layout with `data-near`: their new animations take the island's state.
@@ -576,30 +345,19 @@ export function PacksPlay({
     });
     near.observe(section, { attributes: true, attributeFilter: ["data-near"] });
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("click", onClick, { capture: true, passive: true });
-    window.addEventListener("hashchange", release);
-    section.addEventListener("focusin", onFocus);
     reducedQuery.addEventListener("change", update);
 
     return () => {
       disposed = true;
       window.clearTimeout(endTimer);
-      if (caught) freeOverflow();
       stopLoops();
-      listen(false);
       observer.disconnect();
       near.disconnect();
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("click", onClick, true);
-      window.removeEventListener("hashchange", release);
-      section.removeEventListener("focusin", onFocus);
       reducedQuery.removeEventListener("change", update);
       miraImg.style.transform = "";
       sentadaImg.style.transform = "";
-      mayo.style.scale = "";
     };
-  }, [length, miraRest, miraEnd, runEnd, sentadaStart, sentadaLoop]);
+  }, [length, miraRest, miraEnd, sentadaStart, sentadaLoop]);
 
   return null;
 }

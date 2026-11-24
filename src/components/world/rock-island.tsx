@@ -412,8 +412,7 @@ function packsMayoVars() {
  * Mayo on island 3, painted in place (stage.ts packsMayo): four strip windows
  * share one cell and world.css shows the one the moment calls for, watching
  * while the rocks float, hopping as the first two platforms land, sitting
- * down as the third lands and seated afterwards, and back again as the
- * rocks come apart (packs-play.tsx). Every window steps its strip one painted frame at a
+ * down as the third lands and seated afterwards (packs-play.tsx). Every window steps its strip one painted frame at a
  * time; without motion only the seated one shows.
  */
 function PacksMayo() {
@@ -510,7 +509,6 @@ export function RockIsland() {
             length={packsMayo.timing.crossfade[1] + 1}
             miraRest={packsMayo.timing.miraRest}
             miraEnd={packsMayo.timing.hops[0]}
-            runEnd={packsMayo.timing.hops[2]}
             sentadaStart={packsMayo.timing.sentarse[1]}
             sentadaLoop={packsMayo.timing.sentadaLoop}
           />

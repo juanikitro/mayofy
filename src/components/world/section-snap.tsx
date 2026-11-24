@@ -38,10 +38,8 @@ import {
  * - A touch fling stops before the next rest point, so a flick never carries
  *   the reader past the end of a section (where its buttons are) or the start
  *   of the next one.
- * - Island 3 (packs-play.tsx) holds the page on its own top while its rocks
- *   assemble or come apart: it swallows the input, so the page does not move
- *   and no gesture ends there; its top is an ordinary rest point, where both
- *   the settle and the fling stop bring the reader.
+ * - Island 3 (packs-play.tsx) never holds the page: its rocks assemble on
+ *   their own clock once it is shown, and its top is an ordinary rest point.
  *
  * None of this with reduced motion, and never after a scroll nobody gestured for (a
  * focus moved by Tab, an in-page link, find in page). Not CSS scroll

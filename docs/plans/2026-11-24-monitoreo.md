@@ -16,9 +16,27 @@ Pedido de Juani (24 de noviembre de 2026): "Implementa alerta de si el sitio se 
   Ambos quedaron en **Up**. Con 1 minuto de confirmación, Better Stack vuelve a chequear antes de abrir un incidente, así que un error aislado no dispara un mail. El resto quedó por defecto: `GET`, timeout de 30 s, sigue redirecciones, chequea desde Europa, Norteamérica, Asia y Australia. El onboarding creó un "Sample incident" de `google.com`; es de ejemplo y se puede resolver o ignorar.
 - Verificado: Juani recibió en Gmail la alerta de prueba ("Send test alert") del monitor de la home.
 - Railway, alertas de deploy (revisado en `railway.com/account/notifications`, sin cambios): para todos los proyectos ya están activas, por **Email & In-App**, las reglas *Deployment Failed* y *Deployment Crashed / Oom Killed*, además de las de uso y restricciones. No hace falta configurar nada. Railway no vigila el sitio después del deploy; eso lo cubre Better Stack.
-- Pendiente: monitor de `https://mayofy.dev/api/health` cuando este cambio esté publicado (hoy da `404` y abriría un incidente falso). Mismos ajustes, nombre "Mayofy health".
+- La ruta de salud ya está publicada. Falta confirmar si existe el monitor «Mayofy health»; si no aparece en Better Stack, Juani puede crearlo con los ajustes de abajo.
 - Las alertas van a `jpkitro@gmail.com` y no a `hola@mayofy.dev`, porque el reenvío de `hola@` depende del mismo DNS que el sitio: si se rompe el DNS, se perderían el sitio y el aviso a la vez.
 - Decidido (Juani, 24 de noviembre de 2026: "no agregues"): **sin seguimiento de errores por ahora**. Se evaluó Better Stack Errors (gratis, compatible con el SDK de Sentry: https://betterstack.com/docs/errors/collecting-errors/sentry-sdk/). Se descartó porque sumaba la dependencia `@sentry/nextjs` a una página ya pesada y procesaba datos de visitantes, lo que obligaba a cambiar la política de privacidad, para un sitio casi todo estático. Los errores del servidor siguen en los logs de Railway. Revisarlo si el sitio suma lógica propia (turnos, pagos). La política de privacidad no cambia.
+
+## Crear el monitor «Mayofy health»
+
+En Better Stack Uptime, entrá a **Monitors → Create monitor** y elegí **URL doesn't contain keyword** en **Alert us when**. Usá estos ajustes:
+
+| Campo | Valor |
+|---|---|
+| Nombre | `Mayofy health` |
+| URL | `https://mayofy.dev/api/health` |
+| Método | `GET` |
+| Estado esperado | `200` |
+| Texto que debe aparecer | `"ok":true` |
+| Intervalo | 3 minutos |
+| Alerta | Email, al mismo destinatario que los otros monitores |
+
+Guardá el monitor y verificá que quede en **Up**. El chequeo de keyword debe buscar el literal sin espacios alrededor de los dos puntos.
+
+El estado `200` es el esperado de la ruta. Better Stack documenta el [chequeo de keyword](https://betterstack.com/docs/uptime/keyword-monitor/) y el [chequeo de código exacto](https://betterstack.com/docs/uptime/api/create-a-new-monitor/) como tipos separados; no se verificó que la cuenta permita exigir ambas condiciones en un mismo monitor.
 
 ## Qué cambió en el código
 
@@ -57,7 +75,7 @@ Fuentes:
 
 - `lint`, `typecheck` y `build` pasan; el build lista `/api/health` como dinámica (`ƒ`).
 - Con `next start` local: `GET` → `200` y el JSON de arriba (0,25 s); `HEAD` → `200`; `POST` → `405`.
-- En producción `https://mayofy.dev/api/health` da `404` hasta que se publique este cambio. La home y `/proyectos/shineapp` dan `200`.
+- El GET público a `https://mayofy.dev/api/health` ya responde `200` y contiene `"ok":true`. Esto confirma la ruta, no la creación del monitor.
 - No hay corredor de tests en el proyecto, así que no hubo test automático (RED/GREEN); la verificación fue funcional con `curl`.
 
 ## Qué hacer cuando llega una alerta
