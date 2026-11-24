@@ -75,6 +75,7 @@ export function SixSteps() {
           <div className="sendero__plate">
             <picture>
               {plate.mobileLayers ? <source media="(max-width: 48rem)" type="image/avif" srcSet={plate.mobileLayers.island.avif} /> : null}
+              {plate.mobileLayers ? <source media="(max-width: 48rem)" type="image/webp" srcSet={plate.mobileLayers.island.webp} /> : null}
               <source type="image/avif" srcSet={plate.layers.island.avif} />
               <img src={plate.layers.island.webp} alt="" width={plate.layers.island.width} height={plate.layers.island.height} loading="lazy" decoding="async" />
             </picture>

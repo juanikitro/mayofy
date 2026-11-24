@@ -55,10 +55,18 @@ export function IslandPlate({
     return (
       <div className={className} style={style}>
         <picture className="plate__picture plate__picture--background">
+          {/* Each phone AVIF has its WebP twin: without AVIF (Safari 15 and
+              older) the browser would otherwise skip to the desktop crop. */}
           {mobileLayers ? (
-            <source media="(max-width: 48rem)" type="image/avif" srcSet={mobileLayers.background.avif} />
+            <>
+              <source media="(max-width: 48rem)" type="image/avif" srcSet={mobileLayers.background.avif} />
+              <source media="(max-width: 48rem)" type="image/webp" srcSet={mobileLayers.background.webp} />
+            </>
           ) : plate.mobile ? (
-            <source media="(max-width: 48rem)" type="image/avif" srcSet={plate.mobile.avif} />
+            <>
+              <source media="(max-width: 48rem)" type="image/avif" srcSet={plate.mobile.avif} />
+              <source media="(max-width: 48rem)" type="image/webp" srcSet={plate.mobile.webp} />
+            </>
           ) : null}
           <source type="image/avif" srcSet={plate.layers.background.avif} />
           <img
@@ -79,6 +87,7 @@ export function IslandPlate({
             type={mobileLayers ? "image/avif" : undefined}
             srcSet={mobileLayers ? mobileLayers.island.avif : BLANK_PIXEL}
           />
+          {mobileLayers ? <source media="(max-width: 48rem)" type="image/webp" srcSet={mobileLayers.island.webp} /> : null}
           <source type="image/avif" srcSet={plate.layers.island.avif} />
           <img
             src={plate.layers.island.webp}
@@ -99,7 +108,10 @@ export function IslandPlate({
     <div className="plate" style={style}>
       <picture className="plate__picture">
         {plate.mobile ? (
-          <source media="(max-width: 48rem)" type="image/avif" srcSet={plate.mobile.avif} />
+          <>
+            <source media="(max-width: 48rem)" type="image/avif" srcSet={plate.mobile.avif} />
+            <source media="(max-width: 48rem)" type="image/webp" srcSet={plate.mobile.webp} />
+          </>
         ) : null}
         <source type="image/avif" srcSet={plate.desktop.avif} />
         <img

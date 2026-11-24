@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element -- already-optimised AVIF cutouts; next/image would re-encode them */
 import type { CSSProperties } from "react";
 
+import { AvifImg } from "@/components/world/avif-img";
 import type { PlateObject } from "@/content/stage";
 
 const pct = (value: string) => Number.parseFloat(value);
@@ -13,7 +13,7 @@ export function PlateObjects({ objects }: { objects: readonly PlateObject[] }) {
   return (
     <>
       {objects.map((object, index) => (
-        <img
+        <AvifImg
           key={`${object.src}-${index}`}
           className={`plate-object${object.glow ? " plate-object--glow" : ""}${object.float ? " plate-object--float" : ""}${object.chasedTo ? " plate-object--chased" : ""}`}
           src={object.src}

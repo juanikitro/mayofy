@@ -9213,3 +9213,14 @@ html[data-motion-tier="reduced"] .packs__grid > * {
     scale: 1 1;
   }
 }
+
+/* ======================================================================
+ * Cross-browser fallbacks (QA, 24 November 2026;
+ * docs/plans/2026-11-24-calidad.md)
+ * ==================================================================== */
+
+/* AvifImg: the <picture> around an AVIF cutout adds no box of its own, so
+ * the <img> inside lays out as the bare <img> it replaces. */
+.avif-img {
+  display: contents;
+}
