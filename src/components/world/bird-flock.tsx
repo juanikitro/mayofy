@@ -79,6 +79,8 @@ export function BirdFlock({ island }: { island: AmbientIsland }) {
       context!.fillStyle = `rgb(${sky!.ink} / 0.62)`;
       context!.lineCap = "round";
       context!.lineJoin = "round";
+      // 24 drawings a second: distant birds flap 3 to 4 times a second, 6 to 8 frames a beat
+      // read as smooth, and every frame the page draws costs a style pass for each animation on screen.
       stop = onFrame((_, delta) => {
         const flying = stepFlock(flock, delta / 1000);
         clear();
@@ -90,7 +92,7 @@ export function BirdFlock({ island }: { island: AmbientIsland }) {
           return;
         }
         for (const pose of flockPoses(flock)) drawBird(context!, pose, width, height);
-      });
+      }, { fps: 24 });
     }
 
     function schedule(range: readonly [number, number]) {

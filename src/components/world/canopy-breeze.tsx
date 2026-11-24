@@ -9,8 +9,14 @@ const MOBILE = "(max-width: 48rem)";
 
 /** Largest sway at the top of the crown, in CSS pixels. */
 const SWAY_PX = 2.2;
-/** Frames drawn per second: a breeze needs no more, and it halves the cost. */
-const FPS = 30;
+/**
+ * Frames drawn per second. The sway moves well under a pixel between two
+ * frames, so 15 reads as smooth. Every frame the page draws also costs a
+ * style pass for each animation on screen, so fewer is cheaper.
+ */
+const FPS = 15;
+/** Desktops only: on a phone the crown is ~100 px wide, a 2 px sway barely shows, and the frames cost most there. */
+const DESKTOP = "(min-width: 48.01rem) and (hover: hover) and (pointer: fine)";
 
 const VERTEX = `
 attribute vec2 corner;
@@ -115,7 +121,7 @@ const holePosition = (start: number, size: number) => `${size >= 100 ? 0 : (star
  * canvas over the canopy box redraws that part of the island cutout with a
  * gentle, smooth displacement, while a mask cuts the same box out of the
  * cutout below so nothing shows twice. Only on the `full` tier, only while
- * the island is on screen (on the shared frame loop, at 30 fps), and only
+ * the island is on screen (on the shared frame loop, at 15 fps), and only on desktops, and only
  * once the cutout has loaded; if WebGL fails, the still cutout stays.
  */
 export function CanopyBreeze({ island }: { island: AmbientIsland }) {
@@ -193,6 +199,7 @@ export function CanopyBreeze({ island }: { island: AmbientIsland }) {
     function update() {
       if (disposed) return;
       const live =
+        window.matchMedia(DESKTOP).matches &&
         section!.hasAttribute("data-ambient-near") &&
         section!.hasAttribute("data-ambient-live") &&
         document.documentElement.dataset.ambient === "full";
@@ -206,13 +213,8 @@ export function CanopyBreeze({ island }: { island: AmbientIsland }) {
         return;
       }
       if (stop) return;
-      let last = 0;
       const start = performance.now();
-      stop = onFrame((now) => {
-        if (now - last < 1000 / FPS - 2) return;
-        last = now;
-        breeze?.draw((now - start) / 1000);
-      });
+      stop = onFrame((now) => breeze?.draw((now - start) / 1000), { fps: FPS });
     }
 
     function reset() {

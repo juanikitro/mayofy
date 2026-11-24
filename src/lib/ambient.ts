@@ -35,44 +35,79 @@ export function detectAmbientTier({ reducedMotion, saveData, deviceMemory, cores
 
 export type FrameCallback = (time: number, delta: number) => void;
 
-const callbacks = new Set<FrameCallback>();
+type Subscriber = { callback: FrameCallback; interval: number; last: number };
+
+const subscribers = new Set<Subscriber>();
 let handle: number | null = null;
-let last = 0;
+let timer: number | null = null;
+
+/** Longest step handed to a callback: after a pause (hidden tab, idle loop) nothing jumps. */
+const MAX_STEP = 100;
 
 function frame(time: number) {
-  // A frame after a pause (hidden tab, idle loop) must not jump: cap the step.
-  const delta = Math.min(time - last, 64);
-  last = time;
   handle = null;
-  for (const callback of [...callbacks]) callback(time, delta);
-  if (callbacks.size > 0 && !document.hidden) handle = requestAnimationFrame(frame);
+  for (const subscriber of [...subscribers]) {
+    if (!subscribers.has(subscriber)) continue;
+    // A subscriber at a lower rate runs on the first frame at or after its next turn.
+    if (subscriber.interval > 0 && time - subscriber.last < subscriber.interval - 8) continue;
+    const delta = Math.min(time - subscriber.last, MAX_STEP);
+    subscriber.last = time;
+    subscriber.callback(time, delta);
+  }
+  schedule();
 }
 
-function wake() {
-  if (handle !== null || callbacks.size === 0 || document.hidden) return;
-  last = performance.now();
-  handle = requestAnimationFrame(frame);
+/**
+ * Asks for the next frame. When every subscriber runs at a reduced rate, the
+ * loop sleeps on a timer until the earliest is due instead of waking the page
+ * on every display refresh: each frame the page draws also costs style work
+ * for every running animation on screen.
+ */
+function schedule() {
+  if (handle !== null || timer !== null || subscribers.size === 0 || document.hidden) return;
+  let wait = Infinity;
+  const now = performance.now();
+  for (const subscriber of subscribers) {
+    wait = Math.min(wait, subscriber.interval === 0 ? 0 : subscriber.last + subscriber.interval - now);
+  }
+  if (wait <= 16) {
+    handle = requestAnimationFrame(frame);
+    return;
+  }
+  // Wake a display frame early: the frame then lands on the turn, not a frame after it.
+  timer = window.setTimeout(() => {
+    timer = null;
+    if (handle === null && subscribers.size > 0 && !document.hidden) handle = requestAnimationFrame(frame);
+  }, wait - 16);
 }
 
 let visibilityBound = false;
 
 /**
- * Runs `callback` on every frame until the returned function is called.
- * All ambient effects share one loop, which stops when nothing is
- * subscribed and while the tab is hidden.
+ * Runs `callback` on every frame (or `fps` times a second) until the returned
+ * function is called. All ambient effects share one loop, which stops when
+ * nothing is subscribed and while the tab is hidden.
  */
-export function onFrame(callback: FrameCallback) {
+export function onFrame(callback: FrameCallback, { fps }: { fps?: number } = {}) {
   if (!visibilityBound) {
     visibilityBound = true;
-    document.addEventListener("visibilitychange", wake);
+    document.addEventListener("visibilitychange", schedule);
   }
-  callbacks.add(callback);
-  wake();
+  const subscriber: Subscriber = { callback, interval: fps ? 1000 / fps : 0, last: performance.now() };
+  subscribers.add(subscriber);
+  if (subscriber.interval === 0 && timer !== null) {
+    // A full-rate subscriber cannot wait for a sleeping loop.
+    window.clearTimeout(timer);
+    timer = null;
+  }
+  schedule();
   return () => {
-    callbacks.delete(callback);
-    if (callbacks.size === 0 && handle !== null) {
-      cancelAnimationFrame(handle);
+    subscribers.delete(subscriber);
+    if (subscribers.size === 0) {
+      if (handle !== null) cancelAnimationFrame(handle);
+      if (timer !== null) window.clearTimeout(timer);
       handle = null;
+      timer = null;
     }
   };
 }

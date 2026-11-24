@@ -9351,7 +9351,7 @@ html[data-motion-tier="reduced"] .packs__grid > * {
 
 html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambient-clouds {
   display: block;
-  animation: ambient-fade-in 2.4s ease both;
+  animation: ambient-fade-in 2.4s ease backwards;
 }
 
 .ambient-clouds--near {
@@ -9529,6 +9529,16 @@ html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambie
   inset: 0;
 }
 
+/* A few groups twinkle, not every star: each running animation costs style
+ * work whenever the page draws a frame, so 4 clocks instead of 36. */
+.ambient-stars__group {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: ambient-twinkle var(--amb-twinkle) ease-in-out var(--amb-twinkle-delay) infinite paused;
+}
+
 .ambient-star {
   position: absolute;
   left: var(--amb-x);
@@ -9537,31 +9547,26 @@ html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambie
   aspect-ratio: 1;
   border-radius: 50%;
   background: radial-gradient(closest-side, #fff 0, rgb(214 236 255 / 85%) 30%, rgb(170 210 255 / 0%) 100%);
-  mix-blend-mode: screen;
-  opacity: 0;
+  opacity: var(--amb-star-o);
   transform: translate(-50%, -50%);
-  animation: ambient-twinkle var(--amb-twinkle) ease-in-out var(--amb-twinkle-delay) infinite paused;
 }
 
-/* The cross of the strongest stars: two thin rays, mostly folded away. */
-.ambient-star--glint::before,
-.ambient-star--glint::after {
+/* The cross of the strongest stars: two thin rays in one pseudo-element
+ * (one animation, not two), mostly folded away. */
+.ambient-star--glint::before {
   position: absolute;
-  inset: 50% -170%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgb(226 242 255 / 90%), transparent);
-  scale: 0 1;
+  inset: -170%;
+  background:
+    linear-gradient(90deg, transparent, rgb(226 242 255 / 90%), transparent) center / 100% 1px no-repeat,
+    linear-gradient(180deg, transparent, rgb(226 242 255 / 90%), transparent) center / 1px 100% no-repeat;
+  scale: 0;
+  opacity: 0;
   content: "";
   animation: ambient-glint var(--amb-glint) ease-out var(--amb-glint-delay) infinite paused;
 }
 
-.ambient-star--glint::after {
-  rotate: 90deg;
-}
-
-[data-ambient-live] .ambient-star,
-[data-ambient-live] .ambient-star--glint::before,
-[data-ambient-live] .ambient-star--glint::after {
+[data-ambient-live] .ambient-stars__group,
+[data-ambient-live] .ambient-star--glint::before {
   animation-play-state: running;
 }
 
@@ -9614,12 +9619,12 @@ html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambie
   0%,
   86%,
   100% {
-    scale: 0 1;
+    scale: 0;
     opacity: 0;
   }
 
   90% {
-    scale: 1 1;
+    scale: 1;
     opacity: 1;
   }
 }
@@ -9848,8 +9853,9 @@ html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambie
 }
 
 /* Fireflies: a quick flash, a slow fade and a long dim, each on its own
- * clock (from its index among the plate objects), on top of the float and,
- * where it applies, the scroll-driven chase they already have. */
+ * clock (from its index among the plate objects). It replaces their pulse
+ * (one animation each, as before: every running animation costs style work
+ * on each frame the page draws); a chased one keeps its scroll-driven chase. */
 @keyframes ambient-firefly {
   0% {
     opacity: 0.3;
@@ -9881,7 +9887,7 @@ html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"] .plate-o
   --amb-ff: calc(3.2s + var(--object-index, 0) * 0.41s);
   --amb-ff-delay: calc(var(--object-index, 0) * -1.37s);
 
-  animation: object-float 5s ease-in-out var(--float-delay, 0s) infinite, ambient-firefly var(--amb-ff) linear var(--amb-ff-delay) infinite paused;
+  animation: ambient-firefly var(--amb-ff) linear var(--amb-ff-delay) infinite paused;
 }
 
 html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"][data-ambient-live] .plate-object--glow {
@@ -9890,12 +9896,11 @@ html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"][data-amb
 
 @supports (animation-timeline: view()) {
   html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"] .plate-object--chased {
-    animation: object-chase linear both, object-float 5s ease-in-out infinite, ambient-firefly var(--amb-ff) linear infinite;
-    animation-timeline: --isle, auto, auto;
-    animation-range: var(--chase-range), normal, normal;
-    animation-delay: 0s, var(--float-delay, 0s), var(--amb-ff-delay);
-    animation-composition: replace, add, replace;
-    animation-play-state: running, running, paused;
+    animation: object-chase linear both, ambient-firefly var(--amb-ff) linear infinite;
+    animation-timeline: --isle, auto;
+    animation-range: var(--chase-range), normal;
+    animation-delay: 0s, var(--amb-ff-delay);
+    animation-play-state: running, paused;
   }
 
   html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"][data-ambient-live] .plate-object--chased {
@@ -9919,8 +9924,10 @@ html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"][data-amb
   pointer-events: none;
 }
 
-html[data-ambient="full"] [data-ambient-near] .ambient-breeze {
-  display: block;
+@media (min-width: 48.01rem) and (hover: hover) and (pointer: fine) {
+  html[data-ambient="full"] [data-ambient-near] .ambient-breeze {
+    display: block;
+  }
 }
 
 html[data-ambient="full"] [data-ambient-near] .ambient-breeze[data-ready] {

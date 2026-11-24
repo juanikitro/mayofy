@@ -178,7 +178,7 @@ export const nightStars = {
 } as const satisfies { desktop: readonly (readonly [number, number])[]; mobile: readonly (readonly [number, number])[] };
 
 /** How many of the strongest stars get the cross-shaped glint. */
-export const STAR_GLINTS = 5;
+export const STAR_GLINTS = 3;
 
 /** Seconds between shooting stars while island 7 is on screen. */
 export const SHOOTING_STAR_INTERVAL: readonly [number, number] = [14, 32];
