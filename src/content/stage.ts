@@ -742,27 +742,20 @@ export const rockFloats: readonly Record<PlatformPiece["kind"], RockFloat>[] = [
 ];
 
 /**
- * Island 3's pinned stage (Juani, 22 November 2026: "mejorar la visualizacion
- * de la animacion de mayo"): the section is `height` vh tall, so the stage
- * stays pinned for `height - 100` vh of scroll. Every moment of the island is
- * timed in vh of that pinned scroll (0 when the stage pins, 220 when it lets
- * go) and turned into the `--rocks` cover range by `stageCover`, so the
- * timing holds whatever the section's height.
- */
-export const rocksStage = { height: 320 } as const;
-
-/** A moment `vh` into the pinned scroll (negative: before the stage pins) as a share of the `--rocks` cover range, in %. */
-export const stageCover = (vh: number) => Math.round(((100 + vh) / (rocksStage.height + 100)) * 10000) / 100;
-
-/**
- * Scroll timing of the assembly, in vh of pinned scroll (rocksStage): the
- * rocks float until `start`; each platform then gathers `stagger` after the
- * previous one, its pieces `pieceStagger` apart in landing order (base,
- * left, right, top), each flight lasting `flight` and touching down at
- * `landing` of it. Platform tops land at 52.9, 90.9 and 128.9 vh; Mayo's
+ * Island 3 plays its assembly once, in time, when the reader reaches it
+ * (Juani, 24 November 2026: "que se haga toda la animacion de un solo paso,
+ * no que quede la animacion a medias"): the section is one screen and every
+ * moment is in ms from the start of the play (packs-play.tsx). The
+ * choreography is the one tuned on the former pinned scroll (220 vh), at
+ * 26 ms per vh, so about 5.6 s.
+ *
+ * The rocks swirl in until `start`; each platform then gathers `stagger`
+ * after the previous one, its pieces `pieceStagger` apart in landing order
+ * (base, left, right, top), each flight lasting `flight` and touching down at
+ * `landing` of it. Platform tops land at 1689, 2679 and 3669 ms; Mayo's
  * moments (packsMayo.timing) follow them.
  */
-export const rockTiming = { start: 15, stagger: 38, pieceStagger: 5.5, flight: 25.5, landing: 0.84 } as const;
+export const rockTiming = { start: 700, stagger: 990, pieceStagger: 145, flight: 660, landing: 0.84 } as const;
 
 /** Landing order of a platform's pieces: what holds comes before what rests on it. */
 export const landingOrder: readonly PlatformPiece["kind"][] = ["base", "left", "right", "top"];
@@ -802,26 +795,21 @@ export const packsMayo = {
   size: { desktop: 8.014, mobile: 9 },
   stops: { desktop: [38.995, 40.5, 62.5], mobile: [42, 43, 59] },
   /**
-   * Her moments in vh of pinned scroll (rocksStage), each long enough to be
-   * watched with a wheel or a flick (a wheel notch is about 11 vh on a
-   * 900 px screen): `hops` bounds two hop cycles, a small hop of 40 vh right
-   * after the first platform lands and her run (2.7 of her widths) of 60 vh
-   * after the second: two chained bounds of the hop strip, airborne for
-   * 30 vh in all and landing as the third platform does (Juani, 23 November
-   * 2026: "la animacion es incomoda"; 24 November: "que corra de un punto a
-   * otro y no se deslice estando parada"; world.css packs-mayo-run-frames);
-   * sitting down over
-   * 28 vh, then seated. Her watching loop eases
-   * back to its first frame from `miraRest` so it hands over to the hop on
-   * the same painted frame, and the seated loop only starts at `sentadaLoop`,
-   * so it shows its first frame while it takes over from the sitting down.
-   * Both stretches are 18 vh, more than a wheel notch (100 px is 11 to 13 vh
-   * on 900 to 768 px screens), so a notch cannot skip them
-   * (packs-mayo-clock.tsx).
-   * `rests` are the poses the page may settle on (after the small hop, after
-   * the leap, seated with the painted plate in).
+   * Her moments in ms of the play (rockTiming): `hops` bounds a small hop
+   * of 1040 ms (one hop strip cycle, 87 ms a frame) right after the first
+   * platform lands and her run (2.7 of her widths) of 1560 ms after the
+   * second: two chained bounds of the hop strip (18 steps, 87 ms each),
+   * airborne for about 780 ms in all and landing as the third platform does
+   * (Juani, 23 November 2026: "la animacion es incomoda"; 24 November: "que
+   * corra de un punto a otro y no se deslice estando parada"; world.css
+   * packs-mayo-run-frames); sitting down over 730 ms (6 frames, 122 ms each,
+   * the pace of her loops), then seated, while the painted plate crossfades
+   * in. Her watching loop eases back to its first frame from `miraRest` so
+   * it hands over to the hop on the same painted frame, and the seated loop
+   * only starts at `sentadaLoop`, so it shows its first frame while it takes
+   * over from the sitting down (packs-play.tsx).
    */
-  timing: { hops: [52, 92, 152], sentarse: [152, 180], miraRest: 34, sentadaLoop: 198, crossfade: [184, 202], rests: [80, 140, 204] },
+  timing: { hops: [1690, 2730, 4290], sentarse: [4290, 5020], miraRest: 1220, sentadaLoop: 5490, crossfade: [5120, 5590] },
 } as const;
 
 /**

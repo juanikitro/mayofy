@@ -481,15 +481,17 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 /* Island 3: rock assembly ---------------------------------------------- */
 
-/* The stage is pinned while the section scrolls (`--rocks-height`, 320vh,
- * so 220vh of pinned scroll; stage.ts rocksStage, which also sets every scroll
- * range below as a custom property on the section). Rocks, contact shadows and Mayo live inside the plate,
- * positioned in % of it (stage.ts), so they share the island's perspective;
- * the one-line markers sit in `.platforms`, a box with the plate's exact
- * frame outside the decorative (aria-hidden) scene, each standing on its
- * platform's top. The assembled state is the default layout: without
- * scroll-driven animations and with reduced motion the platforms stand built,
- * the markers show and Mayo sits by the third platform (painted seated). */
+/* One screen that plays its assembly once, in time, when the reader reaches
+ * it (packs-play.tsx sets `data-play="run"`; stage.ts rockTiming and
+ * packsMayo.timing, which reach the CSS below as `--*-at` delays and `--*-for`
+ * durations on the section and on each piece). Rocks, contact shadows and
+ * Mayo live inside the plate, positioned in % of it (stage.ts), so they share
+ * the island's perspective; the one-line markers sit in `.platforms`, a box
+ * with the plate's exact frame outside the decorative (aria-hidden) scene,
+ * each standing on its platform's top. The assembled state is the default
+ * layout: without JavaScript and with reduced motion the platforms stand
+ * built, the markers show and Mayo sits by the third platform (painted
+ * seated). */
 
 @property --gate {
   syntax: "<number>";
@@ -562,13 +564,12 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   --rocks-drop: max(15%, 20rem - 100cqh + 48.25cqw);
 
   position: relative;
-  height: var(--rocks-height, 320vh);
+  /* The far rocks' drift follows the section through the screen. */
   view-timeline-name: --rocks;
 }
 
 .rocks__stage {
-  position: sticky;
-  top: 0;
+  position: relative;
   display: grid;
   grid-template-rows: auto 1fr;
   height: 100svh;
@@ -675,7 +676,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 }
 
 /* A window shows while its animation is active (`fill: none`), so each
- * shows only inside its own stretch of the scroll. */
+ * shows only inside its own stretch of the play. */
 @keyframes packs-mayo-on {
   from,
   to {
@@ -690,10 +691,10 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 }
 
-/* Her small hop and her run, each on its own range (--range-hop,
- * --range-leap). She moves only while airborne, from the take-off (frame 3)
- * to the touch-down (frame 8, paws planted), so she never slides on her
- * feet (Juani, 24 November 2026: "que corra de un punto a otro y no se
+/* Her small hop and her run, each on its own stretch of the play
+ * (--hop-at/for, --leap-at/for). She moves only while airborne, from the
+ * take-off (frame 3) to the touch-down (frame 8, paws planted), so she never
+ * slides on her feet (Juani, 24 November 2026: "que corra de un punto a otro y no se
  * deslice estando parada"). The hop is one strip cycle: airborne 2/12 to
  * 7/12. The run is two chained bounds of 18 steps (packs-mayo-run-frames),
  * each covering half the way: airborne steps 2-7 and 8-13 of 18. */
@@ -751,17 +752,6 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   100% { transform: translateX(calc(-1100% / 12)); }
 }
 
-/* Mayo's key poses, where the guided scroll may settle (data-scroll-rest,
- * stage.ts packsMayo.timing.rests), at their place in the section's scroll,
- * outside the sticky stage. */
-.rocks__rest {
-  position: absolute;
-  left: 0;
-  width: 1px;
-  height: 1px;
-  pointer-events: none;
-}
-
 /* Plate-relative placement: `--*-d` on desktop, `--*-m` on phones. */
 .rock,
 .rock-far,
@@ -809,8 +799,8 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   --clear: blur(0) saturate(0.82) brightness(0.92) contrast(1) sepia(0.05);
 }
 
-/* Idle float, scaled to nothing by `--gate` as the scroll gathers the rock:
- * bob, lateral drift, the swirl that brings it in with the scroll (`--pre`),
+/* Idle float, scaled to nothing by `--gate` as the play gathers the rock:
+ * bob, lateral drift, the swirl that brings it in as the play starts (`--pre`),
  * sway plus the slow tumble of one rock in three, and depth breathing. */
 .rock__body {
   position: relative;
@@ -1034,7 +1024,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   animation: pack-target-ring 1.4s var(--ease-out) 1;
 }
 
-/* Flight of one rock over its own range (`--range`, stage.ts rockTiming),
+/* Flight of one rock over its own stretch of the play (`--at`, `--for`, stage.ts rockTiming),
  * in three animations so each axis has its own physics. Horizontally it
  * glides in with an ease-in-out; vertically it lifts off slowly, decelerates
  * to the apex (above both ends, so it clears the island's rim), falls with
@@ -1185,7 +1175,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 }
 
-/* The swirl: rocks come round the island as the section scrolls in. */
+/* The swirl: rocks come round the island as the play starts. */
 @keyframes rock-pre {
   from {
     --pre: 0;
@@ -1222,8 +1212,7 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
  * sky is transparent, so it needs no top fade. Once it is opaque the live
  * pieces, their painted and ground shadows and the grass strips are hidden
  * (`live-out`), so no live edge can peek past the painting and no shadow is
- * doubled; scrolling back shows them again before the painting fades out.
- * Static tiers (no scroll-driven animations, reduced motion) show the
+ * doubled. The static tiers (no JavaScript, reduced motion) show the
  * painting alone: it is the assembled state, better integrated. */
 .plate__picture--assembled {
   z-index: 3;
@@ -1308,29 +1297,21 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 }
 
-@supports (animation-timeline: view()) {
+/* The play (packs-play.tsx): every animation of the assembly runs on the
+ * page's clock from the moment the section gets `data-play="run"`, each with
+ * its delay and duration from stage.ts, and holds its last frame after it
+ * (`both`, or `forwards`). Before that they wait, paused, on their first
+ * frame: the rocks floating, the platforms bare, Mayo watching. Only with
+ * scripting, which starts it: without JavaScript the island stands built. */
+@media (scripting: enabled) {
   .rock {
     animation:
       rock-fly-x linear both,
       rock-fly-y linear both,
       rock-turn linear both,
       rock-pre cubic-bezier(0.3, 0, 0.4, 1) both;
-    /* A list in the shorthand resolves its durations to 0s, not to the range. */
-    animation-duration: auto;
-    animation-timeline: --rocks;
-    animation-range: var(--range), var(--range), var(--range), var(--range-swirl);
-  }
-
-  .rock-far {
-    animation: rock-far-drift linear both;
-    animation-timeline: --rocks;
-    animation-range: cover 0% cover 100%;
-  }
-
-  .plate__picture--assembled {
-    animation: assembled-in linear both;
-    animation-timeline: --rocks;
-    animation-range: var(--range-crossfade);
+    animation-duration: var(--for), var(--for), var(--for), var(--swirl-for);
+    animation-delay: var(--at), var(--at), var(--at), 0ms;
   }
 
   .rocks--painted .rock {
@@ -1340,126 +1321,120 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
       rock-turn linear both,
       rock-pre cubic-bezier(0.3, 0, 0.4, 1) both,
       live-out linear both;
-    animation-duration: auto;
-    animation-timeline: --rocks;
-    animation-range: var(--range), var(--range), var(--range), var(--range-swirl), var(--live-out);
+    animation-duration: var(--for), var(--for), var(--for), var(--swirl-for), 1ms;
+    animation-delay: var(--at), var(--at), var(--at), 0ms, var(--live-out-at);
+  }
+
+  .plate__picture--assembled {
+    animation: assembled-in linear both;
+    animation-duration: var(--crossfade-for);
+    animation-delay: var(--crossfade-at);
+  }
+
+  .rock-shadow {
+    animation: rock-shadow-in linear both;
+    animation-duration: var(--for);
+    animation-delay: var(--at);
   }
 
   .rocks--painted .rock-shadow {
     animation:
       rock-shadow-in linear both,
       live-out linear both;
-    animation-duration: auto;
-    animation-timeline: --rocks;
-    animation-range: var(--range), var(--live-out);
+    animation-duration: var(--for), 1ms;
+    animation-delay: var(--at), var(--live-out-at);
   }
 
-  .rocks--painted .rock-ground {
-    animation:
-      rock-ground-in linear both,
-      live-out linear both;
-    animation-duration: auto;
-    animation-timeline: --rocks;
-    animation-range: var(--range), var(--live-out);
-  }
-
+  .rock-ground,
   .rock-grass {
     animation: rock-ground-in linear both;
-    animation-timeline: --rocks;
-    animation-range: var(--range);
+    animation-duration: var(--for);
+    animation-delay: var(--at);
   }
 
-  .rocks--painted .rock-grass {
+  .rocks--painted :is(.rock-ground, .rock-grass) {
     animation:
       rock-ground-in linear both,
       live-out linear both;
-    animation-duration: auto;
-    animation-timeline: --rocks;
-    animation-range: var(--range), var(--live-out);
-  }
-
-  .rock-ground {
-    animation: rock-ground-in linear both;
-    animation-timeline: --rocks;
-    animation-range: var(--range);
-  }
-
-  .rock-shadow {
-    animation: rock-shadow-in linear both;
-    animation-timeline: --rocks;
-    animation-range: var(--range);
+    animation-duration: var(--for), 1ms;
+    animation-delay: var(--at), var(--live-out-at);
   }
 
   .platform__marker {
     animation: marker-rise var(--ease-out) both;
-    animation-timeline: --rocks;
-    animation-range: var(--range);
+    animation-duration: var(--for);
+    animation-delay: var(--at);
   }
 
-  /* Mayo's choreography (stage.ts packsMayo.timing, in vh of pinned
-   * scroll; the platform tops land at 52.9, 90.9 and 128.9): she watches the
-   * floating rocks until 52; a small hop over 40 (52-92) right after the
-   * first platform lands and the long leap over 60 (92-152), landing as the
-   * third platform does; sits down (6 frames, 152-180); then stays seated.
-   * The leap's own range keeps its 2.7 widths of travel readable with a
-   * wheel. Each later animation wins while active; `forwards` keeps the leap
-   * out of the way before it starts. Her watching and seated loops run on
-   * their own clock (packs-mayo-clock.tsx), which brings them to the frame
-   * each hand-over shares. */
+  /* Mayo's choreography (stage.ts packsMayo.timing, in ms of the play; the
+   * platform tops land at 1689, 2679 and 3669): she watches the floating
+   * rocks until 1690; a small hop (1690-2730) right after the first platform
+   * lands and her run (2730-4290), landing as the third platform does;
+   * sits down (6 frames, 4290-5020); then stays seated. Each later animation
+   * wins while active; `forwards` keeps the leap out of the way before it
+   * starts. A strip window shows while its animation is active (`fill:
+   * none`). Her watching and seated loops run on their own clock
+   * (packs-play.tsx), which brings them to the frame each hand-over shares. */
   .packs-mayo {
     animation: packs-mayo-hop linear both, packs-mayo-leap linear forwards;
-    /* A list in the shorthand resolves its durations to 0s, not to the range. */
-    animation-duration: auto;
-    animation-timeline: --rocks, --rocks;
-    animation-range: var(--range-hop), var(--range-leap);
+    animation-duration: var(--hop-for), var(--leap-for);
+    animation-delay: var(--hop-at), var(--leap-at);
   }
 
   .packs-mayo__strip--mira {
     animation: packs-mayo-on linear none;
-    animation-timeline: --rocks;
-    animation-range: var(--range-mira);
+    animation-duration: var(--mira-for);
   }
 
   .packs-mayo__strip--salto {
     animation: packs-mayo-on linear none;
-    animation-timeline: --rocks;
-    animation-range: var(--range-hops);
+    animation-duration: var(--hops-for);
+    animation-delay: var(--hops-at);
   }
 
   /* The hop plays the strip once; the run plays it as two chained bounds
-   * (packs-mayo-run-frames). Without an explicit duration the list would
-   * resolve to 0s and hold the last, standing frame while she travels. */
+   * (packs-mayo-run-frames). The durations are set after the shorthand: a
+   * list in it would leave them at 0s and hold the last, standing frame
+   * while she travels. */
   .packs-mayo__strip--salto img {
     animation: mayo-sprite linear both, packs-mayo-run-frames linear forwards;
-    animation-duration: auto;
     animation-timing-function: steps(12, jump-none), step-end;
-    animation-timeline: --rocks, --rocks;
-    animation-range: var(--range-hop), var(--range-leap);
+    animation-duration: var(--hop-for), var(--leap-for);
+    animation-delay: var(--hop-at), var(--leap-at);
   }
 
   .packs-mayo__strip--sentarse {
     animation: packs-mayo-on linear none;
-    animation-timeline: --rocks;
-    animation-range: var(--range-sentarse);
+    animation-duration: var(--sentarse-for);
+    animation-delay: var(--sentarse-at);
   }
 
   .packs-mayo__strip--sentarse img {
     animation: mayo-sprite linear both;
     animation-timing-function: steps(6, jump-none);
-    animation-timeline: --rocks;
-    animation-range: var(--range-sentarse);
+    animation-duration: var(--sentarse-for);
+    animation-delay: var(--sentarse-at);
   }
 
   .packs-mayo__strip--sentada {
     animation: packs-mayo-off linear none;
-    animation-timeline: --rocks;
-    animation-range: var(--range-sentada-off);
+    animation-duration: var(--sentada-off-for);
   }
 
-  .scene--dawn:not(.scene--plated) .scene__sky {
-    animation: sky-drift linear both;
-    animation-timeline: --dawn;
-    animation-range: exit 0% exit 100%;
+  /* Waiting for the reader: every animation of the assembly on its first frame. */
+  .rocks:not([data-play="run"])
+    :is(
+      .rock,
+      .rock-shadow,
+      .rock-ground,
+      .rock-grass,
+      .plate__picture--assembled,
+      .platform__marker,
+      .packs-mayo,
+      .packs-mayo__strip,
+      .packs-mayo__strip img
+    ) {
+    animation-play-state: paused;
   }
 
   /* The idle float runs on the clock, only in the full motion tier: each
@@ -1472,6 +1447,20 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
       rock-breath var(--breath-dur) ease-in-out infinite alternate,
       rock-tumble var(--tumble-dur) linear infinite;
     animation-delay: var(--idle-delay);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .rock-far {
+    animation: rock-far-drift linear both;
+    animation-timeline: --rocks;
+    animation-range: cover 0% cover 100%;
+  }
+
+  .scene--dawn:not(.scene--plated) .scene__sky {
+    animation: sky-drift linear both;
+    animation-timeline: --dawn;
+    animation-range: exit 0% exit 100%;
   }
 }
 
@@ -1514,7 +1503,7 @@ html[data-motion-tier="reduced"] .scene__sky {
   animation: none;
 }
 
-/* Phones: the same pinned assembly on a plate scaled up around its centre,
+/* Phones: the same assembly on a plate scaled up around its centre,
  * so the meadow fills the width; the platforms close in under three compact
  * markers side by side, and the floating rocks stay nearer the island and
  * lose their blur (cheaper to paint). */
