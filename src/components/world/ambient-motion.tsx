@@ -2,8 +2,9 @@
 
 import { useEffect } from "react";
 
+import { type SceneDepth, createSceneDepth } from "@/components/world/scene-depth";
 import { afterLoadIdle } from "@/lib/after-load";
-import { type AmbientTier, detectAmbientTier } from "@/lib/ambient";
+import { type AmbientTier, detectAmbientTier, normalisedPointer } from "@/lib/ambient";
 
 type NavigatorWithHints = Navigator & {
   connection?: { saveData?: boolean };
@@ -25,12 +26,39 @@ const NEAR_AHEAD = 1;
  *   animations pause without it, and the scripted effects (birds, shooting
  *   star, breeze) only run while it is set.
  *
+ * It also runs the pointer depth (createSceneDepth) on desktop.
+ *
  * Without JavaScript none of this happens and the islands keep their still art.
  */
 export function AmbientMotion() {
   useEffect(() => {
     const root = document.documentElement;
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    let depth: SceneDepth | null = null;
+
+    // Pointer depth: desktop mice and trackpads only, on the full tier.
+    function onPointer(event: PointerEvent) {
+      if (event.pointerType !== "mouse") return;
+      const { x, y } = normalisedPointer(event.clientX, event.clientY, window.innerWidth, window.innerHeight);
+      depth?.aim(x, y);
+    }
+    function onLeave(event: PointerEvent) {
+      if (event.pointerType === "mouse") depth?.aim(0, 0);
+    }
+    function syncDepth() {
+      const wanted = root.dataset.ambient === "full" && finePointer.matches;
+      if (wanted && !depth) {
+        depth = createSceneDepth();
+        window.addEventListener("pointermove", onPointer, { passive: true });
+        document.documentElement.addEventListener("pointerleave", onLeave);
+      } else if (!wanted && depth) {
+        window.removeEventListener("pointermove", onPointer);
+        document.documentElement.removeEventListener("pointerleave", onLeave);
+        depth.dispose();
+        depth = null;
+      }
+    }
 
     function applyTier() {
       const nav = navigator as NavigatorWithHints;
@@ -41,9 +69,11 @@ export function AmbientMotion() {
         cores: nav.hardwareConcurrency ?? null,
       });
       root.dataset.ambient = tier;
+      syncDepth();
     }
     applyTier();
     media.addEventListener("change", applyTier);
+    finePointer.addEventListener("change", syncDepth);
 
     const sections = [...document.querySelectorAll<HTMLElement>("main section[data-island]")];
 
@@ -69,6 +99,9 @@ export function AmbientMotion() {
 
     return () => {
       media.removeEventListener("change", applyTier);
+      finePointer.removeEventListener("change", syncDepth);
+      root.dataset.ambient = "off";
+      syncDepth();
       live.disconnect();
       near?.disconnect();
       cancelIdle();

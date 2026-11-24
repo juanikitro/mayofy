@@ -9962,3 +9962,14 @@ html[data-ambient="full"] [data-ambient-near] .plate__picture--island[data-breez
     translate: var(--hero-shift) calc(var(--hero-lift) * 100 / var(--amb-bh-n));
   }
 }
+
+/* Depth (scene-depth.ts): while a scene follows the pointer or the tilt,
+ * its painted background (and the stars on it) grows 1.2 % around its centre,
+ * so its 3 px shift never uncovers an edge. */
+[data-ambient-depth] :is(.plate__picture--background, .ambient-night) {
+  scale: 1.012;
+}
+
+[data-ambient-depth] :is(.plate--layered, .sendero__plate) {
+  will-change: translate;
+}
