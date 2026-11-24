@@ -12,14 +12,13 @@ Fuentes: `docs/plans/2026-11-22-seo-rendimiento.md` ("Lo que tiene que hacer Jua
 
 Leyenda: `[ ]` pendiente, `[x]` hecho y comprobado, `[~]` empezado o esperando a Google.
 
-### 1. Google Search Console (unos 15 minutos, más la espera del DNS)
+### 1. Google Search Console (hecho el 24/11/2026)
 
-- [ ] Elegir una sola cuenta de Google para Search Console, el Perfil de Google y Analytics.
-- [ ] Agregar la propiedad de **Dominio** `mayofy.dev` en https://search.google.com/search-console.
-- [ ] Copiar el registro TXT (`google-site-verification=...`) y cargarlo en el DNS de `mayofy.dev` en Vercel (nombre vacío o `@`, tipo TXT).
-- [ ] Verificar en Search Console.
-- [ ] **[después de publicar]** Enviar `https://mayofy.dev/sitemap.xml` en "Sitemaps".
-- [ ] **[después de publicar]** "Inspección de URL" de `https://mayofy.dev/` → "Solicitar indexación". Igual con los 3 casos.
+- [x] Cuenta: jpkitro@gmail.com (la misma de Analytics).
+- [x] Propiedad de **Dominio** `mayofy.dev` creada y verificada (ya estaba verificada al empezar esta sesión).
+- [x] Sitemap `https://mayofy.dev/sitemap.xml` enviado: estado "Success", 6 páginas encontradas.
+- [x] Indexación solicitada para la home (ya estaba en Google) y los 3 casos (estaban "Discovered - currently not indexed"): las 4 quedaron en la cola prioritaria.
+- [ ] En unas semanas: revisar "Páginas" (que estén las 6), "Mejoras" (datos estructurados) y "Métricas web principales".
 
 ### 2. Bing Webmaster Tools (unos 5 minutos, requiere el paso 1 verificado)
 
@@ -99,3 +98,4 @@ En el sitio de cada cliente cambiar `cliente` por su nombre (`shineapp`, `gymg`,
 
 - 2026-11-23: guía creada a partir de los tres documentos de origen. Nada hecho todavía.
 - 2026-11-23: el coordinador publicó la versión nueva (master `89f798a`; sitemap.xml, og/home.jpg y los casos responden 200). Los pasos marcados "después de publicar" quedan habilitados.
+- 2026-11-24: Juani pidió ejecutar los pasos con el MCP de Chrome. Se instaló Chrome DevTools MCP (`--autoConnect`) a pedido suyo; la sesión opera su Chrome con sus sesiones iniciadas, sin manejar contraseñas. Search Console terminado (ver sección 1).
