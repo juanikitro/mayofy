@@ -22,10 +22,10 @@ export const islandCopy = {
     title: ["Elegí por dónde ", { em: "empezamos" }, "."],
     body: "Precios de referencia para saber por dónde arrancar. El alcance y el precio final se definen después de una charla gratis.",
   },
-  // Shortened on 2026-11-20 with option B of docs/plans/2026-11-20-propuestas.md.
+  // Island 4 became the priced extras on 2026-11-24 (docs/plans/2026-11-24-isla4-extras.md).
   systems: {
-    title: ["Sistemas y automatizaciones ", { em: "a medida" }, "."],
-    body: "Un sistema completo o una sola tarea que hoy hacés a mano. Lo armamos para cómo trabajás vos.",
+    title: ["Extras para sumar a tu ", { em: "pack" }, "."],
+    body: "Cada uno con su precio. Sumá los que te sirvan y mandanos la consulta ya armada por WhatsApp.",
   },
   // The works list goes straight under the title (Juani, 24 November 2026: the intro line was removed).
   works: {
