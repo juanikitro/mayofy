@@ -8859,6 +8859,12 @@ html[data-motion-tier="reduced"] :is(.island-nav__sheet, .island-nav[data-open] 
     margin-inline: calc(50% - 50vw);
     padding-block: 1.25rem 3.25rem;
     overflow-x: auto;
+    /* overflow-x: auto alone turns the block axis into a scroller too, and the
+     * unflipped cards' hidden back faces (absolute, taller than the card)
+     * still count as overflow, so a vertical swipe moved the carousel instead
+     * of the page. Hidden keeps the same clipping and hands vertical swipes to
+     * the page. */
+    overflow-y: hidden;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
