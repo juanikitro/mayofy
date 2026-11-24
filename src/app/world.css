@@ -366,10 +366,10 @@ details[data-preparing-open="true"] > .animated-details__content {
 }
 
 .mayo--hero { --loop-duration: 2.6s; }
-.mayo--problem { --loop-duration: 1.4s; }
+.mayo--problem { --loop-duration: 2s; }
 .mayo--systems { --loop-duration: 1.3s; }
 .mayo--host { --loop-duration: 3.2s; }
-.mayo--questions { --loop-duration: 2.2s; }
+.mayo--questions { --loop-duration: 2.6s; }
 
 /* The fall is the one place Mayo moves on her own (Juani, 19 November
  * 2026): her tumble loops in time while the clouds follow the scroll. */

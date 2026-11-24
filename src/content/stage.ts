@@ -424,11 +424,9 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
     contact: {
       tint: "26 46 10",
       layers: [
-        { kind: "cast", x: "58%", y: "80%", w: "22%", h: "7%", opacity: 0.45 },
-        { kind: "cast", x: "26%", y: "90.5%", w: "34%", h: "8%", opacity: 0.5 },
-        { kind: "ao", x: "26%", y: "88%", w: "9%", h: "2.6%", opacity: 0.65 },
-        { kind: "ao", x: "46%", y: "89.5%", w: "9%", h: "2.6%", opacity: 0.65 },
-        { kind: "ao", x: "74%", y: "73%", w: "7%", h: "2%", opacity: 0.6 },
+        { kind: "cast", x: "45%", y: "86%", w: "36%", h: "7%", opacity: 0.48 },
+        { kind: "ao", x: "66%", y: "88%", w: "23%", h: "3%", opacity: 0.62 },
+        { kind: "ao", x: "24%", y: "82%", w: "9%", h: "2.6%", opacity: 0.62 },
       ],
     },
   },
@@ -501,7 +499,16 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
   },
   // Island 6: resting on the grass facing the campfire (fire at 55 %, 59.5 %; mobile 53 %, 75 %), which lights her from the right.
   // Cell = plate crop (left 681 px, side 142 px of 1672); she faces the fire as painted; shadow painted in.
-  host: { x: "44.98%", y: "61.1%", size: "8.49%", xMobile: "36%", yMobile: "74.5%", sizeMobile: "17%", shadow: false },
+  host: {
+    x: "44.98%", y: "61.1%", size: "8.49%", xMobile: "36%", yMobile: "74.5%", sizeMobile: "17%", shadow: false,
+    contact: {
+      tint: "31 24 13",
+      layers: [
+        { kind: "cast", x: "41%", y: "85.5%", w: "66%", h: "9%", opacity: 0.42 },
+        { kind: "ao", x: "54%", y: "85%", w: "59%", h: "4%", opacity: 0.62 },
+      ],
+    },
+  },
   // Island 7: trots after a firefly on the meadow behind the front lip (rim 41 %, lip 49.5 %), right of the lantern (36.6 %, 48 %), which lights her from the left.
   // Cell = plate crop (left 711 px, top 354 px, side 100 px of 1672); light and shadow painted in.
   questions: {
