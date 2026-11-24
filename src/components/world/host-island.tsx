@@ -2,6 +2,7 @@ import { CalBooking } from "@/components/world/cal-booking";
 import { ContactAlternatives } from "@/components/world/contact-alternatives";
 import { plateSceneStyle } from "@/components/world/island-plate";
 import { AmbientBackdrop, AmbientClouds } from "@/components/world/ambient-sky";
+import { CanopyBreeze } from "@/components/world/canopy-breeze";
 import { IslandScene } from "@/components/world/island-scene";
 import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure } from "@/components/world/mayo-figure";
@@ -40,6 +41,7 @@ export function JuaniIsland() {
           {/* The campfire painted between Mayo and the bench. */}
           <SceneGlow kind="fire" desktop={{ x: "55.2%", y: "55.4%", w: "15%" }} mobile={{ x: "53.8%", y: "71.6%", w: "32%" }} />
           <MayoFigure slot="host" className="isle__mayo isle__mayo--rest" />
+          <CanopyBreeze island="host" />
           <SceneLight kind="fire" plate={islandPlates.host} />
           <AmbientClouds island="host" depth="near" />
         </IslandScene>

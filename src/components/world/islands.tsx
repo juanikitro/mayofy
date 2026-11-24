@@ -1,5 +1,6 @@
 import { AnimatedDetails } from "@/components/animated-details";
 import { AmbientBackdrop, AmbientClouds } from "@/components/world/ambient-sky";
+import { CanopyBreeze } from "@/components/world/canopy-breeze";
 import { plateSceneStyle } from "@/components/world/island-plate";
 import { IslandScene } from "@/components/world/island-scene";
 import { IslandTitle } from "@/components/world/island-title";
@@ -52,6 +53,7 @@ export function QuestionsIsland() {
       <IslandScene variant="night" plate={islandPlates.questions} backdrop={<AmbientBackdrop island="questions" />}>
         {/* The lantern painted on the left rock. */}
         <SceneGlow kind="lantern" desktop={{ x: "36.5%", y: "45.6%", w: "7%" }} mobile={{ x: "26.9%", y: "70.5%", w: "16%" }} />
+        <CanopyBreeze island="questions" />
         <SceneLight kind="lantern" plate={islandPlates.questions} />
         <PlateObjects objects={plateObjects.questions!} />
         <MayoFigure slot="questions" className="isle__mayo isle__mayo--chase" />

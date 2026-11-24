@@ -182,3 +182,29 @@ export const STAR_GLINTS = 5;
 
 /** Seconds between shooting stars while island 7 is on screen. */
 export const SHOOTING_STAR_INTERVAL: readonly [number, number] = [14, 32];
+
+/* ---------------------------------------------------------------- breeze */
+
+/**
+ * A tree canopy that sways in the breeze: the box (x, y, w, h in % of the
+ * plate) holds the whole tree, from a little above the crown to the grass
+ * around the trunk, and `pivot` is the height (% of the plate) of the
+ * trunk's base, where the sway is zero. Measured on the island cutouts.
+ */
+export type CanopyBox = { x: number; y: number; w: number; h: number; pivot: number };
+
+export const ambientCanopies: Partial<Record<AmbientIsland, { desktop: CanopyBox; mobile: CanopyBox | null }>> = {
+  // The hero's big tree. On phones the hero is one flat plate without a cutout: no breeze there.
+  hero: {
+    desktop: { x: 34.5, y: 45.5, w: 16, h: 25.5, pivot: 69 },
+    mobile: null,
+  },
+  host: {
+    desktop: { x: 26.5, y: 28, w: 17.5, h: 25, pivot: 52 },
+    mobile: { x: 16, y: 58, w: 25, h: 13, pivot: 69.5 },
+  },
+  questions: {
+    desktop: { x: 40.5, y: 17, w: 19.5, h: 26, pivot: 41.5 },
+    mobile: { x: 33, y: 52.5, w: 37, h: 18, pivot: 69 },
+  },
+};

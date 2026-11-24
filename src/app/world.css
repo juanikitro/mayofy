@@ -9547,7 +9547,7 @@ html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambie
 .ambient-star--glint::before,
 .ambient-star--glint::after {
   position: absolute;
-  inset: 50% -250%;
+  inset: 50% -170%;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgb(226 242 255 / 90%), transparent);
   scale: 0 1;
@@ -9900,5 +9900,65 @@ html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"][data-amb
 
   html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"][data-ambient-live] .plate-object--chased {
     animation-play-state: running;
+  }
+}
+
+/* Breeze (CanopyBreeze): a WebGL canvas over a tree's crown redraws it with
+ * a gentle displacement, and the same box is cut out of the island cutout
+ * underneath. Both hang off the same conditions, so the hole never shows
+ * without the canvas over it. Laid out (hidden) before it is ready, so the
+ * script can size it. */
+.ambient-breeze {
+  display: none;
+  position: absolute;
+  left: var(--amb-bx);
+  top: var(--amb-by);
+  width: var(--amb-bw);
+  height: var(--amb-bh);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+html[data-ambient="full"] [data-ambient-near] .ambient-breeze {
+  display: block;
+}
+
+html[data-ambient="full"] [data-ambient-near] .ambient-breeze[data-ready] {
+  visibility: visible;
+}
+
+html[data-ambient="full"] [data-ambient-near] .plate__picture--island[data-breeze] img {
+  -webkit-mask:
+    linear-gradient(#000 0 0) 0 0 / 100% 100% no-repeat,
+    linear-gradient(#000 0 0) var(--amb-hole-x) var(--amb-hole-y) / var(--amb-hole-w) var(--amb-hole-h) no-repeat;
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) 0 0 / 100% 100% no-repeat exclude,
+    linear-gradient(#000 0 0) var(--amb-hole-x) var(--amb-hole-y) / var(--amb-hole-w) var(--amb-hole-h) no-repeat;
+}
+
+@media (max-width: 48rem) {
+  .ambient-breeze {
+    left: var(--amb-bx-m);
+    top: var(--amb-by-m);
+    width: var(--amb-bw-m);
+    height: var(--amb-bh-m);
+  }
+}
+
+@media (max-width: 48rem) {
+  .ambient-breeze--desktop {
+    visibility: hidden;
+  }
+}
+
+/* The cutouts of the hero and island 6 sit shifted on desktop; the crown goes with them. */
+@media (min-width: 48.01rem) {
+  .hearth .ambient-breeze {
+    translate: var(--hearth-shift) 0;
+  }
+
+  .dawn .ambient-breeze {
+    translate: var(--hero-shift) calc(var(--hero-lift) * 100 / var(--amb-bh-n));
   }
 }
