@@ -117,7 +117,6 @@ export function WorksIndex({ projects }: { projects: readonly ProjectEntry[] }) 
       onBlur={onBlurIndex}
     >
       <div className="works-index__list-wrap">
-        {/* The island body above already says that more cases are coming. */}
         <ol className="works-index__list" aria-label="Proyectos">
           {shown.map((project, index) => {
             const shot = project.images[0];

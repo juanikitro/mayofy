@@ -429,11 +429,15 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
         // the low chest, then the cast down-left towards the camera like the rocks'. Radii are
         // generous on purpose: at ~120 px on screen anything under ~5 % hides behind her body
         // (Juani, 2026-11-24: "mejora la sombra de este frame").
-        { kind: "ao", x: "27%", y: "84.5%", w: "9%", h: "5.5%", opacity: 1 },
-        { kind: "ao", x: "49%", y: "89%", w: "10.5%", h: "5.5%", opacity: 1 },
-        { kind: "ao", x: "71.5%", y: "88.8%", w: "10%", h: "5.5%", opacity: 1 },
-        { kind: "cast", x: "52%", y: "89%", w: "38%", h: "10%", opacity: 0.85 },
-        { kind: "cast", x: "32%", y: "93%", w: "42%", h: "12%", opacity: 0.7 },
+        // Juani, 2026-11-24, later: the tall round layers read as an extra circle beside her and left
+        // her body without a shadow ("hazla parecida a la de la isla 1"). Like island 1, every layer
+        // is now flat and long: one shadow under the whole body from the hind paw to the front paws,
+        // darker at each paw, and a faint cast down-left like the rocks'.
+        { kind: "cast", x: "50%", y: "87.2%", w: "32%", h: "4.6%", opacity: 0.85 },
+        { kind: "cast", x: "41%", y: "89.8%", w: "38%", h: "5.2%", opacity: 0.45 },
+        { kind: "ao", x: "27.5%", y: "84.4%", w: "7.5%", h: "2.3%", opacity: 0.95 },
+        { kind: "ao", x: "49.5%", y: "88.8%", w: "8.5%", h: "2.4%", opacity: 1 },
+        { kind: "ao", x: "71.5%", y: "88.7%", w: "8.5%", h: "2.4%", opacity: 1 },
       ],
     },
   },
@@ -858,6 +862,30 @@ export const looseRocks: readonly LooseRock[] = [
 export const packsAssembledPlate: { desktop?: PlateImage; mobile?: PlateImage } = {
   desktop: desktopPlate("10-isla3-armada-escritorio-isla"),
   mobile: desktopPlate("10-isla3-armada-celular-isla"),
+};
+
+/**
+ * Each platform's rock stack on the painted assembled plates, as a
+ * `clip-path` polygon in % of the plate (desktop and phone crops, platforms
+ * in order). Traced from the paintings (the warm sandstone against the green,
+ * the convex hull of each stack pushed 6 px out so rim moss falls inside, a
+ * few measured points where moss covers a top), not hand-drawn. A copy of the
+ * painting clipped to one of them lifts a few pixels while that platform's
+ * marker is hovered or focused (world.css, "Wooden signs"), so the rock seems
+ * to lift although the painting is one image
+ * (docs/plans/2026-11-24-isla3-pulido.md).
+ */
+export const platformLiftOutlines: { desktop: readonly string[]; mobile: readonly string[] } = {
+  desktop: [
+    "polygon(19.35% 51.11%, 24.39% 41.94%, 28.65% 40.37%, 31.63% 40.91%, 32.41% 46.84%, 32.48% 47.53%, 32.48% 48.80%, 31.97% 51.35%, 31.51% 53.20%, 31.38% 53.32%, 20.23% 53.12%, 20.11% 53.02%)",
+    "polygon(46.32% 43.62%, 46.96% 34.90%, 47.04% 34.12%, 47.18% 33.68%, 47.24% 33.57%, 48.93% 31.47%, 50.79% 31.47%, 51.50% 32.13%, 52.66% 33.38%, 53.56% 38.01%, 53.89% 48.61%, 53.89% 49.04%, 53.82% 49.81%, 53.68% 50.24%, 47.46% 50.32%, 47.34% 50.21%, 46.49% 45.45%, 46.34% 44.43%)",
+    "polygon(69.01% 50.50%, 69.20% 42.81%, 69.27% 42.35%, 71.56% 33.74%, 71.88% 32.99%, 73.34% 31.24%, 75.16% 31.24%, 75.60% 31.89%, 76.62% 33.62%, 77.70% 38.33%, 77.85% 39.22%, 78.88% 50.20%, 78.86% 51.64%, 78.79% 51.98%, 78.73% 52.08%, 78.54% 52.32%, 78.22% 52.66%, 78.04% 52.78%, 70.03% 52.75%, 69.29% 52.60%, 69.10% 52.38%, 69.04% 51.83%)",
+  ],
+  mobile: [
+    "polygon(25.65% 51.11%, 31.45% 42.38%, 35.46% 40.97%, 37.82% 41.40%, 38.69% 47.08%, 38.70% 48.48%, 38.48% 51.50%, 37.83% 53.13%, 37.70% 53.37%, 26.69% 53.12%)",
+    "polygon(46.30% 44.22%, 47.04% 34.65%, 47.18% 34.00%, 48.84% 31.90%, 50.87% 31.88%, 52.47% 33.62%, 52.86% 34.84%, 53.37% 37.70%, 53.44% 38.38%, 53.85% 48.57%, 53.83% 49.56%, 53.77% 49.79%, 53.57% 50.13%, 52.49% 50.52%, 48.04% 50.51%, 47.52% 50.27%, 47.46% 50.15%, 47.33% 49.81%, 46.30% 45.03%)",
+    "polygon(62.39% 51.06%, 62.74% 44.52%, 62.93% 42.79%, 63.06% 42.09%, 65.38% 33.72%, 65.44% 33.51%, 65.51% 33.40%, 66.58% 31.77%, 68.85% 31.79%, 70.07% 34.39%, 71.21% 38.91%, 71.28% 39.36%, 71.35% 39.93%, 72.19% 50.07%, 72.24% 51.18%, 72.22% 51.85%, 72.15% 52.28%, 70.97% 52.78%, 70.35% 52.93%, 69.52% 53.08%, 64.03% 53.02%, 62.53% 52.39%, 62.47% 52.27%, 62.40% 51.84%)",
+  ],
 };
 
 /**

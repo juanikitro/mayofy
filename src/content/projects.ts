@@ -86,10 +86,11 @@ export const projects = [
   {
     slug: "shineapp",
     index: "01",
-    title: "Sistema de gestión para lavaderos",
+    // Card and listing labels (Juani, 24 November 2026): the product's name and its model.
+    title: "ShineApp",
     headline: "Un sistema de gestión para un lavadero de autos",
     accent: "lavadero de autos",
-    category: "Sistema a medida",
+    category: "Software as a Service",
     summary:
       "ShineApp ordena la agenda, las cotizaciones, la caja y los turnos online de un lavadero y detailing de 25 de Mayo.",
     intro:
@@ -209,7 +210,7 @@ export const projects = [
   {
     slug: "consignataria-hacienda",
     index: "02",
-    title: "Página para una consignataria de hacienda",
+    title: "Página para una consignataria",
     headline: "Una página web para una consignataria de hacienda",
     accent: "consignataria de hacienda",
     category: "Landing",
@@ -294,10 +295,10 @@ export const projects = [
   {
     slug: "portfolio-desarrollador",
     index: "03",
-    title: "Web personal de un programador",
+    title: "Portfolio de un programador",
     headline: "Una web personal para un programador",
     accent: "programador",
-    category: "Web personal",
+    category: "Landing",
     summary:
       "Mi propia web de programador backend: la trayectoria y dos casos reales, explicados para quien no estuvo ahí.",
     intro:

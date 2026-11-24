@@ -1,17 +1,20 @@
+import { CardLight } from "@/components/world/card-light";
 import { FlipCard } from "@/components/world/flip-card";
-import { DetailGroups } from "@/components/world/pack-groups";
 import { GuaranteesStrip } from "@/components/world/guarantees-strip";
 import { PackCarousel } from "@/components/world/pack-carousel";
-import { PaymentTip } from "@/components/world/payment-tip";
-import { commercialIntro, commercialPlans } from "@/content/commercial-plans";
+import { PackTabs } from "@/components/world/pack-tabs";
+import { Toggletip } from "@/components/world/toggletip";
+import { commercialIntro, commercialPlans, extensions } from "@/content/commercial-plans";
 import { getPesoPrices } from "@/lib/peso-prices";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
 /**
  * Commercial substance of island 3, rendered below the rock stage: the three
  * packs (a carousel on phones, PackCarousel), the guarantees strip and how to
- * pay (a toggletip, PaymentTip). The bot and the loose
- * automations live on island 4; maintenance lives on island 6.
+ * pay. Each pack's small print (its note, the optional monthly fee and its
+ * footnote) and how to pay open in (?) toggletips (Toggletip). The bot and the loose
+ * automations live on island 4 (a line under the packs links to its
+ * extras); maintenance lives on island 6.
  * Content comes verbatim from src/content/commercial-plans.ts; the peso
  * reference under each price comes from the cached blue rate and is left out
  * when no rate is available (src/lib/peso-prices.ts).
@@ -38,17 +41,26 @@ export async function PackDetails() {
         unflipLabel="Volver"
         front={
           <>
+            <CardLight />
             <header className="pack__header">
               {plan.eyebrow ? <p className="pack__eyebrow">{plan.eyebrow}</p> : null}
               <h3>{plan.name}</h3>
               <p className="pack__from">Desde</p>
-              <p className="pack__price">{plan.price}</p>
+              <div className="pack__price-row">
+                <p className="pack__price">{plan.price}</p>
+                <Toggletip
+                  className="pack__tip"
+                  label={`${commercialIntro.priceTipLabel} ${plan.name}`}
+                  items={[plan.note, commercialIntro.maintenanceNote, ...(plan.footnote ? [plan.footnote] : [])]}
+                />
+              </div>
               {pesos ? (
                 <p className="pack__pesos">
                   ≈ <strong>{pesos}</strong> {commercialIntro.pesoRateLabel}
                 </p>
-              ) : null}
-              <p className="pack__price-note">{pesos ? commercialIntro.priceNoteWithPesos : commercialIntro.priceNote}</p>
+              ) : (
+                <p className="pack__price-note">{commercialIntro.priceNote}</p>
+              )}
               <p className="pack__timeline">
                 Plazo estimado: <strong>{plan.timeline}</strong>
               </p>
@@ -63,21 +75,10 @@ export async function PackDetails() {
             <a className="btn btn--moss pack__cta" href={getWhatsAppHref(plan.whatsappMessage)} target="_blank" rel="noreferrer">
               {plan.cta}
             </a>
-
-            {plan.footnote ? (
-              <p className="pack__footnote">
-                <span aria-hidden="true">(*) </span>
-                {plan.footnote}
-              </p>
-            ) : null}
           </>
         }
-        back={
-          <>
-            <DetailGroups groups={plan.detailGroups} />
-            <p className="pack-details__note">{plan.note}</p>
-          </>
-        }
+        back={<PackTabs groups={plan.detailGroups} />}
+        resetBack
       />
     );
   }
@@ -99,7 +100,15 @@ export async function PackDetails() {
 
       <GuaranteesStrip />
 
-      <PaymentTip title={payment.title} items={payment.items} />
+      <Toggletip className="packs__payment" heading title={payment.title} items={payment.items} />
+
+      {/* "Automatizaciones sueltas": one line to island 4's priced extras (docs/plans/2026-11-24-isla4-extras.md). */}
+      <p className="packs__extras">
+        {extensions.body}{" "}
+        <a className="host-link" href={extensions.href}>
+          <span className="link-label">{extensions.linkLabel}</span>
+        </a>
+      </p>
     </div>
   );
 }

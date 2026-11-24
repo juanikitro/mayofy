@@ -8,7 +8,7 @@ export type TitleSegment = string | { em: string };
 
 export type IslandCopy = {
   title: readonly TitleSegment[];
-  /** Optional: island 2 dropped its line on 22 November 2026. */
+  /** Optional: island 2 dropped its line on 22 November 2026, the works on 24 November. */
   body?: string;
   /** One line per item of a list the island walks through (the six steps). */
   details?: readonly string[];
@@ -22,25 +22,25 @@ export const islandCopy = {
     title: ["Elegí por dónde ", { em: "empezamos" }, "."],
     body: "Precios de referencia para saber por dónde arrancar. El alcance y el precio final se definen después de una charla gratis.",
   },
-  // Shortened on 2026-11-20 with option B of docs/plans/2026-11-20-propuestas.md.
+  // Island 4 became the priced extras on 2026-11-24 (docs/plans/2026-11-24-isla4-extras.md).
   systems: {
-    title: ["Sistemas y automatizaciones ", { em: "a medida" }, "."],
-    body: "Un sistema completo o una sola tarea que hoy hacés a mano. Lo armamos para cómo trabajás vos.",
+    title: ["Extras para sumar a tu ", { em: "pack" }, "."],
+    body: "Cada uno con su precio. Sumá los que te sirvan y mandanos la consulta ya armada por WhatsApp.",
   },
+  // The works list goes straight under the title (Juani, 24 November 2026: the intro line was removed).
   works: {
-    title: ["Trabajos que ya ", { em: "están andando" }, "."],
-    body: "Un sistema con agenda para lavaderos, una página para una consignataria y una web personal. Se suman más a medida que terminan.",
+    title: ["Hechos y ", { em: "andando" }, "."],
   },
   process: {
     title: ["Seis pasos, sin ", { em: "sorpresas" }, "."],
-    // Lead and one line per step as approved with option A of the six steps
+    // One line per step as approved with option A of the six steps
     // (docs/plans/2026-11-20-propuestas.md, Juani 2026-11-20); in the order of siteContent.process.
-    body: "Vas a saber en qué etapa está tu proyecto y qué falta para publicar.",
+    // Juani, 24 November 2026: no lead, a new first line and "Hacés seguimiento" in the fourth.
     details: [
-      "Charlamos 30 minutos sobre tu negocio y lo que necesitás.",
+      "Nos contás cómo trabajás hoy y qué querés resolver primero.",
       "Te mandamos por escrito qué incluye, cuánto sale y cuándo está.",
       "Lo ves diseñado, con tu marca y tu rubro, antes de construirlo.",
-      "Seguís el avance mientras lo construimos, no recién al final.",
+      "Hacés seguimiento mientras lo construimos, no recién al final.",
       "Publicamos con tu dominio y dejamos medidas las visitas y consultas.",
       "Una semana de soporte incluida; después, mantenimiento si lo querés.",
     ],

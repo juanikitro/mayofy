@@ -9,7 +9,7 @@ export const contactOptions = {
     { value: "gestion", label: "Gestión (turnos, stock, pedidos o tienda)" },
     { value: "sistema", label: "Sistema a Medida" },
     { value: "automatizacion", label: "Automatización suelta" },
-    { value: "bot", label: "Bot de WhatsApp o Telegram (próximamente)" },
+    { value: "bot", label: "Bot de WhatsApp o Telegram" },
     { value: "no-se", label: "No sé todavía" },
   ],
   timeline: [

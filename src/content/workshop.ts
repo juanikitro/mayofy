@@ -12,61 +12,21 @@ export type WorkshopPart = {
   /** Short label pinned over the object on the island. */
   pin: string;
   title: string;
-  items: readonly string[];
 };
 
 /**
  * Island 4 copy rewritten on 23 November 2026 (Juani: the earlier wording
  * "parecen muy de IA"; the object eyebrows such as "El invernadero" are gone).
- * Plain words for a small-business owner; the items say what each thing does.
+ * Since 24 November 2026 each object is a group of priced extras
+ * (src/content/extras.ts, docs/plans/2026-11-24-isla4-extras.md), in the
+ * order of the proposal: from being found to connecting what the client
+ * already uses, which leads to the Sistema a Medida pack.
  */
 export const workshopParts: readonly WorkshopPart[] = [
-  {
-    object: "greenhouse",
-    pin: "Sistema a medida",
-    title: "Tu propio sistema",
-    items: [
-      "Turnos y reservas online",
-      "Clientes, ventas y cobros en un solo panel",
-      "Cada persona del equipo ve lo suyo",
-      "Conectado con lo que ya usás: planillas, facturación o pagos",
-    ],
-  },
-  {
-    object: "pot",
-    pin: "Más consultas",
-    title: "Que te encuentren más",
-    items: [
-      "Una página para cada promoción",
-      "Una página por servicio o por zona",
-      "Saber qué anuncios te traen clientes",
-      "Aparecer en Google Maps de tu zona",
-      "Tu página en otros idiomas",
-    ],
-  },
-  {
-    object: "toolbox",
-    pin: "Contacto simple",
-    title: "Que te escriban más fácil",
-    items: [
-      "Formularios que piden solo lo necesario",
-      "Presupuestos que se calculan solos",
-      "Cobro de señas online",
-      "Un catálogo de lo que vendés o hacés",
-    ],
-  },
-  {
-    object: "gear",
-    pin: "Seguimiento automático",
-    title: "Que no se te escape ninguna consulta",
-    items: [
-      "Cada consulta queda guardada en una planilla",
-      "Tu lista de clientes, ordenada",
-      "Un aviso por mail cuando entra algo nuevo",
-      "Respuestas automáticas",
-      "Saber en qué quedó cada consulta",
-    ],
-  },
+  { object: "pot", pin: "Más consultas", title: "Que te encuentren más" },
+  { object: "toolbox", pin: "Contacto simple", title: "Que te escriban más fácil" },
+  { object: "gear", pin: "Seguimiento", title: "Que no se te escape ninguna consulta" },
+  { object: "greenhouse", pin: "Conexiones", title: "Conectalo con lo que ya usás" },
 ];
 
 /**

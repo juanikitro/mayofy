@@ -1,4 +1,6 @@
-import { commercialPlans } from "@/content/commercial-plans";
+import { chatBot, commercialPlans } from "@/content/commercial-plans";
+import { extraSeals, extras, extrasCopy } from "@/content/extras";
+import { formatUsd } from "@/lib/extras-request";
 import { publishedProjects } from "@/content/projects";
 import { publicChannels, siteContent } from "@/content/site";
 import { getSiteUrl } from "@/lib/site-url";
@@ -18,6 +20,20 @@ export function GET() {
     "",
     "## Packs",
     ...commercialPlans.map((plan) => `- ${plan.name} (desde ${plan.price}, ${plan.timeline}): ${plan.description}`),
+    "",
+    `## ${chatBot.title}`,
+    chatBot.description,
+    ...chatBot.tiers.map((tier) => `- ${tier.name} (${formatUsd(tier.usd)}, ${tier.timeline}): ${tier.includes}`),
+    `- ${chatBot.monthly} ${chatBot.note}`,
+    "",
+    "## Extras para sumar a un pack",
+    `Precios del trabajo de Mayofy. ${extrasCopy.servicesNote}`,
+    ...extras
+      .filter((extra) => !extra.choice)
+      .map(
+        (extra) =>
+          `- ${extra.title}: ${extra.kind === "from" ? "desde " : ""}${formatUsd(extra.price)}${extra.unit ? ` ${extra.unit}` : ""} (${extraSeals[extra.kind].toLowerCase()}${extra.service ? `; ${extra.service}` : ""})`,
+      ),
     "",
     "## Casos",
     ...publishedProjects.map((project) => `- [${project.title}](${url(`/proyectos/${project.slug}`)}): ${project.summary}`),

@@ -902,11 +902,14 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   scale: calc(1.8 - 0.8 * var(--ground));
 }
 
-/* The markers: a box with the plate's frame (bottom-anchored, full width,
- * the plate's ratio and drop), each marker standing on its platform's top
- * rock on a short stem (Juani, 20 November 2026, option A). One line on
- * desktop ("Landing  USD 85  ↓"), name over price on phones; each leads to its
- * full pack card below (platform-markers.tsx). */
+/* Wooden signs (Juani, 24 November 2026: "Marcadores de precio, elijo el
+ * cartel de madera"). The markers share the plate's frame (bottom-anchored,
+ * full width, the plate's ratio and drop), each a small painted plank on a
+ * stake planted in its platform's top rock: name and price lettered on the
+ * plank, the arrow kept; one line on desktop, name over price on phones.
+ * Each leads to its full pack card below (platform-markers.tsx). The wood
+ * takes the plates' light: warm, from the high front left, so the top and
+ * left edges catch it and the bottom and right fall into shade. */
 .platforms {
   position: absolute;
   inset: auto 0 0;
@@ -919,76 +922,110 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 .platform__marker {
   --x: var(--x-d);
   --top: var(--top-d);
-  --stem: 0.9rem;
+  --stem: 1rem;
+  --wood: oklch(51% 0.085 57);
+  --wood-deep: oklch(37% 0.07 48);
+  --wood-lit: oklch(72% 0.09 70);
 
   position: absolute;
   left: var(--x);
   bottom: calc(100% - var(--top) + var(--stem));
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
+  display: flex;
   min-height: 2.75rem;
-  padding: 0.55rem 1rem 0.55rem 0.85rem;
-  border-radius: 999px;
-  background: var(--cream);
-  box-shadow: var(--shadow-soft);
-  color: var(--ink);
+  border-radius: 0.5rem;
+  color: oklch(96% 0.025 85);
   font-size: 1.02rem;
-  font-weight: 600;
+  font-weight: 700;
   white-space: nowrap;
   text-decoration: none;
   translate: -50% 0;
   pointer-events: auto;
-  transition: translate 160ms var(--ease-out);
+  transition: translate 260ms var(--ease-out);
 }
 
-/* The stem down to the rock it names. */
-.platform__marker::after {
+/* The stake: behind the plank from its nail, down into the rock. */
+.platform__marker::before {
   content: "";
   position: absolute;
   left: 50%;
-  top: 100%;
-  width: 2px;
-  height: var(--stem);
-  background: var(--cream);
+  top: 0.45rem;
+  z-index: -1;
+  width: 0.42rem;
+  height: calc(100% - 0.45rem + var(--stem) + 0.2rem);
+  border-radius: 0.12rem 0.12rem 0.22rem 0.22rem;
+  background: linear-gradient(90deg, var(--wood-lit), var(--wood) 45%, var(--wood-deep));
+  box-shadow: 0.1rem 0.1rem 0.2rem oklch(25% 0.05 55 / 35%);
   translate: -50% 0;
 }
 
-.platform__marker:hover {
-  translate: -50% -3px;
+/* The plank hangs on a nail at its top centre, where it sways from. */
+.platform__marker-plank {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  padding: 0.7rem 1rem 0.45rem;
+  border-radius: 0.4rem 0.55rem 0.45rem 0.35rem;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 60' preserveAspectRatio='none'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.005 0.42' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 0 0.04 0 0 0 2.1 -0.85'/%3E%3C/filter%3E%3Crect width='240' height='60' filter='url(%23g)'/%3E%3C/svg%3E") 0 0 / 100% 100%,
+    linear-gradient(180deg, var(--wood-lit), var(--wood) 28%, var(--wood) 72%, var(--wood-deep));
+  box-shadow:
+    inset 0 1px 0 oklch(88% 0.08 78 / 70%),
+    inset 1px 0 0 oklch(82% 0.08 75 / 40%),
+    inset 0 -2px 0 oklch(28% 0.06 46 / 55%),
+    inset -1px 0 0 oklch(28% 0.06 46 / 35%),
+    0 0.4rem 0.6rem -0.25rem oklch(25% 0.05 55 / 50%);
+  text-shadow: 0 1px 0 oklch(26% 0.06 46 / 70%);
+  transform-origin: 50% 0.4rem;
 }
 
+/* Each plank shows another stretch of the same grain. */
+.platform__marker--2 .platform__marker-plank {
+  background-position: 40% 0, 0 0;
+  background-size: 180% 100%, auto;
+}
+
+.platform__marker--3 .platform__marker-plank {
+  background-position: 85% 0, 0 0;
+  background-size: 160% 120%, auto;
+}
+
+/* The nail. */
+.platform__marker-plank::before {
+  content: "";
+  position: absolute;
+  top: 0.22rem;
+  left: 50%;
+  width: 0.34rem;
+  height: 0.34rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, oklch(88% 0.02 85), oklch(42% 0.02 60) 75%);
+  box-shadow: 0 1px 1px oklch(20% 0.04 50 / 50%);
+  translate: -50% 0;
+}
+
+.platform__marker-price,
+.platform__marker-arrow {
+  color: oklch(89% 0.1 88);
+  font-variant-numeric: tabular-nums;
+}
+
+.platform__marker-arrow {
+  transition: translate 160ms var(--ease-out);
+}
+
+/* The ring sits apart from the wood: cream, then moss. */
 .platform__marker:focus-visible {
   outline: 3px solid var(--moss);
   outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--cream);
 }
 
 /* A marker reached with Tab before its platform has assembled shows at once:
  * keyboard focus never lands on something invisible. */
 .platform__marker:focus-visible {
   opacity: 1 !important;
-}
-
-.platform__marker-dot {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 50%;
-  background: var(--leaf);
-}
-
-.platform__marker-price {
-  color: var(--moss);
-  font-variant-numeric: tabular-nums;
-}
-
-.platform__marker-arrow {
-  color: var(--moss);
-  transition: translate 160ms var(--ease-out);
-}
-
-.platform__marker:hover .platform__marker-arrow,
-.platform__marker:focus-visible .platform__marker-arrow {
-  translate: 0 3px;
 }
 
 /* Spoken, not shown: where the marker leads. */
@@ -999,6 +1036,105 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
+}
+
+/* The rock under a sign: a copy of the painted plate clipped to its stack
+ * (LiftPlates, stage.ts platformLiftOutlines), fading out over its feet.
+ * Hidden at rest; hovered or focused, it rises 4px with its sign. */
+.rocks .plate__picture--lift {
+  z-index: 3;
+  clip-path: var(--lift-d);
+  mask-image: linear-gradient(180deg, #000 calc(var(--lift-foot-d) - 2.5%), transparent var(--lift-foot-d));
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    translate 260ms var(--ease-out),
+    visibility 0s linear 260ms;
+}
+
+@media (max-width: 48rem) {
+  .rocks .plate__picture--lift {
+    clip-path: var(--lift-m);
+    mask-image: linear-gradient(180deg, #000 calc(var(--lift-foot-m) - 2.5%), transparent var(--lift-foot-m));
+  }
+}
+
+/* Hover (pointer devices) or keyboard focus: the plank sways like a hanging
+ * sign, a damped pendulum around its nail (two swings, then still), and the
+ * sign and its rock rise 4px; the rock only once the platforms stand built
+ * (or without the play). None of it with reduced motion. */
+@keyframes sign-sway {
+  0% {
+    rotate: 0deg;
+  }
+
+  16% {
+    rotate: 4.5deg;
+  }
+
+  38% {
+    rotate: -2.8deg;
+  }
+
+  58% {
+    rotate: 1.4deg;
+  }
+
+  78% {
+    rotate: -0.5deg;
+  }
+
+  100% {
+    rotate: 0deg;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .platform__marker:focus-visible {
+    translate: -50% -4px;
+  }
+
+  html:not([data-motion-tier="reduced"]) .platform__marker:focus-visible .platform__marker-plank {
+    animation: sign-sway 1.5s cubic-bezier(0.37, 0, 0.63, 1) both;
+  }
+
+  html:not([data-motion-tier="reduced"]) .platform__marker:focus-visible .platform__marker-arrow {
+    translate: 0 3px;
+  }
+
+  html:not([data-motion-tier="reduced"]) .rocks:is([data-play="built"], :not([data-play])) .rocks__stage:has(.platform__marker--1:focus-visible) .plate__picture--lift-1,
+  html:not([data-motion-tier="reduced"]) .rocks:is([data-play="built"], :not([data-play])) .rocks__stage:has(.platform__marker--2:focus-visible) .plate__picture--lift-2,
+  html:not([data-motion-tier="reduced"]) .rocks:is([data-play="built"], :not([data-play])) .rocks__stage:has(.platform__marker--3:focus-visible) .plate__picture--lift-3 {
+    visibility: visible;
+    translate: 0 -4px;
+    transition:
+      translate 320ms var(--ease-out),
+      visibility 0s;
+  }
+
+  @media (hover: hover) {
+    html:not([data-motion-tier="reduced"]) .platform__marker:hover {
+      translate: -50% -4px;
+    }
+
+    html:not([data-motion-tier="reduced"]) .platform__marker:hover .platform__marker-plank {
+      animation: sign-sway 1.5s cubic-bezier(0.37, 0, 0.63, 1) both;
+    }
+
+    html:not([data-motion-tier="reduced"]) .platform__marker:hover .platform__marker-arrow {
+      translate: 0 3px;
+    }
+
+    html:not([data-motion-tier="reduced"]) .rocks:is([data-play="built"], :not([data-play])) .rocks__stage:has(.platform__marker--1:hover) .plate__picture--lift-1,
+    html:not([data-motion-tier="reduced"]) .rocks:is([data-play="built"], :not([data-play])) .rocks__stage:has(.platform__marker--2:hover) .plate__picture--lift-2,
+    html:not([data-motion-tier="reduced"]) .rocks:is([data-play="built"], :not([data-play])) .rocks__stage:has(.platform__marker--3:hover) .plate__picture--lift-3 {
+      visibility: visible;
+      translate: 0 -4px;
+      transition:
+        translate 320ms var(--ease-out),
+        visibility 0s;
+    }
+  }
 }
 
 /* The pack card a marker leads to rings for a moment on arrival (also when
@@ -1591,24 +1727,27 @@ html[data-motion-tier="reduced"] .scene__sky {
     transform: translate(-50%, var(--rocks-drop));
   }
 
-  /* Name over price, no dot or arrow, 44 px tall; a long name may wrap. */
+  /* Name over price, no arrow, 44 px tall; a long name wraps, so the
+   * third sign keeps clear of the screen's edge at 360 px. */
   .platform__marker {
     --x: var(--x-m);
     --top: var(--top-m);
-    --stem: 0.6rem;
+    --stem: 0.7rem;
 
-    flex-direction: column;
-    gap: 0;
-    max-width: 7.6rem;
-    padding: 0.45rem 0.7rem;
-    border-radius: 1.2rem;
+    max-width: 6.6rem;
     font-size: 0.82rem;
     line-height: 1.2;
     text-align: center;
     white-space: normal;
   }
 
-  .platform__marker-dot,
+  .platform__marker-plank {
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    padding: 0.62rem 0.6rem 0.4rem;
+  }
+
   .platform__marker-arrow {
     display: none;
   }
@@ -1639,12 +1778,12 @@ html[data-motion-tier="reduced"] .scene__sky {
 }
 
 /* The three cards share their rows (subgrid): header, "ideal para", call to
- * action, footnote and details line up across the cards whatever the length
- * of each description. */
+ * action and details line up across the cards whatever the length of each
+ * description. */
 .pack {
   position: relative;
   display: grid;
-  grid-row: span 5;
+  grid-row: span 4;
   grid-template-rows: subgrid;
   row-gap: 1rem;
   padding: 1.5rem;
@@ -1654,23 +1793,17 @@ html[data-motion-tier="reduced"] .scene__sky {
   scroll-margin-top: 5rem;
 }
 
-.pack__footnote {
+.pack .pack-details {
   grid-row: 4;
 }
 
-.pack .pack-details {
-  grid-row: 5;
-}
-
-/* One card per row on phones: nothing to line up with, so no empty
- * footnote row either. */
+/* One card per row on phones: nothing to line up with. */
 @media (max-width: 48rem) {
   .pack {
     grid-row: auto;
     grid-template-rows: none;
   }
 
-  .pack__footnote,
   .pack .pack-details {
     grid-row: auto;
   }
@@ -1704,6 +1837,13 @@ html[data-motion-tier="reduced"] .scene__sky {
 .pack__header h3 {
   font-size: 1.35rem;
   margin-block: 0.25rem 0.75rem;
+}
+
+/* The price and its (?) small print side by side. */
+.pack__price-row {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
 }
 
 .pack__price {
@@ -1742,8 +1882,6 @@ html[data-motion-tier="reduced"] .scene__sky {
   text-transform: uppercase;
 }
 
-.pack__footnote,
-.pack-details__note,
 .packs__payment,
 .upkeep__footnotes {
   font-size: 0.88rem;
@@ -1810,16 +1948,6 @@ html[data-motion-tier="reduced"] .scene__sky {
   padding: 1.5rem;
   border-radius: var(--radius);
   background: var(--cream);
-}
-
-.soon__label {
-  padding: 0.3rem 0.7rem;
-  border-radius: var(--radius-pill);
-  background: var(--beige-deep);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .upkeep h3 {
@@ -2046,8 +2174,7 @@ html[data-motion-tier="reduced"] .scene__sky {
 
 .isle--dark .pack-list,
 .isle--dark .upkeep__prices dt,
-.isle--dark .upkeep__footnotes,
-.isle--dark .pack-details__note {
+.isle--dark .upkeep__footnotes {
   color: var(--night-ink-soft);
 }
 
@@ -2514,12 +2641,6 @@ html[data-motion-tier="reduced"] .fall__mayo {
   color: var(--moss);
 }
 
-.sendero__lead {
-  max-width: 34rem;
-  margin-block-start: 0.75rem;
-  color: var(--ink-soft);
-}
-
 .sendero__steps {
   display: grid;
   gap: 0.25rem;
@@ -2537,11 +2658,27 @@ html[data-motion-tier="reduced"] .fall__mayo {
 }
 
 .sendero__number {
+  position: relative;
   font-family: var(--font-world-serif);
   font-size: 1.15rem;
   font-style: italic;
   line-height: 1.3;
   color: var(--moss);
+}
+
+/* The number rolls when its step becomes the current one (the pinned path,
+ * below): the digits it replaces leave one way, its own arrive from the
+ * other. Both sit in the same box; only translate and opacity move. */
+.sendero__digits {
+  display: inline-block;
+}
+
+.sendero__number::before {
+  content: attr(data-from);
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .sendero__step strong {
@@ -2568,13 +2705,11 @@ html[data-motion-tier="reduced"] .fall__mayo {
   transition: background-color 200ms var(--ease-out);
 }
 
+/* Hover: a soft cream wash and the label at full ink, never an underline
+ * (Juani, 24 November 2026: "del hover de los elementos quitales el subrayado"). */
 .sendero__go:hover {
   background: color-mix(in oklch, var(--cream) 40%, transparent);
-}
-
-.sendero__go:hover strong {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+  color: var(--ink);
 }
 
 .sendero__go:focus-visible {
@@ -2758,6 +2893,25 @@ html[data-motion-tier="reduced"] .fall__mayo {
       animation-range: contain var(--from) contain var(--to);
     }
 
+    /* The current step's number rolls in from the one before: up going
+     * down the path, down going back (`data-dir`, SenderoController). Not
+     * in the reduced motion tier. */
+    .sendero__number {
+      --number-shift: 0.7em;
+    }
+
+    .sendero__number[data-dir="up"] {
+      --number-shift: -0.7em;
+    }
+
+    html:not([data-motion-tier="reduced"]) .sendero__go[aria-current] .sendero__digits {
+      animation: sendero-number-in var(--m-reveal, 520ms) var(--ease-enter, ease-out) both;
+    }
+
+    html:not([data-motion-tier="reduced"]) .sendero__go[aria-current] .sendero__number[data-from]::before {
+      animation: sendero-number-out 320ms var(--ease-ui, ease-out) both;
+    }
+
     .sendero__badge {
       animation-name: sendero-badge-now, sendero-badge-done;
       animation-duration: auto;
@@ -2802,10 +2956,6 @@ html[data-motion-tier="reduced"] .fall__mayo {
         padding-block-start: 4.5rem;
       }
 
-      .sendero__lead {
-        display: none;
-      }
-
       .sendero__steps {
         grid-template-areas: "step";
         margin-block-start: 0.75rem;
@@ -2821,6 +2971,20 @@ html[data-motion-tier="reduced"] .fall__mayo {
         margin-block-start: 0.2rem;
         opacity: 1;
         animation: none;
+      }
+
+      /* The number lives in the card's "Paso 3 de 6" label here: it rises
+       * in (or drops in, going back) as the step changes. */
+      .sendero__step::before {
+        --number-shift: 0.6em;
+      }
+
+      .sendero__step:has(.sendero__number[data-dir="up"])::before {
+        --number-shift: -0.6em;
+      }
+
+      html:not([data-motion-tier="reduced"]) .sendero__step:has(.sendero__go[aria-current])::before {
+        animation: sendero-number-in var(--m-reveal, 520ms) var(--ease-enter, ease-out) both;
       }
 
       /* The six step buttons: a vertical rail, in "Mobile packs carousel,
@@ -2852,6 +3016,30 @@ html[data-motion-tier="reduced"] .fall__mayo {
     max-height: 8rem;
     margin-block-start: 0.2rem;
     opacity: 1;
+  }
+}
+
+@keyframes sendero-number-in {
+  from {
+    opacity: 0;
+    translate: 0 var(--number-shift);
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes sendero-number-out {
+  from {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  to {
+    opacity: 0;
+    translate: 0 calc(-1 * var(--number-shift));
   }
 }
 
@@ -3024,60 +3212,6 @@ html[data-motion-tier="reduced"] .mayo--stops {
 }
 
 /* Booking (island 7) */
-
-/* Bot tiers (island 4) */
-
-.soon__label {
-  grid-area: label;
-}
-
-.soon__tiers {
-  grid-area: tiers;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
-  gap: 1rem;
-  width: 100%;
-  margin-block-start: 0.5rem;
-}
-
-.soon__tiers > div {
-  display: grid;
-  gap: 0.35rem;
-  padding: 1rem;
-  border-radius: calc(var(--radius) - 0.5rem);
-  background: var(--beige);
-}
-
-.soon__tiers dt {
-  font-weight: 600;
-}
-
-.soon__tiers dd {
-  display: grid;
-  gap: 0.25rem;
-}
-
-.soon__price {
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  color: var(--moss);
-}
-
-.soon__timeline,
-.soon__includes,
-.soon__monthly,
-.soon__note {
-  font-size: 0.9rem;
-  color: var(--ink-soft);
-}
-
-.soon__monthly {
-  grid-area: monthly;
-}
-
-.soon__note {
-  grid-area: note;
-}
 
 /* Contact form (island 6) ------------------------------------------------ */
 
@@ -5592,7 +5726,7 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
 }
 
 .pack__front > .flip__toggle {
-  grid-row: 5;
+  grid-row: 4;
 }
 
 .pack .flip__face {
@@ -5634,6 +5768,113 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   html:not([data-motion-tier="reduced"]) .pack.flip:hover .flip__face {
     box-shadow: var(--m-shadow-card);
     transition-duration: 180ms, 200ms, 0s;
+  }
+}
+
+/* Pack card hover (Juani, 24 November 2026: "un efecto hover mas
+ * interesante a las cards"). Under a hover-capable pointer, without reduced
+ * motion: besides the 2px rise and the deeper shadow above, a soft sunlit
+ * glow follows the pointer across the card's ground (CardLight sets `--x` and
+ * `--y`; the glow moves by `translate` only, on its own layer, under the
+ * text), the featured outline firms up and the call to action wakes with its
+ * button shadow. No tilt or scale, so the text stays crisp. */
+.pack__front {
+  isolation: isolate;
+}
+
+.pack__light {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  html:not([data-motion-tier="reduced"]) .pack__light {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 360ms var(--ease-ui);
+  }
+
+  html:not([data-motion-tier="reduced"]) .pack__light::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 26rem;
+    aspect-ratio: 1;
+    margin: -13rem 0 0 -13rem;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, oklch(99.5% 0.04 92), oklch(99% 0.035 100 / 50%) 45%, transparent);
+    translate: var(--x, 50%) var(--y, 0);
+    will-change: translate;
+  }
+
+  html:not([data-motion-tier="reduced"]) .pack.flip:hover .pack__light {
+    opacity: 1;
+    transition-duration: 220ms;
+  }
+
+  html:not([data-motion-tier="reduced"]) .pack--featured.flip:hover .flip__face {
+    outline-color: color-mix(in oklch, var(--moss) 70%, transparent);
+  }
+
+  html:not([data-motion-tier="reduced"]) .pack.flip:hover .pack__cta {
+    box-shadow:
+      var(--m-shadow-btn),
+      inset 0 1px 0 oklch(100% 0 0 / 18%);
+  }
+}
+
+/* The island over the cards (Juani, 24 November 2026: "un pequeño efecto
+ * de profundidad de la isla sobre las cards"). The floating island shades
+ * the top of each card's front, a cool haze under its overhang, so the
+ * painted island reads as standing above and behind the cards. The shade
+ * is strongest while the island is still in view above the cards and
+ * thins and draws back up towards it as the cards rise past (the `.packs`
+ * view timeline, not the carousel's own scroller on phones). Opacity and
+ * scale only, under the text; at rest it holds a middle strength. */
+.packs {
+  view-timeline-name: --packs-depth;
+}
+
+.pack__front::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: 9rem;
+  border-radius: inherit;
+  background:
+    radial-gradient(120% 100% at 50% 0, oklch(42% 0.05 215 / 11%), transparent 70%),
+    linear-gradient(180deg, oklch(42% 0.04 215 / 6%), transparent);
+  opacity: 0.75;
+  transform-origin: 50% 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    html:not([data-motion-tier="reduced"]) .pack__front::before {
+      animation: pack-island-shade linear both;
+      animation-timeline: --packs-depth;
+      animation-range: cover 30% cover 60%;
+    }
+  }
+}
+
+@keyframes pack-island-shade {
+  from {
+    opacity: 1;
+    scale: 1 1;
+  }
+
+  to {
+    opacity: 0.3;
+    scale: 1 0.55;
   }
 }
 
@@ -6463,11 +6704,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
   font-size: 1.1rem;
 }
 
-.proposal__base span {
-  font-size: 0.85rem;
-  opacity: 0.85;
-}
-
 .proposal__modules {
   position: relative;
   display: grid;
@@ -6692,10 +6928,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
 
   .proposal-frame--scene .proposal__base b {
     font-size: 6cqi;
-  }
-
-  .proposal-frame--scene .proposal__base span {
-    font-size: 4.2cqi;
   }
 
   /* Six modules (22 November 2026): tighter rows keep the card above the island's meadow. */
@@ -6983,11 +7215,23 @@ html[data-motion-tier="reduced"] .works-index__shot {
   pointer-events: auto;
 }
 
+/* The groups and "Tu consulta" share one block, so the summary's sticky
+ * bar holds the bottom of the screen for the whole list (extras builder,
+ * below). Only its panels take the pointer. */
+.workshop__flow {
+  grid-column: 2;
+  pointer-events: none;
+}
+
+.workshop__flow > *,
+.workshop__part {
+  pointer-events: auto;
+}
+
 /* Parts close together: the next one already shows under the one in the
  * middle of the screen, and the first waits low on the screen as the
  * section pins. */
 .workshop__parts {
-  grid-column: 2;
   display: grid;
   gap: 16svh;
   margin: 62svh 0 0;
@@ -7040,47 +7284,34 @@ html[data-motion-tier="reduced"] .works-index__shot {
 .workshop__items li:nth-child(3) { --item-from: 14%; }
 .workshop__items li:nth-child(4) { --item-from: 17%; }
 .workshop__items li:nth-child(5) { --item-from: 20%; }
+.workshop__items li:nth-child(6) { --item-from: 23%; }
+.workshop__items li:nth-child(7) { --item-from: 26%; }
 
-.workshop__link {
-  margin-block-start: 0.5rem;
-}
-
-.workshop__cta {
-  display: grid;
-  gap: 0.75rem;
-  justify-items: start;
+.workshop__custom {
   margin-block-start: 0.75rem;
-}
-
-.workshop__cta p {
   color: var(--ink-soft);
-  font-size: 0.95rem;
 }
 
-.workshop__soon {
+.workshop__bot {
   grid-column: 2;
   display: grid;
-  grid-template: none / minmax(0, 1fr);
   gap: 0.75rem;
   justify-items: start;
   margin-block-start: 16svh;
-  padding: 1.25rem 1.4rem;
+  padding: 1.5rem 1.6rem;
 }
 
-.workshop__soon .soon__label {
-  grid-area: auto;
+.workshop__bot h3 {
+  font-size: 1.45rem;
 }
 
-.workshop__soon-copy {
+.workshop__bot-copy,
+.workshop__bot-note {
   color: var(--ink-soft);
 }
 
-.workshop__soon-copy strong {
-  color: var(--ink);
-}
-
-.workshop__tiers .soon__tiers {
-  margin-block-start: 0.5rem;
+.workshop__bot-note {
+  font-size: 0.9rem;
 }
 
 /* Each part lights its object and its pin while it crosses the reading
@@ -7178,7 +7409,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
 /* Phones: the title and lead hold the top of the screen, the island sits
  * under them (the plate grows by a sixth and rises), and each part arrives
  * from the bottom, rests centred in the space left under the island
- * (`--workshop-zone-*`; a part taller than it rests at its top) and fades before it reaches it; the pins become
+ * (`--workshop-zone-*`; a part taller than it rests at its top), slides over the island as it is read and fades as it leaves the screen; the pins become
  * numbers that match the parts. Without scroll-driven animations or with
  * reduced motion nothing is pinned: title, island, then every part, all
  * visible. */
@@ -7241,32 +7472,41 @@ html[data-motion-tier="reduced"] .works-index__shot {
     font-size: 0.8rem;
   }
 
-  .workshop__pin--greenhouse::before { content: "1"; }
-  .workshop__pin--pot::before { content: "2"; }
-  .workshop__pin--toolbox::before { content: "3"; }
-  .workshop__pin--gear::before { content: "4"; }
+  .workshop__pin--pot::before { content: "1"; }
+  .workshop__pin--toolbox::before { content: "2"; }
+  .workshop__pin--gear::before { content: "3"; }
+  .workshop__pin--greenhouse::before { content: "4"; }
 
   .workshop__content {
     grid-template-columns: minmax(0, 1fr);
     padding-block: 0 20svh;
   }
 
-  .workshop__parts,
-  .workshop__soon {
+  .workshop__flow,
+  .workshop__bot {
     grid-column: 1;
   }
 
+  /* Wide enough that, while a part rests under the island, the one before
+   * it has already risen past the island. */
   .workshop__parts {
-    gap: 12svh;
+    gap: 40svh;
     margin-block-start: 100svh;
   }
 
-  .workshop__soon {
+  .workshop__bot {
     margin-block-start: 12svh;
+    padding: 1.1rem 1.2rem;
   }
 
   .workshop__part {
     padding: 1.1rem 1.2rem;
+  }
+
+  /* Opaque: they slide over the pinned title and island while being read. */
+  .workshop__part,
+  .workshop__bot {
+    background: var(--cream);
   }
 
   .workshop__part h3 {
@@ -7285,8 +7525,8 @@ html[data-motion-tier="reduced"] .works-index__shot {
         animation-range: cover 5% cover 50%;
       }
 
-      /* The bot strip fades before it rises into the island. */
-      html:not([data-motion-tier="reduced"]) .workshop__soon {
+      /* The bot panel, like a part, fades as it leaves the screen. */
+      html:not([data-motion-tier="reduced"]) .workshop__bot {
         animation: workshop-part-phone linear both;
         animation-timeline: view();
       }
@@ -7313,7 +7553,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
       margin-block-start: 1.5rem;
     }
 
-    .workshop__soon {
+    .workshop__bot {
       margin-block-start: 1rem;
     }
   }
@@ -7336,7 +7576,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
     margin-block-start: 1.5rem;
   }
 
-  html[data-motion-tier="reduced"] .workshop__soon {
+  html[data-motion-tier="reduced"] .workshop__bot {
     margin-block-start: 1rem;
   }
 }
@@ -7360,23 +7600,25 @@ html[data-motion-tier="reduced"] .works-index__shot {
     margin-block-start: 1.5rem;
   }
 
-  .workshop__soon {
+  .workshop__bot {
     margin-block-start: 1rem;
   }
 }
 
+/* Since the extras (24 November 2026) a part is about a screen tall, so it
+ * no longer fades as it rises into the island: it arrives, slides over the
+ * island while its rows are read, and fades only as it leaves the screen. */
 @keyframes workshop-part-phone {
-  0% {
+  entry 0% {
     opacity: 0;
   }
 
-  20%,
-  36% {
+  entry 40%,
+  exit 80% {
     opacity: 1;
   }
 
-  46%,
-  100% {
+  exit 100% {
     opacity: 0;
   }
 }
@@ -7417,6 +7659,549 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
+/* =========================================================================
+ * Extras builder (island 4, 24 November 2026,
+ * docs/plans/2026-11-24-isla4-extras.md): each row of a group is an extra
+ * with its seal, its price and "Sumar"; "Tu consulta" rests at the end of
+ * the list and, once something is added, holds the bottom of the screen as
+ * a compact bar that opens in place (a panel; a bottom sheet on phones).
+ * ========================================================================= */
+
+.extras-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.workshop__items:has(.extra) {
+  gap: 0;
+  width: 100%;
+}
+
+.workshop__items .extra {
+  display: grid;
+  grid-template: "text price" auto "text controls" 1fr / minmax(0, 1fr) auto;
+  gap: 0.3rem 1rem;
+  padding-block: 0.8rem;
+  border-block-start: 1px solid color-mix(in oklch, var(--ink) 11%, transparent);
+  color: var(--ink);
+}
+
+.workshop__items .extra:first-child {
+  border-block-start: 0;
+}
+
+.workshop__items .extra::before {
+  content: none;
+}
+
+.extra__text {
+  grid-area: text;
+  display: grid;
+  gap: 0.2rem;
+  align-content: start;
+}
+
+.extra__title {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.extra__detail,
+.extra__service {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+/* The seal: who charges what. A dot and a small caps label, coloured by kind. */
+.extra__seal {
+  --seal: var(--moss);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  justify-self: start;
+  margin-block-start: 0.15rem;
+  color: var(--seal);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.extra__seal::before {
+  content: "";
+  flex: none;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.extra__seal--service {
+  --seal: oklch(48% 0.11 60);
+}
+
+.extra__seal--from {
+  --seal: oklch(45% 0.09 240);
+}
+
+.extra__price {
+  grid-area: price;
+  justify-self: end;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+  white-space: nowrap;
+}
+
+.extra__price strong {
+  color: var(--ink);
+  font-size: 1.05rem;
+}
+
+.extra__controls {
+  grid-area: controls;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: end;
+  gap: 0.4rem;
+}
+
+/* "Sumar": a real toggle (aria-pressed); pressed, it fills and shows a check. */
+.extra__add,
+.extra__stepper button,
+.extras-summary__toggle,
+.extras-summary__remove,
+.extras-summary__clear {
+  min-height: 2.75rem;
+  border-radius: var(--radius-pill);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 160ms var(--ease-out),
+    color 160ms var(--ease-out),
+    translate 160ms var(--ease-out),
+    scale 120ms var(--ease-out);
+}
+
+.extra__add {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0 1rem 0 0.8rem;
+  border: 1.5px solid var(--moss);
+  background: transparent;
+  color: var(--moss);
+  font-size: 0.92rem;
+}
+
+.extra__mark {
+  display: grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.extra__mark::before {
+  content: "+";
+  color: var(--cream);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.extra__add[aria-pressed="true"] {
+  background: var(--moss);
+  color: var(--cream);
+}
+
+.extra__add[aria-pressed="true"] .extra__mark::before {
+  content: "\2713";
+  color: var(--moss);
+  font-size: 0.75rem;
+}
+
+.extra__stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  border-radius: var(--radius-pill);
+  background: var(--beige);
+}
+
+.extra__stepper button {
+  width: 2.75rem;
+  border: 0;
+  background: transparent;
+  color: var(--moss);
+  font-size: 1.15rem;
+}
+
+.extra__stepper button[aria-disabled="true"] {
+  color: var(--stone);
+  cursor: default;
+}
+
+.extra__stepper output {
+  min-width: 1.25rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .extra__add:hover,
+  .extras-summary__toggle:hover {
+    translate: 0 -1px;
+  }
+
+  .extra__add:not([aria-pressed="true"]):hover {
+    background: color-mix(in oklch, var(--moss) 10%, transparent);
+  }
+
+  .extra__stepper button:not([aria-disabled="true"]):hover,
+  .extras-summary__remove:hover,
+  .extras-summary__clear:hover {
+    background: color-mix(in oklch, var(--moss) 12%, transparent);
+  }
+}
+
+.extra__add:active,
+.extra__stepper button:not([aria-disabled="true"]):active,
+.extras-summary__toggle:active {
+  scale: 0.96;
+}
+
+/* "Tu consulta" ---------------------------------------------------------- */
+
+.extras-summary {
+  display: grid;
+  gap: 1rem;
+  margin-block-start: 16svh;
+  padding: 1.4rem 1.5rem;
+  background: var(--cream);
+}
+
+/* Once something is added: a bar at the bottom of the screen while the list
+ * is in view, resting under the last group at the end of it. */
+.extras-summary--active {
+  position: sticky;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 4;
+  gap: 0.75rem;
+  padding: 0.55rem 0.55rem 0.55rem 1.25rem;
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--moss) 25%, transparent),
+    0 1.25rem 2.5rem -1rem oklch(30% 0.05 60 / 55%);
+}
+
+.extras-summary--open {
+  grid-template-rows: auto minmax(0, 1fr);
+  /* Clear of the floating nav, however many lines the bar wraps to. */
+  max-height: calc(100svh - 6rem - env(safe-area-inset-bottom, 0px));
+  padding: 1rem 1rem 1.25rem 1.25rem;
+}
+
+.extras-summary__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.75rem;
+}
+
+.extras-summary__bar h3 {
+  font-size: 1.3rem;
+}
+
+.extras-summary__bar h3:focus {
+  outline: none;
+}
+
+.extras-summary--active .extras-summary__bar h3 {
+  font-size: 1rem;
+}
+
+.extras-summary__glance {
+  flex: 1 1 8rem;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.extras-summary__glance strong {
+  color: var(--ink);
+}
+
+/* Right-aligned, also when a narrow bar wraps it to its own line. */
+.extras-summary__toggle {
+  margin-inline-start: auto;
+  padding: 0 1.1rem;
+  border: 0;
+  background: var(--moss);
+  color: var(--cream);
+  font-size: 0.92rem;
+}
+
+.extras-summary--open .extras-summary__toggle {
+  background: var(--beige);
+  color: var(--moss);
+}
+
+.extras-summary__body {
+  display: grid;
+  gap: 1rem;
+}
+
+.extras-summary__body[hidden] {
+  display: none;
+}
+
+/* Opened over the list, it never grows past the screen; its own scroll
+ * hands over to the page's at either end (no overscroll lock). */
+.extras-summary--open .extras-summary__body {
+  min-height: 0;
+  /* Room for the focus rings, which the scroll box would clip. */
+  margin: -0.35rem;
+  padding: 0.35rem 0.6rem 0.35rem 0.35rem;
+  overflow-y: auto;
+}
+
+.extras-summary__packs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.extras-summary__packs legend {
+  margin-block-end: 0.5rem;
+  padding: 0;
+  font-weight: 600;
+}
+
+.extras-pack {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.9rem 0.35rem 0.7rem;
+  border: 1.5px solid color-mix(in oklch, var(--moss) 35%, transparent);
+  border-radius: var(--radius-pill);
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.extras-pack input {
+  margin: 0;
+  accent-color: var(--moss);
+}
+
+.extras-pack small {
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+}
+
+.extras-pack:has(input:checked) {
+  border-color: var(--moss);
+  background: color-mix(in oklch, var(--moss) 10%, var(--cream));
+}
+
+.extras-pack:has(input:focus-visible) {
+  outline: 2px solid var(--moss);
+  outline-offset: 2px;
+}
+
+.extras-summary__lines {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.extras-summary__lines li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding-block: 0.3rem;
+  border-block-start: 1px solid color-mix(in oklch, var(--ink) 10%, transparent);
+  font-size: 0.92rem;
+}
+
+.extras-summary__usd {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.extras-summary__remove,
+.extras-summary__clear {
+  padding: 0 0.8rem;
+  border: 0;
+  background: transparent;
+  color: var(--moss);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.extras-summary__empty,
+.extras-summary__note,
+.extras-summary__services {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.extras-summary__total {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.8rem 1rem;
+  border-radius: calc(var(--radius) - 0.5rem);
+  background: var(--beige);
+}
+
+.extras-summary__total strong {
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.extras-summary__pesos {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.extras-summary__pesos strong {
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.extras-summary__services ul {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0.25rem 0 0;
+  padding-inline-start: 1.1rem;
+}
+
+.extras-summary__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Bot product: its two tiers side by side, each with its own "Lo quiero". */
+.bot-tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: 0.75rem;
+  width: 100%;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bot-tier {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 0.35rem;
+  padding: 1rem;
+  border-radius: calc(var(--radius) - 0.5rem);
+  background: var(--beige);
+}
+
+.bot-tier__name {
+  font-weight: 600;
+}
+
+.bot-tier__price {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.bot-tier__price strong {
+  color: var(--moss);
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.bot-tier__timeline {
+  display: block;
+}
+
+.bot-tier__includes {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.bot-tier__cta {
+  justify-self: start;
+  margin-block-start: 0.4rem;
+}
+
+@media (max-width: 48rem) {
+  /* Phones: the price and "Sumar" share one line under the text. */
+  .workshop__items .extra {
+    grid-template: "text text" auto "price controls" auto / auto minmax(0, 1fr);
+    align-items: center;
+    padding-block: 0.65rem;
+  }
+
+  .extra__price {
+    justify-self: start;
+  }
+
+  .extras-summary {
+    margin-block-start: 12svh;
+  }
+
+  /* A bottom sheet over the reading zone, above the safe area. */
+  .extras-summary--active {
+    bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .extra__add,
+  .extra__stepper button,
+  .extras-summary__toggle {
+    transition-duration: 0ms;
+  }
+
+  .extra__add:active,
+  .extra__stepper button:active,
+  .extras-summary__toggle:active,
+  .extra__add:hover,
+  .extras-summary__toggle:hover {
+    scale: none;
+    translate: none;
+  }
+}
+
+/* The line under island 3's packs that leads to the extras. */
+.packs__extras {
+  max-width: 44rem;
+  margin: -1.5rem auto 3rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* ======================= end of Extras builder (island 4) ================ */
+
 /* Island 6: by the fire ------------------------------------------------- */
 
 /* The first screen is the introduction beside the island (the island
@@ -7439,22 +8224,48 @@ html[data-motion-tier="reduced"] .works-index__shot {
   z-index: 2;
 }
 
-.hearth__copy .isle__body {
-  position: relative;
-  isolation: isolate;
+/* The lead in regular weight (Juani, 24 November 2026: "quita la negrita"):
+ * it still reads first through its size and the brightest ink. */
+.hearth__copy .isle__lead {
+  font-weight: 400;
   color: var(--night-ink);
 }
 
-/* Feather only the sky behind the paragraph, not the whole painted scene. */
-.hearth__copy .isle__body::before {
-  position: absolute;
-  z-index: -1;
-  inset: -0.125rem;
-  border-radius: 0.25rem;
-  background: rgb(12 18 28 / 38%);
-  box-shadow: 0 0 0.85rem 0.55rem rgb(12 18 28 / 38%);
-  pointer-events: none;
-  content: "";
+.hearth__copy .isle__body {
+  color: var(--night-ink);
+}
+
+/* Contrast without a box behind the paragraph (Juani, 24 November 2026:
+ * "quita la sombra oscura"): on wide screens the dusk sky deepens towards
+ * the copy column, one wide feathered wash in the sky's own navy with no
+ * edge to see, so the light ink keeps 4.5:1 over the brighter teal band and
+ * the clouds. It fades out before the island's painting. */
+@media (min-width: 48.01rem) {
+  .hearth__copy .host {
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* On narrower desktops the island comes closer: the paragraph wraps
+   * before it reaches the island's rim (1024 px: 3.55:1 over the grass). */
+  .hearth__copy .isle__body {
+    max-width: min(52ch, 38vw);
+  }
+
+  .hearth__copy .host::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -40% -22% -60% -30%;
+    background: radial-gradient(
+      closest-side,
+      rgb(20 32 82 / 64%) 0%,
+      rgb(20 32 82 / 56%) 45%,
+      rgb(20 32 82 / 26%) 75%,
+      rgb(20 32 82 / 0%) 100%
+    );
+    pointer-events: none;
+  }
 }
 
 @media (min-width: 48.01rem) {
@@ -8058,7 +8869,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
  * and the case result label, from 11.5-13.6px up to 12.8-15px. The scene
  * version on the pinned island keeps scaling with its frame, with a floor
  * so a laptop never shows it under 12.8-14px. */
-.proposal-frame--scene :is(.proposal__base span, .proposal__module > span:last-child) {
+.proposal-frame--scene .proposal__module > span:last-child {
   font-size: max(4.2cqi, 0.875rem);
 }
 
@@ -8070,7 +8881,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
   font-size: 0.8rem;
 }
 
-.proposal-frame--flow .proposal__base span,
 .proposal-frame--flow .proposal__module > span:last-child {
   font-size: 0.95rem;
 }
@@ -8079,8 +8889,8 @@ html[data-motion-tier="reduced"] .works-index__shot {
   font-size: 0.875rem;
 }
 
-/* Under every pack price: it can be paid in pesos and the monthly fee is
- * optional (L2). */
+/* Under every pack price when no blue rate is cached: it can be paid in
+ * pesos (L2). The optional monthly fee moved to the pack's (?). */
 .pack__price-note {
   margin-block-start: 0.4rem;
   font-size: 0.9rem;
@@ -8805,10 +9615,6 @@ html[data-motion-tier="reduced"] :is(.island-nav__sheet, .island-nav[data-open] 
   font-weight: 600;
 }
 
-.pack__pesos + .pack__price-note {
-  margin-block-start: 0.15rem;
-}
-
 .case-result__pesos {
   font-variant-numeric: tabular-nums;
 }
@@ -9013,45 +9819,126 @@ html[data-motion-tier="reduced"] .packs__grid > * {
   transition: none;
 }
 
-/* Pack details never scroll inside the card (Juani, 24 November 2026:
- * "dentro de cada detalle de cada pack, hay un scroll vertical que te come
- * el dedo"): the back's lists keep their full height, so a vertical swipe on
- * a turned card always moves the page. */
+/* Pack card backs: tabs, always one open (PackTabs; Juani, 24 November 2026:
+ * "Sobre la card que crece, añadamos tabs al dorso, siempre una abierta").
+ * The back lies exactly on the front, desktop and phone, and the open tab
+ * fits it, so a turned card neither grows over the guarantees strip nor
+ * changes the carousel's height, and nothing scrolls inside it (Juani,
+ * earlier the same day: "hay un scroll vertical que te come el dedo"). */
+.pack .flip__face--back {
+  overflow: hidden;
+}
+
 .pack .flip__scroll {
-  flex: none;
+  display: flex;
+  min-height: 0;
   padding-block-end: 0;
-  overflow: visible;
+  overflow: hidden;
   overscroll-behavior: auto;
   mask-image: none;
 }
 
-/* From tablet up the three cards share their rows (subgrid), so a turned
- * card grows downward over what follows instead of stretching the other
- * two; it rises above it while turned. */
-.pack .flip__face--back {
-  inset: 0 0 auto;
-  min-height: 100%;
+.pack-tabs {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-height: 0;
 }
 
-.pack[data-flipped] {
-  z-index: 4;
+/* A segmented row the width of the card; it never scrolls on its own, so a
+ * sideways swipe on it moves the phone carousel. */
+.pack-tabs__list {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-radius: var(--radius-pill);
+  background: var(--beige);
 }
 
-/* On phones each card stands alone: a turned card takes its back's height
- * and the front lies under it, out of the flow. */
+.pack-tabs__tab {
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0.25rem 0.4rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.15;
+  cursor: pointer;
+  transition:
+    background-color var(--m-base) var(--ease-ui),
+    color var(--m-base) var(--ease-ui),
+    box-shadow var(--m-base) var(--ease-ui);
+}
+
+.pack-tabs__tab[aria-selected="true"] {
+  background: var(--cream);
+  color: var(--moss);
+  box-shadow: 0 1px 2px oklch(30% 0.05 60 / 16%);
+}
+
+@media (hover: hover) {
+  .pack-tabs__tab:not([aria-selected="true"]):hover {
+    background: color-mix(in oklch, var(--cream) 55%, transparent);
+    color: var(--ink);
+  }
+}
+
+.pack-tabs__tab:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 2px;
+}
+
+.pack-tabs__panel {
+  min-height: 0;
+  border-radius: 0.5rem;
+}
+
+/* Phones: three one-line labels across a narrow card. */
 @media (max-width: 48rem) {
-  .pack[data-flipped] .flip__face--back {
-    position: relative;
+  .pack .flip__face--back {
+    padding-inline: 1rem;
   }
 
-  .pack[data-flipped] .flip__face--front {
-    position: absolute;
-    inset: 0;
+  .pack-tabs__list {
+    gap: 0.15rem;
+    padding: 0.2rem;
+  }
+
+  .pack-tabs__tab {
+    padding-inline: 0.2rem;
+    font-size: 0.8rem;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
   }
 }
 
-/* "Cómo se paga (?)": the heading is the toggle, the four lines open in a
- * panel under it (PaymentTip). */
+.pack-tabs__panel:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 4px;
+}
+
+.pack-tabs__panel[hidden] {
+  display: none;
+}
+
+/* Another tab's rows arrive at once, without waiting for a turn. */
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .flip[data-flipped] .pack-tabs[data-touched] .pack-list > li {
+    animation-delay: calc(min(var(--i, 0), 10) * 22ms);
+  }
+}
+
+/* (?) toggletips (Toggletip): "Cómo se paga" under the guarantees strip
+ * and the small print beside each pack's price. The panel is a manual
+ * popover in the top layer, placed by Toggletip (fixed, `top`/`left` and
+ * `--notch`); `data-side` says whether it opened above or below the mark. */
 .packs__payment {
   position: relative;
   z-index: 3;
@@ -9059,11 +9946,11 @@ html[data-motion-tier="reduced"] .packs__grid > * {
   text-align: center;
 }
 
-.packs__payment .packs__payment-title {
+.tip__title {
   margin: 0;
 }
 
-.packs__payment-toggle {
+.tip__toggle {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -9078,7 +9965,7 @@ html[data-motion-tier="reduced"] .packs__grid > * {
   cursor: pointer;
 }
 
-.packs__payment-mark {
+.tip__mark {
   display: grid;
   place-items: center;
   width: 1.5rem;
@@ -9094,63 +9981,82 @@ html[data-motion-tier="reduced"] .packs__grid > * {
     color var(--m-base) var(--ease-ui);
 }
 
-.packs__payment-toggle[aria-expanded="true"] .packs__payment-mark {
+.tip__toggle[aria-expanded="true"] .tip__mark {
   background: var(--moss);
   color: var(--cream);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .packs__payment-toggle:hover .packs__payment-mark {
+@media (hover: hover) {
+  .tip__toggle:hover .tip__mark {
     background: var(--moss);
     color: var(--cream);
   }
 }
 
-.packs__payment-toggle:focus-visible {
+.tip__toggle:focus-visible {
   outline: 2px solid var(--moss);
   outline-offset: 2px;
 }
 
-.packs__payment-toggle:active {
+.tip__toggle:active {
   translate: 0 1px;
 }
 
-/* Above the toggle by default; PaymentTip sets `data-side` from the room
- * there is (the 0.75rem gap matches its GAP). */
-.packs__payment-panel {
-  position: absolute;
-  inset-block-end: calc(100% + 0.75rem);
-  inset-inline-start: 50%;
-  width: min(28rem, calc(100vw - 2 * var(--gutter)));
+/* The pack's (?) is the bare mark beside the price, with a 44px target. */
+.pack__tip .tip__toggle {
+  justify-content: center;
+  min-width: 2.75rem;
+  padding: 0;
+}
+
+.tip__panel {
+  position: fixed;
+  inset: auto;
+  top: 0;
+  left: 0;
+  width: min(26rem, calc(100vw - 2rem));
+  margin: 0;
   padding: 1rem 1.15rem;
+  overflow: visible;
+  border: 1px solid color-mix(in oklch, var(--moss) 14%, transparent);
   border-radius: 1rem;
   background: var(--cream);
   box-shadow: var(--m-shadow-card);
   color: var(--ink-soft);
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.5;
   text-align: start;
-  translate: -50% 0;
   transition:
     opacity var(--m-panel) var(--ease-ui),
     translate var(--m-panel) var(--ease-ui);
 }
 
-.packs__payment-panel[data-side="bottom"] {
-  inset-block: calc(100% + 0.75rem) auto;
+.pack__tip .tip__panel {
+  width: min(22rem, calc(100vw - 2rem));
+}
+
+.tip__panel ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 @starting-style {
-  .packs__payment-panel {
+  .tip__panel {
     opacity: 0;
-    translate: -50% 0.35rem;
+    translate: 0 0.35rem;
   }
 
-  .packs__payment-panel[data-side="bottom"] {
-    translate: -50% -0.35rem;
+  .tip__panel[data-side="bottom"] {
+    translate: 0 -0.35rem;
   }
 }
 
-/* The notch pointing at the (?) mark (`--notch`, set by PaymentTip). */
-.packs__payment-panel::before {
+/* The notch pointing at the (?) mark. */
+.tip__panel::before {
   content: "";
   position: absolute;
   inset-block-end: -0.4rem;
@@ -9162,28 +10068,52 @@ html[data-motion-tier="reduced"] .packs__grid > * {
   rotate: 45deg;
 }
 
-.packs__payment-panel[data-side="bottom"]::before {
+.tip__panel[data-side="bottom"]::before {
   inset-block: -0.4rem auto;
 }
 
-.packs__payment-panel[hidden] {
+/* The hover bridge: the gap between the panel and the mark still counts as
+ * the panel, so the pointer can travel into it. */
+.tip__panel::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 100%;
+  height: 0.85rem;
+}
+
+.tip__panel[data-side="bottom"]::after {
+  inset-block: auto 100%;
+}
+
+.tip__panel[hidden] {
   display: none;
 }
 
-.packs__payment-panel li {
+.tip__panel li {
   position: relative;
   padding-inline-start: 1rem;
 }
 
-.packs__payment-panel li::before {
+.tip__panel li::before {
   content: "";
   position: absolute;
   inset-inline-start: 0.1rem;
-  inset-block-start: 0.55em;
+  inset-block-start: 0.6em;
   width: 0.4rem;
   height: 0.4rem;
   border-radius: 50%;
   background: var(--leaf);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tip__panel {
+    transition: none;
+  }
+}
+
+html[data-motion-tier="reduced"] .tip__panel {
+  transition: none;
 }
 
 /* Six steps on phones, while the path is pinned: the six step buttons stand

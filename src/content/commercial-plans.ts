@@ -1,15 +1,22 @@
 export const commercialIntro = {
   title: "Tres packs. De una página simple a tu propio sistema.",
   body: "Precios de referencia para que sepas por dónde arrancar. El alcance, el plazo y el precio final se definen después de una charla gratis.",
-  /** Under every pack price, so the currency and the monthly fee do not surprise (user test, L2). */
-  priceNote: "Se puede pagar en pesos. El mantenimiento mensual es opcional.",
   /**
-   * With the day's blue rate the peso amount itself answers "can I pay in
-   * pesos?", so only the monthly-fee half of the note stays
-   * (docs/plans/2026-11-23-comercial.md).
+   * Under every pack price when no blue rate is cached (user test, L2). With
+   * the day's rate the peso amount itself answers "can I pay in pesos?", so
+   * the line is left out (docs/plans/2026-11-23-comercial.md).
    */
+  priceNote: "Se puede pagar en pesos.",
   pesoRateLabel: "al dólar blue de hoy",
-  priceNoteWithPesos: "El mantenimiento mensual es opcional.",
+  /**
+   * The small print of each pack sits in a (?) beside its price (Juani,
+   * 24 November 2026: "En cada card añade un (?) traslada ahi el 'El
+   * mantenimiento mensual es opcional' y los asteriscos que tiene cada card"):
+   * the plan's `note`, this line and the plan's `footnote`
+   * (docs/plans/2026-11-24-isla3-pulido.md).
+   */
+  maintenanceNote: "El mantenimiento mensual es opcional.",
+  priceTipLabel: "Más sobre el precio de",
   /** How to pay, under the guarantees strip (Juani, 2026-11-23). */
   payment: {
     title: "Cómo se paga",
@@ -22,6 +29,12 @@ export const commercialIntro = {
   },
 } as const;
 
+/**
+ * Each plan's `detailGroups` are the tabs on the back of its card, in order,
+ * the first open when the card turns (PackTabs; Juani, 24 November 2026:
+ * "añadamos tabs al dorso, siempre una abierta"). Short titles: they are the
+ * tab labels and three share a phone card's width.
+ */
 export const commercialPlans = [
   {
     id: "landing",
@@ -35,17 +48,21 @@ export const commercialPlans = [
       "Negocios de servicios que reciben atención por Instagram, Google Maps o recomendaciones y necesitan un lugar propio para convertirla en consultas.",
     detailGroups: [
       {
-        title: "Incluye",
+        title: "Tu página",
         items: [
-          "Un cuestionario breve para conocer tu negocio, tu servicio y a quién querés atraer.",
-          "Una página con hasta 5 secciones para contar lo importante sin marear a nadie.",
-          "Un diseño cuidado y adaptado a tu rubro.",
-          "Textos base para presentar tu negocio, ajustables a tu estilo.",
-          "Botones para que te escriban por WhatsApp con el mensaje listo.",
-          "Enlaces a Instagram, ubicación y las redes que uses.",
-          "Una buena presentación cuando compartís el enlace por WhatsApp o redes.",
-          "Tu dominio conectado y la página publicada.",
-          "Una instancia de ajustes antes de publicar.",
+          "Una página que cuenta lo importante sin marear a nadie.",
+          "Un diseño prolijo, pensado para tu rubro.",
+          "Los textos ya escritos, ajustados a tu forma de hablar.",
+          "Un botón para que te escriban por WhatsApp con el mensaje ya armado.",
+          "Tu Instagram, tu ubicación en el mapa y tus otras redes, a un toque.",
+        ],
+      },
+      {
+        title: "El proceso",
+        items: [
+          "Unas preguntas cortas para entender tu negocio y a quién le querés vender.",
+          "Una vuelta de cambios antes de publicarla.",
+          "La página publicada en tu propia dirección web, del estilo tunegocio.com.",
         ],
       },
       {
@@ -66,7 +83,7 @@ export const commercialPlans = [
   {
     id: "gestion",
     name: "Gestión",
-    eyebrow: "Para ordenar tu negocio",
+    eyebrow: "Recomendación de la casa",
     price: "USD 150",
     timeline: "3 a 6 semanas",
     description:
@@ -75,20 +92,25 @@ export const commercialPlans = [
       "Consultorios, peluquerías, centros de estética, gimnasios, academias y comercios que pierden horas coordinando por WhatsApp o anotando en un cuaderno.",
     detailGroups: [
       {
-        title: "Incluye en el precio base",
+        title: "Tu sistema",
         items: [
-          "Un sistema para ordenar tu negocio: turnos, stock, pedidos o tienda online.",
-          "Un panel para verlo y manejarlo todo desde el celular o la compu.",
-          "Un enlace para que tus clientes reserven, compren o pidan solos; lo mandás por WhatsApp o lo ponés en Instagram.",
-          "Avisos automáticos por correo para vos y tus clientes, como el recordatorio del turno.",
-          "Un botón para mandar avisos por WhatsApp con el mensaje ya escrito.",
-          "Acceso para una persona administradora.",
-          "Carga inicial de tus datos: servicios, horarios, productos o tu lista de clientes.",
-          "Una charla para enseñarte a usarlo.",
+          "Un sistema para ordenar lo que más tiempo te lleva: turnos, stock, pedidos o ventas online.",
+          "Tu propio panel para ver y manejar todo desde el celular o la compu.",
+          "Un enlace para que tus clientes reserven, compren o pidan solos, sin esperar a que les contestes.",
+          "Correos automáticos para vos y tus clientes, como el recordatorio del turno.",
+          "Un botón para avisar por WhatsApp con el mensaje ya escrito.",
         ],
       },
       {
-        title: "Se cotiza aparte",
+        title: "El arranque",
+        items: [
+          "Acceso para una persona: vos o quien maneje el negocio.",
+          "Cargamos tus datos para que arranques: servicios, horarios, productos o clientes.",
+          "Una capacitación para que lo manejes sin ayuda desde el primer día.",
+        ],
+      },
+      {
+        title: "Extras",
         items: [
           "Varias sedes o un acceso distinto para cada empleado.",
           "Cobro de señas o pagos online.",
@@ -113,16 +135,21 @@ export const commercialPlans = [
       "Negocios que necesitan integrar múltiples soluciones: turnos, stock, cobros y equipos con distintos roles, todo en un solo sistema.",
     detailGroups: [
       {
-        title: "Incluye",
+        title: "Tu sistema",
         items: [
-          "Relevamiento de tus procesos y de lo que hoy se hace a mano.",
-          "Diseño del sistema y de sus datos pensado para tu caso.",
-          "Cada uno ve lo que le toca.",
-          "Pantallas con la información que necesitás para decidir.",
-          "Integración con lo que ya usás: facturación, planillas o pagos.",
-          "Entregas por etapas para que lo uses antes de terminarlo todo.",
-          "Documentación y capacitación para tu equipo.",
-          "Si ya tenés Gestión, el sistema crece desde ahí, sin empezar de cero.",
+          "Un sistema diseñado para tu forma de trabajar.",
+          "Un historial de cambios: quién hizo qué y cuándo.",
+          "Los números que necesitás para decidir, a la vista.",
+          "Se conecta con lo que ya usás: facturación, planillas o cobros.",
+        ],
+      },
+      {
+        title: "El proceso",
+        items: [
+          "Vemos cómo trabajás hoy y qué se sigue haciendo a mano.",
+          "Entregas por etapas: empezás a usarlo antes de que esté terminado.",
+          "Capacitación y guías de uso para tu equipo.",
+          "Si ya tenés Gestión, crecemos desde ahí, sin empezar de cero.",
         ],
       },
     ],
@@ -133,32 +160,44 @@ export const commercialPlans = [
   },
 ] as const;
 
-export const comingSoon = {
-  label: "Próximamente",
+/**
+ * The WhatsApp and Telegram bot, on sale since 24 November 2026 (Juani: "es
+ * un buen momento para sacarle el próximamente y añadirlo como un producto a
+ * vender"). Shown on island 4 with its own "Lo quiero" per tier, and addable
+ * from the extras builder under the gear (src/content/extras.ts).
+ */
+export const chatBot = {
   title: "Bot de WhatsApp y Telegram",
   description:
     "Un asistente que responde las consultas frecuentes, toma los datos de cada cliente y te deriva la conversación cuando hace falta una persona.",
   tiers: [
     {
+      id: "bot-esencial",
       name: "Bot Esencial",
-      price: "USD 120",
+      usd: 120,
       timeline: "2 a 3 semanas",
       includes:
         "Un canal (WhatsApp o Telegram), respuestas a preguntas frecuentes, toma de datos del cliente y derivación a una persona.",
+      short: "Un canal, preguntas frecuentes y derivación a una persona.",
+      whatsappMessage: "Hola, quiero el Bot Esencial de Mayofy.",
     },
     {
+      id: "bot-integrado",
       name: "Bot Integrado",
-      price: "USD 250",
+      usd: 250,
       timeline: "4 a 6 semanas",
       includes:
         "Todo lo anterior, los dos canales y conexión con Gestión o un Sistema a Medida: reservar turnos, consultar estados o datos.",
+      short: "Los dos canales, conectado con Gestión o tu sistema.",
+      whatsappMessage: "Hola, quiero el Bot Integrado de Mayofy.",
     },
   ],
   monthly: "USD 30 por mes: alojamiento, control y ajustes menores.",
-  note: "Las tarifas de WhatsApp Business (Meta cobra por conversación) y el uso de IA, si se usa, se trasladan aparte.",
-  cta: "Quiero que me avisen",
-  whatsappMessage:
-    "Hola, quiero que me avisen cuando esté disponible el bot de WhatsApp y Telegram de Mayofy.",
+  monthlyShort: "Más USD 30 por mes de alojamiento y ajustes.",
+  /** Meta bills WhatsApp Business per delivered message, to the client. */
+  service: "Meta cobra cada mensaje de WhatsApp.",
+  note: "WhatsApp Business queda a tu nombre: Meta te cobra cada mensaje. Si el bot usa IA, ese servicio también queda a tu nombre.",
+  cta: "Lo quiero",
 } as const;
 
 export const guarantees = {
@@ -230,41 +269,14 @@ export const maintenancePlan = {
   ],
 } as const;
 
+/**
+ * "Automatizaciones sueltas": the list moved into island 4's priced extras
+ * (Juani, 24 November 2026: "Déjalo como alcance"), so only one line and a
+ * link to them remain.
+ */
 export const extensions = {
   title: "Automatizaciones sueltas",
-  body: "No hace falta contratar un sistema completo para dejar de hacer una tarea a mano. Sumamos solo lo que necesitás, sobre lo que ya tenés.",
-  categories: [
-    {
-      title: "Conseguí más consultas",
-      items: [
-        "Páginas para una promoción puntual.",
-        "Páginas adicionales por servicio o zona.",
-        "Medir tus anuncios en redes y Google.",
-        "Aparecer en Google Maps de tu zona.",
-        "Versiones en otros idiomas.",
-      ],
-    },
-    {
-      title: "Simplificá el contacto",
-      items: [
-        "Formularios avanzados.",
-        "Presupuestos al instante.",
-        "Pago de señas.",
-        "Catálogos de productos o servicios.",
-      ],
-    },
-    {
-      title: "Automatizá el seguimiento",
-      items: [
-        "Consultas guardadas en una planilla.",
-        "Lista de clientes ordenada.",
-        "Avisos por correo.",
-        "Respuestas automáticas.",
-        "Clasificación y seguimiento de consultas.",
-      ],
-    },
-  ],
-  note: "Estas automatizaciones se cotizan según cada caso.",
-  cta: "Consultar por una automatización",
-  whatsappMessage: "Hola, quiero consultar por una automatización con Mayofy.",
+  body: "No hace falta un sistema completo para dejar de hacer una tarea a mano.",
+  linkLabel: "Ver los extras y sus precios",
+  href: "#sistemas",
 } as const;
