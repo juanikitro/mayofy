@@ -29,7 +29,7 @@ export const islandCopy = {
   },
   // The works list goes straight under the title (Juani, 24 November 2026: the intro line was removed).
   works: {
-    title: ["Trabajos que ya ", { em: "están andando" }, "."],
+    title: ["Hechos y ", { em: "andando" }, "."],
   },
   process: {
     title: ["Seis pasos, sin ", { em: "sorpresas" }, "."],
