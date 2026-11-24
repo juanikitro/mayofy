@@ -7439,6 +7439,24 @@ html[data-motion-tier="reduced"] .works-index__shot {
   z-index: 2;
 }
 
+.hearth__copy .isle__body {
+  position: relative;
+  isolation: isolate;
+  color: var(--night-ink);
+}
+
+/* Feather only the sky behind the paragraph, not the whole painted scene. */
+.hearth__copy .isle__body::before {
+  position: absolute;
+  z-index: -1;
+  inset: -0.125rem;
+  border-radius: 0.25rem;
+  background: rgb(12 18 28 / 38%);
+  box-shadow: 0 0 0.85rem 0.55rem rgb(12 18 28 / 38%);
+  pointer-events: none;
+  content: "";
+}
+
 @media (min-width: 48.01rem) {
   .hearth {
     --hearth-shift: 26vw;
@@ -7748,6 +7766,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
  * wheel back to the page at its ends. Narrower, a button opens Cal.com's
  * popup, so the page stays short and nothing in it scrolls on its own. */
 .booking {
+  --booking-inline-placeholder-height: 35.5rem;
   grid-area: booking;
   width: 100%;
   max-width: 51.5rem;
@@ -7805,7 +7824,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
 /* Before Cal.com is ready the panel keeps the compact month view's height,
  * so nothing below it moves when the calendar arrives. */
 .booking:is([data-status="idle"], [data-status="loading"]) .booking__inline {
-  min-height: 35.5rem;
+  min-height: var(--booking-inline-placeholder-height);
 }
 
 .booking__skeleton {
@@ -7893,23 +7912,43 @@ html[data-motion-tier="reduced"] .works-index__shot {
   .booking__frame {
     display: none;
   }
-}
 
-@media (min-width: 64rem) {
+  /* The failure shares the space reserved for the button and fallback link. */
   .booking__launch {
-    display: none;
+    grid-area: 2 / 1;
+  }
+
+  .booking__link {
+    grid-area: 3 / 1;
+  }
+
+  .booking__failed {
+    grid-area: 2 / 1 / 4;
+  }
+
+  .booking:not([data-status="failed"]) .booking__failed,
+  .booking[data-status="failed"] .booking__launch {
+    visibility: hidden;
   }
 }
 
-/* Failed or silent for 15 s: the direct link takes the calendar's place. */
-.booking[data-status="failed"] :is(.booking__frame, .booking__launch) {
-  display: none;
+@media (min-width: 64rem) {
+  .booking__launch,
+  .booking:not([data-status="failed"]) .booking__failed,
+  .booking[data-status="failed"] .booking__frame {
+    display: none;
+  }
+
+  .booking__failed {
+    min-height: var(--booking-inline-placeholder-height);
+  }
 }
 
 .booking__failed {
   display: grid;
   gap: 1rem;
   justify-items: start;
+  align-content: start;
   padding: 1.25rem clamp(1rem, 2.5vw, 1.5rem) 0.5rem;
 }
 
@@ -7933,7 +7972,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
 }
 
 .booking[data-status="failed"] .booking__link {
-  display: none;
+  visibility: hidden;
 }
 
 /* End of island 6: contact */
