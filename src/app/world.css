@@ -7491,22 +7491,48 @@ html[data-motion-tier="reduced"] .works-index__shot {
   z-index: 2;
 }
 
-.hearth__copy .isle__body {
-  position: relative;
-  isolation: isolate;
+/* The lead in regular weight (Juani, 24 November 2026: "quita la negrita"):
+ * it still reads first through its size and the brightest ink. */
+.hearth__copy .isle__lead {
+  font-weight: 400;
   color: var(--night-ink);
 }
 
-/* Feather only the sky behind the paragraph, not the whole painted scene. */
-.hearth__copy .isle__body::before {
-  position: absolute;
-  z-index: -1;
-  inset: -0.125rem;
-  border-radius: 0.25rem;
-  background: rgb(12 18 28 / 38%);
-  box-shadow: 0 0 0.85rem 0.55rem rgb(12 18 28 / 38%);
-  pointer-events: none;
-  content: "";
+.hearth__copy .isle__body {
+  color: var(--night-ink);
+}
+
+/* Contrast without a box behind the paragraph (Juani, 24 November 2026:
+ * "quita la sombra oscura"): on wide screens the dusk sky deepens towards
+ * the copy column, one wide feathered wash in the sky's own navy with no
+ * edge to see, so the light ink keeps 4.5:1 over the brighter teal band and
+ * the clouds. It fades out before the island's painting. */
+@media (min-width: 48.01rem) {
+  .hearth__copy .host {
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* On narrower desktops the island comes closer: the paragraph wraps
+   * before it reaches the island's rim (1024 px: 3.55:1 over the grass). */
+  .hearth__copy .isle__body {
+    max-width: min(52ch, 38vw);
+  }
+
+  .hearth__copy .host::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -40% -22% -60% -30%;
+    background: radial-gradient(
+      closest-side,
+      rgb(20 32 82 / 64%) 0%,
+      rgb(20 32 82 / 56%) 45%,
+      rgb(20 32 82 / 26%) 75%,
+      rgb(20 32 82 / 0%) 100%
+    );
+    pointer-events: none;
+  }
 }
 
 @media (min-width: 48.01rem) {
