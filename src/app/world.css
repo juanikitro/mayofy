@@ -7076,11 +7076,23 @@ html[data-motion-tier="reduced"] .works-index__shot {
   pointer-events: auto;
 }
 
+/* The groups and "Tu consulta" share one block, so the summary's sticky
+ * bar holds the bottom of the screen for the whole list (extras builder,
+ * below). Only its panels take the pointer. */
+.workshop__flow {
+  grid-column: 2;
+  pointer-events: none;
+}
+
+.workshop__flow > *,
+.workshop__part {
+  pointer-events: auto;
+}
+
 /* Parts close together: the next one already shows under the one in the
  * middle of the screen, and the first waits low on the screen as the
  * section pins. */
 .workshop__parts {
-  grid-column: 2;
   display: grid;
   gap: 16svh;
   margin: 62svh 0 0;
@@ -7133,21 +7145,12 @@ html[data-motion-tier="reduced"] .works-index__shot {
 .workshop__items li:nth-child(3) { --item-from: 14%; }
 .workshop__items li:nth-child(4) { --item-from: 17%; }
 .workshop__items li:nth-child(5) { --item-from: 20%; }
+.workshop__items li:nth-child(6) { --item-from: 23%; }
+.workshop__items li:nth-child(7) { --item-from: 26%; }
 
-.workshop__link {
-  margin-block-start: 0.5rem;
-}
-
-.workshop__cta {
-  display: grid;
-  gap: 0.75rem;
-  justify-items: start;
+.workshop__custom {
   margin-block-start: 0.75rem;
-}
-
-.workshop__cta p {
   color: var(--ink-soft);
-  font-size: 0.95rem;
 }
 
 .workshop__bot {
@@ -7267,7 +7270,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
 /* Phones: the title and lead hold the top of the screen, the island sits
  * under them (the plate grows by a sixth and rises), and each part arrives
  * from the bottom, rests centred in the space left under the island
- * (`--workshop-zone-*`; a part taller than it rests at its top) and fades before it reaches it; the pins become
+ * (`--workshop-zone-*`; a part taller than it rests at its top), slides over the island as it is read and fades as it leaves the screen; the pins become
  * numbers that match the parts. Without scroll-driven animations or with
  * reduced motion nothing is pinned: title, island, then every part, all
  * visible. */
@@ -7330,23 +7333,25 @@ html[data-motion-tier="reduced"] .works-index__shot {
     font-size: 0.8rem;
   }
 
-  .workshop__pin--greenhouse::before { content: "1"; }
-  .workshop__pin--pot::before { content: "2"; }
-  .workshop__pin--toolbox::before { content: "3"; }
-  .workshop__pin--gear::before { content: "4"; }
+  .workshop__pin--pot::before { content: "1"; }
+  .workshop__pin--toolbox::before { content: "2"; }
+  .workshop__pin--gear::before { content: "3"; }
+  .workshop__pin--greenhouse::before { content: "4"; }
 
   .workshop__content {
     grid-template-columns: minmax(0, 1fr);
     padding-block: 0 20svh;
   }
 
-  .workshop__parts,
+  .workshop__flow,
   .workshop__bot {
     grid-column: 1;
   }
 
+  /* Wide enough that, while a part rests under the island, the one before
+   * it has already risen past the island. */
   .workshop__parts {
-    gap: 12svh;
+    gap: 40svh;
     margin-block-start: 100svh;
   }
 
@@ -7357,6 +7362,12 @@ html[data-motion-tier="reduced"] .works-index__shot {
 
   .workshop__part {
     padding: 1.1rem 1.2rem;
+  }
+
+  /* Opaque: they slide over the pinned title and island while being read. */
+  .workshop__part,
+  .workshop__bot {
+    background: var(--cream);
   }
 
   .workshop__part h3 {
@@ -7375,7 +7386,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
         animation-range: cover 5% cover 50%;
       }
 
-      /* The bot panel fades before it rises into the island. */
+      /* The bot panel, like a part, fades as it leaves the screen. */
       html:not([data-motion-tier="reduced"]) .workshop__bot {
         animation: workshop-part-phone linear both;
         animation-timeline: view();
@@ -7455,18 +7466,20 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
+/* Since the extras (24 November 2026) a part is about a screen tall, so it
+ * no longer fades as it rises into the island: it arrives, slides over the
+ * island while its rows are read, and fades only as it leaves the screen. */
 @keyframes workshop-part-phone {
-  0% {
+  entry 0% {
     opacity: 0;
   }
 
-  20%,
-  36% {
+  entry 40%,
+  exit 80% {
     opacity: 1;
   }
 
-  46%,
-  100% {
+  exit 100% {
     opacity: 0;
   }
 }
@@ -7527,6 +7540,431 @@ html[data-motion-tier="reduced"] .works-index__shot {
   border: 0;
 }
 
+.workshop__items:has(.extra) {
+  gap: 0;
+  width: 100%;
+}
+
+.workshop__items .extra {
+  display: grid;
+  grid-template: "text price" auto "text controls" 1fr / minmax(0, 1fr) auto;
+  gap: 0.3rem 1rem;
+  padding-block: 0.8rem;
+  border-block-start: 1px solid color-mix(in oklch, var(--ink) 11%, transparent);
+  color: var(--ink);
+}
+
+.workshop__items .extra:first-child {
+  border-block-start: 0;
+}
+
+.workshop__items .extra::before {
+  content: none;
+}
+
+.extra__text {
+  grid-area: text;
+  display: grid;
+  gap: 0.2rem;
+  align-content: start;
+}
+
+.extra__title {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.extra__detail,
+.extra__service {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+/* The seal: who charges what. A dot and a small caps label, coloured by kind. */
+.extra__seal {
+  --seal: var(--moss);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  justify-self: start;
+  margin-block-start: 0.15rem;
+  color: var(--seal);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.extra__seal::before {
+  content: "";
+  flex: none;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.extra__seal--service {
+  --seal: oklch(48% 0.11 60);
+}
+
+.extra__seal--from {
+  --seal: oklch(45% 0.09 240);
+}
+
+.extra__price {
+  grid-area: price;
+  justify-self: end;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+  white-space: nowrap;
+}
+
+.extra__price strong {
+  color: var(--ink);
+  font-size: 1.05rem;
+}
+
+.extra__controls {
+  grid-area: controls;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: end;
+  gap: 0.4rem;
+}
+
+/* "Sumar": a real toggle (aria-pressed); pressed, it fills and shows a check. */
+.extra__add,
+.extra__stepper button,
+.extras-summary__toggle,
+.extras-summary__remove,
+.extras-summary__clear {
+  min-height: 2.75rem;
+  border-radius: var(--radius-pill);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 160ms var(--ease-out),
+    color 160ms var(--ease-out),
+    translate 160ms var(--ease-out),
+    scale 120ms var(--ease-out);
+}
+
+.extra__add {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0 1rem 0 0.8rem;
+  border: 1.5px solid var(--moss);
+  background: transparent;
+  color: var(--moss);
+  font-size: 0.92rem;
+}
+
+.extra__mark {
+  display: grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.extra__mark::before {
+  content: "+";
+  color: var(--cream);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.extra__add[aria-pressed="true"] {
+  background: var(--moss);
+  color: var(--cream);
+}
+
+.extra__add[aria-pressed="true"] .extra__mark::before {
+  content: "\2713";
+  color: var(--moss);
+  font-size: 0.75rem;
+}
+
+.extra__stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  border-radius: var(--radius-pill);
+  background: var(--beige);
+}
+
+.extra__stepper button {
+  width: 2.75rem;
+  border: 0;
+  background: transparent;
+  color: var(--moss);
+  font-size: 1.15rem;
+}
+
+.extra__stepper button[aria-disabled="true"] {
+  color: var(--stone);
+  cursor: default;
+}
+
+.extra__stepper output {
+  min-width: 1.25rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .extra__add:hover,
+  .extras-summary__toggle:hover {
+    translate: 0 -1px;
+  }
+
+  .extra__add:not([aria-pressed="true"]):hover {
+    background: color-mix(in oklch, var(--moss) 10%, transparent);
+  }
+
+  .extra__stepper button:not([aria-disabled="true"]):hover,
+  .extras-summary__remove:hover,
+  .extras-summary__clear:hover {
+    background: color-mix(in oklch, var(--moss) 12%, transparent);
+  }
+}
+
+.extra__add:active,
+.extra__stepper button:not([aria-disabled="true"]):active,
+.extras-summary__toggle:active {
+  scale: 0.96;
+}
+
+/* "Tu consulta" ---------------------------------------------------------- */
+
+.extras-summary {
+  display: grid;
+  gap: 1rem;
+  margin-block-start: 16svh;
+  padding: 1.4rem 1.5rem;
+  background: var(--cream);
+}
+
+/* Once something is added: a bar at the bottom of the screen while the list
+ * is in view, resting under the last group at the end of it. */
+.extras-summary--active {
+  position: sticky;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 4;
+  gap: 0.75rem;
+  padding: 0.55rem 0.55rem 0.55rem 1.25rem;
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--moss) 25%, transparent),
+    0 1.25rem 2.5rem -1rem oklch(30% 0.05 60 / 55%);
+}
+
+.extras-summary--open {
+  grid-template-rows: auto minmax(0, 1fr);
+  /* Clear of the floating nav, however many lines the bar wraps to. */
+  max-height: calc(100svh - 6rem - env(safe-area-inset-bottom, 0px));
+  padding: 1rem 1rem 1.25rem 1.25rem;
+}
+
+.extras-summary__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.75rem;
+}
+
+.extras-summary__bar h3 {
+  font-size: 1.3rem;
+}
+
+.extras-summary__bar h3:focus {
+  outline: none;
+}
+
+.extras-summary--active .extras-summary__bar h3 {
+  font-size: 1rem;
+}
+
+.extras-summary__glance {
+  flex: 1 1 8rem;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.extras-summary__glance strong {
+  color: var(--ink);
+}
+
+/* Right-aligned, also when a narrow bar wraps it to its own line. */
+.extras-summary__toggle {
+  margin-inline-start: auto;
+  padding: 0 1.1rem;
+  border: 0;
+  background: var(--moss);
+  color: var(--cream);
+  font-size: 0.92rem;
+}
+
+.extras-summary--open .extras-summary__toggle {
+  background: var(--beige);
+  color: var(--moss);
+}
+
+.extras-summary__body {
+  display: grid;
+  gap: 1rem;
+}
+
+.extras-summary__body[hidden] {
+  display: none;
+}
+
+/* Opened over the list, it never grows past the screen; its own scroll
+ * hands over to the page's at either end (no overscroll lock). */
+.extras-summary--open .extras-summary__body {
+  min-height: 0;
+  /* Room for the focus rings, which the scroll box would clip. */
+  margin: -0.35rem;
+  padding: 0.35rem 0.6rem 0.35rem 0.35rem;
+  overflow-y: auto;
+}
+
+.extras-summary__packs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.extras-summary__packs legend {
+  margin-block-end: 0.5rem;
+  padding: 0;
+  font-weight: 600;
+}
+
+.extras-pack {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.9rem 0.35rem 0.7rem;
+  border: 1.5px solid color-mix(in oklch, var(--moss) 35%, transparent);
+  border-radius: var(--radius-pill);
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.extras-pack input {
+  margin: 0;
+  accent-color: var(--moss);
+}
+
+.extras-pack small {
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+}
+
+.extras-pack:has(input:checked) {
+  border-color: var(--moss);
+  background: color-mix(in oklch, var(--moss) 10%, var(--cream));
+}
+
+.extras-pack:has(input:focus-visible) {
+  outline: 2px solid var(--moss);
+  outline-offset: 2px;
+}
+
+.extras-summary__lines {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.extras-summary__lines li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding-block: 0.3rem;
+  border-block-start: 1px solid color-mix(in oklch, var(--ink) 10%, transparent);
+  font-size: 0.92rem;
+}
+
+.extras-summary__usd {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.extras-summary__remove,
+.extras-summary__clear {
+  padding: 0 0.8rem;
+  border: 0;
+  background: transparent;
+  color: var(--moss);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.extras-summary__empty,
+.extras-summary__note,
+.extras-summary__services {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.extras-summary__total {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.8rem 1rem;
+  border-radius: calc(var(--radius) - 0.5rem);
+  background: var(--beige);
+}
+
+.extras-summary__total strong {
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.extras-summary__pesos {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.extras-summary__pesos strong {
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.extras-summary__services ul {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0.25rem 0 0;
+  padding-inline-start: 1.1rem;
+}
+
+.extras-summary__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Bot product: its two tiers side by side, each with its own "Lo quiero". */
 .bot-tiers {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
@@ -7573,6 +8011,45 @@ html[data-motion-tier="reduced"] .works-index__shot {
 .bot-tier__cta {
   justify-self: start;
   margin-block-start: 0.4rem;
+}
+
+@media (max-width: 48rem) {
+  /* Phones: the price and "Sumar" share one line under the text. */
+  .workshop__items .extra {
+    grid-template: "text text" auto "price controls" auto / auto minmax(0, 1fr);
+    align-items: center;
+    padding-block: 0.65rem;
+  }
+
+  .extra__price {
+    justify-self: start;
+  }
+
+  .extras-summary {
+    margin-block-start: 12svh;
+  }
+
+  /* A bottom sheet over the reading zone, above the safe area. */
+  .extras-summary--active {
+    bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .extra__add,
+  .extra__stepper button,
+  .extras-summary__toggle {
+    transition-duration: 0ms;
+  }
+
+  .extra__add:active,
+  .extra__stepper button:active,
+  .extras-summary__toggle:active,
+  .extra__add:hover,
+  .extras-summary__toggle:hover {
+    scale: none;
+    translate: none;
+  }
 }
 
 /* ======================= end of Extras builder (island 4) ================ */

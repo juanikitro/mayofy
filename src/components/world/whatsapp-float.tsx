@@ -7,12 +7,13 @@ import { siteContent } from "@/content/site";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
 /**
- * What the reader fills in or picks from (the agenda and the contact form)
- * and island 6, which has its own WhatsApp buttons. While one of them is in
- * the upper part of the screen the float steps aside, so it never sits on a
- * field or a time slot (simulated user test, M5).
+ * What the reader fills in or picks from (the agenda, the contact form and
+ * island 4's extras builder, whose "Tu consulta" bar holds the bottom of the
+ * screen) and island 6, which has its own WhatsApp buttons. While one of them
+ * is in the upper part of the screen the float steps aside, so it never sits
+ * on a field, a time slot or the builder's bar (simulated user test, M5).
  */
-const clearZoneSelector = "#contacto, #agenda, .contact-form";
+const clearZoneSelector = "#contacto, #agenda, .contact-form, #sistemas";
 
 /**
  * Mobile WhatsApp float, from the end of the hero on. Pure enhancement: the

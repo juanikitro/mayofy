@@ -20,6 +20,12 @@ export type AnalyticsEvents = {
   pack_details_open: { pack: string };
   /** Any WhatsApp link or button, with where it was. */
   whatsapp_click: Placement & { pack?: string; link_text?: string };
+  /**
+   * "Enviar la consulta por WhatsApp" in island 4's extras builder: the pack
+   * ("unsure" for "Todavía no sé", "none" when not picked), how many extras
+   * and Mayofy's estimate in USD (`from` when it is a "desde" total).
+   */
+  extras_request: { pack: string; extras: number; total_usd: number; from: boolean };
   /** The contact form was sent, by WhatsApp or by mail ("callback"). */
   contact_form_submit: { channel: "whatsapp" | "callback" };
   contact_form_success: { channel: "whatsapp" | "callback" };

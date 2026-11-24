@@ -1,19 +1,27 @@
 import type { CSSProperties } from "react";
 
+import { ExtraControls, ExtrasSummary } from "@/components/world/extras-builder";
 import { plateSceneStyle } from "@/components/world/island-plate";
 import { IslandScene } from "@/components/world/island-scene";
 import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure } from "@/components/world/mayo-figure";
 import { WorkshopController } from "@/components/world/workshop-controller";
-import { chatBot, commercialPlans, extensions } from "@/content/commercial-plans";
+import { chatBot, commercialPlans } from "@/content/commercial-plans";
 import { extraSeals, extras, extrasCopy } from "@/content/extras";
 import { islandCopy } from "@/content/islands";
 import { islandPlates } from "@/content/stage";
 import { workshopParts, workshopSpots } from "@/content/workshop";
-import { formatUsd } from "@/lib/extras-request";
+import { formatUsd, type PackOption } from "@/lib/extras-request";
+import { getBlueRate, usdAmount } from "@/lib/peso-prices";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
 const customPlan = commercialPlans.find((plan) => plan.id === "sistema");
+
+/** The packs the summary offers, priced from commercialPlans (one source of truth). */
+const packOptions: PackOption[] = commercialPlans.flatMap((plan) => {
+  const usd = usdAmount(plan.price);
+  return usd ? [{ id: plan.id, name: plan.name, usd }] : [];
+});
 
 const spotStyle = (point: readonly [number, number], mobile: readonly [number, number]) =>
   ({ "--x-d": `${point[0]}%`, "--y-d": `${point[1]}%`, "--x-m": `${mobile[0]}%`, "--y-m": `${mobile[1]}%` }) as CSSProperties;
@@ -31,11 +39,13 @@ const spotStyle = (point: readonly [number, number], mobile: readonly [number, n
  * ... debe acompañar el paralax de la isla"), and every part ends centred
  * on the screen after a scroll (WorkshopController).
  *
- * Since 24 November 2026 every row is an extra with its price and its seal,
+ * Since 24 November 2026 every row is an extra with its price and a "Sumar"
+ * toggle, "Tu consulta" adds them up at the end of the list (ExtrasSummary),
  * and the WhatsApp and Telegram bot is on sale below it
  * (docs/plans/2026-11-24-isla4-extras.md).
  */
-export function SystemsIsland() {
+export async function SystemsIsland() {
+  const rate = await getBlueRate();
   return (
     <section id="sistemas" className="isle isle--golden workshop" data-island="4" style={plateSceneStyle(islandPlates.systems)} aria-labelledby="sistemas-title">
       <div className="workshop__stage">
@@ -59,50 +69,46 @@ export function SystemsIsland() {
       </div>
 
       <div className="world-shell workshop__content">
-        <ol className="workshop__parts">
-          {workshopParts.map((part) => (
-            <li className={`workshop__part workshop__part--${part.object} panel`} key={part.object}>
-              <h3>{part.title}</h3>
-              <ul className="workshop__items">
-                {extras
-                  .filter((extra) => extra.group === part.object)
-                  .map((extra) => (
-                    <li className="extra" key={extra.id}>
-                      <div className="extra__text">
-                        <p className="extra__title">{extra.title}</p>
-                        {extra.detail ? <p className="extra__detail">{extra.detail}</p> : null}
-                        <p className={`extra__seal extra__seal--${extra.kind === "fixed+service" ? "service" : extra.kind}`}>{extraSeals[extra.kind]}</p>
-                        {extra.service ? <p className="extra__service">{extra.service}</p> : null}
-                      </div>
-                      <p className="extra__price">
-                        {extra.kind === "from" ? <span>desde </span> : null}
-                        <strong>{formatUsd(extra.price)}</strong>
-                        {extra.unit ? <span> {extra.unit}</span> : null}
-                      </p>
-                                  </li>
-                  ))}
-              </ul>
-              {part.object === "greenhouse" && customPlan ? (
-                <p className="workshop__custom">
-                  {extrasCopy.customPrompt}{" "}
-                  <a className="host-link workshop__link" href={`#pack-${customPlan.id}`}>
-                    <span className="link-label">
-                      Ver {customPlan.name} · desde {customPlan.price}
-                    </span>
-                  </a>
-                </p>
-              ) : null}
-              {part.object === "gear" ? (
-                <div className="workshop__cta">
-                  <p>{extensions.note}</p>
-                  <a className="btn btn--moss" href={getWhatsAppHref(extensions.whatsappMessage)} target="_blank" rel="noreferrer">
-                    {extensions.cta}
-                  </a>
-                </div>
-              ) : null}
-            </li>
-          ))}
-        </ol>
+        <div className="workshop__flow">
+          <ol className="workshop__parts">
+            {workshopParts.map((part) => (
+              <li className={`workshop__part workshop__part--${part.object} panel`} key={part.object}>
+                <h3>{part.title}</h3>
+                <ul className="workshop__items">
+                  {extras
+                    .filter((extra) => extra.group === part.object)
+                    .map((extra) => (
+                      <li className="extra" key={extra.id}>
+                        <div className="extra__text">
+                          <p className="extra__title">{extra.title}</p>
+                          {extra.detail ? <p className="extra__detail">{extra.detail}</p> : null}
+                          <p className={`extra__seal extra__seal--${extra.kind === "fixed+service" ? "service" : extra.kind}`}>{extraSeals[extra.kind]}</p>
+                          {extra.service ? <p className="extra__service">{extra.service}</p> : null}
+                        </div>
+                        <p className="extra__price">
+                          {extra.kind === "from" ? <span>desde </span> : null}
+                          <strong>{formatUsd(extra.price)}</strong>
+                          {extra.unit ? <span> {extra.unit}</span> : null}
+                        </p>
+                        <ExtraControls extra={extra} />
+                      </li>
+                    ))}
+                </ul>
+                {part.object === "greenhouse" && customPlan ? (
+                  <p className="workshop__custom">
+                    {extrasCopy.customPrompt}{" "}
+                    <a className="host-link workshop__link" href={`#pack-${customPlan.id}`}>
+                      <span className="link-label">
+                        Ver {customPlan.name} · desde {customPlan.price}
+                      </span>
+                    </a>
+                  </p>
+                ) : null}
+              </li>
+            ))}
+          </ol>
+          <ExtrasSummary packs={packOptions} rate={rate} />
+        </div>
 
         {/* A section, not an aside: a complementary landmark may not sit inside main. */}
         <section className="workshop__bot panel" id="bot" aria-labelledby="bot-title">
