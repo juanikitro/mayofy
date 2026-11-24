@@ -269,41 +269,14 @@ export const maintenancePlan = {
   ],
 } as const;
 
+/**
+ * "Automatizaciones sueltas": the list moved into island 4's priced extras
+ * (Juani, 24 November 2026: "Déjalo como alcance"), so only one line and a
+ * link to them remain.
+ */
 export const extensions = {
   title: "Automatizaciones sueltas",
-  body: "No hace falta contratar un sistema completo para dejar de hacer una tarea a mano. Sumamos solo lo que necesitás, sobre lo que ya tenés.",
-  categories: [
-    {
-      title: "Conseguí más consultas",
-      items: [
-        "Páginas para una promoción puntual.",
-        "Páginas adicionales por servicio o zona.",
-        "Medir tus anuncios en redes y Google.",
-        "Aparecer en Google Maps de tu zona.",
-        "Versiones en otros idiomas.",
-      ],
-    },
-    {
-      title: "Simplificá el contacto",
-      items: [
-        "Formularios avanzados.",
-        "Presupuestos al instante.",
-        "Pago de señas.",
-        "Catálogos de productos o servicios.",
-      ],
-    },
-    {
-      title: "Automatizá el seguimiento",
-      items: [
-        "Consultas guardadas en una planilla.",
-        "Lista de clientes ordenada.",
-        "Avisos por correo.",
-        "Respuestas automáticas.",
-        "Clasificación y seguimiento de consultas.",
-      ],
-    },
-  ],
-  note: "Estas automatizaciones se cotizan según cada caso.",
-  cta: "Consultar por una automatización",
-  whatsappMessage: "Hola, quiero consultar por una automatización con Mayofy.",
+  body: "No hace falta un sistema completo para dejar de hacer una tarea a mano.",
+  linkLabel: "Ver los extras y sus precios",
+  href: "#sistemas",
 } as const;

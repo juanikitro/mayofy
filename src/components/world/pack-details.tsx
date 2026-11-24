@@ -4,7 +4,7 @@ import { GuaranteesStrip } from "@/components/world/guarantees-strip";
 import { PackCarousel } from "@/components/world/pack-carousel";
 import { PackTabs } from "@/components/world/pack-tabs";
 import { Toggletip } from "@/components/world/toggletip";
-import { commercialIntro, commercialPlans } from "@/content/commercial-plans";
+import { commercialIntro, commercialPlans, extensions } from "@/content/commercial-plans";
 import { getPesoPrices } from "@/lib/peso-prices";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
@@ -13,7 +13,8 @@ import { getWhatsAppHref } from "@/lib/whatsapp";
  * packs (a carousel on phones, PackCarousel), the guarantees strip and how to
  * pay. Each pack's small print (its note, the optional monthly fee and its
  * footnote) and how to pay open in (?) toggletips (Toggletip). The bot and the loose
- * automations live on island 4; maintenance lives on island 6.
+ * automations live on island 4 (a line under the packs links to its
+ * extras); maintenance lives on island 6.
  * Content comes verbatim from src/content/commercial-plans.ts; the peso
  * reference under each price comes from the cached blue rate and is left out
  * when no rate is available (src/lib/peso-prices.ts).
@@ -100,6 +101,14 @@ export async function PackDetails() {
       <GuaranteesStrip />
 
       <Toggletip className="packs__payment" heading title={payment.title} items={payment.items} />
+
+      {/* "Automatizaciones sueltas": one line to island 4's priced extras (docs/plans/2026-11-24-isla4-extras.md). */}
+      <p className="packs__extras">
+        {extensions.body}{" "}
+        <a className="host-link" href={extensions.href}>
+          <span className="link-label">{extensions.linkLabel}</span>
+        </a>
+      </p>
     </div>
   );
 }

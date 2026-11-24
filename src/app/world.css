@@ -8191,6 +8191,15 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
+/* The line under island 3's packs that leads to the extras. */
+.packs__extras {
+  max-width: 44rem;
+  margin: -1.5rem auto 3rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
 /* ======================= end of Extras builder (island 4) ================ */
 
 /* Island 6: by the fire ------------------------------------------------- */
