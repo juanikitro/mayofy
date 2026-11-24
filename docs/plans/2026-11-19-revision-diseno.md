@@ -176,3 +176,32 @@ Juani:
   - Capturas: antes en `docs/plans/isla4-guiada/antes-{d,m}-0..5.jpg`, después en `despues-{d,m}-0..4.jpg`, `despues-m-reducido.jpg` y `despues-1024.jpg`.
 - **Límite:** a 1024 px la tarjeta centrada tapa la caja de herramientas pintada. Ya pasaba antes, porque la columna de tarjetas se apoya sobre la isla a ese ancho.
 - **Actualización del 22/11 (`2026-11-20-scroll-por-secciones.md`, "Principios"):** el centrado ahora actúa cuando termina el gesto de quien lee. Con rueda o teclas sigue a la tarjeta siguiente, igual que antes. Con el dedo o el touchpad solo completa si esa tarjeta ya está a menos de media separación de su lugar. El envión de un dedo se frena en la tarjeta siguiente, así un deslizamiento ya no saltea una (pasaba de la 02 a la 04).
+
+## Isla 4 entre 1024 y 1365 px (23 de noviembre)
+
+Pedido del coordinador: a 1024 × 768 (y probablemente hasta ~1279 px) la columna de tarjetas tapaba la caja de herramientas pintada y el cartelito "Contacto simple", y el de "Sistema a medida" quedaba debajo de las tarjetas. Solo CSS, sin tocar `workshop-controller.tsx`, `guided-scroll.ts` ni `section-snap.tsx`.
+
+- **Causa.** La isla se dimensiona por el ancho de la pantalla, pero la columna de tarjetas medía siempre 28rem. Cuanto más angosta la pantalla, más porcentaje ocupaba la columna y más se metía sobre la isla. Es el "Límite" que quedó anotado en la sección de la isla 4 del 20 de noviembre.
+- **Medido antes** (porcentaje de cada objeto o cartelito tapado por una tarjeta, con cada tarjeta centrada):
+  - 1024 × 768: caja de herramientas y "Contacto simple" 100 %, "Sistema a medida" 11–12 %.
+  - 1180 × 820: "Contacto simple" 54–59 %, caja 31 %.
+  - 1280 × 720: "Contacto simple" 23–25 %. O sea que el problema llegaba hasta 1365 px, no solo hasta 1279.
+  - 1366 × 768 y 1440 × 900: 0 %.
+- **Cambio** (`src/app/world.css`, bloque "Island 4 between tablets and 1365 px wide", justo después del bloque de la isla 4), solo entre 48rem y 85,3rem de ancho:
+  - La placa baja de 1,12 a 1 (el ancho exacto de la pantalla) y la isla se corre 22vw a la izquierda en lugar de 19vw. No baja de 1 porque con una escala menor se ven los bordes del cielo de la placa (lo probé con 0,96 y aparecía un recuadro).
+  - Mayo se achica en la misma proporción (× 0,893) para mantener su tamaño frente a la isla.
+  - La columna de tarjetas se angosta con la pantalla: `clamp(20rem, 47vw - 9rem, 28rem)`. Mide 337 px a 1024, 411 px a 1180 y vuelve a 28rem desde 1260 px. Así siempre empieza a la derecha del cartelito de la caja. La separación entre título y columna baja de 3 a 2rem y el relleno de la tarjeta, de 1,5 a 1,25rem.
+  - El título y la bajada respetan la columna más angosta (`100% - var(--workshop-col) - 3rem`).
+  - Desde 1366 px y en celular no cambia nada.
+- **Medido después:** 0 % en todos los objetos y cartelitos a 1024 × 768, 1180 × 820, 1280 × 720, 1366 × 768 y 1440 × 900. A 820 × 1180 (tablet vertical) los cartelitos quedan libres, porque la isla está bien abajo de las tarjetas. Solo el halo de la caja queda tapado un 4–18 % mientras pasa una tarjeta.
+- **Lectura guiada intacta.** Con rueda, a 1024, 1180, 1280 y 1440 las cuatro tarjetas quedan centradas una por una con un desvío de 0 px, y la rueda siguiente suelta la sección.
+- **Verificado también:**
+  - Con Tab, el foco llega a "Ver el pack" a 1024 y queda visible y sin tapar.
+  - Con movimiento reducido a 1024 las tarjetas se ven enteras.
+  - A 390 × 844 la isla y las tarjetas no cambian (escala 1,15, una columna).
+  - Sin scroll horizontal ni errores de consola. Lint, typecheck y build limpios.
+- **Capturas:** `docs/plans/isla4-1024/antes-<ancho>x<alto>-{0,2}.jpg` y `despues-…` (0 = primera tarjeta centrada, 2 = la de la caja), más `despues-820x1180-*`, `despues-1024-foco.jpg`, `despues-1024-reducido.jpg` y `despues-390x844.jpg`.
+- **Límites:**
+  - Al cruzar 1366 px la isla salta de escala (1 → 1,12). No se puede hacer gradual, porque `--plate-scale` es un número sin unidad y no admite `vw`. Solo se nota si alguien redimensiona la ventana justo en ese ancho.
+  - Entre 769 y 1023 px en apaisado (por ejemplo 900 × 600) no lo medí. Ahí la columna queda en su mínimo de 20rem y podría volver a rozar la caja.
+  - La franja más clara del cielo arriba del título (alrededor de 130–200 px a 1024 y 1180) ya estaba antes y no es parte de este cambio.

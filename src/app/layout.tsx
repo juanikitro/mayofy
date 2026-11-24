@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Instrument_Sans } from "next/font/google";
 import localFont from "next/font/local";
+import { AnalyticsTracker } from "@/components/analytics-tracker";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { HashLinkHistory } from "@/components/hash-link-history";
+import { googleAnalyticsId } from "@/lib/analytics-consent";
 import { shareMetadata } from "@/lib/share-metadata";
 import { getSiteUrl } from "@/lib/site-url";
 import "./world.css";
@@ -28,9 +30,6 @@ const worldSerifFont = localFont({
   adjustFontFallback: false,
   fallback: ["Fraunces Fallback"],
 });
-
-const googleAnalyticsId =
-  process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ?? "G-F2DHJCS51K";
 
 // Search title and description carry the searches Juani wants to win
 // (docs/plans/2026-11-22-seo-rendimiento.md); share cards keep the slogan.
@@ -71,7 +70,12 @@ export default function RootLayout({
       <body>
         {children}
         <HashLinkHistory />
-        {googleAnalyticsId ? <GoogleAnalytics gaId={googleAnalyticsId} /> : null}
+        {googleAnalyticsId ? (
+          <>
+            <GoogleAnalytics gaId={googleAnalyticsId} />
+            <AnalyticsTracker />
+          </>
+        ) : null}
       </body>
     </html>
   );

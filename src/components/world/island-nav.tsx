@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode, type RefObject } from "react";
 
 import { staggerStyle } from "@/components/world/stagger";
+import { track } from "@/lib/analytics";
 
 /**
  * The seven islands of the story, in page order. `short` is the word the
@@ -286,7 +287,10 @@ export function IslandNav() {
           className="island-nav__where"
           aria-expanded={open}
           aria-controls="island-nav-sheet"
-          onClick={() => setOpen((value) => !value)}
+          onClick={() => {
+            if (!open) track("nav_menu_open", { section: active ?? "none" });
+            setOpen((value) => !value);
+          }}
         >
           <span className="island-nav__sr">Secciones. {current ? "Estás en: " : ""}</span>
           <WhereLabel label={current ? current.short : "Secciones"} index={activeIndex} />

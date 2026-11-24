@@ -1,6 +1,7 @@
 import { commercialPlans } from "@/content/commercial-plans";
 import type { ProjectEntry } from "@/content/projects";
 import { publicChannels, siteContent } from "@/content/site";
+import { usdAmount } from "@/lib/peso-prices";
 import { getSiteUrl } from "@/lib/site-url";
 
 /*
@@ -59,11 +60,6 @@ const areaServed = [
 ];
 
 /** "USD 85" → 85; the packs are "desde" prices, so they become a minimum. */
-function minimumPrice(price: string) {
-  const amount = Number(price.replace(/[^\d.]/g, ""));
-  return Number.isFinite(amount) && amount > 0 ? amount : undefined;
-}
-
 function organization(): JsonLdNode {
   return {
     "@type": "Organization",
@@ -105,7 +101,8 @@ function website(): JsonLdNode {
 
 function services(): JsonLdNode[] {
   return commercialPlans.map((plan) => {
-    const price = minimumPrice(plan.price);
+    // USD stays the base price; the peso amounts on the cards are a reference only.
+    const price = usdAmount(plan.price);
     return {
       "@type": "Service",
       "@id": absolute(`/#pack-${plan.id}`),

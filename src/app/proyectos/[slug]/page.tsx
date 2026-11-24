@@ -1,13 +1,15 @@
+/* eslint-disable @next/next/no-img-element -- the decor and the other cases' thumbnails are pre-sized files */
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { CaseShot } from "@/components/world/case-shot";
 import { IslandNav } from "@/components/world/island-nav";
 import { staggerStyle } from "@/components/world/stagger";
-import { StudyIndex } from "@/components/world/study-index";
 import { WorldFooter } from "@/components/world/world-footer";
 import { JsonLd } from "@/components/json-ld";
-import { getProject, projects, publishedProjects } from "@/content/projects";
+import { commercialPlans } from "@/content/commercial-plans";
+import { type ProjectEntry, getProject, projects, publishedProjects } from "@/content/projects";
 import { siteContent } from "@/content/site";
 import { shareMetadata } from "@/lib/share-metadata";
 import { projectStructuredData } from "@/lib/structured-data";
@@ -20,9 +22,9 @@ type ProjectPageProps = {
 export const dynamicParams = false;
 
 /*
- * Placeholder case studies ("Nombre del proyecto 04") are only built in
- * development, to preview the template; production never publishes them, so
- * they cannot be indexed, shared or reached by a stray link (they 404).
+ * Draft cases (`placeholder: true`) are only built in development, to preview
+ * them; production never publishes them, so they cannot be indexed, shared or
+ * reached by a stray link (they 404).
  */
 export function generateStaticParams() {
   const listed = process.env.NODE_ENV === "production" ? publishedProjects : projects;
@@ -35,9 +37,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   if (!project) return {};
 
   const path = `/proyectos/${project.slug}`;
-  const capture = project.images[0];
-  // The summary alone runs 85-105 characters; the tail fills the snippet Google shows.
-  const description = `${project.summary} Caso de Mayofy: qué necesitaba y cómo lo construimos.`;
+  const description = `${project.summary} Un caso de Mayofy, con capturas reales.`;
   return {
     title: project.title,
     description,
@@ -48,36 +48,55 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
       description,
       path,
       type: "article",
-      ...(capture
-        ? {
-            image: {
-              url: `/og/proyectos/${project.slug}.jpg`,
-              width: 1200,
-              height: 630,
-              alt: `${project.title}: ${capture.alt}`,
-            },
-          }
-        : {}),
+      image: {
+        url: `/og/proyectos/${project.slug}.jpg`,
+        width: 1200,
+        height: 630,
+        alt: `${project.title}: ${project.cover.alt}`,
+      },
     }),
   };
 }
 
+/** The headline with its accent words set in the serif italic. */
+function Headline({ text, accent }: { text: string; accent: string }) {
+  const at = text.indexOf(accent);
+  if (at === -1) return <h1 id="caso-titulo">{text}</h1>;
+  return (
+    <h1 id="caso-titulo">
+      {text.slice(0, at)}
+      <em>{accent}</em>
+      {text.slice(at + accent.length)}
+    </h1>
+  );
+}
+
+function hostOf(url: string | undefined) {
+  if (!url) return null;
+  try {
+    return new URL(url).host.replace(/^www\./, "");
+  } catch {
+    return null;
+  }
+}
+
 /*
- * Case-study template. Every project, real or placeholder, follows the same
- * path: cover → facts → story (context, challenge, approach) → decisions →
- * conversion journey → gallery → next step. The content comes from
- * src/content/projects.ts; see docs/plans/2026-11-16-template-proyectos.md
- * for how to load a new project.
+ * Case-study template (docs/plans/2026-11-23-casos.md). Every case follows
+ * the same path, with the real product shown big: cover with the main
+ * capture → facts → where it started → what was built, capture by capture →
+ * decisions → result → the matching pack, the next step and the other cases.
+ * The content lives in src/content/projects.ts.
  */
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) notFound();
 
-  const whatsappHref = getWhatsAppHref(
-    `Hola Juani, vi el caso ${project.title} y quiero contarte sobre mi negocio.`,
-  );
-  const gallery = ["Vista principal", "Vista secundaria", "Detalle de interfaz"];
+  const { before, result }: Pick<ProjectEntry, "before" | "result"> = project;
+  const host = hostOf(project.url);
+  const plan = commercialPlans.find((candidate) => candidate.id === project.pack);
+  const others = (process.env.NODE_ENV === "production" ? publishedProjects : projects).filter((other) => other.slug !== project.slug);
+  const whatsappHref = getWhatsAppHref(`Hola Juani, vi el caso ${project.title} y quiero contarte sobre mi negocio.`);
 
   return (
     <div className="world">
@@ -87,109 +106,191 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </a>
       <IslandNav />
 
-      <main id="contenido" className="study">
-        <header className="study__cover">
-          <div className="world-shell study__cover-layout">
-            <Link className="study__back" href="/#trabajos">
+      <main id="contenido" className="caso-study">
+        <header className="caso-cover" aria-labelledby="caso-titulo">
+          <div className="caso-cover__decor" aria-hidden="true">
+            <picture className="caso-cover__cloud caso-cover__cloud--a">
+              <source type="image/avif" srcSet="/images/mundo-mayo/62-nube-suelta-1.avif" />
+              <img src="/images/mundo-mayo/62-nube-suelta-1.webp" alt="" width={812} height={471} decoding="async" />
+            </picture>
+            <picture className="caso-cover__cloud caso-cover__cloud--b">
+              <source type="image/avif" srcSet="/images/mundo-mayo/62-nube-suelta-3.avif" />
+              <img src="/images/mundo-mayo/62-nube-suelta-3.webp" alt="" width={1024} height={813} decoding="async" />
+            </picture>
+          </div>
+
+          <div className="world-shell caso-cover__text">
+            <Link className="caso-back" href="/#trabajos">
               <span className="link-arrow link-arrow--back" aria-hidden="true">←</span>{" "}
               <span className="link-label">Volver a trabajos</span>
             </Link>
-            <p className="study__category">
-              {project.placeholder ? "Proyecto placeholder" : project.category}
-              <span aria-hidden="true"> · </span>
-              {project.index} / {String(projects.length).padStart(2, "0")}
-            </p>
-            <h1>{project.title}</h1>
-            <p className="study__summary">{project.summary}</p>
-            {"url" in project && project.url ? (
+            <p className="caso-eyebrow">Caso · {project.category}</p>
+            <Headline text={project.headline} accent={project.accent} />
+            <p className="caso-cover__intro">{project.intro}</p>
+            {project.url ? (
               <a className="btn btn--moss" href={project.url} target="_blank" rel="noreferrer">
-                Visitar sitio <span className="link-arrow link-arrow--out" aria-hidden="true">↗</span>
+                Visitar {host} <span className="link-arrow link-arrow--out" aria-hidden="true">↗</span>
               </a>
             ) : null}
           </div>
+
+          <div className="world-shell caso-cover__stage">
+            <picture className="caso-cover__rock">
+              <source type="image/avif" srcSet="/images/mundo-mayo/20-roca-suelta-1.avif" />
+              <img src="/images/mundo-mayo/20-roca-suelta-1.webp" alt="" width={861} height={699} decoding="async" />
+            </picture>
+            <div className="caso-cover__shot">
+              <CaseShot shot={project.cover} sizes="(min-width: 90rem) 76rem, (min-width: 48rem) 88vw, 100vw" priority />
+            </div>
+          </div>
         </header>
 
-        <section className="study__facts" aria-label="Ficha del proyecto">
-          <dl className="world-shell study__facts-grid">
-            <div>
-              <dt>Tipo</dt>
-              <dd>{project.category}</dd>
-            </div>
-            <div>
-              <dt>Alcance</dt>
-              <dd>{project.scope}</dd>
-            </div>
-            <div>
-              <dt>Estado</dt>
-              <dd>{project.placeholder ? "Contenido pendiente" : "Publicado y funcionando"}</dd>
-            </div>
-            <div>
-              <dt>Resultado</dt>
-              <dd>{project.outcome}</dd>
-            </div>
+        <section className="world-shell caso-facts" aria-label="Ficha del proyecto">
+          <dl>
+            {project.facts.map((fact) => (
+              <div key={fact.label}>
+                <dt>{fact.label}</dt>
+                <dd>{fact.value}</dd>
+              </div>
+            ))}
           </dl>
         </section>
 
-        <section className="study__story world-shell">
-          <StudyIndex />
-          <div className="study__chapters">
-            <article id="contexto">
-              <h2>Qué estaba pasando.</h2>
-              <p>{project.context}</p>
-            </article>
-            <article id="desafio">
-              <h2>Qué necesitaba cambiar.</h2>
-              <p>{project.challenge}</p>
-            </article>
-            <article id="enfoque">
-              <h2>Cómo lo encaramos.</h2>
-              <p>{project.approach}</p>
-            </article>
-            <article id="decisiones">
-              <h2>Las decisiones que sostienen la pieza.</h2>
-              <ol className="study__decisions">
-                {project.decisions.map((decision, index) => (
-                  <li key={decision} style={staggerStyle(index)}>
-                    <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                    <p>{decision}</p>
-                  </li>
+        <section className={`world-shell caso-before${before.changes ? "" : " caso-before--solo"}`} aria-labelledby="punto-de-partida">
+          <div className="caso-before__copy">
+            <p className="caso-eyebrow">El punto de partida</p>
+            <h2 id="punto-de-partida">{before.title}</h2>
+            {before.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+          {before.changes ? (
+            <table className="caso-changes">
+              <thead>
+                <tr>
+                  <th scope="col">Antes</th>
+                  <th scope="col">Ahora</th>
+                </tr>
+              </thead>
+              <tbody>
+                {before.changes.map((change) => (
+                  <tr key={change.before}>
+                    <td>{change.before}</td>
+                    <td>{change.now}</td>
+                  </tr>
                 ))}
-              </ol>
-            </article>
-            <article id="recorrido">
-              <h2>El recorrido de conversión.</h2>
-              <ol className="study__journey">
-                {project.conversionSteps.map((step, index) => (
-                  <li key={`${step}-${index}`} style={staggerStyle(index)}>
-                    <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                    <strong>{step}</strong>
-                  </li>
-                ))}
-              </ol>
-            </article>
-            <article id="galeria">
-              <h2>El proyecto, de cerca.</h2>
-              <ul className="study__gallery" aria-label="Galería">
-                {gallery.map((label) => (
-                  <li key={label}>
-                    <span>{label}</span>
-                    <small>Captura pendiente</small>
-                  </li>
-                ))}
-              </ul>
-            </article>
+              </tbody>
+            </table>
+          ) : null}
+        </section>
+
+        <section className="caso-build" aria-labelledby="lo-que-hice">
+          <div className="world-shell caso-build__head">
+            <p className="caso-eyebrow">Lo que hice</p>
+            <h2 id="lo-que-hice">Pantalla por pantalla.</h2>
+          </div>
+          <div className="world-shell caso-build__list">
+            {project.features.map((feature) => (
+              <article key={feature.title} className={`caso-feature caso-feature--${feature.shot.device}`}>
+                <div className="caso-feature__shot">
+                  <CaseShot
+                    shot={feature.shot}
+                    sizes={feature.shot.device === "phone" ? "(min-width: 48rem) 18rem, 70vw" : "(min-width: 90rem) 48rem, (min-width: 48rem) 56vw, 100vw"}
+                  />
+                </div>
+                <div className="caso-feature__copy">
+                  <h3>{feature.title}</h3>
+                  <p>{feature.body}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
-        <section className="study__next world-shell">
-          <h2>¿Tu negocio necesita algo parecido?</h2>
-          <div className="study__actions">
-            <Link className="btn btn--moss btn--lg" href="/#agenda">
-              {siteContent.hero.primaryCta}
-            </Link>
-            <a className="btn btn--quiet btn--lg" href={whatsappHref} target="_blank" rel="noreferrer">
-              Escribir por WhatsApp
-            </a>
+        <section className="world-shell caso-decisions" aria-labelledby="decisiones">
+          <p className="caso-eyebrow">Decisiones</p>
+          <h2 id="decisiones">Por qué está hecho así.</h2>
+          <ul>
+            {project.decisions.map((decision, index) => (
+              <li key={decision.title} style={staggerStyle(index)}>
+                <h3>{decision.title}</h3>
+                <p>{decision.body}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="caso-result" aria-labelledby="resultado">
+          <div className="world-shell caso-result__inner">
+            <div className="caso-result__copy">
+              <p className="caso-eyebrow">Resultado</p>
+              <h2 id="resultado">{result.title}</h2>
+              {result.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+              {result.stats ? (
+                <dl className="caso-stats">
+                  {result.stats.map((stat) => (
+                    <div key={stat.label}>
+                      <dt>{stat.label}</dt>
+                      <dd>{stat.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : null}
+            </div>
+            {result.quote ? (
+              <figure className="caso-quote">
+                <blockquote>
+                  <p>{result.quote.text}</p>
+                </blockquote>
+                <figcaption>
+                  <strong>{result.quote.author}</strong>, {result.quote.role}
+                </figcaption>
+              </figure>
+            ) : null}
+          </div>
+        </section>
+
+        <section className="caso-next" aria-labelledby="siguiente-paso">
+          <div className="world-shell caso-next__inner">
+            <div className="caso-next__offer">
+              <h2 id="siguiente-paso">¿Tu negocio necesita algo parecido?</h2>
+              {plan ? (
+                <p>
+                  Un trabajo así entra en el pack <strong>{plan.name}</strong>: desde {plan.price}, en {plan.timeline}.{" "}
+                  <Link href="/#packs">Ver los packs</Link>
+                </p>
+              ) : null}
+              <div className="caso-next__actions">
+                <Link className="btn btn--moss btn--lg" href="/#agenda">
+                  {siteContent.hero.primaryCta}
+                </Link>
+                <a className="btn btn--quiet btn--lg" href={whatsappHref} target="_blank" rel="noreferrer">
+                  Escribir por WhatsApp
+                </a>
+              </div>
+            </div>
+            {others.length ? (
+              <nav className="caso-others" aria-labelledby="otros-casos">
+                <h2 id="otros-casos">Otros casos</h2>
+                <ul>
+                  {others.map((other) => (
+                    <li key={other.slug}>
+                      <Link href={`/proyectos/${other.slug}`}>
+                        <span className="caso-others__thumb">
+                          <img src={`${other.cover.src}-800.webp`} alt="" width={other.cover.width} height={other.cover.height} loading="lazy" decoding="async" />
+                        </span>
+                        <span className="caso-others__text">
+                          <small>{other.category}</small>
+                          <strong>{other.title}</strong>
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ) : null}
           </div>
         </section>
       </main>

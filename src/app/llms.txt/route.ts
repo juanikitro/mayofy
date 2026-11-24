@@ -31,6 +31,7 @@ export function GET() {
     `- Email: ${publicChannels.email}`,
     `- Instagram: ${publicChannels.instagram}`,
     `- Política de privacidad: ${url("/privacidad")}`,
+    `- Términos y condiciones: ${url("/terminos")}`,
     "",
   ];
   return new Response(lines.join("\n"), {

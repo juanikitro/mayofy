@@ -1,7 +1,7 @@
 # Template de proyectos (casos)
 
 **Fecha:** 16 de noviembre de 2026
-**Estado:** vigente. Juani pidió "un template para que cada proyecto que cargue siga un mismo camino"; el detalle de cada caso se completa después.
+**Estado:** reemplazado el 23/11/2026 por la plantilla nueva: ver [2026-11-23-casos.md](2026-11-23-casos.md). Lo de abajo es historia. Juani pidió "un template para que cada proyecto que cargue siga un mismo camino"; el detalle de cada caso se completa después.
 
 ## Cómo se carga un proyecto
 

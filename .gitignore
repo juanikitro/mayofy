@@ -41,8 +41,17 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.vercel
-.env*
-!.env.example
+# local agent and tool output (never versioned)
+.atl/
+.codegraph/
+.taste-skill/
 .playwright-cli/
 .playwright-mcp/
+/playwright-report/
+/test-results/
+*.log
+/scratch/
+/tmp/
+
+# original high-resolution art; only the optimized files are versioned
+/public/images/mundo-mayo/raw/

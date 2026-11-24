@@ -9,6 +9,7 @@ import { NearGate } from "@/components/world/near-gate";
 import { casePicker } from "@/content/case-picker";
 import { islandCopy } from "@/content/islands";
 import { islandPlates } from "@/content/stage";
+import { getPesoPrices } from "@/lib/peso-prices";
 
 /**
  * Where each question floats before it flies into the proposal, in % of
@@ -73,8 +74,10 @@ function Proposal({ inScene }: { inScene: boolean }) {
  * it scrolls in. With reduced motion or without scroll-driven animations the
  * proposal stands complete and the questions never float.
  */
-export function ProblemIsland() {
+export async function ProblemIsland() {
   const { proposal } = casePicker;
+  // The recommendation shows the same peso reference as the pack cards.
+  const pesoPrices = await getPesoPrices();
 
   return (
     <section
@@ -117,7 +120,7 @@ export function ProblemIsland() {
             <IslandTitle segments={islandCopy.problem.title} />
           </h2>
           <Proposal inScene={false} />
-          <CasePicker />
+          <CasePicker pesoPrices={pesoPrices} />
         </div>
       </div>
     </section>

@@ -3,6 +3,7 @@
 import { type CSSProperties, type FocusEvent, useEffect, useRef, useState } from "react";
 
 import { type CaseArt, casePicker, planFor } from "@/content/case-picker";
+import type { PesoPrices } from "@/lib/peso-prices";
 
 /** The painted art of a case: a still cut-out, or a strip that flutters back and forth. */
 function CaseArtwork({ art }: { art: CaseArt }) {
@@ -26,7 +27,7 @@ function CaseArtwork({ art }: { art: CaseArt }) {
  * request); with reduced motion nothing advances by itself. A choice made by the visitor is
  * announced; the automatic tour is not.
  */
-export function CasePicker() {
+export function CasePicker({ pesoPrices }: { pesoPrices?: PesoPrices }) {
   const { options } = casePicker;
   const rootRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
@@ -141,7 +142,9 @@ export function CasePicker() {
               <p className="case-result__eyebrow">{casePicker.resultEyebrow}</p>
               <h3>{plan.name}</h3>
               <p className="case-result__price">
-                Desde <strong>{plan.price}</strong> · Plazo: {plan.timeline}
+                Desde <strong>{plan.price}</strong>
+                {pesoPrices?.[plan.id] ? <span className="case-result__pesos"> (≈ {pesoPrices[plan.id]})</span> : null} ·{" "}
+                <span className="case-result__timeline">Plazo: {plan.timeline}</span>
               </p>
               <p className="case-result__why">{option.pitch}</p>
               <div className="case-result__actions">
