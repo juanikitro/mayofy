@@ -71,8 +71,8 @@ URL del perfil: _pendiente de verificación_ (id interno 7328409250559941765).
 Juani (24/11): "instagram es mayofy.dev y linkedin usa el mio https://www.linkedin.com/in/juanikitro/ y github https://github.com/juanikitro".
 
 - [x] Instagram `@mayofy.dev` (https://www.instagram.com/mayofy.dev/): la bio ya enlaza a mayofy.dev. El sitio enlazaba a `instagram.com/mayofy.web`, que no existe ("Sorry, this page isn't available"); avisado al coordinador, que lo corrigió en `landing-redesign` (sale con el próximo deploy).
-- [ ] LinkedIn: "Website" tiene juanikitro.com (Portfolio) y github.com (Personal); falta sumar `https://mayofy.dev` como tercer sitio (tipo Company). Esperando el sí de Juani.
-- [ ] GitHub: el campo "Website" es https://juanikitro.com; queda un lugar libre en los enlaces sociales para `https://mayofy.dev`. Esperando el sí de Juani.
+- [x] LinkedIn (Juani: "si"): `https://mayofy.dev` agregado como sitio "Company", junto a juanikitro.com (Portfolio) y github.com (Personal). Título y resto del perfil sin tocar.
+- [x] GitHub: `https://mayofy.dev` agregado en el cuarto enlace social; "Website" sigue en https://juanikitro.com, bio y README sin tocar.
 - [ ] Perfil de Google: Instagram y LinkedIn después de la verificación (el editor no abre antes).
 - [ ] Sitios de clientes: "Hecho por Mayofy" en el pie de shineapp.lat y gymg.com.ar, si los dueños aceptan; juanikitro.com es propio.
 
@@ -114,4 +114,11 @@ En el sitio de cada cliente cambiar `cliente` por su nombre (`shineapp`, `gymg`,
 - 2026-11-24: Juani, sobre Google Ads: "quiero reclamar los 300000 creditos en google ads pero desde la pc no desde el clular". La oferta para anunciantes nuevos en Argentina (business.google.com/es-all/google-ads/) dice: "Invierte 300.000 ARS con Google Ads durante los primeros 60 días para acceder al crédito" de 300.000 ARS. El botón "Advertise" del perfil abrió el alta de una campaña inteligente en la cuenta de Google Ads 249-764-5529 (jpkitro@gmail.com), sin terminar. No se creó ninguna campaña ni se cargó un medio de pago: esperar la decisión de Juani sobre el gasto.
 - 2026-11-24: Juani descartó la oferta de Google Ads ("entonces no"). Se cerró el alta sin crear campaña ni cargar pago.
 - 2026-11-24: perfil de Google con servicios y fotos cargados mientras se revisa el video.
-- 2026-11-24: título de Cal.com y "Domain hosting" hechos; Instagram verificado; se descubrió el enlace roto de Instagram del sitio.
+- 2026-11-24: título de Cal.com y "Domain hosting" hechos; Instagram verificado; se descubrió el enlace roto de Instagram del sitio.- 2026-11-24: LinkedIn y GitHub enlazan a mayofy.dev.
+
+## Pendiente al cierre de la sesión (24/11/2026)
+
+- Verificación del Perfil de Google (video enviado; hasta 5 días hábiles). Después: pasar la URL pública al coordinador para `sameAs`, cargar Instagram y LinkedIn en el perfil, atributos y la primera publicación (textos en `docs/plans/2026-11-22-perfil-google.md`), y pedir reseñas a clientes reales.
+- WhatsApp: compartir `https://mayofy.dev/?v=2` desde el celular para ver la tarjeta nueva.
+- "Hecho por Mayofy" en shineapp.lat y gymg.com.ar (con permiso de los dueños) y en juanikitro.com.
+- Search Console: en unas semanas, revisar Páginas, Mejoras y Métricas web principales.
