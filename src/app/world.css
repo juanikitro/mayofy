@@ -1639,12 +1639,12 @@ html[data-motion-tier="reduced"] .scene__sky {
 }
 
 /* The three cards share their rows (subgrid): header, "ideal para", call to
- * action, footnote and details line up across the cards whatever the length
- * of each description. */
+ * action and details line up across the cards whatever the length of each
+ * description. */
 .pack {
   position: relative;
   display: grid;
-  grid-row: span 5;
+  grid-row: span 4;
   grid-template-rows: subgrid;
   row-gap: 1rem;
   padding: 1.5rem;
@@ -1654,23 +1654,17 @@ html[data-motion-tier="reduced"] .scene__sky {
   scroll-margin-top: 5rem;
 }
 
-.pack__footnote {
+.pack .pack-details {
   grid-row: 4;
 }
 
-.pack .pack-details {
-  grid-row: 5;
-}
-
-/* One card per row on phones: nothing to line up with, so no empty
- * footnote row either. */
+/* One card per row on phones: nothing to line up with. */
 @media (max-width: 48rem) {
   .pack {
     grid-row: auto;
     grid-template-rows: none;
   }
 
-  .pack__footnote,
   .pack .pack-details {
     grid-row: auto;
   }
@@ -1704,6 +1698,13 @@ html[data-motion-tier="reduced"] .scene__sky {
 .pack__header h3 {
   font-size: 1.35rem;
   margin-block: 0.25rem 0.75rem;
+}
+
+/* The price and its (?) small print side by side. */
+.pack__price-row {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
 }
 
 .pack__price {
@@ -1742,8 +1743,6 @@ html[data-motion-tier="reduced"] .scene__sky {
   text-transform: uppercase;
 }
 
-.pack__footnote,
-.pack-details__note,
 .packs__payment,
 .upkeep__footnotes {
   font-size: 0.88rem;
@@ -2046,8 +2045,7 @@ html[data-motion-tier="reduced"] .scene__sky {
 
 .isle--dark .pack-list,
 .isle--dark .upkeep__prices dt,
-.isle--dark .upkeep__footnotes,
-.isle--dark .pack-details__note {
+.isle--dark .upkeep__footnotes {
   color: var(--night-ink-soft);
 }
 
@@ -5592,7 +5590,7 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
 }
 
 .pack__front > .flip__toggle {
-  grid-row: 5;
+  grid-row: 4;
 }
 
 .pack .flip__face {
@@ -8079,8 +8077,8 @@ html[data-motion-tier="reduced"] .works-index__shot {
   font-size: 0.875rem;
 }
 
-/* Under every pack price: it can be paid in pesos and the monthly fee is
- * optional (L2). */
+/* Under every pack price when no blue rate is cached: it can be paid in
+ * pesos (L2). The optional monthly fee moved to the pack's (?). */
 .pack__price-note {
   margin-block-start: 0.4rem;
   font-size: 0.9rem;
@@ -8805,10 +8803,6 @@ html[data-motion-tier="reduced"] :is(.island-nav__sheet, .island-nav[data-open] 
   font-weight: 600;
 }
 
-.pack__pesos + .pack__price-note {
-  margin-block-start: 0.15rem;
-}
-
 .case-result__pesos {
   font-variant-numeric: tabular-nums;
 }
@@ -9050,8 +9044,10 @@ html[data-motion-tier="reduced"] .packs__grid > * {
   }
 }
 
-/* "Cómo se paga (?)": the heading is the toggle, the four lines open in a
- * panel under it (PaymentTip). */
+/* (?) toggletips (Toggletip): "Cómo se paga" under the guarantees strip
+ * and the small print beside each pack's price. The panel is a manual
+ * popover in the top layer, placed by Toggletip (fixed, `top`/`left` and
+ * `--notch`); `data-side` says whether it opened above or below the mark. */
 .packs__payment {
   position: relative;
   z-index: 3;
@@ -9059,11 +9055,11 @@ html[data-motion-tier="reduced"] .packs__grid > * {
   text-align: center;
 }
 
-.packs__payment .packs__payment-title {
+.tip__title {
   margin: 0;
 }
 
-.packs__payment-toggle {
+.tip__toggle {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -9078,7 +9074,7 @@ html[data-motion-tier="reduced"] .packs__grid > * {
   cursor: pointer;
 }
 
-.packs__payment-mark {
+.tip__mark {
   display: grid;
   place-items: center;
   width: 1.5rem;
@@ -9094,63 +9090,82 @@ html[data-motion-tier="reduced"] .packs__grid > * {
     color var(--m-base) var(--ease-ui);
 }
 
-.packs__payment-toggle[aria-expanded="true"] .packs__payment-mark {
+.tip__toggle[aria-expanded="true"] .tip__mark {
   background: var(--moss);
   color: var(--cream);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .packs__payment-toggle:hover .packs__payment-mark {
+@media (hover: hover) {
+  .tip__toggle:hover .tip__mark {
     background: var(--moss);
     color: var(--cream);
   }
 }
 
-.packs__payment-toggle:focus-visible {
+.tip__toggle:focus-visible {
   outline: 2px solid var(--moss);
   outline-offset: 2px;
 }
 
-.packs__payment-toggle:active {
+.tip__toggle:active {
   translate: 0 1px;
 }
 
-/* Above the toggle by default; PaymentTip sets `data-side` from the room
- * there is (the 0.75rem gap matches its GAP). */
-.packs__payment-panel {
-  position: absolute;
-  inset-block-end: calc(100% + 0.75rem);
-  inset-inline-start: 50%;
-  width: min(28rem, calc(100vw - 2 * var(--gutter)));
+/* The pack's (?) is the bare mark beside the price, with a 44px target. */
+.pack__tip .tip__toggle {
+  justify-content: center;
+  min-width: 2.75rem;
+  padding: 0;
+}
+
+.tip__panel {
+  position: fixed;
+  inset: auto;
+  top: 0;
+  left: 0;
+  width: min(26rem, calc(100vw - 2rem));
+  margin: 0;
   padding: 1rem 1.15rem;
+  overflow: visible;
+  border: 1px solid color-mix(in oklch, var(--moss) 14%, transparent);
   border-radius: 1rem;
   background: var(--cream);
   box-shadow: var(--m-shadow-card);
   color: var(--ink-soft);
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.5;
   text-align: start;
-  translate: -50% 0;
   transition:
     opacity var(--m-panel) var(--ease-ui),
     translate var(--m-panel) var(--ease-ui);
 }
 
-.packs__payment-panel[data-side="bottom"] {
-  inset-block: calc(100% + 0.75rem) auto;
+.pack__tip .tip__panel {
+  width: min(22rem, calc(100vw - 2rem));
+}
+
+.tip__panel ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 @starting-style {
-  .packs__payment-panel {
+  .tip__panel {
     opacity: 0;
-    translate: -50% 0.35rem;
+    translate: 0 0.35rem;
   }
 
-  .packs__payment-panel[data-side="bottom"] {
-    translate: -50% -0.35rem;
+  .tip__panel[data-side="bottom"] {
+    translate: 0 -0.35rem;
   }
 }
 
-/* The notch pointing at the (?) mark (`--notch`, set by PaymentTip). */
-.packs__payment-panel::before {
+/* The notch pointing at the (?) mark. */
+.tip__panel::before {
   content: "";
   position: absolute;
   inset-block-end: -0.4rem;
@@ -9162,28 +9177,52 @@ html[data-motion-tier="reduced"] .packs__grid > * {
   rotate: 45deg;
 }
 
-.packs__payment-panel[data-side="bottom"]::before {
+.tip__panel[data-side="bottom"]::before {
   inset-block: -0.4rem auto;
 }
 
-.packs__payment-panel[hidden] {
+/* The hover bridge: the gap between the panel and the mark still counts as
+ * the panel, so the pointer can travel into it. */
+.tip__panel::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 100%;
+  height: 0.85rem;
+}
+
+.tip__panel[data-side="bottom"]::after {
+  inset-block: auto 100%;
+}
+
+.tip__panel[hidden] {
   display: none;
 }
 
-.packs__payment-panel li {
+.tip__panel li {
   position: relative;
   padding-inline-start: 1rem;
 }
 
-.packs__payment-panel li::before {
+.tip__panel li::before {
   content: "";
   position: absolute;
   inset-inline-start: 0.1rem;
-  inset-block-start: 0.55em;
+  inset-block-start: 0.6em;
   width: 0.4rem;
   height: 0.4rem;
   border-radius: 50%;
   background: var(--leaf);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tip__panel {
+    transition: none;
+  }
+}
+
+html[data-motion-tier="reduced"] .tip__panel {
+  transition: none;
 }
 
 /* Six steps on phones, while the path is pinned: the six step buttons stand

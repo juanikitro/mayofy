@@ -1,15 +1,22 @@
 export const commercialIntro = {
   title: "Tres packs. De una página simple a tu propio sistema.",
   body: "Precios de referencia para que sepas por dónde arrancar. El alcance, el plazo y el precio final se definen después de una charla gratis.",
-  /** Under every pack price, so the currency and the monthly fee do not surprise (user test, L2). */
-  priceNote: "Se puede pagar en pesos. El mantenimiento mensual es opcional.",
   /**
-   * With the day's blue rate the peso amount itself answers "can I pay in
-   * pesos?", so only the monthly-fee half of the note stays
-   * (docs/plans/2026-11-23-comercial.md).
+   * Under every pack price when no blue rate is cached (user test, L2). With
+   * the day's rate the peso amount itself answers "can I pay in pesos?", so
+   * the line is left out (docs/plans/2026-11-23-comercial.md).
    */
+  priceNote: "Se puede pagar en pesos.",
   pesoRateLabel: "al dólar blue de hoy",
-  priceNoteWithPesos: "El mantenimiento mensual es opcional.",
+  /**
+   * The small print of each pack sits in a (?) beside its price (Juani,
+   * 24 November 2026: "En cada card añade un (?) traslada ahi el 'El
+   * mantenimiento mensual es opcional' y los asteriscos que tiene cada card"):
+   * the plan's `note`, this line and the plan's `footnote`
+   * (docs/plans/2026-11-24-isla3-pulido.md).
+   */
+  maintenanceNote: "El mantenimiento mensual es opcional.",
+  priceTipLabel: "Más sobre el precio de",
   /** How to pay, under the guarantees strip (Juani, 2026-11-23). */
   payment: {
     title: "Cómo se paga",
