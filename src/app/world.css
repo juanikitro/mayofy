@@ -5635,6 +5635,64 @@ html[data-motion-tier="reduced"] :is(.flip[data-flipped] .flip__face--front, .fl
   }
 }
 
+/* Pack card hover (Juani, 24 November 2026: "un efecto hover mas
+ * interesante a las cards"). Under a hover-capable pointer, without reduced
+ * motion: besides the 2px rise and the deeper shadow above, a soft sunlit
+ * glow follows the pointer across the card's ground (CardLight sets `--x` and
+ * `--y`; the glow moves by `translate` only, on its own layer, under the
+ * text), the featured outline firms up and the call to action wakes with its
+ * button shadow. No tilt or scale, so the text stays crisp. */
+.pack__front {
+  isolation: isolate;
+}
+
+.pack__light {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  html:not([data-motion-tier="reduced"]) .pack__light {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 360ms var(--ease-ui);
+  }
+
+  html:not([data-motion-tier="reduced"]) .pack__light::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 26rem;
+    aspect-ratio: 1;
+    margin: -13rem 0 0 -13rem;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, oklch(99.5% 0.04 92), oklch(99% 0.035 100 / 50%) 45%, transparent);
+    translate: var(--x, 50%) var(--y, 0);
+    will-change: translate;
+  }
+
+  html:not([data-motion-tier="reduced"]) .pack.flip:hover .pack__light {
+    opacity: 1;
+    transition-duration: 220ms;
+  }
+
+  html:not([data-motion-tier="reduced"]) .pack--featured.flip:hover .flip__face {
+    outline-color: color-mix(in oklch, var(--moss) 70%, transparent);
+  }
+
+  html:not([data-motion-tier="reduced"]) .pack.flip:hover .pack__cta {
+    box-shadow:
+      var(--m-shadow-btn),
+      inset 0 1px 0 oklch(100% 0 0 / 18%);
+  }
+}
+
 /* Maintenance: the panel's ground moves to its faces as well. */
 .upkeep.flip {
   display: block;

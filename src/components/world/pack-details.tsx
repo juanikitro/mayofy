@@ -1,3 +1,4 @@
+import { CardLight } from "@/components/world/card-light";
 import { FlipCard } from "@/components/world/flip-card";
 import { DetailGroups } from "@/components/world/pack-groups";
 import { GuaranteesStrip } from "@/components/world/guarantees-strip";
@@ -39,6 +40,7 @@ export async function PackDetails() {
         unflipLabel="Volver"
         front={
           <>
+            <CardLight />
             <header className="pack__header">
               {plan.eyebrow ? <p className="pack__eyebrow">{plan.eyebrow}</p> : null}
               <h3>{plan.name}</h3>
