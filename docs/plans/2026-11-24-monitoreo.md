@@ -14,9 +14,11 @@ Pedido de Juani (24 de noviembre de 2026): "Implementa alerta de si el sitio se 
   | Mayofy caso ShineApp | `https://mayofy.dev/proyectos/shineapp` | 3 min | 1 min | email |
 
   Ambos quedaron en **Up**. Con 1 minuto de confirmación, Better Stack vuelve a chequear antes de abrir un incidente, así que un error aislado no dispara un mail. El resto quedó por defecto: `GET`, timeout de 30 s, sigue redirecciones, chequea desde Europa, Norteamérica, Asia y Australia. El onboarding creó un "Sample incident" de `google.com`; es de ejemplo y se puede resolver o ignorar.
+- Verificado: Juani recibió en Gmail la alerta de prueba ("Send test alert") del monitor de la home.
+- Railway, alertas de deploy (revisado en `railway.com/account/notifications`, sin cambios): para todos los proyectos ya están activas, por **Email & In-App**, las reglas *Deployment Failed* y *Deployment Crashed / Oom Killed*, además de las de uso y restricciones. No hace falta configurar nada. Railway no vigila el sitio después del deploy; eso lo cubre Better Stack.
 - Pendiente: monitor de `https://mayofy.dev/api/health` cuando este cambio esté publicado (hoy da `404` y abriría un incidente falso). Mismos ajustes, nombre "Mayofy health".
 - Las alertas van a `jpkitro@gmail.com` y no a `hola@mayofy.dev`, porque el reenvío de `hola@` depende del mismo DNS que el sitio: si se rompe el DNS, se perderían el sitio y el aviso a la vez.
-- Pendiente de decisión: seguimiento de errores.
+- Decidido (Juani, 24 de noviembre de 2026: "no agregues"): **sin seguimiento de errores por ahora**. Se evaluó Better Stack Errors (gratis, compatible con el SDK de Sentry: https://betterstack.com/docs/errors/collecting-errors/sentry-sdk/). Se descartó porque sumaba la dependencia `@sentry/nextjs` a una página ya pesada y procesaba datos de visitantes, lo que obligaba a cambiar la política de privacidad, para un sitio casi todo estático. Los errores del servidor siguen en los logs de Railway. Revisarlo si el sitio suma lógica propia (turnos, pagos). La política de privacidad no cambia.
 
 ## Qué cambió en el código
 
