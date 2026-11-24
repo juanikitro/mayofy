@@ -9,8 +9,9 @@
  * --trim cuts pixels off the edges first (a browser scrollbar, a window
  * border). Widths larger than the trimmed source are skipped, never upscaled.
  * Prints the files written and the size the page should declare.
- * Client names, amounts and personal data must be blurred in the source
- * before it gets here (docs/plans/2026-11-23-casos.md, "Capturas").
+ * People's names, plates and personal contact data must be dot-masked in the
+ * source before it gets here; numbers stay as they are
+ * (docs/plans/2026-11-23-casos.md, "Máscara de puntos").
  */
 import sharp from "sharp";
 

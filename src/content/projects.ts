@@ -12,8 +12,8 @@ export type ProjectImage = {
 /**
  * A capture on the case page, served as AVIF, WebP and JPG at every width
  * (`<src>-<width>.<ext>`, made by scripts/case-captures.mjs). `width` and
- * `height` are the trimmed source's, for the aspect ratio. Client names,
- * amounts and personal data are blurred before the files are made.
+ * `height` are the trimmed source's, for the aspect ratio. People's names,
+ * plates and personal contact data are dot-masked before the files are made.
  */
 export type CaseShot = {
   src: string;
