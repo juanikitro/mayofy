@@ -54,8 +54,10 @@ Las tiras de escritorio (`*-tira.avif`/`.webp`, 12 cuadros de 640 px) y las de c
 - 390x844: las tiras `-cel` de las islas 2, 6 y 7 cargan. Sin errores de consola ni desborde horizontal.
 - Movimiento reducido: ninguna animación de Mayo queda activa.
 - Cero errores de consola en escritorio y celular.
+- Trackpad simulado (deslizamientos de unos 280 px en pasos de 1 a 30 px cada 16 ms, con inercia): la isla 3 avanza sin cortes. Un deslizamiento moderado cubre el salto largo entero, que se ve animado en unos 0,35 s, más o menos la duración natural de un salto.
+- Táctil a 390x844 con eventos `touchStart`/`touchMove`/`touchEnd` de CDP (deslizamientos de 300 px): la página se desplaza entre 285 y 800 px por deslizamiento, con inercia y scroll guiado. El salto largo ocurre durante un deslizamiento y la página se detiene después del aterrizaje (descanso de 140 vh). Sin errores ni desborde.
 
 ## Limitaciones
 
 - La luz de las islas 6 y 7 es un retoque por código, no una pintura: el borde cálido sigue la silueta, pero no modela volumen como lo haría una pasada pintada.
-- No se probó un trackpad real ni un teléfono físico. Los gestos táctiles sintéticos de CDP no desplazaron la página, así que el recorrido en celular se midió con desplazamientos programáticos.
+- Trackpad y toque se probaron con eventos simulados en Chromium, no en hardware real. Falta que Juani lo pruebe con su trackpad y su teléfono (Safari en iPhone incluido, donde el scroll por animaciones de CSS tiene soporte propio).
