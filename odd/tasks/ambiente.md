@@ -14,17 +14,19 @@ Objective: make the island world feel alive (sky, light, depth) at the quality o
 
 ## Tasks
 
-- [ ] T1 (S1, S4, S5) inline. Ambient foundation (tier, shared loop, visibility) + drifting painted clouds.
-- [ ] T2 (S1) inline. Bird flocks on the day islands (canvas, only while a flock crosses a visible island).
-- [ ] T3 (S1) inline. Island 7 stars twinkle on the painted stars + rare shooting star.
-- [ ] T4 (S2) inline. Island 6 firelight on the scene, Juani and Mayo.
-- [ ] T5 (S2) inline. Island 7 lantern flicker and firefly blinks.
-- [ ] T6 (S2) inline. Breeze in the tree canopies (WebGL displacement, visible island only).
-- [ ] T7 (S3) inline. Pointer depth on the layer pairs.
-- [ ] T8 (S3) inline. Gyroscope analysis + opt-in.
-- [ ] T9 (S4, S7) inline. Measurements, cross-browser pass, media, doc.
+- [x] T1 (S1, S4, S5) inline. Ambient foundation (tier, shared loop, visibility) + drifting painted clouds. f5a3ee6; prefetch regression found in T9 fixed in dfbdee4.
+- [x] T2 (S1) inline. Bird flocks on the day islands (canvas, only while a flock crosses a visible island). 354e85e.
+- [x] T3 (S1) inline. Island 7 stars twinkle on the painted stars + rare shooting star. 7cf5972.
+- [x] T4 (S2) inline. Island 6 firelight on the scene, Juani and Mayo. 6413fce.
+- [x] T5 (S2) inline. Island 7 lantern flicker and firefly blinks. ea1a965.
+- [x] T6 (S2) inline. Breeze in the tree canopies (WebGL displacement, visible island only). 124c25c. Grass left still (see doc section 6).
+- [x] T7 (S3) inline. Pointer depth on the layer pairs. 176c748.
+- [x] T8 (S3) inline. Gyroscope analysis + opt-in. e84a541. Not tested on a real phone.
+- [x] T9 (S4, S7) inline. Measurements, cross-browser pass, media, doc. Perf fixes 8ee05c2, 15d8ed7, 05c521a; doc in the docs commit.
 
 ## Log
 
 - L1 (2026-11-24) Juani verbatim: "Quiero que despliegues un agente especializado para implementar: - cielo vivo (pero de buena calidad, no un css barato) - luz viva en las ilustraciones - profundidad con el mouse (y analiza la opcion de aplicarlo tambien al giroscopio del celular)". Details chosen with the coordinator: see S1-S3.
 - L2 (2026-11-24) Baseline built from a7fa6f0 and kept as a standalone server in the session scratchpad for interleaved before/after measurement. Route: inline for every task (no writer trigger: one agent, units depend on a shared foundation).
+- L3 (2026-11-24) T9: first Lighthouse pass sent ~20 page_view hits to the real GA property (dl=http://127.0.0.1, identifiable); later passes block GA/GTM/Cal.com. Found and fixed a prefetch stall caused by hidden lazy cloud images (dfbdee4). Lighthouse mobile median 82 -> 83, desktop 96 -> 96 (interleaved, 5 each).
+- L4 (2026-11-24) T9 resumed after a usage-limit stop (coordinator: resume, do not restart). Steady-state A/B (6 s settle; 0.8 s settle measured the layers start-up, 3x too high) found two real costs: the bird canvas redrawn from the main thread at 24 fps (+250-300 ms/s on a 4x-throttled phone during a flock) and a static transform beside the animated cloud translate. Birds moved to one shared OffscreenCanvas worker on a sky strip (WebKit on Windows uses the main-thread fallback); cloud centring moved into translate. Phone islands 4/5: +252/+293 -> +62/+78 ms/s; islands 6/7 stay +127/+179 (sum of ~20 small animations, amplified by the pre-existing mayo-sprite main-thread frames, reported, not touched). Lighthouse mobile median 83 -> 83; throttled phone load event 5.89 -> 5.99 s (consistent +0.1 s), LCP/long tasks within noise. Chrome/Firefox/WebKit x 4 sizes: 0 console errors, no overflow; reduced motion runs 0 ambient animations. Videos recorded per effect (session scratchpad).
