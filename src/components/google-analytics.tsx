@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 import { afterLoadIdle } from "@/lib/after-load";
 import { markAnalyticsReady, setAnalyticsConsent } from "@/lib/analytics";
-import { analyticsAllowed, analyticsConsentEvent, applyGaDisableFlag } from "@/lib/analytics-consent";
+import { analyticsAllowed, analyticsConsentEvent, applyGaDisableFlag, followOtherTabs } from "@/lib/analytics-consent";
 
 type WindowWithGtag = Window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void };
 
@@ -30,9 +30,9 @@ function internalTraffic() {
   }
 }
 
-/** `?ga_debug=1` sends this visit to GA's DebugView (Admin > DebugView). */
+/** `?ga_debug=1` sends this visit to GA's DebugView (Admin > DebugView); any other value does not. */
 function debugMode() {
-  return new URLSearchParams(window.location.search).has("ga_debug");
+  return new URLSearchParams(window.location.search).get("ga_debug") === "1";
 }
 
 /*
@@ -48,7 +48,8 @@ function debugMode() {
  *
  * Nothing loads, and no event is sent, while the visitor has turned measuring
  * off on /privacidad or the browser sends Global Privacy Control
- * (`analytics-consent.ts`); turning it back on loads GA then.
+ * (`analytics-consent.ts`); turning it back on loads GA then. A choice made
+ * in another open tab reaches this one through the `storage` event.
  */
 export function GoogleAnalytics({ gaId }: { gaId: string }) {
   useEffect(() => {
@@ -81,9 +82,11 @@ export function GoogleAnalytics({ gaId }: { gaId: string }) {
       if (pageLoaded) inject();
     };
     window.addEventListener(analyticsConsentEvent, onConsentChange);
+    const stopFollowing = followOtherTabs();
     const cancel = afterLoadIdle(inject, idleTimeout);
     return () => {
       cancel();
+      stopFollowing();
       window.removeEventListener(analyticsConsentEvent, onConsentChange);
     };
   }, [gaId]);

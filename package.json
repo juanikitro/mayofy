@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "typegen": "next typegen"
   },
   "dependencies": {
@@ -23,7 +24,8 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "postcss": "^8.5.10",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "4.1.12"
   },
   "overrides": {
     "postcss": "^8.5.10"

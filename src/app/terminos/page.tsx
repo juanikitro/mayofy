@@ -4,7 +4,7 @@ import Link from "next/link";
 import { IslandNav } from "@/components/world/island-nav";
 import { WorldFooter } from "@/components/world/world-footer";
 import { commercialIntro, guarantees, maintenancePlan } from "@/content/commercial-plans";
-import { legalEntity, legalUpdated } from "@/content/legal";
+import { legalDateText, legalEntity, legalUpdated } from "@/content/legal";
 import { shareMetadata } from "@/lib/share-metadata";
 
 const description =
@@ -39,7 +39,7 @@ export default function TermsPage() {
           <span className="link-label">Volver al inicio</span>
         </Link>
         <h1>Términos y condiciones</h1>
-        <p className="reading__updated">Última actualización: {legalUpdated.terms}</p>
+        <p className="reading__updated">Última actualización: {legalDateText(legalUpdated.terms)}</p>
 
         <section aria-labelledby="terminos-quien">
           <h2 id="terminos-quien">Quién presta el servicio</h2>

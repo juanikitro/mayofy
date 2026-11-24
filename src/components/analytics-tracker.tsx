@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 import { track } from "@/lib/analytics";
+import { caseStudyProject } from "@/lib/case-study-path";
 
 /** Page areas a tap is reported from, nearest first. */
 const areaIds = ["agenda", "packs-detalle", "inicio", "problema", "packs", "sistemas", "trabajos", "contacto", "preguntas"];
@@ -122,9 +123,8 @@ export function AnalyticsTracker() {
   }, [pathname]);
 
   useEffect(() => {
-    if (pathname.startsWith("/proyectos/")) {
-      track("case_study_view", { project: decodeURIComponent(pathname.slice("/proyectos/".length)) });
-    }
+    const project = caseStudyProject(pathname);
+    if (project) track("case_study_view", { project });
   }, [pathname]);
 
   // One `section_reached` per island while this page is open.

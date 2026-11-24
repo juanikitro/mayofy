@@ -9,13 +9,10 @@ import {
   setAnalyticsOptOut,
 } from "@/lib/analytics-consent";
 
+/** A choice made in another tab arrives as the same event (`followOtherTabs`). */
 function subscribe(onChange: () => void) {
   window.addEventListener(analyticsConsentEvent, onChange);
-  window.addEventListener("storage", onChange);
-  return () => {
-    window.removeEventListener(analyticsConsentEvent, onChange);
-    window.removeEventListener("storage", onChange);
-  };
+  return () => window.removeEventListener(analyticsConsentEvent, onChange);
 }
 
 const status: Record<AnalyticsChoice, string> = {

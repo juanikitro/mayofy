@@ -59,7 +59,6 @@ const areaServed = [
   })),
 ];
 
-/** "USD 85" → 85; the packs are "desde" prices, so they become a minimum. */
 function organization(): JsonLdNode {
   return {
     "@type": "Organization",
@@ -102,6 +101,7 @@ function website(): JsonLdNode {
 function services(): JsonLdNode[] {
   return commercialPlans.map((plan) => {
     // USD stays the base price; the peso amounts on the cards are a reference only.
+    // "USD 85" → 85; the packs are "desde" prices, so they become a minimum.
     const price = usdAmount(plan.price);
     return {
       "@type": "Service",

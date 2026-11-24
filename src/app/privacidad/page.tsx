@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AnalyticsOptOut } from "@/components/analytics-opt-out";
 import { IslandNav } from "@/components/world/island-nav";
 import { WorldFooter } from "@/components/world/world-footer";
-import { legalEntity, legalUpdated, retention } from "@/content/legal";
+import { legalDateText, legalEntity, legalUpdated, retention } from "@/content/legal";
 import { googleAnalyticsId } from "@/lib/analytics-consent";
 import { shareMetadata } from "@/lib/share-metadata";
 
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
           <span className="link-label">Volver al inicio</span>
         </Link>
         <h1>Política de privacidad</h1>
-        <p className="reading__updated">Última actualización: {legalUpdated.privacy}</p>
+        <p className="reading__updated">Última actualización: {legalDateText(legalUpdated.privacy)}</p>
 
         <section aria-labelledby="privacidad-resumen">
           <h2 id="privacidad-resumen">En pocas palabras</h2>

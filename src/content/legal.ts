@@ -17,7 +17,7 @@ export const legalEntity = {
    * not answer over https when checked.
    */
   dataFiscalUrl: "http://qr.afip.gob.ar/?qr=4wtmhXFACizt8znuUknxHw,,",
-  /** Data requests and legal notices: the site's public address (hola@mayofy.dev since 23 November 2026). */
+  /** Data requests and legal notices go to the site's public address. */
   email: publicChannels.email,
 } as const;
 
@@ -31,7 +31,18 @@ export const retention = {
   analytics: "14 meses",
 } as const;
 
+/**
+ * When each legal page last changed, as an ISO date. The pages print it in
+ * words and the sitemap reads it as `lastModified`, so there is one date to bump.
+ */
 export const legalUpdated = {
-  privacy: "23 de noviembre de 2026",
-  terms: "23 de noviembre de 2026",
+  privacy: "2026-11-23",
+  terms: "2026-11-23",
 } as const;
+
+const longDate = new Intl.DateTimeFormat("es-AR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+
+/** "2026-11-23" → "23 de noviembre de 2026". */
+export function legalDateText(isoDate: string) {
+  return longDate.format(new Date(`${isoDate}T00:00:00Z`));
+}

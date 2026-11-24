@@ -112,8 +112,23 @@ Juani lo va a configurar más adelante. Lo hace él desde la app; ningún agente
 ## Límites y riesgos
 
 - **"De hoy" puede tener hasta 3 horas de atraso.** Si las fuentes fallan, hasta 24 horas. El fin de semana el blue es el del viernes. Por eso el monto lleva "≈" y la condición 2 aclara que vale el blue del día del pago.
-- **Fuentes gratuitas de terceros:** si dolarapi y bluelytics cambian su formato o dejan de existir, la web vuelve a mostrar solo USD; no se rompe. Para arreglarlo alcanza con cambiar la lista `sources` de `peso-prices.ts`.
+- **Fuentes gratuitas de terceros:** si dolarapi y bluelytics cambian su formato o dejan de existir, la web vuelve a mostrar solo USD; no se rompe. Para arreglarlo alcanza con cambiar la lista `rateSources` de `peso-prices.ts`.
 - **ISR en Railway:** la página regenerada se guarda en el disco del contenedor. Con cada deploy se genera de nuevo en el build, así que no hay datos viejos que migrar.
 - **La caída a solo USD no se probó en el navegador.** El script la cubre: la función devuelve `undefined` y los componentes muestran la nota anterior.
 - **Archivos de otras áreas:** `problem-island.tsx` y `case-picker.tsx` son de la isla 2. El cambio es chico: una prop `pesoPrices` y un `<span>` en la línea del precio.
 - **Pendiente:** la página de términos (agente de legales) y la configuración de WhatsApp Business (Juani, más adelante).
+
+## Ajustes de la revisión (24 de noviembre de 2026)
+
+Dos revisiones de Gentle AI dejaron observaciones menores sobre `src/lib/peso-prices.ts` (no bloqueaban). Quedaron así:
+
+- **Redondeo con enteros.** `roundedPesos` multiplica en centavos y redondea con resto entero. Antes usaba coma flotante: USD 35,20 al blue de $1.562,50 daba 55.000,00000000001 y saltaba a $ 60.000. Con los precios actuales no pasaba, pero un cambio de precio o de cotización podía mostrar $ 5.000 de más.
+- **Cotización vieja o absurda.** Una cotización vale solo si:
+  - el valor está entre $1.000 y $10.000 (`PLAUSIBLE_RATE`; el 24 de noviembre el blue estaba en $1.690);
+  - la fecha que trae la fuente (`fechaActualizacion` en dolarapi, `last_update` en bluelytics) tiene menos de 4 días y no está en el futuro.
+  Si ninguna fuente cumple, se reusa la última cotización buena mientras tenga menos de 4 días; después, las tarjetas muestran solo USD.
+- **Por qué 4 días:** el blue no se mueve el fin de semana ni los feriados; 4 días cubren un fin de semana largo.
+- **Por qué la banda es angosta:** fuera de la banda se muestra solo USD, que es seguro. Una cotización baja por error mostraría pesos por debajo del precio en USD. **Si el blue real sale de la banda, hay que ampliarla** en `peso-prices.ts`; mientras tanto la web muestra solo USD.
+- **Tests:** `src/lib/peso-prices.test.ts` (Vitest, `npm test`) cubre el redondeo, el formato, las dos fuentes, la banda, las fechas, la caída a la segunda fuente, la última cotización buena y la caída a solo USD.
+
+Límite: la página ya generada (ISR) guarda los montos hasta la próxima regeneración. Si Next no puede regenerarla, sigue mostrando los últimos montos. La validación corre al generar la página, no en el navegador.

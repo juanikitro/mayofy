@@ -38,6 +38,22 @@ function readDetails(form: FormData): ContactDetails {
   };
 }
 
+/**
+ * Why a mail send failed and what the visitor reads: a timeout (it may have
+ * arrived), a lost connection (fetch throws a TypeError) or the route's own
+ * rejection, whose message is already written for the visitor.
+ */
+function sendFailure(error: unknown): { reason: "timeout" | "network" | "rejected"; message: string } {
+  if (error instanceof Error && error.name === "TimeoutError") {
+    return {
+      reason: "timeout",
+      message: "El envío tardó demasiado y no sabemos si llegó. Escribinos por WhatsApp para confirmarlo.",
+    };
+  }
+  if (error instanceof Error && error.name !== "TypeError") return { reason: "rejected", message: error.message };
+  return { reason: "network", message: "No pudimos enviar la consulta. Probá por WhatsApp." };
+}
+
 function SelectField({
   field,
   label,
@@ -150,17 +166,10 @@ export function ContactForm({ whatsappHref }: ContactFormProps) {
       formRef.current?.reset();
       startedAt.current = Date.now();
     } catch (error) {
-      track("contact_form_error", {
-        reason: error instanceof Error && error.name === "TimeoutError" ? "timeout" : error instanceof Error && error.name !== "TypeError" ? "rejected" : "network",
-      });
+      const failure = sendFailure(error);
+      track("contact_form_error", { reason: failure.reason });
       setSubmissionState("error");
-      setFeedback(
-        error instanceof Error && error.name === "TimeoutError"
-          ? "El envío tardó demasiado y no sabemos si llegó. Escribinos por WhatsApp para confirmarlo."
-          : error instanceof Error && error.name !== "TypeError"
-            ? error.message
-            : "No pudimos enviar la consulta. Probá por WhatsApp.",
-      );
+      setFeedback(failure.message);
     } finally {
       window.clearTimeout(slowNote);
     }

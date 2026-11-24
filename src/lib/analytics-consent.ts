@@ -84,3 +84,21 @@ export function setAnalyticsOptOut(off: boolean) {
   if (off) removeGaCookies();
   window.dispatchEvent(new Event(analyticsConsentEvent));
 }
+
+/**
+ * Follows a choice made in another tab of this site: the browser fires
+ * `storage` there, never in the tab that wrote. This tab drops its own
+ * remembered choice, reads storage again, updates GA's off switch and tells
+ * its listeners (the GA loader, the switch on /privacidad).
+ */
+export function followOtherTabs() {
+  const onStorage = (event: StorageEvent) => {
+    // A null key means another tab cleared all of this site's storage.
+    if (event.key !== null && event.key !== optOutKey) return;
+    pageChoice = null;
+    applyGaDisableFlag();
+    window.dispatchEvent(new Event(analyticsConsentEvent));
+  };
+  window.addEventListener("storage", onStorage);
+  return () => window.removeEventListener("storage", onStorage);
+}

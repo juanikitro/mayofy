@@ -139,3 +139,17 @@ Pedido de Juani (23 de noviembre): "Sobre lo que hay que hacer en google analyti
 - **Consentimiento:** la ronda de privacidad conectó `setAnalyticsConsent` con la opción de no medir en /privacidad y con Global Privacy Control (`analytics-consent.ts`); no hay aviso de cookies.
 - **Filtros en Active:** pendientes de ver la marca en los informes (ver "Verificación").
 - **Desarrollo local manda a la propiedad real.** Para evitarlo, el `.env.local` de quien desarrolle puede tener `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=` vacío (no se cambió el valor por defecto porque producción depende de él).
+
+## Ajustes de la revisión (24 de noviembre de 2026)
+
+Observaciones menores de las dos revisiones de Gentle AI, ya resueltas:
+
+- **Ruta de un caso mal escrita.** `decodeURIComponent` tiraba un error con una URL rota (por ejemplo `/proyectos/%E0%A4%A`). Ahora `caseStudyProject` (`src/lib/case-study-path.ts`) devuelve el texto sin decodificar y el evento `case_study_view` se manda igual.
+- **`?ga_debug=0` también activaba DebugView.** Ahora solo `?ga_debug=1` lo activa (`google-analytics.tsx`).
+- **Baja en otra pestaña.** Si alguien desactiva la medición en /privacidad con otra pestaña del sitio abierta, esa otra pestaña ahora se entera: `followOtherTabs` (`analytics-consent.ts`) escucha el evento `storage`, olvida la elección guardada en la pestaña, vuelve a leer y prende el interruptor de GA (`ga-disable-<id>`). El interruptor de /privacidad se actualiza con el mismo evento.
+- **Tests (Vitest, `npm test`):**
+  - `src/lib/analytics.test.ts`: la cola manda en orden cuando GA está listo, guarda como máximo 40 eventos, descarta lo pendiente si se retira el consentimiento, trata un error del chequeo como "no medir", nunca tira errores y no hace nada en el servidor.
+  - `src/lib/analytics-consent.test.ts`: medición por defecto, baja, Global Privacy Control y la sincronización entre pestañas.
+  - `src/lib/case-study-path.test.ts`: rutas bien y mal escritas.
+
+Límite: la sincronización entre pestañas se probó con un navegador simulado en los tests, no con dos pestañas reales.
