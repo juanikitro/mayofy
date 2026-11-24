@@ -38,6 +38,31 @@ Las tiras de escritorio (`*-tira.avif`/`.webp`, 12 cuadros de 640 px) y las de c
   - La sección sigue midiendo 320 vh (220 vh de scroll fijado) y no se tocó el código del scroll guiado.
 - **Sombra de contacto más marcada.** Isla 2: la proyectada sube a 0,66 y la oclusión bajo las patas a 0,86 y 0,82, y se reubicó bajo las patas de la reverencia. Isla 3: el contacto (`.packs-mayo::before`) pasa del marrón al verde sombra del pasto, con un núcleo denso bajo las patas dentro de un charco más suave.
 
+**Cuarta entrega (24/11/2026, "mejora la sombra de este frame", isla 2)**
+
+La sombra de la isla 2 seguía sin verse por dos motivos:
+
+- **Medidas que no coincidían con la tira:** una oclusión caía en x 33 %, donde no hay ninguna pata.
+- **Radios demasiado chicos:** Mayo mide unos 120 px en pantalla, así que un radio vertical de 2 a 4 % de su celda son 3 a 5 px, y casi todo queda tapado por su cuerpo.
+
+Las 12 posturas de la reverencia apoyan las patas en el mismo lugar: la trasera en x 23-31 % (apoyo en y 83 %) y las delanteras en x 44-55 % y 66-77 % (apoyo en y 88 %). La capa nueva (`mayoAnchors.problem.contact`, tinte `18 36 6`) tiene:
+
+- una oclusión por pata, con radio vertical de 5,5 %;
+- una penumbra bajo el pecho;
+- una sombra proyectada hacia abajo a la izquierda, como la de las rocas.
+
+Los valores se eligieron comparando variantes inyectadas en el navegador. En `integracion-mayo/sombra-isla-2.jpg`, de izquierda a derecha: la versión anterior, una variante intermedia y la elegida.
+
+**Quinta entrega (24/11/2026, "que la animacion en la isla 3 corra de un punto a otro y no se deslice estando parada")**
+
+- **Causa del deslizamiento.** Era una regresión de la tercera entrega (957b8cc). Al separar el salto chico y el largo en dos animaciones listadas en el shorthand, la duración de la tira quedó en `0s`: con una lista, el shorthand no resuelve `auto` (el mismo problema ya estaba anotado en las rocas). Con duración 0, la animación ligada al scroll salta al final, así que la tira mostraba siempre el último cuadro, parada, mientras la caja avanzaba. Se agregó `animation-duration: auto` a la tira y a la caja.
+- **Carrera.** El tramo largo (2,7 anchos de Mayo) pasa a ser dos saltos encadenados de la misma tira (`packs-mayo-run-frames`, 18 pasos):
+  - parada → agachada → despegue → vuelo → aterrizaje agachada → despegue → vuelo → aterrizaje → se endereza;
+  - el aterrizaje del primer salto (cuadro 8) sirve de impulso para el segundo, sin pararse en el medio;
+  - cada salto cubre la mitad del camino.
+- **Solo se mueve en el aire.** Mayo se traslada únicamente entre el despegue (cuadro 3) y el apoyo (cuadro 8), en el salto chico y en los dos de la carrera. En los cuadros apoyados queda quieta.
+- **Verificación:** se recorrió la isla de a 0,75-1,5 vh en 1440x900 y 390x844. Ningún cambio de posición cae en un cuadro apoyado, sin errores de consola, y con movimiento reducido no queda ninguna animación activa. Secuencia en `integracion-mayo/carrera-isla-3.jpg`, de 96 a 140 vh.
+
 ## Evidencia
 
 - `integracion-mayo/isla-{2,3,6,7}.jpg`: cuatro cuadros por isla. Arriba, la tira anterior; abajo, la nueva (en la 6 y la 7, con la luz final).
@@ -54,8 +79,10 @@ Las tiras de escritorio (`*-tira.avif`/`.webp`, 12 cuadros de 640 px) y las de c
 - 390x844: las tiras `-cel` de las islas 2, 6 y 7 cargan. Sin errores de consola ni desborde horizontal.
 - Movimiento reducido: ninguna animación de Mayo queda activa.
 - Cero errores de consola en escritorio y celular.
+- Trackpad simulado (deslizamientos de unos 280 px en pasos de 1 a 30 px cada 16 ms, con inercia): la isla 3 avanza sin cortes. Un deslizamiento moderado cubre el salto largo entero, que se ve animado en unos 0,35 s, más o menos la duración natural de un salto.
+- Táctil a 390x844 con eventos `touchStart`/`touchMove`/`touchEnd` de CDP (deslizamientos de 300 px): la página se desplaza entre 285 y 800 px por deslizamiento, con inercia y scroll guiado. El salto largo ocurre durante un deslizamiento y la página se detiene después del aterrizaje (descanso de 140 vh). Sin errores ni desborde.
 
 ## Limitaciones
 
 - La luz de las islas 6 y 7 es un retoque por código, no una pintura: el borde cálido sigue la silueta, pero no modela volumen como lo haría una pasada pintada.
-- No se probó un trackpad real ni un teléfono físico. Los gestos táctiles sintéticos de CDP no desplazaron la página, así que el recorrido en celular se midió con desplazamientos programáticos.
+- Trackpad y toque se probaron con eventos simulados en Chromium, no en hardware real. Falta que Juani lo pruebe con su trackpad y su teléfono (Safari en iPhone incluido, donde el scroll por animaciones de CSS tiene soporte propio).
