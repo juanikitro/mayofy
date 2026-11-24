@@ -3,7 +3,7 @@ import { Fragment, type CSSProperties } from "react";
 
 import { IslandPlate, plateSceneStyle } from "@/components/world/island-plate";
 import { NearGate } from "@/components/world/near-gate";
-import { PacksMayoClock } from "@/components/world/packs-mayo-clock";
+import { PacksPlay } from "@/components/world/packs-play";
 import { PlatformMarkers } from "@/components/world/platform-markers";
 import { IslandTitle } from "@/components/world/island-title";
 import { StripSources } from "@/components/world/mayo-figure";
@@ -21,8 +21,6 @@ import {
   platforms,
   rockFloats,
   rockTiming,
-  rocksStage,
-  stageCover,
   type LooseRock,
   type Platform,
   type PlatformPiece,
@@ -96,14 +94,17 @@ function flightVars(box: Box, kind: PlatformPiece["kind"], index: number, size: 
   };
 }
 
-/** One piece's flight, in vh of the stage's pinned scroll (rocksStage). */
+/** One piece's flight, in ms of the play (rockTiming). */
 function flightRange(index: number, kind: PlatformPiece["kind"]) {
   const start = rockTiming.start + index * rockTiming.stagger + landingOrder.indexOf(kind) * rockTiming.pieceStagger;
   return { start, end: start + rockTiming.flight };
 }
 
-/** A stretch of the pinned scroll (vh, rocksStage) as an `animation-range` on the `--rocks` timeline. */
-const cover = (start: number, end: number) => `cover ${stageCover(start)}% cover ${stageCover(end)}%`;
+/** A stretch of the play (ms) as the `--at` delay and `--for` duration world.css gives its animation. */
+const span = (start: number, end: number) => ({ "--at": `${Math.round(start)}ms`, "--for": `${Math.round(end - start)}ms` });
+
+/** How long a marker takes to rise once its platform's top has landed (ms). */
+const MARKER_RISE = 310;
 
 /** A stable pseudo-random number in [0, 1) per serial and seed, so server and client agree. */
 const noise = (serial: number, seed: number) => Math.abs((Math.sin(serial * 12.9898 + seed * 78.233) * 43758.5453) % 1);
@@ -138,10 +139,10 @@ function idleVars(serial: number, scale = 1) {
 const SWIRL_CENTRE = { x: 50, y: 48 };
 
 /**
- * Where a rock is pushed along its swirl at the start of the section
- * (`--pre` 0, world.css): a turn around the island plus a little outwards,
- * in % of the plate width, so as the stage arrives the rocks circle in on
- * the scroll and pass in front of and behind each other.
+ * Where a rock is pushed along its swirl before the play (`--pre` 0,
+ * world.css): a turn around the island plus a little outwards, in % of the
+ * plate width, so as the play starts the rocks circle in and pass in front
+ * of and behind each other.
  */
 function swirlVars(x: number, y: number, serial: number, size: Size) {
   const ox = x - SWIRL_CENTRE.x;
@@ -176,7 +177,7 @@ function Rock({ piece, index }: { piece: PlatformPiece; index: number }) {
     "--wobble": `${float.rotate > 0 ? -3.5 : 3.5}deg`,
     "--s0": float.scale,
     "--z0": LAYER_Z[float.layer],
-    "--range": cover(start, end),
+    ...span(start, end),
     "--mask": `url("${piece.src}")`,
   } as CSSProperties;
   return (
@@ -280,7 +281,7 @@ function GrassTufts({ index }: { index: number }) {
     ...vars("d"),
     ...vars("m"),
     "--tufts": tuftMask(index + 1),
-    "--range": cover(flightRange(index, "base").start, flightRange(index, "base").end),
+    ...span(flightRange(index, "base").start, flightRange(index, "base").end),
     "--meadow": `image-set(url("${island.avif}") type("image/avif"), url("${island.webp}") type("image/webp"))`,
   } as CSSProperties;
   return <span className="rock-grass" style={style} />;
@@ -297,7 +298,8 @@ function AssembledPlate() {
     <picture className="plate__picture plate__picture--assembled">
       {mobile ? <source media="(max-width: 48rem)" type="image/avif" srcSet={mobile.avif} /> : null}
       <source type="image/avif" srcSet={desktop.avif} />
-      <img src={desktop.webp} alt="" width={desktop.width} height={desktop.height} loading="lazy" decoding="async" />
+      {/* Decoded in the frame that shows it: decoded apart, coming back to the island showed bare meadow for a few frames. */}
+      <img src={desktop.webp} alt="" width={desktop.width} height={desktop.height} loading="lazy" decoding="sync" />
     </picture>
   );
 }
@@ -326,7 +328,7 @@ function Shadow({ shadow, index }: { shadow: PlatformShadow; index: number }) {
   const style = {
     ...boxVars(onPlate(platform, platformPlacements.desktop[index], shadow.x, shadow.y, shadow.w, shadow.h), "d"),
     ...boxVars(onPlate(platform, platformPlacements.mobile[index], shadow.x, shadow.y, shadow.w, shadow.h), "m"),
-    "--range": cover(start, end),
+    ...span(start, end),
   } as CSSProperties;
   return <img className="rock-shadow" src={shadow.src} alt="" width={shadow.w} height={shadow.h} loading="lazy" decoding="async" style={style} />;
 }
@@ -361,7 +363,7 @@ function GroundShadow({ index }: { index: number }) {
       [`--h-${size}`]: `${round(height)}%`,
     };
   };
-  const style = { ...box("d"), ...box("m"), "--range": cover(start, end) } as CSSProperties;
+  const style = { ...box("d"), ...box("m"), ...span(start, end) } as CSSProperties;
   return <span className="rock-ground" style={style} />;
 }
 
@@ -377,7 +379,7 @@ function markerVars(index: number) {
     "--top-d": `${round(top(platformPlacements.desktop[index]))}%`,
     "--x-m": `${platformPlacements.mobile[index].x}%`,
     "--top-m": `${round(top(platformPlacements.mobile[index]))}%`,
-    "--range": cover(landed, landed + 12),
+    ...span(landed, landed + MARKER_RISE),
   } as CSSProperties;
 }
 
@@ -408,8 +410,9 @@ function packsMayoVars() {
  * Mayo on island 3, painted in place (stage.ts packsMayo): four strip windows
  * share one cell and world.css shows the one the moment calls for, watching
  * while the rocks float, hopping as the first two platforms land, sitting
- * down as the third lands and seated afterwards. Every window steps its strip
- * one painted frame at a time; without motion only the seated one shows.
+ * down as the third lands and seated afterwards, all in one play
+ * (packs-play.tsx). Every window steps its strip one painted frame at a
+ * time; without motion only the seated one shows.
  */
 function PacksMayo() {
   return (
@@ -420,7 +423,8 @@ function PacksMayo() {
           <div className={`packs-mayo__strip packs-mayo__strip--${name}`} style={{ "--frames": strip.frames } as CSSProperties} key={name}>
             <picture>
               <StripSources avif={strip.avif} />
-              <img src={strip.webp} alt="" width={packsMayo.cell * strip.frames} height={packsMayo.cell} loading="lazy" decoding="async" />
+              {/* Decoded in the frame that shows it, so a hand-over never paints an empty cell (packs-play.tsx also decodes them ahead). */}
+              <img src={strip.webp} alt="" width={packsMayo.cell * strip.frames} height={packsMayo.cell} loading="lazy" decoding="sync" />
             </picture>
           </div>
         );
@@ -430,23 +434,25 @@ function PacksMayo() {
 }
 
 /**
- * The section's height and the island's scroll ranges that world.css uses
- * directly, all from the pinned-scroll timing in stage.ts.
+ * The island's moments that world.css uses directly, as `-at` delays and
+ * `-for` durations in ms of the play, all from the timing in stage.ts.
  */
-function stageVars() {
+function playVars() {
   const { hops, sentarse, crossfade } = packsMayo.timing;
+  const ms = (value: number) => `${Math.round(value)}ms`;
+  const stretch = (name: string, from: number, to: number) => ({ [`--${name}-at`]: ms(from), [`--${name}-for`]: ms(to - from) });
   return {
-    "--rocks-height": `${rocksStage.height}vh`,
-    "--range-swirl": `cover 4% cover ${stageCover(rockTiming.start)}%`,
-    "--range-crossfade": cover(crossfade[0], crossfade[1]),
+    // The rocks swirl in from the start of the play until the first flight.
+    "--swirl-for": ms(rockTiming.start),
+    ...stretch("crossfade", crossfade[0], crossfade[1]),
     // The live pieces hide once the painting is opaque.
-    "--live-out": cover(crossfade[1] - 0.5, crossfade[1]),
-    "--range-mira": `cover 0% cover ${stageCover(hops[0])}%`,
-    "--range-hops": cover(hops[0], hops[2]),
-    "--range-hop": cover(hops[0], hops[1]),
-    "--range-leap": cover(hops[1], hops[2]),
-    "--range-sentarse": cover(sentarse[0], sentarse[1]),
-    "--range-sentada-off": `cover 0% cover ${stageCover(sentarse[1])}%`,
+    "--live-out-at": ms(crossfade[1]),
+    "--mira-for": ms(hops[0]),
+    ...stretch("hops", hops[0], hops[2]),
+    ...stretch("hop", hops[0], hops[1]),
+    ...stretch("leap", hops[1], hops[2]),
+    ...stretch("sentarse", sentarse[0], sentarse[1]),
+    "--sentada-off-for": ms(sentarse[1]),
   } as CSSProperties;
 }
 
@@ -460,14 +466,10 @@ export function RockIsland() {
       className={packsAssembledPlate.desktop ? "rocks rocks--painted" : "rocks"}
       data-island="3"
       aria-labelledby="packs-title"
-      style={stageVars()}
+      style={playVars()}
     >
       {/* The rock pieces and grass strips load as the reader nears the island or once the page has loaded. */}
       <NearGate />
-      {/* Mayo's key poses, where the page may settle (the guided scroll's rest points; outside the sticky stage). */}
-      {packsMayo.timing.rests.map((vh) => (
-        <span className="rocks__rest" data-scroll-rest aria-hidden="true" style={{ top: `${vh}vh` }} key={vh} />
-      ))}
       <div className="rocks__stage">
         <header className="rocks__intro">
           <h2 id="packs-title">
@@ -502,11 +504,11 @@ export function RockIsland() {
             <AssembledPlate />
             <PacksMayo />
           </IslandPlate>
-          <PacksMayoClock
-            miraRest={stageCover(packsMayo.timing.miraRest)}
-            miraEnd={stageCover(packsMayo.timing.hops[0])}
-            sentadaStart={stageCover(packsMayo.timing.sentarse[1])}
-            sentadaLoop={stageCover(packsMayo.timing.sentadaLoop)}
+          <PacksPlay
+            miraRest={packsMayo.timing.miraRest}
+            miraEnd={packsMayo.timing.hops[0]}
+            sentadaStart={packsMayo.timing.sentarse[1]}
+            sentadaLoop={packsMayo.timing.sentadaLoop}
           />
         </div>
 
