@@ -37,7 +37,7 @@ Sigue la "Lista única para Juani" de `docs/plans/2026-11-22-perfil-google.md`.
 - [~] **Verificación por video:** Juani la grabó y la envió el 24/11 (escaneando el QR que da "Get verified" en la PC; en la app de Maps no le aparecía el perfil). Estado en el panel: "Processing", "Google is processing your verification. It may take up to five days". Requisitos que pedía Google: Google ofreció un único método: un video continuo con (1) la calle o un lugar conocido de la zona, (2) el nombre Mayofy impreso o en pantalla y (3) acceso a una herramienta del negocio (por ejemplo, el panel de Cal.com o de Vercel con mayofy.dev). Sin caras ni documentos sensibles; de 1 a 2 minutos. La revisión tarda hasta 5 días hábiles.
 - [ ] Redes (Instagram, LinkedIn): el editor no abre con el perfil sin verificar; cargar después.
 - [x] Servicios: Google agregó solos 8 sugeridos de la categoría (Application development, Domain hosting, Landing pages, Mobile app development, Self-managed websites, SEO services, Software development, Web design); se sumaron "Corporate websites" y "Online stores" (el sitio ofrece web institucional y tienda online en Gestión) y 6 propios con descripción: Landing, Gestión, Sistema a Medida, Mantenimiento mensual, Charla inicial gratis y Automatizaciones sueltas. Los precios y plazos salen de `src/content/commercial-plans.ts` en master (el pack ahora es "Gestión", de 3 a 6 semanas; mantenimiento USD 25 Landing y USD 50 Gestión y Sistema a Medida), no del plan del 22/11. El campo de precio solo acepta ARS: quedó "No price" y el "Desde USD" va al principio de la descripción.
-- [ ] Revisar con Juani si quitar "Mobile app development" y "Domain hosting" (sugeridos por Google; el sitio no los ofrece como servicio aparte).
+- [x] Juani (24/11): "de servicios sugeridos saca hosting de dominios". "Domain hosting" eliminado; "Mobile app development" queda.
 - [x] Fotos: logo `01-logo-720.jpg`, portada `02-portada-1280x720.jpg` y las 4 de trabajos subidas; quedan "PENDING" hasta la verificación.
 - [ ] Atributos y la primera publicación: después de la verificación.
 - [ ] Pasar la URL pública del perfil al coordinador (va en `sameAs`, `src/lib/structured-data.ts`).
@@ -49,7 +49,7 @@ URL del perfil: _pendiente de verificación_ (id interno 7328409250559941765).
 
 - [x] Evento "Mayofy First Meeting" → Appearance → "Interface language" activado en **Español Latinoamericano** (en Cal.com 7 la opción ya no está en "Avanzado"). La vista previa pasó a "noviembre", "LUN", "Horarios disponibles".
 - [x] Disponibilidad (Juani, 24/11: "los horarios de cal.com deben ser esos mismos"): pasó de lunes a sábado 7 a 19 a lunes a sábado **9 a 19**.
-- [ ] Título del evento (hoy "Mayofy First Meeting", en inglés): esperar la decisión de Juani. Sugerido: `Charla inicial con Mayofy`. Cambiar solo el título, no el slug `mayofy-first-meeting`, que usa el sitio. Si cambia la duración o el lugar, avisar: `src/content/site.ts` dice "30 minutos por videollamada".
+- [x] Juani (24/11): "cambia el titulo del evento de cal.com por el recomendado". Título: **Charla inicial con Mayofy** (el enlace sigue siendo `mayofy-first-meeting`). Antes: Sugerido: `Charla inicial con Mayofy`. Cambiar solo el título, no el slug `mayofy-first-meeting`, que usa el sitio. Si cambia la duración o el lugar, avisar: `src/content/site.ts` dice "30 minutos por videollamada".
 - Formato de 24 h: sigue sin opción por evento; el selector "12h / 24h" queda a la vista del visitante.
 
 ### 5. FormSubmit (hecho el 24/11/2026)
@@ -66,13 +66,15 @@ URL del perfil: _pendiente de verificación_ (id interno 7328409250559941765).
 - [x] Prueba de resultados enriquecidos con la home: "Organization", 1 elemento válido. Las preguntas frecuentes no aparecen, como estaba previsto (Google las muestra solo para salud y gobierno).
 - [x] Google Analytics en tiempo real (propiedad 547554982): 1 usuario activo en la home, escritorio.
 
-### 7. Enlaces y perfiles que apuntan a mayofy.dev (unos 20 minutos)
+### 7. Enlaces y perfiles que apuntan a mayofy.dev
 
-- [ ] Instagram `@mayofy.web`: enlace de la bio a `https://mayofy.dev`.
-- [ ] LinkedIn: sitio web en el perfil y en "Destacados".
-- [ ] GitHub: campo "Website" del perfil y README del perfil.
-- [ ] Sitios de clientes: "Hecho por Mayofy" en el pie de shineapp.lat y gymg.com.ar, si los dueños aceptan. juanikitro.com es propio: se puede sumar sin pedir permiso.
-- [ ] Directorios: los que Juani elija de la lista de la sesión.
+Juani (24/11): "instagram es mayofy.dev y linkedin usa el mio https://www.linkedin.com/in/juanikitro/ y github https://github.com/juanikitro".
+
+- [x] Instagram `@mayofy.dev` (https://www.instagram.com/mayofy.dev/): la bio ya enlaza a mayofy.dev. El sitio enlazaba a `instagram.com/mayofy.web`, que no existe ("Sorry, this page isn't available"); avisado al coordinador, que lo corrigió en `landing-redesign` (sale con el próximo deploy).
+- [ ] LinkedIn: "Website" tiene juanikitro.com (Portfolio) y github.com (Personal); falta sumar `https://mayofy.dev` como tercer sitio (tipo Company). Esperando el sí de Juani.
+- [ ] GitHub: el campo "Website" es https://juanikitro.com; queda un lugar libre en los enlaces sociales para `https://mayofy.dev`. Esperando el sí de Juani.
+- [ ] Perfil de Google: Instagram y LinkedIn después de la verificación (el editor no abre antes).
+- [ ] Sitios de clientes: "Hecho por Mayofy" en el pie de shineapp.lat y gymg.com.ar, si los dueños aceptan; juanikitro.com es propio.
 
 ## Textos listos para pegar
 
@@ -112,3 +114,4 @@ En el sitio de cada cliente cambiar `cliente` por su nombre (`shineapp`, `gymg`,
 - 2026-11-24: Juani, sobre Google Ads: "quiero reclamar los 300000 creditos en google ads pero desde la pc no desde el clular". La oferta para anunciantes nuevos en Argentina (business.google.com/es-all/google-ads/) dice: "Invierte 300.000 ARS con Google Ads durante los primeros 60 días para acceder al crédito" de 300.000 ARS. El botón "Advertise" del perfil abrió el alta de una campaña inteligente en la cuenta de Google Ads 249-764-5529 (jpkitro@gmail.com), sin terminar. No se creó ninguna campaña ni se cargó un medio de pago: esperar la decisión de Juani sobre el gasto.
 - 2026-11-24: Juani descartó la oferta de Google Ads ("entonces no"). Se cerró el alta sin crear campaña ni cargar pago.
 - 2026-11-24: perfil de Google con servicios y fotos cargados mientras se revisa el video.
+- 2026-11-24: título de Cal.com y "Domain hosting" hechos; Instagram verificado; se descubrió el enlace roto de Instagram del sitio.
