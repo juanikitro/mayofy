@@ -8,7 +8,7 @@ export type TitleSegment = string | { em: string };
 
 export type IslandCopy = {
   title: readonly TitleSegment[];
-  /** Optional: island 2 dropped its line on 22 November 2026. */
+  /** Optional: island 2 dropped its line on 22 November 2026, the works on 24 November. */
   body?: string;
   /** One line per item of a list the island walks through (the six steps). */
   details?: readonly string[];
@@ -27,9 +27,9 @@ export const islandCopy = {
     title: ["Sistemas y automatizaciones ", { em: "a medida" }, "."],
     body: "Un sistema completo o una sola tarea que hoy hacés a mano. Lo armamos para cómo trabajás vos.",
   },
+  // The works list goes straight under the title (Juani, 24 November 2026: the intro line was removed).
   works: {
     title: ["Trabajos que ya ", { em: "están andando" }, "."],
-    body: "Un sistema con agenda para lavaderos, una página para una consignataria y una web personal. Se suman más a medida que terminan.",
   },
   process: {
     title: ["Seis pasos, sin ", { em: "sorpresas" }, "."],
