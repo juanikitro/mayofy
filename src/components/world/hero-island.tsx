@@ -1,3 +1,4 @@
+import { AmbientClouds } from "@/components/world/ambient-sky";
 import { IslandPlate, plateSceneStyle } from "@/components/world/island-plate";
 import { MayoFigure } from "@/components/world/mayo-figure";
 import { islandPlates } from "@/content/stage";
@@ -12,8 +13,9 @@ export function HeroIsland() {
   return (
     <div className="scene scene--dawn scene--plated" style={plateSceneStyle(islandPlates.hero)} aria-hidden="true">
       <div className="scene__sky" />
-      <IslandPlate plate={islandPlates.hero} eager>
+      <IslandPlate plate={islandPlates.hero} eager backdrop={<AmbientClouds island="hero" depth="far" />}>
         <MayoFigure slot="hero" className="scene__mayo" eager />
+        <AmbientClouds island="hero" depth="near" />
       </IslandPlate>
     </div>
   );

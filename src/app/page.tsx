@@ -1,3 +1,5 @@
+import { AmbientFilters } from "@/components/world/ambient-filters";
+import { AmbientMotion } from "@/components/world/ambient-motion";
 import { CloudFall } from "@/components/world/cloud-fall";
 import { HeroIsland } from "@/components/world/hero-island";
 import { IslandNav } from "@/components/world/island-nav";
@@ -90,6 +92,8 @@ export default function Home() {
       <WhatsAppFloat />
 
       <WorldMotion />
+      <AmbientMotion />
+      <AmbientFilters />
       <SectionSnap />
     </div>
   );

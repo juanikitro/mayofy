@@ -9329,3 +9329,159 @@ html[data-motion-tier="reduced"] .packs__grid > * {
 .avif-img {
   display: contents;
 }
+
+/* ======================================================================
+ * Ambient motion: living sky, living light, pointer depth
+ * (docs/plans/2026-11-24-ambiente.md). Everything in this block hangs off
+ * html[data-ambient] (AmbientMotion): "full", "lite" (Save-Data or a
+ * low-end device: compositor CSS only) or "off" (reduced motion: nothing
+ * here shows or moves). Island sections carry data-ambient-near (the
+ * layers join the page) and data-ambient-live (on screen: they move).
+ * ==================================================================== */
+
+/* Clouds: the fall's painted puffs drifting across the plate. Far ones sit
+ * between the background layer and the island cutout, near ones in front
+ * of the roots; both move by `translate` only, on the compositor. */
+.ambient-clouds {
+  display: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambient-clouds {
+  display: block;
+  animation: ambient-fade-in 2.4s ease both;
+}
+
+.ambient-clouds--near {
+  z-index: 1;
+}
+
+.ambient-cloud {
+  position: absolute;
+  top: var(--amb-y);
+  left: calc(-1 * var(--amb-w));
+  width: var(--amb-w);
+  transform: translateY(-50%);
+  animation: ambient-drift var(--amb-drift-time) linear var(--amb-drift-delay) infinite paused;
+}
+
+.ambient-clouds--wind-left .ambient-cloud {
+  left: 100%;
+}
+
+[data-ambient-live] .ambient-cloud {
+  animation-play-state: running;
+}
+
+.ambient-cloud img {
+  display: block;
+  width: 100%;
+  height: auto;
+  scale: var(--amb-flip, 1) var(--amb-squash, 1);
+  filter: var(--amb-cloud-tint, ) var(--amb-cloud-focus, );
+}
+
+.ambient-cloud--flip {
+  --amb-flip: -1;
+}
+
+/* Far clouds: flatter, softer and paler (the sky shows through them), like
+ * the painted ones on the plates' horizon. Near clouds: out of focus. */
+.ambient-clouds--far .ambient-cloud {
+  --amb-squash: 0.84;
+  --amb-cloud-focus: blur(0.6px);
+
+  opacity: var(--amb-cloud-far, 0.6);
+}
+
+.ambient-clouds--near .ambient-cloud {
+  --amb-cloud-focus: blur(2.5px);
+
+  opacity: var(--amb-cloud-near, 0.72);
+}
+
+@media (min-width: 48.01rem) {
+  .ambient-cloud--mobile {
+    display: none;
+  }
+}
+
+.ambient-filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 48rem) {
+  .ambient-cloud {
+    top: var(--amb-y-m);
+    left: calc(-1 * var(--amb-w-m));
+    width: var(--amb-w-m);
+    animation-duration: var(--amb-drift-time-m);
+    animation-delay: var(--amb-drift-delay-m);
+    animation-name: ambient-drift-m;
+  }
+
+  .ambient-clouds--wind-left .ambient-cloud {
+    left: 100%;
+  }
+
+  .ambient-cloud--desktop {
+    display: none;
+  }
+}
+
+@keyframes ambient-drift {
+  from {
+    translate: 0 0;
+  }
+
+  to {
+    translate: var(--amb-drift) 0;
+  }
+}
+
+@keyframes ambient-drift-m {
+  from {
+    translate: 0 0;
+  }
+
+  to {
+    translate: var(--amb-drift-m) 0;
+  }
+}
+
+@keyframes ambient-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* The puffs are painted in dawn light (the hero's); every other island
+ * relights them with its own sky (AmbientFilters' gradient maps). */
+[data-island="2"] {
+  --amb-cloud-tint: url("#amb-tint-morning");
+}
+
+[data-island="4"] {
+  --amb-cloud-tint: url("#amb-tint-golden");
+}
+
+[data-island="5"] {
+  --amb-cloud-tint: url("#amb-tint-sunset");
+}
+
+[data-island="6"] {
+  --amb-cloud-tint: url("#amb-tint-dusk");
+  --amb-cloud-far: 0.75;
+  --amb-cloud-near: 0.8;
+}
+
+[data-island="7"] {
+  --amb-cloud-tint: url("#amb-tint-night");
+  --amb-cloud-far: 0.8;
+  --amb-cloud-near: 0.85;
+}
