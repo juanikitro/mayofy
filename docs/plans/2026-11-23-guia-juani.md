@@ -20,10 +20,11 @@ Leyenda: `[ ]` pendiente, `[x]` hecho y comprobado, `[~]` empezado o esperando a
 - [x] Indexación solicitada para la home (ya estaba en Google) y los 3 casos (estaban "Discovered - currently not indexed"): las 4 quedaron en la cola prioritaria.
 - [ ] En unas semanas: revisar "Páginas" (que estén las 6), "Mejoras" (datos estructurados) y "Métricas web principales".
 
-### 2. Bing Webmaster Tools (unos 5 minutos, requiere el paso 1 verificado)
+### 2. Bing Webmaster Tools (hecho el 24/11/2026)
 
-- [ ] Entrar a https://www.bing.com/webmasters con la misma cuenta de Google y elegir "Importar desde Google Search Console".
-- [ ] Confirmar que `mayofy.dev` aparece verificado. El sitemap se importa solo si ya estaba enviado en Search Console; si no, se envía después de publicar.
+- [x] Cuenta de Bing Webmaster creada con "Sign in with Google" (jpkitro@gmail.com).
+- [x] `https://mayofy.dev/` importado desde Search Console (rol Administrator). Bing recibió acceso de solo lectura a Search Console; se puede quitar en la cuenta de Google, en "Terceros con acceso".
+- [x] Sitemap `https://mayofy.dev/sitemap.xml` enviado en Bing (no venía en la importación porque se había enviado minutos antes): estado "Processing".
 
 ### 3. Perfil de Empresa en Google (unos 45 minutos, más hasta 5 días hábiles de verificación)
 
@@ -39,24 +40,25 @@ Sigue la "Lista única para Juani" de `docs/plans/2026-11-22-perfil-google.md`.
 
 URL del perfil: _pendiente_.
 
-### 4. Cal.com (unos 5 minutos)
+### 4. Cal.com
 
-- [ ] En el evento "Mayofy First Meeting", configuración avanzada → idioma de la interfaz: Español.
-- [ ] Revisar el título del evento (hoy en inglés). Sugerido: `Charla inicial con Mayofy`. Si cambia la duración o el lugar, avisar: `src/content/site.ts` dice "30 minutos por videollamada".
+- [x] Evento "Mayofy First Meeting" → Appearance → "Interface language" activado en **Español Latinoamericano** (en Cal.com 7 la opción ya no está en "Avanzado"). La vista previa pasó a "noviembre", "LUN", "Horarios disponibles".
+- [ ] Título del evento (hoy "Mayofy First Meeting", en inglés): esperar la decisión de Juani. Sugerido: `Charla inicial con Mayofy`. Cambiar solo el título, no el slug `mayofy-first-meeting`, que usa el sitio. Si cambia la duración o el lugar, avisar: `src/content/site.ts` dice "30 minutos por videollamada".
+- Formato de 24 h: sigue sin opción por evento; el selector "12h / 24h" queda a la vista del visitante.
 
-### 5. FormSubmit (unos 5 minutos) **[después de publicar]**
+### 5. FormSubmit (hecho el 24/11/2026)
 
-- [ ] Mandar una consulta de prueba desde https://mayofy.dev/#contacto ("Completar un formulario"). Puede tardar hasta un minuto.
-- [ ] En jpkitro@gmail.com (mirar también Spam y Promociones), abrir el correo de FormSubmit y tocar "Activate Form".
-- [ ] Confirmar que llega la consulta con asunto "Nueva consulta desde mayofy.dev: …".
+- [x] Consulta de prueba enviada desde https://mayofy.dev/#contacto: el sitio mostró "El formulario todavía no está activado…", como se esperaba.
+- [x] Correo "Action Required: Activate FormSubmit on https://mayofy.dev/#contacto" (24/11, 10:35) → "Activate Form". La primera carga dio error 500 de FormSubmit; al recargar mostró "Form Activated".
+- [x] Llegó a jpkitro@gmail.com la consulta "Nueva consulta desde mayofy.dev: Juani (prueba)". Se puede borrar.
 
-### 6. Vistas previas y Analytics (unos 10 minutos) **[después de publicar]**
+### 6. Vistas previas y Analytics (hecho el 24/11/2026)
 
-- [ ] Facebook Sharing Debugger (https://developers.facebook.com/tools/debug/): la home y un caso → "Volver a extraer".
-- [ ] LinkedIn Post Inspector (https://www.linkedin.com/post-inspector/): la home.
-- [ ] WhatsApp guarda la vista previa por URL: para probar la nueva, compartir `https://mayofy.dev/?v=2`.
-- [ ] Prueba de resultados enriquecidos (https://search.google.com/test/rich-results) con la home.
-- [ ] Google Analytics → Informes → Tiempo real: abrir la web desde el celular y ver la visita.
+- [x] Facebook Sharing Debugger, "Recuperar nueva información" en la home y los 3 casos: las 4 responden 200 con su imagen propia (`/og/home.jpg`, `/og/proyectos/<caso>.jpg`) y su título. El aviso "Falta fb:app_id" no afecta la vista previa.
+- [x] LinkedIn Post Inspector con la home: leída de nuevo, título "Mayofy — webs que venden, sistemas que ordenan" e imagen.
+- [ ] WhatsApp guarda la vista previa por URL: para probar la nueva, compartir `https://mayofy.dev/?v=2` desde el celular.
+- [x] Prueba de resultados enriquecidos con la home: "Organization", 1 elemento válido. Las preguntas frecuentes no aparecen, como estaba previsto (Google las muestra solo para salud y gobierno).
+- [x] Google Analytics en tiempo real (propiedad 547554982): 1 usuario activo en la home, escritorio.
 
 ### 7. Enlaces y perfiles que apuntan a mayofy.dev (unos 20 minutos)
 
@@ -99,3 +101,4 @@ En el sitio de cada cliente cambiar `cliente` por su nombre (`shineapp`, `gymg`,
 - 2026-11-23: guía creada a partir de los tres documentos de origen. Nada hecho todavía.
 - 2026-11-23: el coordinador publicó la versión nueva (master `89f798a`; sitemap.xml, og/home.jpg y los casos responden 200). Los pasos marcados "después de publicar" quedan habilitados.
 - 2026-11-24: Juani pidió ejecutar los pasos con el MCP de Chrome. Se instaló Chrome DevTools MCP (`--autoConnect`) a pedido suyo; la sesión opera su Chrome con sus sesiones iniciadas, sin manejar contraseñas. Search Console terminado (ver sección 1).
+- 2026-11-24: Bing, Cal.com (idioma), FormSubmit, vistas previas y Analytics hechos desde el Chrome de Juani (secciones 2, 4, 5 y 6). Quedan: Perfil de Google (necesita horario, dirección y la verificación de Juani), título del evento de Cal.com, enlaces en perfiles y WhatsApp desde el celular.
