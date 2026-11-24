@@ -9330,40 +9330,119 @@ html[data-motion-tier="reduced"] .packs__grid > * {
   transition: none;
 }
 
-/* Pack details never scroll inside the card (Juani, 24 November 2026:
- * "dentro de cada detalle de cada pack, hay un scroll vertical que te come
- * el dedo"): the back's lists keep their full height, so a vertical swipe on
- * a turned card always moves the page. */
+/* Pack card backs: tabs, always one open (PackTabs; Juani, 24 November 2026:
+ * "Sobre la card que crece, añadamos tabs al dorso, siempre una abierta").
+ * The back lies exactly on the front, desktop and phone, and the open tab
+ * fits it, so a turned card neither grows over the guarantees strip nor
+ * changes the carousel's height, and nothing scrolls inside it (Juani,
+ * earlier the same day: "hay un scroll vertical que te come el dedo"). */
+.pack .flip__face--back {
+  overflow: hidden;
+}
+
 .pack .flip__scroll {
-  flex: none;
+  display: flex;
+  min-height: 0;
   padding-block-end: 0;
-  overflow: visible;
+  overflow: hidden;
   overscroll-behavior: auto;
   mask-image: none;
 }
 
-/* From tablet up the three cards share their rows (subgrid), so a turned
- * card grows downward over what follows instead of stretching the other
- * two; it rises above it while turned. */
-.pack .flip__face--back {
-  inset: 0 0 auto;
-  min-height: 100%;
+.pack-tabs {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-height: 0;
 }
 
-.pack[data-flipped] {
-  z-index: 4;
+/* A segmented row the width of the card; it never scrolls on its own, so a
+ * sideways swipe on it moves the phone carousel. */
+.pack-tabs__list {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-radius: var(--radius-pill);
+  background: var(--beige);
 }
 
-/* On phones each card stands alone: a turned card takes its back's height
- * and the front lies under it, out of the flow. */
+.pack-tabs__tab {
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0.25rem 0.4rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.15;
+  cursor: pointer;
+  transition:
+    background-color var(--m-base) var(--ease-ui),
+    color var(--m-base) var(--ease-ui),
+    box-shadow var(--m-base) var(--ease-ui);
+}
+
+.pack-tabs__tab[aria-selected="true"] {
+  background: var(--cream);
+  color: var(--moss);
+  box-shadow: 0 1px 2px oklch(30% 0.05 60 / 16%);
+}
+
+@media (hover: hover) {
+  .pack-tabs__tab:not([aria-selected="true"]):hover {
+    background: color-mix(in oklch, var(--cream) 55%, transparent);
+    color: var(--ink);
+  }
+}
+
+.pack-tabs__tab:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 2px;
+}
+
+.pack-tabs__panel {
+  min-height: 0;
+  border-radius: 0.5rem;
+}
+
+/* Phones: three one-line labels across a narrow card. */
 @media (max-width: 48rem) {
-  .pack[data-flipped] .flip__face--back {
-    position: relative;
+  .pack .flip__face--back {
+    padding-inline: 1rem;
   }
 
-  .pack[data-flipped] .flip__face--front {
-    position: absolute;
-    inset: 0;
+  .pack-tabs__list {
+    gap: 0.15rem;
+    padding: 0.2rem;
+  }
+
+  .pack-tabs__tab {
+    padding-inline: 0.2rem;
+    font-size: 0.8rem;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+}
+
+.pack-tabs__panel:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 4px;
+}
+
+.pack-tabs__panel[hidden] {
+  display: none;
+}
+
+/* Another tab's rows arrive at once, without waiting for a turn. */
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .flip[data-flipped] .pack-tabs[data-touched] .pack-list > li {
+    animation-delay: calc(min(var(--i, 0), 10) * 22ms);
   }
 }
 
