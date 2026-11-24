@@ -481,8 +481,8 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 /* Island 3: rock assembly ---------------------------------------------- */
 
-/* One screen in three states (packs-play.tsx): rocks loose, assembling,
- * built, and coming apart on the way back up. The assembly is time-based:
+/* One screen (packs-play.tsx): the rocks wait loose and assemble once, on
+ * their own clock, when the island is shown. The assembly is time-based:
  * stage.ts rockTiming and packsMayo.timing reach the CSS below as `--*-at`
  * delays and `--*-for` durations on the section and on each piece, and
  * packs-play.tsx holds and plays those animations. Rocks, contact shadows and
@@ -1300,8 +1300,8 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 /* The play (packs-play.tsx): every animation of the assembly, with its
  * delay and duration from stage.ts, is held and played by script on the
- * page's clock, forwards to assemble and backwards to come apart, and holds
- * its last frame after it (`both`, or `forwards`). Until the script takes
+ * page's clock, once, when the island is shown, and holds its last frame
+ * after it (`both`, or `forwards`). Until the script takes
  * them they wait, paused, on their first frame: the rocks floating, the
  * platforms bare, Mayo watching. Only with scripting, which runs it: without
  * JavaScript the island stands built. */

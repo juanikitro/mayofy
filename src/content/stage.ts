@@ -742,13 +742,11 @@ export const rockFloats: readonly Record<PlatformPiece["kind"], RockFloat>[] = [
 ];
 
 /**
- * Island 3 has three states (Juani, 24 November 2026: "piedras desarmadas,
- * piedras armandose, piedras armadas ... no me deja continuar hasta terminar
- * la animacion ... si subo las piedras deben desarmarse"): the section is one
- * screen; the reader's first scroll down while it fills the screen plays the
- * assembly while the page waits, and the first scroll up from the assembled
- * state plays it backwards (packs-play.tsx). Every moment is in ms of the
- * play, about 3.9 s in all, since the reader is held while it runs.
+ * Island 3 assembles once it is shown (Juani, 24 November 2026: "Una vez se
+ * muestra la isla 3 debe de empezar la animacion. indistinta del scroll"):
+ * the section is one screen, and the whole assembly plays once on its own
+ * clock (packs-play.tsx). Every moment is in ms of the play, about 3.9 s in
+ * all.
  *
  * The rocks swirl in until `start`; each platform then gathers `stagger`
  * after the previous one, its pieces `pieceStagger` apart in landing order
