@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 
 import { CasePicker } from "@/components/world/case-picker";
 import { plateSceneStyle } from "@/components/world/island-plate";
+import { AmbientBackdrop, AmbientClouds } from "@/components/world/ambient-sky";
 import { IslandScene } from "@/components/world/island-scene";
 import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure } from "@/components/world/mayo-figure";
@@ -90,8 +91,9 @@ export async function ProblemIsland() {
           screen of the island or, after the page has loaded, once the fall's art is in. */}
       <NearGate ahead={1} />
       <div className="problem__stage">
-        <IslandScene variant="morning" plate={islandPlates.problem}>
+        <IslandScene variant="morning" plate={islandPlates.problem} backdrop={<AmbientBackdrop island="problem" />}>
           <MayoFigure slot="problem" className="isle__mayo isle__mayo--play" />
+          <AmbientClouds island="problem" depth="near" />
         </IslandScene>
         {/* Over the scene (and its morning veil), in the plate's frame: the
             proposal stays crisp and the questions fly above everything. */}

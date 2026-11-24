@@ -33,6 +33,7 @@ export function PlateObjects({ objects }: { objects: readonly PlateObject[] }) {
               "--chase-d": chaseOffset(object.chasedTo, object.x, object.w),
               "--chase-m": object.mobile ? chaseOffset(object.mobile.chasedTo, object.mobile.x, object.mobile.w) : undefined,
               "--float-delay": `${(index % 5) * 0.7}s`,
+              "--object-index": index,
             } as CSSProperties
           }
         />

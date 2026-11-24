@@ -14,15 +14,20 @@ export function IslandScene({
   variant,
   plate,
   children,
+  backdrop,
 }: {
   variant: SceneVariant;
   plate: PlateSpec;
   children?: ReactNode;
+  /** Between the plate's background layer and its island cutout (IslandPlate). */
+  backdrop?: ReactNode;
 }) {
   return (
     <div className={`scene scene--${variant} scene--plated`} aria-hidden="true">
       <div className="scene__sky" />
-      <IslandPlate plate={plate}>{children}</IslandPlate>
+      <IslandPlate plate={plate} backdrop={backdrop}>
+        {children}
+      </IslandPlate>
     </div>
   );
 }

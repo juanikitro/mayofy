@@ -10259,3 +10259,705 @@ html[data-motion-tier="reduced"] .tip__panel {
 .avif-img {
   display: contents;
 }
+
+/* ======================================================================
+ * Ambient motion: living sky, living light, pointer depth
+ * (docs/plans/2026-11-24-ambiente.md). Everything in this block hangs off
+ * html[data-ambient] (AmbientMotion): "full", "lite" (Save-Data or a
+ * low-end device: compositor CSS only) or "off" (reduced motion: nothing
+ * here shows or moves). Island sections carry data-ambient-near (the
+ * layers join the page) and data-ambient-live (on screen: they move).
+ * ==================================================================== */
+
+/* Clouds: the fall's painted puffs drifting across the plate. Far ones sit
+ * between the background layer and the island cutout, near ones in front
+ * of the roots; both move by `translate` only, on the compositor. */
+.ambient-clouds {
+  display: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambient-clouds {
+  display: block;
+  animation: ambient-fade-in 2.4s ease backwards;
+}
+
+.ambient-clouds--near {
+  z-index: 1;
+}
+
+.ambient-cloud {
+  position: absolute;
+  top: var(--amb-y);
+  left: calc(-1 * var(--amb-w));
+  width: var(--amb-w);
+  /* The vertical centring lives in `translate` (and in the drift keyframes):
+   * a static `transform` next to an animated `translate` keeps Chrome from
+   * running the drift on the compositor, and every frame then ticks it on
+   * the main thread. */
+  translate: 0 -50%;
+  animation: ambient-drift var(--amb-drift-time) linear var(--amb-drift-delay) infinite paused;
+}
+
+.ambient-clouds--wind-left .ambient-cloud {
+  left: 100%;
+}
+
+[data-ambient-live] .ambient-cloud {
+  animation-play-state: running;
+}
+
+.ambient-cloud img {
+  display: block;
+  width: 100%;
+  height: auto;
+  scale: var(--amb-flip, 1) var(--amb-squash, 1);
+  filter: var(--amb-cloud-tint, ) var(--amb-cloud-focus, );
+}
+
+.ambient-cloud--flip {
+  --amb-flip: -1;
+}
+
+/* Far clouds: flatter, softer and paler (the sky shows through them), like
+ * the painted ones on the plates' horizon. Near clouds: out of focus. */
+.ambient-clouds--far .ambient-cloud {
+  --amb-squash: 0.84;
+  --amb-cloud-focus: blur(0.6px);
+
+  opacity: var(--amb-cloud-far, 0.6);
+}
+
+.ambient-clouds--near .ambient-cloud {
+  --amb-cloud-focus: blur(2.5px);
+
+  opacity: var(--amb-cloud-near, 0.72);
+}
+
+@media (min-width: 48.01rem) {
+  .ambient-cloud--mobile {
+    display: none;
+  }
+}
+
+.ambient-filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 48rem) {
+  .ambient-cloud {
+    top: var(--amb-y-m);
+    left: calc(-1 * var(--amb-w-m));
+    width: var(--amb-w-m);
+    animation-duration: var(--amb-drift-time-m);
+    animation-delay: var(--amb-drift-delay-m);
+    animation-name: ambient-drift-m;
+  }
+
+  .ambient-clouds--wind-left .ambient-cloud {
+    left: 100%;
+  }
+
+  .ambient-cloud--desktop {
+    display: none;
+  }
+}
+
+@keyframes ambient-drift {
+  from {
+    translate: 0 -50%;
+  }
+
+  to {
+    translate: var(--amb-drift) -50%;
+  }
+}
+
+@keyframes ambient-drift-m {
+  from {
+    translate: 0 -50%;
+  }
+
+  to {
+    translate: var(--amb-drift-m) -50%;
+  }
+}
+
+@keyframes ambient-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* The puffs are painted in dawn light (the hero's); every other island
+ * relights them with its own sky (AmbientFilters' gradient maps). */
+[data-island="2"] {
+  --amb-cloud-tint: url("#amb-tint-morning");
+}
+
+[data-island="4"] {
+  --amb-cloud-tint: url("#amb-tint-golden");
+}
+
+[data-island="5"] {
+  --amb-cloud-tint: url("#amb-tint-sunset");
+}
+
+[data-island="6"] {
+  --amb-cloud-tint: url("#amb-tint-dusk");
+  --amb-cloud-far: 0.7;
+  --amb-cloud-near: 0.62;
+}
+
+[data-island="7"] {
+  --amb-cloud-tint: url("#amb-tint-night");
+  --amb-cloud-far: 0.8;
+  --amb-cloud-near: 0.85;
+}
+
+/* Birds: a canvas over the plate's background, behind the island cutout. */
+.ambient-birds {
+  display: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+html[data-ambient="full"] .ambient-birds {
+  display: block;
+}
+
+/* Night sky (island 7): the painted stars twinkle in place, the strongest
+ * flash a small cross, and a rare shooting star crosses (ShootingStar,
+ * Web Animations on transform and opacity). The layer replays the
+ * background picture's own scroll animation, so the twinkles stay on the
+ * stars they sit on. */
+.ambient-night {
+  display: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambient-night {
+  display: block;
+}
+
+@supports (animation-timeline: view()) {
+  .isle .ambient-night {
+    animation: plate-background-depth linear both;
+    animation-timeline: --isle;
+    animation-range: entry 0% exit 100%;
+  }
+}
+
+.ambient-stars {
+  position: absolute;
+  inset: 0;
+}
+
+/* A few groups twinkle, not every star: each running animation costs style
+ * work whenever the page draws a frame, so 4 clocks instead of 36. */
+.ambient-stars__group {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: ambient-twinkle var(--amb-twinkle) ease-in-out var(--amb-twinkle-delay) infinite paused;
+}
+
+.ambient-star {
+  position: absolute;
+  left: var(--amb-x);
+  top: var(--amb-y);
+  width: calc(0.55% * var(--amb-star));
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, #fff 0, rgb(214 236 255 / 85%) 30%, rgb(170 210 255 / 0%) 100%);
+  opacity: var(--amb-star-o);
+  transform: translate(-50%, -50%);
+}
+
+/* The cross of the strongest stars: two thin rays in one pseudo-element
+ * (one animation, not two), mostly folded away. */
+.ambient-star--glint::before {
+  position: absolute;
+  inset: -170%;
+  background:
+    linear-gradient(90deg, transparent, rgb(226 242 255 / 90%), transparent) center / 100% 1px no-repeat,
+    linear-gradient(180deg, transparent, rgb(226 242 255 / 90%), transparent) center / 1px 100% no-repeat;
+  scale: 0;
+  opacity: 0;
+  content: "";
+  animation: ambient-glint var(--amb-glint) ease-out var(--amb-glint-delay) infinite paused;
+}
+
+[data-ambient-live] .ambient-stars__group,
+[data-ambient-live] .ambient-star--glint::before {
+  animation-play-state: running;
+}
+
+.ambient-stars--mobile {
+  display: none;
+}
+
+@media (max-width: 48rem) {
+  .ambient-stars--desktop {
+    display: none;
+  }
+
+  .ambient-stars--mobile {
+    display: block;
+  }
+
+  .ambient-star {
+    width: calc(1.1% * var(--amb-star));
+  }
+}
+
+@keyframes ambient-twinkle {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+
+  17% {
+    opacity: 0.85;
+  }
+
+  27% {
+    opacity: 0.3;
+  }
+
+  43% {
+    opacity: 0.7;
+  }
+
+  62% {
+    opacity: 0.18;
+  }
+
+  80% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes ambient-glint {
+  0%,
+  86%,
+  100% {
+    scale: 0;
+    opacity: 0;
+  }
+
+  90% {
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+.ambient-meteor {
+  position: absolute;
+  width: 9%;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, rgb(200 230 255 / 0%), rgb(214 236 255 / 55%) 70%, #fff);
+  box-shadow: 0 0 6px 1px rgb(190 225 255 / 35%);
+  opacity: 0;
+  transform-origin: 0 50%;
+}
+
+.ambient-meteor--left {
+  background: linear-gradient(270deg, rgb(200 230 255 / 0%), rgb(214 236 255 / 55%) 70%, #fff);
+  transform-origin: 100% 50%;
+}
+
+@media (max-width: 48rem) {
+  .ambient-meteor {
+    width: 22%;
+  }
+}
+
+/* Light cast on the islands (SceneLight): layers over the plate, masked by
+ * the island cutout, so the light falls on the grass, on Juani and on Mayo
+ * and never on the sky. "warm" tints with soft-light (keeps the painted
+ * shadows), "glow" adds a little light with screen. Opacity and a small
+ * translate only, on two clocks, so the flicker never loops visibly. */
+.ambient-light {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  -webkit-mask-image: var(--amb-mask-fallback);
+  mask-image: var(--amb-mask-fallback);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+@supports (mask-image: image-set(url("a.avif") type("image/avif"))) {
+  .ambient-light {
+    mask-image: var(--amb-mask);
+  }
+}
+
+html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambient-light {
+  display: block;
+}
+
+.ambient-light--warm {
+  mix-blend-mode: soft-light;
+  animation: ambient-fire-a 2.7s linear infinite paused;
+}
+
+.ambient-light--glow {
+  mix-blend-mode: screen;
+  animation: ambient-fire-b 1.9s linear infinite paused;
+}
+
+[data-ambient-live] .ambient-light {
+  animation-play-state: running;
+}
+
+/* Island 6: the campfire between Mayo and Juani's bench. */
+.ambient-light--fire.ambient-light--warm {
+  background:
+    radial-gradient(ellipse 13% 9% at 55.2% 57%, oklch(86% 0.17 62 / 95%), oklch(76% 0.17 50 / 45%) 50%, transparent),
+    radial-gradient(ellipse 3.6% 11% at 63.2% 47%, oklch(84% 0.16 60 / 80%), transparent),
+    radial-gradient(ellipse 4% 4.6% at 47.6% 57%, oklch(84% 0.16 60 / 70%), transparent);
+}
+
+.ambient-light--fire.ambient-light--glow {
+  background:
+    radial-gradient(ellipse 8% 6% at 55.2% 56%, oklch(74% 0.16 55 / 48%), transparent),
+    radial-gradient(ellipse 1.8% 3.2% at 63.6% 40.5%, oklch(76% 0.13 62 / 18%), transparent),
+    radial-gradient(ellipse 2.6% 3% at 48% 56.5%, oklch(74% 0.13 58 / 16%), transparent);
+}
+
+@media (max-width: 48rem) {
+  .ambient-light {
+    -webkit-mask-image: var(--amb-mask-fallback-m);
+    mask-image: var(--amb-mask-fallback-m);
+  }
+
+  @supports (mask-image: image-set(url("a.avif") type("image/avif"))) {
+    .ambient-light {
+      mask-image: var(--amb-mask-m);
+    }
+  }
+
+  .ambient-light--fire.ambient-light--warm {
+    background:
+      radial-gradient(ellipse 25% 6.5% at 53.8% 73%, oklch(86% 0.17 62 / 95%), oklch(76% 0.17 50 / 45%) 50%, transparent),
+      radial-gradient(ellipse 6% 7% at 61.4% 67%, oklch(84% 0.16 60 / 80%), transparent),
+      radial-gradient(ellipse 7% 3.6% at 39.5% 71.5%, oklch(84% 0.16 60 / 70%), transparent);
+  }
+
+  .ambient-light--fire.ambient-light--glow {
+    background:
+      radial-gradient(ellipse 15% 4.4% at 53.8% 72%, oklch(74% 0.16 55 / 48%), transparent),
+      radial-gradient(ellipse 3.4% 2% at 62.8% 63%, oklch(76% 0.13 62 / 18%), transparent),
+      radial-gradient(ellipse 5% 2.2% at 39.5% 71%, oklch(74% 0.13 58 / 16%), transparent);
+  }
+}
+
+/* On desktop the island 6 cutout sits 26vw right of its plate (.hearth):
+ * its light goes with it, flicker included. */
+@media (min-width: 48.01rem) {
+  .hearth .ambient-light {
+    --amb-shift: var(--hearth-shift);
+
+    translate: var(--amb-shift) 0;
+  }
+}
+
+/* Uneven steps on a linear clock: a flame never breathes evenly. */
+@keyframes ambient-fire-a {
+  0% {
+    opacity: 0.62;
+  }
+
+  9% {
+    opacity: 0.92;
+  }
+
+  17% {
+    opacity: 0.48;
+  }
+
+  31% {
+    opacity: 1;
+  }
+
+  38% {
+    opacity: 0.7;
+  }
+
+  52% {
+    opacity: 0.88;
+  }
+
+  61% {
+    opacity: 0.42;
+  }
+
+  74% {
+    opacity: 1;
+  }
+
+  88% {
+    opacity: 0.58;
+  }
+
+  100% {
+    opacity: 0.62;
+  }
+}
+
+@keyframes ambient-fire-b {
+  0% {
+    opacity: 0.45;
+    translate: calc(var(--amb-shift, 0px) + 0%) 0;
+  }
+
+  14% {
+    opacity: 1;
+    translate: calc(var(--amb-shift, 0px) + 0.15%) -0.1%;
+  }
+
+  29% {
+    opacity: 0.35;
+    translate: calc(var(--amb-shift, 0px) + -0.1%) 0;
+  }
+
+  47% {
+    opacity: 0.85;
+    translate: calc(var(--amb-shift, 0px) + 0.05%) -0.15%;
+  }
+
+  66% {
+    opacity: 0.55;
+    translate: calc(var(--amb-shift, 0px) + -0.15%) -0.05%;
+  }
+
+  83% {
+    opacity: 0.95;
+    translate: calc(var(--amb-shift, 0px) + 0.1%) 0;
+  }
+
+  100% {
+    opacity: 0.45;
+    translate: calc(var(--amb-shift, 0px) + 0%) 0;
+  }
+}
+
+/* Island 7: the candle in the lantern on the left rock. Slower clocks than
+ * the campfire: a candle wavers, it does not roar. */
+.ambient-light--lantern.ambient-light--warm {
+  animation-duration: 3.4s;
+  background:
+    radial-gradient(ellipse 5.2% 6.5% at 36.5% 46%, oklch(84% 0.14 68 / 72%), oklch(78% 0.13 62 / 28%) 50%, transparent),
+    radial-gradient(ellipse 1.8% 3.6% at 43.4% 43.8%, oklch(88% 0.12 82 / 60%), transparent);
+}
+
+.ambient-light--lantern.ambient-light--glow {
+  animation-duration: 2.6s;
+  background: radial-gradient(ellipse 2.8% 3.8% at 36.5% 45.4%, oklch(80% 0.12 85 / 38%), transparent);
+}
+
+@media (max-width: 48rem) {
+  .ambient-light--lantern.ambient-light--warm {
+    background:
+      radial-gradient(ellipse 11.5% 4% at 27% 70.8%, oklch(84% 0.14 68 / 72%), oklch(78% 0.13 62 / 28%) 50%, transparent),
+      radial-gradient(ellipse 3.6% 2.4% at 38.6% 70%, oklch(88% 0.12 82 / 60%), transparent);
+  }
+
+  .ambient-light--lantern.ambient-light--glow {
+    background: radial-gradient(ellipse 5.6% 2.4% at 26.9% 70.3%, oklch(80% 0.12 85 / 38%), transparent);
+  }
+}
+
+/* Fireflies: a quick flash, a slow fade and a long dim, each on its own
+ * clock (from its index among the plate objects). It replaces their pulse
+ * (one animation each, as before: every running animation costs style work
+ * on each frame the page draws); a chased one keeps its scroll-driven chase. */
+@keyframes ambient-firefly {
+  0% {
+    opacity: 0.3;
+    scale: 1;
+  }
+
+  5% {
+    opacity: 1;
+    scale: 1.14;
+  }
+
+  12% {
+    opacity: 0.92;
+    scale: 1.08;
+  }
+
+  30% {
+    opacity: 0.34;
+    scale: 1;
+  }
+
+  100% {
+    opacity: 0.24;
+    scale: 1;
+  }
+}
+
+html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"] .plate-object--glow {
+  --amb-ff: calc(3.2s + var(--object-index, 0) * 0.41s);
+  --amb-ff-delay: calc(var(--object-index, 0) * -1.37s);
+
+  animation: ambient-firefly var(--amb-ff) linear var(--amb-ff-delay) infinite paused;
+}
+
+html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"][data-ambient-live] .plate-object--glow {
+  animation-play-state: running;
+}
+
+@supports (animation-timeline: view()) {
+  html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"] .plate-object--chased {
+    animation: object-chase linear both, ambient-firefly var(--amb-ff) linear infinite;
+    animation-timeline: --isle, auto;
+    animation-range: var(--chase-range), normal;
+    animation-delay: 0s, var(--amb-ff-delay);
+    animation-play-state: running, paused;
+  }
+
+  html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"][data-ambient-live] .plate-object--chased {
+    animation-play-state: running;
+  }
+}
+
+/* Breeze (CanopyBreeze): a WebGL canvas over a tree's crown redraws it with
+ * a gentle displacement, and the same box is cut out of the island cutout
+ * underneath. Both hang off the same conditions, so the hole never shows
+ * without the canvas over it. Laid out (hidden) before it is ready, so the
+ * script can size it. */
+.ambient-breeze {
+  display: none;
+  position: absolute;
+  left: var(--amb-bx);
+  top: var(--amb-by);
+  width: var(--amb-bw);
+  height: var(--amb-bh);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (min-width: 48.01rem) and (hover: hover) and (pointer: fine) {
+  html[data-ambient="full"] [data-ambient-near] .ambient-breeze {
+    display: block;
+  }
+}
+
+html[data-ambient="full"] [data-ambient-near] .ambient-breeze[data-ready] {
+  visibility: visible;
+}
+
+html[data-ambient="full"] [data-ambient-near] .plate__picture--island[data-breeze] img {
+  -webkit-mask:
+    linear-gradient(#000 0 0) 0 0 / 100% 100% no-repeat,
+    linear-gradient(#000 0 0) var(--amb-hole-x) var(--amb-hole-y) / var(--amb-hole-w) var(--amb-hole-h) no-repeat;
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) 0 0 / 100% 100% no-repeat exclude,
+    linear-gradient(#000 0 0) var(--amb-hole-x) var(--amb-hole-y) / var(--amb-hole-w) var(--amb-hole-h) no-repeat;
+}
+
+@media (max-width: 48rem) {
+  .ambient-breeze {
+    left: var(--amb-bx-m);
+    top: var(--amb-by-m);
+    width: var(--amb-bw-m);
+    height: var(--amb-bh-m);
+  }
+}
+
+@media (max-width: 48rem) {
+  .ambient-breeze--desktop {
+    visibility: hidden;
+  }
+}
+
+/* The cutouts of the hero and island 6 sit shifted on desktop; the crown goes with them. */
+@media (min-width: 48.01rem) {
+  .hearth .ambient-breeze {
+    translate: var(--hearth-shift) 0;
+  }
+
+  .dawn .ambient-breeze {
+    translate: var(--hero-shift) calc(var(--hero-lift) * 100 / var(--amb-bh-n));
+  }
+}
+
+/* Depth (scene-depth.ts): while a scene follows the pointer or the tilt,
+ * its painted background (and the stars on it) grows 1.2 % around its centre,
+ * so its 3 px shift never uncovers an edge. */
+[data-ambient-depth] :is(.plate__picture--background, .ambient-night) {
+  scale: 1.012;
+}
+
+[data-ambient-depth] :is(.plate--layered, .sendero__plate) {
+  will-change: translate;
+}
+
+/* Tilt depth switch (TiltToggle): phones only, at the foot of the first
+ * screen, quiet until the reader wants it. */
+.tilt-toggle {
+  position: absolute;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  left: var(--gutter);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0 0.95rem 0 0.75rem;
+  border: 1px solid color-mix(in oklch, var(--moss) 35%, transparent);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--cream) 72%, transparent);
+  color: var(--moss);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--m-base, 160ms) var(--ease-ui, ease);
+}
+
+.tilt-toggle[aria-pressed="true"] {
+  background: var(--cream);
+  border-color: var(--moss);
+}
+
+.tilt-toggle__icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.tilt-toggle[aria-pressed="true"] .tilt-toggle__icon rect {
+  fill: color-mix(in oklch, var(--moss) 18%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .tilt-toggle:active {
+    scale: var(--m-press-scale, 0.97);
+  }
+}
