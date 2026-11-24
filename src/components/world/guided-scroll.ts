@@ -17,6 +17,7 @@
  *   it), so one flick never skips a step of the story.
  *
  * Shared by SectionSnap, SenderoController (six steps) and WorkshopController (island 4).
+ * While `POPOVER_OPEN` is on <html>, gestures end without guidance.
  */
 
 export const easeInOutSine = (t: number) => -(Math.cos(Math.PI * t) - 1) / 2;
@@ -97,6 +98,11 @@ const QUIET = 320;
 const STILL = 140;
 /** A finger that moved the page less than this (px) was tapping, not scrolling. */
 const TAP_DRIFT = 10;
+/**
+ * Set on <html> while a popover is open: gestures then end without guidance
+ * (no `onGestureEnd` listener runs), so no settle scrolls the popover away.
+ */
+export const POPOVER_OPEN = "data-popover-open";
 /** A wheel event this large (px) starts a notch, not a touchpad swipe, which starts small. */
 const NOTCH = 50;
 
@@ -139,6 +145,8 @@ function attach() {
     // A guided scroll that started meanwhile owns the page; a gesture that went nowhere means nothing,
     // and neither does a finger that only drifted while tapping.
     if (isGuiding() || !moved || way === 0 || (touchFrom !== null && Math.abs(way) < TAP_DRIFT)) return;
+    // A popover is open (PaymentTip): the reader is reading it, so nothing carries the page away.
+    if (document.documentElement.hasAttribute(POPOVER_OPEN)) return;
     for (const listener of listeners) listener({ to, direction: way > 0 ? 1 : -1, stepped });
   };
   const schedule = () => {

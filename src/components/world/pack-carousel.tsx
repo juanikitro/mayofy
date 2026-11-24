@@ -20,6 +20,13 @@ const reducedMotion = () =>
  *   card it copies, so the row loops both ways. `scroll-snap-stop: always`
  *   keeps a fling to one card, so it never runs past the copies.
  * - Arrows and one dot per pack; the current dot carries `aria-current`.
+ *   The highlight over the dots follows the row's scroll position frame by
+ *   frame (Juani, 24 November: "mejora la animacion de movimiento del
+ *   packs__dots"): between two cards it stretches towards the next dot and
+ *   then lets go of the last one; at the loop's seam it slides out past one
+ *   end while a copy slides in at the other, so the jump from a copy to its
+ *   real card never shows. It has no timing of its own, so with reduced motion
+ *   (instant scrolls) it moves at once.
  * - A card that takes focus (Tab, island 3's markers) or a `#pack-<id>` link
  *   (island 2's recommendation, the workshop link, a shared URL) centres that
  *   card. Vertical page scrolling is untouched: the row scrolls only sideways
@@ -95,6 +102,31 @@ export function PackCarousel({
     };
     controls.current = { go, step };
 
+    const dots = track.parentElement?.querySelector<HTMLElement>(".packs__dots");
+    const worms = [...(dots?.querySelectorAll<HTMLElement>(".packs__worm") ?? [])];
+    const smoothstep = (t: number) => t * t * (3 - 2 * t);
+    /** Moves the highlight to the row's position, in dots (0 on the first real card). */
+    const paint = () => {
+      const all = slides();
+      if (!phone.matches || !dots || all.length < 2) return;
+      const pitch = all[1].offsetLeft - all[0].offsetLeft;
+      const centre = track.scrollLeft + track.clientWidth / 2;
+      const position = (centre - (all[0].offsetLeft + all[0].offsetWidth / 2)) / pitch - clones;
+      const slot = dots.clientWidth / count;
+      const pill = slot * 0.7;
+      // One highlight per lap (the previous, this and the next); the dots' box clips the ones outside it.
+      worms.forEach((worm, lap) => {
+        const at = position + (lap - 1) * count;
+        const from = Math.floor(at);
+        const t = at - from;
+        const tail = from + smoothstep(Math.max(0, 2 * t - 1));
+        const head = from + smoothstep(Math.min(1, 2 * t));
+        const left = (tail + 0.5) * slot - pill / 2;
+        worm.style.transform = `translateX(${left}px)`;
+        worm.style.width = `${(head - tail) * slot + pill}px`;
+      });
+    };
+
     let touching = false;
     /** At rest on a copy: stand on the real card instead, without animation. */
     const settle = () => {
@@ -110,7 +142,9 @@ export function PackCarousel({
       if (!frame) {
         frame = requestAnimationFrame(() => {
           frame = 0;
-          if (phone.matches) mark(planOf(nearest()));
+          if (!phone.matches) return;
+          mark(planOf(nearest()));
+          paint();
         });
       }
       if (!hasScrollEnd) {
@@ -157,12 +191,14 @@ export function PackCarousel({
       }
       const fromHash = planOfHash(window.location.hash);
       go(fromHash >= 0 ? fromHash : 0, false);
+      paint();
     };
     let resizeTimer = 0;
     const onResize = () => {
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
         if (phone.matches && current >= 0) scrollToIndex(realIndex(current), false);
+        paint();
       }, 120);
     };
 
@@ -202,6 +238,11 @@ export function PackCarousel({
       <div className="packs__controls">
         <button type="button" className="packs__arrow packs__arrow--prev" aria-label="Pack anterior" onClick={() => controls.current.step(-1)} />
         <div className="packs__dots">
+          <span className="packs__worms" aria-hidden="true">
+            <span className="packs__worm" />
+            <span className="packs__worm" />
+            <span className="packs__worm" />
+          </span>
           {labels.map((label, index) => (
             <button
               key={label}
