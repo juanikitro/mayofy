@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 
-import { type AmbientIsland, type CloudSpec, ambientClouds, cloudDrift } from "@/content/ambient";
+import { BirdFlock } from "@/components/world/bird-flock";
+import { type AmbientIsland, type CloudSpec, ambientBirds, ambientClouds, cloudDrift } from "@/content/ambient";
 import { cloudFall } from "@/content/stage";
 
 function cloudStyle(cloud: CloudSpec, island: AmbientIsland) {
@@ -56,5 +57,18 @@ export function AmbientClouds({ island, depth }: { island: AmbientIsland; depth:
         );
       })}
     </div>
+  );
+}
+
+/**
+ * Everything of the living sky that goes behind an island cutout: the far
+ * clouds and, over the day islands, the birds.
+ */
+export function AmbientBackdrop({ island }: { island: AmbientIsland }) {
+  return (
+    <>
+      <AmbientClouds island={island} depth="far" />
+      {ambientBirds[island] ? <BirdFlock island={island} /> : null}
+    </>
   );
 }

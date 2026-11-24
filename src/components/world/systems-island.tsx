@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 
 import { AnimatedDetails } from "@/components/animated-details";
 import { plateSceneStyle } from "@/components/world/island-plate";
-import { AmbientClouds } from "@/components/world/ambient-sky";
+import { AmbientBackdrop, AmbientClouds } from "@/components/world/ambient-sky";
 import { IslandScene } from "@/components/world/island-scene";
 import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure } from "@/components/world/mayo-figure";
@@ -35,7 +35,7 @@ export function SystemsIsland() {
   return (
     <section id="sistemas" className="isle isle--golden workshop" data-island="4" style={plateSceneStyle(islandPlates.systems)} aria-labelledby="sistemas-title">
       <div className="workshop__stage">
-        <IslandScene variant="golden" plate={islandPlates.systems} backdrop={<AmbientClouds island="systems" depth="far" />}>
+        <IslandScene variant="golden" plate={islandPlates.systems} backdrop={<AmbientBackdrop island="systems" />}>
           {workshopParts.map((part) => (
             <span className={`workshop__halo workshop__halo--${part.object}`} key={part.object} style={spotStyle(workshopSpots[part.object].d, workshopSpots[part.object].m)} />
           ))}

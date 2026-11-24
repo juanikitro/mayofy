@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 
-import { AmbientClouds } from "@/components/world/ambient-sky";
+import { AmbientBackdrop, AmbientClouds } from "@/components/world/ambient-sky";
 import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure, stopsLegFrames } from "@/components/world/mayo-figure";
 import { SenderoController } from "@/components/world/sendero-controller";
@@ -74,7 +74,7 @@ export function SixSteps() {
 
         <div className="sendero__scene" aria-hidden="true">
           <div className="sendero__plate">
-            <AmbientClouds island="works" depth="far" />
+            <AmbientBackdrop island="works" />
             <picture>
               {plate.mobileLayers ? <source media="(max-width: 48rem)" type="image/avif" srcSet={plate.mobileLayers.island.avif} /> : null}
               {plate.mobileLayers ? <source media="(max-width: 48rem)" type="image/webp" srcSet={plate.mobileLayers.island.webp} /> : null}

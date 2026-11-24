@@ -129,3 +129,23 @@ export function cloudDrift(cloud: { x: number; w: number }, layer: { wind: 1 | -
     distance: (travel / cloud.w) * 100,
   };
 }
+
+/* ----------------------------------------------------------------- birds */
+
+/**
+ * Open sky where a flock may cross each day island, as a band of plate
+ * heights (top, bottom) on desktop and on the mobile plate, and the colour
+ * of the silhouettes against that sky.
+ */
+export type BirdSky = { band: readonly [number, number]; bandMobile: readonly [number, number]; ink: string };
+
+export const ambientBirds: Partial<Record<AmbientIsland, BirdSky>> = {
+  hero: { band: [16, 34], bandMobile: [48, 58], ink: "64 44 84" },
+  problem: { band: [14, 30], bandMobile: [40, 52], ink: "44 58 84" },
+  systems: { band: [10, 26], bandMobile: [36, 48], ink: "92 58 44" },
+  works: { band: [8, 24], bandMobile: [36, 50], ink: "82 46 72" },
+};
+
+/** Seconds before the first flock once an island is on screen, and between flocks. */
+export const BIRD_FIRST_DELAY: readonly [number, number] = [3, 7];
+export const BIRD_INTERVAL: readonly [number, number] = [24, 48];

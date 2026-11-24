@@ -1,5 +1,5 @@
 import { AnimatedDetails } from "@/components/animated-details";
-import { AmbientClouds } from "@/components/world/ambient-sky";
+import { AmbientBackdrop, AmbientClouds } from "@/components/world/ambient-sky";
 import { plateSceneStyle } from "@/components/world/island-plate";
 import { IslandScene } from "@/components/world/island-scene";
 import { IslandTitle } from "@/components/world/island-title";
@@ -48,7 +48,7 @@ export function WorksIsland() {
 export function QuestionsIsland() {
   return (
     <section id="preguntas" className="isle isle--night isle--dark" data-island="7" style={plateSceneStyle(islandPlates.questions)} aria-labelledby="preguntas-title">
-      <IslandScene variant="night" plate={islandPlates.questions} backdrop={<AmbientClouds island="questions" depth="far" />}>
+      <IslandScene variant="night" plate={islandPlates.questions} backdrop={<AmbientBackdrop island="questions" />}>
         {/* The lantern painted on the left rock. */}
         <SceneGlow kind="lantern" desktop={{ x: "36.5%", y: "45.6%", w: "7%" }} mobile={{ x: "26.9%", y: "70.5%", w: "16%" }} />
         <PlateObjects objects={plateObjects.questions!} />
