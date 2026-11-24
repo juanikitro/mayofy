@@ -215,7 +215,7 @@ No se pudo confirmar que un estudio de servicios en Argentina vea "Productos". S
   ```
   https://cal.com/juan-ignacio-portilla-kitroser-svfbs3/mayofy-first-meeting
   ```
-- **Redes:** Instagram `https://www.instagram.com/mayofy.web/` y LinkedIn `https://www.linkedin.com/in/juanikitro/`.
+- **Redes:** Instagram `https://www.instagram.com/mayofy.dev/` y LinkedIn `https://www.linkedin.com/in/juanikitro/`.
 
 ### Fecha de apertura
 
