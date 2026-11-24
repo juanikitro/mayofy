@@ -1,5 +1,4 @@
-/* eslint-disable @next/next/no-img-element -- already-optimised AVIF cutouts; next/image would re-encode them */
-import { Fragment, type CSSProperties } from "react";
+import { Fragment, type CSSProperties, type ImgHTMLAttributes } from "react";
 
 import { IslandPlate, plateSceneStyle } from "@/components/world/island-plate";
 import { NearGate } from "@/components/world/near-gate";
@@ -41,6 +40,20 @@ type Box = { left: number; top: number; width: number; height: number };
 type Size = "d" | "m";
 
 const round = (value: number) => Math.round(value * 100) / 100;
+
+/**
+ * An AVIF with its WebP sibling for browsers without AVIF (Safari 15 and
+ * older): the same markup as the shared AvifImg (`.avif-img`, its picture
+ * out of the layout), so the image keeps its class and its place.
+ */
+function AvifImg({ src, ...img }: { src: string } & Omit<ImgHTMLAttributes<HTMLImageElement>, "src">) {
+  return (
+    <picture className="avif-img" style={{ display: "contents" }}>
+      <source type="image/avif" srcSet={src} />
+      <img src={src.replace(/\.avif$/, ".webp")} alt="" {...img} />
+    </picture>
+  );
+}
 
 /** Extent of a platform's rocks on its 1254 design canvas. */
 function bounds(platform: Platform) {
@@ -185,7 +198,7 @@ function Rock({ piece, index }: { piece: PlatformPiece; index: number }) {
       {/* The body carries the idle float; its ::after grades the rock into the plate once it lands. */}
       <div className="rock__body">
         {/* Lazy, and hidden with its grading mask (same file) until the reader nears the island (NearGate, world.css). */}
-        <img className="rock__img" src={piece.src} alt="" width={piece.width} height={piece.height} loading="lazy" decoding="async" />
+        <AvifImg className="rock__img" src={piece.src} width={piece.width} height={piece.height} loading="lazy" decoding="async" />
       </div>
     </div>
   );
@@ -214,7 +227,7 @@ function FarRock({ rock, serial }: { rock: LooseRock; serial: number }) {
   return (
     <div className="rock-far" style={style}>
       <div className="rock__body">
-        <img className="rock__img" src={rock.src} alt="" width={rock.width} height={rock.height} loading="lazy" decoding="async" />
+        <AvifImg className="rock__img" src={rock.src} width={rock.width} height={rock.height} loading="lazy" decoding="async" />
       </div>
     </div>
   );
@@ -330,7 +343,7 @@ function Shadow({ shadow, index }: { shadow: PlatformShadow; index: number }) {
     ...boxVars(onPlate(platform, platformPlacements.mobile[index], shadow.x, shadow.y, shadow.w, shadow.h), "m"),
     ...span(start, end),
   } as CSSProperties;
-  return <img className="rock-shadow" src={shadow.src} alt="" width={shadow.w} height={shadow.h} loading="lazy" decoding="async" style={style} />;
+  return <AvifImg className="rock-shadow" src={shadow.src} width={shadow.w} height={shadow.h} loading="lazy" decoding="async" style={style} />;
 }
 
 /** Where a platform's grass shadow sits, as a box in % of the plate (its centre offset from the feet). */
@@ -410,8 +423,8 @@ function packsMayoVars() {
  * Mayo on island 3, painted in place (stage.ts packsMayo): four strip windows
  * share one cell and world.css shows the one the moment calls for, watching
  * while the rocks float, hopping as the first two platforms land, sitting
- * down as the third lands and seated afterwards, all in one play
- * (packs-play.tsx). Every window steps its strip one painted frame at a
+ * down as the third lands and seated afterwards, and back again as the
+ * rocks come apart (packs-play.tsx). Every window steps its strip one painted frame at a
  * time; without motion only the seated one shows.
  */
 function PacksMayo() {
@@ -505,8 +518,10 @@ export function RockIsland() {
             <PacksMayo />
           </IslandPlate>
           <PacksPlay
+            length={packsMayo.timing.crossfade[1] + 1}
             miraRest={packsMayo.timing.miraRest}
             miraEnd={packsMayo.timing.hops[0]}
+            runEnd={packsMayo.timing.hops[2]}
             sentadaStart={packsMayo.timing.sentarse[1]}
             sentadaLoop={packsMayo.timing.sentadaLoop}
           />

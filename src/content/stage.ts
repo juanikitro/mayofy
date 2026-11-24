@@ -742,20 +742,21 @@ export const rockFloats: readonly Record<PlatformPiece["kind"], RockFloat>[] = [
 ];
 
 /**
- * Island 3 plays its assembly once, in time, when the reader reaches it
- * (Juani, 24 November 2026: "que se haga toda la animacion de un solo paso,
- * no que quede la animacion a medias"): the section is one screen and every
- * moment is in ms from the start of the play (packs-play.tsx). The
- * choreography is the one tuned on the former pinned scroll (220 vh), at
- * 26 ms per vh, so about 5.6 s.
+ * Island 3 has three states (Juani, 24 November 2026: "piedras desarmadas,
+ * piedras armandose, piedras armadas ... no me deja continuar hasta terminar
+ * la animacion ... si subo las piedras deben desarmarse"): the section is one
+ * screen; the reader's first scroll down while it fills the screen plays the
+ * assembly while the page waits, and the first scroll up from the assembled
+ * state plays it backwards (packs-play.tsx). Every moment is in ms of the
+ * play, about 3.9 s in all, since the reader is held while it runs.
  *
  * The rocks swirl in until `start`; each platform then gathers `stagger`
  * after the previous one, its pieces `pieceStagger` apart in landing order
  * (base, left, right, top), each flight lasting `flight` and touching down at
- * `landing` of it. Platform tops land at 1689, 2679 and 3669 ms; Mayo's
+ * `landing` of it. Platform tops land at 1130, 1830 and 2530 ms; Mayo's
  * moments (packsMayo.timing) follow them.
  */
-export const rockTiming = { start: 700, stagger: 990, pieceStagger: 145, flight: 660, landing: 0.84 } as const;
+export const rockTiming = { start: 300, stagger: 700, pieceStagger: 120, flight: 560, landing: 0.84 } as const;
 
 /** Landing order of a platform's pieces: what holds comes before what rests on it. */
 export const landingOrder: readonly PlatformPiece["kind"][] = ["base", "left", "right", "top"];
@@ -796,20 +797,20 @@ export const packsMayo = {
   stops: { desktop: [38.995, 40.5, 62.5], mobile: [42, 43, 59] },
   /**
    * Her moments in ms of the play (rockTiming): `hops` bounds a small hop
-   * of 1040 ms (one hop strip cycle, 87 ms a frame) right after the first
-   * platform lands and her run (2.7 of her widths) of 1560 ms after the
-   * second: two chained bounds of the hop strip (18 steps, 87 ms each),
-   * airborne for about 780 ms in all and landing as the third platform does
-   * (Juani, 23 November 2026: "la animacion es incomoda"; 24 November: "que
-   * corra de un punto a otro y no se deslice estando parada"; world.css
-   * packs-mayo-run-frames); sitting down over 730 ms (6 frames, 122 ms each,
-   * the pace of her loops), then seated, while the painted plate crossfades
-   * in. Her watching loop eases back to its first frame from `miraRest` so
-   * it hands over to the hop on the same painted frame, and the seated loop
-   * only starts at `sentadaLoop`, so it shows its first frame while it takes
-   * over from the sitting down (packs-play.tsx).
+   * of 780 ms (one hop strip cycle, 65 ms a frame) right after the first
+   * platform lands and her run (2.7 of her widths) of 1170 ms after the
+   * second: two chained bounds of the hop strip (18 steps, 65 ms each),
+   * landing after the third platform does (Juani, 23 November 2026: "la
+   * animacion es incomoda"; 24 November: "que corra de un punto a otro y no
+   * se deslice estando parada"; world.css packs-mayo-run-frames); sitting
+   * down over 540 ms (6 frames, 90 ms each), then seated, while the painted
+   * plate crossfades in; the play ends with the crossfade. Her watching loop
+   * eases back to its first frame from `miraRest` so it hands over to the
+   * hop on the same painted frame, and the seated loop only starts at
+   * `sentadaLoop`, so it shows its first frame while it takes over from the
+   * sitting down (packs-play.tsx).
    */
-  timing: { hops: [1690, 2730, 4290], sentarse: [4290, 5020], miraRest: 1220, sentadaLoop: 5490, crossfade: [5120, 5590] },
+  timing: { hops: [1130, 1910, 3080], sentarse: [3080, 3620], miraRest: 680, sentadaLoop: 3820, crossfade: [3480, 3900] },
 } as const;
 
 /**

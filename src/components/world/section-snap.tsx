@@ -38,6 +38,10 @@ import {
  * - A touch fling stops before the next rest point, so a flick never carries
  *   the reader past the end of a section (where its buttons are) or the start
  *   of the next one.
+ * - Island 3 (packs-play.tsx) holds the page on its own top while its rocks
+ *   assemble or come apart: it swallows the input, so the page does not move
+ *   and no gesture ends there; its top is an ordinary rest point, where both
+ *   the settle and the fling stop bring the reader.
  *
  * None of this with reduced motion, and never after a scroll nobody gestured for (a
  * focus moved by Tab, an in-page link, find in page). Not CSS scroll
@@ -119,7 +123,7 @@ export function SectionSnap() {
       const target = settleTarget(gesture);
       if (target === null) return;
       // Calm and slowing down into the rest point. A scene's own pose comes at the scene's reading
-      // pace, slower than a seam between sections, so the movement just before it (island 3's hops) reads.
+      // pace, slower than a seam between sections, so the movement just before it reads.
       const distance = Math.abs(target - gesture.to) / window.innerHeight;
       const pose = scenePoses().some((point) => Math.abs(point - target) <= 1);
       const duration = pose ? Math.min(1600, 450 + distance * 1300) : Math.min(1100, 400 + distance * 700);

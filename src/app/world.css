@@ -481,10 +481,11 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 /* Island 3: rock assembly ---------------------------------------------- */
 
-/* One screen that plays its assembly once, in time, when the reader reaches
- * it (packs-play.tsx sets `data-play="run"`; stage.ts rockTiming and
- * packsMayo.timing, which reach the CSS below as `--*-at` delays and `--*-for`
- * durations on the section and on each piece). Rocks, contact shadows and
+/* One screen in three states (packs-play.tsx): rocks loose, assembling,
+ * built, and coming apart on the way back up. The assembly is time-based:
+ * stage.ts rockTiming and packsMayo.timing reach the CSS below as `--*-at`
+ * delays and `--*-for` durations on the section and on each piece, and
+ * packs-play.tsx holds and plays those animations. Rocks, contact shadows and
  * Mayo live inside the plate, positioned in % of it (stage.ts), so they share
  * the island's perspective; the one-line markers sit in `.platforms`, a box
  * with the plate's exact frame outside the decorative (aria-hidden) scene,
@@ -1297,12 +1298,13 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 }
 
-/* The play (packs-play.tsx): every animation of the assembly runs on the
- * page's clock from the moment the section gets `data-play="run"`, each with
- * its delay and duration from stage.ts, and holds its last frame after it
- * (`both`, or `forwards`). Before that they wait, paused, on their first
- * frame: the rocks floating, the platforms bare, Mayo watching. Only with
- * scripting, which starts it: without JavaScript the island stands built. */
+/* The play (packs-play.tsx): every animation of the assembly, with its
+ * delay and duration from stage.ts, is held and played by script on the
+ * page's clock, forwards to assemble and backwards to come apart, and holds
+ * its last frame after it (`both`, or `forwards`). Until the script takes
+ * them they wait, paused, on their first frame: the rocks floating, the
+ * platforms bare, Mayo watching. Only with scripting, which runs it: without
+ * JavaScript the island stands built. */
 @media (scripting: enabled) {
   .rock {
     animation:
@@ -1421,8 +1423,8 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     animation-duration: var(--sentada-off-for);
   }
 
-  /* Waiting for the reader: every animation of the assembly on its first frame. */
-  .rocks:not([data-play="run"])
+  /* Until the script takes them: every animation of the assembly on its first frame. */
+  .rocks
     :is(
       .rock,
       .rock-shadow,
