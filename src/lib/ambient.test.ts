@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { approach, detectAmbientTier, normalisedPointer, normalisedTilt, seeded } from "@/lib/ambient";
+import { approach, detectAmbientTier, normalisedPointer, normalisedTilt, seeded, tiltOnScreen } from "@/lib/ambient";
 
 describe("detectAmbientTier", () => {
   it("turns everything off under reduced motion, whatever the device", () => {
@@ -64,5 +64,19 @@ describe("seeded", () => {
       expect(value).toBeGreaterThanOrEqual(0);
       expect(value).toBeLessThan(1);
     }
+  });
+});
+
+describe("tiltOnScreen", () => {
+  it("keeps the device axes in portrait", () => {
+    expect(tiltOnScreen(40, 10, 0)).toEqual({ beta: 40, gamma: 10 });
+  });
+
+  it("swaps them in landscape, so tilting toward the screen's right still reads as right", () => {
+    // Turned counter-clockwise: raising the device's top drops the screen's right edge.
+    expect(tiltOnScreen(40, 10, 90)).toEqual({ beta: 10, gamma: 40 });
+    // Turned clockwise: the device's top is the screen's right edge.
+    expect(tiltOnScreen(40, 10, 270)).toEqual({ beta: -10, gamma: -40 });
+    expect(tiltOnScreen(40, 10, 180)).toEqual({ beta: -40, gamma: -10 });
   });
 });

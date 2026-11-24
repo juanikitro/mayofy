@@ -9973,3 +9973,50 @@ html[data-ambient="full"] [data-ambient-near] .plate__picture--island[data-breez
 [data-ambient-depth] :is(.plate--layered, .sendero__plate) {
   will-change: translate;
 }
+
+/* Tilt depth switch (TiltToggle): phones only, at the foot of the first
+ * screen, quiet until the reader wants it. */
+.tilt-toggle {
+  position: absolute;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  left: var(--gutter);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0 0.95rem 0 0.75rem;
+  border: 1px solid color-mix(in oklch, var(--moss) 35%, transparent);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--cream) 72%, transparent);
+  color: var(--moss);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--m-base, 160ms) var(--ease-ui, ease);
+}
+
+.tilt-toggle[aria-pressed="true"] {
+  background: var(--cream);
+  border-color: var(--moss);
+}
+
+.tilt-toggle__icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.tilt-toggle[aria-pressed="true"] .tilt-toggle__icon rect {
+  fill: color-mix(in oklch, var(--moss) 18%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion-tier="reduced"]) .tilt-toggle:active {
+    scale: var(--m-press-scale, 0.97);
+  }
+}

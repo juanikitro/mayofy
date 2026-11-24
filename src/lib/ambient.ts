@@ -103,6 +103,28 @@ export function normalisedTilt(beta: number, gamma: number, rest: { beta: number
   return { x: clamp((gamma - rest.gamma) / range), y: clamp((beta - rest.beta) / range) };
 }
 
+/**
+ * Turns a `deviceorientation` reading into the screen's own axes: `beta`
+ * (front-back, positive as the top rises) and `gamma` (left-right, positive
+ * as the right edge drops) are measured on the device, so in landscape they
+ * swap. `angle` is `screen.orientation.angle` (0, 90, 180, 270). Derived
+ * from the specifications; not yet checked on a phone in landscape.
+ */
+export function tiltOnScreen(beta: number, gamma: number, angle: number) {
+  switch (((angle % 360) + 360) % 360) {
+    // Turned counter-clockwise: the screen's top is the device's left edge, its right the device's bottom.
+    case 90:
+      return { beta: gamma, gamma: beta };
+    case 180:
+      return { beta: -beta, gamma: -gamma };
+    // Turned clockwise: the screen's top is the device's right edge, its right the device's top.
+    case 270:
+      return { beta: -gamma, gamma: -beta };
+    default:
+      return { beta, gamma };
+  }
+}
+
 /** A small deterministic random generator (mulberry32), so a layout is the same on every render. */
 export function seeded(seed: number) {
   let state = seed >>> 0;
