@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 
 import { ExtraControls, ExtrasSummary } from "@/components/world/extras-builder";
 import { plateSceneStyle } from "@/components/world/island-plate";
+import { AmbientBackdrop, AmbientClouds } from "@/components/world/ambient-sky";
 import { IslandScene } from "@/components/world/island-scene";
 import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure } from "@/components/world/mayo-figure";
@@ -49,11 +50,12 @@ export async function SystemsIsland() {
   return (
     <section id="sistemas" className="isle isle--golden workshop" data-island="4" style={plateSceneStyle(islandPlates.systems)} aria-labelledby="sistemas-title">
       <div className="workshop__stage">
-        <IslandScene variant="golden" plate={islandPlates.systems}>
+        <IslandScene variant="golden" plate={islandPlates.systems} backdrop={<AmbientBackdrop island="systems" />}>
           {workshopParts.map((part) => (
             <span className={`workshop__halo workshop__halo--${part.object}`} key={part.object} style={spotStyle(workshopSpots[part.object].d, workshopSpots[part.object].m)} />
           ))}
           <MayoFigure slot="systems" className="isle__mayo isle__mayo--dig" />
+          <AmbientClouds island="systems" depth="near" />
           {workshopParts.map((part) => (
             <span className={`workshop__pin workshop__pin--${part.object}`} key={part.object} style={spotStyle(workshopSpots[part.object].pinD, workshopSpots[part.object].pinM)}>
               {part.pin}

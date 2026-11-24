@@ -17,10 +17,12 @@ const SECTION_TIMEOUT = 10000;
  * Resolves once every image of the section the browser has started has
  * loaded or failed (or after SECTION_TIMEOUT). Lazy images still beyond the
  * browser's lazy-load distance have no `currentSrc` yet: they are left to
- * load as the reader nears them.
+ * load as the reader nears them. Neither do images that are not rendered
+ * (`display: none`, such as the ambient clouds before their island is near):
+ * a lazy one never starts, so waiting for it would stall the queue.
  */
 function startedImagesIn(section: HTMLElement) {
-  const pending = [...section.querySelectorAll("img")].filter((img) => img.currentSrc && !img.complete);
+  const pending = [...section.querySelectorAll("img")].filter((img) => img.currentSrc && !img.complete && img.getClientRects().length > 0);
   const loaded = Promise.all(
     pending.map(
       (img) =>

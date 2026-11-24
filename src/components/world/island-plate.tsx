@@ -30,10 +30,13 @@ export function plateSceneStyle(plate: PlateSpec) {
 export function IslandPlate({
   plate,
   children,
+  backdrop,
   eager = false,
 }: {
   plate: PlateSpec;
   children?: ReactNode;
+  /** Drawn between the background layer and the island cutout (far ambient clouds, birds, stars). */
+  backdrop?: ReactNode;
   eager?: boolean;
 }) {
   const style = {
@@ -79,6 +82,7 @@ export function IslandPlate({
             fetchPriority={priority}
           />
         </picture>
+        {backdrop}
         <picture className="plate__picture plate__picture--island">
           {/* Without a mobile pair the cutout is hidden on phones (world.css), yet an eager
               <img> still downloads it: a blank pixel there keeps the desktop file off phones. */}
