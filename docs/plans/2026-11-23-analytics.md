@@ -9,7 +9,7 @@ Rama `juanikitro/landing-analytics`, desde `juanikitro/landing-redesign` (`dacd9
 - **Google Analytics 4 ya cuenta cada paso del embudo:** toques en "Agendá" y en los demás botones, cada WhatsApp (con dónde estaba), el formulario (enviado, salió bien, falló), la agenda de Cal.com (abierta, empezada, reservada), casos de estudio, links a sitios de clientes, islas alcanzadas y uso del menú.
 - **La carga no cambia.** Analytics sigue esperando a que la página termine; los eventos de antes esperan en una cola y se mandan después. Se suman 2,2 KB de JavaScript comprimido (+1 %), sin pedidos nuevos.
 - **Sin datos personales.** Ningún evento lleva lo que escribe el visitante: solo nombres de secciones, packs, textos de botones y dominios.
-- **Falta lo de Juani en la interfaz de GA** (marcar conversiones, dimensiones, filtros): lista guiada al final.
+- **Google Analytics quedó configurado** (24 de noviembre): conversiones, dimensiones, retención de 14 meses, tráfico interno, filtros en prueba y Search Console. La propiedad vieja de juanikitro.com se borró. Falta pasar los filtros a Active cuando los informes muestren la marca.
 
 ## Qué se registra
 
@@ -71,28 +71,60 @@ Se probó en vivo con el embed real (23 de noviembre, escuchando todos sus event
 - Cero errores de consola, sin scroll horizontal, `lint`, `typecheck` y `build` en verde.
 - **Peso:** el JavaScript de la portada pasa de 207,6 KB a 209,8 KB comprimidos (+2,2 KB, +1 %); el HTML, +217 bytes. Ningún pedido nuevo antes de la carga; GA se pide en el mismo momento que antes.
 
-**Ojo:** las pruebas de hoy mandaron eventos de `localhost` a la propiedad real de GA (el id por defecto está en `layout.tsx` y el entorno local también lo usa). Están marcados como depuración y se filtran con el filtro de tráfico de desarrolladores (paso 5 de la lista).
+**Ojo:** las pruebas de hoy mandaron eventos de `localhost` a la propiedad real de GA (el id por defecto está en `layout.tsx` y el entorno local también lo usa). Las de `localhost` no las saca ningún filtro: en los informes conviene filtrar por nombre de host `mayofy.dev`. Las de producción con `?ga_debug=1` las saca el filtro "Developer traffic" cuando esté activo.
 
-## Lo que tiene que hacer Juani en Google Analytics
+## Configuración de Google Analytics (24 de noviembre)
 
-Todo en [analytics.google.com](https://analytics.google.com), propiedad de mayofy.dev. Se puede hacer apenas esté publicado (los eventos tardan hasta 24 h en aparecer en las listas; si un evento todavía no figura, se puede crear la conversión escribiendo el nombre a mano).
+Pedido de Juani (23 de noviembre): "Sobre lo que hay que hacer en google analytics, en el agente desplegado autorizo a utiliza el mcp de google analytics para hacerlo vos (https://developers.google.com/analytics/devguides/MCP). De paso si podes elimina el de juanikitro.com que no pertenece a juanikitro.com (ya que hay dos y uno es viejo) y configura correctamente el de mayofy landing y todo lo que puedas mejorar".
 
-1. **Marcar las conversiones ("eventos clave").** Administrar > Visualización de datos > Eventos clave > Nuevo evento clave. Crear estos cuatro, escritos exactamente así:
-   - `booking_complete` (reservó una llamada; la principal)
-   - `contact_form_success` (mandó el formulario)
-   - `whatsapp_click` (tocó WhatsApp)
-   - `cta_click` es opcional: cuenta intención, no contacto. Recomendación: no marcarla, para que "conversiones" sea solo gente que contactó.
-2. **Dimensiones personalizadas** (para poder ver los parámetros en los informes). Administrar > Visualización de datos > Definiciones personalizadas > Crear dimensión personalizada, alcance "Evento". Una por cada uno, con el mismo nombre en "Nombre de la dimensión" y en "Parámetro de evento":
-   `placement`, `cta`, `pack`, `channel`, `reason`, `mode`, `section`, `item`, `project`, `link_type`, `link_text`.
-   (`link_domain` ya lo trae GA.) Solo cuentan desde que se crean, no para atrás: conviene hacerlo el primer día.
-3. **Retención de datos.** Administrar > Recopilación y modificación de datos > Retención de datos > "Retención de datos de eventos": cambiar de 2 a **14 meses** y guardar. Sin esto, las exploraciones no pueden comparar con el año anterior.
-4. **Filtrar tus propias visitas.** Dos partes:
-   - Administrar > Flujos de datos > (el flujo web) > Configurar etiqueta > Mostrar más > Definir tráfico interno > Crear: nombre "Juani", `traffic_type` = `internal`, "La dirección IP es igual a" tu IP (buscá "cuál es mi IP" en Google). Si tu IP de casa cambia, este paso solo no alcanza; por eso la segunda parte.
-   - En cada navegador y celular tuyo, abrí una vez **https://mayofy.dev/?interno=1**. Queda guardado en ese navegador y tus visitas salen marcadas como internas aunque cambie la IP (`?interno=0` lo saca).
-   - Después: Administrar > Recopilación y modificación de datos > Filtros de datos > "Internal Traffic": primero dejalo en "Prueba" un par de días; si en tiempo real ves que tus visitas tienen la dimensión "Filtro de datos de prueba", pasalo a **Activo**. Activo borra esas visitas para siempre.
-5. **Filtrar las pruebas de desarrollo.** En el mismo lugar (Filtros de datos) debería estar "Developer traffic"; si no, crear uno de tipo "Tráfico de desarrolladores". Dejarlo **Activo**: saca los eventos de depuración (como las pruebas de hoy desde `localhost`).
-6. **Vincular Search Console.** Administrar > Vínculos de productos > Vínculos de Search Console > Vincular > elegir la propiedad `mayofy.dev` (la que verificaste en el plan de SEO) > elegir el flujo web > Enviar. Después, en Informes > Biblioteca, publicar la colección "Search Console" para ver búsquedas y páginas de entrada. Si Search Console todavía no está verificado, hacerlo primero (ver `2026-11-22-seo-rendimiento.md`).
-7. **Opcional, para menos ruido:** en el flujo web > Medición mejorada > engranaje, apagar "Interacciones con formularios". Manda `form_start` / `form_submit` propios de GA que no saben si el envío salió bien; los nuestros (`contact_form_*`) sí.
+### Cómo se hizo
+
+- **El MCP oficial de Google Analytics es solo lectura** (lo dice su documentación: no puede crear, cambiar ni borrar configuración). Quedó instalado para consultas a nivel usuario, no en el proyecto: `claude mcp add analytics-mcp --scope user … -- uvx --from analytics-mcp google-analytics-mcp`.
+- **Las escrituras se hicieron con la Admin API de Google Analytics** (cliente oficial de Python `google-analytics-admin`, corrido con `uv` sin instalarlo en el proyecto), con las mismas credenciales.
+- **Credenciales:** gcloud CLI a nivel usuario (`%LOCALAPPDATA%\google-cloud-sdk`). Proyecto de Google Cloud nuevo, `mayofy-analytics-mcp` ("Mayofy Analytics MCP"), con la Admin API, la Data API y Resource Manager activadas (sin costo). Google bloquea la app genérica de gcloud para los permisos de Analytics ("Esta app está bloqueada"), así que Juani creó en ese proyecto una app de escritorio propia ("Mayofy Analytics", en modo prueba, con él como único usuario de prueba). El archivo de esa app está en `%APPDATA%\gcloud\mayofy-analytics-oauth-client.json` y las credenciales en `%APPDATA%\gcloud\application_default_credentials.json`. Juani hizo los inicios de sesión; nadie más vio su contraseña.
+- Para sacar el acceso: `gcloud auth application-default revoke` y borrar la app en https://console.cloud.google.com/auth/clients?project=mayofy-analytics-mcp.
+
+### Inventario (cuenta "juanikitro", 215430953)
+
+| Propiedad | ID | Flujo / ID de medición | Creada | Último dato |
+|---|---|---|---|---|
+| juanikitro.com (vieja) | 296960689 | juanikitro, `G-QQN0E354J2`, www.juanikitro.com | 15/12/2021 | 04/08/2022 |
+| The King Shine | 547423482 | `G-M02T0YSQQY`, thekingshine.vercel.app | 28/07/2026 | 07/11/2026 |
+| Mayofy landing | 547554982 | `G-F2DHJCS51K` | 29/07/2026 | al día |
+| juanikitro.com | 559155441 | Juani Kitro, `G-S38VY0DW86`, juanikitro.com | 15/10/2026 | al día |
+
+### juanikitro.com: propiedad vieja borrada
+
+- **Evidencia:** https://juanikitro.com (y www, que redirige ahí) carga `G-S38VY0DW86` (propiedad 559155441, 339 eventos de juanikitro.com en 30 días). `G-QQN0E354J2` no aparece en el sitio, y su propiedad (296960689) no recibe datos desde el 4 de agosto de 2022 (482 eventos en total).
+- Juani confirmó ("si") y se borró la **296960689** el 23 de noviembre a las 15:15. Queda en la papelera hasta el **28 de diciembre de 2026**. Para recuperarla: Admin > Account > Trash > marcarla > Restore. Después de esa fecha se borra para siempre.
+
+### Mayofy landing (547554982): cambios
+
+| Qué | Antes | Después | Cómo |
+|---|---|---|---|
+| Eventos clave | `purchase`, `close_convert_lead`, `qualify_lead` (los que GA crea por defecto) | además `booking_complete`, `contact_form_success`, `whatsapp_click` (una vez por evento) | API |
+| Dimensiones personalizadas (alcance evento) | ninguna | `placement`, `cta`, `pack`, `channel`, `reason`, `mode`, `section`, `island`, `item`, `project`, `link_type` (`link_text` y `link_domain` ya son dimensiones de GA) | API |
+| Retención de datos de eventos | 2 meses | **14 meses** (usuarios: 14 meses, sin cambio; se reinicia con nueva actividad). Coincide con la política de privacidad. | API, releído |
+| Medición mejorada | todo encendido | **clics salientes y formularios apagados** (duplicaban `whatsapp_click`, `outbound_click` y `contact_form_*` con menos detalle); siguen vistas de página, cambios de historial (casos de estudio), scroll, búsqueda, videos y descargas | API |
+| Flujo web | "Mayofy Landing Web", `https://mayofy.vercel.app` | "Mayofy landing web", `https://mayofy.dev` | API |
+| Moneda | USD | USD (Juani eligió USD: los precios del sitio están en dólares) | sin cambio |
+| Zona horaria | `America/Buenos_Aires` | sin cambio: es el mismo huso que `America/Argentina/Buenos_Aires`, y cambiarla corta los días en los informes | sin cambio |
+| Google signals | apagado | apagado (Juani no lo pidió) | sin cambio |
+| Tráfico interno | sin definir | regla "Juani casa": la IPv4 de su casa (igual a) o su red IPv6 (rango CIDR /64) → `traffic_type=internal`; si cambia la IP de casa, hay que actualizar la regla; además, `?interno=1` en cada navegador de Juani | Juani, en la interfaz (el Google tag ahora es un contenedor de Tag Manager: Settings > Define internal traffic; no hizo falta publicar) |
+| Filtros de datos | ninguno visible | "Internal Traffic" y "Developer traffic", los dos **Exclude** en **Testing** | Juani, en la interfaz (la API no maneja filtros) |
+| Search Console | sin vincular | vinculado a mayofy.dev y al flujo web | Juani, en la interfaz (la API no lo lee: queda por su confirmación) |
+
+### Verificación
+
+- Todo lo hecho por la API se releyó después de escribirlo.
+- Desde la máquina de Juani se mandaron visitas a https://mayofy.dev: con `?interno=1`, cada evento sale con `traffic_type=internal`; con `?ga_debug=1`, sale como depuración. Google respondió 204 (recibido) a cada envío.
+- **Pendiente:** el informe de Tiempo real no mostró esas visitas en los primeros 30 minutos, y los informes normales tardan unas horas. Hay que confirmar en los informes que "Test data filter name" las marca como "Internal Traffic" / "Developer traffic" y **recién ahí pasar los dos filtros a Active**. Active borra ese tráfico para siempre: no se activa sin ver primero la marca.
+
+### Lo que sigue en la interfaz
+
+1. Abrí **https://mayofy.dev/?interno=1** una vez en cada navegador y celular tuyo (queda guardado; `?interno=0` lo saca). En el celular con datos móviles la regla de IP de casa no aplica, así que esto es lo único que marca esas visitas.
+2. Cuando los informes muestren tus visitas con "Test data filter name" = Internal Traffic: Admin > Data filters > Internal Traffic > Filter state **Active** > Save. Lo mismo con Developer traffic.
+3. Opcional: Reports > Library > publicar la colección **Search Console** para ver búsquedas y páginas de entrada.
 
 ### Cómo probarlo
 
@@ -104,5 +136,6 @@ Todo en [analytics.google.com](https://analytics.google.com), propiedad de mayof
 - **`booking_complete` con una reserva real:** se va a confirmar la primera vez que alguien reserve (ver arriba).
 - **`booking_started` depende de un evento interno de Cal.com.** Si Cal.com lo cambia, ese paso deja de contarse; las reservas siguen contándose.
 - **Visitas que se van en los primeros segundos:** siguen sin contarse (decisión de rendimiento del 22 de noviembre). Si tocan algo antes de irse, el evento se pierde junto con la visita.
-- **Aviso de cookies:** si el agente de privacidad suma uno, se conecta con `setAnalyticsConsent`; también conviene sumar el modo de consentimiento de Google. Hasta entonces, todo se mide.
+- **Consentimiento:** la ronda de privacidad conectó `setAnalyticsConsent` con la opción de no medir en /privacidad y con Global Privacy Control (`analytics-consent.ts`); no hay aviso de cookies.
+- **Filtros en Active:** pendientes de ver la marca en los informes (ver "Verificación").
 - **Desarrollo local manda a la propiedad real.** Para evitarlo, el `.env.local` de quien desarrolle puede tener `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=` vacío (no se cambió el valor por defecto porque producción depende de él).
