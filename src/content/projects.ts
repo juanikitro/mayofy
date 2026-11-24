@@ -59,6 +59,8 @@ export type ProjectEntry = {
   result: {
     title: string;
     paragraphs: readonly string[];
+    /** Figures the client allowed to publish, each with what it counts. */
+    stats?: readonly { value: string; label: string }[];
     quote?: { text: string; author: string; role: string };
   };
   /** The pack on the landing this kind of work belongs to (commercial-plans.ts). */
@@ -76,9 +78,9 @@ const desktop = { widths: [800, 1280, 1680], width: 1690, device: "browser" } as
 const phone = { widths: [320, 390], width: 390, height: 844, device: "phone" } as const;
 
 /*
- * Every sentence below comes from Juani, his published portfolio
- * (juanikitro.com/es/shineapp) or the client's live site. Sources and what
- * is still unconfirmed: docs/plans/2026-11-23-casos.md.
+ * Every sentence below comes from Juani's answers (24 November 2026), his
+ * published portfolio (juanikitro.com) or the client's live site. Sources:
+ * docs/plans/2026-11-23-casos.md.
  */
 export const projects = [
   {
@@ -89,14 +91,14 @@ export const projects = [
     accent: "lavadero de autos",
     category: "Sistema a medida",
     summary:
-      "ShineApp ordena la agenda, los presupuestos, la caja y los materiales de un lavadero y detailing.",
+      "ShineApp ordena la agenda, las cotizaciones, la caja y los turnos online de un lavadero y detailing de 25 de Mayo.",
     intro:
-      "The King Shine es una estética vehicular: lavado y detailing. Los turnos, la caja y los materiales vivían en un cuaderno y en Excel. Hice ShineApp para que todo eso esté en un solo lugar.",
+      "The King Shine es un centro de estética vehicular de 25 de Mayo: lavadero y detailing. Las reservas, la caja y los materiales vivían en un cuaderno. Hice ShineApp para que todo eso esté en un solo lugar.",
     facts: [
-      { label: "Cliente", value: "The King Shine, estética vehicular" },
-      { label: "Qué hice", value: "Todo: producto, diseño, programación y puesta en marcha" },
+      { label: "Cliente", value: "The King Shine, estética vehicular en 25 de Mayo" },
+      { label: "Qué hice", value: "Producto y desarrollo, de punta a punta" },
       { label: "Desde", value: "Marzo de 2026" },
-      { label: "Estado", value: "En uso en The King Shine" },
+      { label: "Para", value: "Cualquier negocio de servicios automotores" },
     ],
     cover: {
       ...desktop,
@@ -108,18 +110,20 @@ export const projects = [
     before: {
       title: "Un lavadero tiene más cuentas de las que parece.",
       paragraphs: [
-        "Turnos, autos, servicios que gastan materiales, cobros, deudas y una caja que tiene que cerrar todos los días. En The King Shine todo eso estaba en papel y en planillas.",
+        "Los turnos llegaban por WhatsApp o en persona y quedaban en el aire. Las reservas, la caja y los materiales se anotaban en un cuaderno.",
+        "Andrés Piñero, el dueño, no sabía qué autos entraban cada día, quién le debía plata ni cuánto quedaba en caja al cerrar. Ordenar el negocio así era imposible.",
       ],
       changes: [
-        { before: "Turnos anotados en un cuaderno", now: "Agenda por día, semana y mes, con lugares por sector" },
-        { before: "La caja en una planilla de Excel", now: "Caja con cierre diario, deudas y gastos fijos" },
+        { before: "Turnos por WhatsApp o en persona, que quedaban en el aire", now: "Una turnera online donde el cliente pide turno solo" },
+        { before: "Reservas anotadas en un cuaderno", now: "Agenda por día, semana y mes, separada por rubro" },
+        { before: "La caja en el cuaderno", now: "Caja con cierre diario, deudas y gastos fijos" },
         { before: "Materiales contados a mano", now: "Materiales que se descuentan solos según el servicio" },
       ],
     },
     features: [
       {
         title: "Una agenda que sabe cuántos autos entran",
-        body: "Turnos por día, semana o mes, separados en lavadero y detailing. Cada tarjeta muestra el auto, el servicio, el estado y lo que falta cobrar. Se entrega y se cobra desde ahí.",
+        body: "Turnos por día, semana o mes, separados por rubro: lavadero, detailing, taller o el que cada negocio configure. Cada tarjeta muestra el auto, el servicio, el estado y lo que falta cobrar. Se entrega y se cobra desde ahí.",
         shot: {
           ...desktop,
           src: "/images/proyectos/shineapp/agenda",
@@ -129,19 +133,19 @@ export const projects = [
         },
       },
       {
-        title: "Presupuestos en PDF, listos para mandar",
-        body: "Un presupuesto puede sumar hasta 25 autos. Sale en PDF, se manda por WhatsApp y, cuando el cliente acepta, pasa a la agenda como reserva.",
+        title: "Cotizaciones en PDF, listas para mandar",
+        body: "Cada cotización se arma a medida del cliente, con precios según el tipo de vehículo. Sale en PDF, se manda por WhatsApp y, cuando el cliente acepta, pasa a la agenda.",
         shot: {
           ...desktop,
           src: "/images/proyectos/shineapp/presupuestos",
           height: 975,
-          alt: "Presupuestos de ShineApp: los que faltan enviar y los enviados, con sus servicios y botones de PDF y WhatsApp",
+          alt: "Cotizaciones de ShineApp: las que faltan enviar y las enviadas, con sus servicios y botones de PDF y WhatsApp",
           host: "shineapp.lat",
         },
       },
       {
         title: "Una caja que cierra todos los días",
-        body: "Lo que entra y lo que sale, las deudas, los gastos fijos, los proveedores y los materiales. Los empleados usan el sistema, pero no ven los números del negocio.",
+        body: "Lo que entra y lo que sale, las deudas, los gastos fijos y los materiales, que se descuentan solos según el servicio. Los empleados tienen su usuario, pero no ven la economía del negocio.",
         shot: {
           ...desktop,
           src: "/images/proyectos/shineapp/caja",
@@ -151,8 +155,8 @@ export const projects = [
         },
       },
       {
-        title: "Los clientes piden turno desde el celular",
-        body: "Cada negocio tiene su página para pedir turno, con sus datos y los del auto. Nada entra a la agenda hasta que el dueño lo acepta.",
+        title: "Una turnera online para los clientes",
+        body: "Cada negocio tiene su página para pedir turno desde el celular, con sus datos y los del auto. Nada entra a la agenda hasta que el dueño lo acepta.",
         shot: {
           ...phone,
           src: "/images/proyectos/shineapp/reserva",
@@ -165,8 +169,8 @@ export const projects = [
     ],
     decisions: [
       {
-        title: "Pensado para muchos lavaderos",
-        body: "Arrancó con uno, pero cada negocio tiene sus datos separados y hay pruebas que confirman que ninguno ve los de otro. Sumar un lavadero no obliga a rehacer nada.",
+        title: "Pensado para muchos negocios",
+        body: "Arrancó con un lavadero, pero sirve para cualquier negocio de servicios automotores. Cada uno tiene sus datos separados y hay pruebas que confirman que ninguno ve los de otro.",
       },
       {
         title: "Ágil sin gastar en servidores",
@@ -178,10 +182,20 @@ export const projects = [
       },
     ],
     result: {
-      title: "The King Shine trabaja con ShineApp.",
+      title: "Andrés sabe cada día qué autos entran.",
       paragraphs: [
-        "Usa la agenda, los presupuestos, la caja, las deudas, los materiales y la página de reservas. El control de stock y los mensajes automáticos de WhatsApp ya están hechos y esperan su momento.",
+        "Cierra la caja todos los días sin cuaderno, sabe quién le debe y los clientes piden turno solos desde la página. Como sabe cuántos turnos tiene cada día y cuáles son, puede organizar a sus empleados.",
+        "Con los mensajes automáticos de WhatsApp se ahorra la mitad del tiempo.",
       ],
+      stats: [
+        { value: "127", label: "turnos cargados en noviembre de 2026" },
+        { value: "Más de 700", label: "cotizaciones armadas en el sistema" },
+      ],
+      quote: {
+        text: "Aceptar la ayuda de Juani construyendo ShineApp fue un antes y un después para The King Shine.",
+        author: "Andrés Piñero",
+        role: "dueño de The King Shine",
+      },
     },
     pack: "sistema",
     placeholder: false,
@@ -205,8 +219,8 @@ export const projects = [
       "GyMG es una consignataria familiar de 25 de Mayo, provincia de Buenos Aires. Su página cuenta qué operan, muestra precios de referencia del mercado y lleva cada consulta directo a su WhatsApp.",
     facts: [
       { label: "Cliente", value: "GyMG Consignataria de Hacienda" },
-      { label: "Qué hice", value: "Diseño, programación y publicación" },
-      { label: "Tiempo", value: "3 días" },
+      { label: "Qué hice", value: "Diseño de la experiencia, programación y publicación" },
+      { label: "Tiempo", value: "3 días, en mayo de 2026" },
       { label: "Rubro", value: "Hacienda: gordo, invernada y cría" },
     ],
     cover: {
@@ -219,13 +233,18 @@ export const projects = [
     before: {
       title: "Un productor quiere saber con quién habla.",
       paragraphs: [
-        "GyMG opera en Buenos Aires, Santa Fe, Córdoba, La Pampa y el litoral. Antes de mandar hacienda, un productor que no los conoce necesita ver quiénes son, qué operan y cuánto vale lo que tiene.",
+        "Rafael y Germán Gutiérrez compran y venden hacienda en varias provincias. Tenían Instagram y el boca en boca, pero nada propio para mandarle a un productor nuevo.",
+        "Me pidieron una página seria que los presente y que las consultas lleguen directo a su WhatsApp.",
+      ],
+      changes: [
+        { before: "Solo Instagram y el boca en boca", now: "Una página propia para mandarle a cualquier productor" },
+        { before: "Cada consulta empezaba de cero", now: "La consulta llega por WhatsApp con la categoría, el peso y las cabezas" },
       ],
     },
     features: [
       {
         title: "Precios de referencia, con su fuente",
-        body: "Gordo, invernada, cría, granos y monedas, en pesos o en dólares, con la variación de cada categoría. La tabla dice de dónde salen los valores: el Mercado Agroganadero de Cañuelas.",
+        body: "Gordo, invernada, cría, granos y monedas, en pesos o en dólares, con la variación de cada categoría. Se actualizan solos todos los días hábiles, desde el Mercado Agroganadero de Cañuelas y ROSGAN.",
         shot: {
           ...desktop,
           src: "/images/proyectos/consignataria-hacienda/precios",
@@ -236,7 +255,7 @@ export const projects = [
       },
       {
         title: "Un cotizador que arma la consulta",
-        body: "El productor elige la categoría, el peso y las cabezas, y ve una estimación con el promedio de referencia. Un botón abre WhatsApp con la operación ya escrita.",
+        body: "Lo primero que pregunta un productor es cuánto vale su hacienda. El cotizador le da un número orientativo con el promedio del día y le arma el mensaje de WhatsApp con la categoría, el peso y las cabezas.",
         shot: {
           ...phone,
           src: "/images/proyectos/consignataria-hacienda/cotizador",
@@ -247,7 +266,7 @@ export const projects = [
     decisions: [
       {
         title: "Una promesa que se entiende",
-        body: "\"Compra y venta de hacienda con trato directo y respaldo familiar.\" Arriba de todo, sobre una foto de campo, con dos botones: WhatsApp y llamar.",
+        body: "\"Compra y venta de hacienda con trato directo y respaldo familiar.\" Arriba de todo, con dos botones: WhatsApp y llamar.",
       },
       {
         title: "Números que no prometen de más",
@@ -259,9 +278,9 @@ export const projects = [
       },
     ],
     result: {
-      title: "GyMG tiene su página en 3 días.",
+      title: "De una charla con mate a una página publicada en 3 días.",
       paragraphs: [
-        "Está publicada en gymg.com.ar, con modo claro y oscuro, y un enlace a su Instagram.",
+        "La página se diseñó en una charla con mate y quedó publicada en gymg.com.ar, con modo claro y oscuro. Ahora cada productor nuevo recibe un enlace que muestra quiénes son, qué operan y cuánto vale su hacienda.",
       ],
     },
     pack: "landing",
@@ -282,11 +301,11 @@ export const projects = [
     summary:
       "Mi propia web de programador backend: la trayectoria y dos casos reales, explicados para quien no estuvo ahí.",
     intro:
-      "Es mi web personal. La uso para buscar trabajo remoto como programador backend. Muestra mi trayectoria y dos casos reales, SISOC y ShineApp, explicados para que los entienda alguien que no estuvo ahí.",
+      "Es mi web personal. La hice para conseguir trabajo remoto como programador backend: muestra con dos casos reales, SISOC y ShineApp, cómo trabajo en sistemas que no pueden fallar. Sirve de ejemplo para cualquier profesional que quiere conseguir clientes o trabajo.",
     facts: [
       { label: "Cliente", value: "Yo, Juani" },
-      { label: "Qué hice", value: "Textos, diseño, diagramas y programación" },
-      { label: "Tiempo", value: "Una semana" },
+      { label: "Qué hice", value: "Diseño de la experiencia, diagramas y programación" },
+      { label: "Tiempo", value: "Una semana, en 2026" },
       { label: "Idiomas", value: "Español e inglés" },
     ],
     cover: {
@@ -318,7 +337,7 @@ export const projects = [
       },
       {
         title: "Un sistema grande, dibujado como un mapa de subte",
-        body: "SISOC tiene decenas de programas e integraciones. Dibujado como líneas y estaciones, se ve en un vistazo qué partes hay y cómo se conectan.",
+        body: "Un sistema grande es difícil de explicar. Dibujado como un mapa de subte, cualquiera ve en un vistazo qué partes hay y cómo se conectan.",
         shot: {
           ...desktop,
           src: "/images/proyectos/portfolio-desarrollador/mapa",
@@ -329,7 +348,7 @@ export const projects = [
       },
       {
         title: "Resultados sin inventar números",
-        body: "No había mediciones de antes. Por eso el caso muestra qué cambió, de tareas en un grupo de WhatsApp a una versión nueva cada jueves, y el camino que recorre cada cambio.",
+        body: "No hay números de antes y después, así que el caso muestra qué cambió: de tareas en un grupo de WhatsApp a una versión nueva cada jueves, con pruebas automáticas.",
         shot: {
           ...desktop,
           src: "/images/proyectos/portfolio-desarrollador/resultado",
@@ -355,7 +374,7 @@ export const projects = [
       },
       {
         title: "En dos idiomas",
-        body: "Está en español y en inglés, con el currículum para bajar en los dos, porque apunta a empresas de afuera.",
+        body: "Apunta a empresas de afuera: el reclutador lee en su idioma y se baja el currículum sin pedirlo.",
       },
       {
         title: "Lo que no se sabe, se dice",

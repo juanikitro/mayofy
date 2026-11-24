@@ -3234,7 +3234,8 @@ html[data-motion-tier="reduced"] .mayo--stops {
  * the beige ground: facts, the starting point, the screens (a cream band),
  * decisions, the result (a moss band) and the next step. */
 
-.caso-eyebrow {
+.caso-eyebrow,
+.caso-study p.caso-eyebrow {
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -3251,7 +3252,7 @@ html[data-motion-tier="reduced"] .mayo--stops {
 .caso-cover {
   position: relative;
   overflow: clip;
-  padding-block: 7.5rem 3.5rem;
+  padding-block: 6.75rem 3.5rem;
   background: linear-gradient(
     180deg,
     var(--sky-dawn-top) 0%,
@@ -3301,7 +3302,7 @@ html[data-motion-tier="reduced"] .mayo--stops {
 
 .caso-cover__text h1 {
   max-width: 17ch;
-  font-size: clamp(2.4rem, 1.3rem + 4vw, 4.75rem);
+  font-size: clamp(2.4rem, 1.4rem + 3.4vw, 4.25rem);
 }
 
 .caso-cover__intro {
@@ -3592,11 +3593,18 @@ html[data-motion-tier="reduced"] .mayo--stops {
 
 .caso-result__inner {
   display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: end;
+}
+
+.caso-result__copy {
+  display: grid;
   gap: 1rem;
   justify-items: start;
 }
 
-.caso-result .caso-eyebrow {
+.caso-study .caso-result p.caso-eyebrow {
   color: var(--mint);
 }
 
@@ -3610,11 +3618,39 @@ html[data-motion-tier="reduced"] .mayo--stops {
   color: color-mix(in oklch, var(--cream) 86%, transparent);
 }
 
+.caso-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem clamp(2rem, 6vw, 5rem);
+  margin-block-start: 1rem;
+}
+
+.caso-stats > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.2rem;
+}
+
+.caso-stats dd {
+  font-size: clamp(2.4rem, 1.6rem + 2.6vw, 3.6rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--cream);
+}
+
+.caso-stats dt {
+  max-width: 18ch;
+  color: color-mix(in oklch, var(--cream) 80%, transparent);
+}
+
 .caso-quote {
   display: grid;
   gap: 1rem;
-  max-width: 48rem;
-  margin: 1.5rem 0 0;
+  margin: 0;
+  padding-inline-start: 1.5rem;
+  border-inline-start: 2px solid var(--mint);
 }
 
 .caso-quote blockquote {
@@ -3863,6 +3899,7 @@ html[data-motion-tier="reduced"] .mayo--stops {
   }
 
   .caso-before,
+  .caso-result__inner,
   .caso-feature,
   .caso-feature:nth-child(even),
   .caso-feature--phone,

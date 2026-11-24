@@ -222,11 +222,23 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         <section className="caso-result" aria-labelledby="resultado">
           <div className="world-shell caso-result__inner">
-            <p className="caso-eyebrow">Resultado</p>
-            <h2 id="resultado">{result.title}</h2>
-            {result.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+            <div className="caso-result__copy">
+              <p className="caso-eyebrow">Resultado</p>
+              <h2 id="resultado">{result.title}</h2>
+              {result.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+              {result.stats ? (
+                <dl className="caso-stats">
+                  {result.stats.map((stat) => (
+                    <div key={stat.label}>
+                      <dt>{stat.label}</dt>
+                      <dd>{stat.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : null}
+            </div>
             {result.quote ? (
               <figure className="caso-quote">
                 <blockquote>
