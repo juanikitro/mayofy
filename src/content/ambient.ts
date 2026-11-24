@@ -149,3 +149,35 @@ export const ambientBirds: Partial<Record<AmbientIsland, BirdSky>> = {
 /** Seconds before the first flock once an island is on screen, and between flocks. */
 export const BIRD_FIRST_DELAY: readonly [number, number] = [3, 7];
 export const BIRD_INTERVAL: readonly [number, number] = [24, 48];
+
+/* ----------------------------------------------------------------- stars */
+
+/**
+ * The brightest stars painted on island 7's background layer, found on the
+ * image itself (local brightness peaks well above the sky around them,
+ * strongest first), as [x, y] in % of the plate. Each one twinkles where it
+ * is painted; the first few also flash a small cross now and then.
+ */
+export const nightStars = {
+  desktop: [
+    [86.78, 13.71], [66.45, 16.9], [75.42, 19.45], [42.46, 14.24], [53.47, 19.98], [29.84, 15.94],
+    [48.03, 22.0], [56.94, 27.63], [57.0, 17.75], [8.49, 41.55], [71.71, 11.37], [60.71, 43.04],
+    [69.62, 16.05], [79.31, 43.57], [46.23, 38.68], [7.95, 14.35], [81.1, 16.58], [77.51, 12.33],
+    [15.67, 44.31], [58.01, 32.84], [83.25, 44.31], [71.53, 36.56], [90.91, 44.0], [85.29, 52.39],
+    [21.29, 11.9], [20.51, 37.51], [52.15, 49.31], [29.55, 22.53], [16.03, 52.71], [49.52, 29.86],
+    [34.21, 18.07], [70.1, 23.49], [32.18, 26.78], [38.58, 22.21], [68.24, 26.25], [82.24, 55.58],
+  ],
+  mobile: [
+    [15.05, 15.89], [38.19, 14.0], [19.68, 19.73], [86.46, 13.67], [91.9, 23.96], [76.5, 17.19],
+    [46.06, 17.64], [64.7, 23.76], [54.98, 15.62], [29.75, 14.78], [9.49, 27.21], [63.66, 16.21],
+    [24.65, 35.87], [67.71, 30.4], [35.3, 30.21], [41.78, 57.49], [7.29, 20.25], [70.25, 11.91],
+    [83.91, 40.17], [63.19, 36.91], [19.91, 25.52], [46.3, 22.85], [22.69, 30.21], [88.66, 35.81],
+    [26.85, 17.32], [41.32, 25.65], [26.27, 23.11], [94.79, 16.8], [28.7, 41.02], [48.96, 13.61],
+  ],
+} as const satisfies { desktop: readonly (readonly [number, number])[]; mobile: readonly (readonly [number, number])[] };
+
+/** How many of the strongest stars get the cross-shaped glint. */
+export const STAR_GLINTS = 5;
+
+/** Seconds between shooting stars while island 7 is on screen. */
+export const SHOOTING_STAR_INTERVAL: readonly [number, number] = [14, 32];

@@ -9499,3 +9499,149 @@ html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambie
 html[data-ambient="full"] .ambient-birds {
   display: block;
 }
+
+/* Night sky (island 7): the painted stars twinkle in place, the strongest
+ * flash a small cross, and a rare shooting star crosses (ShootingStar,
+ * Web Animations on transform and opacity). The layer replays the
+ * background picture's own scroll animation, so the twinkles stay on the
+ * stars they sit on. */
+.ambient-night {
+  display: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambient-night {
+  display: block;
+}
+
+@supports (animation-timeline: view()) {
+  .isle .ambient-night {
+    animation: plate-background-depth linear both;
+    animation-timeline: --isle;
+    animation-range: entry 0% exit 100%;
+  }
+}
+
+.ambient-stars {
+  position: absolute;
+  inset: 0;
+}
+
+.ambient-star {
+  position: absolute;
+  left: var(--amb-x);
+  top: var(--amb-y);
+  width: calc(0.55% * var(--amb-star));
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, #fff 0, rgb(214 236 255 / 85%) 30%, rgb(170 210 255 / 0%) 100%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  animation: ambient-twinkle var(--amb-twinkle) ease-in-out var(--amb-twinkle-delay) infinite paused;
+}
+
+/* The cross of the strongest stars: two thin rays, mostly folded away. */
+.ambient-star--glint::before,
+.ambient-star--glint::after {
+  position: absolute;
+  inset: 50% -250%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(226 242 255 / 90%), transparent);
+  scale: 0 1;
+  content: "";
+  animation: ambient-glint var(--amb-glint) ease-out var(--amb-glint-delay) infinite paused;
+}
+
+.ambient-star--glint::after {
+  rotate: 90deg;
+}
+
+[data-ambient-live] .ambient-star,
+[data-ambient-live] .ambient-star--glint::before,
+[data-ambient-live] .ambient-star--glint::after {
+  animation-play-state: running;
+}
+
+.ambient-stars--mobile {
+  display: none;
+}
+
+@media (max-width: 48rem) {
+  .ambient-stars--desktop {
+    display: none;
+  }
+
+  .ambient-stars--mobile {
+    display: block;
+  }
+
+  .ambient-star {
+    width: calc(1.1% * var(--amb-star));
+  }
+}
+
+@keyframes ambient-twinkle {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+
+  17% {
+    opacity: 0.85;
+  }
+
+  27% {
+    opacity: 0.3;
+  }
+
+  43% {
+    opacity: 0.7;
+  }
+
+  62% {
+    opacity: 0.18;
+  }
+
+  80% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes ambient-glint {
+  0%,
+  86%,
+  100% {
+    scale: 0 1;
+    opacity: 0;
+  }
+
+  90% {
+    scale: 1 1;
+    opacity: 1;
+  }
+}
+
+.ambient-meteor {
+  position: absolute;
+  width: 9%;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, rgb(200 230 255 / 0%), rgb(214 236 255 / 55%) 70%, #fff);
+  box-shadow: 0 0 6px 1px rgb(190 225 255 / 35%);
+  opacity: 0;
+  transform-origin: 0 50%;
+}
+
+.ambient-meteor--left {
+  background: linear-gradient(270deg, rgb(200 230 255 / 0%), rgb(214 236 255 / 55%) 70%, #fff);
+  transform-origin: 100% 50%;
+}
+
+@media (max-width: 48rem) {
+  .ambient-meteor {
+    width: 22%;
+  }
+}

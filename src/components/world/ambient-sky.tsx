@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 
 import { BirdFlock } from "@/components/world/bird-flock";
+import { NightSky } from "@/components/world/night-sky";
 import { type AmbientIsland, type CloudSpec, ambientBirds, ambientClouds, cloudDrift } from "@/content/ambient";
 import { cloudFall } from "@/content/stage";
 
@@ -62,11 +63,12 @@ export function AmbientClouds({ island, depth }: { island: AmbientIsland; depth:
 
 /**
  * Everything of the living sky that goes behind an island cutout: the far
- * clouds and, over the day islands, the birds.
+ * clouds, the birds over the day islands and island 7's stars.
  */
 export function AmbientBackdrop({ island }: { island: AmbientIsland }) {
   return (
     <>
+      {island === "questions" ? <NightSky /> : null}
       <AmbientClouds island={island} depth="far" />
       {ambientBirds[island] ? <BirdFlock island={island} /> : null}
     </>
