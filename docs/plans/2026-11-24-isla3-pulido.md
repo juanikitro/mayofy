@@ -95,7 +95,69 @@ Una bruma fría en la parte de arriba del frente de cada card, como la sombra de
 - El comentario de `guided-scroll.ts` todavía nombra `PaymentTip`; no se tocó ese archivo para no cruzarse con otros cambios.
 - No se probó en un iPhone real ni con lector de pantalla.
 
-## Cómo crece hoy la card dada vuelta (para elegir alternativa)
+## Cómo crecía la card dada vuelta (para elegir alternativa; resuelto con tabs en la segunda vuelta, abajo)
 
 - **Escritorio y tablet:** el dorso es `position: absolute` con `inset: 0 0 auto` y `min-height: 100%`, y su lista no scrollea (`.pack .flip__scroll { overflow: visible }`, pedido del 24/11 de no tener scroll interno). Entonces el dorso mide lo que su contenido: a 1440 el frente mide 603 px y el dorso 683 px en Landing (+80) y 774 px en Gestión (+171). Sobresale hacia abajo y tapa la franja de garantías (`.pack[data-flipped] { z-index: 4 }`); las otras dos cards no cambian.
 - **Celular:** el dorso pasa a `position: relative` y el frente a `absolute`, así que la card toma la altura del dorso: a 390, Landing pasa de 640 a 866 px (+226) y Gestión de 608 a 911 px (+303), y el carrusel cambia de alto.
+
+## Segunda vuelta: carteles de madera y tabs en el dorso (24 de noviembre de 2026)
+
+Elección de Juani: "Marcadores de precio, elijo el cartel de madera" y "Sobre la card que crece, añadamos tabs al dorso, siempre una abierta, además de la mejora en los textos puede quedar bien".
+
+### 1. Carteles de madera en la isla 3 (`platform-markers.tsx`, `rock-island.tsx`, `stage.ts`, `world.css` "Wooden signs")
+
+- Cada marcador de precio es un cartel chico de madera pintada: una tabla con veta (cada cartel muestra otro tramo de la misma veta), luz cálida en los bordes de arriba e izquierda y sombra abajo y a la derecha, como la luz de las placas pintadas. Un clavo arriba al centro y una estaca de madera que baja hasta la roca, en lugar del palito crema. Todo es CSS; no se agregó ninguna imagen.
+- Nombre y precio van escritos en la tabla y la flecha se mantiene en escritorio. En el celular el nombre va sobre el precio, sin flecha (ya era así antes), con un ancho máximo para que el tercer cartel no toque el borde a 360 px.
+- **Hover (con puntero) o foco por teclado:** la tabla se balancea como un cartel colgado, un péndulo amortiguado alrededor del clavo (dos vaivenes en 1,5 s y queda quieta), y el cartel y su roca suben 4 px. La roca sube con una copia de la placa pintada recortada al contorno de esa pila de rocas (`platformLiftOutlines` en `stage.ts`, trazado desde las pinturas) que se desvanece en el pie; es la misma imagen, no se descarga nada nuevo. La roca sólo sube cuando las plataformas ya están armadas.
+- El foco por teclado tiene además el anillo visible. Un cartel al que se llega con Tab antes de que su plataforma se arme se muestra igual (nunca hay foco sobre algo invisible).
+- Sin balanceo ni subida con `prefers-reduced-motion` ni con `html[data-motion-tier="reduced"]`.
+- Se mantienen el objetivo de click de 44 px o más y la pista para lectores de pantalla.
+
+### 2. Tabs en el dorso de las cards de packs (`pack-tabs.tsx`, `flip-card.tsx`, `commercial-plans.ts`, `src/lib/tab-keys.ts`)
+
+- El dorso de cada pack muestra sus grupos como tabs, siempre una abierta. Al dar vuelta la card se abre la primera (FlipCard vuelve a montar el dorso en cada vuelta con `resetBack`).
+- El dorso queda exactamente sobre el frente, en escritorio y en el celular. La tab abierta entra en esa altura, así que la card dada vuelta ya no crece, no tapa la franja de garantías, no cambia el alto del carrusel y no scrollea por dentro.
+- Los grupos se reordenaron y se renombraron para que sean etiquetas cortas (tres entran en el ancho de una card de celular). Los textos de cada punto no cambiaron, sólo de grupo:
+
+| Pack | Tabs |
+|---|---|
+| Landing | Tu página · El proceso · No incluye |
+| Gestión | Tu sistema · El arranque · Extras (antes "Se cotiza aparte") |
+| Sistema a Medida | Tu sistema · El proceso |
+
+- **Accesibilidad:** patrón ARIA de tabs (`tablist`, `tab`, `tabpanel`, `aria-selected`, `aria-controls`/`aria-labelledby`), una sola parada de Tab en la fila; Izquierda/Derecha cambian de tab (con vuelta al principio) e Inicio/Fin van a los extremos, y el foco sigue a la tab abierta. Tab pasa de la tab a su panel. Cada tab mide 44 px de alto. La lógica de teclas está en `src/lib/tab-keys.ts` con tests.
+- **Dentro del carrusel del celular:** la fila de tabs no scrollea por su cuenta y no toma los gestos (`touch-action` por defecto), así que un deslizamiento lateral que empieza sobre una tab mueve el carrusel y no cambia de tab; un toque cambia de tab.
+- `DetailGroups` (`pack-groups.tsx`) queda sólo para el dorso de la card de mantenimiento.
+
+### Alturas del frente y del dorso, antes y después (px)
+
+Medidas con Playwright (Chromium), la card dada vuelta, revisando cada tab. "Pisa" es cuánto baja el dorso sobre la franja de garantías (negativo: no la toca). "Carrusel" es el alto de la fila de cards del celular.
+
+| Viewport | Card | Antes: frente / dorso | Antes: pisa / carrusel | Después: frente / dorso | Después: pisa / carrusel |
+|---|---|---|---|---|---|
+| 1440×900 | Landing | 603 / 683 | 60 / — | 603 / 603 | −20 / — |
+| 1440×900 | Gestión | 603 / 774 | 151 / — | 603 / 603 | −20 / — |
+| 1440×900 | Sistema | 603 / 603 | −20 / — | 603 / 603 | −20 / — |
+| 1366×768 | Landing | 603 / 706 | 83 / — | 603 / 603 | −20 / — |
+| 1366×768 | Gestión | 603 / 774 | 151 / — | 603 / 603 | −20 / — |
+| 1366×768 | Sistema | 603 / 603 | −20 / — | 603 / 603 | −20 / — |
+| 390×844 | Landing | 640 / 866 | — / 712→938 | 640 / 640 | — / 712→712 |
+| 390×844 | Gestión | 640 / 911 | — / 712→983 | 640 / 640 | — / 712→712 |
+| 390×844 | Sistema | 640 / 640 | — / 712→712 | 640 / 640 | — / 712→712 |
+| 360×800 | Landing | 682 / 888 | — / 754→960 | 682 / 682 | — / 754→754 |
+| 360×800 | Gestión | 682 / 957 | — / 754→1029 | 682 / 682 | — / 754→754 |
+| 360×800 | Sistema | 682 / 682 | — / 754→754 | 682 / 682 | — / 754→754 |
+
+La tab más cargada (Gestión, "Tu sistema") deja todavía 119 px libres a 360×800 y 130 px a 1440×900 entre el último punto y "Volver", así que no hizo falta recortar textos ni espacios.
+
+### Cómo se verificó
+
+- `npm run lint`, `npm run typecheck`, `npm test` (4 tests nuevos de `tabIndexForKey`; RED observado antes de escribir el módulo) y `npm run build`: sin errores.
+- Playwright sobre `next dev`, dos corridas seguidas, Chromium a 1440×900, 1366×768 (con movimiento reducido), 390×844 y 360×800 táctil, y WebKit a 390×844 táctil: roles y relaciones ARIA, primera tab abierta, una sola parada de Tab, tabs de 44 px, flechas/Inicio/Fin con el foco siguiendo, Tab al panel, click y toque cambian de tab, dar vuelta otra vez abre la primera, deslizar de lado sobre una tab mueve el carrusel una card sin cambiar de tab (Chromium, eventos táctiles reales por CDP), sin scroll horizontal de la página. Sin errores de consola.
+- Carteles: dentro de la pantalla y de 44 px o más a 1440, 1366, 390, 360 y WebKit 390; hover y foco balancean y suben la roca; el balanceo termina quieto; con movimiento reducido no hay animación ni subida. Sin errores de consola.
+- Capturas (fuera del repo), en `C:\Users\Juanito\AppData\Local\Temp\claude\C--Users-Juanito-orca-workspaces-mayofy-landing-landing-isla3-pulido\335aa93f-654f-418c-8834-7a9959d81f72\scratchpad\shots\`: `tabs-before\` y `tabs-after\` (cada card dada vuelta, cada tab, cuatro tamaños) y `tabs-round\` (carteles en reposo, hover y foco).
+
+### Límites
+
+- En WebKit no se pudo simular un deslizamiento táctil real; ahí se comprobó el toque y que las tabs no bloquean el gesto (`touch-action: auto`). No se probó en un iPhone real ni con lector de pantalla.
+- Las tabs de Sistema a Medida son dos, no tres: no hay un grupo "No incluye" para ese pack.

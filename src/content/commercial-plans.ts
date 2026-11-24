@@ -29,6 +29,12 @@ export const commercialIntro = {
   },
 } as const;
 
+/**
+ * Each plan's `detailGroups` are the tabs on the back of its card, in order,
+ * the first open when the card turns (PackTabs; Juani, 24 November 2026:
+ * "añadamos tabs al dorso, siempre una abierta"). Short titles: they are the
+ * tab labels and three share a phone card's width.
+ */
 export const commercialPlans = [
   {
     id: "landing",
@@ -42,16 +48,21 @@ export const commercialPlans = [
       "Negocios de servicios que reciben atención por Instagram, Google Maps o recomendaciones y necesitan un lugar propio para convertirla en consultas.",
     detailGroups: [
       {
-        title: "Incluye",
+        title: "Tu página",
         items: [
-          "Unas preguntas cortas para entender tu negocio y a quién le querés vender.",
           "Una página que cuenta lo importante sin marear a nadie.",
           "Un diseño prolijo, pensado para tu rubro.",
           "Los textos ya escritos, ajustados a tu forma de hablar.",
           "Un botón para que te escriban por WhatsApp con el mensaje ya armado.",
           "Tu Instagram, tu ubicación en el mapa y tus otras redes, a un toque.",
-          "La página publicada en tu propia dirección web, del estilo tunegocio.com.",
+        ],
+      },
+      {
+        title: "El proceso",
+        items: [
+          "Unas preguntas cortas para entender tu negocio y a quién le querés vender.",
           "Una vuelta de cambios antes de publicarla.",
+          "La página publicada en tu propia dirección web, del estilo tunegocio.com.",
         ],
       },
       {
@@ -81,20 +92,25 @@ export const commercialPlans = [
       "Consultorios, peluquerías, centros de estética, gimnasios, academias y comercios que pierden horas coordinando por WhatsApp o anotando en un cuaderno.",
     detailGroups: [
       {
-        title: "Incluye en el precio base",
+        title: "Tu sistema",
         items: [
           "Un sistema para ordenar lo que más tiempo te lleva: turnos, stock, pedidos o ventas online.",
           "Tu propio panel para ver y manejar todo desde el celular o la compu.",
           "Un enlace para que tus clientes reserven, compren o pidan solos, sin esperar a que les contestes.",
           "Correos automáticos para vos y tus clientes, como el recordatorio del turno.",
           "Un botón para avisar por WhatsApp con el mensaje ya escrito.",
+        ],
+      },
+      {
+        title: "El arranque",
+        items: [
           "Acceso para una persona: vos o quien maneje el negocio.",
           "Cargamos tus datos para que arranques: servicios, horarios, productos o clientes.",
           "Una capacitación para que lo manejes sin ayuda desde el primer día.",
         ],
       },
       {
-        title: "Se cotiza aparte",
+        title: "Extras",
         items: [
           "Varias sedes o un acceso distinto para cada empleado.",
           "Cobro de señas o pagos online.",
@@ -119,13 +135,18 @@ export const commercialPlans = [
       "Negocios que necesitan integrar múltiples soluciones: turnos, stock, cobros y equipos con distintos roles, todo en un solo sistema.",
     detailGroups: [
       {
-        title: "Incluye",
+        title: "Tu sistema",
         items: [
-          "Vemos cómo trabajás hoy y qué se sigue haciendo a mano.",
           "Un sistema diseñado para tu forma de trabajar.",
           "Un historial de cambios: quién hizo qué y cuándo.",
           "Los números que necesitás para decidir, a la vista.",
           "Se conecta con lo que ya usás: facturación, planillas o cobros.",
+        ],
+      },
+      {
+        title: "El proceso",
+        items: [
+          "Vemos cómo trabajás hoy y qué se sigue haciendo a mano.",
           "Entregas por etapas: empezás a usarlo antes de que esté terminado.",
           "Capacitación y guías de uso para tu equipo.",
           "Si ya tenés Gestión, crecemos desde ahí, sin empezar de cero.",
