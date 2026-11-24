@@ -1,5 +1,6 @@
-import { Fragment, type CSSProperties, type ImgHTMLAttributes } from "react";
+import { Fragment, type CSSProperties } from "react";
 
+import { AvifImg } from "@/components/world/avif-img";
 import { IslandPlate, plateSceneStyle } from "@/components/world/island-plate";
 import { NearGate } from "@/components/world/near-gate";
 import { PacksPlay } from "@/components/world/packs-play";
@@ -40,20 +41,6 @@ type Box = { left: number; top: number; width: number; height: number };
 type Size = "d" | "m";
 
 const round = (value: number) => Math.round(value * 100) / 100;
-
-/**
- * An AVIF with its WebP sibling for browsers without AVIF (Safari 15 and
- * older): the same markup as the shared AvifImg (`.avif-img`, its picture
- * out of the layout), so the image keeps its class and its place.
- */
-function AvifImg({ src, ...img }: { src: string } & Omit<ImgHTMLAttributes<HTMLImageElement>, "src">) {
-  return (
-    <picture className="avif-img" style={{ display: "contents" }}>
-      <source type="image/avif" srcSet={src} />
-      <img src={src.replace(/\.avif$/, ".webp")} alt="" {...img} />
-    </picture>
-  );
-}
 
 /** Extent of a platform's rocks on its 1254 design canvas. */
 function bounds(platform: Platform) {
@@ -198,7 +185,7 @@ function Rock({ piece, index }: { piece: PlatformPiece; index: number }) {
       {/* The body carries the idle float; its ::after grades the rock into the plate once it lands. */}
       <div className="rock__body">
         {/* Lazy, and hidden with its grading mask (same file) until the reader nears the island (NearGate, world.css). */}
-        <AvifImg className="rock__img" src={piece.src} width={piece.width} height={piece.height} loading="lazy" decoding="async" />
+        <AvifImg alt="" className="rock__img" src={piece.src} width={piece.width} height={piece.height} loading="lazy" decoding="async" />
       </div>
     </div>
   );
@@ -227,7 +214,7 @@ function FarRock({ rock, serial }: { rock: LooseRock; serial: number }) {
   return (
     <div className="rock-far" style={style}>
       <div className="rock__body">
-        <AvifImg className="rock__img" src={rock.src} width={rock.width} height={rock.height} loading="lazy" decoding="async" />
+        <AvifImg alt="" className="rock__img" src={rock.src} width={rock.width} height={rock.height} loading="lazy" decoding="async" />
       </div>
     </div>
   );
@@ -310,6 +297,8 @@ function AssembledPlate() {
   return (
     <picture className="plate__picture plate__picture--assembled">
       {mobile ? <source media="(max-width: 48rem)" type="image/avif" srcSet={mobile.avif} /> : null}
+      {/* The phone WebP too: without AVIF the browser would skip to the desktop crop. */}
+      {mobile ? <source media="(max-width: 48rem)" type="image/webp" srcSet={mobile.webp} /> : null}
       <source type="image/avif" srcSet={desktop.avif} />
       {/* Decoded in the frame that shows it: decoded apart, coming back to the island showed bare meadow for a few frames. */}
       <img src={desktop.webp} alt="" width={desktop.width} height={desktop.height} loading="lazy" decoding="sync" />
@@ -343,7 +332,7 @@ function Shadow({ shadow, index }: { shadow: PlatformShadow; index: number }) {
     ...boxVars(onPlate(platform, platformPlacements.mobile[index], shadow.x, shadow.y, shadow.w, shadow.h), "m"),
     ...span(start, end),
   } as CSSProperties;
-  return <AvifImg className="rock-shadow" src={shadow.src} width={shadow.w} height={shadow.h} loading="lazy" decoding="async" style={style} />;
+  return <AvifImg alt="" className="rock-shadow" src={shadow.src} width={shadow.w} height={shadow.h} loading="lazy" decoding="async" style={style} />;
 }
 
 /** Where a platform's grass shadow sits, as a box in % of the plate (its centre offset from the feet). */
