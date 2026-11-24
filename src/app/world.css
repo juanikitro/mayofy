@@ -8884,14 +8884,32 @@ html[data-motion-tier="reduced"] :is(.island-nav__sheet, .island-nav[data-open] 
     height: 0.5rem;
     border-radius: var(--radius-pill);
     background: color-mix(in oklch, var(--ink-soft) 30%, transparent);
-    transition:
-      width var(--m-base) var(--ease-ui),
-      background-color var(--m-base) var(--ease-ui);
   }
 
-  .packs__dot[aria-current]::before {
+  /* The highlight over the dots: PackCarousel places and stretches each
+   * pill from the row's scroll position; the box clips (and fades) the one
+   * leaving or entering at the loop's seam. */
+  .packs__dots {
+    position: relative;
+  }
+
+  .packs__worms {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    mask-image: linear-gradient(90deg, transparent, #000 0.4rem, #000 calc(100% - 0.4rem), transparent);
+  }
+
+  .packs__worm {
+    position: absolute;
+    inset-block-start: calc(50% - 0.25rem);
+    inset-inline-start: 0;
     width: 1.25rem;
+    height: 0.5rem;
+    border-radius: var(--radius-pill);
     background: var(--moss);
+    will-change: transform, width;
   }
 
   .packs__arrow {
@@ -8946,6 +8964,43 @@ html[data-motion-tier="reduced"] :is(.island-nav__sheet, .island-nav[data-open] 
 
 html[data-motion-tier="reduced"] .packs__grid > * {
   transition: none;
+}
+
+/* Pack details never scroll inside the card (Juani, 24 November 2026:
+ * "dentro de cada detalle de cada pack, hay un scroll vertical que te come
+ * el dedo"): the back's lists keep their full height, so a vertical swipe on
+ * a turned card always moves the page. */
+.pack .flip__scroll {
+  flex: none;
+  padding-block-end: 0;
+  overflow: visible;
+  overscroll-behavior: auto;
+  mask-image: none;
+}
+
+/* From tablet up the three cards share their rows (subgrid), so a turned
+ * card grows downward over what follows instead of stretching the other
+ * two; it rises above it while turned. */
+.pack .flip__face--back {
+  inset: 0 0 auto;
+  min-height: 100%;
+}
+
+.pack[data-flipped] {
+  z-index: 4;
+}
+
+/* On phones each card stands alone: a turned card takes its back's height
+ * and the front lies under it, out of the flow. */
+@media (max-width: 48rem) {
+  .pack[data-flipped] .flip__face--back {
+    position: relative;
+  }
+
+  .pack[data-flipped] .flip__face--front {
+    position: absolute;
+    inset: 0;
+  }
 }
 
 /* "Cómo se paga (?)": the heading is the toggle, the four lines open in a
@@ -9013,9 +9068,11 @@ html[data-motion-tier="reduced"] .packs__grid > * {
   translate: 0 1px;
 }
 
+/* Above the toggle by default; PaymentTip sets `data-side` from the room
+ * there is (the 0.75rem gap matches its GAP). */
 .packs__payment-panel {
   position: absolute;
-  inset-block-start: calc(100% + 0.5rem);
+  inset-block-end: calc(100% + 0.75rem);
   inset-inline-start: 50%;
   width: min(28rem, calc(100vw - 2 * var(--gutter)));
   padding: 1rem 1.15rem;
@@ -9030,24 +9087,36 @@ html[data-motion-tier="reduced"] .packs__grid > * {
     translate var(--m-panel) var(--ease-ui);
 }
 
+.packs__payment-panel[data-side="bottom"] {
+  inset-block: calc(100% + 0.75rem) auto;
+}
+
 @starting-style {
   .packs__payment-panel {
     opacity: 0;
+    translate: -50% 0.35rem;
+  }
+
+  .packs__payment-panel[data-side="bottom"] {
     translate: -50% -0.35rem;
   }
 }
 
-/* The notch pointing at the (?) toggle. */
+/* The notch pointing at the (?) mark (`--notch`, set by PaymentTip). */
 .packs__payment-panel::before {
   content: "";
   position: absolute;
-  inset-block-start: -0.4rem;
-  inset-inline-start: calc(50% - 0.4rem);
+  inset-block-end: -0.4rem;
+  inset-inline-start: calc(var(--notch, 50%) - 0.4rem);
   width: 0.8rem;
   height: 0.8rem;
   border-radius: 0.15rem;
   background: inherit;
   rotate: 45deg;
+}
+
+.packs__payment-panel[data-side="bottom"]::before {
+  inset-block: -0.4rem auto;
 }
 
 .packs__payment-panel[hidden] {
