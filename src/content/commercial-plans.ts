@@ -139,32 +139,44 @@ export const commercialPlans = [
   },
 ] as const;
 
-export const comingSoon = {
-  label: "Próximamente",
+/**
+ * The WhatsApp and Telegram bot, on sale since 24 November 2026 (Juani: "es
+ * un buen momento para sacarle el próximamente y añadirlo como un producto a
+ * vender"). Shown on island 4 with its own "Lo quiero" per tier, and addable
+ * from the extras builder under the gear (src/content/extras.ts).
+ */
+export const chatBot = {
   title: "Bot de WhatsApp y Telegram",
   description:
     "Un asistente que responde las consultas frecuentes, toma los datos de cada cliente y te deriva la conversación cuando hace falta una persona.",
   tiers: [
     {
+      id: "bot-esencial",
       name: "Bot Esencial",
-      price: "USD 120",
+      usd: 120,
       timeline: "2 a 3 semanas",
       includes:
         "Un canal (WhatsApp o Telegram), respuestas a preguntas frecuentes, toma de datos del cliente y derivación a una persona.",
+      short: "Un canal, preguntas frecuentes y derivación a una persona.",
+      whatsappMessage: "Hola, quiero el Bot Esencial de Mayofy.",
     },
     {
+      id: "bot-integrado",
       name: "Bot Integrado",
-      price: "USD 250",
+      usd: 250,
       timeline: "4 a 6 semanas",
       includes:
         "Todo lo anterior, los dos canales y conexión con Gestión o un Sistema a Medida: reservar turnos, consultar estados o datos.",
+      short: "Los dos canales, conectado con Gestión o tu sistema.",
+      whatsappMessage: "Hola, quiero el Bot Integrado de Mayofy.",
     },
   ],
   monthly: "USD 30 por mes: alojamiento, control y ajustes menores.",
-  note: "Las tarifas de WhatsApp Business (Meta cobra por conversación) y el uso de IA, si se usa, se trasladan aparte.",
-  cta: "Quiero que me avisen",
-  whatsappMessage:
-    "Hola, quiero que me avisen cuando esté disponible el bot de WhatsApp y Telegram de Mayofy.",
+  monthlyShort: "Más USD 30 por mes de alojamiento y ajustes.",
+  /** Meta bills WhatsApp Business per delivered message, to the client. */
+  service: "Meta cobra cada mensaje de WhatsApp.",
+  note: "WhatsApp Business queda a tu nombre: Meta te cobra cada mensaje. Si el bot usa IA, ese servicio también queda a tu nombre.",
+  cta: "Lo quiero",
 } as const;
 
 export const guarantees = {

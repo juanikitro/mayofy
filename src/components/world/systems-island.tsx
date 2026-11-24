@@ -1,12 +1,11 @@
 import type { CSSProperties } from "react";
 
-import { AnimatedDetails } from "@/components/animated-details";
 import { plateSceneStyle } from "@/components/world/island-plate";
 import { IslandScene } from "@/components/world/island-scene";
 import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure } from "@/components/world/mayo-figure";
 import { WorkshopController } from "@/components/world/workshop-controller";
-import { comingSoon, commercialPlans, extensions } from "@/content/commercial-plans";
+import { chatBot, commercialPlans, extensions } from "@/content/commercial-plans";
 import { islandCopy } from "@/content/islands";
 import { islandPlates } from "@/content/stage";
 import { workshopParts, workshopSpots } from "@/content/workshop";
@@ -81,30 +80,28 @@ export function SystemsIsland() {
         </ol>
 
         {/* A section, not an aside: a complementary landmark may not sit inside main. */}
-        <section className="workshop__soon panel" aria-labelledby="bot-title">
-          <p className="soon__label">{comingSoon.label}</p>
-          <p className="workshop__soon-copy">
-            <strong id="bot-title">{comingSoon.title}</strong> desde {comingSoon.tiers[0].price}. {comingSoon.description}
+        <section className="workshop__bot panel" id="bot" aria-labelledby="bot-title">
+          <h3 id="bot-title">{chatBot.title}</h3>
+          <p className="workshop__bot-copy">{chatBot.description}</p>
+          <ul className="bot-tiers">
+            {chatBot.tiers.map((tier) => (
+              <li className="bot-tier" key={tier.id}>
+                <p className="bot-tier__name">{tier.name}</p>
+                <p className="bot-tier__price">
+                  <strong>USD {tier.usd}</strong>
+                  <span className="bot-tier__timeline">{tier.timeline}</span>
+                </p>
+                <p className="bot-tier__includes">{tier.includes}</p>
+                <a className="btn btn--moss bot-tier__cta" href={getWhatsAppHref(tier.whatsappMessage)} target="_blank" rel="noreferrer">
+                  {chatBot.cta}
+                  <span className="extras-sr"> el {tier.name}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="workshop__bot-note">
+            {chatBot.monthly} {chatBot.note}
           </p>
-          <AnimatedDetails className="pack-details workshop__tiers" summary={<span className="link-label">Ver los dos niveles</span>}>
-            <dl className="soon__tiers">
-              {comingSoon.tiers.map((tier) => (
-                <div key={tier.name}>
-                  <dt>{tier.name}</dt>
-                  <dd>
-                    <span className="soon__price">Desde {tier.price}</span>
-                    <span className="soon__timeline">{tier.timeline}</span>
-                    <span className="soon__includes">{tier.includes}</span>
-                  </dd>
-                </div>
-              ))}
-            </dl>
-            <p className="soon__monthly">{comingSoon.monthly}</p>
-            <p className="soon__note">{comingSoon.note}</p>
-          </AnimatedDetails>
-          <a className="btn btn--quiet" href={getWhatsAppHref(comingSoon.whatsappMessage)} target="_blank" rel="noreferrer">
-            {comingSoon.cta}
-          </a>
         </section>
       </div>
       <WorkshopController />

@@ -1,4 +1,4 @@
-import { commercialPlans } from "@/content/commercial-plans";
+import { chatBot, commercialPlans } from "@/content/commercial-plans";
 import { publishedProjects } from "@/content/projects";
 import { publicChannels, siteContent } from "@/content/site";
 import { getSiteUrl } from "@/lib/site-url";
@@ -18,6 +18,11 @@ export function GET() {
     "",
     "## Packs",
     ...commercialPlans.map((plan) => `- ${plan.name} (desde ${plan.price}, ${plan.timeline}): ${plan.description}`),
+    "",
+    `## ${chatBot.title}`,
+    chatBot.description,
+    ...chatBot.tiers.map((tier) => `- ${tier.name} (USD ${tier.usd}, ${tier.timeline}): ${tier.includes}`),
+    `- ${chatBot.monthly} ${chatBot.note}`,
     "",
     "## Casos",
     ...publishedProjects.map((project) => `- [${project.title}](${url(`/proyectos/${project.slug}`)}): ${project.summary}`),

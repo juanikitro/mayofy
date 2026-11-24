@@ -1,4 +1,4 @@
-import { commercialPlans } from "@/content/commercial-plans";
+import { chatBot, commercialPlans } from "@/content/commercial-plans";
 import type { ProjectEntry } from "@/content/projects";
 import { publicChannels, siteContent } from "@/content/site";
 import { usdAmount } from "@/lib/peso-prices";
@@ -129,6 +129,27 @@ function services(): JsonLdNode[] {
   });
 }
 
+/** The WhatsApp and Telegram bot, on sale since 24 November 2026: one fixed price per tier. */
+function botService(): JsonLdNode {
+  return {
+    "@type": "Service",
+    "@id": absolute("/#bot"),
+    name: chatBot.title,
+    description: chatBot.description,
+    serviceType: "Bot de atención por WhatsApp y Telegram",
+    provider: { "@id": organizationId() },
+    areaServed,
+    offers: chatBot.tiers.map((tier) => ({
+      "@type": "Offer",
+      name: tier.name,
+      description: tier.includes,
+      url: absolute("/#sistemas"),
+      price: tier.usd,
+      priceCurrency: "USD",
+    })),
+  };
+}
+
 function faqPage(): JsonLdNode {
   return {
     "@type": "FAQPage",
@@ -141,11 +162,11 @@ function faqPage(): JsonLdNode {
   };
 }
 
-/** The home page: who Mayofy is, the three packs and the visible FAQ. */
+/** The home page: who Mayofy is, the three packs, the bot and the visible FAQ. */
 export function homeStructuredData(): JsonLdNode {
   return {
     "@context": "https://schema.org",
-    "@graph": [organization(), website(), ...services(), faqPage()],
+    "@graph": [organization(), website(), ...services(), botService(), faqPage()],
   };
 }
 

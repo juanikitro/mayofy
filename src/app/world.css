@@ -1811,16 +1811,6 @@ html[data-motion-tier="reduced"] .scene__sky {
   background: var(--cream);
 }
 
-.soon__label {
-  padding: 0.3rem 0.7rem;
-  border-radius: var(--radius-pill);
-  background: var(--beige-deep);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .upkeep h3 {
   font-size: 1.35rem;
   margin-block-end: 0.4rem;
@@ -3083,60 +3073,6 @@ html[data-motion-tier="reduced"] .mayo--stops {
 }
 
 /* Booking (island 7) */
-
-/* Bot tiers (island 4) */
-
-.soon__label {
-  grid-area: label;
-}
-
-.soon__tiers {
-  grid-area: tiers;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
-  gap: 1rem;
-  width: 100%;
-  margin-block-start: 0.5rem;
-}
-
-.soon__tiers > div {
-  display: grid;
-  gap: 0.35rem;
-  padding: 1rem;
-  border-radius: calc(var(--radius) - 0.5rem);
-  background: var(--beige);
-}
-
-.soon__tiers dt {
-  font-weight: 600;
-}
-
-.soon__tiers dd {
-  display: grid;
-  gap: 0.25rem;
-}
-
-.soon__price {
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  color: var(--moss);
-}
-
-.soon__timeline,
-.soon__includes,
-.soon__monthly,
-.soon__note {
-  font-size: 0.9rem;
-  color: var(--ink-soft);
-}
-
-.soon__monthly {
-  grid-area: monthly;
-}
-
-.soon__note {
-  grid-area: note;
-}
 
 /* Contact form (island 6) ------------------------------------------------ */
 
@@ -7214,30 +7150,26 @@ html[data-motion-tier="reduced"] .works-index__shot {
   font-size: 0.95rem;
 }
 
-.workshop__soon {
+.workshop__bot {
   grid-column: 2;
   display: grid;
-  grid-template: none / minmax(0, 1fr);
   gap: 0.75rem;
   justify-items: start;
   margin-block-start: 16svh;
-  padding: 1.25rem 1.4rem;
+  padding: 1.5rem 1.6rem;
 }
 
-.workshop__soon .soon__label {
-  grid-area: auto;
+.workshop__bot h3 {
+  font-size: 1.45rem;
 }
 
-.workshop__soon-copy {
+.workshop__bot-copy,
+.workshop__bot-note {
   color: var(--ink-soft);
 }
 
-.workshop__soon-copy strong {
-  color: var(--ink);
-}
-
-.workshop__tiers .soon__tiers {
-  margin-block-start: 0.5rem;
+.workshop__bot-note {
+  font-size: 0.9rem;
 }
 
 /* Each part lights its object and its pin while it crosses the reading
@@ -7409,7 +7341,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 
   .workshop__parts,
-  .workshop__soon {
+  .workshop__bot {
     grid-column: 1;
   }
 
@@ -7418,8 +7350,9 @@ html[data-motion-tier="reduced"] .works-index__shot {
     margin-block-start: 100svh;
   }
 
-  .workshop__soon {
+  .workshop__bot {
     margin-block-start: 12svh;
+    padding: 1.1rem 1.2rem;
   }
 
   .workshop__part {
@@ -7442,8 +7375,8 @@ html[data-motion-tier="reduced"] .works-index__shot {
         animation-range: cover 5% cover 50%;
       }
 
-      /* The bot strip fades before it rises into the island. */
-      html:not([data-motion-tier="reduced"]) .workshop__soon {
+      /* The bot panel fades before it rises into the island. */
+      html:not([data-motion-tier="reduced"]) .workshop__bot {
         animation: workshop-part-phone linear both;
         animation-timeline: view();
       }
@@ -7470,7 +7403,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
       margin-block-start: 1.5rem;
     }
 
-    .workshop__soon {
+    .workshop__bot {
       margin-block-start: 1rem;
     }
   }
@@ -7493,7 +7426,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
     margin-block-start: 1.5rem;
   }
 
-  html[data-motion-tier="reduced"] .workshop__soon {
+  html[data-motion-tier="reduced"] .workshop__bot {
     margin-block-start: 1rem;
   }
 }
@@ -7517,7 +7450,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
     margin-block-start: 1.5rem;
   }
 
-  .workshop__soon {
+  .workshop__bot {
     margin-block-start: 1rem;
   }
 }
@@ -7573,6 +7506,76 @@ html[data-motion-tier="reduced"] .works-index__shot {
     padding: 1.25rem 1.35rem;
   }
 }
+
+/* =========================================================================
+ * Extras builder (island 4, 24 November 2026,
+ * docs/plans/2026-11-24-isla4-extras.md): each row of a group is an extra
+ * with its seal, its price and "Sumar"; "Tu consulta" rests at the end of
+ * the list and, once something is added, holds the bottom of the screen as
+ * a compact bar that opens in place (a panel; a bottom sheet on phones).
+ * ========================================================================= */
+
+.extras-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.bot-tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: 0.75rem;
+  width: 100%;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bot-tier {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 0.35rem;
+  padding: 1rem;
+  border-radius: calc(var(--radius) - 0.5rem);
+  background: var(--beige);
+}
+
+.bot-tier__name {
+  font-weight: 600;
+}
+
+.bot-tier__price {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.bot-tier__price strong {
+  color: var(--moss);
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.bot-tier__timeline {
+  display: block;
+}
+
+.bot-tier__includes {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.bot-tier__cta {
+  justify-self: start;
+  margin-block-start: 0.4rem;
+}
+
+/* ======================= end of Extras builder (island 4) ================ */
 
 /* Island 6: by the fire ------------------------------------------------- */
 
