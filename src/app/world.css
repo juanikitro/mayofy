@@ -2792,43 +2792,8 @@ html[data-motion-tier="reduced"] .fall__mayo {
         animation: none;
       }
 
-      /* Six segments, each a 44 px tall button that scrolls to its step. */
-      .sendero__bar {
-        display: flex;
-        gap: 0.15rem;
-        margin-block-start: 0.35rem;
-      }
-
-      .sendero__bar button {
-        display: grid;
-        place-items: center;
-        width: 1.85rem;
-        height: 2.75rem;
-        padding: 0;
-        border: 0;
-        background: none;
-        cursor: pointer;
-      }
-
-      .sendero__bar button:focus-visible {
-        outline: 2px solid var(--moss);
-        outline-offset: -2px;
-        border-radius: 0.5rem;
-      }
-
-      .sendero__bar i {
-        width: 1.6rem;
-        height: 0.3rem;
-        border-radius: var(--radius-pill);
-        background: oklch(96% 0.018 75 / 60%);
-        animation: sendero-bar-on linear forwards;
-        animation-timeline: --sendero;
-        animation-range: contain var(--from) contain 100%;
-      }
-
-      .sendero__bar button:first-child i {
-        animation-fill-mode: both;
-      }
+      /* The six step buttons: a vertical rail, in "Mobile packs carousel,
+       * payment toggletip and six-steps rail" at the end of this file. */
     }
   }
 }
@@ -8013,12 +7978,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
-/* The six steps' bar: each segment is a 44px square target (it was 30px
- * wide); the dash inside keeps its size. */
-.sendero__bar button {
-  width: 2.75rem;
-}
-
 /* "Ver los dos niveles", "Ver todo lo que incluye" and the other
  * expanders: a 44px tall summary (it was 40px). */
 .pack-details summary {
@@ -8809,26 +8768,408 @@ html[data-motion-tier="reduced"] :is(.island-nav__sheet, .island-nav[data-open] 
   list-style: none;
 }
 
-/* Centred lines of four sentences read poorly on a phone: they line up on
- * the left there, each after a small leaf mark like the pack lists. */
-@media (max-width: 40rem) {
-  .packs__payment ul {
-    text-align: start;
+/* ======================================================================
+ * Mobile packs carousel, payment toggletip and six-steps rail
+ * (Juani, 24 November 2026; docs/plans/2026-11-24-mobile-packs.md)
+ * ==================================================================== */
+
+/* Packs: the grid from tablet up; on phones an endless swipe row
+ * (PackCarousel). The copies only exist for the phone loop. */
+.packs__clone,
+.packs__controls {
+  display: none;
+}
+
+@media (max-width: 48rem) {
+  .packs__grid {
+    display: flex;
+    gap: 0.75rem;
+    /* Full width, so the neighbours peek in from the screen's edges; the
+     * block padding keeps the featured label and the shadows unclipped. */
+    margin-inline: calc(50% - 50vw);
+    padding-block: 1.25rem 3.25rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
   }
 
-  .packs__payment li {
-    position: relative;
-    padding-inline-start: 1rem;
+  .packs__grid::-webkit-scrollbar {
+    display: none;
   }
 
-  .packs__payment li::before {
+  .packs__grid > * {
+    flex: 0 0 min(78vw, 22rem);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    transition:
+      opacity var(--m-panel) var(--ease-ui),
+      scale var(--m-panel) var(--ease-ui);
+  }
+
+  .packs__clone {
+    display: block;
+  }
+
+  .packs__clone > .pack {
+    height: 100%;
+  }
+
+  /* The centred card in full, its neighbours set back a little. */
+  .packs__grid:has(> .is-current) > :not(.is-current) {
+    opacity: 0.6;
+    scale: 0.95;
+  }
+
+  .packs__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-block: -2rem 0.5rem;
+  }
+
+  .packs__dots {
+    display: flex;
+  }
+
+  .packs__dot,
+  .packs__arrow {
+    display: grid;
+    place-items: center;
+    height: 2.75rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--moss);
+    cursor: pointer;
+  }
+
+  .packs__dot {
+    width: 1.75rem;
+  }
+
+  .packs__dot::before {
     content: "";
-    position: absolute;
-    inset-inline-start: 0.1rem;
-    inset-block-start: 0.55em;
-    width: 0.4rem;
-    height: 0.4rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: var(--radius-pill);
+    background: color-mix(in oklch, var(--ink-soft) 30%, transparent);
+    transition:
+      width var(--m-base) var(--ease-ui),
+      background-color var(--m-base) var(--ease-ui);
+  }
+
+  .packs__dot[aria-current]::before {
+    width: 1.25rem;
+    background: var(--moss);
+  }
+
+  .packs__arrow {
+    width: 2.75rem;
     border-radius: 50%;
-    background: var(--leaf);
+    background: var(--cream);
+    box-shadow: 0 0.5rem 1rem -0.6rem oklch(30% 0.05 60 / 45%);
+    transition: translate var(--m-press) var(--ease-ui);
+  }
+
+  /* A chevron drawn from two borders, pointing its way. */
+  .packs__arrow::before {
+    content: "";
+    width: 0.55rem;
+    height: 0.55rem;
+    border-block-start: 2px solid currentColor;
+    border-inline-end: 2px solid currentColor;
+    rotate: 45deg;
+    translate: -0.1rem 0;
+  }
+
+  .packs__arrow--prev::before {
+    rotate: -135deg;
+    translate: 0.1rem 0;
+  }
+
+  .packs__arrow:active {
+    translate: 0 1px;
+  }
+
+  .packs__dot:focus-visible,
+  .packs__arrow:focus-visible {
+    outline: 2px solid var(--moss);
+    outline-offset: 2px;
+    border-radius: var(--radius-pill);
+  }
+}
+
+/* Without JavaScript the row is a plain swipe through the three real cards. */
+@media (scripting: none) {
+  .packs__clone,
+  .packs__controls {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .packs__grid > * {
+    transition: none;
+  }
+}
+
+html[data-motion-tier="reduced"] .packs__grid > * {
+  transition: none;
+}
+
+/* "Cómo se paga (?)": the heading is the toggle, the four lines open in a
+ * panel under it (PaymentTip). */
+.packs__payment {
+  position: relative;
+  z-index: 3;
+  margin-block: 1rem 2.5rem;
+  text-align: center;
+}
+
+.packs__payment .packs__payment-title {
+  margin: 0;
+}
+
+.packs__payment-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.85rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.packs__payment-mark {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1.5px solid var(--moss);
+  border-radius: 50%;
+  color: var(--moss);
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;
+  transition:
+    background-color var(--m-base) var(--ease-ui),
+    color var(--m-base) var(--ease-ui);
+}
+
+.packs__payment-toggle[aria-expanded="true"] .packs__payment-mark {
+  background: var(--moss);
+  color: var(--cream);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .packs__payment-toggle:hover .packs__payment-mark {
+    background: var(--moss);
+    color: var(--cream);
+  }
+}
+
+.packs__payment-toggle:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 2px;
+}
+
+.packs__payment-toggle:active {
+  translate: 0 1px;
+}
+
+.packs__payment-panel {
+  position: absolute;
+  inset-block-start: calc(100% + 0.5rem);
+  inset-inline-start: 50%;
+  width: min(28rem, calc(100vw - 2 * var(--gutter)));
+  padding: 1rem 1.15rem;
+  border-radius: 1rem;
+  background: var(--cream);
+  box-shadow: var(--m-shadow-card);
+  color: var(--ink-soft);
+  text-align: start;
+  translate: -50% 0;
+  transition:
+    opacity var(--m-panel) var(--ease-ui),
+    translate var(--m-panel) var(--ease-ui);
+}
+
+@starting-style {
+  .packs__payment-panel {
+    opacity: 0;
+    translate: -50% -0.35rem;
+  }
+}
+
+/* The notch pointing at the (?) toggle. */
+.packs__payment-panel::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -0.4rem;
+  inset-inline-start: calc(50% - 0.4rem);
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 0.15rem;
+  background: inherit;
+  rotate: 45deg;
+}
+
+.packs__payment-panel[hidden] {
+  display: none;
+}
+
+.packs__payment-panel li {
+  position: relative;
+  padding-inline-start: 1rem;
+}
+
+.packs__payment-panel li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0.1rem;
+  inset-block-start: 0.55em;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--leaf);
+}
+
+/* Six steps on phones, while the path is pinned: the six step buttons stand
+ * in a vertical rail beside the current step, filling from the top as the
+ * page goes down (Juani, 24 November 2026: the horizontal bar "parece que el
+ * scroll es horizontal y no lo es"). The step card names its place, "Paso 3
+ * de 6". */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    @media (max-width: 48rem) {
+      .sendero__copy {
+        display: grid;
+        grid-template-columns: 2.75rem minmax(0, 1fr);
+        column-gap: 0.4rem;
+        align-items: start;
+      }
+
+      .sendero__title {
+        grid-column: 1 / -1;
+      }
+
+      .sendero__steps {
+        grid-column: 2;
+        grid-row: 2;
+        counter-reset: sendero-step;
+      }
+
+      .sendero__step {
+        grid-template-columns: minmax(0, 1fr);
+        counter-increment: sendero-step;
+      }
+
+      .sendero__step::before {
+        content: "Paso " counter(sendero-step) " de 6";
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--moss);
+      }
+
+      .sendero__number {
+        display: none;
+      }
+
+      .sendero__go {
+        margin-block-start: 0;
+        padding-block-start: 0.15rem;
+      }
+
+      .sendero__step p {
+        grid-column: 1;
+      }
+
+      .sendero__bar {
+        position: relative;
+        grid-column: 1;
+        grid-row: 2;
+        display: flex;
+        flex-direction: column;
+        margin-block-start: 0.75rem;
+      }
+
+      /* The rail between the first and the last dot, and its fill. */
+      .sendero__bar::before,
+      .sendero__bar::after {
+        content: "";
+        position: absolute;
+        inset-block: 1.375rem;
+        inset-inline-start: calc(50% - 1px);
+        width: 2px;
+        border-radius: var(--radius-pill);
+        background: oklch(96% 0.018 75 / 55%);
+      }
+
+      .sendero__bar::after {
+        background: var(--moss);
+        transform-origin: top;
+        animation: sendero-rail-fill linear both;
+        animation-timeline: --sendero;
+        animation-range: contain 0% contain 83.33%;
+      }
+
+      .sendero__bar button {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        padding: 0;
+        border: 0;
+        background: none;
+        cursor: pointer;
+      }
+
+      .sendero__bar button:focus-visible {
+        outline: 2px solid var(--moss);
+        outline-offset: -2px;
+        border-radius: 50%;
+      }
+
+      .sendero__bar i {
+        width: 0.7rem;
+        height: 0.7rem;
+        border-radius: 50%;
+        background: oklch(96% 0.018 75);
+        animation: sendero-bar-on linear forwards;
+        animation-timeline: --sendero;
+        animation-range: contain var(--from) contain 100%;
+        transition: scale var(--m-base) var(--ease-ui);
+      }
+
+      .sendero__bar button:first-child i {
+        animation-fill-mode: both;
+      }
+
+      .sendero__bar button[aria-current] i {
+        scale: 1.5;
+        box-shadow: 0 0 0 3px color-mix(in oklch, var(--moss) 25%, transparent);
+      }
+    }
+  }
+}
+
+@keyframes sendero-rail-fill {
+  from {
+    scale: 1 0;
+  }
+
+  to {
+    scale: 1 1;
   }
 }
