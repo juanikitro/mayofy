@@ -89,9 +89,10 @@ export const ambientClouds: Record<AmbientIsland, CloudLayer> = {
     wind: 1,
     speed: 0.18,
     clouds: [
-      { puff: 1, depth: "far", x: 20, y: 52, w: 10, mobile: { x: 18, y: 62, w: 24 } },
-      { puff: 0, depth: "far", x: 82, y: 40, w: 9, flip: true, mobile: { x: 86, y: 58, w: 20 } },
-      { puff: 2, depth: "near", x: 60, y: 94, w: 22, mobile: { x: 46, y: 98, w: 56 } },
+      // Low, under the copy column: the light text never sits on a lit cloud.
+      { puff: 1, depth: "far", x: 20, y: 84, w: 10, mobile: { x: 18, y: 62, w: 24 } },
+      { puff: 0, depth: "far", x: 82, y: 78, w: 9, flip: true, mobile: { x: 86, y: 58, w: 20 } },
+      { puff: 2, depth: "near", x: 60, y: 94, w: 22, mobile: { x: 46, y: 97, w: 40 } },
     ],
   },
   // Night: dark cumulus lit by the moon, slow.

@@ -9476,8 +9476,8 @@ html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambie
 
 [data-island="6"] {
   --amb-cloud-tint: url("#amb-tint-dusk");
-  --amb-cloud-far: 0.75;
-  --amb-cloud-near: 0.8;
+  --amb-cloud-far: 0.7;
+  --amb-cloud-near: 0.62;
 }
 
 [data-island="7"] {
@@ -9643,5 +9643,180 @@ html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambie
 @media (max-width: 48rem) {
   .ambient-meteor {
     width: 22%;
+  }
+}
+
+/* Light cast on the islands (SceneLight): layers over the plate, masked by
+ * the island cutout, so the light falls on the grass, on Juani and on Mayo
+ * and never on the sky. "warm" tints with soft-light (keeps the painted
+ * shadows), "glow" adds a little light with screen. Opacity and a small
+ * translate only, on two clocks, so the flicker never loops visibly. */
+.ambient-light {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  -webkit-mask-image: var(--amb-mask-fallback);
+  mask-image: var(--amb-mask-fallback);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+@supports (mask-image: image-set(url("a.avif") type("image/avif"))) {
+  .ambient-light {
+    mask-image: var(--amb-mask);
+  }
+}
+
+html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambient-light {
+  display: block;
+}
+
+.ambient-light--warm {
+  mix-blend-mode: soft-light;
+  animation: ambient-fire-a 2.7s linear infinite paused;
+}
+
+.ambient-light--glow {
+  mix-blend-mode: screen;
+  animation: ambient-fire-b 1.9s linear infinite paused;
+}
+
+[data-ambient-live] .ambient-light {
+  animation-play-state: running;
+}
+
+/* Island 6: the campfire between Mayo and Juani's bench. */
+.ambient-light--fire.ambient-light--warm {
+  background:
+    radial-gradient(ellipse 13% 9% at 55.2% 57%, oklch(86% 0.17 62 / 95%), oklch(76% 0.17 50 / 45%) 50%, transparent),
+    radial-gradient(ellipse 3.6% 11% at 63.2% 47%, oklch(84% 0.16 60 / 80%), transparent),
+    radial-gradient(ellipse 4% 4.6% at 47.6% 57%, oklch(84% 0.16 60 / 70%), transparent);
+}
+
+.ambient-light--fire.ambient-light--glow {
+  background:
+    radial-gradient(ellipse 8% 6% at 55.2% 56%, oklch(74% 0.16 55 / 48%), transparent),
+    radial-gradient(ellipse 1.8% 3.2% at 63.6% 40.5%, oklch(76% 0.13 62 / 18%), transparent),
+    radial-gradient(ellipse 2.6% 3% at 48% 56.5%, oklch(74% 0.13 58 / 16%), transparent);
+}
+
+@media (max-width: 48rem) {
+  .ambient-light {
+    -webkit-mask-image: var(--amb-mask-fallback-m);
+    mask-image: var(--amb-mask-fallback-m);
+  }
+
+  @supports (mask-image: image-set(url("a.avif") type("image/avif"))) {
+    .ambient-light {
+      mask-image: var(--amb-mask-m);
+    }
+  }
+
+  .ambient-light--fire.ambient-light--warm {
+    background:
+      radial-gradient(ellipse 25% 6.5% at 53.8% 73%, oklch(86% 0.17 62 / 95%), oklch(76% 0.17 50 / 45%) 50%, transparent),
+      radial-gradient(ellipse 6% 7% at 61.4% 67%, oklch(84% 0.16 60 / 80%), transparent),
+      radial-gradient(ellipse 7% 3.6% at 39.5% 71.5%, oklch(84% 0.16 60 / 70%), transparent);
+  }
+
+  .ambient-light--fire.ambient-light--glow {
+    background:
+      radial-gradient(ellipse 15% 4.4% at 53.8% 72%, oklch(74% 0.16 55 / 48%), transparent),
+      radial-gradient(ellipse 3.4% 2% at 62.8% 63%, oklch(76% 0.13 62 / 18%), transparent),
+      radial-gradient(ellipse 5% 2.2% at 39.5% 71%, oklch(74% 0.13 58 / 16%), transparent);
+  }
+}
+
+/* On desktop the island 6 cutout sits 26vw right of its plate (.hearth):
+ * its light goes with it, flicker included. */
+@media (min-width: 48.01rem) {
+  .hearth .ambient-light {
+    --amb-shift: var(--hearth-shift);
+
+    translate: var(--amb-shift) 0;
+  }
+}
+
+/* Uneven steps on a linear clock: a flame never breathes evenly. */
+@keyframes ambient-fire-a {
+  0% {
+    opacity: 0.62;
+  }
+
+  9% {
+    opacity: 0.92;
+  }
+
+  17% {
+    opacity: 0.48;
+  }
+
+  31% {
+    opacity: 1;
+  }
+
+  38% {
+    opacity: 0.7;
+  }
+
+  52% {
+    opacity: 0.88;
+  }
+
+  61% {
+    opacity: 0.42;
+  }
+
+  74% {
+    opacity: 1;
+  }
+
+  88% {
+    opacity: 0.58;
+  }
+
+  100% {
+    opacity: 0.62;
+  }
+}
+
+@keyframes ambient-fire-b {
+  0% {
+    opacity: 0.45;
+    translate: calc(var(--amb-shift, 0px) + 0%) 0;
+  }
+
+  14% {
+    opacity: 1;
+    translate: calc(var(--amb-shift, 0px) + 0.15%) -0.1%;
+  }
+
+  29% {
+    opacity: 0.35;
+    translate: calc(var(--amb-shift, 0px) + -0.1%) 0;
+  }
+
+  47% {
+    opacity: 0.85;
+    translate: calc(var(--amb-shift, 0px) + 0.05%) -0.15%;
+  }
+
+  66% {
+    opacity: 0.55;
+    translate: calc(var(--amb-shift, 0px) + -0.15%) -0.05%;
+  }
+
+  83% {
+    opacity: 0.95;
+    translate: calc(var(--amb-shift, 0px) + 0.1%) 0;
+  }
+
+  100% {
+    opacity: 0.45;
+    translate: calc(var(--amb-shift, 0px) + 0%) 0;
   }
 }
