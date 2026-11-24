@@ -269,7 +269,16 @@ function retain() {
  * nobody gestured for (a focus moved by Tab, an in-page link, find in page, a
  * guided scroll) never end a gesture. Returns a cleanup function.
  */
+/**
+ * Automatic guidance switch (Juani, 24 November 2026: "desactiva el scroll guiado").
+ * While false, no section, island 4 card or six-steps stone settles the page after
+ * a gesture and no touch fling is stopped; scrolls the reader asks for (step
+ * buttons, links) and island 3's own play are unaffected.
+ */
+export const AUTO_GUIDANCE_ENABLED = false;
+
 export function onGestureEnd(onEnd: (gesture: Gesture) => void) {
+  if (!AUTO_GUIDANCE_ENABLED) return () => {};
   listeners.add(onEnd);
   const release = retain();
   return () => {
@@ -283,6 +292,7 @@ export function onGestureEnd(onEnd: (gesture: Gesture) => void) {
  * asked when a fling starts; return none to leave it free). Returns a cleanup function.
  */
 export function addMomentumStops(provider: StopsProvider) {
+  if (!AUTO_GUIDANCE_ENABLED) return () => {};
   stopProviders.add(provider);
   const release = retain();
   return () => {
