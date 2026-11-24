@@ -805,10 +805,12 @@ export const packsMayo = {
    * Her moments in vh of pinned scroll (rocksStage), each long enough to be
    * watched with a wheel or a flick (a wheel notch is about 11 vh on a
    * 900 px screen): `hops` bounds two hop cycles, a small hop of 40 vh right
-   * after the first platform lands and the long leap (2.7 of her widths) of
-   * 60 vh after the second, airborne for 30 vh and landing as the third
-   * platform does (Juani, 23 November 2026: "la animacion es incomoda"; at
-   * 40 vh it crossed the screen in two wheel notches); sitting down over
+   * after the first platform lands and her run (2.7 of her widths) of 60 vh
+   * after the second: two chained bounds of the hop strip, airborne for
+   * 30 vh in all and landing as the third platform does (Juani, 23 November
+   * 2026: "la animacion es incomoda"; 24 November: "que corra de un punto a
+   * otro y no se deslice estando parada"; world.css packs-mayo-run-frames);
+   * sitting down over
    * 28 vh, then seated. Her watching loop eases
    * back to its first frame from `miraRest` so it hands over to the hop on
    * the same painted frame, and the seated loop only starts at `sentadaLoop`,

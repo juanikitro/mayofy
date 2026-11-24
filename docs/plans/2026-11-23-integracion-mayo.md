@@ -53,6 +53,16 @@ Las 12 posturas de la reverencia apoyan las patas en el mismo lugar: la trasera 
 
 Los valores se eligieron comparando variantes inyectadas en el navegador. En `integracion-mayo/sombra-isla-2.jpg`, de izquierda a derecha: la versión anterior, una variante intermedia y la elegida.
 
+**Quinta entrega (24/11/2026, "que la animacion en la isla 3 corra de un punto a otro y no se deslice estando parada")**
+
+- **Causa del deslizamiento.** Era una regresión de la tercera entrega (957b8cc). Al separar el salto chico y el largo en dos animaciones listadas en el shorthand, la duración de la tira quedó en `0s`: con una lista, el shorthand no resuelve `auto` (el mismo problema ya estaba anotado en las rocas). Con duración 0, la animación ligada al scroll salta al final, así que la tira mostraba siempre el último cuadro, parada, mientras la caja avanzaba. Se agregó `animation-duration: auto` a la tira y a la caja.
+- **Carrera.** El tramo largo (2,7 anchos de Mayo) pasa a ser dos saltos encadenados de la misma tira (`packs-mayo-run-frames`, 18 pasos):
+  - parada → agachada → despegue → vuelo → aterrizaje agachada → despegue → vuelo → aterrizaje → se endereza;
+  - el aterrizaje del primer salto (cuadro 8) sirve de impulso para el segundo, sin pararse en el medio;
+  - cada salto cubre la mitad del camino.
+- **Solo se mueve en el aire.** Mayo se traslada únicamente entre el despegue (cuadro 3) y el apoyo (cuadro 8), en el salto chico y en los dos de la carrera. En los cuadros apoyados queda quieta.
+- **Verificación:** se recorrió la isla de a 0,75-1,5 vh en 1440x900 y 390x844. Ningún cambio de posición cae en un cuadro apoyado, sin errores de consola, y con movimiento reducido no queda ninguna animación activa. Secuencia en `integracion-mayo/carrera-isla-3.jpg`, de 96 a 140 vh.
+
 ## Evidencia
 
 - `integracion-mayo/isla-{2,3,6,7}.jpg`: cuatro cuadros por isla. Arriba, la tira anterior; abajo, la nueva (en la 6 y la 7, con la luz final).
