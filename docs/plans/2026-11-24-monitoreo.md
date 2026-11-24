@@ -5,7 +5,17 @@ Pedido de Juani (24 de noviembre de 2026): "Implementa alerta de si el sitio se 
 ## Estado
 
 - Hecho: ruta `GET /api/health` en el código (sin publicar todavía).
-- Pendiente de Juani: elegir el servicio de monitoreo y crear los monitores (guía abajo).
+- Decidido (Juani, 24 de noviembre de 2026: "apruebo"): Better Stack Uptime, plan gratis.
+- Hecho (24 de noviembre de 2026): Juani creó la cuenta (Google, `jpkitro@gmail.com`, plan **Free**; el onboarding traía preseleccionado el plan pago de USD 29 y se cambió a Free). El agente creó dos monitores desde el Chrome de Juani:
+
+  | Monitor | URL | Frecuencia | Confirmación | Aviso |
+  |---|---|---|---|---|
+  | Mayofy home | `https://mayofy.dev/` | 3 min | 1 min | email |
+  | Mayofy caso ShineApp | `https://mayofy.dev/proyectos/shineapp` | 3 min | 1 min | email |
+
+  Ambos quedaron en **Up**. Con 1 minuto de confirmación, Better Stack vuelve a chequear antes de abrir un incidente, así que un error aislado no dispara un mail. El resto quedó por defecto: `GET`, timeout de 30 s, sigue redirecciones, chequea desde Europa, Norteamérica, Asia y Australia. El onboarding creó un "Sample incident" de `google.com`; es de ejemplo y se puede resolver o ignorar.
+- Pendiente: monitor de `https://mayofy.dev/api/health` cuando este cambio esté publicado (hoy da `404` y abriría un incidente falso). Mismos ajustes, nombre "Mayofy health".
+- Las alertas van a `jpkitro@gmail.com` y no a `hola@mayofy.dev`, porque el reenvío de `hola@` depende del mismo DNS que el sitio: si se rompe el DNS, se perderían el sitio y el aviso a la vez.
 - Pendiente de decisión: seguimiento de errores.
 
 ## Qué cambió en el código
@@ -47,6 +57,18 @@ Fuentes:
 - Con `next start` local: `GET` → `200` y el JSON de arriba (0,25 s); `HEAD` → `200`; `POST` → `405`.
 - En producción `https://mayofy.dev/api/health` da `404` hasta que se publique este cambio. La home y `/proyectos/shineapp` dan `200`.
 - No hay corredor de tests en el proyecto, así que no hubo test automático (RED/GREEN); la verificación fue funcional con `curl`.
+
+## Qué hacer cuando llega una alerta
+
+1. **Confirmar.** Abrí https://mayofy.dev en el celular con datos móviles, sin Wi-Fi. Si carga, puede ser un problema de red de Better Stack; esperá el próximo chequeo (3 min).
+2. **Mirar qué monitor cayó.**
+   - Solo cae `Mayofy caso ShineApp`: falla esa página. Revisá el último deploy.
+   - Caen todos: el servidor o el DNS están caídos. Seguí con el paso 3.
+3. **Railway.** Entrá al proyecto `mayofy`, servicio `web`:
+   - Si el último deploy dice *Failed* o *Crashed*, abrí sus logs. Para volver atrás, en el deploy anterior que funcionaba usá **Redeploy**.
+   - Si el deploy está *Active* pero el sitio no responde, mirá los logs del servicio (los errores del formulario empiezan con `[contact]`) y la página de estado de Railway: https://status.railway.com
+4. **DNS.** Si Railway está bien pero el dominio no responde, revisá los registros en Vercel (ver [docs/ops/domains.md](../ops/domains.md)).
+5. **Cierre.** Better Stack te manda otro mail cuando el sitio vuelve. Anotá en este documento qué pasó si fue algo nuevo.
 
 ## Límites
 
