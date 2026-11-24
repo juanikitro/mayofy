@@ -9363,7 +9363,11 @@ html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambie
   top: var(--amb-y);
   left: calc(-1 * var(--amb-w));
   width: var(--amb-w);
-  transform: translateY(-50%);
+  /* The vertical centring lives in `translate` (and in the drift keyframes):
+   * a static `transform` next to an animated `translate` keeps Chrome from
+   * running the drift on the compositor, and every frame then ticks it on
+   * the main thread. */
+  translate: 0 -50%;
   animation: ambient-drift var(--amb-drift-time) linear var(--amb-drift-delay) infinite paused;
 }
 
@@ -9436,21 +9440,21 @@ html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambie
 
 @keyframes ambient-drift {
   from {
-    translate: 0 0;
+    translate: 0 -50%;
   }
 
   to {
-    translate: var(--amb-drift) 0;
+    translate: var(--amb-drift) -50%;
   }
 }
 
 @keyframes ambient-drift-m {
   from {
-    translate: 0 0;
+    translate: 0 -50%;
   }
 
   to {
-    translate: var(--amb-drift-m) 0;
+    translate: var(--amb-drift-m) -50%;
   }
 }
 
