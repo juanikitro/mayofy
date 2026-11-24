@@ -9820,3 +9820,85 @@ html:is([data-ambient="full"], [data-ambient="lite"]) [data-ambient-near] .ambie
     translate: calc(var(--amb-shift, 0px) + 0%) 0;
   }
 }
+
+/* Island 7: the candle in the lantern on the left rock. Slower clocks than
+ * the campfire: a candle wavers, it does not roar. */
+.ambient-light--lantern.ambient-light--warm {
+  animation-duration: 3.4s;
+  background:
+    radial-gradient(ellipse 5.2% 6.5% at 36.5% 46%, oklch(84% 0.14 68 / 72%), oklch(78% 0.13 62 / 28%) 50%, transparent),
+    radial-gradient(ellipse 1.8% 3.6% at 43.4% 43.8%, oklch(88% 0.12 82 / 60%), transparent);
+}
+
+.ambient-light--lantern.ambient-light--glow {
+  animation-duration: 2.6s;
+  background: radial-gradient(ellipse 2.8% 3.8% at 36.5% 45.4%, oklch(80% 0.12 85 / 38%), transparent);
+}
+
+@media (max-width: 48rem) {
+  .ambient-light--lantern.ambient-light--warm {
+    background:
+      radial-gradient(ellipse 11.5% 4% at 27% 70.8%, oklch(84% 0.14 68 / 72%), oklch(78% 0.13 62 / 28%) 50%, transparent),
+      radial-gradient(ellipse 3.6% 2.4% at 38.6% 70%, oklch(88% 0.12 82 / 60%), transparent);
+  }
+
+  .ambient-light--lantern.ambient-light--glow {
+    background: radial-gradient(ellipse 5.6% 2.4% at 26.9% 70.3%, oklch(80% 0.12 85 / 38%), transparent);
+  }
+}
+
+/* Fireflies: a quick flash, a slow fade and a long dim, each on its own
+ * clock (from its index among the plate objects), on top of the float and,
+ * where it applies, the scroll-driven chase they already have. */
+@keyframes ambient-firefly {
+  0% {
+    opacity: 0.3;
+    scale: 1;
+  }
+
+  5% {
+    opacity: 1;
+    scale: 1.14;
+  }
+
+  12% {
+    opacity: 0.92;
+    scale: 1.08;
+  }
+
+  30% {
+    opacity: 0.34;
+    scale: 1;
+  }
+
+  100% {
+    opacity: 0.24;
+    scale: 1;
+  }
+}
+
+html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"] .plate-object--glow {
+  --amb-ff: calc(3.2s + var(--object-index, 0) * 0.41s);
+  --amb-ff-delay: calc(var(--object-index, 0) * -1.37s);
+
+  animation: object-float 5s ease-in-out var(--float-delay, 0s) infinite, ambient-firefly var(--amb-ff) linear var(--amb-ff-delay) infinite paused;
+}
+
+html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"][data-ambient-live] .plate-object--glow {
+  animation-play-state: running;
+}
+
+@supports (animation-timeline: view()) {
+  html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"] .plate-object--chased {
+    animation: object-chase linear both, object-float 5s ease-in-out infinite, ambient-firefly var(--amb-ff) linear infinite;
+    animation-timeline: --isle, auto, auto;
+    animation-range: var(--chase-range), normal, normal;
+    animation-delay: 0s, var(--float-delay, 0s), var(--amb-ff-delay);
+    animation-composition: replace, add, replace;
+    animation-play-state: running, running, paused;
+  }
+
+  html:is([data-ambient="full"], [data-ambient="lite"]) [data-island="7"][data-ambient-live] .plate-object--chased {
+    animation-play-state: running;
+  }
+}

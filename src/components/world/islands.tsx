@@ -6,6 +6,7 @@ import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure } from "@/components/world/mayo-figure";
 import { PlateObjects } from "@/components/world/plate-objects";
 import { SceneGlow } from "@/components/world/scene-glow";
+import { SceneLight } from "@/components/world/scene-light";
 import { SixSteps } from "@/components/world/six-steps";
 import { WorksIndex } from "@/components/world/works-index";
 import { DetailGroups } from "@/components/world/pack-groups";
@@ -51,6 +52,7 @@ export function QuestionsIsland() {
       <IslandScene variant="night" plate={islandPlates.questions} backdrop={<AmbientBackdrop island="questions" />}>
         {/* The lantern painted on the left rock. */}
         <SceneGlow kind="lantern" desktop={{ x: "36.5%", y: "45.6%", w: "7%" }} mobile={{ x: "26.9%", y: "70.5%", w: "16%" }} />
+        <SceneLight kind="lantern" plate={islandPlates.questions} />
         <PlateObjects objects={plateObjects.questions!} />
         <MayoFigure slot="questions" className="isle__mayo isle__mayo--chase" />
         <AmbientClouds island="questions" depth="near" />
