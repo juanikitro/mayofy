@@ -259,7 +259,12 @@ export function IslandNav() {
         data-story={onHome ? "" : undefined}
         data-open={open ? "" : undefined}
         onBlur={(event) => {
-          if (open && !event.currentTarget.contains(event.relatedTarget as Node | null)) setOpen(false);
+          // Only focus moving to another element (Tab) closes the sheet here.
+          // Focus moving to nothing is a press: Safari never focuses a tapped
+          // link, so closing (and making the sheet inert) would swallow the
+          // tap's click. Presses outside are closed by the pointerdown listener.
+          const next = event.relatedTarget as Node | null;
+          if (open && next && !event.currentTarget.contains(next)) setOpen(false);
         }}
       >
         <span className="island-nav__glass" aria-hidden="true" />
