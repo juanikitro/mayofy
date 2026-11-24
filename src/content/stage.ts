@@ -422,11 +422,18 @@ export const mayoAnchors: Partial<Record<MayoSlotId, MayoAnchor>> = {
     // 20-52 %, 88 %) and the hind paws (70-78 %, 72 %), plus a cast down-left like the rocks': from
     // under her hindquarters to past her front paws, fading at its far end.
     contact: {
-      tint: "26 46 10",
+      tint: "18 36 6",
       layers: [
-        { kind: "cast", x: "50%", y: "87%", w: "48%", h: "9%", opacity: 0.66 },
-        { kind: "ao", x: "60%", y: "88.5%", w: "34%", h: "3.6%", opacity: 0.86 },
-        { kind: "ao", x: "33%", y: "87%", w: "11%", h: "3%", opacity: 0.82 },
+        // Measured on the strip (all 12 bow frames share the paws): hind paw x 23-31 %, down at 83 %;
+        // front paws x 44-55 % and 66-77 %, down at 88 %. One occlusion per paw, a penumbra under
+        // the low chest, then the cast down-left towards the camera like the rocks'. Radii are
+        // generous on purpose: at ~120 px on screen anything under ~5 % hides behind her body
+        // (Juani, 2026-11-24: "mejora la sombra de este frame").
+        { kind: "ao", x: "27%", y: "84.5%", w: "9%", h: "5.5%", opacity: 1 },
+        { kind: "ao", x: "49%", y: "89%", w: "10.5%", h: "5.5%", opacity: 1 },
+        { kind: "ao", x: "71.5%", y: "88.8%", w: "10%", h: "5.5%", opacity: 1 },
+        { kind: "cast", x: "52%", y: "89%", w: "38%", h: "10%", opacity: 0.85 },
+        { kind: "cast", x: "32%", y: "93%", w: "42%", h: "12%", opacity: 0.7 },
       ],
     },
   },
@@ -798,10 +805,12 @@ export const packsMayo = {
    * Her moments in vh of pinned scroll (rocksStage), each long enough to be
    * watched with a wheel or a flick (a wheel notch is about 11 vh on a
    * 900 px screen): `hops` bounds two hop cycles, a small hop of 40 vh right
-   * after the first platform lands and the long leap (2.7 of her widths) of
-   * 60 vh after the second, airborne for 30 vh and landing as the third
-   * platform does (Juani, 23 November 2026: "la animacion es incomoda"; at
-   * 40 vh it crossed the screen in two wheel notches); sitting down over
+   * after the first platform lands and her run (2.7 of her widths) of 60 vh
+   * after the second: two chained bounds of the hop strip, airborne for
+   * 30 vh in all and landing as the third platform does (Juani, 23 November
+   * 2026: "la animacion es incomoda"; 24 November: "que corra de un punto a
+   * otro y no se deslice estando parada"; world.css packs-mayo-run-frames);
+   * sitting down over
    * 28 vh, then seated. Her watching loop eases
    * back to its first frame from `miraRest` so it hands over to the hop on
    * the same painted frame, and the seated loop only starts at `sentadaLoop`,

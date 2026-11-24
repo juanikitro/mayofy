@@ -690,16 +690,20 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
   }
 }
 
-/* Her small hop and her leap, one hop strip cycle each on its own range
- * (--range-hop, --range-leap): she moves only while airborne, frames 3 to 8
- * of 12 (2/12 to 8/12 of the cycle), and stands still otherwise. */
+/* Her small hop and her run, each on its own range (--range-hop,
+ * --range-leap). She moves only while airborne, from the take-off (frame 3)
+ * to the touch-down (frame 8, paws planted), so she never slides on her
+ * feet (Juani, 24 November 2026: "que corra de un punto a otro y no se
+ * deslice estando parada"). The hop is one strip cycle: airborne 2/12 to
+ * 7/12. The run is two chained bounds of 18 steps (packs-mayo-run-frames),
+ * each covering half the way: airborne steps 2-7 and 8-13 of 18. */
 @keyframes packs-mayo-hop {
   0%,
   16.67% {
     translate: var(--hop-0) 0;
   }
 
-  66.67%,
+  58.33%,
   100% {
     translate: var(--hop-1) 0;
   }
@@ -707,14 +711,44 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
 
 @keyframes packs-mayo-leap {
   0%,
-  16.67% {
+  11.11% {
     translate: var(--hop-1) 0;
   }
 
-  66.67%,
+  38.89%,
+  44.44% {
+    translate: calc((var(--hop-1) + var(--hop-2)) / 2) 0;
+  }
+
+  72.22%,
   100% {
     translate: var(--hop-2) 0;
   }
+}
+
+/* The run's frames: stand, crouch, then take-off to touch-down twice (the
+ * landing crouch, frame 8, springs straight into the second take-off),
+ * then she straightens up. One cell per step, held until the next. */
+@keyframes packs-mayo-run-frames {
+  0% { transform: translateX(0%); }
+  5.56% { transform: translateX(calc(-100% / 12)); }
+  11.11% { transform: translateX(calc(-200% / 12)); }
+  16.67% { transform: translateX(calc(-300% / 12)); }
+  22.22% { transform: translateX(calc(-400% / 12)); }
+  27.78% { transform: translateX(calc(-500% / 12)); }
+  33.33% { transform: translateX(calc(-600% / 12)); }
+  38.89% { transform: translateX(calc(-700% / 12)); }
+  44.44% { transform: translateX(calc(-200% / 12)); }
+  50% { transform: translateX(calc(-300% / 12)); }
+  55.56% { transform: translateX(calc(-400% / 12)); }
+  61.11% { transform: translateX(calc(-500% / 12)); }
+  66.67% { transform: translateX(calc(-600% / 12)); }
+  72.22% { transform: translateX(calc(-700% / 12)); }
+  77.78% { transform: translateX(calc(-800% / 12)); }
+  83.33% { transform: translateX(calc(-900% / 12)); }
+  88.89% { transform: translateX(calc(-1000% / 12)); }
+  94.44%,
+  100% { transform: translateX(calc(-1100% / 12)); }
 }
 
 /* Mayo's key poses, where the guided scroll may settle (data-scroll-rest,
@@ -1374,6 +1408,8 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
    * each hand-over shares. */
   .packs-mayo {
     animation: packs-mayo-hop linear both, packs-mayo-leap linear forwards;
+    /* A list in the shorthand resolves its durations to 0s, not to the range. */
+    animation-duration: auto;
     animation-timeline: --rocks, --rocks;
     animation-range: var(--range-hop), var(--range-leap);
   }
@@ -1390,9 +1426,13 @@ html[data-motion-tier="reduced"] .mayo__sprite img {
     animation-range: var(--range-hops);
   }
 
+  /* The hop plays the strip once; the run plays it as two chained bounds
+   * (packs-mayo-run-frames). Without an explicit duration the list would
+   * resolve to 0s and hold the last, standing frame while she travels. */
   .packs-mayo__strip--salto img {
-    animation: mayo-sprite linear both, mayo-sprite linear forwards;
-    animation-timing-function: steps(12, jump-none);
+    animation: mayo-sprite linear both, packs-mayo-run-frames linear forwards;
+    animation-duration: auto;
+    animation-timing-function: steps(12, jump-none), step-end;
     animation-timeline: --rocks, --rocks;
     animation-range: var(--range-hop), var(--range-leap);
   }
