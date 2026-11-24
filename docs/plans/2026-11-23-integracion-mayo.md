@@ -38,6 +38,21 @@ Las tiras de escritorio (`*-tira.avif`/`.webp`, 12 cuadros de 640 px) y las de c
   - La sección sigue midiendo 320 vh (220 vh de scroll fijado) y no se tocó el código del scroll guiado.
 - **Sombra de contacto más marcada.** Isla 2: la proyectada sube a 0,66 y la oclusión bajo las patas a 0,86 y 0,82, y se reubicó bajo las patas de la reverencia. Isla 3: el contacto (`.packs-mayo::before`) pasa del marrón al verde sombra del pasto, con un núcleo denso bajo las patas dentro de un charco más suave.
 
+**Cuarta entrega (24/11/2026, "mejora la sombra de este frame", isla 2)**
+
+La sombra de la isla 2 seguía sin verse por dos motivos:
+
+- **Medidas que no coincidían con la tira:** una oclusión caía en x 33 %, donde no hay ninguna pata.
+- **Radios demasiado chicos:** Mayo mide unos 120 px en pantalla, así que un radio vertical de 2 a 4 % de su celda son 3 a 5 px, y casi todo queda tapado por su cuerpo.
+
+Las 12 posturas de la reverencia apoyan las patas en el mismo lugar: la trasera en x 23-31 % (apoyo en y 83 %) y las delanteras en x 44-55 % y 66-77 % (apoyo en y 88 %). La capa nueva (`mayoAnchors.problem.contact`, tinte `18 36 6`) tiene:
+
+- una oclusión por pata, con radio vertical de 5,5 %;
+- una penumbra bajo el pecho;
+- una sombra proyectada hacia abajo a la izquierda, como la de las rocas.
+
+Los valores se eligieron comparando variantes inyectadas en el navegador. En `integracion-mayo/sombra-isla-2.jpg`, de izquierda a derecha: la versión anterior, una variante intermedia y la elegida.
+
 ## Evidencia
 
 - `integracion-mayo/isla-{2,3,6,7}.jpg`: cuatro cuadros por isla. Arriba, la tira anterior; abajo, la nueva (en la 6 y la 7, con la luz final).
