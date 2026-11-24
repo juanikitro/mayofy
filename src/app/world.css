@@ -6463,11 +6463,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
   font-size: 1.1rem;
 }
 
-.proposal__base span {
-  font-size: 0.85rem;
-  opacity: 0.85;
-}
-
 .proposal__modules {
   position: relative;
   display: grid;
@@ -6692,10 +6687,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
 
   .proposal-frame--scene .proposal__base b {
     font-size: 6cqi;
-  }
-
-  .proposal-frame--scene .proposal__base span {
-    font-size: 4.2cqi;
   }
 
   /* Six modules (22 November 2026): tighter rows keep the card above the island's meadow. */
@@ -8058,7 +8049,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
  * and the case result label, from 11.5-13.6px up to 12.8-15px. The scene
  * version on the pinned island keeps scaling with its frame, with a floor
  * so a laptop never shows it under 12.8-14px. */
-.proposal-frame--scene :is(.proposal__base span, .proposal__module > span:last-child) {
+.proposal-frame--scene .proposal__module > span:last-child {
   font-size: max(4.2cqi, 0.875rem);
 }
 
@@ -8070,7 +8061,6 @@ html[data-motion-tier="reduced"] .works-index__shot {
   font-size: 0.8rem;
 }
 
-.proposal-frame--flow .proposal__base span,
 .proposal-frame--flow .proposal__module > span:last-child {
   font-size: 0.95rem;
 }

@@ -62,7 +62,8 @@ export const casePicker = {
    * module per question as it lands, and a closing line.
    */
   proposal: {
-    base: { title: "Hecho para tu negocio", text: "Lo que tu negocio necesite." },
+    // The base card is its title alone (Juani, 24 November 2026: "elimina \"lo que tu negocio necesite\"").
+    base: { title: "Hecho para tu negocio" },
     modules: [
       { question: "¿Me pasás los precios?", title: "Bot de WhatsApp", text: "Responde precios y consultas al instante." },
       { question: "¿Tenés turno el jueves?", title: "Turnos online", text: "Tus clientes reservan solos." },
