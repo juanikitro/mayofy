@@ -865,6 +865,30 @@ export const packsAssembledPlate: { desktop?: PlateImage; mobile?: PlateImage } 
 };
 
 /**
+ * Each platform's rock stack on the painted assembled plates, as a
+ * `clip-path` polygon in % of the plate (desktop and phone crops, platforms
+ * in order). Traced from the paintings (the warm sandstone against the green,
+ * the convex hull of each stack pushed 6 px out so rim moss falls inside, a
+ * few measured points where moss covers a top), not hand-drawn. A copy of the
+ * painting clipped to one of them lifts a few pixels while that platform's
+ * marker is hovered or focused (world.css, "Wooden signs"), so the rock seems
+ * to lift although the painting is one image
+ * (docs/plans/2026-11-24-isla3-pulido.md).
+ */
+export const platformLiftOutlines: { desktop: readonly string[]; mobile: readonly string[] } = {
+  desktop: [
+    "polygon(19.35% 51.11%, 24.39% 41.94%, 28.65% 40.37%, 31.63% 40.91%, 32.41% 46.84%, 32.48% 47.53%, 32.48% 48.80%, 31.97% 51.35%, 31.51% 53.20%, 31.38% 53.32%, 20.23% 53.12%, 20.11% 53.02%)",
+    "polygon(46.32% 43.62%, 46.96% 34.90%, 47.04% 34.12%, 47.18% 33.68%, 47.24% 33.57%, 48.93% 31.47%, 50.79% 31.47%, 51.50% 32.13%, 52.66% 33.38%, 53.56% 38.01%, 53.89% 48.61%, 53.89% 49.04%, 53.82% 49.81%, 53.68% 50.24%, 47.46% 50.32%, 47.34% 50.21%, 46.49% 45.45%, 46.34% 44.43%)",
+    "polygon(69.01% 50.50%, 69.20% 42.81%, 69.27% 42.35%, 71.56% 33.74%, 71.88% 32.99%, 73.34% 31.24%, 75.16% 31.24%, 75.60% 31.89%, 76.62% 33.62%, 77.70% 38.33%, 77.85% 39.22%, 78.88% 50.20%, 78.86% 51.64%, 78.79% 51.98%, 78.73% 52.08%, 78.54% 52.32%, 78.22% 52.66%, 78.04% 52.78%, 70.03% 52.75%, 69.29% 52.60%, 69.10% 52.38%, 69.04% 51.83%)",
+  ],
+  mobile: [
+    "polygon(25.65% 51.11%, 31.45% 42.38%, 35.46% 40.97%, 37.82% 41.40%, 38.69% 47.08%, 38.70% 48.48%, 38.48% 51.50%, 37.83% 53.13%, 37.70% 53.37%, 26.69% 53.12%)",
+    "polygon(46.30% 44.22%, 47.04% 34.65%, 47.18% 34.00%, 48.84% 31.90%, 50.87% 31.88%, 52.47% 33.62%, 52.86% 34.84%, 53.37% 37.70%, 53.44% 38.38%, 53.85% 48.57%, 53.83% 49.56%, 53.77% 49.79%, 53.57% 50.13%, 52.49% 50.52%, 48.04% 50.51%, 47.52% 50.27%, 47.46% 50.15%, 47.33% 49.81%, 46.30% 45.03%)",
+    "polygon(62.39% 51.06%, 62.74% 44.52%, 62.93% 42.79%, 63.06% 42.09%, 65.38% 33.72%, 65.44% 33.51%, 65.51% 33.40%, 66.58% 31.77%, 68.85% 31.79%, 70.07% 34.39%, 71.21% 38.91%, 71.28% 39.36%, 71.35% 39.93%, 72.19% 50.07%, 72.24% 51.18%, 72.22% 51.85%, 72.15% 52.28%, 70.97% 52.78%, 70.35% 52.93%, 69.52% 53.08%, 64.03% 53.02%, 62.53% 52.39%, 62.47% 52.27%, 62.40% 51.84%)",
+  ],
+};
+
+/**
  * Each platform's shadow on the grass, measured on the painted plates
  * (`10-isla3-armada-*-isla` against `10-isla3-base-isla`: the darkening of
  * the grass around each stack's feet, weighted by how much darker it is), so

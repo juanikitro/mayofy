@@ -17,6 +17,7 @@ import {
   packsMayo,
   PLATFORM_CANVAS,
   platformGroundShadows,
+  platformLiftOutlines,
   platformPlacements,
   platforms,
   rockFloats,
@@ -287,6 +288,38 @@ function GrassTufts({ index }: { index: number }) {
   return <span className="rock-grass" style={style} />;
 }
 
+/** The lowest point of a `polygon(...)` outline, in its own units (% of the plate height). */
+const outlineFoot = (outline: string) => Math.max(...[...outline.matchAll(/[\d.]+% ([\d.]+)%/g)].map((match) => Number(match[1])));
+
+/**
+ * One copy of the painted assembled plate per platform, clipped to that
+ * platform's rock stack (stage.ts platformLiftOutlines) and fading out over
+ * its feet: hidden until its marker is hovered or focused, then it lifts a
+ * few pixels over the painting, so the rock under the sign seems to rise
+ * (world.css, "Wooden signs"). Same image as AssembledPlate, so nothing more
+ * is downloaded.
+ */
+function LiftPlates() {
+  const { desktop, mobile } = packsAssembledPlate;
+  if (!desktop) return null;
+  return platformLiftOutlines.desktop.map((outline, index) => {
+    const style = {
+      "--lift-d": outline,
+      "--lift-m": platformLiftOutlines.mobile[index],
+      "--lift-foot-d": `${outlineFoot(outline)}%`,
+      "--lift-foot-m": `${outlineFoot(platformLiftOutlines.mobile[index])}%`,
+    } as CSSProperties;
+    return (
+      <picture className={`plate__picture plate__picture--lift plate__picture--lift-${index + 1}`} style={style} key={index}>
+        {mobile ? <source media="(max-width: 48rem)" type="image/avif" srcSet={mobile.avif} /> : null}
+        {mobile ? <source media="(max-width: 48rem)" type="image/webp" srcSet={mobile.webp} /> : null}
+        <source type="image/avif" srcSet={desktop.avif} />
+        <img src={desktop.webp} alt="" width={desktop.width} height={desktop.height} loading="lazy" decoding="async" />
+      </picture>
+    );
+  });
+}
+
 /** How far the grass strip reaches above a platform's feet, in % of the plate height (it is 7 % tall). */
 const GRASS_RISE = 5.2;
 
@@ -503,6 +536,7 @@ export function RockIsland() {
               </Fragment>
             ))}
             <AssembledPlate />
+            <LiftPlates />
             <PacksMayo />
           </IslandPlate>
           <PacksPlay

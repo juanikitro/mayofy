@@ -12,8 +12,11 @@ const prefersReducedMotion = () =>
 
 /**
  * One-line markers on island 3's platforms (Juani, 20 November 2026, option A:
- * "los marcadores de una linea derivan alli"): each names its pack and price
- * and leads to the full pack card below (`#pack-<id>`). Following one scrolls
+ * "los marcadores de una linea derivan alli"), painted as small wooden signs
+ * staked on their rocks (Juani, 24 November: "elijo el cartel de madera"):
+ * each names its pack and price and leads to the full pack card below
+ * (`#pack-<id>`). Hovered or focused, the plank sways on its nail and the
+ * rock under it lifts (world.css, "Wooden signs"). Following one scrolls
  * smoothly to the card (instantly under reduced motion), moves focus to it so
  * the next Tab continues inside it, and rings it for a moment. Without
  * JavaScript the plain anchor still lands on the card.
@@ -46,11 +49,12 @@ export function PlatformMarkers({ markers }: { markers: readonly PlatformMarker[
           onClick={(event) => follow(event, marker.id)}
         >
           {/* Spaces between the parts keep the accessible name "Landing USD 85, ver qué incluye"; the flex gap does the visual spacing. */}
-          <span className="platform__marker-dot" aria-hidden="true" />
-          <span className="platform__marker-name">{marker.name}</span>{" "}
-          <span className="platform__marker-price">{marker.price}</span>{" "}
-          <span className="platform__marker-arrow" aria-hidden="true">
-            ↓
+          <span className="platform__marker-plank">
+            <span className="platform__marker-name">{marker.name}</span>{" "}
+            <span className="platform__marker-price">{marker.price}</span>{" "}
+            <span className="platform__marker-arrow" aria-hidden="true">
+              ↓
+            </span>
           </span>
           <span className="platform__marker-hint">, ver qué incluye</span>
         </a>
