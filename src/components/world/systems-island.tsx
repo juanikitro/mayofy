@@ -80,7 +80,8 @@ export function SystemsIsland() {
           ))}
         </ol>
 
-        <aside className="workshop__soon panel" aria-labelledby="bot-title">
+        {/* A section, not an aside: a complementary landmark may not sit inside main. */}
+        <section className="workshop__soon panel" aria-labelledby="bot-title">
           <p className="soon__label">{comingSoon.label}</p>
           <p className="workshop__soon-copy">
             <strong id="bot-title">{comingSoon.title}</strong> desde {comingSoon.tiers[0].price}. {comingSoon.description}
@@ -104,7 +105,7 @@ export function SystemsIsland() {
           <a className="btn btn--quiet" href={getWhatsAppHref(comingSoon.whatsappMessage)} target="_blank" rel="noreferrer">
             {comingSoon.cta}
           </a>
-        </aside>
+        </section>
       </div>
       <WorkshopController />
     </section>

@@ -247,7 +247,7 @@ export function CalBooking({ url, calLink, heading, detail, open, opening, loadi
           <p className="booking__detail">{detail}</p>
         </div>
         <div className="booking__frame">
-          <div className="booking__inline" ref={hostRef} aria-label="Agenda de Cal.com" aria-busy={busy} />
+          <div className="booking__inline" ref={hostRef} role="region" aria-label="Agenda de Cal.com" aria-busy={busy} />
           <div className="booking__skeleton" aria-hidden="true">
             <span className="booking__skeleton-grid">
               {Array.from({ length: 35 }, (_, index) => (

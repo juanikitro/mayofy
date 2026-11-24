@@ -107,7 +107,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <IslandNav />
 
       <main id="contenido" className="caso-study">
-        <header className="caso-cover" aria-labelledby="caso-titulo">
+        <header className="caso-cover">
           <div className="caso-cover__decor" aria-hidden="true">
             <picture className="caso-cover__cloud caso-cover__cloud--a">
               <source type="image/avif" srcSet="/images/mundo-mayo/62-nube-suelta-1.avif" />
