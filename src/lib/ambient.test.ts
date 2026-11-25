@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { approach, detectAmbientTier, normalisedPointer, normalisedTilt, seeded, tiltOnScreen } from "@/lib/ambient";
+import { approach, autoTiltAllowed, createTiltReader, detectAmbientTier, normalisedPointer, normalisedTilt, seeded, tiltOnScreen } from "@/lib/ambient";
 
 describe("detectAmbientTier", () => {
   it("turns everything off under reduced motion, whatever the device", () => {
@@ -43,7 +43,7 @@ describe("normalisedPointer", () => {
 });
 
 describe("normalisedTilt", () => {
-  it("measures tilt from the pose the phone had when depth was switched on", () => {
+  it("measures tilt from the pose the phone rests in", () => {
     const rest = { beta: 50, gamma: -5 };
     expect(normalisedTilt(50, -5, rest)).toEqual({ x: 0, y: 0 });
     expect(normalisedTilt(59, 4, rest)).toEqual({ x: 0.5, y: 0.5 });
@@ -78,5 +78,75 @@ describe("tiltOnScreen", () => {
     // Turned clockwise: the device's top is the screen's right edge.
     expect(tiltOnScreen(40, 10, 270)).toEqual({ beta: -10, gamma: -40 });
     expect(tiltOnScreen(40, 10, 180)).toEqual({ beta: -40, gamma: -10 });
+  });
+});
+
+describe("autoTiltAllowed", () => {
+  const phone = { tier: "full" as const, phone: true, hasOrientation: true };
+
+  it("starts by itself on a phone with orientation events, whether or not the browser has requestPermission", () => {
+    expect(autoTiltAllowed(phone)).toBe(true);
+  });
+
+  it("never starts with reduced motion or Save-Data, off phones or without the events", () => {
+    expect(autoTiltAllowed({ ...phone, tier: "off" })).toBe(false);
+    expect(autoTiltAllowed({ ...phone, tier: "lite" })).toBe(false);
+    expect(autoTiltAllowed({ ...phone, phone: false })).toBe(false);
+    expect(autoTiltAllowed({ ...phone, hasOrientation: false })).toBe(false);
+  });
+});
+
+describe("createTiltReader", () => {
+  const options = { range: 18, strength: 0.7, recentre: 4000, deadZone: 0.03, calibration: 5 };
+  /** Feeds readings 16 ms apart and returns every aim the reader asked for. */
+  function feed(readings: [number, number][], reader = createTiltReader(options), start = 0) {
+    const aims: { x: number; y: number }[] = [];
+    readings.forEach(([beta, gamma], index) => {
+      const aim = reader.read(beta, gamma, 0, start + index * 16);
+      if (aim) aims.push(aim);
+    });
+    return aims;
+  }
+
+  it("calibrates its rest pose on the first readings before moving anything", () => {
+    const reader = createTiltReader(options);
+    expect(feed([[40, 2], [41, 3], [39, 1], [40, 2]], reader)).toEqual([]);
+    // The fifth reading closes the calibration at the average pose: no tilt yet.
+    expect(feed([[40, 2]], reader, 64)).toEqual([]);
+    const [aim] = feed([[49, 11]], reader, 80);
+    expect(aim.x).toBeCloseTo(0.35, 2);
+    expect(aim.y).toBeCloseTo(0.35, 2);
+  });
+
+  it("keeps a phone lying flat still: sensor noise never reaches the scene", () => {
+    const noise: [number, number][] = Array.from({ length: 300 }, (_, index) => [Math.sin(index) * 0.6, Math.cos(index * 1.3) * 0.6]);
+    expect(feed(noise)).toEqual([]);
+  });
+
+  it("caps the lean at the calm strength however far the phone turns", () => {
+    const aims = feed([[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [60, -60]]);
+    expect(aims.at(-1)).toEqual({ x: -0.7, y: 0.7 });
+  });
+
+  it("starts over, back at rest, when a reading jumps (the axes flip near upright or the phone is turned over)", () => {
+    const reader = createTiltReader(options);
+    feed([[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [10, 10]], reader);
+    expect(reader.read(10, 170, 0, 200)).toEqual({ x: 0, y: 0 });
+    // A new calibration follows: nothing moves until it is done.
+    expect(reader.read(10, 170, 0, 216)).toBeNull();
+  });
+
+  it("ignores readings near upright, where gamma is unreliable", () => {
+    expect(feed([[80, 0], [82, 20], [85, -30], [88, 40], [80, 0], [84, 25]])).toEqual([]);
+  });
+
+  it("recentres on a pose held for a while, so the reader can settle into any grip", () => {
+    const reader = createTiltReader(options);
+    feed([[30, 0], [30, 0], [30, 0], [30, 0], [30, 0]], reader);
+    const lean = reader.read(39, 0, 0, 100);
+    expect(lean?.y).toBeGreaterThan(0.3);
+    let last = lean;
+    for (let time = 116; time < 30000; time += 16) last = reader.read(39, 0, 0, time) ?? last;
+    expect(Math.abs(last?.y ?? 1)).toBeLessThan(0.05);
   });
 });

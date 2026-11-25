@@ -3,8 +3,9 @@
 import { useEffect } from "react";
 
 import { type SceneDepth, createSceneDepth } from "@/components/world/scene-depth";
+import { startTiltDepth } from "@/components/world/tilt-depth";
 import { afterLoadIdle } from "@/lib/after-load";
-import { type AmbientTier, detectAmbientTier, normalisedPointer } from "@/lib/ambient";
+import { type AmbientTier, autoTiltAllowed, detectAmbientTier, normalisedPointer } from "@/lib/ambient";
 
 type NavigatorWithHints = Navigator & {
   connection?: { saveData?: boolean };
@@ -26,7 +27,10 @@ const NEAR_AHEAD = 1;
  *   animations pause without it, and the scripted effects (birds, shooting
  *   star, breeze) only run while it is set.
  *
- * It also runs the pointer depth (createSceneDepth) on desktop.
+ * It also runs the depth (createSceneDepth): with the pointer on desktop,
+ * and with the phone's tilt on phones (startTiltDepth, autoTiltAllowed). It
+ * never asks for motion permission: where the browser sends no reading
+ * without it (iOS Safari), the tilt stops listening and never shows.
  *
  * Without JavaScript none of this happens and the islands keep their still art.
  */
@@ -35,9 +39,13 @@ export function AmbientMotion() {
     const root = document.documentElement;
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const phone = window.matchMedia("(hover: none) and (pointer: coarse)");
     let depth: SceneDepth | null = null;
+    let mode: "pointer" | "tilt" | null = null;
+    let stopTilt: (() => void) | null = null;
+    // No usable reading arrived once (no gyroscope, or no permission on iOS): the tilt never starts again on this page.
+    let noSensor = false;
 
-    // Pointer depth: desktop mice and trackpads only, on the full tier.
     function onPointer(event: PointerEvent) {
       if (event.pointerType !== "mouse") return;
       const { x, y } = normalisedPointer(event.clientX, event.clientY, window.innerWidth, window.innerHeight);
@@ -46,17 +54,37 @@ export function AmbientMotion() {
     function onLeave(event: PointerEvent) {
       if (event.pointerType === "mouse") depth?.aim(0, 0);
     }
+    function stopDepth() {
+      window.removeEventListener("pointermove", onPointer);
+      document.documentElement.removeEventListener("pointerleave", onLeave);
+      stopTilt?.();
+      stopTilt = null;
+      depth?.dispose();
+      depth = null;
+      mode = null;
+    }
+    // Depth: desktop mice and trackpads, or the tilt of a phone; only on the full tier.
     function syncDepth() {
-      const wanted = root.dataset.ambient === "full" && finePointer.matches;
-      if (wanted && !depth) {
-        depth = createSceneDepth();
+      const full = root.dataset.ambient === "full";
+      const tilt =
+        !noSensor &&
+        autoTiltAllowed({ tier: full ? "full" : "off", phone: phone.matches, hasOrientation: "DeviceOrientationEvent" in window });
+      const wanted = full && finePointer.matches ? "pointer" : tilt ? "tilt" : null;
+      if (wanted === mode) return;
+      stopDepth();
+      if (!wanted) return;
+      const scene = createSceneDepth();
+      depth = scene;
+      mode = wanted;
+      if (wanted === "pointer") {
         window.addEventListener("pointermove", onPointer, { passive: true });
         document.documentElement.addEventListener("pointerleave", onLeave);
-      } else if (!wanted && depth) {
-        window.removeEventListener("pointermove", onPointer);
-        document.documentElement.removeEventListener("pointerleave", onLeave);
-        depth.dispose();
-        depth = null;
+      } else {
+        stopTilt = startTiltDepth(scene, () => {
+          stopTilt = null;
+          noSensor = true;
+          stopDepth();
+        });
       }
     }
 
@@ -74,6 +102,7 @@ export function AmbientMotion() {
     applyTier();
     media.addEventListener("change", applyTier);
     finePointer.addEventListener("change", syncDepth);
+    phone.addEventListener("change", syncDepth);
 
     const sections = [...document.querySelectorAll<HTMLElement>("main section[data-island]")];
 
@@ -100,6 +129,7 @@ export function AmbientMotion() {
     return () => {
       media.removeEventListener("change", applyTier);
       finePointer.removeEventListener("change", syncDepth);
+      phone.removeEventListener("change", syncDepth);
       root.dataset.ambient = "off";
       syncDepth();
       live.disconnect();
