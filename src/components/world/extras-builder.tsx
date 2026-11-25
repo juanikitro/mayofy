@@ -119,10 +119,12 @@ export function ExtraControls({ extra }: { extra: Extra }) {
           </button>
         </div>
       ) : null}
+      {/* A round "+" (a check once added); its name says what it adds. */}
       <button type="button" className="extra__add" aria-pressed={added} onClick={() => update((current) => toggleExtra(current, extra, extras))}>
         <span className="extra__mark" aria-hidden="true" />
-        {extrasCopy.add}
-        <span className="extras-sr"> {extra.title}</span>
+        <span className="extras-sr">
+          {extrasCopy.add} {extra.title}
+        </span>
       </button>
     </div>
   );

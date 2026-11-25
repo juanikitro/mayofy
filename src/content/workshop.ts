@@ -1,3 +1,5 @@
+import { chatBot } from "@/content/commercial-plans";
+
 /**
  * Island 4 (Juani, 20 November 2026: option B of
  * docs/plans/2026-11-20-propuestas.md). The island stays in view while the
@@ -12,6 +14,11 @@ export type WorkshopPart = {
   /** Short label pinned over the object on the island. */
   pin: string;
   title: string;
+  /**
+   * A second panel under the same object for these extras: the whole group
+   * would not fit one phone screen while its panel is fully shown.
+   */
+  split?: { title: string; ids: readonly string[] };
 };
 
 /**
@@ -25,7 +32,12 @@ export type WorkshopPart = {
 export const workshopParts: readonly WorkshopPart[] = [
   { object: "pot", pin: "Más consultas", title: "Que te encuentren más" },
   { object: "toolbox", pin: "Contacto simple", title: "Que te escriban más fácil" },
-  { object: "gear", pin: "Seguimiento", title: "Que no se te escape ninguna consulta" },
+  {
+    object: "gear",
+    pin: "Seguimiento",
+    title: "Que no se te escape ninguna consulta",
+    split: { title: "Un bot que responde por vos", ids: chatBot.tiers.map((tier) => tier.id) },
+  },
   { object: "greenhouse", pin: "Conexiones", title: "Conectalo con lo que ya usás" },
 ];
 

@@ -41,6 +41,20 @@ export const extraSeals: Record<ExtraKind, string> = {
   from: "Desde",
 };
 
+/** The seal as a short tag on each row; the whole seal and its meaning open from it (Toggletip). */
+export const extraSealTags: Record<ExtraKind, string> = {
+  fixed: "Cerrado",
+  "fixed+service": "+ Servicio",
+  from: "Según alcance",
+};
+
+/** What each seal means, first line of the row's toggletip. */
+export const extraSealNotes: Record<ExtraKind, string> = {
+  fixed: "Precio cerrado: solo trabajo de Mayofy.",
+  "fixed+service": "Precio cerrado + servicio a tu nombre: el precio de Mayofy es fijo y el servicio lo pagás directo al proveedor.",
+  from: "Desde: depende del alcance. El precio final queda escrito en la propuesta, antes de empezar.",
+};
+
 export const extrasCopy = {
   /** The fixed line under the list (Juani's proposal, accepted 24 November 2026). */
   servicesNote: "Los servicios externos quedan a tu nombre y te los cobra cada proveedor. Mayofy no les suma nada.",
