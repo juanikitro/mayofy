@@ -39,7 +39,8 @@ export default function Home() {
       <IslandNav />
 
       <main id="contenido">
-        <section id="inicio" className="dawn" data-island="1" aria-labelledby="dawn-title">
+        {/* suppressHydrationWarning: the intro script (hero-island.tsx) marks the section before React hydrates it. */}
+        <section id="inicio" className="dawn" data-island="1" aria-labelledby="dawn-title" suppressHydrationWarning>
           <HeroIsland />
           <div className="dawn__content world-shell">
             <h1 id="dawn-title">
