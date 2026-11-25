@@ -6,12 +6,13 @@ import { AmbientBackdrop, AmbientClouds } from "@/components/world/ambient-sky";
 import { IslandScene } from "@/components/world/island-scene";
 import { IslandTitle } from "@/components/world/island-title";
 import { MayoFigure } from "@/components/world/mayo-figure";
+import { Toggletip } from "@/components/world/toggletip";
 import { WorkshopController } from "@/components/world/workshop-controller";
 import { chatBot, commercialPlans } from "@/content/commercial-plans";
-import { extraSeals, extras, extrasCopy } from "@/content/extras";
+import { type Extra, extraSealNotes, extraSealTags, extraSeals, extras, extrasCopy } from "@/content/extras";
 import { islandCopy } from "@/content/islands";
 import { islandPlates } from "@/content/stage";
-import { workshopParts, workshopSpots } from "@/content/workshop";
+import { type WorkshopPart, workshopParts, workshopSpots } from "@/content/workshop";
 import { formatUsd, type PackOption } from "@/lib/extras-request";
 import { getBlueRate, usdAmount } from "@/lib/peso-prices";
 import { getWhatsAppHref } from "@/lib/whatsapp";
@@ -23,6 +24,49 @@ const packOptions: PackOption[] = commercialPlans.flatMap((plan) => {
   const usd = usdAmount(plan.price);
   return usd ? [{ id: plan.id, name: plan.name, usd }] : [];
 });
+
+/** The panels of a painted object: its group of extras, or two when it is split (WorkshopPart.split). */
+function panelsOf(part: WorkshopPart) {
+  const group = extras.filter((extra) => extra.group === part.object);
+  const split = part.split;
+  if (!split) return [{ title: part.title, extras: group }];
+  return [
+    { title: part.title, extras: group.filter((extra) => !split.ids.includes(extra.id)) },
+    { title: split.title, extras: group.filter((extra) => split.ids.includes(extra.id)) },
+  ];
+}
+
+/**
+ * One extra on one compact line: its title, its price with the seal under
+ * it as a short tag (the whole seal, the limits and the provider's note open
+ * from it) and a round "+" (ExtraControls).
+ */
+function ExtraRow({ extra }: { extra: Extra }) {
+  const lines = [extraSealNotes[extra.kind], extra.detail, extra.service].filter((line): line is string => Boolean(line));
+  return (
+    <li className="extra">
+      <p className="extra__title">{extra.title}</p>
+      <div className="extra__price">
+        <p>
+          {extra.kind === "from" ? "desde " : null}
+          <strong>{formatUsd(extra.price)}</strong>
+          {extra.unit ? ` ${extra.unit}` : null}
+        </p>
+        <Toggletip
+          className={`extra__tag extra__tag--${extra.kind === "fixed+service" ? "service" : extra.kind}`}
+          title={
+            <>
+              {extraSealTags[extra.kind]}
+              <span className="extras-sr">: {extra.title}</span>
+            </>
+          }
+          items={lines}
+        />
+      </div>
+      <ExtraControls extra={extra} />
+    </li>
+  );
+}
 
 const spotStyle = (point: readonly [number, number], mobile: readonly [number, number]) =>
   ({ "--x-d": `${point[0]}%`, "--y-d": `${point[1]}%`, "--x-m": `${mobile[0]}%`, "--y-m": `${mobile[1]}%` }) as CSSProperties;
@@ -74,38 +118,27 @@ export async function SystemsIsland() {
         <div className="workshop__flow">
           <ol className="workshop__parts">
             {workshopParts.map((part) => (
-              <li className={`workshop__part workshop__part--${part.object} panel`} key={part.object}>
-                <h3>{part.title}</h3>
-                <ul className="workshop__items">
-                  {extras
-                    .filter((extra) => extra.group === part.object)
-                    .map((extra) => (
-                      <li className="extra" key={extra.id}>
-                        <div className="extra__text">
-                          <p className="extra__title">{extra.title}</p>
-                          {extra.detail ? <p className="extra__detail">{extra.detail}</p> : null}
-                          <p className={`extra__seal extra__seal--${extra.kind === "fixed+service" ? "service" : extra.kind}`}>{extraSeals[extra.kind]}</p>
-                          {extra.service ? <p className="extra__service">{extra.service}</p> : null}
-                        </div>
-                        <p className="extra__price">
-                          {extra.kind === "from" ? <span>desde </span> : null}
-                          <strong>{formatUsd(extra.price)}</strong>
-                          {extra.unit ? <span> {extra.unit}</span> : null}
-                        </p>
-                        <ExtraControls extra={extra} />
-                      </li>
-                    ))}
-                </ul>
-                {part.object === "greenhouse" && customPlan ? (
-                  <p className="workshop__custom">
-                    {extrasCopy.customPrompt}{" "}
-                    <a className="host-link workshop__link" href={`#pack-${customPlan.id}`}>
-                      <span className="link-label">
-                        Ver {customPlan.name} · desde {customPlan.price}
-                      </span>
-                    </a>
-                  </p>
-                ) : null}
+              <li className={`workshop__group workshop__group--${part.object}`} key={part.object}>
+                {panelsOf(part).map((panel) => (
+                  <div className={`workshop__part workshop__part--${part.object} panel`} key={panel.title}>
+                    <h3>{panel.title}</h3>
+                    <ul className="workshop__items">
+                      {panel.extras.map((extra) => (
+                        <ExtraRow extra={extra} key={extra.id} />
+                      ))}
+                    </ul>
+                    {part.object === "greenhouse" && customPlan ? (
+                      <p className="workshop__custom">
+                        {extrasCopy.customPrompt}{" "}
+                        <a className="host-link workshop__link" href={`#pack-${customPlan.id}`}>
+                          <span className="link-label">
+                            Ver {customPlan.name} · desde {customPlan.price}
+                          </span>
+                        </a>
+                      </p>
+                    ) : null}
+                  </div>
+                ))}
               </li>
             ))}
           </ol>

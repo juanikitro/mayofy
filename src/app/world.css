@@ -7098,7 +7098,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
  * the sticky stage can never outlive the section, so at its end the island
  * leaves with it instead of hanging below it under island 5 (it used a
  * negative bottom margin, which let it stick a screen past the section).
- * Each part names a view timeline; the section shares them
+ * Each object's group names a view timeline; the section shares them
  * (`timeline-scope`) with the halos and pins inside the scene. */
 .workshop {
   --workshop-x: -19vw;
@@ -7231,25 +7231,32 @@ html[data-motion-tier="reduced"] .works-index__shot {
 /* Parts close together: the next one already shows under the one in the
  * middle of the screen, and the first waits low on the screen as the
  * section pins. */
-.workshop__parts {
+.workshop__parts,
+.workshop__group {
   display: grid;
   gap: 16svh;
+}
+
+.workshop__parts {
   margin: 62svh 0 0;
   padding: 0;
   list-style: none;
 }
 
+/* Each panel is its own timeline (its fade, its rows); the object's group,
+ * one panel or two (the gear), lights the object and its pin. */
 .workshop__part {
   display: grid;
   gap: 0.5rem;
   justify-items: start;
   padding: 1.5rem 1.6rem;
+  view-timeline-name: --panel;
 }
 
-.workshop__part--greenhouse { view-timeline-name: --part-greenhouse; }
-.workshop__part--pot { view-timeline-name: --part-pot; }
-.workshop__part--toolbox { view-timeline-name: --part-toolbox; }
-.workshop__part--gear { view-timeline-name: --part-gear; }
+.workshop__group--greenhouse { view-timeline-name: --part-greenhouse; }
+.workshop__group--pot { view-timeline-name: --part-pot; }
+.workshop__group--toolbox { view-timeline-name: --part-toolbox; }
+.workshop__group--gear { view-timeline-name: --part-gear; }
 
 .workshop__part h3 {
   font-size: 1.45rem;
@@ -7263,13 +7270,13 @@ html[data-motion-tier="reduced"] .works-index__shot {
   list-style: none;
 }
 
-.workshop__items li {
+.workshop__items > li {
   display: flex;
   gap: 0.6rem;
   color: var(--ink-soft);
 }
 
-.workshop__items li::before {
+.workshop__items > li::before {
   content: "";
   flex: none;
   width: 0.4rem;
@@ -7329,27 +7336,31 @@ html[data-motion-tier="reduced"] .works-index__shot {
 
     html:not([data-motion-tier="reduced"]) .workshop__part {
       animation: workshop-part linear both;
+      animation-timeline: --panel;
     }
 
-    html:not([data-motion-tier="reduced"]) .workshop__items li {
+    html:not([data-motion-tier="reduced"]) .workshop__items > li {
       animation: workshop-item linear both;
+      animation-timeline: --panel;
       animation-range: cover var(--item-from) cover calc(var(--item-from) + 12%);
     }
 
-    html:not([data-motion-tier="reduced"]) :is(.workshop__halo--greenhouse, .workshop__pin--greenhouse, .workshop__part--greenhouse, .workshop__part--greenhouse .workshop__items li) {
+    html:not([data-motion-tier="reduced"]) :is(.workshop__halo--greenhouse, .workshop__pin--greenhouse) {
       animation-timeline: --part-greenhouse;
     }
 
-    html:not([data-motion-tier="reduced"]) :is(.workshop__halo--pot, .workshop__pin--pot, .workshop__part--pot, .workshop__part--pot .workshop__items li) {
+    html:not([data-motion-tier="reduced"]) :is(.workshop__halo--pot, .workshop__pin--pot) {
       animation-timeline: --part-pot;
     }
 
-    html:not([data-motion-tier="reduced"]) :is(.workshop__halo--toolbox, .workshop__pin--toolbox, .workshop__part--toolbox, .workshop__part--toolbox .workshop__items li) {
+    html:not([data-motion-tier="reduced"]) :is(.workshop__halo--toolbox, .workshop__pin--toolbox) {
       animation-timeline: --part-toolbox;
     }
 
-    html:not([data-motion-tier="reduced"]) :is(.workshop__halo--gear, .workshop__pin--gear, .workshop__part--gear, .workshop__part--gear .workshop__items li) {
+    html:not([data-motion-tier="reduced"]) :is(.workshop__halo--gear, .workshop__pin--gear) {
       animation-timeline: --part-gear;
+      /* Two panels under the gear: it stays lit while either one rests. */
+      animation-range: cover 10% cover 90%;
     }
   }
 }
@@ -7409,7 +7420,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
 /* Phones: the title and lead hold the top of the screen, the island sits
  * under them (the plate grows by a sixth and rises), and each part arrives
  * from the bottom, rests centred in the space left under the island
- * (`--workshop-zone-*`; a part taller than it rests at its top), slides over the island as it is read and fades as it leaves the screen; the pins become
+ * (`--workshop-zone-*`; a part taller than it rests at its top) and fades before it reaches it; the pins become
  * numbers that match the parts. Without scroll-driven animations or with
  * reduced motion nothing is pinned: title, island, then every part, all
  * visible. */
@@ -7421,6 +7432,11 @@ html[data-motion-tier="reduced"] .works-index__shot {
     /* Under the island, above the floating bottom bar. */
     --workshop-zone-top: 53;
     --workshop-zone-bottom: 93;
+  }
+
+  /* Above "Tu consulta" too, once it holds the bottom of the screen. */
+  .workshop:has(.extras-summary--active) {
+    --workshop-zone-bottom: 90;
   }
 
   .workshop .plate {
@@ -7487,10 +7503,12 @@ html[data-motion-tier="reduced"] .works-index__shot {
     grid-column: 1;
   }
 
-  /* Wide enough that, while a part rests under the island, the one before
-   * it has already risen past the island. */
+  .workshop__parts,
+  .workshop__group {
+    gap: 12svh;
+  }
+
   .workshop__parts {
-    gap: 40svh;
     margin-block-start: 100svh;
   }
 
@@ -7499,18 +7517,14 @@ html[data-motion-tier="reduced"] .works-index__shot {
     padding: 1.1rem 1.2rem;
   }
 
+  /* Tighter than on desktop: a whole group fits under the island. */
   .workshop__part {
-    padding: 1.1rem 1.2rem;
-  }
-
-  /* Opaque: they slide over the pinned title and island while being read. */
-  .workshop__part,
-  .workshop__bot {
-    background: var(--cream);
+    gap: 0.3rem;
+    padding: 0.85rem 1rem;
   }
 
   .workshop__part h3 {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
   }
 
   @supports (animation-timeline: view()) {
@@ -7525,7 +7539,11 @@ html[data-motion-tier="reduced"] .works-index__shot {
         animation-range: cover 5% cover 50%;
       }
 
-      /* The bot panel, like a part, fades as it leaves the screen. */
+      html:not([data-motion-tier="reduced"]) :is(.workshop__halo--gear, .workshop__pin--gear) {
+        animation-range: cover 4% cover 76%;
+      }
+
+      /* The bot panel fades before it rises into the island. */
       html:not([data-motion-tier="reduced"]) .workshop__bot {
         animation: workshop-part-phone linear both;
         animation-timeline: view();
@@ -7605,20 +7623,22 @@ html[data-motion-tier="reduced"] .works-index__shot {
   }
 }
 
-/* Since the extras (24 November 2026) a part is about a screen tall, so it
- * no longer fades as it rises into the island: it arrives, slides over the
- * island while its rows are read, and fades only as it leaves the screen. */
+/* A part fades in as it arrives under the island and fades out as it rises
+ * into it (restored on 24 November 2026 after the extras: Juani, "quiero que
+ * los extras tengan el efecto que tenían antes"); its rows are compact
+ * enough to be read while it is fully shown. */
 @keyframes workshop-part-phone {
-  entry 0% {
+  0% {
     opacity: 0;
   }
 
-  entry 40%,
-  exit 80% {
+  20%,
+  36% {
     opacity: 1;
   }
 
-  exit 100% {
+  46%,
+  100% {
     opacity: 0;
   }
 }
@@ -7684,11 +7704,16 @@ html[data-motion-tier="reduced"] .works-index__shot {
   width: 100%;
 }
 
+/* One compact line per extra (title, price with its seal tag, a round "+"),
+ * so a whole group is read while its panel is fully shown (Juani, 24
+ * November 2026: the groups fade over the island again). The seal's
+ * meaning, the limits and the provider's note open from the tag. */
 .workshop__items .extra {
   display: grid;
-  grid-template: "text price" auto "text controls" 1fr / minmax(0, 1fr) auto;
-  gap: 0.3rem 1rem;
-  padding-block: 0.8rem;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  padding-block: 0.2rem;
   border-block-start: 1px solid color-mix(in oklch, var(--ink) 11%, transparent);
   color: var(--ink);
 }
@@ -7701,26 +7726,88 @@ html[data-motion-tier="reduced"] .works-index__shot {
   content: none;
 }
 
-.extra__text {
-  grid-area: text;
-  display: grid;
-  gap: 0.2rem;
-  align-content: start;
-}
-
 .extra__title {
+  font-size: 0.88rem;
   font-weight: 600;
   line-height: 1.3;
 }
 
-.extra__detail,
-.extra__service {
-  color: var(--ink-soft);
-  font-size: 0.88rem;
-  line-height: 1.4;
+/* The seal: a short tag under the price, coloured by kind; tapping it
+ * opens the whole seal, the limits and who bills the service (Toggletip).
+ * Its target reaches 24 px around it. */
+.extra__tag {
+  --seal: var(--moss);
+
+  margin-block-start: 0.1rem;
 }
 
-/* The seal: who charges what. A dot and a small caps label, coloured by kind. */
+.extra__tag .tip__toggle {
+  position: relative;
+  gap: 0.2rem;
+  min-height: 1rem;
+  padding: 0 0.1rem 0 0.4rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklch, var(--seal) 11%, transparent);
+  color: var(--seal);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.extra__tag .tip__toggle::after {
+  content: "";
+  position: absolute;
+  inset: -0.25rem -0.1rem;
+}
+
+.extra__tag .link-label {
+  background: none;
+}
+
+.extra__tag .tip__mark {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-width: 1.25px;
+  border-color: currentColor;
+  color: inherit;
+  font-size: 0.55rem;
+}
+
+.extra__tag .tip__toggle[aria-expanded="true"] .tip__mark {
+  background: var(--seal);
+  color: var(--cream);
+}
+
+@media (hover: hover) {
+  .extra__tag .tip__toggle:hover .tip__mark {
+    background: var(--seal);
+    color: var(--cream);
+  }
+}
+
+.extra__tag .tip__panel {
+  text-transform: none;
+  letter-spacing: normal;
+  white-space: normal;
+}
+
+/* Wide panels have room for a larger tag. */
+@media (min-width: 48.01rem) {
+  .extra__tag .tip__toggle {
+    font-size: 0.65rem;
+  }
+}
+
+.extra__tag--service {
+  --seal: oklch(48% 0.11 60);
+}
+
+.extra__tag--from {
+  --seal: oklch(45% 0.09 240);
+}
+
+/* The bot panel keeps the seal as a line: a dot and a small caps label. */
 .extra__seal {
   --seal: var(--moss);
 
@@ -7749,32 +7836,31 @@ html[data-motion-tier="reduced"] .works-index__shot {
   --seal: oklch(48% 0.11 60);
 }
 
-.extra__seal--from {
-  --seal: oklch(45% 0.09 240);
-}
-
 .extra__price {
-  grid-area: price;
-  justify-self: end;
+  display: grid;
+  justify-items: end;
   color: var(--ink-soft);
-  font-size: 0.85rem;
+  font-size: 0.72rem;
   font-variant-numeric: tabular-nums;
+  line-height: 1.1;
   text-align: end;
   white-space: nowrap;
 }
 
 .extra__price strong {
   color: var(--ink);
-  font-size: 1.05rem;
+  font-size: 0.92rem;
 }
 
+/* The stepper takes a line of its own under the row once a quantity is added. */
 .extra__controls {
-  grid-area: controls;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: start;
-  justify-content: end;
-  gap: 0.4rem;
+  display: contents;
+}
+
+.extra__stepper {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  justify-self: end;
 }
 
 /* "Sumar": a real toggle (aria-pressed); pressed, it fills and shows a check. */
@@ -7796,29 +7882,23 @@ html[data-motion-tier="reduced"] .works-index__shot {
 }
 
 .extra__add {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0 1rem 0 0.8rem;
-  border: 1.5px solid var(--moss);
-  background: transparent;
-  color: var(--moss);
-  font-size: 0.92rem;
-}
-
-.extra__mark {
   display: grid;
   place-items: center;
-  width: 1.15rem;
-  height: 1.15rem;
+  width: 2.125rem;
+  height: 2.125rem;
+  min-height: 0;
+  padding: 0;
+  border: 1.5px solid var(--moss);
   border-radius: 50%;
-  background: currentColor;
+  background: transparent;
+  color: var(--moss);
 }
 
+/* A bare "+" in the outlined circle; added, the circle fills and shows a check. */
 .extra__mark::before {
   content: "+";
-  color: var(--cream);
-  font-size: 0.9rem;
+  font-size: 1.25rem;
+  font-weight: 500;
   line-height: 1;
 }
 
@@ -7829,8 +7909,7 @@ html[data-motion-tier="reduced"] .works-index__shot {
 
 .extra__add[aria-pressed="true"] .extra__mark::before {
   content: "\2713";
-  color: var(--moss);
-  font-size: 0.75rem;
+  font-size: 0.95rem;
 }
 
 .extra__stepper {
@@ -8153,15 +8232,27 @@ html[data-motion-tier="reduced"] .works-index__shot {
 }
 
 @media (max-width: 48rem) {
-  /* Phones: the price and "Sumar" share one line under the text. */
-  .workshop__items .extra {
-    grid-template: "text text" auto "price controls" auto / auto minmax(0, 1fr);
-    align-items: center;
-    padding-block: 0.65rem;
+  /* The bar keeps to one line on phones: its title over the glance, the
+   * button beside them, so it covers as little of the groups as it can. */
+  .extras-summary--active .extras-summary__bar {
+    display: grid;
+    grid-template: "title toggle" auto "glance toggle" auto / minmax(0, 1fr) auto;
+    gap: 0 0.75rem;
   }
 
-  .extra__price {
-    justify-self: start;
+  .extras-summary--active .extras-summary__bar h3 {
+    grid-area: title;
+    line-height: 1.2;
+  }
+
+  .extras-summary--active .extras-summary__glance {
+    grid-area: glance;
+    font-size: 0.82rem;
+    line-height: 1.3;
+  }
+
+  .extras-summary--active .extras-summary__toggle {
+    grid-area: toggle;
   }
 
   .extras-summary {
@@ -10913,51 +11004,4 @@ html[data-ambient="full"] [data-ambient-near] .plate__picture--island[data-breez
 
 [data-ambient-depth] :is(.plate--layered, .sendero__plate) {
   will-change: translate;
-}
-
-/* Tilt depth switch (TiltToggle): phones only, at the foot of the first
- * screen, quiet until the reader wants it. */
-.tilt-toggle {
-  position: absolute;
-  bottom: max(1rem, env(safe-area-inset-bottom));
-  left: var(--gutter);
-  z-index: 3;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  min-height: 2.75rem;
-  padding: 0 0.95rem 0 0.75rem;
-  border: 1px solid color-mix(in oklch, var(--moss) 35%, transparent);
-  border-radius: 999px;
-  background: color-mix(in oklch, var(--cream) 72%, transparent);
-  color: var(--moss);
-  font: inherit;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color var(--m-base, 160ms) var(--ease-ui, ease);
-}
-
-.tilt-toggle[aria-pressed="true"] {
-  background: var(--cream);
-  border-color: var(--moss);
-}
-
-.tilt-toggle__icon {
-  width: 1.15rem;
-  height: 1.15rem;
-  fill: none;
-  stroke: currentcolor;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-}
-
-.tilt-toggle[aria-pressed="true"] .tilt-toggle__icon rect {
-  fill: color-mix(in oklch, var(--moss) 18%, transparent);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  html:not([data-motion-tier="reduced"]) .tilt-toggle:active {
-    scale: var(--m-press-scale, 0.97);
-  }
 }

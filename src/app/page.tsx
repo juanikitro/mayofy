@@ -10,7 +10,6 @@ import { ProblemIsland } from "@/components/world/problem-island";
 import { RockIsland } from "@/components/world/rock-island";
 import { SectionSnap } from "@/components/world/section-snap";
 import { SystemsIsland } from "@/components/world/systems-island";
-import { TiltToggle } from "@/components/world/tilt-toggle";
 import { WhatsAppFloat } from "@/components/world/whatsapp-float";
 import { WhatsAppIcon } from "@/components/world/whatsapp-icon";
 import { WorldFooter } from "@/components/world/world-footer";
@@ -76,7 +75,6 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <TiltToggle />
         </section>
 
         <CloudFall />

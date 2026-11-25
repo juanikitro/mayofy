@@ -130,8 +130,8 @@ export function normalisedPointer(x: number, y: number, width: number, height: n
 
 /**
  * Device tilt as -1..1 from a `deviceorientation` reading, relative to the
- * pose the phone had when tilt depth was switched on (`rest`), so the reader
- * holds it however they like. `range` degrees of tilt reach the full depth.
+ * pose the phone rests in (`rest`), so the reader holds it however they
+ * like. `range` degrees of tilt reach the full depth.
  */
 export function normalisedTilt(beta: number, gamma: number, rest: { beta: number; gamma: number }, range = 18) {
   const clamp = (value: number) => Math.max(-1, Math.min(1, value));
@@ -158,6 +158,91 @@ export function tiltOnScreen(beta: number, gamma: number, angle: number) {
     default:
       return { beta, gamma };
   }
+}
+
+export type AutoTiltSignals = {
+  tier: AmbientTier;
+  /** `(hover: none) and (pointer: coarse)`. */
+  phone: boolean;
+  /** `DeviceOrientationEvent` exists. */
+  hasOrientation: boolean;
+};
+
+/**
+ * Tilt depth starts listening by itself, with no button, on phones in the
+ * full tier. It never calls `DeviceOrientationEvent.requestPermission()`:
+ * iOS Safari only answers it from a tap, with a system prompt, and sends no
+ * reading without it, so iPhones get no tilt (startTiltDepth stops listening
+ * when no reading arrives). Chrome also exposes `requestPermission()` but
+ * allows the sensor by default, so its existence says nothing about iOS.
+ */
+export function autoTiltAllowed({ tier, phone, hasOrientation }: AutoTiltSignals) {
+  return tier === "full" && phone && hasOrientation;
+}
+
+export type TiltReaderOptions = {
+  /** Degrees of tilt that reach the full depth. */
+  range: number;
+  /** Share of the pointer depth at full tilt. */
+  strength: number;
+  /** Half-life (ms) of the rest pose following the hand, so a new grip re-centres the scene. */
+  recentre: number;
+  /** Smaller changes of the aim than this are hand tremor or sensor noise: ignored. */
+  deadZone: number;
+  /** Readings averaged into the first rest pose; the first ones are often stale. */
+  calibration: number;
+};
+
+/** Past this |beta| the phone is near upright and gamma swings wildly (gimbal lock). */
+const UPRIGHT = 75;
+/** A jump this large between two readings is an axis flip or the phone turned over, not a tilt. */
+const JUMP = 100;
+
+/**
+ * Turns `deviceorientation` readings into a calm aim for the scene depth.
+ * `read` returns the new aim, or null while nothing should move: during the
+ * calibration, near upright, or for a change inside the dead zone (a phone
+ * lying flat on a table never moves the scene). After a jump it returns the
+ * rest aim once and calibrates again.
+ */
+export function createTiltReader({ range, strength, recentre, deadZone, calibration }: TiltReaderOptions) {
+  let samples: { beta: number; gamma: number }[] = [];
+  let rest: { beta: number; gamma: number } | null = null;
+  let previous: { beta: number; gamma: number } | null = null;
+  let last = 0;
+  let aimed = { x: 0, y: 0 };
+
+  return {
+    read(beta: number, gamma: number, angle: number, now: number): { x: number; y: number } | null {
+      if (Math.abs(beta) > UPRIGHT) return null;
+      const jumped = previous !== null && (Math.abs(beta - previous.beta) > JUMP || Math.abs(gamma - previous.gamma) > JUMP);
+      previous = { beta, gamma };
+      const pose = tiltOnScreen(beta, gamma, angle);
+      if (jumped) {
+        samples = [pose];
+        rest = null;
+        if (aimed.x === 0 && aimed.y === 0) return null;
+        aimed = { x: 0, y: 0 };
+        return aimed;
+      }
+      if (!rest) {
+        samples.push(pose);
+        if (samples.length < calibration) return null;
+        const average = (key: "beta" | "gamma") => samples.reduce((sum, sample) => sum + sample[key], 0) / samples.length;
+        rest = { beta: average("beta"), gamma: average("gamma") };
+        samples = [];
+        last = now;
+      }
+      rest.beta = approach(rest.beta, pose.beta, now - last, recentre);
+      rest.gamma = approach(rest.gamma, pose.gamma, now - last, recentre);
+      last = now;
+      const tilt = normalisedTilt(pose.beta, pose.gamma, rest, range);
+      const next = { x: tilt.x * strength, y: tilt.y * strength };
+      if (Math.abs(next.x - aimed.x) < deadZone && Math.abs(next.y - aimed.y) < deadZone) return null;
+      aimed = next;
+      return aimed;
+    },
+  };
 }
 
 /** A small deterministic random generator (mulberry32), so a layout is the same on every render. */
