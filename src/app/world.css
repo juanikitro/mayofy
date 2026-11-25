@@ -11006,186 +11006,156 @@ html[data-ambient="full"] [data-ambient-near] .plate__picture--island[data-breez
   will-change: translate;
 }
 
-/* ======================================================================
- * Page intro "Amanecer" (docs/plans/2026-11-25-intro-amanecer.md).
- * On the first visit of a session the hero opens in the blue light before
- * dawn and warms into its painted dawn, a bank of clouds parts and the
- * island rises a few percent. src/lib/intro.ts marks the hero section with
- * data-intro: "wait" (art still coming: the page looks final), "hold" (the
- * pre-dawn pose, about 0.14 s), "play" (0.9 s of transform and opacity only)
- * and "done" (the final state). Without the attribute (no JavaScript, a
- * second visit, reduced motion) none of these layers exists.
- * ==================================================================== */
-
-.intro-curtain,
-.intro-light {
-  display: none;
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-/* The copy never fades in while the intro is on: the title is readable from
- * the first frame and stands still while the world wakes up behind it. */
-.dawn[data-intro] :is(.dawn__line, .dawn__actions) {
-  animation: none;
-}
-
-.intro-cloud {
-  position: absolute;
-  top: var(--y);
-  left: var(--x);
-  width: var(--w);
-  translate: -50% -50%;
-  opacity: 0.94;
-}
-
-.intro-cloud img {
-  display: block;
-  width: 100%;
-  height: auto;
-  scale: var(--intro-flip, 1) 1;
-}
-
-.intro-cloud--flip {
-  --intro-flip: -1;
-}
-
-@media (max-width: 48rem) {
-  .intro-cloud {
-    --dx: var(--dx-m);
-    --dy: var(--dy-m);
-
-    top: var(--y-m);
-    left: var(--x-m);
-    width: var(--w-m);
-  }
-
-  .intro-cloud--desktop {
-    display: none;
-  }
-}
-
-/* Blue hour as a cool mist over the scene: one layer, two gradients in
- * plain alpha. Every extra full-scene layer the intro adds while the page
- * loads lengthens Lighthouse's phone TBT (blend modes cost 300 ms; three
- * plain layers and a warm glow still about 150 ms), so the dawn's warmth is
- * simply the painted sky showing through as the mist lifts. The mist keeps
- * the sky behind the title about as light as the painted one, so the copy
- * keeps its contrast; the shade darkens the island into a silhouette. */
-.intro-light {
-  background:
-    radial-gradient(ellipse 38% 50% at 74% 64%, oklch(28% 0.1 272 / 50%) 0%, oklch(32% 0.1 272 / 26%) 50%, oklch(36% 0.1 272 / 0%) 100%),
-    linear-gradient(180deg, oklch(58% 0.13 273 / 80%) 0%, oklch(65% 0.12 268 / 72%) 50%, oklch(70% 0.1 262 / 74%) 100%);
-}
-
-/* The plate's own horizontal centring (Generated plates), repeated in the
- * intro's transform: anchored at --plate-x on desktop, centred on phones. */
-.dawn .plate {
-  --intro-x: calc(-1 * var(--plate-x, 50%));
-}
-
-@media (max-width: 48rem) {
-  .dawn .plate {
-    --intro-x: -50%;
-  }
-
-  .intro-light {
-    background:
-      linear-gradient(180deg, oklch(58% 0.13 273 / 76%) 0%, oklch(65% 0.12 268 / 68%) 57%, oklch(43% 0.1 272 / 62%) 100%);
-  }
-}
-
+/* Sky-first landing entrance. The parser marks only the home world before its
+ * first content; all other routes and no-script views keep the normal scene. */
 @media (prefers-reduced-motion: no-preference) {
-  .dawn {
-    --intro-rise: 4%;
+  .world[data-intro] .dawn__line {
+    animation: none;
   }
 
-  /* Waiting for the art: the curtain is laid out but unseen, so its lazy
-   * cloud (the fall's own file) loads; nothing else changes. */
-  html:not([data-motion-tier="reduced"]) .dawn:is([data-intro="wait"], [data-intro="hold"], [data-intro="play"]) .intro-curtain {
-    display: block;
+  .world[data-intro] .dawn__actions {
+    animation: none;
+  }
+
+  .world[data-intro="wait"] :is(.island-nav-wrap, .dawn__content, .wa-float),
+  .world[data-intro="wait"] > main > :not(.dawn) {
     visibility: hidden;
   }
 
-  html:not([data-motion-tier="reduced"]) .dawn:is([data-intro="hold"], [data-intro="play"])[data-intro-curtain] .intro-curtain {
+  .world[data-intro="wait"] :is(.dawn .plate, .dawn .scene::after) {
+    opacity: 0;
+  }
+
+  /* The living clouds have their own entrance. Do not start it until the
+   * intro releases the scene, or the ambient animation can restart mid-fade. */
+  .world:is([data-intro="wait"], [data-intro="play"]) .dawn .ambient-clouds {
+    display: none;
+  }
+
+  .world:is([data-intro="wait"], [data-intro="play"]) .dawn .scene__sky::after {
+    --dawn-night-art: url("/images/mundo-mayo/55-isla7-escritorio-v2-fondo.webp");
+
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* Island 7's painted sky, without the island. The stars underneath keep
+     * the first frame recognizably night even before that picture arrives. */
+    background:
+      var(--dawn-night-art) center / cover no-repeat,
+      radial-gradient(circle at 12% 29%, #c3deff 0 1px, transparent 2px),
+      radial-gradient(circle at 22% 11%, #c3deff 0 0.7px, transparent 1.5px),
+      radial-gradient(circle at 33% 23%, #c3deff 0 0.6px, transparent 1.5px),
+      radial-gradient(circle at 42% 38%, #a8ccff 0 0.7px, transparent 1.5px),
+      radial-gradient(circle at 54% 9%, #a8ccff 0 0.6px, transparent 1.5px),
+      radial-gradient(circle at 63% 21%, #dbeaff 0 1px, transparent 2px),
+      radial-gradient(circle at 74% 35%, #c3deff 0 0.7px, transparent 1.5px),
+      radial-gradient(circle at 84% 14%, #a8ccff 0 0.6px, transparent 1.5px),
+      radial-gradient(circle at 92% 25%, #dbeaff 0 0.8px, transparent 2px),
+      linear-gradient(180deg, #041331 0%, #072247 54%, #0d426d 100%);
+  }
+
+  .world[data-intro="play"] .dawn {
+    --dawn-light-duration: 1700ms;
+    --dawn-light-ease: cubic-bezier(0.25, 0.42, 0.46, 1);
+  }
+
+  .world[data-intro="play"] .dawn .scene__sky::after {
+    /* Light reaches the title before it has finished rising. */
+    animation: dawn-unshade var(--dawn-light-duration) var(--dawn-light-ease) both;
+  }
+
+  .world[data-intro="play"] .dawn h1 {
+    animation: dawn-copy 560ms var(--ease-enter) 280ms both;
+  }
+
+  .world[data-intro="play"] .dawn__actions {
+    animation: dawn-copy 500ms var(--ease-enter) 450ms both;
+  }
+
+  .world[data-intro="play"] .island-nav-wrap {
+    animation: dawn-nav 560ms var(--ease-enter) 600ms both;
+  }
+
+  @media (width > 48rem) {
+    .world[data-intro="play"] .dawn :is(.plate__picture--island, .scene__mayo, .ambient-breeze) {
+      animation: dawn-island 1040ms both;
+      animation-composition: add;
+    }
+
+    .world[data-intro="play"] .dawn .plate__picture--background {
+      animation: dawn-sky var(--dawn-light-duration) var(--dawn-light-ease) both;
+    }
+  }
+
+  @media (width <= 48rem) {
+    .world:is([data-intro="wait"], [data-intro="play"]) .dawn .scene__sky::after {
+      --dawn-night-art: url("/images/mundo-mayo/55-isla7-celular-v2-fondo.webp");
+    }
+
+    /* Phones have a single painted sky/island image. Bring it in as a unit
+     * over the independent sky fade, then restore its normal parallax. */
+    .world[data-intro="play"] .dawn .plate {
+      animation: dawn-island 1040ms both, dawn-sky 650ms ease-out both;
+      animation-composition: add, replace;
+    }
+  }
+}
+
+@keyframes dawn-unshade {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes dawn-sky {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dawn-island {
+  0% {
+    translate: 0 100svh;
+    animation-timing-function: cubic-bezier(0.16, 0.72, 0.26, 1);
+  }
+
+  65% {
+    translate: 0 -14px;
+    animation-timing-function: ease-in-out;
+  }
+
+  83% {
+    translate: 0 4px;
+    animation-timing-function: ease-out;
+  }
+
+  100% {
+    translate: 0 0;
+  }
+}
+
+@keyframes dawn-copy {
+  from {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
     visibility: visible;
-  }
-
-  /* Each cloud fades in by itself: fading the bank as a whole would render
-   * it offscreen first (a render surface), one more large layer at load. */
-  html:not([data-motion-tier="reduced"]) .dawn[data-intro="hold"][data-intro-curtain] .intro-cloud {
-    animation: intro-mist 140ms ease-out both;
-  }
-
-  html:not([data-motion-tier="reduced"]) .dawn:is([data-intro="hold"], [data-intro="play"]) .intro-light {
-    display: block;
-  }
-
-  /* The pre-dawn pose: the whole plate (island, Mayo, its clouds) a few
-   * percent low. `transform` keeps the plate's own centring; the pointer and
-   * tilt depth write `translate`, which adds to it. */
-  html:not([data-motion-tier="reduced"]) .dawn[data-intro="hold"] .plate {
-    transform: translateX(var(--intro-x)) translateY(var(--intro-rise));
-  }
-
-  html:not([data-motion-tier="reduced"]) .dawn[data-intro="play"] .plate {
-    animation: intro-rise 900ms var(--ease-enter) both;
-  }
-
-  html:not([data-motion-tier="reduced"]) .dawn[data-intro="play"] .intro-cloud {
-    animation: intro-part 900ms cubic-bezier(0.45, 0, 0.2, 1) both;
-  }
-
-  html:not([data-motion-tier="reduced"]) .dawn[data-intro="play"] .intro-light {
-    animation: intro-light-out 900ms cubic-bezier(0.45, 0, 0.35, 1) both;
-  }
-}
-
-@keyframes intro-mist {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 0.94;
-  }
-}
-
-@keyframes intro-rise {
-  from {
-    transform: translateX(var(--intro-x)) translateY(var(--intro-rise));
-  }
-
-  to {
-    transform: translateX(var(--intro-x)) translateY(0);
-  }
-}
-
-/* The bank parts towards the edges and thins out on the way: it never
- * stops, and it is gone before the dawn ends, so nothing jumps. */
-@keyframes intro-part {
-  0%,
-  35% {
-    opacity: 0.94;
-  }
-
-  from {
-    translate: -50% -50%;
-  }
-
-  to {
-    translate: calc(-50% + var(--dx)) calc(-50% + var(--dy));
-    opacity: 0;
-  }
-}
-
-@keyframes intro-light-out {
-  from {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dawn-nav {
+  from {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(calc(-100% - 1rem));
   }
 
   to {
-    opacity: 0;
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
   }
 }

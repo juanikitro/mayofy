@@ -1,4 +1,20 @@
-# Amanecer: entrada breve de la isla 1
+# Amanecer: entrada de la landing
+
+## Versión actual: primero el cielo
+
+La home abre con el cielo nocturno estrellado de la última isla, sin paisaje ni interfaz. Cuando pasan al menos 250 ms desde el primer cuadro disponible y las imágenes principales de la isla están decodificadas, el cielo nocturno se funde con el amanecer habitual durante 1700 ms. La iluminación sigue mientras termina la entrada de la isla, el título, las acciones y el navbar; sus tiempos y solapamiento no cambian.
+
+- **Para probar:** abrir o recargar `/` arriba de todo, o volver a la home desde otra página mediante «Volver al inicio». No se guarda una marca por sesión. `/#packs` y otras anclas profundas no deben tapar el destino. Una restauración del historial conserva la posición en lugar de repetir la entrada.
+- **Acceso inmediato:** Tab, toque, clic o scroll cancelan la transición sin consumir la interacción. Movimiento reducido, ahorro de datos y JavaScript desactivado muestran la página sin la intro. Si una imagen falla o no responde en 8 s, se muestra la landing sin bloquear la navegación.
+- **Cómo funciona:** `intro-dawn.tsx` emite el script antes del navbar y del hero; `intro-route-entry.tsx` ejecuta el mismo controlador para transiciones internas de Next.js, donde el script insertado no se ejecuta solo. `lib/intro.ts` coordina el tiempo y la decodificación; `world.css` se encarga de la secuencia sin modificar el layout final.
+- **Cielo y nubes:** se reutiliza una variante WebP del fondo nocturno de la isla 7 según el viewport (12–16 kB). Un cielo estrellado en CSS sirve de respaldo si la imagen aún no está disponible. Las nubes ambientales esperan hasta que termina la intro y entonces ejecutan su fundido normal una sola vez. No se cambian las nubes pintadas en ambos cielos.
+- **Diferencia móvil:** escritorio tiene un recorte de isla separado del cielo. En móvil, ambos vienen en la misma imagen. La composición móvil se mueve y aparece sobre el cielo sin modificar el encuadre final.
+
+**Verificación local:** build de producción en Docker, Vitest, ESLint y TypeScript. En Chrome se comprobó el primer cuadro y la secuencia en escritorio y con viewport móvil, la recarga, el regreso desde Privacidad, Tab sin pérdida de foco, movimiento reducido, enlace profundo y JavaScript desactivado. Con el recorte demorado 2 s, la intro esperó y luego arrancó. WebKit móvil y Firefox de escritorio reprodujeron la subida y el rebote. Se excluyó de la espera el recorte invisible en móvil: WebKit no terminaba de decodificar ese marcador y Firefox móvil lo rechazaba. No se usó un teléfono físico ni se hicieron mediciones de rendimiento para esta versión.
+
+En el ajuste de cielo y nubes, Chrome verificó en ambos tamaños el arte nocturno, la fusión con el amanecer, el fundido único de las nubes ambientales, la recarga y los tiempos de entrada originales. Con el ajuste de 250 ms/1700 ms, se comprobó que el cielo sigue aclarándose después de que entran los elementos, sin alterar sus retardos. Tab siguió pasando el foco al enlace «Saltar al contenido».
+
+## Historial: versión anterior (no corresponde a esta entrada)
 
 La home presenta el paso de la hora azul al amanecer. Se abren las nubes y la isla sube un poco; el título y las acciones quedan visibles y utilizables. No es una pantalla de carga.
 

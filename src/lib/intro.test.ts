@@ -1,86 +1,131 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { INTRO_KEY, INTRO_TIMING, type IntroSignals, introAllowed, introScript, runIntro } from "@/lib/intro";
+import { introAllowed, introScript } from "@/lib/intro";
 
-const firstVisit: IntroSignals = {
-  reducedMotion: false,
-  saveData: false,
-  visible: true,
-  hash: "",
-  navigationType: "navigate",
-  seen: false,
+const top = {
+  reducedMotion: false, saveData: false, visible: true, hash: "", navigationType: "navigate",
 };
 
 describe("introAllowed", () => {
-  it("plays on the first visit of the session, at the top of the page", () => {
-    expect(introAllowed(firstVisit)).toBe(true);
-    expect(introAllowed({ ...firstVisit, hash: "#inicio" })).toBe(true);
-    expect(introAllowed({ ...firstVisit, hash: "#" })).toBe(true);
+  it("plays on every entry or reload at the top", () => {
+    expect(introAllowed(top)).toBe(true);
+    expect(introAllowed({ ...top, hash: "#inicio" })).toBe(true);
+    expect(introAllowed({ ...top, hash: "#" })).toBe(true);
+    expect(introAllowed({ ...top, navigationType: "reload" })).toBe(true);
   });
 
-  it("never plays twice in a session", () => {
-    expect(introAllowed({ ...firstVisit, seen: true })).toBe(false);
-  });
-
-  it("stays off with reduced motion and with Save-Data", () => {
-    expect(introAllowed({ ...firstVisit, reducedMotion: true })).toBe(false);
-    expect(introAllowed({ ...firstVisit, saveData: true })).toBe(false);
-  });
-
-  it("skips pages that open below the hero", () => {
-    expect(introAllowed({ ...firstVisit, hash: "#packs" })).toBe(false);
-    expect(introAllowed({ ...firstVisit, navigationType: "reload" })).toBe(false);
-    expect(introAllowed({ ...firstVisit, navigationType: "back_forward" })).toBe(false);
-  });
-
-  it("skips a tab opened in the background", () => {
-    expect(introAllowed({ ...firstVisit, visible: false })).toBe(false);
+  it("preserves motion, data, background-tab and scroll-restoration bypasses", () => {
+    expect(introAllowed({ ...top, reducedMotion: true })).toBe(false);
+    expect(introAllowed({ ...top, saveData: true })).toBe(false);
+    expect(introAllowed({ ...top, visible: false })).toBe(false);
+    expect(introAllowed({ ...top, hash: "#packs" })).toBe(false);
+    expect(introAllowed({ ...top, navigationType: "back_forward" })).toBe(false);
   });
 });
 
-describe("introScript", () => {
-  it("is standalone JavaScript: the runner and the decision travel as source", () => {
-    const script = introScript();
-    expect(() => new Function(script)).not.toThrow();
-    expect(script).toContain('"mayofy:intro-amanecer"');
+function openLanding({ hideCutout = false } = {}) {
+  vi.useFakeTimers();
+  const sky = new Map<string, string>();
+  const plate = Promise.withResolvers<void>();
+  const cutout = Promise.withResolvers<void>();
+  let markupReady = false;
+  let parsed = () => {};
+  const landing = {
+    setAttribute: (name: string, value: string) => sky.set(name, value),
+    querySelector: () => markupReady ? {} : null,
+    querySelectorAll: () => [
+      { parentElement: { display: "block" }, decode: () => plate.promise },
+      { parentElement: { display: hideCutout ? "none" : "block" }, decode: () => cutout.promise },
+    ],
+  };
+  const browser = Object.assign(new EventTarget(), {
+    matchMedia: () => Object.assign(new EventTarget(), { matches: false }),
+    location: { hash: "" },
+    getComputedStyle: (element: { display: string }) => element,
+    setTimeout,
+    clearTimeout,
+    requestAnimationFrame: (callback: () => void) => setTimeout(callback, 0),
+    cancelAnimationFrame: clearTimeout,
+  });
+  vi.stubGlobal("window", browser);
+  vi.stubGlobal("document", Object.assign(new EventTarget(), {
+    currentScript: { parentElement: landing }, documentElement: { dataset: {} }, visibilityState: "visible",
+  }));
+  vi.stubGlobal("navigator", {});
+  vi.stubGlobal("MutationObserver", class {
+    constructor(callback: () => void) { parsed = callback; }
+    observe() {}
+    disconnect() {}
+  });
+  new Function(introScript())();
+  return {
+    browser, plate, cutout,
+    phase: () => sky.get("data-intro"),
+    parseHero: () => { markupReady = true; parsed(); },
+  };
+}
+
+describe("landing intro bootstrap", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.useRealTimers();
   });
 
-  it("keeps the pre-dawn hold and the dawn within 1.2 s", () => {
-    expect(INTRO_TIMING.hold + INTRO_TIMING.play).toBeLessThanOrEqual(1200);
+  it("holds the night sky for 250 ms with cached art and keeps the light transition open for 1700 ms", async () => {
+    const intro = openLanding();
+    expect(intro.phase()).toBe("wait");
+    intro.parseHero();
+    intro.plate.resolve();
+    intro.cutout.resolve();
+    await vi.advanceTimersByTimeAsync(249);
+    expect(intro.phase()).toBe("wait");
+    await vi.advanceTimersByTimeAsync(1);
+    expect(intro.phase()).toBe("play");
+    await vi.advanceTimersByTimeAsync(1699);
+    expect(intro.phase()).toBe("play");
+    await vi.advanceTimersByTimeAsync(1);
+    expect(intro.phase()).toBe("done");
   });
-});
 
-describe("runIntro", () => {
-  it("ends the visible entrance immediately on keyboard input without consuming it", async () => {
-    vi.useFakeTimers();
-    try {
-      const browser = Object.assign(new EventTarget(), {
-        sessionStorage: { getItem: () => null, setItem: () => {} },
-        matchMedia: () => ({ matches: false }),
-        location: { hash: "" },
-        setTimeout,
-        clearTimeout,
-      });
-      vi.stubGlobal("window", browser);
-      vi.stubGlobal("document", { documentElement: { dataset: {} }, visibilityState: "visible" });
-      vi.stubGlobal("navigator", {});
-      const image = Object.assign(new EventTarget(), {
-        complete: true, naturalWidth: 600, currentSrc: "/hero.avif", decode: async () => {},
-      });
-      const attributes = new Map<string, string>();
-      const section = Object.assign(new EventTarget(), {
-        querySelectorAll: (selector: string) => selector.startsWith(".scene") ? [image] : [],
-        setAttribute: (name: string, value: string) => attributes.set(name, value),
-        removeAttribute: (name: string) => attributes.delete(name),
-      });
-      runIntro(section as unknown as HTMLElement, introAllowed, INTRO_KEY, INTRO_TIMING);
-      await vi.advanceTimersByTimeAsync(INTRO_TIMING.hold);
-      expect(attributes.get("data-intro")).toBe("play");
-      expect(browser.dispatchEvent(new Event("keydown", { cancelable: true }))).toBe(true);
-      expect(attributes.get("data-intro")).toBe("done");
-    } finally {
-      vi.unstubAllGlobals();
-      vi.useRealTimers();
-    }
+  it("starts as soon as the last hero picture decodes if loading takes longer than 250 ms", async () => {
+    const intro = openLanding();
+    intro.parseHero();
+    intro.plate.resolve();
+    await vi.advanceTimersByTimeAsync(400);
+    expect(intro.phase()).toBe("wait");
+    intro.cutout.resolve();
+    await vi.advanceTimersByTimeAsync(0);
+    expect(intro.phase()).toBe("play");
+  });
+
+  it("does not wait for the hidden desktop cutout on a narrow viewport", async () => {
+    const intro = openLanding({ hideCutout: true });
+    intro.parseHero();
+    intro.plate.resolve();
+    await vi.advanceTimersByTimeAsync(250);
+    expect(intro.phase()).toBe("play");
+  });
+
+  it("reveals the landing on keyboard input without consuming it", async () => {
+    const intro = openLanding();
+    intro.parseHero();
+    expect(intro.browser.dispatchEvent(new Event("keydown", { cancelable: true }))).toBe(true);
+    expect(intro.phase()).toBe("done");
+    intro.plate.resolve();
+    intro.cutout.resolve();
+    await vi.advanceTimersByTimeAsync(1000);
+    expect(intro.phase()).toBe("done");
+  });
+
+  it("does not trap the user behind a broken or stalled hero image", async () => {
+    const broken = openLanding();
+    broken.parseHero();
+    broken.cutout.reject(new Error("Missing image"));
+    await vi.advanceTimersByTimeAsync(0);
+    expect(broken.phase()).toBe("done");
+    const stalled = openLanding();
+    stalled.parseHero();
+    await vi.advanceTimersByTimeAsync(8000);
+    expect(stalled.phase()).toBe("done");
   });
 });

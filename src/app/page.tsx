@@ -2,6 +2,7 @@ import { AmbientFilters } from "@/components/world/ambient-filters";
 import { AmbientMotion } from "@/components/world/ambient-motion";
 import { CloudFall } from "@/components/world/cloud-fall";
 import { HeroIsland } from "@/components/world/hero-island";
+import { IntroScript } from "@/components/world/intro-dawn";
 import { IslandNav } from "@/components/world/island-nav";
 import { JuaniIsland } from "@/components/world/host-island";
 import { QuestionsIsland, WorksIsland } from "@/components/world/islands";
@@ -30,7 +31,9 @@ export default function Home() {
   const heroWhatsAppHref = getWhatsAppHref(siteContent.hero.primaryMessage);
 
   return (
-    <div className="world">
+    // The intro bootstrap sets data-intro before React hydrates this element.
+    <div className="world" suppressHydrationWarning>
+      <IntroScript />
       <JsonLd data={homeStructuredData()} />
       <a className="skip-link" href="#contenido">
         Saltar al contenido
@@ -39,8 +42,7 @@ export default function Home() {
       <IslandNav />
 
       <main id="contenido">
-        {/* suppressHydrationWarning: the intro script (hero-island.tsx) marks the section before React hydrates it. */}
-        <section id="inicio" className="dawn" data-island="1" aria-labelledby="dawn-title" suppressHydrationWarning>
+        <section id="inicio" className="dawn" data-island="1" aria-labelledby="dawn-title">
           <HeroIsland />
           <div className="dawn__content world-shell">
             <h1 id="dawn-title">
