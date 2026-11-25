@@ -1,6 +1,6 @@
 "use client";
 
-import type { CSSProperties, MouseEvent } from "react";
+import { useId, type CSSProperties, type MouseEvent } from "react";
 
 export type PlatformMarker = { id: string; name: string; price: string; style: CSSProperties };
 
@@ -10,17 +10,46 @@ const TARGET_RING_MS = 1400;
 const prefersReducedMotion = () =>
   document.documentElement.dataset.motionTier === "reduced" || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/**
- * One-line markers on island 3's platforms (Juani, 20 November 2026, option A:
- * "los marcadores de una linea derivan alli"), painted as small wooden signs
- * staked on their rocks (Juani, 24 November: "elijo el cartel de madera"):
- * each names its pack and price and leads to the full pack card below
- * (`#pack-<id>`). Hovered or focused, the plank sways on its nail and the
- * rock under it lifts (world.css, "Wooden signs"). Following one scrolls
- * smoothly to the card (instantly under reduced motion), moves focus to it so
- * the next Tab continues inside it, and rings it for a moment. Without
- * JavaScript the plain anchor still lands on the card.
- */
+/** Composites the wood and lettering in a single graphic, using the same copy as the link. */
+function PlankArt({ name, price, compact }: { name: string; price: string; compact?: boolean }) {
+  const lettering = `#${useId()}`;
+  const letteringId = lettering.slice(1);
+  const longName = name.length > 13;
+  const width = compact ? 104 : longName ? 238 : 176;
+  const height = compact ? 52 : 55;
+  return (
+    <svg
+      className={`platform__marker-plank platform__marker-plank--${compact ? "compact" : "wide"}`}
+      viewBox={`0 0 ${width} ${height}`}
+      width={width}
+      height={height}
+      aria-hidden="true"
+      focusable="false"
+    >
+      <image href="/images/pack-sign-rendered-plank.webp" width={width} height={height} preserveAspectRatio="none" />
+      <defs>
+        {compact ? (
+          <text id={letteringId} x={width / 2} y="25" textAnchor="middle" fontSize="13">
+            <tspan x={width / 2} textLength={longName ? 87 : undefined} lengthAdjust="spacingAndGlyphs">
+              {name}
+            </tspan>
+            <tspan x={width / 2} dy="14">{price}</tspan>
+          </text>
+        ) : (
+          <text id={letteringId} x={width / 2} y="37" textAnchor="middle" fontSize="18">
+            {name}{"\u2002"}{price}
+          </text>
+        )}
+      </defs>
+      {/* The engraved edges are SVG paint, so they rotate with the grain and glyphs. */}
+      <use href={lettering} y={0.8} fill="rgb(255 225 179 / 75%)" />
+      <use href={lettering} y={-0.55} fill="rgb(51 23 8 / 62%)" />
+      <use href={lettering} fill="rgb(65 33 13 / 90%)" />
+    </svg>
+  );
+}
+
+/** Pack sign links keep their accessible name, independent of the decorative artwork. */
 export function PlatformMarkers({ markers }: { markers: readonly PlatformMarker[] }) {
   function follow(event: MouseEvent<HTMLAnchorElement>, id: string) {
     const card = document.getElementById(`pack-${id}`);
@@ -41,23 +70,17 @@ export function PlatformMarkers({ markers }: { markers: readonly PlatformMarker[
   return (
     <div className="platforms">
       {markers.map((marker, index) => (
-        <a
-          className={`platform__marker platform__marker--${index + 1}`}
-          href={`#pack-${marker.id}`}
-          style={marker.style}
-          key={marker.id}
-          onClick={(event) => follow(event, marker.id)}
-        >
-          {/* Spaces between the parts keep the accessible name "Landing USD 85, ver qué incluye"; the flex gap does the visual spacing. */}
-          <span className="platform__marker-plank">
-            <span className="platform__marker-name">{marker.name}</span>{" "}
-            <span className="platform__marker-price">{marker.price}</span>{" "}
-            <span className="platform__marker-arrow" aria-hidden="true">
-              ↓
-            </span>
-          </span>
-          <span className="platform__marker-hint">, ver qué incluye</span>
-        </a>
+        <div className="platform__marker-flight" key={marker.id} style={marker.style}>
+          <a
+            className={`platform__marker platform__marker--${index + 1}`}
+            href={`#pack-${marker.id}`}
+            aria-label={`${marker.name} ${marker.price}, ver qué incluye`}
+            onClick={(event) => follow(event, marker.id)}
+          >
+            <PlankArt name={marker.name} price={marker.price} />
+            <PlankArt name={marker.name} price={marker.price} compact />
+          </a>
+        </div>
       ))}
     </div>
   );

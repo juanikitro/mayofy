@@ -161,3 +161,51 @@ La tab más cargada (Gestión, "Tu sistema") deja todavía 119 px libres a 360×
 
 - En WebKit no se pudo simular un deslizamiento táctil real; ahí se comprobó el toque y que las tabs no bloquean el gesto (`touch-action: auto`). No se probó en un iPhone real ni con lector de pantalla.
 - Las tabs de Sistema a Medida son dos, no tres: no hay un grupo "No incluye" para ese pack.
+
+### Revisión de los carteles — 25 de noviembre
+
+Los carteles usan dos SVG decorativos: rama y poste fijos, y tabla suspendida de madera clara con vetas, cuerda y musgo. El nombre, el precio y el enlace siguen en HTML. Cada cartel comparte la trayectoria X/Y y la ventana de vuelo de su roca superior. La tabla conserva la orientación durante el vuelo y se balancea brevemente al aterrizar, en el mismo reloj de la escena. Se eliminó la entrada independiente. Con movimiento reducido quedan en su posición final.
+
+Verificado en Chromium a 1440 y 360 px: las tres trayectorias comparten los mismos tiempos que sus rocas, los enlaces caben en pantalla, Tab y Enter abren la ficha correcta y le transfieren el foco, y el modo reducido suprime el vuelo y el balanceo. Tests, typecheck y lint pasaron en una copia limpia en Docker. No se probó en un dispositivo físico ni con lector de pantalla.
+
+### Prueba de acabado 3D — Landing
+
+Solo Landing usa el nuevo render, dividido en dos WebP transparentes. El poste cae desde fuera de la pantalla después de que termina el vuelo de su roca; en el impacto se detiene y la tabla inicia su sacudida. Gestión y Sistema a Medida conservan la versión anterior para comparar. El nuevo acabado queda pendiente de aprobación visual antes de producir los otros dos carteles.
+
+### Acabado 3D aprobado � los tres packs
+
+Tras la aprobaci�n de la prueba de Landing, Gesti�n y Sistema a Medida usan los mismos dos WebP transparentes. Se comparte el render para mantener el acabado y evitar descargar tres juegos de im�genes. Cada cartel cae despu�s de que se asienta su propia roca. La sacudida solo afecta a la tabla y arranca al terminar la ca�da. Al cerrarse la escena, los carteles permanecen fijos sin depender del fotograma retenido por el navegador. Los enlaces, precios y el modo de movimiento reducido se conservan.
+
+### Uni�n del poste y elevaci�n de la roca
+
+El poste se prolonga dentro de la silueta de la roca y lleva una sombra corta de contacto. La capa de elevaci�n recupera su m�scara local: el selector general del escenario la sustitu�a por el fundido del cielo, dejando visible hierba recortada. La m�scara local se desvanece antes de llegar al c�sped, y el cartel y la roca comparten distancia y duraci�n de subida. No cambia la animaci�n de ca�da.
+
+### Hover definitivo: solo se balancea la tabla
+
+Se retir� la capa duplicada que elevaba la roca. En hover y con foco de teclado solo se balancea la tabla, alrededor de las cuerdas; el poste, su sombra y la roca permanecen fijos. La rama se acerca a los extremos de las cuerdas, y el extremo del poste se mezcla con la piedra mediante una m�scara y la sombra de contacto. Se conserva la ca�da original y su sacudida de impacto; el hover no la interrumpe mientras la escena se arma.
+
+En Chromium se comprobó hover en escritorio, foco y Enter a 360 px, y ausencia de balanceo con movimiento reducido. La captura de la escena armada reveló que el navegador podía volver al primer fotograma retenido; el estado armado muestra ahora la pintura final sin depender de esas animaciones. Se verificó por captura y por opacidad/visibilidad computadas.
+
+### Contacto de las cuerdas y oclusión del poste
+
+La rama se solapa con los dos extremos de cuerda. El extremo afilado queda recortado por un borde curvo a la altura de la piedra, en lugar de desvanecerse. La sombra corta marca el punto de entrada. Se revisó la escena armada en Chromium a 1440 px y se comprobaron los extremos del balanceo, el anclaje fijo y la navegación al pack a 1440 y 360 px.
+
+### Tipografía de los carteles
+
+Los tres carteles reutilizan Fraunces, la serif local de la landing, con un relieve sutil. Se retiró el óvalo del precio: el importe se lee directamente sobre la madera, sin cambiar su texto, enlace ni animación. Chromium confirmó la fuente, el fondo transparente del precio, la ausencia de desbordamiento y la navegación con teclado a 360 y 1440 px.
+
+### Acabado tallado
+
+Se quitó la flecha decorativa de los tres carteles. Las letras conservan Fraunces y el contenido HTML; una sombra oscura arriba, un borde claro abajo y una tinta ligeramente translúcida simulan la talla sin tapar del todo la veta. En Chromium, a 360 y 1440 px, se verificaron el ajuste, la ausencia de flechas y la activación del enlace con teclado.
+
+### Texto integrado en la tabla
+
+La textura WebP y los glifos Fraunces se componen en un mismo SVG. El movimiento se aplica solo al SVG completo, no a las letras; el nombre y precio siguen saliendo del dato comercial que también da nombre al enlace accesible. La versión para móvil integra dos líneas dentro de la misma pieza. En Chromium se compararon las transformaciones de la textura y los glifos a 360 y 1440 px durante el balanceo y se verificó la navegación por teclado.
+
+### Borde tallado durante el balanceo
+
+El borde oscuro y el reflejo claro se dibujan como capas del mismo glifo SVG, en lugar de depender de la sombra CSS. En Chromium se compararon las capas en reposo y en el pico del balanceo a 360 y 1440 px. Sus dimensiones, color y desplazamiento permanecieron iguales; solo rotó la tabla.
+
+### Nitidez en hover y foco
+
+El borde tallado seguía presente en el SVG, pero el giro de la tabla cambiaba cómo se dibujaba en la cuadrícula de píxeles. El giro de interacción se sustituyó por una subida de un píxel, sin interpolación. Se conserva la sacudida al clavarse. Chromium confirmó que hover y foco solo cambian la posición vertical, sin rotar ni escalar los glifos y sin movimiento con la preferencia reducida.
